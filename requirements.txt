@@ -1,0 +1,9 @@
+# Pinned to environment-verified versions (2026-10-28). No installs were
+# performed in the offline sandbox; install on a networked machine with:
+#   .venv/Scripts/python -m pip install -r requirements.txt
+fastapi==0.128.0
+uvicorn==0.40.0
+pydantic==2.12.5
+httpx==0.28.1
+jinja2==3.1.6
+pytest==9.0.2

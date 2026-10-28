@@ -1,0 +1,796 @@
+CRUISESHIELD AI™ FINAL HACKATHON ENGINEERABLE BUILD BLUEPRINT V1.0 —
+V5-DERIVED IMPLEMENTATION AND EXECUTION CONTRACT Date: 27 October 2026
+Status: Build specification; implementation status must be proven from
+the actual repository.
+
+======================================================================
+0. PURPOSE, AUTHORITY, AND NON-NEGOTIABLE RULES
+======================================================================
+
+PRODUCT CruiseShield AI™ Positioning: The Financial Crime Immune System™
+Tagline: “The transaction is only the beginning. The network is the
+signal.” Category: Agentic Financial Crime Intelligence Platform.
+Hackathon focus: Build for Your World. Primary model integration: Meta
+Model API, Muse Spark 1.3 (verify current model identifier and endpoint
+against official documentation before coding).
+
+MASTER AUTHORITY The existing
+CRUISESHIELD_AI_FINAL_ZERO_GAP_ENGINEERABLE_MASTER_BLUEPRINT_v5.0.txt
+remains the canonical product specification. This file is a focused
+hackathon execution contract derived from V5. It does not replace V5 and
+does not authorize a wholesale rewrite.
+
+SOURCE OF TRUTH The actual repository, runtime, tests and deployed
+application determine what exists. Architecture documents, UI mockups,
+generated screenshots and planned features are not proof of
+implementation.
+
+OPERATING RULE INSPECT → BASELINE → PLAN → IMPLEMENT → RUN → TEST →
+VERIFY → FIX → RE-RUN → CAPTURE EVIDENCE → DEPLOY → RE-VERIFY.
+
+NON-NEGOTIABLES 1. Preserve working code. Inspect before editing. 2. Do
+not build a second architecture beside the existing V5 design. 3. Use
+deterministic synthetic financial data for the hackathon demo. 4.
+Clearly label synthetic data in the interface and documentation. 5.
+Application code computes graph facts, rule results and authoritative
+demo risk scores. 6. Muse Spark interprets supplied evidence; it must
+not invent graph relationships, transaction facts, IDs, timestamps,
+metrics or authoritative risk scores. 7. Every material finding must be
+traceable to source evidence. 8. Model recommendations are advisory.
+Consequential actions require an authorized human decision. 9. No
+autonomous irreversible financial action. 10. Never expose API secrets
+in frontend code, public configuration, browser storage, logs,
+screenshots or Git. 11. Never fabricate provider calls, request IDs,
+latency, test results, metrics, health states or live telemetry. 12.
+Never claim fraud certainty, regulatory approval, bank certification,
+guaranteed loss reduction, production accuracy or an SLA without
+evidence. 13. Do not mark a feature VERIFIED until objective test or
+runtime evidence exists. 14. If a dependency, credential, environment,
+API permission or deployment is unavailable, record the blocker honestly
+and implement/test all independent work. 15. Do not stop after producing
+another plan. Execute the next unblocked task.
+
+STATUS VOCABULARY MISSING, IN_PROGRESS, PARTIAL, WORKING_UNVERIFIED,
+VERIFIED, BLOCKED, DEFERRED. A status must have a reason and evidence
+reference. VERIFIED requires repeatable objective evidence.
+
+====================================================================== 1.
+PRODUCT THESIS AND SIGNATURE EXPERIENCE
+======================================================================
+
+PROBLEM Transaction-by-transaction monitoring can miss suspicious
+relationships spread across accounts, devices, phones, merchants,
+beneficiaries, channels and time. Investigators need a traceable way to
+understand why an event was flagged and what the surrounding network
+actually shows.
+
+SOLUTION CruiseShield AI turns a synthetic transaction into a connected,
+evidence-linked investigation. A deterministic event/graph/rules
+pipeline identifies seeded relationships and risk signals. Meta Muse
+Spark explains the supplied evidence. Replay and a bounded what-if
+simulation support analysis. A human decision gate records the
+investigator’s choice, and an audit trail records the workflow.
+
+CORE PROMISE “Move from a suspicious transaction to an explainable
+network investigation in one controlled workflow.”
+
+SIGNATURE SCENARIO - Transaction ID: txn_84721 - Display label:
+Transaction #84721 - Amount: NGN 480,000 (display ₦480,000) - Sender:
+Account A (acct_A) - Receiver: Account B (acct_B) - Seeded network
+target: 12 accounts, 4 devices, 3 phones, 2 merchants, 1 beneficiary -
+Source: synthetic_demo - Every record must be seeded synthetic data, not
+a claim about real financial activity. - Reset must reproduce the same
+scenario and expected relationships. - Graph expansion must be based on
+seeded relationships and implemented logic. - Risk changes must be
+calculated from graph/rule inputs, not triggered by a UI button alone.
+
+REQUIRED USER JOURNEY DETECT → CONNECT → INVESTIGATE → EXPLAIN →
+REPLAY/SIMULATE → HUMAN DECISION → CASE → AUDIT.
+
+DEMO ACCEPTANCE A judge can start/reset the scenario, open transaction
+#84721, reveal the real seeded graph, inspect an edge’s provenance, see
+computed risk reasons, trigger an actual Meta Model API call, review
+validated model findings, replay events, run a hypothetical simulation,
+record a human decision with a reason, and inspect the resulting
+case/audit history.
+
+======================================================================
+2. SCOPE: P0, P1, P2
+======================================================================
+
+P0 — REQUIRED FOR SUBMISSION 1. Repository and deployment baseline
+inventory. 2. Deterministic synthetic scenario and reset. 3. Event
+validation, normalization, idempotency and trace IDs. 4. Entity
+resolution for the seeded demo. 5. Graph nodes/edges with relationship
+types and provenance. 6. Deterministic versioned rules and risk
+calculation. 7. Alerts/investigation view with “Why this risk?” 8.
+Versioned evidence package with stable evidence IDs. 9. Actual
+server-side Meta Model API call using Muse Spark. 10. Model response
+schema validation and evidence-ID validation. 11. AI provenance panel
+using actual runtime metadata. 12. Replay of the seeded event sequence.
+13. One bounded what-if simulation that does not mutate the baseline.
+14. Human decision gate with required reason. 15. Case state transition
+and audit event. 16. Useful loading, empty, success, error and degraded
+states. 17. Automated tests for the critical flow. 18. Public deployment
+verification in a clean browser session. 19. README, contribution
+record, limitations, test evidence and three-minute demo.
+
+P1 — ONLY AFTER P0 WORKS - Channel filters for channels present in seed
+data. - False-positive scenario. - Baseline-versus-what-if comparison. -
+Downloadable synthetic investigation report. - Keyboard-accessible
+graph/table alternative. - Compact health/test panel based on actual
+checks. - Judge Mode that starts the primary scenario. - Small
+performance/latency summary derived from actual telemetry.
+
+P2 — DEFER IF IT THREATENS P0 - Full enterprise SSO and identity
+lifecycle. - Real bank/payment integrations. - Production model training
+and claims of accuracy. - Multi-provider model routing. - Full
+multi-region disaster recovery. - Commercial billing and entitlement
+management. - Every country/jurisdiction adapter. - Kubernetes,
+streaming infrastructure or extra databases not already needed. -
+Complex 3D graph effects. - All V5 enterprise governance capabilities
+not needed for the hackathon vertical slice.
+
+Deferred features must be listed as DEFERRED, not represented as
+operational with fake status indicators.
+
+======================================================================
+3. REPOSITORY DISCOVERY AND CHANGE CONTROL
+======================================================================
+
+Before editing, inspect: - repository tree and Git status; - package
+manifests and lockfiles; - frontend framework and routes; - backend
+services/API routes; - database schema, migrations and seed data; -
+graph, rules, risk, evidence, AI and audit modules; -
+authentication/authorization boundaries; - tests and test commands; -
+environment variable handling and secret exposure; - deployment config,
+logs and public URL; - current UI and existing interactions.
+
+Produce docs/IMPLEMENTATION_INVENTORY.md with: - capability; - status; -
+source files; - test/evidence; - defect/blocker; - next action.
+
+Capture baseline screenshots and current commit hash. Record
+pre-existing functionality separately from hackathon additions.
+
+Change control: - Prefer small, reversible changes. - Add an ADR for any
+material framework/database/architecture change. - Reuse working
+components and existing dependency choices. - Do not delete/rewrite
+existing code without a clear reason and regression coverage. - Maintain
+a task checklist and update it as work is completed. - Keep the V5
+master blueprint unchanged unless the user explicitly requests a change
+to that file.
+
+======================================================================
+4. ARCHITECTURE AND TECHNICAL BOUNDARIES
+======================================================================
+
+VERTICAL SLICE Synthetic Event → Event Gateway → Validate / Normalize /
+Idempotency → Entity Resolution → Feature Extraction → Rules Engine →
+Graph Update / Network Features → Risk Assessment → Alert /
+Investigation → Evidence Package → Meta Muse Spark Adapter → Schema and
+Evidence Reference Validator → Investigation Studio → Replay / What-if
+Simulation → Human Decision Gate → Case State → Audit Flight Recorder
+
+BOUNDARIES - Domain services compute authoritative facts. - Database
+persists canonical records. - Graph engine creates relationships only
+from seeded/authorized data and deterministic logic. - Rules/risk engine
+computes risk with versioned inputs and transparent contributions. -
+Evidence service builds a bounded package with source references. - Meta
+adapter calls the external model server-side. - Validator checks
+response structure and evidence IDs. - Frontend renders API responses;
+it must not manufacture facts or telemetry. - Human-decision service
+validates allowed transitions and required reason. - Audit service
+records relevant state changes and trace IDs.
+
+STACK POLICY Inspect and reuse the existing stack. Do not migrate
+frameworks just for preference. If a component is genuinely missing,
+choose the smallest compatible option: - Frontend: existing framework;
+Next.js + TypeScript only if a new app is needed. - UI: existing
+component system; Tailwind if already compatible. - Backend: existing
+API; compact server routes or existing FastAPI if already in use. -
+Validation: existing schema library; Zod for TypeScript or Pydantic for
+Python. - Storage: existing database; otherwise the simplest durable
+option already supported. - Graph: typed node/edge records and
+deterministic graph functions for MVP. - Model client: SDK pattern
+documented by Meta, configured server-side. - Tests: existing runner
+plus browser end-to-end test. - Deployment: existing hosting provider
+and server-side secret store.
+
+Do not add Redis, Kafka, Kubernetes, a vector database or a separate
+graph database unless a concrete acceptance criterion requires it and
+the current stack cannot meet it.
+
+======================================================================
+5. CANONICAL DATA CONTRACTS
+======================================================================
+
+All data must be deterministic, versioned and labelled synthetic.
+
+EVENT FIELDS event_id, event_type, schema_version, occurred_at, source,
+trace_id, privacy_classification, transaction_id, entity IDs, payload.
+
+Example: { “event_id”: “evt_demo_84721”, “event_type”:
+“financial.transaction.created”, “schema_version”: “1.0”, “occurred_at”:
+“2026-10-27T10:00:00Z”, “source”: “synthetic_demo”, “trace_id”:
+“trace_demo_84721”, “privacy_classification”: “synthetic”,
+“transaction”: { “transaction_id”: “txn_84721”, “amount_minor”:
+48000000, “currency”: “NGN”, “channel”: “MOBILE_APP”,
+“sender_account_id”: “acct_A”, “receiver_account_id”: “acct_B” },
+“entities”: { “device_id”: “dev_04”, “phone_id”: “phn_03”, “ip_id”:
+“ip_02”, “location_id”: “loc_01” } }
+
+MONEY - Use integer minor units where appropriate; ₦480,000 = 48,000,000
+kobo. - Never use binary floating point for money. - Format amounts from
+canonical stored values.
+
+CORE RECORDS Transaction, Event, Account, Customer (synthetic only),
+Device, Phone, IP, Location, Merchant, Beneficiary, Channel, GraphNode,
+GraphEdge, RuleDefinition, RuleResult, RiskAssessment, Alert,
+Investigation, EvidenceItem, AgentRun, ModelResult, Case, HumanDecision,
+AuditEvent, ReplayEvent, SimulationRun, Requirement, TestResult,
+VerificationRecord and ADR.
+
+STABLE ID PREFIXES evt_, txn_, acct_, cust_, dev_, phn_, ip_, loc_,
+merch_, ben_, node_, edge_, rule_, rr_, risk_, alert_, inv_, evidence_,
+agentrun_, case_, decision_, audit_, replay_, sim_, test_, verify_.
+
+GRAPH NODE node_id, node_type, display_label, synthetic_flag,
+source_record_ids, created_at, permitted attributes.
+
+GRAPH EDGE edge_id, source_node_id, target_node_id, relationship_type,
+source_event_ids, evidence_ids, valid_from, valid_to,
+confidence_if_defined, synthetic_flag, trace_id.
+
+RULE RESULT rule_result_id, rule_id, rule_version, triggered,
+observed_values, threshold, explanation, source_record_ids,
+evidence_ids, trace_id.
+
+RISK ASSESSMENT risk_assessment_id, target_id, target_type, score, band,
+score_version, rule_results, graph_features, evidence_ids, computed_at,
+trace_id, limitations.
+
+EVIDENCE ITEM evidence_id, evidence_type, title, description,
+source_record_ids, event_ids, graph_node_ids, graph_edge_ids,
+rule_result_ids, observed_at, trace_id, synthetic_flag,
+evidence_version.
+
+AI RUN agent_run_id, provider, model_id, prompt_version,
+request_id_if_returned, trace_id, evidence_package_id,
+evidence_ids_sent, started_at, completed_at, latency_ms, status,
+response_reference, schema_validation_status,
+evidence_reference_validation_status, error_code_if_any,
+synthetic_data_flag.
+
+HUMAN DECISION decision_id, case_id, actor_id, actor_role, decision,
+reason, evidence_viewed, recommendation_at_decision, created_at,
+authorization_scope, trace_id.
+
+AUDIT EVENT audit_event_id, actor_type, actor_id, action, target_type,
+target_id, previous_state_reference, new_state_reference, reason,
+timestamp, trace_id, request_id, integrity_reference.
+
+Do not conflate transaction risk, entity risk, network risk, model
+qualitative confidence, evidence coverage and investigation status.
+
+======================================================================
+6. DETERMINISTIC SYNTHETIC SCENARIO
+======================================================================
+
+Create one versioned seed manifest and deterministic reset function.
+
+Expected primary network: - 12 accounts total, including acct_A and
+acct_B; - 4 devices; - 3 phones; - 2 merchants; - 1 beneficiary; -
+optional IP/location/authentication nodes only if seeded and used.
+
+Example relationships: - acct_A SENT_TO acct_B through txn_84721; -
+acct_B USES_DEVICE dev_04; - acct_B USES_PHONE phn_03; - multiple seeded
+accounts share a device; - selected accounts share a phone/merchant; -
+selected accounts are linked to the seeded beneficiary; - every edge
+references source event/seed provenance.
+
+Relationship types may include: SENT_TO, USES_DEVICE, USES_PHONE,
+PAID_MERCHANT, BENEFICIARY_OF, ASSOCIATED_WITH, EVIDENCED_BY.
+
+Seed both: A. Suspicious-network scenario with several independent,
+explainable signals. B. False-positive scenario where an unusual
+transaction lacks sufficient network evidence and remains reviewable
+without asserting a fraud ring.
+
+CHANNEL ENUM POS, ATM, USSD, MOBILE_APP, WEB, CARD, TRANSFER_NIP, QR,
+AGENT_AGENCY, API_OPEN_BANKING, WALLET, MERCHANT, UNKNOWN. Only display
+channels represented in seed data. Normalize source values. Unknown
+input becomes UNKNOWN with a visible warning.
+
+SCENARIO MANIFEST scenario_id, scenario_version, title, purpose,
+seed_hash, synthetic_notice, event_sequence, expected_rule_results,
+expected_graph_counts, expected_risk_band, expected_evidence_ids.
+
+RESET ACCEPTANCE - reset clears or isolates prior demo state
+correctly; - reloads the same scenario version; - reproduces expected
+nodes, edges, rules and score; - creates no duplicate records; - gives
+the run/trace a valid identifier; - visibly displays “Synthetic demo
+data.”
+
+======================================================================
+7. GRAPH, RULES AND RISK
+======================================================================
+
+Implement deterministic, versioned rules. Suitable rule families: -
+amount threshold; - velocity within a defined time window; - device
+reused across accounts; - phone reused across accounts; - beneficiary
+concentration; - graph fan-in/fan-out; - multiple independent signals
+linked to the same network; - channel-specific rule only when supported
+by seeded facts.
+
+Each rule definition must have rule ID/version, description, inputs,
+threshold, severity, reason template, test cases and enabled state.
+
+The score must: - use a documented deterministic function; - use
+versioned weights/configuration; - stay within a documented range; -
+expose contributions and input features; - have boundary and no-signal
+tests; - recompute from actual rule/graph outputs; - never increase
+merely because the Reveal Network button was clicked.
+
+If no trained/calibrated model exists, label it “Deterministic demo risk
+score,” not “fraud probability.”
+
+“WHY THIS RISK?” must show: 1. rule/signal name; 2. observed value; 3.
+threshold/comparison; 4. source event/entity/edge; 5. evidence ID; 6.
+contribution to score, if implemented; 7. caveat: a risk signal is not
+proof of criminal intent.
+
+Graph interaction: - render graph data returned from backend; -
+selecting a node reveals node details and evidence; - selecting an edge
+reveals relationship, provenance and source event; - provide a
+keyboard-accessible table/list alternative; - use a legend and readable
+labels; - do not fabricate edges for visual density.
+
+======================================================================
+8. META MODEL API — MUSE SPARK
+======================================================================
+
+Verify all current model IDs, endpoint patterns and SDK behavior against
+official Meta documentation at implementation time:
+https://dev.meta.ai/docs/quickstart https://dev.meta.ai/docs/models
+https://dev.meta.ai/docs/api-reference
+https://github.com/meta-models/meta-model-cookbook
+
+Expected configuration from current guidance: - Base URL:
+https://api.meta.ai/v1 - Model ID: muse-spark-1.3 - Secret variable:
+MODEL_API_KEY - OpenAI-compatible client pattern, subject to
+confirmation against the current docs.
+
+Install only if not already present: npm install openai or use the
+existing supported Python SDK.
+
+Illustrative TypeScript connectivity test: import OpenAI from “openai”;
+
+const apiKey = process.env.MODEL_API_KEY; if (!apiKey) throw new
+Error(“MODEL_API_KEY is not configured”);
+
+const meta = new OpenAI({ baseURL: “https://api.meta.ai/v1”, apiKey });
+
+export async function testMetaConnection() { const response = await
+meta.chat.completions.create({ model: “muse-spark-1.3”, messages: [{
+role: “user”, content: “Reply with the single word: ready” }] }); return
+{ model: response.model, result: response.choices[0]?.message?.content
+}; }
+
+This is a connectivity example only. Adapt endpoint/SDK fields to
+current official documentation. Do not assume a JSON-shaped answer is
+valid JSON.
+
+SECRET SAFETY - server environment only; - local .env file excluded from
+Git; - .env.example contains names only; - never use
+NEXT_PUBLIC_MODEL_API_KEY; - never return key to client; - never log key
+or authorization header; - rotate exposed keys immediately; - configure
+provider budget/usage limits where available.
+
+REAL INVESTIGATION ENDPOINT Implement an equivalent of: POST
+/api/v1/investigations/{investigationId}/ai-analysis
+
+Workflow: 1. Load actual investigation. 2. Assemble a bounded, versioned
+evidence package. 3. Validate package and ensure each evidence item
+exists. 4. Call Muse Spark from backend. 5. Record actual
+provider/model, request ID if returned, trace ID, measured latency,
+status and evidence package reference. 6. Parse and validate model
+response. 7. Check every evidence ID against the exact set sent. 8.
+Reject/flag unknown IDs. 9. Persist validated output and metadata. 10.
+Return result to UI.
+
+MODEL SYSTEM INSTRUCTION “You are CruiseShield AI’s evidence-grounded
+investigation assistant. Use only facts in the supplied synthetic
+evidence package. Do not invent transactions, entities, relationships,
+event IDs, timestamps, metrics or evidence. Do not calculate the
+authoritative risk score. Separate observed facts, interpretations,
+uncertainty and suggested next steps. Cite evidence IDs for material
+factual findings. If evidence is insufficient, say so. Consider
+alternative explanations. Do not declare criminal intent from a risk
+signal. Recommendations are advisory and require authorized human
+review.”
+
+OUTPUT SCHEMA { “summary”: “string”, “key_findings”: [ { “finding”:
+“string”, “evidence_ids”: [“string”], “confidence_label”:
+“low|medium|high”, “caveat”: “string” } ], “alternative_explanations”:
+[“string”], “missing_information”: [“string”], “suggested_next_steps”: [
+{ “action”: “string”, “rationale”: “string”, “evidence_ids”: [“string”],
+“requires_human_approval”: true } ], “conclusion”:
+“insufficient_evidence|requires_review|evidence_supports_escalation”,
+“disclaimer”: “string” }
+
+Use provider-supported structured output/JSON schema if available.
+Always validate server-side regardless. Do not persist hidden reasoning;
+store only visible response and required metadata.
+
+VALIDATION STATES VALIDATED = schema and reference checks passed;
+interpretation is not thereby proven true. PARTIALLY_VALIDATED = some
+non-critical fields need review. INVALID = malformed response or unknown
+evidence references. FAILED = provider/request failure.
+
+TIMEOUTS/FAILURE - use bounded timeout; - retry only appropriate
+transient failures; - do not blindly retry permanent auth/client
+errors; - rate-limit and cap request payload; - present useful error and
+retry option; - keep graph/risk/case features usable if AI is
+unavailable.
+
+AI PROVENANCE UI Show actual: - provider; - model ID; - request ID if
+returned; - trace ID; - measured latency; - request status; - evidence
+package ID/count; - evidence IDs sent; - schema validation status; -
+evidence-reference validation status; - visible model result and
+caveats. Do not populate these fields with hardcoded demo values.
+
+======================================================================
+9. EVIDENCE PACKAGE AND VALIDATION
+======================================================================
+
+The evidence package contains only relevant: - scenario ID/version and
+trace ID; - transaction facts; - actual graph nodes/edges; - computed
+graph features; - rule results and version; - risk
+calculation/version; - evidence IDs and source references; - missing
+data and limitations.
+
+Before sending: - validate schema; - verify every evidence item
+exists; - sort deterministically; - cap payload size; - record package
+ID and immutable reference/hash where feasible; - record prompt version
+and model ID.
+
+After receiving: - validate schema; - ensure every evidence ID exists in
+the submitted package; - reject unknown references; - ensure cited
+evidence can be traced to source records; - distinguish suggestions from
+executed actions; - store visible response and safe metadata; - never
+label a model interpretation as independently proven solely because it
+passes validation.
+
+Tests must include a deliberately invalid evidence ID and malformed
+model output.
+
+======================================================================
+10. API CONTRACT
+======================================================================
+
+Adapt route names to existing project conventions; do not duplicate
+existing APIs.
+
+Required logical endpoints: GET /api/v1/health GET
+/api/v1/demo/scenarios POST /api/v1/demo/reset POST
+/api/v1/demo/scenarios/{scenarioId}/start GET /api/v1/events GET
+/api/v1/transactions/{transactionId} GET /api/v1/graph/{transactionId}
+GET /api/v1/risk/{transactionId} GET /api/v1/alerts GET
+/api/v1/investigations/{investigationId} POST
+/api/v1/investigations/{investigationId}/evidence-package POST
+/api/v1/investigations/{investigationId}/ai-analysis GET
+/api/v1/ai-runs/{agentRunId} GET /api/v1/replay/{scenarioId} POST
+/api/v1/simulations GET /api/v1/cases/{caseId} POST
+/api/v1/cases/{caseId}/decisions GET /api/v1/cases/{caseId}/audit
+
+API REQUIREMENTS - schema validation; - stable error format; -
+trace/request ID; - appropriate HTTP status; - bounded request body; -
+no secret leakage; - authorization for protected mutations where
+identity exists; - explicit demo-mode boundary; - useful errors rather
+than swallowed exceptions.
+
+Example: { “error”: { “code”: “MODEL_PROVIDER_UNAVAILABLE”, “message”:
+“AI analysis is temporarily unavailable.”, “trace_id”: “trace_…” } }
+
+A public unauthenticated demo must not be described as
+production-secure. Restrict mutations to seeded demo records and clearly
+disclose demo mode.
+
+======================================================================
+11. UI/UX DESIGN CONTRACT
+======================================================================
+
+PRODUCT VISUAL IDENTITY - premium enterprise, clear and distinctive; -
+dark navy primary investigation workspace; - white/light surfaces for
+dense data where useful; - cyan/blue primary action accent; - teal for
+verified/positive states; - amber for review/warning; - red for
+risk/error; - readable typography, high contrast and generous spacing; -
+restrained borders and subtle depth; - motion only when it explains a
+state transition; - respect reduced-motion preference; - never rely on
+color alone.
+
+MAIN SHELL 1. Left navigation. 2. Top bar with search, active scenario,
+synthetic-data badge and actual service/model status. 3. Main workspace.
+4. Contextual right panel. 5. Bottom event timeline on
+investigation/replay views.
+
+NAVIGATION - Command Center - Investigations - Network Explorer -
+Cases - Replay & Simulation - AI Copilot - Reports - System Health (demo
+scope only)
+
+COMMAND CENTER - CruiseShield branding and synthetic-data disclosure; -
+one obvious “Start Signature Investigation” action; - compact seeded
+scenario/alert summary derived from actual backend state; - “Reveal
+Network” after selecting the transaction; - no fake live counts or
+invented operational telemetry.
+
+INVESTIGATION STUDIO — PRIMARY SCREEN - Header: transaction #84721,
+₦480,000, channel, timestamp, scenario badge. - Main area: interactive
+2D graph. - Right panel: “Why this risk?” with computed rules and
+evidence. - AI panel: “Analyze with Muse Spark” button and actual
+provider state. - Bottom timeline: events, graph changes, risk changes,
+AI run, decision. - Case action strip: Escalate, Request Verification,
+Monitor, Mark False Positive, Close Case. - Require a reason for
+consequential decisions. - Keep graph selection, evidence selection and
+timeline synchronized.
+
+AI PANEL - actual provider/model; - actual request state; -
+request/trace ID when available; - measured latency; - evidence package
+ID/count; - evidence IDs sent; - validation states; - findings, caveats
+and next steps; - clear distinction between “System-computed fact” and
+“Model suggestion.”
+
+REPLAY AND SIMULATION - play, pause, step, speed and reset; - show event
+order and timestamps; - show graph and risk changes; - compare baseline
+with a hypothetical branch; - explicitly state assumptions and
+limitations; - never imply a hypothetical result is a real-world
+prediction.
+
+HUMAN DECISION - decision options: Escalate, Request Verification,
+Monitor, Mark False Positive, Close Case; - required reason; - validated
+case state transition; - append audit event; - AI must not finalize the
+decision.
+
+ALL UI STATES LOADING, EMPTY, SUCCESS, ERROR, PARTIAL, OFFLINE,
+DEGRADED, UNAUTHORIZED, FORBIDDEN, STALE, RETRYING. Every primary
+control must work and provide feedback. No dead buttons.
+
+RESPONSIVE AND ACCESSIBLE - keyboard-accessible core path; - visible
+focus states; - graph list/table fallback; - no hover-only essential
+controls; - readable mobile layout; - graph panels stack on narrow
+screens; - meaningful accessible labels.
+
+SHIELD SENTINEL Retain the existing signature character if already part
+of the product. Give it working shortcuts only when connected to real
+functions. Treat it as supporting UI, never a substitute for the
+investigation workflow.
+
+======================================================================
+12. REPLAY, SIMULATION, CASES AND AUDIT
+======================================================================
+
+REPLAY - use deterministic ordered events; - show current replay cursor
+and event timestamp; - show graph/edge changes and risk recomputation; -
+support reset, step, play/pause; - same scenario version must reproduce
+expected replay.
+
+WHAT-IF SIMULATION - implement one bounded scenario, such as
+removing/ignoring a selected seeded relationship and recomputing
+graph-derived risk contribution; - clearly label the changed
+assumption; - do not mutate baseline data; - save simulation inputs,
+rule/code version, output, limitations and trace ID; - do not call it a
+prediction of actual future crime.
+
+CASE STATES NEW → TRIAGED → INVESTIGATING → AWAITING_REVIEW → DECISIONED
+→ ACTIONED → CLOSED. Allow explicit alternatives such as FALSE_POSITIVE,
+NO_ACTION and ESCALATED when valid. Validate transitions; reject invalid
+transitions.
+
+AUDIT Record: - scenario start/reset; - event processing; - graph/risk
+calculation version; - evidence package generation; - AI request
+metadata and validation; - simulation run; - human decision and
+reason; - case transition; - failures/retries when relevant.
+
+Audit events must be append-only at application level. Do not claim
+tamper-proof audit unless cryptographic integrity protection is actually
+implemented and tested.
+
+======================================================================
+13. TEST MATRIX AND ACCEPTANCE CRITERIA
+======================================================================
+
+T-001 Reset twice: same seed, graph counts and rules; no duplicates.
+T-002 Duplicate event: idempotent processing. T-003 Unknown channel:
+UNKNOWN plus visible warning. T-004 Rule below threshold: expected
+non-trigger. T-005 Rule at/above threshold: documented boundary
+semantics. T-006 Edge without provenance: rejected or test fails. T-007
+Reveal network: graph comes from backend and matches seed. T-008 Risk
+calculation: matches documented deterministic formula. T-009 Evidence
+package: every item maps to real source records. T-010 Muse Spark
+success: actual response and metadata displayed. T-011 Unknown model
+evidence ID: rejected/flagged. T-012 API timeout: degraded state, retry,
+rest of app remains usable. T-013 API auth failure: useful error, no key
+leak. T-014 Malformed response: schema validation fails safely. T-015
+Replay: expected sequence reproducible. T-016 Simulation: baseline
+unchanged; assumptions/result persisted. T-017 Decision without reason:
+rejected with validation message. T-018 Invalid case transition:
+rejected. T-019 Valid human decision: state and audit event persist.
+T-020 Keyboard test: primary journey possible without mouse-only
+actions. T-021 Responsive test: core details readable and graph
+alternative available. T-022 Public deployment: core journey works in
+clean browser session. T-023 Secret scan: no API key in source, bundle,
+Git or logs. T-024 Judge walkthrough: no hidden manual step and all
+controls work.
+
+Do not report tests as passed unless they have run. Save command,
+environment, commit hash, timestamp and result.
+
+======================================================================
+14. BUILD PHASES AND GATES
+======================================================================
+
+PHASE 0 — BASELINE Deliver: repository map, capability inventory,
+baseline screenshots, current commit, issue list. Gate: existing state
+understood and working features protected.
+
+PHASE 1 — SCENARIO/RESET Deliver: deterministic seed manifest, event
+sequence, reset endpoint and synthetic watermark. Gate: reset repeats
+expected seed without duplicates.
+
+PHASE 2 — EVENT/GRAPH/RISK Deliver: event validation, entity resolution,
+graph, rules, risk, evidence. Gate: tests prove node/edge provenance,
+expected rules and deterministic score.
+
+PHASE 3 — INVESTIGATION UI Deliver: Command Center and Investigation
+Studio wired to backend. Gate: judge can select transaction, reveal
+network, select edge and trace it to evidence.
+
+PHASE 4 — META MODEL API Deliver: server-side client, environment
+secret, evidence package, prompt, schema validation, evidence-ID
+validation, provenance panel and error handling. Gate: actual deployed
+request succeeds and result is visible; fake IDs are rejected; provider
+failure degrades safely.
+
+PHASE 5 — REPLAY/SIMULATION/DECISION Deliver: replay timeline, bounded
+simulation, case transitions, reasoned decision and audit. Gate: replay
+deterministic, baseline unchanged by simulation, decision/audit
+persists.
+
+PHASE 6 — HARDENING Deliver: unit, integration and browser tests;
+accessibility pass; secret/dependency checks. Gate: all critical tests
+pass or documented blocker exists; no broken critical path.
+
+PHASE 7 — RELEASE Deliver: deployed app, README, contribution record,
+known limitations, test evidence, screenshots and three-minute video.
+Gate: public app works in clean session and all claims match observed
+behavior.
+
+======================================================================
+15. DEMO MODE AND THREE-MINUTE VIDEO
+======================================================================
+
+Provide “Start Judge Demo”: - resets the canonical scenario; - verifies
+required local services through actual checks; - opens the transaction
+investigation; - never fabricates a green health check.
+
+VIDEO 0:00–0:15 Problem: isolated transactions can hide connected
+patterns. 0:15–0:35 Open synthetic transaction #84721, ₦480,000.
+0:35–1:00 Reveal seeded network and select an edge to inspect
+provenance. 1:00–1:35 Trigger Muse Spark; show actual provider/model,
+request trace, evidence IDs and validation. 1:35–2:00 Explain risk
+through implemented graph features and rules. 2:00–2:20 Replay timeline
+and run bounded what-if. 2:20–2:45 Record human decision and inspect
+audit event. 2:45–3:00 Summarize impact and honestly state current
+limitations.
+
+Run the full flow at least three times from clean reset. Use readable
+text and actual deployed UI.
+
+Never present a cached response as a live model request. If the provider
+is down, show the real failure state. A separately recorded proof may be
+shown only if clearly labelled as a recording and permitted by the event
+rules.
+
+======================================================================
+16. REPOSITORY DOCUMENTATION
+======================================================================
+
+Preserve the current structure where possible. If needed, add: -
+docs/IMPLEMENTATION_INVENTORY.md - docs/ARCHITECTURE.md -
+docs/HACKATHON_CONTRIBUTIONS.md - docs/TEST_EVIDENCE.md -
+docs/KNOWN_LIMITATIONS.md - docs/ADR/ - .env.example - README.md
+
+README must state: - product and problem; - screenshots; - live demo
+URL; - architecture; - Meta model integration and actual model ID; -
+local setup and environment variable names only; - synthetic scenario
+explanation; - test commands/results; - demo steps; - limitations and
+deferred features; - security guidance.
+
+HACKATHON_CONTRIBUTIONS.md must distinguish pre-existing, modified,
+newly implemented and unimplemented work. Support claims with commits,
+screenshots, tests and deployment evidence. Do not claim all V5 features
+were built during the hackathon if they were not.
+
+======================================================================
+17. CODING AGENT EXECUTION CONTRACT
+======================================================================
+
+You are the senior engineer implementing CruiseShield AI™ for the Meta
+Global AI Developer Hackathon.
+
+The actual repository and runtime are the source of truth. The existing
+CRUISESHIELD_AI_FINAL_ZERO_GAP_ENGINEERABLE_MASTER_BLUEPRINT_v5.0.txt
+remains the canonical product specification. This document is the
+focused execution contract.
+
+FIRST: 1. Inspect the repo, manifests, routes, schema, database, seed
+data, graph/risk/evidence logic, current AI integration, tests, secrets
+and deployment. 2. Capture baseline and Git status. 3. Create/update
+docs/IMPLEMENTATION_INVENTORY.md. 4. List WORKING, PARTIAL, MISSING,
+BROKEN and BLOCKED with file paths and evidence. 5. Identify the next
+smallest complete task. Do not respond with only a new plan.
+
+THEN: Implement P0 in this exact order: 1. deterministic synthetic
+scenario/reset; 2. event normalization/idempotency; 3. graph with
+provenance; 4. deterministic rules/risk; 5. evidence package; 6. real
+server-side Muse Spark request; 7. schema and evidence-ID validation; 8.
+Investigation Studio and actual AI provenance; 9. replay and bounded
+what-if simulation; 10. human decision, case transition and audit; 11.
+tests, deployment verification and docs.
+
+For every task: - define acceptance criteria; - implement; - run
+tests; - inspect output; - fix failures; - rerun tests; - record changed
+files and evidence. Keep a current checklist. Do not claim success
+before verifying it.
+
+Use the existing stack unless a documented blocker requires change.
+Avoid unnecessary dependencies and infrastructure. Never expose secrets.
+Never use unauthorized financial data. Never fabricate facts, metrics,
+provider responses or health states. Do not allow AI to execute
+consequential financial actions.
+
+If credentials, quota, API access, deployment permissions or tools are
+missing: - state the exact blocker; - complete independent
+implementation and tests; - provide the exact configuration/action
+required from the user; - do not simulate a successful live
+integration; - resume once unblocked.
+
+At each checkpoint report: - what was implemented; - files changed; -
+commands/tests run and results; - what remains; - blockers; - next
+action.
+
+FINAL DELIVERABLES: - feature/status inventory; - changed files; -
+actual test results; - proof of real Meta API call; - public deployment
+and clean-browser verification; - known limitations/deferred V5
+features; - README and contribution record; - screenshots and
+three-minute video; - unresolved blockers.
+
+Do not stop at planning. Execute the next unblocked task.
+
+======================================================================
+18. FINAL RELEASE GATE
+======================================================================
+
+[ ] Baseline inspected and captured. [ ] Deterministic scenario/reset
+works. [ ] Event normalization/idempotency tested. [ ] Graph edges have
+provenance. [ ] Risk score is computed from versioned logic. [ ]
+Material findings link to evidence. [ ] Real Muse Spark request works
+through deployed backend. [ ] API key remains server-side. [ ] Actual
+provider/model/request/latency/status shown. [ ] Model output schema
+validated. [ ] Evidence references checked against submitted package. [
+] Provider failure handled safely. [ ] Replay works. [ ] Simulation
+preserves baseline and records assumptions. [ ] Human decision requires
+reason and creates audit event. [ ] Synthetic data is clearly labelled.
+[ ] No fabricated telemetry or unverified claims. [ ] Critical tests
+passed and evidence captured. [ ] Public deployment works in a clean
+browser session. [ ] README, contributions, limitations and test
+evidence exist. [ ] Three-minute demo is rehearsed and truthful. [ ]
+Final submission is completed before the portal deadline.
+
+FINAL PRINCIPLE Do not attempt to make every line of V5 operational
+before the hackathon deadline. Make the signature investigation path
+complete, polished, reliable and verifiable. Keep the rest of V5 as the
+longer-term product contract and mark unimplemented capabilities
+honestly.
+
+BUILD → RUN → TEST → VERIFY → FIX → RE-RUN → CAPTURE EVIDENCE.

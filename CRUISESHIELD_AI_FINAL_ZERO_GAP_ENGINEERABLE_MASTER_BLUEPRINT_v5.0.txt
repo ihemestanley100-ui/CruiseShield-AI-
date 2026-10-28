@@ -1,0 +1,5858 @@
+# CRUISESHIELD AI™ — FINAL ZERO-GAP ENGINEERABLE MASTER BLUEPRINT v3.0
+
+**Status:** CANONICAL AI-AGENT BUILD CONTRACT  
+**Product:** CruiseShield AI™ — Financial Crime Immune System™  
+**Category:** Agentic Financial Crime Intelligence Platform  
+**Purpose:** Build the real product end-to-end, with live flows, activation, testing, runtime proof and evidence.
+
+> **The transaction is only the beginning. The network is the signal.**
+
+---
+
+## 0. MASTER EXECUTION DIRECTIVE
+
+This is an executable engineering contract, not a proposal.
+
+The engineering agent MUST inspect the existing repository and reuse the Frontier Enterprise AI Platform™ universal foundation. It MUST use:
+
+**INHERIT → CONFIGURE → EXTEND → BRAND → IMPLEMENT → TEST → VERIFY → TRACE → EVIDENCE → DEPLOY → OPERATE → MEASURE → GOVERN → AUDIT → EVOLVE → RE-VERIFY**
+
+Never:
+- build disconnected mock screens;
+- duplicate universal services without an ADR;
+- use CruiseLink telecom architecture;
+- invent metrics, evidence, graph facts, AI answers or health states;
+- use unauthorized real financial data;
+- allow AI to bypass human authorization for irreversible financial actions;
+- hide manual steps;
+- claim runtime completion because code compiles.
+
+A capability is **VERIFIED** only when objective evidence exists.
+
+---
+
+## 1. SOURCE / AUTHORITY CONTRACT
+
+Authority order:
+
+1. Actual repository/runtime
+2. This master blueprint
+3. Frontier Enterprise AI Platform™ Universal Master Blueprint
+4. CruiseShield AI™ project blueprint
+5. CruiseShield UI/UX extension
+6. CruiseTech Inc.™ UI/UX sections 01–116
+7. Approved ADRs
+8. Provider documentation
+9. Agent inference
+
+Conflicts MUST be recorded as ADRs and resolved before silently changing architecture.
+
+---
+
+## 2. PRODUCT IDENTITY AND BOUNDARY
+
+**Product:** CruiseShield AI™  
+**Concept:** Financial Crime Immune System™  
+**Core innovation:** network-level financial-crime intelligence.  
+**Technical innovation:** Rules + ML + Behavior + Graph + Agentic AI.  
+**Frontier layer:** Financial Digital Twin + Replay + Controlled Scenario Simulation.  
+**Human layer:** Evidence-linked investigation + human decision control.
+
+CruiseShield is NOT:
+- a consumer banking super-app;
+- a generic chatbot;
+- a banking core;
+- a single fraud model;
+- an autonomous criminal adjudicator;
+- an autonomous irreversible financial-action executor.
+
+Aurora X™ is the UI/UX system only; it is not the fraud engine or product concept.
+
+---
+
+## 3. REAL-WORLD PROBLEM COVERAGE
+
+The system is designed to address:
+
+1. transaction-level fraud blindness;
+2. hidden relationships;
+3. fraud rings/networks;
+4. fragmented identity/entity data;
+5. device/account/phone/merchant linkage blindness;
+6. behavioral anomalies;
+7. static-rule limitations;
+8. false positives;
+9. investigator overload;
+10. slow alert-to-case workflows;
+11. weak risk explanations;
+12. disconnected evidence;
+13. weak timeline reconstruction;
+14. fragmented case management;
+15. lack of network propagation visibility;
+16. limited what-if analysis;
+17. weak AI accountability;
+18. model governance gaps;
+19. feedback/learning gaps;
+20. fragmented data and integrations;
+21. weak operational observability;
+22. security/privacy risk;
+23. weak auditability;
+24. weak historical replay;
+25. weak investigation UX.
+
+Architecture coverage is not proof of real-world effectiveness; actual effectiveness MUST be measured after authorized implementation.
+
+---
+
+## 4. PRODUCT LOOP
+
+```text
+OBSERVE → RECOGNIZE → CONNECT → UNDERSTAND
+→ PREDICT/SIMULATE → INTERVENE → LEARN → ADAPT
+```
+
+Core demo:
+
+```text
+DETECT → MAP → INVESTIGATE → EXPLAIN → ACT → VERIFY → PROVE → LEARN
+```
+
+Engineering loop:
+
+```text
+INHERIT → CONFIGURE → EXTEND → BRAND → IMPLEMENT → TEST
+→ VERIFY → EVIDENCE → DEPLOY → OPERATE → MEASURE → GOVERN → EVOLVE
+```
+
+---
+
+## 5. UNIVERSAL PLATFORM INHERITANCE
+
+Reuse the Frontier Enterprise AI Platform™ where available:
+
+**L01 Frontend:** Web/mobile/UI/accessibility/themes  
+**L02 Backend:** APIs/services/workflows/auth  
+**L03 AI:** agents/RAG/memory/orchestration/model routing/evaluation  
+**L04 Data:** SQL/graph/cache/vector/object/event data  
+**L05 DevOps:** cloud/Docker/Kubernetes/CI/CD/scaling  
+**L06 Security:** RBAC/encryption/audit/privacy/compliance  
+**L07 Observability:** logs/metrics/traces/analytics  
+**L08 Business:** organizations/tenants/plans/usage/billing  
+**L09 Governance:** contracts/testing/versioning/traceability/evidence
+
+CruiseShield Project Adapter owns financial-crime domain logic, graph semantics, detection, risk, agents, investigation, simulation, cases and product UX.
+
+---
+
+## 6. MASTER ARCHITECTURE
+
+```text
+FINANCIAL EVENTS
+  ↓
+EVENT GATEWAY
+  ↓
+VALIDATION / NORMALIZATION / IDEMPOTENCY
+  ↓
+ENTITY RESOLUTION
+  ↓
+FEATURE + BEHAVIOR ENGINE
+  ↓
+RULES + ML + GRAPH
+  ↓
+NETWORK DETECTION
+  ↓
+MULTIDIMENSIONAL RISK
+  ↓
+AGENT ORCHESTRATOR
+  ↓
+SPECIALIZED AGENTS
+  ↓
+EVIDENCE ENGINE
+  ↓
+INVESTIGATION STUDIO
+  ↓
+DIGITAL TWIN / REPLAY
+  ↓
+CONTROLLED WHAT-IF SIMULATION
+  ↓
+HUMAN DECISION GATE
+  ↓
+CASE MANAGEMENT
+  ↓
+AUDIT FLIGHT RECORDER
+  ↓
+FEEDBACK / LEARNING
+```
+
+---
+
+## 7. CORE MODULES
+
+Implement and integrate:
+
+1. Event Gateway
+2. Transaction Engine
+3. Entity Resolver
+4. Identity Layer
+5. Device Intelligence
+6. Behavioral Engine
+7. Anomaly Engine
+8. Rules Engine
+9. ML Engine
+10. Graph Engine
+11. Network Detection
+12. Risk Engine
+13. Simulation Engine
+14. Agent Orchestrator
+15. Investigation Agent
+16. Explanation Agent
+17. Compliance Agent
+18. Evidence Engine
+19. Case Engine
+20. Alert Engine
+21. Human Review
+22. Audit Engine
+23. Model Governance
+24. Feedback Engine
+25. Command Center
+26. Graph Explorer
+27. Investigation Studio
+28. AI Copilot
+29. Security Layer
+30. API Layer
+31. Data Governance
+32. Observability
+33. Synthetic Data Engine
+34. Demo Scenario Engine
+35. Reporting
+
+---
+
+## 8. DATA MODEL
+
+Versioned records MUST exist for:
+
+Organization, Tenant, User, Role, Permission, Account, Customer, Transaction, Beneficiary, Merchant, Device, Phone, Email, IP, Location, Authentication Event, Channel, Feature, Rule, Model, Prediction, Risk Assessment, Network, Graph Node, Graph Edge, Alert, Investigation, Evidence, Agent Run, Agent Finding, Recommendation, Case, Human Decision, Action Authorization, Audit Event, Simulation, Digital-Twin Snapshot, Replay Event, Feedback, Outcome, Report, Integration, Data Source, Model Version, Prompt Version, Agent Version, Release, Requirement, Test, Verification, Exception and ADR.
+
+Use stable IDs such as `evt_*`, `txn_*`, `acct_*`, `case_*`, `evidence_*`, `agentrun_*`, `verify_*`.
+
+---
+
+## 9. EVENT CONTRACT
+
+Canonical event fields:
+
+```json
+{
+  "event_id": "evt_demo_84721",
+  "event_type": "financial.transaction.created",
+  "schema_version": "1.0",
+  "occurred_at": "ISO-8601",
+  "source": "synthetic_demo",
+  "transaction": {
+    "transaction_id": "txn_84721",
+    "amount": 480000,
+    "currency": "NGN",
+    "channel": "digital",
+    "sender_account_id": "acct_A",
+    "receiver_account_id": "acct_B"
+  },
+  "entities": {
+    "device_id": "dev_04",
+    "phone_id": "phn_03",
+    "ip_id": "ip_02",
+    "location_id": "loc_01"
+  },
+  "privacy_classification": "synthetic",
+  "trace_id": "trace_demo_84721"
+}
+```
+
+Required behavior: validation, normalization, idempotency, retry, dead-letter, replay, provenance, timestamp/timezone handling and observability.
+
+---
+
+## 10. ENTITY RESOLUTION
+
+Resolve authorized relationships among:
+
+Account, customer, beneficiary, device, phone, email, IP, merchant, location, authentication and transaction signals.
+
+Every relationship requires:
+- source;
+- relationship type;
+- timestamp;
+- confidence where appropriate;
+- provenance;
+- temporal validity where applicable.
+
+Do not infer identity beyond available evidence.
+
+---
+
+## 11. FINANCIAL CRIME GRAPH
+
+Node types:
+
+```text
+Account, Customer, Transaction, Device, Phone, Merchant,
+Beneficiary, IP, Location, Authentication, Case, Alert,
+Organization, Agent Finding
+```
+
+Edge types:
+
+```text
+OWNS, SENT_TO, RECEIVED_FROM, USES_DEVICE, USES_PHONE,
+USES_IP, VISITED_LOCATION, PAID_MERCHANT, AUTHENTICATED_FROM,
+BENEFICIARY_OF, ASSOCIATED_WITH, RELATED_TO, FLAGGED_BY,
+EVIDENCED_BY, INVESTIGATED_IN, DERIVED_FROM
+```
+
+Edges must support provenance and temporal validity where applicable.
+
+---
+
+## 12. SIGNATURE NETWORK REVEAL
+
+Primary scenario:
+
+```text
+Transaction #84721
+₦480,000
+Account A → Account B
+Risk: Moderate
+```
+
+User selects:
+
+**REVEAL NETWORK**
+
+The graph expands to a deterministic synthetic network, e.g.:
+
+```text
+12 Accounts
+4 Devices
+3 Phones
+2 Merchants
+1 Beneficiary
+```
+
+Risk can move:
+
+```text
+NORMAL → ANOMALOUS → CONNECTED → HIGH RISK
+```
+
+The explanation MUST state that network relationships and evidence caused the escalation, not falsely claim the single transaction alone proved fraud.
+
+---
+
+## 13. HYBRID DETECTION
+
+Rules:
+- thresholds;
+- velocity;
+- geographic inconsistency;
+- device reuse;
+- beneficiary behavior;
+- configurable risk indicators.
+
+ML:
+- anomaly detection;
+- behavioral profiling;
+- clustering;
+- transaction patterns;
+- graph-derived features;
+- temporal patterns.
+
+Graph:
+- centrality;
+- communities;
+- connected components;
+- suspicious paths;
+- fan-in/fan-out;
+- shared infrastructure;
+- graph velocity.
+
+No single detector is presented as absolute truth.
+
+---
+
+## 14. RISK MODEL
+
+Separate:
+
+```text
+TRANSACTION RISK
+ENTITY RISK
+NETWORK RISK
+MODEL CONFIDENCE
+EVIDENCE COVERAGE
+INVESTIGATION STATUS
+```
+
+Possible risk dimensions:
+
+behavioral, transaction, velocity, relationship, network, temporal, geographic, device, authentication.
+
+Never display “Fraud = 97%” unless that is genuinely the defined metric.
+
+Preferred UI:
+
+```text
+Risk Score: 92/100
+Model Confidence: 94%
+Evidence Coverage: 87%
+Investigation Status: Review Required
+```
+
+---
+
+## 15. AI AGENT NETWORK
+
+Required agents:
+
+1. Sentinel Agent — event/risk monitoring.
+2. Pattern Agent — behavioral/transaction patterns.
+3. Network Agent — graph relationships.
+4. Investigation Agent — investigative synthesis.
+5. Risk Agent — risk synthesis.
+6. Simulation Agent — controlled scenarios.
+7. Explanation Agent — evidence-grounded explanation.
+8. Compliance Agent — configured control mapping.
+9. Learning Agent — governed feedback/improvement.
+
+Every agent MUST define:
+
+```text
+purpose
+data scope
+tools
+read permissions
+write permissions
+action permissions
+human approval requirements
+model/provider
+prompt version
+timeout
+retry
+cost limit
+evaluation suite
+safety policy
+audit events
+owner
+```
+
+Agents cannot execute irreversible financial actions without explicit authorization.
+
+---
+
+## 16. AGENT ORCHESTRATION
+
+```text
+EVENT
+→ DETECTION
+→ ORCHESTRATOR
+→ SPECIALIST AGENTS
+→ EVIDENCE AGGREGATION
+→ CONFLICT RESOLUTION
+→ RISK SYNTHESIS
+→ RECOMMENDATION
+→ HUMAN GATE
+```
+
+Agent disagreements MUST remain inspectable.
+
+Tool authorization MUST be enforced outside the LLM.
+
+---
+
+## 17. EVIDENCE-FIRST AI
+
+Every material AI conclusion MUST link to:
+
+```text
+CLAIM → EVIDENCE → SOURCE → TIMESTAMP → TRACE
+```
+
+Evidence may be:
+
+transaction, graph relationship, historical event, feature, rule result, model result, graph metric, investigator observation, simulation result or policy/control.
+
+No unsupported AI claim can become VERIFIED.
+
+---
+
+## 18. INVESTIGATION FLOW
+
+```text
+ALERT
+→ OPEN
+→ CONTEXT
+→ REVEAL NETWORK
+→ EVIDENCE
+→ AI ANALYSIS
+→ TIMELINE
+→ RISK
+→ SIMULATION
+→ RECOMMENDATION
+→ HUMAN REVIEW
+→ DECISION
+→ CASE
+→ AUDIT
+```
+
+Investigator actions: assign, prioritize, expand graph, inspect evidence, ask AI, run simulation, add note, request verification, escalate, close, false-positive.
+
+---
+
+## 19. DIGITAL TWIN + REPLAY
+
+Digital Twin represents authorized relevant financial-network state.
+
+Support:
+- current state;
+- historical state;
+- graph snapshots;
+- event replay;
+- risk state;
+- investigation state;
+- simulation branches.
+
+Replay must show:
+
+```text
+EVENTS
+GRAPH CHANGES
+RISK CHANGES
+ALERTS
+AGENT OBSERVATIONS
+EVIDENCE
+INVESTIGATOR ACTIONS
+```
+
+Controls: play, pause, step, jump, speed, snapshot, compare.
+
+---
+
+## 20. CONTROLLED SIMULATION
+
+Examples:
+
+```text
+What happens to network risk if Account B is removed?
+Which entity is most connected?
+Which relationships contribute most to network risk?
+```
+
+Every result shows:
+
+```text
+SCENARIO
+ASSUMPTIONS
+CHANGES
+MODEL
+RESULT
+UNCERTAINTY
+LIMITATIONS
+```
+
+Simulation is not presented as certainty or criminal-intent prediction.
+
+---
+
+## 21. HUMAN DECISION CONTROL
+
+```text
+AI
+→ EVIDENCE
+→ RECOMMENDATION
+→ AUTHORIZED HUMAN
+→ DECISION
+→ ACTION
+→ AUDIT
+```
+
+Decision states:
+
+PENDING, APPROVE, REJECT, ESCALATE, REQUEST_VERIFICATION, MONITOR, CLOSE, FALSE_POSITIVE.
+
+Every decision records actor, role, timestamp, recommendation, evidence viewed, decision, reason, authorization scope and result.
+
+---
+
+## 22. CASE MANAGEMENT
+
+States:
+
+```text
+NEW → TRIAGED → INVESTIGATING → AWAITING_REVIEW
+→ DECISIONED → ACTIONED → CLOSED
+```
+
+Alternate terminal states: FALSE_POSITIVE, NO_ACTION, ESCALATED.
+
+All transitions require authorization and audit.
+
+---
+
+## 23. UI/UX AUTHORITY
+
+Existing CruiseTech Inc.™ Full UI/UX Design Feature System **01–116 remains immutable visual foundation**.
+
+CruiseShield UI/UX extension **117–205 remains the product-specific experience layer**.
+
+Required experiences:
+
+- Command Center;
+- Live Risk Feed;
+- Network Pulse;
+- Reveal Network;
+- Financial Crime Graph;
+- 3D Financial Crime Constellation;
+- Shield Sentinel™ giant AI robot;
+- AI Agent Council;
+- Agent Execution Timeline;
+- Trust HUD;
+- Evidence Chain;
+- Why This Risk?;
+- Case DNA;
+- Case Replay;
+- Digital Twin;
+- What-If Simulator;
+- Fork the Network;
+- Human Decision Gate;
+- Audit Flight Recorder;
+- Proof Mode;
+- Judge Mode;
+- 90-second WOW flow;
+- cursor intelligence;
+- network magnet;
+- 3D graph camera;
+- evidence beams;
+- network X-Ray;
+- follow-the-money;
+- natural-language graph query;
+- global network map;
+- live event stream;
+- system health HUD;
+- privacy shield;
+- role-aware UI;
+- responsive/mobile mode;
+- visual risk language;
+- demo reset;
+- degraded/offline mode;
+- UI observability;
+- visual regression.
+
+---
+
+## 24. CANONICAL VISUAL REFERENCE
+
+Authoritative supplied image:
+
+`ChatGPT Image Oct 5, 2026, 04_23_00 PM.png`
+
+ChatGPT runtime path:
+
+`/mnt/data/ChatGPT Image Oct 5, 2026, 04_23_00 PM.png`
+
+External agent requirement:
+
+```text
+CRUISESHIELD_CANONICAL_UI_REFERENCE_URL=https://<DIRECT-HTTPS-IMAGE-URL>
+```
+
+Do NOT invent the URL. Upload the canonical image to a stable public HTTPS location if the external agent rejects ordinary PNG/JPG attachments.
+
+Preserve:
+- dark navy futuristic enterprise environment;
+- CruiseShield branding;
+- left navigation;
+- top search/profile;
+- giant silver/white Shield Sentinel robot;
+- Earth/global environment;
+- six hexagonal capability cards;
+- investigation card;
+- risk metrics;
+- AI Investigation Assistant;
+- Financial Crime Network Graph;
+- Network Details;
+- Timeline;
+- Simulation;
+- Case Management;
+- System Performance;
+- security/online indicators;
+- Detect → Connect → Predict → Investigate → Intervene.
+
+The implementation may improve responsiveness and accessibility but MUST NOT turn the product into an unrelated generic dashboard.
+
+---
+
+## 25. SHIELD SENTINEL™ ROBOT
+
+The robot is functional UI, not decoration only.
+
+Interactions:
+- hover;
+- cursor tracking;
+- focus;
+- mission ring;
+- explain platform;
+- reveal network;
+- show agent activity;
+- show system health;
+- open investigation;
+- reduced-motion alternative.
+
+Robot = intelligence interface. Human authorization = control authority.
+
+---
+
+## 26. FRONTEND INFORMATION ARCHITECTURE
+
+Primary navigation:
+
+```text
+HOME / COMMAND CENTER
+INVESTIGATIONS
+NETWORK EXPLORER
+GRAPH EXPLORER
+CASES
+AI COPILOT
+REPORTS & ANALYTICS
+ADMINISTRATION
+```
+
+Supporting:
+Digital Twin, Replay, Simulation, Agent Council, Evidence, Audit, Model Governance, System Health, Data Sources, Security.
+
+Required states for important components:
+
+```text
+LOADING / EMPTY / SUCCESS / ERROR / PARTIAL / OFFLINE /
+DEGRADED / UNAUTHORIZED / FORBIDDEN / STALE / RETRYING
+```
+
+No dead ends.
+
+---
+
+## 27. THEME / ACCESSIBILITY / RESPONSIVE
+
+Themes:
+- Light;
+- Dark;
+- System/Auto.
+
+Required:
+- semantic tokens;
+- persisted preference;
+- organization/project defaults;
+- runtime switching;
+- contrast;
+- keyboard navigation;
+- screen-reader semantics;
+- reduced motion;
+- non-color-only meaning;
+- accessible graph/table alternative.
+
+Responsive:
+mobile, tablet, desktop, wide, ultra-wide.
+
+3D must have functional 2D/accessibility fallback.
+
+---
+
+## 28. AUTH / TENANCY / SECURITY
+
+Authentication:
+- identity;
+- MFA;
+- sessions;
+- RBAC;
+- permission checks.
+
+Suggested roles:
+ADMIN, COMPLIANCE_OFFICER, INVESTIGATOR, ANALYST, AUDITOR, EXECUTIVE_VIEWER, DEVELOPER.
+
+Tenant isolation MUST be tested for:
+- data;
+- graph;
+- cases;
+- exports;
+- audit.
+
+Security:
+- TLS;
+- encryption at rest where applicable;
+- secure secrets;
+- least privilege;
+- input validation;
+- rate limiting;
+- dependency/SAST/container scanning;
+- SBOM;
+- secure headers;
+- audit integrity;
+- credential rotation.
+
+---
+
+## 29. PRIVACY / DATA GOVERNANCE
+
+Demo uses synthetic/authorized sandbox data only.
+
+Production requires:
+- authorization;
+- purpose limitation;
+- minimization;
+- access control;
+- retention/deletion policy;
+- residency where applicable;
+- masking;
+- auditability.
+
+No unauthorized real financial data.
+
+---
+
+## 30. API / INTEGRATION CONTRACT
+
+Versioned API groups:
+
+```text
+/auth /users /organizations /transactions /events /entities
+/graph /risk /alerts /investigations /evidence /agents
+/cases /simulations /replay /reports /audit /health /metrics /admin
+```
+
+Every API requires validation, auth, authorization, rate limiting, structured errors, trace IDs, versioning and contract tests.
+
+Every external integration defines:
+
+provider, capability, auth, authorization, contract, version, timeout, retry, rate limit, idempotency, fallback, privacy, monitoring, cost, owner, replacement strategy, test environment, production verification.
+
+---
+
+## 31. DATA / EVENT RELIABILITY
+
+Implement:
+- schema validation;
+- idempotency;
+- retries with bounds;
+- dead-letter queues;
+- backpressure;
+- replay;
+- timeouts;
+- circuit breakers where appropriate;
+- graceful shutdown;
+- readiness/liveness;
+- backups;
+- restore tests.
+
+Duplicate delivery MUST NOT corrupt state.
+
+---
+
+## 32. SYNTHETIC DATA / DEMO SCENARIOS
+
+Required deterministic scenarios:
+
+```text
+SCN-001-NORMAL
+SCN-002-VELOCITY
+SCN-003-DEVICE_REUSE
+SCN-004-BENEFICIARY_CLUSTER
+SCN-005-NETWORK_RING
+SCN-006-MULTI_SIGNAL
+SCN-007-FALSE_POSITIVE
+SCN-008-HIGH_RISK_NETWORK
+```
+
+Primary scenario MUST be resettable and deterministic.
+
+---
+
+## 33. REAL-TIME LIVE FLOW
+
+The product MUST demonstrate:
+
+```text
+Synthetic Event
+→ Event Gateway
+→ Normalize
+→ Entity Resolve
+→ Feature Extract
+→ Rules
+→ ML
+→ Graph Update
+→ Network Detection
+→ Risk
+→ Alert
+→ Agent Orchestration
+→ Evidence
+→ Investigation
+→ Case
+→ Human Decision
+→ Audit
+```
+
+Every transition must be observable.
+
+---
+
+## 34. ACTIVATION FLOWS
+
+Organization:
+
+```text
+CREATE ORGANIZATION
+→ CREATE ADMIN
+→ VERIFY IDENTITY
+→ CONFIGURE SECURITY
+→ CREATE ROLES
+→ SELECT DATA SOURCE
+→ LOAD SYNTHETIC DEMO
+→ HEALTH CHECK
+→ FIRST INVESTIGATION
+→ ACTIVATE
+```
+
+Investigator:
+
+```text
+INVITE → VERIFY → MFA → ROLE → TUTORIAL → FIRST ALERT → FIRST INVESTIGATION → READY
+```
+
+Demo:
+
+```text
+OPEN DEMO → RESET → LOAD SCENARIO → HEALTH CHECK → START STREAM → READY
+```
+
+---
+
+## 35. FIRST-RUN HEALTH CHECK
+
+Show actual PASS/FAIL for:
+
+```text
+Database
+Graph
+Cache
+Event Pipeline
+Risk Engine
+Agent Runtime
+Evidence Engine
+Frontend/API
+Authentication
+Audit
+Synthetic Scenario
+```
+
+No fake green checks.
+
+---
+
+## 36. SIGNATURE JUDGE DEMO
+
+Target story:
+
+```text
+0–10s: Problem
+10–25s: Normal transaction
+25–40s: Reveal network
+40–55s: AI investigation
+55–70s: Evidence
+70–80s: Replay/simulation
+80–90s: Human decision + audit + impact
+```
+
+Exact duration must be measured if claimed.
+
+Demo MUST run from clean reset without hidden manual operations.
+
+---
+
+## 37. AI COPILOT
+
+Questions:
+
+```text
+Why is this network high risk?
+Show the strongest relationships.
+What evidence supports the risk increase?
+Replay this network from one hour ago.
+Run a scenario removing Account B.
+Which entity has the highest network centrality?
+```
+
+Answers MUST come from actual tools/data.
+
+Natural-language graph flow:
+
+```text
+QUESTION
+→ INTENT
+→ AUTHORIZATION
+→ QUERY PLAN
+→ VALIDATION
+→ GRAPH QUERY
+→ RESULT
+→ EVIDENCE
+→ EXPLANATION
+```
+
+LLM must never receive unrestricted database write access.
+
+---
+
+## 38. MODEL / AI GOVERNANCE
+
+Track:
+- model version;
+- feature version;
+- prompt version;
+- provider;
+- agent version;
+- inputs;
+- tools;
+- evidence;
+- output;
+- latency;
+- cost;
+- human decision;
+- feedback.
+
+Model lifecycle:
+
+```text
+PROPOSED → EVALUATED → APPROVED → DEPLOYED → MONITORED → RE-EVALUATED → RETIRED
+```
+
+No silent production model/rule mutation.
+
+---
+
+## 39. AI EVALUATION
+
+Test:
+- factuality;
+- evidence grounding;
+- tool correctness;
+- authorization;
+- hallucination;
+- conflicting agents;
+- ambiguous questions;
+- prompt injection;
+- cross-tenant requests;
+- unauthorized action;
+- privacy-sensitive requests;
+- tool/model timeout;
+- false-positive scenario;
+- simulation certainty trap.
+
+External/untrusted financial text MUST never override system instructions.
+
+---
+
+## 40. AUDIT FLIGHT RECORDER
+
+Record where applicable:
+
+```text
+User
+Agent
+Model
+Prompt Version
+Tool
+Input
+Evidence
+Output
+Recommendation
+Human Decision
+Action
+Timestamp
+Tenant
+Trace ID
+Result
+```
+
+Audit logs must be protected from unauthorized modification.
+
+---
+
+## 41. OBSERVABILITY
+
+Track actual:
+- events received/processed/failed;
+- processing latency;
+- graph latency;
+- detection latency;
+- risk latency;
+- agent latency;
+- investigation latency;
+- API latency;
+- error rate;
+- queue depth;
+- DLQ count;
+- DB/graph health;
+- model errors;
+- AI usage/cost;
+- active cases.
+
+Use correlation IDs end-to-end.
+
+---
+
+## 42. REPORTING / ANALYTICS
+
+Required:
+- risk overview;
+- investigation workload;
+- alert funnel;
+- network statistics;
+- case outcomes;
+- false-positive trends;
+- agent performance;
+- evidence coverage;
+- model performance;
+- system performance;
+- audit report.
+
+Every metric must identify source, time window, population and calculation.
+
+---
+
+## 43. TESTING MATRIX
+
+Unit: rules, risk, graph utilities, state machines.
+
+Integration: DB, graph, cache, event pipeline, agents, evidence.
+
+Contract: API/event/schema.
+
+E2E: complete journeys.
+
+Security: auth/RBAC/tenant/injection/secrets.
+
+Performance: throughput/latency/render/graph/agent/simulation.
+
+AI: grounding/tool use/safety/authorization/regression.
+
+Visual: canonical UI, light/dark/system, responsive.
+
+Accessibility: keyboard/contrast/semantic/screen-reader-critical.
+
+Reliability: failure injection/restart/recovery.
+
+---
+
+## 44. CI/CD
+
+```text
+CHECKOUT
+→ INSTALL
+→ LINT
+→ TYPECHECK
+→ UNIT
+→ INTEGRATION
+→ CONTRACT
+→ SECURITY
+→ BUILD
+→ AI EVALUATION
+→ E2E
+→ VISUAL
+→ PERFORMANCE
+→ PACKAGE
+→ DEPLOY
+→ SMOKE
+→ EVIDENCE
+```
+
+Critical failure blocks release.
+
+---
+
+## 45. DEPLOYMENT / DR
+
+Provide:
+- Docker;
+- local production-like stack;
+- CI/CD;
+- environment separation;
+- secrets;
+- health checks;
+- backups;
+- restore;
+- rollback.
+
+Define measured RPO/RTO only after infrastructure is known and tested.
+
+Deployment does not equal production readiness until runtime verification passes.
+
+---
+
+## 46. REQUIREMENTS / EVIDENCE CONTROL PLANE
+
+Every requirement receives:
+
+```text
+REQ-ID
+Title
+Source
+Priority
+Risk
+Owner
+Scope
+Component
+Acceptance Criteria
+Test IDs
+Evidence IDs
+Release
+Runtime Verification
+Status
+```
+
+Statuses:
+
+```text
+PLANNED / IN_PROGRESS / IMPLEMENTED / TESTED / VERIFIED
+/ BLOCKED / UNVERIFIED / WAIVED
+```
+
+Required bidirectional traceability:
+
+```text
+REQUIREMENT ↔ ARCHITECTURE ↔ DESIGN ↔ IMPLEMENTATION
+↔ TEST ↔ EVIDENCE ↔ RELEASE ↔ RUNTIME
+```
+
+Detect orphan requirements, orphan implementation and orphan tests.
+
+---
+
+## 47. UNIVERSAL ZERO-GAP CLOSURE MATRIX
+
+Inherit the universal ZG controls:
+
+```text
+ZG-00 Governance
+ZG-01 Requirements
+ZG-02 Traceability
+ZG-03 Architecture Conformance
+ZG-04 Drift
+ZG-05 Dependency/Impact
+ZG-06 Contracts
+ZG-07 Compatibility
+ZG-08 Migration
+ZG-09 Release
+ZG-10 Reliability
+ZG-11 Incident/Operations
+ZG-12 Compliance Controls
+ZG-13 Tenancy
+ZG-14 Privacy
+ZG-15 FinOps
+ZG-16 Supply Chain
+ZG-17 Project Factory
+ZG-18 Portfolio Governance
+ZG-19 Evidence
+ZG-20 Evolution
+ZG-21 Institutional Memory
+ZG-22 Technology Substitution
+ZG-23 Human + AI Operating Model
+ZG-24 Accessibility
+ZG-25 Offline/Edge
+ZG-26 External/Physical Interfaces
+ZG-27 Documentation
+ZG-28 Final Traceability
+ZG-29 Final Closure
+```
+
+The universal standard remains:
+
+```text
+LISTED ≠ COMPLETE
+IMPLEMENTED ≠ VERIFIED
+TESTED ≠ PROVEN
+DEPLOYED ≠ OPERATIONAL
+OPERATIONAL ≠ GOVERNED
+```
+
+---
+
+## 48. REQUIRED REPOSITORY OUTPUT
+
+Preferred:
+
+```text
+/apps/web
+/apps/api
+/apps/worker
+/services/event-gateway
+/services/entity-resolution
+/services/feature-engine
+/services/rules-engine
+/services/ml-engine
+/services/graph-engine
+/services/risk-engine
+/services/agent-orchestrator
+/services/evidence-engine
+/services/investigation-engine
+/services/simulation-engine
+/services/case-engine
+/services/audit-engine
+/packages/contracts
+/packages/domain
+/packages/ui
+/packages/auth
+/packages/observability
+/data/synthetic
+/models
+/agents
+/migrations
+/infra
+/tests/unit
+/tests/integration
+/tests/contract
+/tests/e2e
+/tests/security
+/tests/performance
+/tests/ai
+/tests/visual
+/docs
+/evidence
+```
+
+Preserve an existing repository structure when it already provides these capabilities.
+
+---
+
+## 49. FIRST VERTICAL SLICE
+
+Build this BEFORE broadening:
+
+```text
+Synthetic Event
+→ Ingestion
+→ Normalization
+→ Entity Resolution
+→ Graph Update
+→ Detection
+→ Risk
+→ Alert
+→ Investigation
+→ Evidence
+→ Case
+→ Human Decision
+→ Audit
+```
+
+It MUST run end-to-end before expansion.
+
+---
+
+## 50. MACHINE-VERIFIABLE ACCEPTANCE GATES
+
+At minimum:
+
+```text
+001 Repository builds
+002 Dependencies resolve
+003 Environment validated
+004 DB starts
+005 Graph starts
+006 Cache starts
+007 Migrations pass
+008 Synthetic seed passes
+009 Event ingestion passes
+010 Schema validation passes
+011 Idempotency passes
+012 Entity resolution passes
+013 Graph update/query passes
+014 Rules pass
+015 ML evaluation passes
+016 Network detection passes
+017 Risk engine passes
+018 Alert lifecycle passes
+019 Agent orchestration passes
+020 Agent permission policy passes
+021 Evidence linkage passes
+022 Investigation passes
+023 Explanation grounding passes
+024 Digital Twin passes
+025 Replay passes
+026 Simulation passes
+027 Human authorization passes
+028 Case lifecycle passes
+029 Audit passes
+030 Feedback passes
+031 API contracts pass
+032 Authentication passes
+033 RBAC passes
+034 Tenant isolation passes
+035 Security tests pass
+036 Privacy tests pass
+037 Observability passes
+038 Command Center works
+039 Graph Explorer works
+040 Investigation Studio works
+041 AI Copilot works
+042 Light theme passes
+043 Dark theme passes
+044 System theme passes
+045 Accessibility passes
+046 Responsive passes
+047 Reduced-motion passes
+048 Visual regression passes
+049 Unit tests pass
+050 Integration tests pass
+051 Contract tests pass
+052 E2E tests pass
+053 AI evaluation passes
+054 Performance baseline passes
+055 Docker build passes
+056 Local production-like stack passes
+057 CI passes
+058 Deployment passes where available
+059 Deployed health passes where deployed
+060 Backup passes
+061 Restore passes
+062 Rollback passes
+063 Signature demo passes
+064 Demo reset passes
+065 Proof Mode passes
+066 Evidence package generated
+067 Traceability complete
+068 Architecture conformance passes
+069 Drift check passes
+070 Dependency-impact check passes
+071 Contract registry complete
+072 Exception registry reviewed
+073 ADR lifecycle current
+074 AI model/agent lifecycle current
+075 Evidence integrity verified
+076 No unauthorized real financial data
+077 No AI authorization bypass
+078 No hidden manual demo step
+079 Final runtime audit passes
+080 Zero-Gap closure eligible
+```
+
+---
+
+## 51. LIVE PROOF PACKAGE
+
+For the primary scenario generate:
+
+```text
+event.json
+normalized-event.json
+entity-resolution.json
+graph-snapshot.json
+detection-result.json
+risk-assessment.json
+agent-run.json
+evidence.json
+investigation.json
+simulation.json
+human-decision.json
+case.json
+audit.json
+```
+
+Also capture:
+- screenshots;
+- logs;
+- test reports;
+- runtime traces;
+- performance measurements;
+- deployment health;
+- visual regression;
+- AI evaluation.
+
+---
+
+## 52. EVIDENCE DIRECTORY
+
+```text
+/evidence
+  /requirements
+  /architecture
+  /build
+  /tests
+  /security
+  /ai-evaluation
+  /performance
+  /runtime
+  /demo
+  /deployment
+  /audit
+  /visual
+  /final
+```
+
+Final files:
+
+```text
+/evidence/final/FINAL_VERIFICATION_REPORT.md
+/evidence/final/TRACEABILITY_MATRIX.csv
+/evidence/final/ACCEPTANCE_GATE_RESULTS.json
+/evidence/final/RUNTIME_PROOF.json
+/evidence/final/DEMO_PROOF.md
+/evidence/final/SECURITY_PROOF.md
+/evidence/final/AI_EVALUATION_REPORT.md
+/evidence/final/DEPLOYMENT_PROOF.md
+/evidence/final/FINAL_ZERO_GAP_STATUS.md
+```
+
+---
+
+## 53. FEATURE DEFINITION OF DONE
+
+No feature is complete until:
+
+```text
+REQUIREMENT
+→ DESIGN
+→ IMPLEMENTATION
+→ UNIT
+→ INTEGRATION
+→ E2E WHERE APPLICABLE
+→ SECURITY
+→ OBSERVABILITY
+→ DOCUMENTATION
+→ RUNTIME
+→ EVIDENCE
+→ TRACEABILITY
+```
+
+---
+
+## 54. FAILURE / BLOCKER PROTOCOL
+
+If blocked:
+
+1. identify blocker;
+2. assign BLOCKED status;
+3. record affected requirements;
+4. record exact failure;
+5. preserve logs;
+6. attempt safe automated repair;
+7. re-run affected tests;
+8. if unresolved, produce an explicit blocker report.
+
+Never silently skip a required gate.
+
+---
+
+## 55. NO-HIDDEN-MANUAL-STEP RULE
+
+Any manual operator step required by the advertised demo MUST be:
+- automated; or
+- explicitly exposed and documented.
+
+The final judge/demo flow must not depend on invisible terminal/database edits.
+
+---
+
+## 56. NO-FAKE-INTELLIGENCE / NO-FAKE-METRICS
+
+Synthetic data is allowed when clearly labeled.
+
+Every displayed system metric MUST be traceable to actual runtime telemetry.
+
+Every AI answer MUST be grounded in actual data/tools.
+
+Targets must be labeled TARGET. Measurements must be labeled MEASURED.
+
+---
+
+## 57. ACTIVATION / FIRST-RUN PROOF
+
+Organization activation:
+
+```text
+CREATE ORG → ADMIN → IDENTITY → MFA → ROLES
+→ DATA SOURCE → SYNTHETIC DEMO → HEALTH CHECK
+→ FIRST ALERT → FIRST INVESTIGATION → ACTIVE
+```
+
+Proof must include timestamps, actor, result and evidence.
+
+---
+
+## 58. SECURITY / AI TRUST PROOF
+
+Security evidence must cover:
+authentication, MFA, RBAC, tenant isolation, secret handling, encryption, validation, rate limits, dependency/container scans, audit, tool authorization and prompt-injection defenses.
+
+AI trust evidence must show:
+
+```text
+QUESTION
+→ AGENT
+→ TOOL CALL
+→ DATA
+→ EVIDENCE
+→ FINDING
+→ RECOMMENDATION
+→ HUMAN DECISION
+```
+
+---
+
+## 59. PRODUCTION BOUNDARY
+
+Hackathon/demo may use:
+- synthetic data;
+- local simulation;
+- mock financial institutions;
+- sandbox providers.
+
+Production requires authorized infrastructure and data.
+
+Never claim:
+- regulatory approval;
+- bank certification;
+- guaranteed fraud-loss reduction;
+- production detection accuracy;
+- production SLA;
+- production compliance
+
+without independent verification.
+
+---
+
+## 60. BUILD ORDER
+
+```text
+00 Repository Discovery
+01 Architecture Inventory
+02 Requirements Registry
+03 Dependencies + ADR
+04 Environment
+05 Database
+06 Synthetic Data
+07 Event Gateway
+08 Normalization
+09 Entity Resolution
+10 Feature/Behavior
+11 Rules
+12 ML
+13 Graph
+14 Network Detection
+15 Risk
+16 Alerts
+17 Agent Orchestration
+18 Agents
+19 Evidence
+20 Investigation
+21 Digital Twin/Replay
+22 Simulation
+23 Cases
+24 Human Review
+25 Audit
+26 APIs
+27 Frontend
+28 Graph Explorer
+29 Investigation Studio
+30 AI Copilot
+31 Auth/RBAC
+32 Security/Privacy
+33 Observability
+34 Reporting
+35 Testing
+36 AI Evaluation
+37 Performance/Security Hardening
+38 Docker/CI/CD
+39 Deployment
+40 Smoke
+41 Signature Demo
+42 Evidence
+43 Final Audit
+44 Closure
+```
+
+---
+
+## 61. FINAL AI-AGENT COMMAND
+
+```text
+BUILD CRUISESHIELD AI™ NOW.
+
+Inspect the repository first.
+Reuse universal capabilities.
+Create the CruiseShield Project Adapter.
+Do not build CruiseLink telecom components.
+
+Build the first vertical slice:
+
+Synthetic Event
+→ Ingestion
+→ Normalization
+→ Entity Resolution
+→ Graph Update
+→ Detection
+→ Risk
+→ Alert
+→ Investigation
+→ Evidence
+→ Case
+→ Human Decision
+→ Audit
+
+Then expand the complete product.
+
+At every phase:
+
+BUILD → RUN → TEST → VERIFY → FIX → RE-RUN → EVIDENCE
+
+For every requirement:
+
+REQUIREMENT → IMPLEMENTATION → TEST → RUNTIME RESULT → EVIDENCE → STATUS
+
+For every agent:
+
+CAPABILITY → DATA SCOPE → TOOLS → PERMISSIONS → POLICY
+→ IMPLEMENTATION → EVALUATION → LOGGING → EVIDENCE
+
+For every integration:
+
+PROVIDER → AUTH → CONTRACT → VERSION → TIMEOUT → RETRY
+→ RATE LIMIT → IDEMPOTENCY → FALLBACK → PRIVACY → MONITORING
+→ COST → TEST → EVIDENCE
+
+For every UI feature:
+
+DESIGN → COMPONENT → REAL DATA → INTERACTION → ACCESSIBILITY
+→ RESPONSIVE → THEME → ERROR STATE → OBSERVABILITY → VISUAL TEST → EVIDENCE
+
+Use CRUISESHIELD_CANONICAL_UI_REFERENCE_URL if supplied.
+Do not invent a URL.
+
+Do not stop at scaffolding, compilation, isolated tests or static UI.
+
+Run the real system.
+Run the real demo.
+Capture proof.
+Fix failures.
+Re-run.
+Generate the complete evidence package.
+
+Only mark VERIFIED when evidence exists.
+```
+
+---
+
+## 62. FINAL PRODUCT EQUATION
+
+```text
+CRUISESHIELD AI™
+
+=
+FRONTIER ENTERPRISE AI CORE
++ PROJECT ADAPTER
++ FINANCIAL EVENT INTELLIGENCE
++ ENTITY RESOLUTION
++ BEHAVIOR
++ RULES
++ ML
++ UNIVERSAL RISK GRAPH
++ NETWORK DETECTION
++ MULTIDIMENSIONAL RISK
++ SPECIALIZED AGENTS
++ EVIDENCE
++ INVESTIGATION
++ DIGITAL TWIN
++ REPLAY
++ SIMULATION
++ HUMAN DECISION
++ CASE MANAGEMENT
++ AUDIT
++ SECURITY
++ PRIVACY
++ OBSERVABILITY
++ AI GOVERNANCE
++ MODEL GOVERNANCE
++ FEEDBACK
++ REPORTING
++ DEPLOYMENT
++ RELIABILITY
++ ARCHITECTURE ASSURANCE
++ PROOF
++ CONTINUOUS EVOLUTION
+```
+
+Final product loop:
+
+```text
+DETECT → CONNECT → PREDICT/SIMULATE → INVESTIGATE
+→ EXPLAIN → HUMAN DECISION → INTERVENE → AUDIT → LEARN → ADAPT
+```
+
+Final engineering loop:
+
+```text
+INHERIT → CONFIGURE → EXTEND → BRAND → IMPLEMENT → TEST
+→ VERIFY → TRACE → EVIDENCE → DEPLOY → OPERATE → MEASURE
+→ GOVERN → AUDIT → EVOLVE → RE-VERIFY
+```
+
+---
+
+## 63. FINAL STATUS CONTRACT
+
+Before execution:
+
+```text
+ARCHITECTURE: COMPLETE FOR BUILD
+REQUIREMENTS: DEFINED
+DOMAIN CONTRACT: DEFINED
+AI/AGENT CONTRACT: DEFINED
+UI/UX CONTRACT: DEFINED
+SECURITY: DEFINED
+TESTING: DEFINED
+DEPLOYMENT: DEFINED
+EVIDENCE: DEFINED
+ZERO-GAP GATES: DEFINED
+IMPLEMENTATION: TO EXECUTE
+RUNTIME PROOF: PENDING
+```
+
+After execution, replace these with actual evidence-backed statuses.
+
+**100% architectural coverage** means no known required architectural category was intentionally omitted.
+
+**100% implementation closure** means every applicable requirement is implemented, tested, verified, traced, evidenced, runtime-confirmed and governed.
+
+---
+
+# END — CRUISESHIELD AI™ FINAL ZERO-GAP ENGINEERABLE MASTER BLUEPRINT
+
+
+# ============================================================================
+# v4.0 FINAL CLOSURE DELTA — CHANNEL INTELLIGENCE + FULL EXECUTION LOCK
+# ============================================================================
+
+This section is an authoritative implementation delta on top of v3.0.
+It exists because the existing runtime/demo behavior contains a deterministic
+72-hour ledger with channel-aware events such as POS, USSD and mobile app.
+The v3 blueprint contains a generic Channel field but does not sufficiently
+lock channel intelligence as a first-class detection/network/investigation
+subsystem. v4 closes that gap without deleting or replacing v3.
+
+## 64. CHANNEL INTELLIGENCE FABRIC™ — MANDATORY
+
+Channel Intelligence is a first-class CruiseShield subsystem.
+It MUST affect:
+
+- event normalization;
+- entity resolution;
+- feature extraction;
+- behavior analysis;
+- rules;
+- ML;
+- graph construction;
+- network detection;
+- multidimensional risk;
+- agent tools;
+- evidence;
+- investigations;
+- alerts;
+- replay;
+- digital twin;
+- simulation;
+- cases;
+- audit;
+- reporting;
+- analytics;
+- observability;
+- UI;
+- testing.
+
+Canonical channels:
+
+POS
+ATM
+USSD
+MOBILE_APP
+WEB
+INTERNET_BANKING
+CARD
+TRANSFER
+NIP
+QR
+AGENT
+AGENCY
+OPEN_BANKING_API
+WALLET
+MERCHANT
+BRANCH
+OTHER
+
+Aliases MUST normalize deterministically, e.g.:
+
+pos / POS / point_of_sale -> POS
+app / mobile / mobile_app -> MOBILE_APP
+ussd / USSD -> USSD
+atm / ATM -> ATM
+
+Unknown channels MUST be rejected or mapped to OTHER according to an
+explicit versioned schema policy. No silent arbitrary classification.
+
+## 65. CHANNEL EVENT CONTRACT
+
+Every transaction event MUST carry or derive:
+
+- channel;
+- normalized_channel;
+- channel_category;
+- channel_provider where applicable;
+- authentication_method where applicable;
+- session_id where applicable;
+- device_id where applicable;
+- phone_id where applicable;
+- IP where applicable;
+- location where applicable;
+- merchant/terminal where applicable;
+- provenance.
+
+Channel classification MUST be observable and evidence-backed.
+
+## 66. CHANNEL SIGNAL ENGINE
+
+Implement channel-specific signals.
+
+POS:
+- merchant reuse;
+- terminal reuse;
+- merchant concentration;
+- velocity;
+- geographic inconsistency;
+- multi-account terminal relationships.
+
+ATM:
+- rapid withdrawals;
+- ATM reuse;
+- account concentration;
+- geographic velocity;
+- authentication anomalies;
+- withdrawal sequence anomalies.
+
+USSD:
+- session velocity;
+- beneficiary changes;
+- phone/account relationships;
+- failed authentication;
+- unusual sequences;
+- cross-channel escalation.
+
+MOBILE APP:
+- device reuse;
+- IP reuse;
+- location anomaly;
+- session anomaly;
+- beneficiary behavior;
+- device switching.
+
+WEB / INTERNET BANKING:
+- IP reuse;
+- device/browser reuse;
+- session anomaly;
+- geographic anomaly;
+- account clustering;
+- authentication anomaly.
+
+CARD:
+- merchant patterns;
+- terminal patterns;
+- geographic velocity;
+- card/account relationships.
+
+TRANSFER / NIP:
+- sender/receiver graph;
+- fan-in;
+- fan-out;
+- velocity;
+- beneficiary reuse;
+- circular movement;
+- propagation patterns.
+
+AGENT / AGENCY:
+- agent concentration;
+- geography;
+- account reuse;
+- velocity.
+
+OPEN BANKING / API:
+- API client identity;
+- application identity;
+- token/session relationships;
+- account concentration;
+- velocity.
+
+## 67. CROSS-CHANNEL INTELLIGENCE
+
+The system MUST detect relationships across channels.
+
+Example:
+
+ACCOUNT A
+  -> MOBILE_APP
+  -> TRANSFER
+  -> ACCOUNT B
+  -> USSD
+  -> ACCOUNT C
+  -> ATM
+  -> WITHDRAWAL
+
+Required capabilities:
+
+- channel switching detection;
+- cross-channel velocity;
+- cross-channel identity reuse;
+- cross-channel device reuse;
+- cross-channel phone reuse;
+- cross-channel merchant reuse;
+- cross-channel beneficiary reuse;
+- cross-channel geographic anomalies;
+- cross-channel authentication anomalies;
+- cross-channel network propagation;
+- cross-channel risk escalation;
+- cross-channel sequence detection.
+
+A channel must be a meaningful feature/context in the risk and network
+pipeline, not merely a display label.
+
+## 68. CHANNEL-AWARE GRAPH
+
+Add CHANNEL as a graph node/context where useful.
+
+Required relationship:
+
+USED_CHANNEL
+
+Graph examples:
+
+ACCOUNT -> USED_CHANNEL -> POS
+ACCOUNT -> USED_CHANNEL -> USSD
+ACCOUNT -> USED_CHANNEL -> MOBILE_APP
+ACCOUNT -> USED_CHANNEL -> ATM
+
+Channel relationships require provenance, timestamps, tenant and trace ID.
+
+The graph explorer MUST be able to filter and explain by channel.
+
+## 69. LIVE LEDGER PRESERVATION LOCK
+
+The existing deterministic 72-hour live ledger behavior MUST NOT be removed.
+
+Preserve:
+
+- simulated 72-hour timeline;
+- event streaming;
+- event IDs;
+- timestamps;
+- routes;
+- amounts;
+- channels;
+- provenance;
+- flags;
+- playback speed;
+- reset;
+- run ID;
+- completion state.
+
+Extend each ledger event where available with:
+
+DEVICE
+PHONE
+MERCHANT
+BENEFICIARY
+LOCATION
+RISK
+SIGNAL
+WHY_FLAGGED
+
+Rows MUST be generated by the deterministic scenario engine, not hardcoded
+into the UI.
+
+The demo MUST continue to support mixed channel sequences such as:
+
+POS
+USSD
+POS
+MOBILE_APP
+ATM
+TRANSFER
+
+and must use those channels in detection and graph/risk context.
+
+## 70. REQUIRED CHANNEL UI
+
+Add a Channel Intelligence view/panel to the production Command Center.
+
+It MUST show actual runtime counts for:
+
+POS
+ATM
+USSD
+MOBILE APP
+WEB
+TRANSFER
+CARD
+AGENT
+API
+WALLET
+
+Counts MUST be computed from the current event stream/time window.
+
+Filters MUST include:
+
+channel
+risk
+time
+entity
+merchant
+device
+phone
+beneficiary
+network
+
+Every flagged event MUST expose actual signal reasons, such as:
+
+VELOCITY
+NETWORK
+SHARED_MERCHANT
+DEVICE_REUSE
+PHONE_REUSE
+BENEFICIARY_CLUSTER
+CROSS_CHANNEL_PATTERN
+GEOGRAPHIC_ANOMALY
+AUTHENTICATION_ANOMALY
+RULE_MATCH
+ML_ANOMALY
+GRAPH_PATTERN
+
+No decorative reason may be presented as a real detection result.
+
+## 71. CHANNEL INVESTIGATION / REPLAY / SIMULATION
+
+Channel context MUST survive the entire lifecycle:
+
+EVENT
+-> DETECTION
+-> ALERT
+-> INVESTIGATION
+-> EVIDENCE
+-> REPLAY
+-> DIGITAL TWIN
+-> SIMULATION
+-> HUMAN DECISION
+-> CASE
+-> AUDIT
+
+Replay must show channel changes.
+Simulation must permit channel-related what-if scenarios where supported.
+Case records must retain channel evidence.
+Audit records must retain channel context for consequential events.
+
+## 72. CHANNEL ACCEPTANCE GATES
+
+CH-001 Channel taxonomy
+CH-002 Channel normalization
+CH-003 Channel event contract
+CH-004 POS processing
+CH-005 ATM processing
+CH-006 USSD processing
+CH-007 Mobile App processing
+CH-008 Web processing
+CH-009 Internet Banking processing
+CH-010 Transfer processing
+CH-011 NIP processing
+CH-012 Card processing
+CH-013 Agent/Agency processing
+CH-014 API/Open Banking processing
+CH-015 Wallet processing
+CH-016 Channel filtering
+CH-017 Channel aggregation
+CH-018 Cross-channel sequence detection
+CH-019 Cross-channel risk contribution
+CH-020 Channel graph relationships
+CH-021 Channel evidence linkage
+CH-022 Channel investigation
+CH-023 Channel replay
+CH-024 Channel Digital Twin
+CH-025 Channel simulation
+CH-026 Channel case management
+CH-027 Channel audit
+CH-028 Channel analytics
+CH-029 Channel UI
+CH-030 Channel agent access
+CH-031 Channel observability
+CH-032 Synthetic channel labeling
+CH-033 Channel idempotency
+CH-034 Unknown-channel handling
+CH-035 Channel schema compatibility
+CH-036 Channel E2E
+CH-037 Channel runtime proof
+CH-038 Final channel closure
+
+No CH gate may be marked VERIFIED without evidence.
+
+# ============================================================================
+# v4.0 FINAL EXECUTION LOCK
+# ============================================================================
+
+## 73. FIRST ACTION — DISCOVER, DO NOT GUESS
+
+The implementation agent MUST begin by inspecting the repository and runtime.
+
+Inventory:
+
+- existing frontend;
+- backend;
+- APIs;
+- database;
+- graph;
+- cache;
+- workers;
+- event pipeline;
+- ledger;
+- synthetic scenarios;
+- alerts;
+- investigations;
+- cases;
+- replay;
+- simulation;
+- agents;
+- AI provider/model configuration;
+- authentication;
+- RBAC;
+- security;
+- observability;
+- tests;
+- CI/CD;
+- deployment;
+- current UI/UX.
+
+Classify every area as:
+
+WORKING
+PARTIAL
+MISSING
+BROKEN
+DUPLICATED
+CONFLICTING
+REUSABLE
+EXTEND
+
+Do not rebuild a working universal capability.
+
+## 74. FIRST VERTICAL SLICE — MUST RUN BEFORE EXPANSION
+
+Implement and prove:
+
+SYNTHETIC EVENT
+-> INGESTION
+-> VALIDATION
+-> NORMALIZATION
+-> CHANNEL NORMALIZATION
+-> ENTITY RESOLUTION
+-> FEATURE EXTRACTION
+-> RULES
+-> ML/ANOMALY WHERE CONFIGURED
+-> GRAPH UPDATE
+-> NETWORK DETECTION
+-> RISK
+-> ALERT
+-> AGENT ORCHESTRATION
+-> EVIDENCE
+-> INVESTIGATION
+-> CASE
+-> HUMAN DECISION
+-> AUDIT
+
+Capture a proof artifact at each material transition.
+
+## 75. COMPLETE LIVE FLOW
+
+The complete live flow is:
+
+FINANCIAL EVENT
+-> EVENT GATEWAY
+-> VALIDATION
+-> NORMALIZATION
+-> CHANNEL INTELLIGENCE
+-> ENTITY RESOLUTION
+-> FEATURE/BEHAVIOR ENGINE
+-> RULES + ML + GRAPH
+-> CROSS-CHANNEL NETWORK DETECTION
+-> MULTIDIMENSIONAL RISK
+-> ALERT
+-> AGENT ORCHESTRATOR
+-> SPECIALIZED AGENTS
+-> EVIDENCE ENGINE
+-> INVESTIGATION STUDIO
+-> DIGITAL TWIN / REPLAY
+-> CONTROLLED SIMULATION
+-> HUMAN DECISION GATE
+-> CASE MANAGEMENT
+-> AUDIT FLIGHT RECORDER
+-> FEEDBACK
+-> LEARNING
+
+Every transition must be observable and traceable.
+
+## 76. ACTIVATION FLOWS
+
+### Organization
+
+CREATE ORGANIZATION
+-> CREATE ADMIN
+-> VERIFY IDENTITY
+-> CONFIGURE SECURITY
+-> CREATE ROLES
+-> SELECT DATA SOURCE
+-> LOAD SYNTHETIC DEMO
+-> HEALTH CHECK
+-> FIRST ALERT
+-> FIRST INVESTIGATION
+-> ACTIVE
+
+### Investigator
+
+INVITE
+-> VERIFY
+-> MFA
+-> ROLE
+-> TUTORIAL
+-> FIRST ALERT
+-> FIRST INVESTIGATION
+-> READY
+
+### Demo
+
+OPEN DEMO
+-> RESET
+-> LOAD SCENARIO
+-> HEALTH CHECK
+-> START STREAM
+-> READY
+
+Each flow MUST generate proof with actor, timestamp, state transitions,
+result, trace ID and evidence ID.
+
+## 77. FIRST-RUN HEALTH CHECK
+
+Health checks MUST actually query:
+
+- database;
+- graph;
+- cache;
+- event pipeline;
+- channel intelligence;
+- risk engine;
+- agent runtime;
+- evidence engine;
+- API/frontend;
+- authentication;
+- audit;
+- synthetic scenario engine.
+
+No hardcoded ONLINE status.
+
+## 78. SIGNATURE JUDGE FLOW
+
+The judge-facing journey MUST be:
+
+PROBLEM
+-> NORMAL TRANSACTION
+-> REVEAL NETWORK
+-> CROSS-CHANNEL SIGNAL
+-> AI INVESTIGATION
+-> EVIDENCE
+-> REPLAY
+-> SIMULATION
+-> HUMAN DECISION
+-> AUDIT
+-> IMPACT
+
+The primary visual story must remain simple even though the underlying
+architecture is deep.
+
+## 79. MISSION GATE / SHIELD SENTINEL
+
+The first view MUST present the CruiseShield experience before entering
+the operational Command Center.
+
+Shield Sentinel must be functional enough to:
+
+- respond to cursor/interaction;
+- surface the six intelligence domains;
+- navigate to real product areas;
+- support optional narration;
+- expose Judge Mode / Architecture Mode / Proof Mode.
+
+3D is enhancement, not a functional dependency.
+
+Every critical function MUST have an accessible 2D equivalent.
+
+## 80. UI STATE SYNCHRONIZATION
+
+The UI is never its own source of truth.
+
+Authoritative state comes from the backend/domain/event state.
+
+Required synchronization:
+
+EVENT STATE
+<->
+RISK STATE
+<->
+GRAPH STATE
+<->
+AGENT STATE
+<->
+EVIDENCE STATE
+<->
+INVESTIGATION STATE
+<->
+CASE STATE
+<->
+AUDIT STATE
+<->
+UI STATE
+
+Stale or disconnected state must be visibly indicated.
+
+## 81. NO-FAKE-INTELLIGENCE LOCK
+
+The agent MUST NOT:
+
+- fabricate graph relationships;
+- fabricate AI findings;
+- fabricate evidence;
+- fabricate health checks;
+- fabricate performance metrics;
+- fabricate security results;
+- fabricate deployment status;
+- fabricate external integrations;
+- fabricate regulatory approval;
+- fabricate production outcomes.
+
+Synthetic data is permitted only when explicitly labeled as synthetic/demo.
+
+Targets and measured values MUST be separated.
+
+## 82. HUMAN CONTROL LOCK
+
+No AI agent may directly bypass authorization for an irreversible financial
+action.
+
+The enforceable chain is:
+
+AI
+-> EVIDENCE
+-> RECOMMENDATION
+-> AUTHORIZED HUMAN
+-> DECISION
+-> ACTION
+-> AUDIT
+
+Tool permissions MUST be enforced outside the LLM.
+
+## 83. NO-HIDDEN-MANUAL-STEP LOCK
+
+Any step required for the advertised demo must be automated or explicitly
+shown/documented.
+
+The clean demo path MUST be:
+
+RESET
+-> RUN
+
+No invisible terminal edits.
+No hidden database edits.
+No hidden JSON edits.
+No hidden state manipulation.
+
+## 84. PROOF PACKAGE
+
+Generate at minimum:
+
+/evidence/requirements
+/evidence/architecture
+/evidence/build
+/evidence/tests
+/evidence/security
+/evidence/ai-evaluation
+/evidence/performance
+/evidence/runtime
+/evidence/demo
+/evidence/deployment
+/evidence/audit
+/evidence/visual
+/evidence/channel-intelligence
+/evidence/final
+
+Live proof artifacts:
+
+- event.json
+- normalized-event.json
+- channel-normalized-event.json
+- entity-resolution.json
+- graph-snapshot.json
+- channel-graph.json
+- detection-result.json
+- risk-assessment.json
+- agent-run.json
+- evidence.json
+- investigation.json
+- simulation.json
+- human-decision.json
+- case.json
+- audit.json
+
+## 85. REQUIRED FINAL ARTIFACTS
+
+/evidence/final/FINAL_VERIFICATION_REPORT.md
+/evidence/final/TRACEABILITY_MATRIX.csv
+/evidence/final/ACCEPTANCE_GATE_RESULTS.json
+/evidence/final/RUNTIME_PROOF.json
+/evidence/final/DEMO_PROOF.md
+/evidence/final/SECURITY_PROOF.md
+/evidence/final/AI_EVALUATION_REPORT.md
+/evidence/final/DEPLOYMENT_PROOF.md
+/evidence/final/CHANNEL_INTELLIGENCE_PROOF.md
+/evidence/final/FINAL_ZERO_GAP_STATUS.md
+
+## 86. FEATURE DEFINITION OF DONE
+
+No feature is complete until:
+
+REQUIREMENT
+-> DESIGN
+-> IMPLEMENTATION
+-> UNIT
+-> INTEGRATION
+-> E2E WHERE APPLICABLE
+-> SECURITY
+-> OBSERVABILITY
+-> DOCUMENTATION
+-> RUNTIME
+-> EVIDENCE
+-> TRACEABILITY
+
+## 87. FAILURE / BLOCKER PROTOCOL
+
+When a gate fails:
+
+1. mark BLOCKED;
+2. identify affected requirements;
+3. capture exact error;
+4. preserve logs/traces;
+5. diagnose root cause;
+6. apply safe repair;
+7. rerun affected tests;
+8. update evidence;
+9. only then reconsider status.
+
+Never silently skip a failed gate.
+
+## 88. REQUIRED FINAL VERIFICATION EQUATION
+
+A capability is VERIFIED only when:
+
+REQUIREMENT
++
+IMPLEMENTATION
++
+TEST
++
+RUNTIME RESULT
++
+EVIDENCE
++
+TRACEABILITY
++
+GOVERNANCE
+
+are all present and applicable gates pass.
+
+Therefore:
+
+LISTED != COMPLETE
+IMPLEMENTED != VERIFIED
+TESTED != PROVEN
+DEPLOYED != OPERATIONAL
+OPERATIONAL != GOVERNED
+
+## 89. FINAL ZERO-GAP CLOSURE CONDITION
+
+100% ARCHITECTURAL COVERAGE means:
+
+No known required architectural category is intentionally omitted.
+
+100% IMPLEMENTATION CLOSURE means:
+
+Every applicable requirement is implemented, tested, verified, traced,
+evidenced, runtime-confirmed and governed.
+
+The implementation agent MUST NOT award 100% solely from documentation.
+
+## 90. FINAL AI-AGENT COMMAND
+
+BUILD CRUISESHIELD AI™ NOW.
+
+You are the principal implementation agent responsible for actual product
+construction, not merely planning.
+
+START BY INSPECTING THE EXISTING REPOSITORY AND RUNTIME.
+
+PRESERVE WORKING FUNCTIONALITY.
+REUSE UNIVERSAL CAPABILITIES.
+CREATE/EXTEND THE CRUISESHIELD PROJECT ADAPTER.
+DO NOT BUILD CRUISELINK TELECOM COMPONENTS.
+
+Implement the complete CruiseShield product described by this document.
+
+Implement Channel Intelligence Fabric™ as a first-class subsystem.
+Preserve the deterministic 72-hour live ledger.
+Preserve POS / USSD / Mobile App behavior.
+Add and verify ATM / Web / Internet Banking / Card / Transfer / NIP / QR /
+Agent / API / Wallet / Merchant / Branch support where applicable.
+
+Implement the full live chain:
+
+EVENT
+-> CHANNEL
+-> ENTITY
+-> BEHAVIOR
+-> RULES + ML + GRAPH
+-> NETWORK
+-> RISK
+-> AGENTS
+-> EVIDENCE
+-> INVESTIGATION
+-> REPLAY
+-> SIMULATION
+-> HUMAN DECISION
+-> CASE
+-> AUDIT
+
+Implement the first-view Mission Gate and Shield Sentinel.
+Implement Command Center.
+Implement Live Ledger.
+Implement Channel Intelligence.
+Implement Financial Crime Graph.
+Implement Reveal Network.
+Implement AI Agent Council.
+Implement Evidence Chain.
+Implement Why This Risk.
+Implement Investigation Studio.
+Implement Digital Twin.
+Implement Replay.
+Implement What-If Simulation.
+Implement Human Decision Gate.
+Implement Case Management.
+Implement Audit Flight Recorder.
+Implement AI Copilot.
+Implement Judge Mode.
+Implement Proof Mode.
+Implement authentication/RBAC/security/privacy.
+Implement observability/reliability.
+Implement testing and AI evaluation.
+Implement CI/CD and deployment where infrastructure exists.
+Implement backup/restore/rollback.
+Implement traceability and evidence.
+
+At every phase:
+
+BUILD
+-> RUN
+-> TEST
+-> VERIFY
+-> FIX
+-> RE-RUN
+-> EVIDENCE
+
+For every requirement:
+
+REQUIREMENT
+-> IMPLEMENTATION
+-> TEST
+-> RUNTIME RESULT
+-> EVIDENCE
+-> STATUS
+
+For every agent:
+
+CAPABILITY
+-> DATA SCOPE
+-> TOOLS
+-> PERMISSIONS
+-> POLICY
+-> IMPLEMENTATION
+-> EVALUATION
+-> LOGGING
+-> EVIDENCE
+
+For every integration:
+
+PROVIDER
+-> AUTH
+-> CONTRACT
+-> VERSION
+-> TIMEOUT
+-> RETRY
+-> RATE LIMIT
+-> IDEMPOTENCY
+-> FALLBACK
+-> PRIVACY
+-> MONITORING
+-> COST
+-> TEST
+-> EVIDENCE
+
+For every UI feature:
+
+DESIGN
+-> COMPONENT
+-> REAL DATA
+-> INTERACTION
+-> ACCESSIBILITY
+-> RESPONSIVE
+-> THEME
+-> ERROR STATE
+-> OBSERVABILITY
+-> VISUAL TEST
+-> EVIDENCE
+
+If something is missing, BUILD IT.
+If something is broken, FIX IT.
+If something is partial, COMPLETE IT.
+If something is duplicated, CONSOLIDATE IT SAFELY.
+If something conflicts, RECORD AND RESOLVE IT.
+If a gate fails, DO NOT SKIP IT.
+If something cannot be proven, mark it UNVERIFIED.
+
+Do not fabricate metrics, AI findings, graph facts, health status, security
+results, deployment status or regulatory claims.
+Do not use unauthorized real financial data.
+Do not bypass human authorization.
+Do not hide manual steps.
+Do not stop at scaffolding.
+Do not stop at compilation.
+Do not stop at static UI.
+Do not stop at isolated tests.
+Do not stop at mock AI.
+Do not stop at mock graph.
+Do not stop at documentation.
+
+Run the actual system.
+Run the actual deterministic demo.
+Capture actual proof.
+Fix failures.
+Rerun.
+Generate the complete evidence package.
+
+Only mark VERIFIED when evidence exists.
+Only mark ZERO-GAP CLOSURE when all applicable gates pass.
+
+BEGIN NOW.
+
+# END OF v4.0 FINAL CLOSURE DELTA
+# ============================================================================
+# CRUISESHIELD AI™ v5.0 — UNIVERSAL ZERO-GAP PRODUCTION ENGINEERING MASTER
+# BLUEPRINT — UNIVERSAL CLOSURE EXTENSION
+# ============================================================================
+
+**Version:** 5.0  
+**Status:** CANONICAL LEVEL 13 META ENGINEERING CONTRACT  
+**Product:** CruiseShield AI™  
+**Concept:** Financial Crime Immune System™  
+**Domain:** Agentic Financial Crime Intelligence / Network-Level Financial Crime Defense  
+**Inheritance:** v4.0 unchanged + universal production closure layers  
+**Implementation mode:** AI-agent executable / human-governed / evidence-gated  
+**Primary rule:** v4.0 is preserved byte-for-byte above this section. This v5
+section is append-only and expands the architecture without converting
+CruiseShield into CruiseLink or another product.
+
+> **The transaction is only the beginning. The network is the signal.**
+
+---
+
+## 91. v5 MASTER CLOSURE DIRECTIVE
+
+v5.0 is the next canonical engineering layer.
+
+The engineering agent MUST:
+
+1. Preserve every v4 requirement.
+2. Preserve every v4 runtime/demo behavior.
+3. Preserve the 72-hour deterministic ledger.
+4. Preserve POS, ATM, USSD, MOBILE_APP and all v4 channel behavior.
+5. Preserve the CruiseShield product identity and financial-crime domain.
+6. Reuse the Frontier Enterprise AI Platform™ universal foundation.
+7. Add the universal enterprise-control layers defined in Sections 92–139.
+8. Implement each applicable layer as executable software, configuration,
+   contracts, tests, observability and evidence.
+9. Avoid building duplicate universal capabilities when an inherited service
+   already exists.
+10. Record every reuse, extension, replacement or conflict in an ADR.
+11. Never silently downgrade a control because the demo does not visibly use it.
+12. Keep hackathon scope adapterized: production-scale controls may be
+    implemented as interfaces, local implementations, deterministic stubs or
+    deferred adapters only when the deferral is explicit, tested and tracked.
+13. Never label a deferred adapter as operational.
+14. Never label an architectural contract as runtime proof.
+15. Never fabricate production metrics, compliance status, regulatory approval,
+    fraud-loss reduction, model accuracy, SLA, RPO or RTO.
+
+The mandatory execution loop remains:
+
+**INHERIT → CONFIGURE → EXTEND → BRAND → IMPLEMENT → TEST → VERIFY → TRACE
+→ EVIDENCE → DEPLOY → OPERATE → MEASURE → GOVERN → AUDIT → EVOLVE
+→ RE-VERIFY**
+
+The mandatory proof rule remains:
+
+**LISTED ≠ IMPLEMENTED ≠ TESTED ≠ VERIFIED ≠ OPERATIONAL ≠ GOVERNED**
+
+---
+
+## 92. v5 AUTHORITY, INHERITANCE AND NON-DUPLICATION CONTRACT
+
+Authority order:
+
+1. Actual repository and runtime behavior.
+2. This v5 master blueprint.
+3. v4.0 unchanged core.
+4. Frontier Enterprise AI Platform™ Universal Master Blueprint.
+5. CruiseShield project requirements.
+6. CruiseShield UI/UX extension.
+7. CruiseTech Inc.™ UI/UX 01–116.
+8. Approved ADRs.
+9. Provider specifications.
+10. Agent inference.
+
+Inheritance rule:
+
+```text
+FRONTIER UNIVERSAL CORE
+        ↓
+CRUISESHIELD PROJECT ADAPTER
+        ↓
+FINANCIAL-CRIME DOMAIN SERVICES
+        ↓
+COUNTRY / INSTITUTION ADAPTERS
+        ↓
+TENANT CONFIGURATION
+        ↓
+RUNTIME
+```
+
+Reuse rule:
+
+```text
+INHERIT
+→ CONFIGURE
+→ EXTEND
+→ REPLACE ONLY WITH ADR
+```
+
+Every shared capability MUST have:
+
+- capability ID;
+- owner;
+- source;
+- version;
+- interface;
+- dependencies;
+- consumers;
+- security classification;
+- data classification;
+- availability expectation;
+- lifecycle;
+- test suite;
+- evidence location.
+
+No parallel implementation may be introduced solely because it is easier.
+
+---
+
+## 93. UNIVERSAL CONTROL-PLANE ARCHITECTURE
+
+v5 introduces a cross-cutting control plane above the product services.
+
+### Control planes
+
+1. Identity & Trust Plane
+2. Consent & Privacy Plane
+3. Notification Plane
+4. Geospatial Intelligence Plane
+5. Knowledge & Semantic Plane
+6. Model Gateway Plane
+7. Agent Memory Plane
+8. Tool / MCP / Connector Plane
+9. Incident / Problem / Change Plane
+10. Disaster Recovery / Business Continuity Plane
+11. Dependency & Integration Plane
+12. Country / Jurisdiction Plane
+13. Compliance Control Plane
+14. Data Lifecycle Plane
+15. Schema & Contract Plane
+16. Quantitative Target Plane
+17. FinOps Plane
+18. Software Supply-Chain Plane
+19. Project Factory Plane
+20. Portfolio Governance Plane
+21. Institutional Memory Plane
+22. Technology Substitution Plane
+23. Environment Promotion Plane
+24. Unknown / Risk Plane
+25. Closure & Evidence Plane
+26. Commercial Platform Plane
+
+### Control-plane rule
+
+Every control-plane capability MUST be consumable by the product without
+requiring domain-specific duplication.
+
+Example:
+
+```text
+Fraud Case
+    ↓
+Identity → Consent → Data Policy → Knowledge → Agents
+    ↓
+Evidence → Compliance → Audit
+    ↓
+Notification → Human Decision → Case
+    ↓
+FinOps → Observability → Governance
+```
+
+---
+
+## 94. ENTERPRISE IDENTITY & TRUST FABRIC™
+
+Identity is a platform capability, not merely a login screen.
+
+### Required identity domains
+
+- human identity;
+- organization identity;
+- tenant identity;
+- role identity;
+- service identity;
+- workload identity;
+- device identity;
+- agent identity;
+- machine identity;
+- API-client identity;
+- integration identity;
+- emergency/break-glass identity.
+
+### Authentication
+
+Support an adapterized architecture for:
+
+- OIDC;
+- OAuth 2.x;
+- SAML SSO;
+- MFA;
+- passkeys/WebAuthn where supported;
+- email/phone authentication where applicable;
+- service-to-service authentication;
+- signed machine credentials;
+- short-lived access tokens;
+- refresh-token lifecycle;
+- recovery workflows.
+
+### Authorization
+
+Implement:
+
+- RBAC;
+- ABAC where required;
+- tenant isolation;
+- organization scope;
+- resource scope;
+- action scope;
+- data classification scope;
+- purpose scope;
+- agent scope;
+- tool scope;
+- geographic/jurisdiction scope;
+- temporal access;
+- separation of duties;
+- privileged access;
+- delegation with expiry.
+
+### Identity lifecycle
+
+```text
+INVITE
+→ VERIFY
+→ PROVISION
+→ ASSIGN ROLE
+→ GRANT MINIMUM ACCESS
+→ MONITOR
+→ REVIEW
+→ ROTATE / REVOKE
+→ ARCHIVE
+```
+
+### Service and agent identity
+
+Every agent and service MUST have:
+
+- immutable identity;
+- owner;
+- purpose;
+- permissions;
+- credential source;
+- credential expiry;
+- allowed tools;
+- allowed tenants;
+- allowed data classes;
+- audit identity;
+- lifecycle status.
+
+AI output MUST NOT itself grant authority.
+
+---
+
+## 95. CONSENT MANAGEMENT PLANE™
+
+Where consent is legally or operationally applicable, implement a versioned
+consent registry.
+
+### Consent record
+
+```text
+CONSENT_ID
+SUBJECT_ID
+TENANT_ID
+PURPOSE
+DATA_CATEGORY
+SOURCE
+JURISDICTION
+POLICY_VERSION
+CONSENT_VERSION
+GRANTED_AT
+EXPIRES_AT
+WITHDRAWN_AT
+ACTOR
+CHANNEL
+EVIDENCE
+STATUS
+```
+
+### Consent states
+
+```text
+NOT_REQUIRED
+PENDING
+GRANTED
+DENIED
+EXPIRED
+WITHDRAWN
+SUPERSEDED
+UNKNOWN
+```
+
+### Required behavior
+
+Consent MUST be evaluated before applicable data collection, processing,
+sharing or secondary use.
+
+Withdrawal MUST propagate to all systems where technically and legally
+required.
+
+Consent decisions MUST be auditable.
+
+For fraud-prevention/legal-obligation processing where consent is not the
+applicable lawful basis, the system MUST record the applicable processing
+basis rather than falsely requesting consent.
+
+---
+
+## 96. UNIVERSAL NOTIFICATION & COMMUNICATION ENGINE™
+
+Create a unified notification abstraction.
+
+### Channels
+
+- in-app;
+- email;
+- SMS;
+- push;
+- webhook;
+- API callback;
+- enterprise messaging adapter;
+- investigator notification;
+- security notification;
+- operational notification.
+
+### Notification contract
+
+```text
+notification_id
+tenant_id
+recipient
+channel
+template_id
+template_version
+priority
+purpose
+payload_reference
+locale
+scheduled_at
+expires_at
+idempotency_key
+retry_policy
+delivery_status
+provider
+provider_message_id
+audit_reference
+```
+
+### Required controls
+
+- preferences;
+- quiet hours;
+- severity;
+- escalation;
+- retries;
+- dead-letter queue;
+- deduplication;
+- idempotency;
+- provider fallback;
+- delivery receipts;
+- template versioning;
+- localization;
+- accessibility;
+- security redaction.
+
+Financial-crime evidence MUST NOT be leaked into an insecure notification
+channel.
+
+---
+
+## 97. GEOSPATIAL INTELLIGENCE FABRIC™
+
+Location becomes an intelligence dimension where lawful and available.
+
+### Data
+
+- transaction location;
+- ATM location;
+- merchant location;
+- terminal location;
+- device location;
+- IP-derived region;
+- authentication location;
+- account profile geography;
+- country;
+- state/province;
+- city;
+- timezone;
+- geofence;
+- distance;
+- movement velocity.
+
+### Signals
+
+- impossible travel;
+- geographic velocity;
+- location inconsistency;
+- unusual region;
+- merchant/ATM clustering;
+- account-location divergence;
+- device-location divergence;
+- cross-channel geographic sequence;
+- temporal-location anomaly.
+
+### Graph integration
+
+Location MUST be usable as a graph node or contextual attribute when
+authorized.
+
+### UI
+
+Provide:
+
+- map layer;
+- geographic risk heatmap;
+- entity-to-location view;
+- timeline-location correlation;
+- location evidence trail.
+
+No location signal may be treated as proof of criminal activity by itself.
+
+---
+
+## 98. KNOWLEDGE & SEMANTIC INTELLIGENCE PLANE™
+
+CruiseShield requires a controlled semantic layer.
+
+### Components
+
+- financial-crime ontology;
+- entity taxonomy;
+- event taxonomy;
+- risk taxonomy;
+- investigation taxonomy;
+- regulatory taxonomy;
+- policy taxonomy;
+- evidence taxonomy;
+- case taxonomy;
+- channel taxonomy;
+- agent capability taxonomy.
+
+### Knowledge graph domains
+
+```text
+ENTITY
+EVENT
+RELATIONSHIP
+RISK
+PATTERN
+RULE
+REGULATION
+CONTROL
+POLICY
+EVIDENCE
+CASE
+DECISION
+MODEL
+AGENT
+TOOL
+```
+
+### Source authority
+
+Every knowledge item SHOULD track:
+
+- source;
+- source authority;
+- publication/version;
+- effective date;
+- jurisdiction;
+- retrieval timestamp;
+- provenance;
+- confidence;
+- supersession;
+- conflict state.
+
+### Semantic search
+
+Natural-language questions MUST resolve through:
+
+```text
+QUESTION
+→ INTENT
+→ AUTHORIZATION
+→ SEMANTIC RETRIEVAL
+→ STRUCTURED QUERY PLAN
+→ DATA / GRAPH QUERY
+→ EVIDENCE
+→ EXPLANATION
+```
+
+The LLM MUST NOT be treated as the database of record.
+
+---
+
+## 99. MODEL GATEWAY & AI PROVIDER ROUTING PLANE™
+
+Create a provider-neutral model gateway.
+
+### Required abstraction
+
+```text
+MODEL_REQUEST
+→ POLICY CHECK
+→ CAPABILITY MATCH
+→ PROVIDER ROUTING
+→ MODEL EXECUTION
+→ OUTPUT VALIDATION
+→ SAFETY CHECK
+→ COST / LATENCY CAPTURE
+→ TRACE
+```
+
+### Routing dimensions
+
+- capability;
+- model type;
+- latency;
+- quality;
+- cost;
+- privacy;
+- data residency;
+- jurisdiction;
+- provider health;
+- context window;
+- multimodal capability;
+- tool-calling capability;
+- availability;
+- fallback policy.
+
+### Provider contract
+
+```text
+provider_id
+model_id
+version
+capabilities
+regions
+data_policy
+price_model
+rate_limits
+timeout
+retry_policy
+health
+security
+owner
+replacement_strategy
+```
+
+### Failure behavior
+
+If a model provider fails:
+
+```text
+PRIMARY
+→ HEALTH CHECK
+→ FALLBACK
+→ DEGRADED MODE
+→ HUMAN ESCALATION
+```
+
+No silent model substitution where the model identity affects governance,
+risk, evidence or audit.
+
+---
+
+## 100. AGENT MEMORY ARCHITECTURE™
+
+Agent memory MUST be explicit, scoped and governable.
+
+### Memory classes
+
+1. Session Memory
+2. Investigation Memory
+3. Case Memory
+4. Tenant Memory
+5. Organization Memory
+6. Investigator Preference Memory
+7. Institutional Memory
+8. Evidence Memory
+9. Workflow Memory
+10. Safety / Policy Memory
+
+### Memory record
+
+```text
+memory_id
+memory_scope
+tenant_id
+owner
+source
+content_reference
+classification
+purpose
+created_at
+expires_at
+retention_policy
+provenance
+confidence
+version
+access_policy
+deletion_policy
+```
+
+### Memory rules
+
+- no cross-tenant leakage;
+- no hidden persistent memory;
+- no memory without provenance;
+- no sensitive retention without policy;
+- memory can be invalidated;
+- memory changes are auditable;
+- evidence remains distinct from generated memory;
+- investigator decisions can become institutional knowledge only through
+  governed promotion.
+
+---
+
+## 101. TOOL / MCP / CONNECTOR REGISTRY™
+
+All agent tools MUST be registered.
+
+### Tool manifest
+
+```text
+tool_id
+name
+version
+owner
+purpose
+description
+input_schema
+output_schema
+data_classes
+permissions
+allowed_agents
+allowed_tenants
+risk_level
+human_approval_required
+rate_limit
+cost
+timeout
+retry_policy
+side_effects
+idempotency
+audit_events
+provider
+health
+test_suite
+```
+
+### Tool classes
+
+- read-only;
+- analytical;
+- communication;
+- workflow;
+- reversible action;
+- high-impact action;
+- external integration;
+- administrative.
+
+### Tool execution
+
+```text
+AGENT
+→ TOOL AUTHORIZATION
+→ INPUT VALIDATION
+→ POLICY CHECK
+→ HUMAN APPROVAL IF REQUIRED
+→ EXECUTE
+→ OUTPUT VALIDATION
+→ AUDIT
+```
+
+The LLM cannot bypass the authorization service by generating a tool call.
+
+---
+
+## 102. INCIDENT / PROBLEM / CHANGE MANAGEMENT PLANE™
+
+### Incident lifecycle
+
+```text
+DETECT
+→ CLASSIFY
+→ SEVERITY
+→ ASSIGN
+→ CONTAIN
+→ RECOVER
+→ VERIFY
+→ COMMUNICATE
+→ CLOSE
+→ RCA
+→ LEARN
+```
+
+### Problem lifecycle
+
+```text
+IDENTIFY
+→ ROOT CAUSE
+→ CORRECTIVE ACTION
+→ PREVENTIVE ACTION
+→ VERIFY
+→ CLOSE
+```
+
+### Change lifecycle
+
+```text
+REQUEST
+→ IMPACT
+→ RISK
+→ REVIEW
+→ APPROVAL
+→ IMPLEMENT
+→ VERIFY
+→ ROLLBACK IF NEEDED
+→ CLOSE
+```
+
+### Change classes
+
+- emergency;
+- standard;
+- normal;
+- security;
+- data/schema;
+- model;
+- agent;
+- prompt;
+- rule;
+- infrastructure;
+- integration;
+- UI;
+- configuration.
+
+No production model, rule, prompt, agent permission or security policy may
+change silently.
+
+---
+
+## 103. FULL DISASTER RECOVERY & BUSINESS CONTINUITY PLANE™
+
+DR is separate from financial-crime scenario simulation.
+
+### Required assets
+
+- databases;
+- graph database;
+- event streams;
+- object storage;
+- secrets;
+- identity configuration;
+- model registry;
+- agent registry;
+- evidence;
+- audit logs;
+- configuration;
+- schema registry;
+- deployment artifacts.
+
+### Failure scenarios
+
+At minimum test:
+
+- database loss;
+- graph loss;
+- cache loss;
+- queue failure;
+- DLQ corruption;
+- object storage loss;
+- AI provider outage;
+- model registry outage;
+- network outage;
+- DNS failure;
+- credential compromise;
+- secret expiration;
+- deployment failure;
+- dependency outage;
+- region outage where multi-region applies;
+- data corruption;
+- accidental deletion;
+- ransomware-style isolation scenario where appropriate.
+
+### Recovery loop
+
+```text
+DETECT
+→ DECLARE
+→ CONTAIN
+→ FAILOVER
+→ RESTORE
+→ RECONCILE
+→ VERIFY
+→ RESUME
+→ COMMUNICATE
+→ RCA
+→ IMPROVE
+```
+
+RPO and RTO MUST be measured, not invented.
+
+---
+
+## 104. DISASTER SIMULATION ENGINE™
+
+Add a separate operational resilience simulator.
+
+### Scenarios
+
+- database unavailable;
+- graph unavailable;
+- queue backlog;
+- model provider unavailable;
+- API dependency unavailable;
+- credential invalid;
+- storage unavailable;
+- region unavailable;
+- corrupted event;
+- failed migration;
+- failed deployment.
+
+### Outputs
+
+```text
+SCENARIO
+ASSUMPTIONS
+SYSTEM STATE
+FAILURE INJECTED
+DETECTION
+DEGRADATION
+FAILOVER
+RECOVERY
+DATA RECONCILIATION
+RPO_MEASURED
+RTO_MEASURED
+USER IMPACT
+EVIDENCE
+GAPS
+REMEDIATION
+```
+
+This is distinct from CruiseShield's financial what-if simulator.
+
+---
+
+## 105. EXTERNAL DEPENDENCY REGISTRY™
+
+Every external dependency MUST be registered.
+
+### Dependency record
+
+```text
+dependency_id
+provider
+capability
+owner
+jurisdiction
+version
+contract
+authentication
+data_class
+criticality
+availability_requirement
+status
+risk
+blocker
+fallback
+replacement
+test_environment
+production_status
+cost
+rate_limit
+security_status
+compliance_status
+last_verified
+evidence
+```
+
+Examples include:
+
+- identity provider;
+- model provider;
+- email provider;
+- SMS provider;
+- notification provider;
+- cloud;
+- graph provider;
+- payment/financial sandbox;
+- geospatial provider;
+- storage;
+- observability;
+- CI/CD;
+- secrets management.
+
+---
+
+## 106. COUNTRY / JURISDICTION ADAPTER FRAMEWORK™
+
+Country support is an adapter, not a hard-coded assumption.
+
+### Adapter dimensions
+
+```text
+COUNTRY
+REGULATOR
+DATA_PROTECTION
+FINANCIAL_CRIME_RULES
+IDENTITY / KYC
+PAYMENT_RAILS
+REPORTING
+RESIDENCY
+LANGUAGE
+CURRENCY
+TIMEZONE
+TAX
+ACCESSIBILITY
+EMERGENCY / AUTHORITY CONTACT
+RETENTION
+LEGAL BASIS
+```
+
+### Nigeria-first adapter
+
+The initial adapter MUST be capable of representing Nigerian-specific
+requirements without claiming regulatory certification unless independently
+verified.
+
+The architecture MUST allow future adapters for:
+
+- Ghana;
+- Kenya;
+- South Africa;
+- other African markets;
+- global jurisdictions.
+
+### Country adapter contract
+
+```text
+COUNTRY_PROFILE
+→ RULESET
+→ DATA_POLICY
+→ IDENTITY_POLICY
+→ REPORTING_POLICY
+→ PAYMENT_RAIL_ADAPTER
+→ LANGUAGE / CURRENCY
+→ RESIDENCY
+→ TEST SUITE
+→ EVIDENCE
+```
+
+---
+
+## 107. COMPLIANCE CONTROL PLANE™
+
+Map regulatory and organizational obligations to executable controls.
+
+### Control chain
+
+```text
+REGULATION
+→ REQUIREMENT
+→ CONTROL
+→ POLICY
+→ IMPLEMENTATION
+→ TEST
+→ EVIDENCE
+→ AUDIT
+```
+
+### Control record
+
+```text
+control_id
+jurisdiction
+source
+requirement
+risk
+policy
+owner
+implementation
+test_ids
+evidence_ids
+status
+exception
+review_date
+```
+
+### Control states
+
+```text
+DEFINED
+IMPLEMENTED
+TESTED
+VERIFIED
+FAILED
+EXCEPTION
+WAIVED
+RETIRED
+```
+
+The platform MUST distinguish:
+
+- legal requirement;
+- internal policy;
+- engineering control;
+- test;
+- evidence;
+- external certification.
+
+No internal test may be represented as regulatory approval.
+
+---
+
+## 108. COMPLETE DATA LIFECYCLE PLANE™
+
+Every data class MUST have a lifecycle.
+
+```text
+COLLECT
+→ CLASSIFY
+→ VALIDATE
+→ STORE
+→ PROCESS
+→ SHARE
+→ ARCHIVE
+→ RETAIN
+→ DELETE
+→ PROVE DELETION
+```
+
+### Data classes
+
+At minimum:
+
+- public;
+- internal;
+- confidential;
+- sensitive;
+- regulated;
+- financial;
+- identity;
+- authentication;
+- security;
+- model;
+- agent;
+- evidence;
+- audit.
+
+### Required metadata
+
+- owner;
+- source;
+- purpose;
+- classification;
+- lawful/authorized basis where applicable;
+- residency;
+- retention;
+- deletion;
+- access policy;
+- lineage;
+- quality;
+- provenance.
+
+Deletion MUST be observable and auditable where deletion is applicable.
+
+---
+
+## 109. MACHINE-READABLE SCHEMA & CONTRACT REGISTRY™
+
+All critical contracts MUST exist in machine-readable form.
+
+### Required schema families
+
+- OpenAPI;
+- JSON Schema;
+- Avro/Protobuf where event infrastructure requires it;
+- SQL/DDL migrations;
+- state-machine schemas;
+- agent manifests;
+- tool manifests;
+- model manifests;
+- requirement schemas;
+- test schemas;
+- evidence schemas;
+- configuration schemas;
+- country-adapter schemas;
+- compliance-control schemas;
+- target/metric schemas.
+
+### Registry behavior
+
+```text
+REGISTER
+→ VALIDATE
+→ VERSION
+→ COMPATIBILITY CHECK
+→ PUBLISH
+→ CONSUME
+→ MONITOR
+→ DEPRECATE
+→ MIGRATE
+```
+
+Breaking changes MUST trigger compatibility and migration analysis.
+
+---
+
+## 110. QUANTITATIVE TARGET REGISTRY™
+
+Every claimed target MUST be measurable.
+
+### Metric record
+
+```text
+metric_id
+name
+definition
+scope
+population
+calculation
+source
+unit
+target
+warning_threshold
+critical_threshold
+owner
+frequency
+test_method
+evidence
+status
+```
+
+### Examples
+
+- detection latency;
+- event throughput;
+- graph update latency;
+- investigation latency;
+- AI response latency;
+- API latency;
+- error rate;
+- false-positive rate;
+- precision;
+- recall;
+- evidence coverage;
+- availability;
+- queue depth;
+- DLQ count;
+- cost per investigation;
+- model cost;
+- RPO;
+- RTO.
+
+A target is not a measured result.
+
+UI MUST label:
+
+```text
+TARGET
+MEASURED
+BASELINE
+NOT_AVAILABLE
+```
+
+---
+
+## 111. FINOPS ENGINE™
+
+Cost becomes an observable product dimension.
+
+### Cost domains
+
+- model inference;
+- tokens;
+- embeddings;
+- GPU/CPU;
+- database;
+- graph;
+- cache;
+- storage;
+- network;
+- external APIs;
+- notifications;
+- observability;
+- CI/CD;
+- tenant usage;
+- investigation;
+- agent run.
+
+### Cost dimensions
+
+```text
+TENANT
+PROJECT
+CASE
+INVESTIGATION
+AGENT
+MODEL
+PROVIDER
+FEATURE
+ENVIRONMENT
+COUNTRY
+```
+
+### FinOps loop
+
+```text
+MEASURE
+→ ALLOCATE
+→ FORECAST
+→ BUDGET
+→ OPTIMIZE
+→ ALERT
+→ REVIEW
+```
+
+No cost number may be presented as actual unless sourced from runtime or
+provider data.
+
+---
+
+## 112. SOFTWARE SUPPLY-CHAIN PROVENANCE™
+
+Production artifacts MUST be traceable.
+
+### Required controls
+
+- dependency lockfiles;
+- vulnerability scanning;
+- secret scanning;
+- SAST;
+- container scanning;
+- SBOM;
+- artifact signing;
+- build provenance;
+- trusted CI;
+- release attestations;
+- dependency review;
+- vulnerability exception registry;
+- artifact verification.
+
+### Provenance chain
+
+```text
+SOURCE
+→ COMMIT
+→ BUILD
+→ TEST
+→ SCAN
+→ SBOM
+→ SIGN
+→ ARTIFACT
+→ DEPLOY
+→ RUNTIME
+```
+
+Every deployed artifact MUST be traceable to a source revision and build.
+
+---
+
+## 113. PROJECT FACTORY™
+
+CruiseShield MUST be reusable without cloning its architecture manually.
+
+### Factory pattern
+
+```text
+UNIVERSAL CORE
+→ CRUISESHIELD ADAPTER
+→ COUNTRY ADAPTER
+→ INSTITUTION ADAPTER
+→ TENANT CONFIGURATION
+→ DEPLOYMENT
+→ VERIFICATION
+```
+
+### Factory inputs
+
+- product profile;
+- domain;
+- country;
+- organization;
+- branding;
+- data policy;
+- security policy;
+- integrations;
+- plans;
+- feature flags;
+- AI policy;
+- deployment target.
+
+### Factory outputs
+
+- repository configuration;
+- schemas;
+- environment configuration;
+- identity setup;
+- tenant configuration;
+- integrations;
+- dashboards;
+- policies;
+- tests;
+- evidence templates.
+
+No generated project may bypass required gates.
+
+---
+
+## 114. PORTFOLIO GOVERNANCE™
+
+CruiseShield is a project in a larger CruiseTech ecosystem.
+
+Portfolio governance MUST track:
+
+- product;
+- owner;
+- architecture version;
+- universal-core version;
+- adapter version;
+- dependencies;
+- shared services;
+- security posture;
+- AI posture;
+- data posture;
+- country coverage;
+- deployment status;
+- evidence status;
+- operational risk;
+- lifecycle;
+- technology substitutions.
+
+Portfolio governance MUST prevent accidental divergence from the universal
+core.
+
+---
+
+## 115. INSTITUTIONAL MEMORY™
+
+Create governed organizational memory.
+
+### Sources
+
+- previous cases;
+- investigator decisions;
+- false positives;
+- model failures;
+- agent disagreements;
+- simulation results;
+- incidents;
+- postmortems;
+- ADRs;
+- architecture decisions;
+- integration failures;
+- policy decisions;
+- successful investigation patterns.
+
+### Promotion rule
+
+```text
+EVENT
+→ REVIEW
+→ VALIDATE
+→ CLASSIFY
+→ APPROVE
+→ STORE
+→ INDEX
+→ GOVERN
+→ REUSE
+```
+
+Institutional memory is not automatically truth.
+
+Every memory item retains provenance and review state.
+
+---
+
+## 116. TECHNOLOGY SUBSTITUTION PLANE™
+
+No critical capability may be permanently coupled to one provider without
+an explicit architectural decision.
+
+### Capability abstraction
+
+```text
+CAPABILITY
+→ CURRENT PROVIDER
+→ INTERFACE
+→ ALTERNATIVES
+→ COMPATIBILITY
+→ MIGRATION PLAN
+→ TEST
+→ EVIDENCE
+```
+
+Applicable to:
+
+- LLMs;
+- embeddings;
+- vector stores;
+- graph stores;
+- databases;
+- cloud;
+- identity;
+- messaging;
+- maps;
+- storage;
+- observability;
+- payment/financial sandbox;
+- CI/CD.
+
+Substitution MUST preserve security, data contracts, behavior and evidence.
+
+---
+
+## 117. ENVIRONMENT PROMOTION & RELEASE ASSURANCE™
+
+Required environment progression:
+
+```text
+LOCAL
+→ DEV
+→ TEST
+→ STAGING
+→ PRE-PROD
+→ PRODUCTION
+```
+
+Not every hackathon deployment requires all physical environments, but the
+promotion model MUST exist.
+
+### Promotion gates
+
+- source integrity;
+- dependency integrity;
+- schema compatibility;
+- tests;
+- security;
+- AI evaluation;
+- visual regression;
+- performance baseline;
+- migration safety;
+- configuration validation;
+- approval;
+- deployment;
+- smoke test;
+- rollback readiness;
+- evidence.
+
+Artifacts SHOULD be immutable between environments.
+
+---
+
+## 118. UNKNOWN / RISK / ASSUMPTION REGISTRY™
+
+Unknowns MUST become managed objects.
+
+### Record
+
+```text
+risk_id
+type
+description
+impact
+likelihood
+owner
+assumption
+dependency
+blocker
+mitigation
+due_date
+status
+resolution
+evidence
+```
+
+### Types
+
+- unknown;
+- assumption;
+- architectural risk;
+- security risk;
+- privacy risk;
+- AI risk;
+- data risk;
+- dependency risk;
+- operational risk;
+- commercial risk;
+- regulatory uncertainty;
+- performance risk.
+
+The agent MUST NOT silently convert an unknown into a fact.
+
+---
+
+## 119. FORMAL ZERO-GAP CLOSURE CERTIFICATE™
+
+Closure requires objective machine-readable conditions.
+
+### Mandatory certificate predicates
+
+```text
+CRITICAL_REQUIREMENTS_UNMAPPED = 0
+CRITICAL_TESTS_MISSING = 0
+CRITICAL_EVIDENCE_MISSING = 0
+CRITICAL_SECURITY_GAPS = 0
+CRITICAL_PRIVACY_GAPS = 0
+CRITICAL_OPERATIONAL_GAPS = 0
+CRITICAL_DR_GAPS = 0
+CRITICAL_DEPENDENCIES_UNTRACKED = 0
+CRITICAL_SCHEMA_CONTRACT_GAPS = 0
+CRITICAL_IDENTITY_GAPS = 0
+CRITICAL_AI_GOVERNANCE_GAPS = 0
+CRITICAL_AGENT_PERMISSION_GAPS = 0
+CRITICAL_DATA_LIFECYCLE_GAPS = 0
+CRITICAL_COMPLIANCE_CONTROL_GAPS = 0
+CRITICAL_RELEASE_GAPS = 0
+LIVE_CLAIMS_WITHOUT_EVIDENCE = 0
+UNRESOLVED_CRITICAL_RISKS = 0
+UNAUTHORIZED_REAL_FINANCIAL_DATA = 0
+AI_AUTHORIZATION_BYPASSES = 0
+HIDDEN_MANUAL_DEMO_STEPS = 0
+```
+
+Then:
+
+```text
+IF ALL APPLICABLE CONDITIONS PASS
+    → ZERO_GAP_CLOSURE_ELIGIBLE
+ELSE
+    → NOT_CLOSED
+```
+
+The certificate MUST contain:
+
+- release;
+- commit;
+- build;
+- environment;
+- timestamp;
+- test run;
+- evidence index;
+- gate results;
+- exceptions;
+- approvers;
+- runtime health;
+- deployment identity.
+
+---
+
+## 120. COMMERCIAL PLATFORM LAYER™
+
+The enterprise architecture MUST support commercialization without forcing
+commercial complexity into the hackathon core.
+
+### Capabilities
+
+- product catalog;
+- plans;
+- free trial;
+- subscriptions;
+- entitlements;
+- usage;
+- billing;
+- invoices;
+- contracts;
+- enterprise seats;
+- regional pricing;
+- tax;
+- payment methods;
+- customer portal;
+- support;
+- developer portal;
+- API keys;
+- usage metering.
+
+### Owner/free-use rule
+
+The platform owner MAY have an explicit internal entitlement that provides
+authorized free usage without bypassing billing architecture.
+
+### Commercial separation
+
+```text
+CORE INTELLIGENCE
+≠
+COMMERCIAL ENTITLEMENT
+≠
+PAYMENT PROCESSING
+```
+
+Commercial state MUST NOT be used to bypass security or financial-crime
+controls.
+
+---
+
+## 121. UNIVERSAL API / CONTRACT CONTROL PLANE
+
+All services MUST expose or consume versioned contracts.
+
+### Required API qualities
+
+- authentication;
+- authorization;
+- tenant scope;
+- schema validation;
+- versioning;
+- structured errors;
+- correlation IDs;
+- idempotency;
+- rate limiting;
+- timeout;
+- retry;
+- observability;
+- audit;
+- compatibility tests.
+
+### Event contracts
+
+Every event MUST support:
+
+- event ID;
+- schema version;
+- timestamp;
+- source;
+- tenant;
+- provenance;
+- privacy class;
+- trace ID;
+- payload;
+- idempotency key where required.
+
+---
+
+## 122. EXPANDED UNIVERSAL DATA MODEL
+
+Add the following control-plane entities to the v4 domain model:
+
+```text
+Identity
+IdentityProvider
+Credential
+Role
+Permission
+Policy
+Consent
+ProcessingBasis
+Notification
+NotificationTemplate
+Location
+GeoSignal
+KnowledgeItem
+OntologyTerm
+KnowledgeSource
+ModelProvider
+ModelRoute
+ModelEndpoint
+Memory
+Tool
+ToolVersion
+Connector
+Incident
+Problem
+Change
+RecoveryPlan
+DisasterScenario
+Dependency
+CountryProfile
+Jurisdiction
+RegulatoryRequirement
+ComplianceControl
+DataClass
+DataLifecyclePolicy
+Schema
+SchemaVersion
+CompatibilityCheck
+Metric
+Target
+CostRecord
+Budget
+Artifact
+SBOM
+BuildAttestation
+ProjectTemplate
+PortfolioProduct
+InstitutionalMemory
+TechnologyCapability
+TechnologyAlternative
+Environment
+Promotion
+Risk
+Assumption
+Exception
+ClosureCertificate
+Plan
+Subscription
+Entitlement
+Invoice
+Contract
+UsageMeter
+```
+
+All entities MUST have ownership, lifecycle and auditability appropriate to
+their sensitivity.
+
+---
+
+## 123. COMPLETE END-TO-END v5 LIVE FLOW
+
+The complete operational path becomes:
+
+```text
+FINANCIAL EVENT
+→ IDENTITY / TENANT RESOLUTION
+→ CONSENT / PROCESSING-BASIS CHECK
+→ SCHEMA VALIDATION
+→ NORMALIZATION
+→ CHANNEL INTELLIGENCE
+→ GEOSPATIAL CONTEXT
+→ ENTITY RESOLUTION
+→ FEATURE / BEHAVIOR ENGINE
+→ RULES + ML
+→ GRAPH UPDATE
+→ NETWORK DETECTION
+→ MULTIDIMENSIONAL RISK
+→ KNOWLEDGE CONTEXT
+→ AGENT ORCHESTRATION
+→ TOOL AUTHORIZATION
+→ AGENT MEMORY
+→ EVIDENCE
+→ INVESTIGATION
+→ DIGITAL TWIN / REPLAY
+→ FINANCIAL WHAT-IF SIMULATION
+→ HUMAN DECISION GATE
+→ CASE MANAGEMENT
+→ NOTIFICATION
+→ AUDIT FLIGHT RECORDER
+→ FEEDBACK
+→ INSTITUTIONAL MEMORY
+→ MODEL / RULE / AGENT LEARNING
+→ GOVERNANCE
+→ REPORTING
+```
+
+Operational failure path:
+
+```text
+ANY FAILURE
+→ OBSERVABILITY
+→ INCIDENT
+→ CONTAINMENT
+→ FALLBACK / DEGRADED MODE
+→ RECOVERY
+→ RECONCILIATION
+→ VERIFICATION
+→ AUDIT
+→ RCA
+→ IMPROVEMENT
+```
+
+---
+
+## 124. v5 ACTIVATION FLOWS
+
+### Organization activation
+
+```text
+CREATE ORGANIZATION
+→ IDENTITY PROVIDER
+→ ADMIN
+→ MFA
+→ ROLES
+→ POLICIES
+→ DATA CLASSIFICATION
+→ CONSENT / PROCESSING BASIS
+→ COUNTRY PROFILE
+→ INTEGRATIONS
+→ MODEL PROVIDERS
+→ AGENT POLICIES
+→ TOOL REGISTRY
+→ SYNTHETIC DEMO
+→ HEALTH CHECK
+→ SECURITY CHECK
+→ FIRST INVESTIGATION
+→ EVIDENCE
+→ ACTIVATE
+```
+
+### Investigator activation
+
+```text
+INVITE
+→ VERIFY IDENTITY
+→ MFA
+→ ROLE
+→ ACCESS REVIEW
+→ TUTORIAL
+→ SYNTHETIC CASE
+→ FIRST INVESTIGATION
+→ FIRST DECISION
+→ READY
+```
+
+### Production integration activation
+
+```text
+DEPENDENCY REGISTRY
+→ SANDBOX CREDENTIALS
+→ CONTRACT TEST
+→ DATA CLASSIFICATION
+→ PRIVACY REVIEW
+→ SECURITY REVIEW
+→ SCHEMA VALIDATION
+→ REPLAY TEST
+→ FAILURE TEST
+→ APPROVAL
+→ STAGING
+→ SMOKE
+→ PRODUCTION
+→ RUNTIME VERIFICATION
+```
+
+### Disaster activation
+
+```text
+DETECT FAILURE
+→ INCIDENT
+→ DECLARE DR
+→ FAILOVER
+→ RESTORE
+→ RECONCILE
+→ VERIFY
+→ RESUME
+→ COMMUNICATE
+→ RCA
+```
+
+---
+
+## 125. v5 AI / AGENT GOVERNANCE LIFECYCLE
+
+Every agent MUST pass:
+
+```text
+PROPOSED
+→ DESIGNED
+→ PERMISSIONED
+→ EVALUATED
+→ APPROVED
+→ DEPLOYED
+→ MONITORED
+→ RE-EVALUATED
+→ RE-APPROVED
+→ RETIRED
+```
+
+Every agent must have:
+
+- owner;
+- purpose;
+- model/provider;
+- prompt version;
+- tools;
+- data scope;
+- memory scope;
+- authorization scope;
+- cost budget;
+- latency target;
+- evaluation suite;
+- safety policy;
+- fallback;
+- audit;
+- evidence;
+- retirement plan.
+
+Agent disagreement MUST remain inspectable.
+
+---
+
+## 126. v5 SECURITY / PRIVACY / TRUST CLOSURE MATRIX
+
+### Identity
+
+- authentication;
+- MFA;
+- SSO;
+- service identity;
+- agent identity;
+- credential lifecycle.
+
+### Authorization
+
+- RBAC;
+- ABAC where applicable;
+- tenant isolation;
+- least privilege;
+- separation of duties;
+- privileged access;
+- action authorization.
+
+### Data
+
+- classification;
+- minimization;
+- encryption;
+- masking;
+- retention;
+- deletion;
+- residency;
+- lineage;
+- access logging.
+
+### AI
+
+- prompt injection defense;
+- tool authorization;
+- model isolation;
+- provider policy;
+- data leakage protection;
+- hallucination evaluation;
+- output validation;
+- memory isolation.
+
+### Infrastructure
+
+- secrets;
+- dependency scanning;
+- SBOM;
+- artifact signing;
+- network controls;
+- backups;
+- restore tests;
+- incident response.
+
+---
+
+## 127. v5 OBSERVABILITY & OPERATIONS CLOSURE
+
+Every critical control-plane capability MUST emit:
+
+- structured logs;
+- metrics;
+- traces;
+- audit events;
+- health state;
+- dependency state;
+- version;
+- owner.
+
+Required correlation:
+
+```text
+REQUEST_ID
+TRACE_ID
+TENANT_ID
+USER_ID
+AGENT_ID
+MODEL_ID
+TOOL_ID
+CASE_ID
+EVENT_ID
+RELEASE_ID
+```
+
+Operational dashboards MUST distinguish:
+
+```text
+HEALTHY
+DEGRADED
+FAILED
+UNKNOWN
+NOT_CONFIGURED
+NOT_APPLICABLE
+```
+
+Never show green for a check that was not actually executed.
+
+---
+
+## 128. v5 EVIDENCE ARCHITECTURE
+
+Extend the v4 evidence tree:
+
+```text
+/evidence
+  /requirements
+  /architecture
+  /build
+  /tests
+  /security
+  /privacy
+  /ai-evaluation
+  /agent-governance
+  /performance
+  /runtime
+  /demo
+  /deployment
+  /audit
+  /visual
+  /data-lineage
+  /schemas
+  /dependencies
+  /compliance
+  /finops
+  /supply-chain
+  /disaster-recovery
+  /country-adapters
+  /incident
+  /change
+  /institutional-memory
+  /technology-substitution
+  /portfolio
+  /closure
+  /final
+```
+
+Every evidence item MUST identify:
+
+```text
+evidence_id
+requirement_id
+test_id
+component
+release
+environment
+timestamp
+source
+hash/reference
+result
+reviewer
+status
+```
+
+---
+
+## 129. v5 MACHINE-VERIFIABLE ACCEPTANCE GATES
+
+The v4 gates remain mandatory.
+
+v5 adds:
+
+```text
+081 Identity fabric passes
+082 Authentication lifecycle passes
+083 Authorization policy passes
+084 Service/agent identity passes
+085 Credential lifecycle passes
+086 Consent/processing-basis passes
+087 Notification engine passes
+088 Notification retry/DLQ passes
+089 Geospatial context passes
+090 Geospatial signal tests pass
+091 Knowledge registry passes
+092 Knowledge provenance passes
+093 Semantic query authorization passes
+094 Model gateway passes
+095 Provider fallback passes
+096 Model routing audit passes
+097 Agent memory isolation passes
+098 Agent memory provenance passes
+099 Tool registry passes
+100 Tool authorization passes
+101 Incident lifecycle passes
+102 Problem lifecycle passes
+103 Change lifecycle passes
+104 Backup verification passes
+105 Restore verification passes
+106 DR failover test passes
+107 Disaster simulation passes
+108 Dependency registry complete
+109 Dependency failure test passes
+110 Country adapter contract passes
+111 Jurisdiction policy resolution passes
+112 Compliance control mapping passes
+113 Compliance evidence linkage passes
+114 Data lifecycle passes
+115 Deletion verification passes where applicable
+116 Schema registry passes
+117 Schema compatibility passes
+118 Quantitative target registry passes
+119 Metric provenance passes
+120 FinOps telemetry passes
+121 Cost allocation passes
+122 SBOM generated
+123 Artifact provenance passes
+124 Artifact signing/verification passes
+125 Project Factory template validation passes
+126 Portfolio governance passes
+127 Institutional memory governance passes
+128 Technology substitution test passes
+129 Environment promotion passes
+130 Rollback verification passes
+131 Unknown/risk registry complete
+132 Critical risk review passes
+133 Closure certificate generation passes
+134 Closure certificate predicates pass
+135 Commercial entitlement isolation passes
+136 API contract registry passes
+137 Control-plane observability passes
+138 Evidence integrity passes
+139 Final v5 traceability passes
+140 Final Level-13 closure audit passes
+```
+
+No gate may be marked VERIFIED without evidence.
+
+---
+
+## 130. v5 BUILD ORDER
+
+The v4 build order remains mandatory.
+
+After v4 closure, execute the universal layer in this order:
+
+```text
+45 Identity / Trust
+46 Consent / Data Basis
+47 Notifications
+48 Geospatial
+49 Knowledge / Semantic
+50 Model Gateway
+51 Agent Memory
+52 Tool / MCP Registry
+53 Incident / Problem / Change
+54 DR / BCP
+55 Disaster Simulation
+56 Dependency Registry
+57 Country / Jurisdiction
+58 Compliance Control Plane
+59 Data Lifecycle
+60 Schema Registry
+61 Quantitative Targets
+62 FinOps
+63 Supply Chain
+64 Project Factory
+65 Portfolio Governance
+66 Institutional Memory
+67 Technology Substitution
+68 Environment Promotion
+69 Unknown / Risk Registry
+70 Commercial Platform
+71 Closure Certificate
+72 Final Audit
+```
+
+The numbers above are v5 phase IDs and do not replace v4 section numbering.
+
+---
+
+## 131. v5 FIRST VERTICAL SLICE FOR UNIVERSAL CONTROLS
+
+Before implementing every enterprise feature, prove the control plane through
+one real end-to-end investigation:
+
+```text
+USER LOGIN
+→ TENANT RESOLUTION
+→ ROLE AUTHORIZATION
+→ SYNTHETIC EVENT
+→ SCHEMA VALIDATION
+→ CHANNEL
+→ LOCATION
+→ ENTITY RESOLUTION
+→ GRAPH
+→ RISK
+→ AGENT
+→ TOOL AUTHORIZATION
+→ MEMORY
+→ EVIDENCE
+→ INVESTIGATION
+→ NOTIFICATION
+→ HUMAN DECISION
+→ CASE
+→ AUDIT
+→ METRIC
+→ COST
+→ EVIDENCE
+→ CLOSURE
+```
+
+Then execute the same flow with:
+
+- model provider failure;
+- graph failure;
+- notification failure;
+- unauthorized tool attempt;
+- cross-tenant access attempt;
+- schema mismatch;
+- expired credential;
+- data-retention condition.
+
+Each failure MUST produce observable evidence.
+
+---
+
+## 132. v5 REAL-WORLD PRODUCT BOUNDARY
+
+CruiseShield remains:
+
+**An agentic financial-crime intelligence platform.**
+
+The universal additions do NOT change the product into:
+
+- a telecom network;
+- a generic ERP;
+- a generic CRM;
+- a banking core;
+- a payment processor;
+- a government identity system;
+- an autonomous law-enforcement system.
+
+Universal controls exist to make CruiseShield enterprise-operable.
+
+The domain differentiator remains:
+
+```text
+FINANCIAL EVENT
+→ RELATIONSHIP
+→ NETWORK
+→ RISK
+→ INVESTIGATION
+→ EVIDENCE
+→ SIMULATION
+→ HUMAN DECISION
+→ AUDIT
+→ LEARNING
+```
+
+---
+
+## 133. v5 HACKATHON / MVP SCOPE CONTROL
+
+The architecture is Level 13 META, but the Zecathon demonstration remains
+focused.
+
+### MUST be visibly operational for the core demo
+
+- deterministic synthetic event stream;
+- channel-aware ledger;
+- POS/USSD/MOBILE_APP behavior;
+- graph reveal;
+- network risk;
+- AI investigation;
+- evidence;
+- replay;
+- financial what-if simulation;
+- human decision;
+- case;
+- audit;
+- proof mode;
+- reset;
+- live metrics sourced from runtime.
+
+### MUST be architecturally ready or adapterized
+
+- enterprise SSO;
+- SCIM;
+- advanced ABAC;
+- external notifications;
+- country adapters;
+- regulatory knowledge feeds;
+- multi-provider model gateway;
+- disaster failover;
+- commercial billing;
+- portfolio factory;
+- multi-region infrastructure.
+
+A deferred capability MUST have:
+
+```text
+OWNER
+INTERFACE
+SCHEMA
+SECURITY MODEL
+TEST STUB / CONTRACT TEST
+IMPLEMENTATION STATUS
+DEPENDENCY
+TARGET RELEASE
+EVIDENCE
+```
+
+This prevents “future work” from becoming an untracked gap.
+
+---
+
+## 134. v5 UI / UX CONTROL-PLANE INTEGRATION
+
+The canonical CruiseShield visual experience remains unchanged.
+
+The new control-plane capabilities become visible only where useful.
+
+### Command Center
+
+Show:
+
+- identity state;
+- system health;
+- model provider health;
+- event health;
+- graph health;
+- agent health;
+- evidence health;
+- notification health;
+- deployment/release state.
+
+### Investigation Studio
+
+Show:
+
+- investigator identity;
+- authorization scope;
+- evidence provenance;
+- geospatial context;
+- channel;
+- model/provider;
+- agent reasoning trace;
+- tool actions;
+- memory source;
+- notification state;
+- human decision gate.
+
+### Administration
+
+Show:
+
+- users;
+- roles;
+- policies;
+- tools;
+- agents;
+- models;
+- providers;
+- country profiles;
+- compliance controls;
+- dependencies;
+- schemas;
+- environments;
+- incidents;
+- changes;
+- risks;
+- evidence;
+- closure.
+
+### Proof Mode
+
+Every displayed claim SHOULD expose:
+
+```text
+SOURCE
+TIME
+TRACE
+MODEL / RULE
+EVIDENCE
+STATUS
+```
+
+---
+
+## 135. v5 TRACEABILITY MATRIX
+
+Every v5 capability MUST map:
+
+```text
+REQ
+→ ARCHITECTURE
+→ COMPONENT
+→ DATA
+→ API / EVENT
+→ UI
+→ SECURITY
+→ TEST
+→ OBSERVABILITY
+→ EVIDENCE
+→ RELEASE
+→ RUNTIME
+→ GOVERNANCE
+```
+
+### Orphan detection
+
+The system MUST detect:
+
+- requirements without implementation;
+- implementation without requirement;
+- tests without requirement;
+- evidence without test;
+- runtime claims without evidence;
+- dependencies without owner;
+- agents without permissions;
+- tools without authorization;
+- schemas without consumers;
+- metrics without sources;
+- controls without tests;
+- risks without owners.
+
+---
+
+## 136. v5 DR / FAILURE RUNBOOK MATRIX
+
+For each critical service, define:
+
+```text
+SERVICE
+DEPENDENCIES
+FAILURE MODES
+DETECTION
+SEVERITY
+CONTAINMENT
+FALLBACK
+RECOVERY
+RECONCILIATION
+DATA LOSS RISK
+RPO
+RTO
+OWNER
+TEST
+EVIDENCE
+```
+
+Critical CruiseShield services include:
+
+- Event Gateway;
+- Stream Processor;
+- Entity Resolution;
+- Graph Engine;
+- Risk Engine;
+- Agent Orchestrator;
+- Evidence Engine;
+- Investigation Engine;
+- Case Engine;
+- Audit Engine;
+- Identity;
+- Model Gateway;
+- Tool Registry;
+- Notification;
+- Knowledge;
+- Schema Registry;
+- Observability;
+- Storage.
+
+---
+
+## 137. v5 RELEASE / CHANGE / ROLLBACK PROOF
+
+A release MUST have:
+
+```text
+SOURCE COMMIT
+→ BUILD
+→ TEST
+→ SECURITY
+→ AI EVALUATION
+→ SCHEMA COMPATIBILITY
+→ ARTIFACT SIGNATURE
+→ DEPLOYMENT
+→ SMOKE
+→ RUNTIME HEALTH
+→ EVIDENCE
+```
+
+Rollback MUST be tested.
+
+For database/schema changes:
+
+```text
+MIGRATION
+→ BACKUP
+→ APPLY
+→ VERIFY
+→ ROLLBACK / FORWARD-FIX
+→ RECONCILE
+```
+
+Never assume rollback works because deployment tooling supports it.
+
+---
+
+## 138. v5 FINAL AI-AGENT EXECUTION COMMAND
+
+```text
+BUILD CRUISESHIELD AI™ v5.0 NOW.
+
+You are executing an engineering contract, not writing a proposal.
+
+FIRST:
+1. Inspect the repository.
+2. Inspect the existing runtime.
+3. Identify the existing Frontier Enterprise AI Platform™ capabilities.
+4. Identify the existing CruiseShield v4 implementation.
+5. Build a capability inventory.
+6. Build a dependency graph.
+7. Build the requirements registry.
+8. Build the contract/schema registry.
+9. Detect duplication and conflicts.
+10. Create ADRs before changing inherited architecture.
+
+PRESERVE:
+- all v4 behavior;
+- all CruiseShield financial-crime functionality;
+- the deterministic 72-hour ledger;
+- channel intelligence;
+- graph intelligence;
+- AI investigation;
+- evidence;
+- replay;
+- simulation;
+- human decision;
+- case;
+- audit;
+- canonical UI/UX;
+- Mission Gate;
+- Shield Sentinel;
+- live demo;
+- reset and proof flow.
+
+ADD:
+- Identity/Trust;
+- Consent;
+- Notifications;
+- Geospatial Intelligence;
+- Knowledge/Semantic Intelligence;
+- Model Gateway;
+- Agent Memory;
+- Tool/MCP Registry;
+- Incident/Problem/Change;
+- DR/BCP;
+- Disaster Simulation;
+- External Dependency Registry;
+- Country/Jurisdiction Adapter;
+- Compliance Control Plane;
+- Data Lifecycle;
+- Machine-Readable Schema Registry;
+- Quantitative Target Registry;
+- FinOps;
+- Supply-Chain Provenance;
+- Project Factory;
+- Portfolio Governance;
+- Institutional Memory;
+- Technology Substitution;
+- Environment Promotion;
+- Unknown/Risk Registry;
+- Closure Certificate;
+- Commercial Platform Layer.
+
+EXECUTE:
+BUILD → RUN → TEST → VERIFY → FIX → RE-RUN → EVIDENCE
+
+FOR EVERY REQUIREMENT:
+REQUIREMENT
+→ IMPLEMENTATION
+→ TEST
+→ RUNTIME RESULT
+→ EVIDENCE
+→ STATUS
+
+FOR EVERY AGENT:
+CAPABILITY
+→ DATA SCOPE
+→ MEMORY
+→ TOOLS
+→ PERMISSIONS
+→ POLICY
+→ IMPLEMENTATION
+→ EVALUATION
+→ OBSERVABILITY
+→ EVIDENCE
+
+FOR EVERY TOOL:
+REGISTRY
+→ AUTHORIZATION
+→ INPUT VALIDATION
+→ POLICY
+→ HUMAN APPROVAL IF REQUIRED
+→ EXECUTION
+→ OUTPUT VALIDATION
+→ AUDIT
+
+FOR EVERY INTEGRATION:
+PROVIDER
+→ AUTH
+→ CONTRACT
+→ VERSION
+→ TIMEOUT
+→ RETRY
+→ RATE LIMIT
+→ IDEMPOTENCY
+→ FALLBACK
+→ PRIVACY
+→ MONITORING
+→ COST
+→ TEST
+→ EVIDENCE
+
+FOR EVERY DATASET:
+SOURCE
+→ CLASSIFICATION
+→ PURPOSE
+→ LINEAGE
+→ QUALITY
+→ ACCESS
+→ RETENTION
+→ DELETION
+→ EVIDENCE
+
+FOR EVERY DEPLOYMENT:
+SOURCE
+→ BUILD
+→ TEST
+→ SCAN
+→ SIGN
+→ PROMOTE
+→ DEPLOY
+→ SMOKE
+→ RUNTIME VERIFY
+→ EVIDENCE
+
+FOR EVERY FAILURE:
+DETECT
+→ CLASSIFY
+→ CONTAIN
+→ RECOVER
+→ RECONCILE
+→ VERIFY
+→ AUDIT
+→ RCA
+→ IMPROVE
+
+FOR EVERY UNKNOWN:
+REGISTER
+→ OWNER
+→ IMPACT
+→ MITIGATION
+→ RESOLUTION
+→ EVIDENCE
+
+DO NOT:
+- invent metrics;
+- invent AI conclusions;
+- invent graph relationships;
+- invent health states;
+- invent regulatory approval;
+- invent production compliance;
+- use unauthorized real financial data;
+- bypass human authorization;
+- bypass tenant isolation;
+- allow LLMs to directly decide permissions;
+- silently substitute models;
+- silently change schemas;
+- silently change rules;
+- silently change prompts;
+- silently change agent permissions;
+- hide manual demo steps;
+- use CruiseLink telecom architecture;
+- stop at scaffolding;
+- stop at compilation;
+- stop at static UI;
+- stop at mock AI;
+- stop at mock graph;
+- stop at documentation.
+
+RUN THE REAL SYSTEM.
+
+RUN THE REAL DETERMINISTIC DEMO.
+
+RUN FAILURE TESTS.
+
+RUN SECURITY TESTS.
+
+RUN AI EVALUATION.
+
+RUN VISUAL REGRESSION.
+
+RUN ACCESSIBILITY TESTS.
+
+RUN PERFORMANCE TESTS.
+
+RUN BACKUP / RESTORE TESTS.
+
+RUN DR TESTS WHERE INFRASTRUCTURE SUPPORTS THEM.
+
+CAPTURE PROOF.
+
+FIX FAILURES.
+
+RE-RUN.
+
+GENERATE THE COMPLETE EVIDENCE PACKAGE.
+
+Only mark VERIFIED when objective evidence exists.
+
+Only mark ZERO-GAP CLOSURE when the closure certificate predicates pass.
+
+If a capability cannot yet be implemented because an external dependency is
+missing, create the adapter, contract, explicit BLOCKED/UNVERIFIED status,
+owner, dependency, test stub, and evidence. Never conceal the gap.
+
+BEGIN NOW.
+```
+
+---
+
+## 139. v5 FINAL PRODUCT + ENGINEERING EQUATION
+
+### Product equation
+
+```text
+CRUISESHIELD AI™
+
+=
+FRONTIER ENTERPRISE AI CORE
++ PROJECT ADAPTER
++ FINANCIAL EVENT INTELLIGENCE
++ CHANNEL INTELLIGENCE
++ ENTITY RESOLUTION
++ GEOSPATIAL INTELLIGENCE
++ BEHAVIOR
++ RULES
++ ML
++ UNIVERSAL RISK GRAPH
++ CROSS-CHANNEL NETWORK DETECTION
++ MULTIDIMENSIONAL RISK
++ KNOWLEDGE / SEMANTIC INTELLIGENCE
++ SPECIALIZED AGENTS
++ MODEL GATEWAY
++ AGENT MEMORY
++ TOOL / MCP REGISTRY
++ EVIDENCE
++ INVESTIGATION
++ DIGITAL TWIN
++ REPLAY
++ CONTROLLED SIMULATION
++ HUMAN DECISION
++ CASE MANAGEMENT
++ NOTIFICATIONS
++ AUDIT
++ IDENTITY / TRUST
++ CONSENT / DATA BASIS
++ SECURITY
++ PRIVACY
++ DATA LIFECYCLE
++ OBSERVABILITY
++ AI GOVERNANCE
++ MODEL GOVERNANCE
++ COMPLIANCE CONTROL
++ COUNTRY ADAPTERS
++ INCIDENT / PROBLEM / CHANGE
++ DISASTER RECOVERY
++ BUSINESS CONTINUITY
++ FEEDBACK
++ INSTITUTIONAL MEMORY
++ FINOPS
++ SUPPLY-CHAIN PROVENANCE
++ DEPLOYMENT
++ ENVIRONMENT PROMOTION
++ RELIABILITY
++ ARCHITECTURE ASSURANCE
++ PROJECT FACTORY
++ PORTFOLIO GOVERNANCE
++ TECHNOLOGY SUBSTITUTION
++ PROOF
++ CONTINUOUS EVOLUTION
+```
+
+### Product loop
+
+```text
+DETECT
+→ CONNECT
+→ CONTEXTUALIZE
+→ PREDICT / SIMULATE
+→ INVESTIGATE
+→ EXPLAIN
+→ HUMAN DECISION
+→ INTERVENE
+→ AUDIT
+→ LEARN
+→ ADAPT
+```
+
+### Enterprise control loop
+
+```text
+IDENTIFY
+→ AUTHORIZE
+→ PROCESS
+→ OBSERVE
+→ GOVERN
+→ PROTECT
+→ RECOVER
+→ VERIFY
+→ EVIDENCE
+→ IMPROVE
+```
+
+### Engineering loop
+
+```text
+INHERIT
+→ CONFIGURE
+→ EXTEND
+→ BRAND
+→ IMPLEMENT
+→ TEST
+→ VERIFY
+→ TRACE
+→ EVIDENCE
+→ DEPLOY
+→ OPERATE
+→ MEASURE
+→ GOVERN
+→ AUDIT
+→ EVOLVE
+→ RE-VERIFY
+```
+
+---
+
+# v5 FINAL STATUS CONTRACT
+
+Before execution:
+
+```text
+V4 CORE PRESERVED: YES
+V5 UNIVERSAL CLOSURE DEFINED: YES
+ARCHITECTURE: COMPLETE FOR BUILD
+REQUIREMENTS: DEFINED
+DOMAIN CONTRACT: DEFINED
+AI / AGENT CONTRACT: DEFINED
+IDENTITY / TRUST: DEFINED
+CONSENT: DEFINED
+NOTIFICATIONS: DEFINED
+GEOSPATIAL: DEFINED
+KNOWLEDGE / SEMANTIC: DEFINED
+MODEL GATEWAY: DEFINED
+AGENT MEMORY: DEFINED
+TOOL / MCP REGISTRY: DEFINED
+INCIDENT / PROBLEM / CHANGE: DEFINED
+DR / BCP: DEFINED
+DISASTER SIMULATION: DEFINED
+DEPENDENCY REGISTRY: DEFINED
+COUNTRY / JURISDICTION: DEFINED
+COMPLIANCE CONTROL PLANE: DEFINED
+DATA LIFECYCLE: DEFINED
+SCHEMA REGISTRY: DEFINED
+QUANTITATIVE TARGETS: DEFINED
+FINOPS: DEFINED
+SUPPLY CHAIN: DEFINED
+PROJECT FACTORY: DEFINED
+PORTFOLIO GOVERNANCE: DEFINED
+INSTITUTIONAL MEMORY: DEFINED
+TECHNOLOGY SUBSTITUTION: DEFINED
+ENVIRONMENT PROMOTION: DEFINED
+UNKNOWN / RISK: DEFINED
+CLOSURE CERTIFICATE: DEFINED
+COMMERCIAL PLATFORM: DEFINED
+SECURITY: DEFINED
+TESTING: DEFINED
+DEPLOYMENT: DEFINED
+EVIDENCE: DEFINED
+ZERO-GAP GATES: DEFINED
+
+IMPLEMENTATION: TO EXECUTE
+RUNTIME PROOF: PENDING
+PRODUCTION VERIFICATION: PENDING
+ZERO-GAP CLOSURE: PENDING
+```
+
+After execution, these MUST be replaced by evidence-backed statuses.
+
+---
+
+# v5 ARCHITECTURAL COMPLETENESS CONTRACT
+
+The following statement is the governing definition:
+
+> **100% ARCHITECTURAL COVERAGE** means every known applicable architectural
+> category required to design, build, secure, operate, govern, verify,
+> recover, commercialize and evolve CruiseShield AI has an explicit owner,
+> boundary, contract, implementation path, test strategy and evidence path.
+
+> **100% IMPLEMENTATION CLOSURE** means every applicable requirement is
+> implemented, tested, runtime-verified, traced, evidenced, governed and
+> operationally validated.
+
+> **ZERO-GAP CLOSURE** is not awarded merely because the blueprint is long,
+> the repository compiles, or the UI looks complete.
+
+The only valid closure sequence is:
+
+```text
+REQUIREMENT
+→ ARCHITECTURE
+→ IMPLEMENTATION
+→ TEST
+→ RUNTIME
+→ EVIDENCE
+→ GOVERNANCE
+→ CLOSURE CERTIFICATE
+```
+
+---
+
+# v5 NON-NEGOTIABLE PRODUCT IDENTITY LOCK
+
+```text
+PRODUCT:
+CRUISESHIELD AI™
+
+CONCEPT:
+FINANCIAL CRIME IMMUNE SYSTEM™
+
+CATEGORY:
+AGENTIC FINANCIAL CRIME INTELLIGENCE PLATFORM
+
+CORE DIFFERENTIATOR:
+NETWORK-LEVEL FINANCIAL CRIME INTELLIGENCE
+
+SIGNATURE:
+THE TRANSACTION IS ONLY THE BEGINNING.
+THE NETWORK IS THE SIGNAL.
+
+UI/UX SYSTEM:
+AURORA X™ / CRUISETECH INC.™ VISUAL FOUNDATION
+
+NOT:
+CRUISELINK™
+TELECOM NETWORK ARCHITECTURE
+RAN / 4G / 5G / IMS / SIM / ROAMING ARCHITECTURE
+```
+
+---
+
+# v5 FINAL CLOSURE STATEMENT
+
+This v5.0 document consists of:
+
+```text
+v4.0 CORE
++
+IDENTITY / TRUST
++
+CONSENT
++
+NOTIFICATIONS
++
+GEOSPATIAL
++
+KNOWLEDGE / SEMANTIC
++
+MODEL GATEWAY
++
+AGENT MEMORY
++
+TOOL / MCP REGISTRY
++
+INCIDENT / PROBLEM / CHANGE
++
+FULL DR / BCP
++
+DISASTER SIMULATION
++
+EXTERNAL DEPENDENCY REGISTRY
++
+COUNTRY / JURISDICTION ADAPTER
++
+COMPLIANCE CONTROL PLANE
++
+DATA LIFECYCLE
++
+MACHINE-READABLE SCHEMAS
++
+QUANTITATIVE TARGET REGISTRY
++
+FINOPS
++
+SUPPLY-CHAIN PROVENANCE
++
+PROJECT FACTORY
++
+PORTFOLIO GOVERNANCE
++
+INSTITUTIONAL MEMORY
++
+TECHNOLOGY SUBSTITUTION
++
+ENVIRONMENT PROMOTION
++
+UNKNOWN / RISK REGISTRY
++
+CLOSURE CERTIFICATE
++
+COMMERCIAL PLATFORM
+```
+
+The project remains **CruiseShield AI™**.
+
+The domain remains **financial crime intelligence**.
+
+The network graph remains the central differentiator.
+
+The AI remains governed and human-controlled.
+
+The evidence chain remains mandatory.
+
+The canonical UI/UX remains preserved.
+
+The live demo remains preserved.
+
+The universal layers make the product production-engineerable rather than
+changing its identity.
+
+---
+
+# v5 FINAL AI-AGENT MASTER DIRECTIVE
+
+```text
+BUILD CRUISESHIELD AI™ v5.0 AS A REAL, END-TO-END, LIVE, TESTED,
+EVIDENCE-BACKED FINANCIAL CRIME INTELLIGENCE PLATFORM.
+
+PRESERVE ALL v4 FUNCTIONALITY.
+
+ADD ALL v5 UNIVERSAL CLOSURE LAYERS.
+
+REUSE THE UNIVERSAL FRONTIER ENTERPRISE AI PLATFORM.
+
+DO NOT DUPLICATE SHARED SERVICES.
+
+DO NOT USE CRUISELINK ARCHITECTURE.
+
+DO NOT INVENT FACTS.
+
+DO NOT INVENT METRICS.
+
+DO NOT INVENT EVIDENCE.
+
+DO NOT INVENT REGULATORY APPROVAL.
+
+DO NOT USE UNAUTHORIZED REAL FINANCIAL DATA.
+
+DO NOT ALLOW AI TO BYPASS HUMAN AUTHORIZATION.
+
+DO NOT ALLOW CROSS-TENANT DATA LEAKAGE.
+
+DO NOT ALLOW UNREGISTERED AGENT TOOLS.
+
+DO NOT ALLOW UNREGISTERED MODEL PROVIDERS.
+
+DO NOT ALLOW UNVERSIONED CRITICAL SCHEMAS.
+
+DO NOT ALLOW SILENT PRODUCTION CHANGES.
+
+DO NOT HIDE MANUAL STEPS.
+
+BUILD THE SYSTEM.
+
+RUN THE SYSTEM.
+
+TEST THE SYSTEM.
+
+ATTACK THE SYSTEM.
+
+RECOVER THE SYSTEM.
+
+MEASURE THE SYSTEM.
+
+PROVE THE SYSTEM.
+
+GOVERN THE SYSTEM.
+
+GENERATE EVIDENCE.
+
+REPAIR FAILURES.
+
+RE-RUN FAILED GATES.
+
+ONLY THEN ISSUE THE ZERO-GAP CLOSURE CERTIFICATE.
+```
+
+# END — CRUISESHIELD AI™ v5.0 UNIVERSAL ZERO-GAP PRODUCTION ENGINEERING
+# MASTER BLUEPRINT
