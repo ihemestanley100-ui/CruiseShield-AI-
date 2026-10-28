@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}System Health — CruiseShield AI{% endblock %}
+{% block content %}
+<h1>System Health</h1>
+<p>Overall status: <strong>{{ health.status }}</strong> · version {{ health.version }} ·
+  scenario {{ health.scenario_id }} · run <code>{{ health.run_id }}</code></p>
+<table>
+  <thead><tr><th>Check</th><th>Result</th></tr></thead>
+  <tbody>
+    {% for name, result in health.checks.items() %}
+    <tr><td>{{ name }}</td><td>{{ result }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p class="muted">Every value above is computed from live application state at render time. No status is hardcoded.</p>
+{% endblock %}

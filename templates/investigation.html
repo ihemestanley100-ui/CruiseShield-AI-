@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}Investigation {{ inv.investigation_id }} — CruiseShield AI{% endblock %}
+{% block content %}
+<h1>Investigation Studio</h1>
+<p class="muted">{{ manifest.title }} · Investigation <code>{{ inv.investigation_id }}</code> · Case <code>{{ case.case_id }}</code> ({{ case.status }})</p>
+
+<section class="card" aria-labelledby="txn-h">
+  <h2 id="txn-h">Transaction #{{ txn.transaction_id.split('_')[1] }} — {{ naira(txn.amount_minor) }} {{ txn.currency }}</h2>
+  <p>{{ txn.sender_account_id }} → {{ txn.receiver_account_id }} · channel {{ txn.channel }} · {{ txn.occurred_at }}</p>
+  <p><span class="risk-score band-{{ risk_net.band }}">{{ risk_net.score }}/100</span>
+    <strong class="band-{{ risk_net.band }}">{{ risk_net.band }}</strong> network risk
+    <span class="muted">(transaction-only: {{ risk_txn.score }}/100 {{ risk_txn.band }} · {{ risk_net.score_version }})</span></p>
+  <p class="muted">{{ risk_net.limitations }}</p>
+</section>
+
+<div class="grid main-side">
+  <section class="card" aria-labelledby="graph-h">
+    <h2 id="graph-h">Financial crime graph</h2>
+    <div id="graph-wrap" role="img" aria-label="Network graph for {{ txn.transaction_id }}"></div>
+    <p class="muted" id="graph-status" role="status">Loading graph…</p>
+    <div id="graph-detail" aria-live="polite"></div>
+    <details>
+      <summary>Table alternative ({{ edges|length }} relationships)</summary>
+      <table>
+        <thead><tr><th>Edge</th><th>Relationship</th><th>Provenance</th></tr></thead>
+        <tbody>
+          {% for e in edges %}
+          <tr><td><code>{{ e.edge_id }}</code>: {{ e.source_node_id }} → {{ e.target_node_id }}</td>
+            <td>{{ e.relationship_type }}</td><td>{{ e.source_event_ids|join(', ') }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </details>
+  </section>
+
+  <section class="card" aria-labelledby="why-h">
+    <h2 id="why-h">Why this risk?</h2>
+    {% for r in rule_results %}
+    <h3>{{ r.rule_id }} — {% if r.triggered %}triggered{% else %}not triggered{% endif %}</h3>
+    <p class="muted">{{ r.explanation }}</p>
+    <p class="muted">Evidence: <code>{{ r.evidence_ids[0] }}</code></p>
+    {% endfor %}
+  </section>
+</div>
+
+<div class="grid two">
+  <section class="card" aria-labelledby="ai-h">
+    <h2 id="ai-h">Analyze with Muse Spark</h2>
+    {% if model_configured %}
+    <p class="muted">Model {{ model_id }} interprets the {{ package['items']|length }}-item evidence package. It cannot change the risk score.</p>
+    <p><button data-action="ai-analyze" data-inv="{{ inv.investigation_id }}">Run AI analysis</button></p>
+    {% else %}
+    <div class="alert warn">Model API not configured on the server (MODEL_API_KEY absent). Graph, risk, replay, simulation, and case features remain available.</div>
+    {% endif %}
+    <div id="ai-result" aria-live="polite"></div>
+    {% if ai_runs %}
+    <h3>Previous runs</h3>
+    <ul>
+      {% for run in ai_runs %}
+      <li><code>{{ run.agent_run_id }}</code> {{ run.status }} · {{ run.model_id }} ·
+        schema {{ run.schema_validation_status }} · refs {{ run.evidence_reference_validation_status }} ·
+        {{ run.latency_ms }} ms</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </section>
+
+  <section class="card" aria-labelledby="replay-h">
+    <h2 id="replay-h">Replay</h2>
+    <p>
+      <button class="secondary" data-action="replay-step" data-dir="-1">◀ Step</button>
+      <button class="secondary" data-action="replay-step" data-dir="1">Step ▶</button>
+      <button class="secondary" data-action="replay-reset">Reset</button>
+    </p>
+    <div id="replay-state" role="status" aria-live="polite"></div>
+    <ul class="timeline" id="replay-timeline"></ul>
+  </section>
+</div>
+
+<div class="grid two">
+  <section class="card" aria-labelledby="sim-h">
+    <h2 id="sim-h">What-if simulation (bounded)</h2>
+    <form id="sim-form">
+      <label for="sim-edges">Ignore relationships (baseline is never modified)</label>
+      <select id="sim-edges" name="ignored_edge_ids" multiple size="6">
+        {% for e in edges %}
+        <option value="{{ e.edge_id }}">{{ e.edge_id }}: {{ e.source_node_id }} {{ e.relationship_type }} {{ e.target_node_id }}</option>
+        {% endfor %}
+      </select>
+      <label for="sim-assumption">Assumption</label>
+      <input id="sim-assumption" name="assumption" value="Selected relationships treated as absent.">
+      <p><button type="submit">Run simulation</button></p>
+    </form>
+    <div id="sim-result" aria-live="polite"></div>
+  </section>
+
+  <section class="card" aria-labelledby="dec-h">
+    <h2 id="dec-h">Human decision gate</h2>
+    <p class="muted">Case <code>{{ case.case_id }}</code> status: <strong>{{ case.status }}</strong>.
+      Allowed next: {{ allowed|join(', ') or 'none (terminal)' }}.</p>
+    <form id="decision-form" data-case="{{ case.case_id }}">
+      <label for="dec-label">Decision</label>
+      <select id="dec-label" name="decision">
+        {% for d in decisions|sort %}<option>{{ d }}</option>{% endfor %}
+      </select>
+      <label for="dec-target">Move case to</label>
+      <select id="dec-target" name="target_status">
+        {% for s in allowed %}<option>{{ s }}</option>{% endfor %}
+      </select>
+      <label for="dec-reason">Reason (required)</label>
+      <textarea id="dec-reason" name="reason" rows="3" required></textarea>
+      <p><button type="submit">Record decision</button></p>
+    </form>
+    <div id="decision-result" aria-live="polite"></div>
+  </section>
+</div>
+
+<section class="card" aria-labelledby="audit-h">
+  <h2 id="audit-h">Audit history</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Actor</th><th>Action</th><th>Target</th><th>Change</th><th>Time</th></tr></thead>
+    <tbody>
+      {% for a in audits %}
+      <tr><td><code>{{ a.audit_event_id }}</code></td><td>{{ a.actor_type }}:{{ a.actor_id }}</td>
+        <td>{{ a.action }}</td><td>{{ a.target_type }}:{{ a.target_id }}</td>
+        <td>{{ a.previous_state_reference }} → {{ a.new_state_reference }}</td>
+        <td>{{ a.timestamp }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>window.CS_TXN = {{ txn.transaction_id|tojson }}; window.CS_SCENARIO = {{ scenario_id|tojson }};</script>
+<script src="/static/graph.js"></script>
+{% endblock %}

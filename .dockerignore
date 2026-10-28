@@ -1,0 +1,17 @@
+# Keep the build context small and secrets out of the image.
+# The Dockerfile only COPYs requirements.txt, app/, templates/, static/.
+.venv/
+.git/
+.gitignore
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+.env.example
+data/
+docs/
+tests/
+pytest-of-HP/
+CRUISESHIELD_AI_FINAL_*.txt
+README.md
+render.yaml

@@ -1,0 +1,31 @@
+# Render Blueprint for CruiseShield AI (FastAPI + Docker).
+# Deploy from the Render dashboard with this file at the repo root ("New" ->
+# "Blueprint", pick the repo). No secrets are stored here: MODEL_API_KEY is
+# sync:false, so Render prompts for it at deploy time and keeps it in its
+# secret store. Nothing in this file provisions or pays for anything by itself.
+services:
+  - type: web
+    name: cruiseshield-ai
+    runtime: docker
+    # NOTE: persistent disks require a paid instance type. Starter is the
+    # smallest type that supports the disk below. On the free tier, remove
+    # the disk block: the app still runs (it re-seeds deterministically on a
+    # fresh/empty DATA_DIR) but decisions, runs, and audits will not persist
+    # across restarts or instances.
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    startCommand: python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/health
+    disk:
+      name: cruiseshield-data
+      mountPath: /srv/data
+      sizeGB: 1
+    envVars:
+      - key: MODEL_API_KEY
+        sync: false
+      - key: META_MODEL_ID
+        value: muse-spark-1.3
+      - key: META_BASE_URL
+        value: https://api.meta.ai/v1
+      - key: DATA_DIR
+        value: /srv/data

@@ -2,7 +2,8 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+pytest-of-*/
 .env
-data/*.json
+data/*
 !data/.gitkeep
 .DS_Store

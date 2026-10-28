@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Command Center — CruiseShield AI{% endblock %}
+{% block content %}
+<h1>Command Center</h1>
+<p class="muted">Financial Crime Immune System — {{ manifest.title }} (scenario {{ scenario_id }} v{{ manifest.scenario_version }})</p>
+
+<div class="grid main-side">
+  <section class="card" aria-labelledby="sig-h">
+    <h2 id="sig-h">Signature investigation</h2>
+    <p><strong>Transaction #{{ txn.transaction_id.split('_')[1] }}</strong> —
+      {{ naira(txn.amount_minor) }} {{ txn.currency }} ·
+      {{ txn.sender_account_id }} → {{ txn.receiver_account_id }} ·
+      channel {{ txn.channel }} · {{ txn.occurred_at }}</p>
+    <p>Transaction risk: <strong class="band-{{ risk_txn.band }}">{{ risk_txn.score }}/100 {{ risk_txn.band }}</strong>
+      &nbsp; Network risk: <strong class="band-{{ risk_net.band }}">{{ risk_net.score }}/100 {{ risk_net.band }}</strong></p>
+    <p class="muted">{{ risk_net.limitations }}</p>
+    <p>
+      <button data-action="judge-start">Start Signature Investigation</button>
+      <a class="btn secondary" href="/investigations/{{ investigations[0].investigation_id }}">Open Investigation Studio</a>
+    </p>
+    <div id="judge-msg" role="status"></div>
+  </section>
+
+  <section class="card" aria-labelledby="seed-h">
+    <h2 id="seed-h">Seeded scenario</h2>
+    <ul>
+      <li>Accounts: {{ counts.accounts }}, Devices: {{ counts.devices }}, Phones: {{ counts.phones }}</li>
+      <li>Merchants: {{ counts.merchants }}, Beneficiaries: {{ counts.beneficiaries }}</li>
+      <li>Nodes: {{ counts.nodes }}, Edges: {{ counts.edges }}</li>
+      <li>Transactions: {{ counts.transactions }}, Events: {{ counts.events }}</li>
+    </ul>
+    <p class="muted">Seed hash: <code>{{ manifest.seed_hash[:16] }}…</code></p>
+    <form id="scenario-form">
+      <label for="scenario">Active scenario</label>
+      <select id="scenario" name="scenario_id">
+        {% for s in scenarios %}
+        <option value="{{ s.scenario_id }}" {% if s.scenario_id == scenario_id %}selected{% endif %}>{{ s.title }}</option>
+        {% endfor %}
+      </select>
+      <p><button type="submit" class="secondary">Reset to scenario</button></p>
+    </form>
+    <div id="scenario-msg" role="status"></div>
+  </section>
+</div>
+
+<section class="card" aria-labelledby="open-h">
+  <h2 id="open-h">Open investigations</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Transaction</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      {% for inv in investigations %}
+      <tr><td><code>{{ inv.investigation_id }}</code></td><td>{{ inv.transaction_id }}</td>
+        <td>{{ inv.status }}</td>
+        <td><a href="/investigations/{{ inv.investigation_id }}">Open</a></td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
