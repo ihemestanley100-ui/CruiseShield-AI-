@@ -1,0 +1,77 @@
+# CruiseShield AI security gate. Runs on every push/PR plus a weekly
+# audit-only schedule. All jobs use free github-hosted runners and free
+# OSS actions. No secrets required: pip-audit queries the public OSV
+# database; installs use the committed hash-pinned lockfile.
+name: security-gate
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+  schedule:
+    - cron: "19 6 * * 1"  # weekly audit, Monday 06:19 UTC
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install from hash-pinned lock
+        # Cryptographic lockfile-integrity check: any hash mismatch or
+        # unexpected pin fails the install and the gate.
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --require-hashes -r requirements.lock
+          python -m pip install pip-audit
+
+      - name: Backend security gate (pins, hashes, audit, secrets)
+        run: python scripts/security_gate.py
+
+      - name: Backend regression
+        env:
+          STORE_BACKEND: json
+        run: python -m pytest tests/ -q -p no:cacheprovider
+
+      - name: Secret scan (gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Frontend install (locked)
+        working-directory: frontend
+        run: npm ci
+
+      - name: TypeScript validation
+        working-directory: frontend
+        run: npm run typecheck
+
+      - name: Frontend tests
+        working-directory: frontend
+        run: npm test -- --reporter=basic
+
+      - name: Production build
+        working-directory: frontend
+        run: npm run build
+
+      - name: Gate report
+        if: always()
+        run: |
+          echo "## Security gate: ${{ job.status }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Failures above name the exact check; see docs/SECURITY_GATE_POLICY.md for severity and exceptions." >> "$GITHUB_STEP_SUMMARY"

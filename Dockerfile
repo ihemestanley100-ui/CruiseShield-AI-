@@ -8,11 +8,11 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     DATA_DIR=/srv/data
 
 WORKDIR /srv/app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.txt requirements.lock .
+RUN pip install --no-cache-dir --require-hashes -r requirements.lock
 COPY app/ app/
 COPY templates/ templates/
 COPY static/ static/
 
 EXPOSE 8000
-CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "exec python -m uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

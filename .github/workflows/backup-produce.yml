@@ -1,0 +1,102 @@
+# DISABLED BY DEFAULT. Manual dispatch only; the job runs only when the
+# dispatcher explicitly sets `enabled` to true AND the
+# `backup-production-gate` environment (required reviewers) exists.
+# No schedule, no push trigger: this file alone can never start a backup.
+name: backup-produce
+
+on:
+  workflow_dispatch:
+    inputs:
+      enabled:
+        description: "Explicit enable for this run (must be true)"
+        required: true
+        type: boolean
+        default: false
+      source:
+        description: "Database source label (neon or scratch)"
+        required: true
+        type: choice
+        options: ["scratch", "neon"]
+        default: "scratch"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backup-produce
+  cancel-in-progress: false
+
+jobs:
+  produce:
+    if: ${{ inputs.enabled == true }}
+    runs-on: ubuntu-latest
+    environment: backup-production-gate
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: python -m pip install --require-hashes -r requirements.lock
+      - name: Produce one backup generation
+        env:
+          BACKUP_DATABASE_URL: ${{ secrets.BACKUP_DATABASE_URL }}
+          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+          B2_APP_KEY: ${{ secrets.B2_APP_KEY }}
+          B2_BUCKET: ${{ secrets.B2_BUCKET }}
+          B2_PREFIX: ${{ secrets.B2_PREFIX }}
+          B2_ENDPOINT: ${{ secrets.B2_ENDPOINT }}
+          C3_REPO: ${{ secrets.C3_REPO }}
+          C3_TOKEN: ${{ secrets.C3_TOKEN }}
+          CSBK_RECIPIENT_PUBKEYS: ${{ secrets.CSBK_RECIPIENT_PUBKEYS }}
+          CSBK_SIGNING_SEED: ${{ secrets.CSBK_SIGNING_SEED }}
+          CSBK_SIGNING_VERIFY_KEY: ${{ secrets.CSBK_SIGNING_VERIFY_KEY }}
+          BACKUP_ENV: ${{ secrets.BACKUP_ENV }}
+        run: |
+          python - <<'EOF'
+          import base64
+          import os
+
+          from app import db as db_mod
+          from backups import logutil as log_mod
+          from backups import produce as produce_mod
+          from backups import targets as targets_mod
+
+          logger = log_mod.get_logger("cruiseshield.backup.produce")
+          redactor = log_mod.SecretRedactor(os.environ.get("CSBK_SIGNING_SEED", ""))
+
+          def need(name):
+              value = os.environ.get(name, "")
+              if not value:
+                  raise SystemExit(f"missing required secret: {name}")
+              return value
+
+          source = "${{ inputs.source }}"
+          backup_id, created_at = produce_mod.new_backup_id()
+          conn = db_mod.connect(need("BACKUP_DATABASE_URL"))
+          try:
+              snapshot = produce_mod.capture_postgres_snapshot(conn)
+          finally:
+              conn.close()
+          pubkeys = [base64.b64decode(p) for p in
+                     need("CSBK_RECIPIENT_PUBKEYS").split(",")]
+          targets = {
+              "c2": targets_mod.B2Target(
+                  bucket=need("B2_BUCKET"), prefix=os.environ.get("B2_PREFIX", ""),
+                  endpoint_url=need("B2_ENDPOINT"),
+                  key_id=need("B2_KEY_ID"), app_key=need("B2_APP_KEY")),
+              "c3": targets_mod.GitTarget(
+                  repo=need("C3_REPO"), token=need("C3_TOKEN")),
+          }
+          report = produce_mod.produce_backup(
+              snapshot=snapshot, recipient_pubkeys=pubkeys,
+              signing_seed=base64.b64decode(need("CSBK_SIGNING_SEED")),
+              signing_verify_key=base64.b64decode(
+                  need("CSBK_SIGNING_VERIFY_KEY")),
+              targets=targets, backup_id=backup_id, created_at=created_at,
+              source=source, logger=logger, redactor=redactor)
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
+              summary.write(f"promoted={report['promoted']} "
+                            f"backup_id={report['backup_id']}\n")
+          EOF

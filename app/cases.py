@@ -19,6 +19,13 @@ TRANSITIONS: dict[str, list[str]] = {
 DECISION_LABELS = {"Escalate", "Request Verification", "Monitor",
                    "Mark False Positive", "Close Case"}
 
+# Phase 10 (SEC-001): bound free-text decision inputs. A 2 MB reason was
+# accepted and persisted (4 MB file: reason + audit echo). 10 000 chars
+# is generous for a rationale; actor ids stay short by construction.
+MAX_REASON_CHARS = 10000
+MAX_ACTOR_ID_CHARS = 256
+MAX_RECOMMENDATION_CHARS = 10000
+
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
@@ -38,6 +45,13 @@ def record_decision(store, case_id: str, decision: str, target_status: str,
         raise ValueError(f"INVALID_DECISION: {decision}")
     if not reason or not reason.strip():
         raise ValueError("REASON_REQUIRED: a reason is required")
+    if len(reason.strip()) > MAX_REASON_CHARS:
+        raise ValueError(
+            f"REASON_TOO_LONG: {len(reason.strip())} > {MAX_REASON_CHARS}")
+    if len((actor_id or "").strip()) > MAX_ACTOR_ID_CHARS:
+        raise ValueError("ACTOR_ID_TOO_LONG: actor_id exceeds 256 chars")
+    if len((recommendation or "")) > MAX_RECOMMENDATION_CHARS:
+        raise ValueError("RECOMMENDATION_TOO_LONG: recommendation too long")
     case = store.get_case(case_id)
     if case is None:
         raise ValueError(f"CASE_NOT_FOUND: {case_id}")

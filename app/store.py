@@ -2,16 +2,41 @@
 from __future__ import annotations
 
 import json
+import threading
 import uuid
+import warnings
 from datetime import datetime, timezone
 from pathlib import Path
 
 from app import evidence as evidence_mod
 from app import rules as rules_mod
 from app import seed as seed_mod
-from app.config import STATE_PATH
+from app.config import STATE_PATH, validate_backend
 from app.events import validate_and_normalize
 from app.models import RuleResult
+
+
+def storage_backend() -> str:
+    """Validated SELECTED storage backend (default "json").
+
+    Reads the live config value so tests can monkeypatch it. JSON remains
+    the active backend in Phase 5.1; "pg" only enables the scratch
+    migration-verification path (no cutover).
+    """
+    from app import config as config_mod
+
+    return validate_backend(config_mod.STORE_BACKEND)
+
+
+def open_store(backend: str | None = None, path=None):
+    """Open the requested backend: Store (json) or PgStore (pg)."""
+    selected = validate_backend(backend) if backend is not None \
+        else storage_backend()
+    if selected == "json":
+        return Store(path)
+    from app.db import PgStore
+
+    return PgStore()
 
 
 def _now() -> str:
@@ -19,19 +44,31 @@ def _now() -> str:
 
 
 class Store:
+    backend = "json"
+
     def __init__(self, path: Path | None = None) -> None:
         self.path = Path(path) if path else STATE_PATH
+        # Phase 11 (PERF-001): serialize _save() — concurrent writers shared
+        # one fixed tmp path and collided (WinError 32 → HTTP 500).
+        self._save_lock = threading.Lock()
         self.state: dict = {}
         if self.path.exists():
             self.state = json.loads(self.path.read_text(encoding="utf-8"))
         else:
+            # Phase 10 (SEC-002): a missing state file silently reseeds a
+            # fresh demo. Warn loudly so data loss is never mistaken for
+            # a healthy start (surfaces on uvicorn stderr).
+            warnings.warn(
+                f"state file {self.path} missing; seeding fresh demo state",
+                RuntimeWarning, stacklevel=2)
             self.reset("scn_primary")
 
     def _save(self) -> None:
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        tmp = self.path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(self.state, indent=2), encoding="utf-8")
-        tmp.replace(self.path)
+        with self._save_lock:
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            tmp = self.path.with_suffix(".tmp")
+            tmp.write_text(json.dumps(self.state, indent=2), encoding="utf-8")
+            tmp.replace(self.path)
 
     # -- reset / seed -----------------------------------------------------
     def reset(self, scenario_id: str) -> dict:
@@ -39,6 +76,8 @@ class Store:
             scenario = seed_mod.build_primary()
         elif scenario_id == "scn_false_positive":
             scenario = seed_mod.build_false_positive()
+        elif scenario_id == "scn_ambiguous":
+            scenario = seed_mod.build_ambiguous()
         else:
             raise ValueError(f"UNKNOWN_SCENARIO: {scenario_id}")
         run_id = uuid.uuid4().hex
@@ -166,7 +205,12 @@ class Store:
         if dumped["event_id"] in self.state["seen_event_ids"]:
             return "duplicate", dumped, warnings
         self.state["events"].append(dumped)
-        self.state["transactions"].append(dumped["transaction"])
+        # Phase 5.3 L2 canonical rule: one row per transaction_id,
+        # first-wins. Matches PostgreSQL ON CONFLICT DO NOTHING. Existing
+        # records are untouched (all live transaction IDs are unique).
+        known = {t["transaction_id"] for t in self.state["transactions"]}
+        if dumped["transaction"]["transaction_id"] not in known:
+            self.state["transactions"].append(dumped["transaction"])
         self.state["seen_event_ids"].append(dumped["event_id"])
         self._save()
         return "accepted", dumped, warnings

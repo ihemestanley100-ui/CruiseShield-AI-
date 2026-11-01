@@ -1,8 +1,15 @@
-# Render Blueprint for CruiseShield AI (FastAPI + Docker).
-# Deploy from the Render dashboard with this file at the repo root ("New" ->
-# "Blueprint", pick the repo). No secrets are stored here: MODEL_API_KEY is
-# sync:false, so Render prompts for it at deploy time and keeps it in its
-# secret store. Nothing in this file provisions or pays for anything by itself.
+# Render Blueprint for CruiseShield AI (FastAPI backend + Next.js frontend).
+# Deploy order is load-bearing (see DEPLOY_ORDER below). Nothing in this file
+# provisions or pays for anything by itself. No secrets stored here.
+#
+# DEPLOY_ORDER:
+#   1. Deploy backend first; note its https URL.
+#   2. Set the frontend NEXT_PUBLIC_API_BASE_URL to that URL (build-time baked;
+#      the frontend MUST be (re)built after the value is set).
+#   3. Set backend FRONTEND_ORIGINS to the frontend https URL; redeploy backend.
+#   4. Smoke: backend /api/v1/health + frontend / + one cross-origin page.
+# Template URLs below use Render's default <service>.onrender.com shape;
+# confirm exact hostnames after step 1 and replace before step 2.
 services:
   - type: web
     name: cruiseshield-ai
@@ -28,3 +35,38 @@ services:
         value: https://api.meta.ai/v1
       - key: DATA_DIR
         value: /srv/data
+      - key: FRONTEND_ORIGINS
+        value: https://cruiseshield-ai-frontend.onrender.com
+      # Gap-closure D-002: shared demo write token. Render prompts at
+      # deploy. Empty = open demo; set = POSTs require the credential.
+      - key: DEMO_WRITE_TOKEN
+        sync: false
+
+  - type: web
+    name: cruiseshield-ai-frontend
+    runtime: node
+    # Free tier sleeps on idle (cold starts); starter keeps the demo warm.
+    # Owner decides; demo reliability recommends starter.
+    plan: starter
+    rootDir: frontend
+    # Gate review 11-01: npm ci REQUIRES frontend/package-lock.json IN GIT
+    # (currently untracked locally — the approved commit MUST include it,
+    # else the Render clone has no lockfile and this build fails loudly).
+    buildCommand: npm ci && npm run build
+    # Next reads $PORT at start (verified locally on :3110).
+    startCommand: npm start -- --port $PORT
+    healthCheckPath: /
+    envVars:
+      # Locally verified 20.19.6; relax to major "20" if the build image
+      # lacks this exact patch (failure is loud at build time).
+      - key: NODE_VERSION
+        value: 20.19.6
+      # Build-time baked into client chunks (verified mechanism locally).
+      # MUST equal the deployed backend URL from DEPLOY_ORDER step 1.
+      - key: NEXT_PUBLIC_API_BASE_URL
+        value: https://cruiseshield-ai.onrender.com
+      # Gap-closure D-002: MUST equal backend DEMO_WRITE_TOKEN (same
+      # owner-generated value in both prompts). PUBLIC once baked into
+      # client chunks — demo-staging use only. Empty = header omitted.
+      - key: NEXT_PUBLIC_DEMO_WRITE_TOKEN
+        sync: false

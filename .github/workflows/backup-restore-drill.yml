@@ -1,0 +1,104 @@
+# DISABLED BY DEFAULT. Manual dispatch only; the job runs only when the
+# dispatcher explicitly sets `enabled` to true AND the
+# `backup-production-gate` environment (required reviewers) exists.
+# No schedule, no push trigger: this file alone can never run.
+# DRILL ONLY: plan_restore is read-only (fetch, verify, decrypt) and
+# writes to no database. There is no production-restore path.
+name: backup-restore-drill
+
+on:
+  workflow_dispatch:
+    inputs:
+      enabled:
+        description: "Explicit enable for this run (must be true)"
+        required: true
+        type: boolean
+        default: false
+      backup_id:
+        description: "Generation to drill-restore (csbk-YYYYMMDD-HHMMSSZ)"
+        required: true
+        type: string
+      target:
+        description: "Which copy to restore from"
+        required: true
+        type: choice
+        options: ["c2", "c3"]
+        default: "c2"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backup-restore-drill
+  cancel-in-progress: false
+
+jobs:
+  drill:
+    if: ${{ inputs.enabled == true }}
+    runs-on: ubuntu-latest
+    environment: backup-production-gate
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install dependencies
+        run: python -m pip install --require-hashes -r requirements.lock
+      - name: Drill-restore one generation (read-only)
+        env:
+          B2_KEY_ID: ${{ secrets.B2_KEY_ID }}
+          B2_APP_KEY: ${{ secrets.B2_APP_KEY }}
+          B2_BUCKET: ${{ secrets.B2_BUCKET }}
+          B2_PREFIX: ${{ secrets.B2_PREFIX }}
+          B2_ENDPOINT: ${{ secrets.B2_ENDPOINT }}
+          C3_REPO: ${{ secrets.C3_REPO }}
+          C3_TOKEN: ${{ secrets.C3_TOKEN }}
+          CSBK_SIGNING_VERIFY_KEY: ${{ secrets.CSBK_SIGNING_VERIFY_KEY }}
+          CSBK_RESTORE_PRIVATE_KEY: ${{ secrets.CSBK_RESTORE_PRIVATE_KEY }}
+        run: |
+          python - <<'EOF'
+          import base64
+          import json
+          import os
+
+          from backups import logutil as log_mod
+          from backups import restore as restore_mod
+          from backups import targets as targets_mod
+
+          logger = log_mod.get_logger("cruiseshield.backup.drill")
+          redactor = log_mod.SecretRedactor()
+
+          def need(name):
+              value = os.environ.get(name, "")
+              if not value:
+                  raise SystemExit(f"missing required secret: {name}")
+              return value
+
+          backup_id = "${{ inputs.backup_id }}"
+          which = "${{ inputs.target }}"
+          all_targets = {
+              "c2": targets_mod.B2Target(
+                  bucket=need("B2_BUCKET"), prefix=os.environ.get("B2_PREFIX", ""),
+                  endpoint_url=need("B2_ENDPOINT"),
+                  key_id=need("B2_KEY_ID"), app_key=need("B2_APP_KEY")),
+              "c3": targets_mod.GitTarget(
+                  repo=need("C3_REPO"), token=need("C3_TOKEN")),
+          }
+          plan = restore_mod.plan_restore(
+              target=all_targets[which], target_name=which,
+              backup_id=backup_id,
+              verify_key=base64.b64decode(
+                  need("CSBK_SIGNING_VERIFY_KEY")),
+              private_key=base64.b64decode(
+                  need("CSBK_RESTORE_PRIVATE_KEY")),
+              logger=logger, redactor=redactor)
+          snapshot = json.loads(plan.plaintext.decode("utf-8"))
+          assert snapshot["schema_version"] == plan.manifest["schema_version"]
+          log_mod.heartbeat(logger, backup_id=backup_id, target=which,
+                            ok=True, redactor=redactor)
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
+              summary.write(f"drill_ok=true backup_id={plan.backup_id} "
+                            f"tables={len(snapshot['tables'])} "
+                            f"writes=none\n")
+          EOF

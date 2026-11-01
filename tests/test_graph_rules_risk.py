@@ -53,6 +53,22 @@ def test_neighborhood_is_deterministic_subset(tmp_path):
     assert "acct_A" in first[0] and "dev_04" in first[0]
 
 
+def test_rule_evaluation_deterministic_over_repeats(tmp_path):
+    # G03: the synthetic benchmark — 200 evaluations, identical output.
+    import json as jsonlib
+    state = _state(tmp_path)
+    first = jsonlib.dumps(
+        [r.model_dump() for r in rules_mod.evaluate(
+            "txn_84721", state["transactions"], state["edges"], "t")],
+        sort_keys=True, default=str)
+    for _ in range(200):
+        again = jsonlib.dumps(
+            [r.model_dump() for r in rules_mod.evaluate(
+                "txn_84721", state["transactions"], state["edges"], "t")],
+            sort_keys=True, default=str)
+        assert again == first
+
+
 def test_unknown_scope_rejected(tmp_path):
     state = _state(tmp_path)
     results = rules_mod.evaluate("txn_84721", state["transactions"],

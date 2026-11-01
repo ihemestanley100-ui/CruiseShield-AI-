@@ -15,6 +15,16 @@ async function postJSON(url, body) {
   return data;
 }
 
+/* Escape untrusted text (model output, server messages, ids) before it
+ * reaches innerHTML. Static markup stays literal; every ${...} value that
+ * is not a hardcoded string must pass through esc(). */
+function esc(value) {
+  return String(value === null || value === undefined ? "" : value).replace(
+    /[&<>"']/g,
+    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
+  );
+}
+
 function setHTML(id, html) {
   const el = document.getElementById(id);
   if (el) el.innerHTML = html;
@@ -44,11 +54,11 @@ async function loadReplay(cursor) {
   replayCursor = data.cursor;
   const cur = data.current_event;
   setHTML("replay-state",
-    `Event ${data.cursor}/${data.total}` +
-    (cur ? ` — <code>${cur.event_id}</code> ${cur.transaction.transaction_id} ${cur.occurred_at}` : " — start") +
-    `<br>Transactions: ${data.counts.transactions}, Edges: ${data.counts.edges}`);
+    `Event ${esc(data.cursor)}/${esc(data.total)}` +
+    (cur ? ` — <code>${esc(cur.event_id)}</code> ${esc(cur.transaction.transaction_id)} ${esc(cur.occurred_at)}` : " — start") +
+    `<br>Transactions: ${esc(data.counts.transactions)}, Edges: ${esc(data.counts.edges)}`);
   setHTML("replay-timeline",
-    data.cumulative_event_ids.map((id) => `<li><code>${id}</code></li>`).join(""));
+    data.cumulative_event_ids.map((id) => `<li><code>${esc(id)}</code></li>`).join(""));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -62,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = await postJSON("/api/v1/demo/judge-start", {});
         window.location.href = data.url;
       } catch (e) {
-        setHTML("judge-msg", `<div class="alert error">${e.message}</div>`);
+        setHTML("judge-msg", `<div class="alert error">${esc(e.message)}</div>`);
         btn.disabled = false;
       }
     });
@@ -78,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         await postJSON(`/api/v1/demo/scenarios/${id}/start`, {});
         window.location.reload();
       } catch (e) {
-        setHTML("scenario-msg", `<div class="alert error">${e.message}</div>`);
+        setHTML("scenario-msg", `<div class="alert error">${esc(e.message)}</div>`);
       }
     });
   }
@@ -92,16 +102,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const run = await postJSON(`/api/v1/investigations/${inv}/ai-analysis`, {});
         const r = run.result || {};
         const findings = (r.key_findings || []).map((f) =>
-          `<li>${f.finding} <span class="muted">[${(f.evidence_ids || []).join(", ")}]</span></li>`).join("");
+          `<li>${esc(f.finding)} <span class="muted">[${(f.evidence_ids || []).map(esc).join(", ")}]</span></li>`).join("");
         setHTML("ai-result",
-          `<div class="alert ok">Status ${run.status} · model ${run.model_id} · ` +
-          `latency ${run.latency_ms} ms · request <code>${run.request_id || "n/a"}</code><br>` +
-          `Schema ${run.schema_validation_status} · Refs ${run.evidence_reference_validation_status}</div>` +
+          `<div class="alert ok">Status ${esc(run.status)} · model ${esc(run.model_id)} · ` +
+          `latency ${esc(run.latency_ms)} ms · request <code>${esc(run.request_id || "n/a")}</code><br>` +
+          `Schema ${esc(run.schema_validation_status)} · Refs ${esc(run.evidence_reference_validation_status)}</div>` +
           `<p><strong>System-computed fact:</strong> risk score is computed by the app, not the model.</p>` +
-          `<p>${r.summary || ""}</p><ul>${findings}</ul>` +
-          `<p class="muted">Conclusion: ${r.conclusion || "n/a"}. ${r.disclaimer || ""}</p>`);
+          `<p>${esc(r.summary || "")}</p><ul>${findings}</ul>` +
+          `<p class="muted">Conclusion: ${esc(r.conclusion || "n/a")}. ${esc(r.disclaimer || "")}</p>`);
       } catch (e) {
-        setHTML("ai-result", `<div class="alert error">AI unavailable: ${e.message}. ` +
+        setHTML("ai-result", `<div class="alert error">AI unavailable: ${esc(e.message)}. ` +
           `Graph, risk, replay, simulation, and case features remain usable.</div>`);
       } finally {
         btn.disabled = false;
@@ -112,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-action='replay-step']").forEach((btn) => {
     btn.addEventListener("click", () => {
       loadReplay(replayCursor + parseInt(btn.getAttribute("data-dir"), 10)).catch((e) =>
-        setHTML("replay-state", `<div class="alert error">${e.message}</div>`));
+        setHTML("replay-state", `<div class="alert error">${esc(e.message)}</div>`));
     });
   });
   document.querySelectorAll("[data-action='replay-reset']").forEach((btn) => {
@@ -134,12 +144,12 @@ document.addEventListener("DOMContentLoaded", () => {
           assumption: document.getElementById("sim-assumption").value,
         });
         setHTML("sim-result",
-          `<div class="alert ok">Baseline ${sim.baseline_score} (${sim.baseline_band}) → ` +
-          `simulated ${sim.simulated_score} (${sim.simulated_band}). ` +
-          `Run <code>${sim.simulation_id}</code>.</div>` +
-          `<p class="muted">${sim.limitations}</p>`);
+          `<div class="alert ok">Baseline ${esc(sim.baseline_score)} (${esc(sim.baseline_band)}) → ` +
+          `simulated ${esc(sim.simulated_score)} (${esc(sim.simulated_band)}). ` +
+          `Run <code>${esc(sim.simulation_id)}</code>.</div>` +
+          `<p class="muted">${esc(sim.limitations)}</p>`);
       } catch (e) {
-        setHTML("sim-result", `<div class="alert error">${e.message}</div>`);
+        setHTML("sim-result", `<div class="alert error">${esc(e.message)}</div>`);
       }
     });
   }
@@ -158,10 +168,10 @@ document.addEventListener("DOMContentLoaded", () => {
           actor_id: "investigator",
         });
         setHTML("decision-result",
-          `<div class="alert ok">Recorded ${data.decision.decision_id}; ` +
-          `case now ${data.case.status}; audit ${data.audit.audit_event_id}.</div>`);
+          `<div class="alert ok">Recorded ${esc(data.decision.decision_id)}; ` +
+          `case now ${esc(data.case.status)}; audit ${esc(data.audit.audit_event_id)}.</div>`);
       } catch (e) {
-        setHTML("decision-result", `<div class="alert error">${e.message}</div>`);
+        setHTML("decision-result", `<div class="alert error">${esc(e.message)}</div>`);
       }
     });
   }

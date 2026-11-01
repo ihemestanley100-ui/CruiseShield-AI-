@@ -25,6 +25,7 @@ def test_route_table_matches_contract():
         "/api/v1/investigations/{inv_id}",
         "/api/v1/investigations/{inv_id}/evidence-package",
         "/api/v1/investigations/{inv_id}/ai-analysis",
+        "/api/v1/investigations/{inv_id}/ai-followup",
         "/api/v1/ai-runs/{run_id}", "/api/v1/replay/{scenario_id}",
         "/api/v1/simulations", "/api/v1/cases", "/api/v1/cases/{case_id}",
         "/api/v1/cases/{case_id}/decisions", "/api/v1/cases/{case_id}/audit",
@@ -35,7 +36,7 @@ def test_route_table_matches_contract():
 
 def test_full_judge_flow_direct(tmp_store, monkeypatch):
     monkeypatch.setattr(ai_adapter, "MODEL_API_KEY", "")
-    result = main.demo_reset({"scenario_id": "scn_primary"})
+    result = main.demo_reset(_req(), {"scenario_id": "scn_primary"})
     assert result["manifest"]["synthetic_notice"] == "Synthetic demo data."
 
     txn = main.get_transaction("txn_84721")
@@ -70,6 +71,11 @@ def test_full_judge_flow_direct(tmp_store, monkeypatch):
     assert sim["baseline_score"] == 84
     assert sim["simulated_score"] == 72  # R-003 (weight 12) drops out
     assert main.get_graph("txn_84721")["counts"]["edges"] == 30
+    # §4.7: the simulation mutates neither case state nor case audit history.
+    assert tmp_store.get_case("case_84721")["status"] == "NEW"
+    assert tmp_store.state["decisions"] == []
+    assert [a for a in tmp_store.state["audits"]
+            if a["action"] == "case.decision"] == []
 
     with pytest.raises(main.AppError) as exc:
         main.post_decision("case_84721", {
@@ -96,6 +102,42 @@ def test_full_judge_flow_direct(tmp_store, monkeypatch):
     assert exc.value.code == "MODEL_NOT_CONFIGURED"
 
 
+def test_followup_validates_before_any_model_call(tmp_store):
+    # Unknown investigation rejected without touching the provider.
+    with pytest.raises(main.AppError) as exc:
+        main.ai_followup("inv_nope", {"question": "Why?"}, _req()).send(None)
+    assert exc.value.code == "UNKNOWN_INVESTIGATION"
+    # Empty question rejected without touching the provider.
+    with pytest.raises(main.AppError) as exc:
+        main.ai_followup("inv_84721", {"question": "  "}, _req()).send(None)
+    assert exc.value.code == "QUESTION_REQUIRED"
+    # Overlong question rejected without touching the provider.
+    with pytest.raises(main.AppError) as exc:
+        main.ai_followup(
+            "inv_84721", {"question": "x" * 2001}, _req()).send(None)
+    assert exc.value.code == "QUESTION_TOO_LONG"
+    assert tmp_store.state["ai_runs"] == []
+
+
+def test_malformed_bodies_rejected_with_400_not_500(tmp_store):
+    with pytest.raises(main.AppError) as exc:
+        main.post_simulation(["not", "a", "dict"], _req())
+    assert exc.value.code == "INVALID_BODY"
+    with pytest.raises(main.AppError) as exc:
+        main.post_simulation(
+            {"target_transaction_id": "txn_84721",
+             "ignored_edge_ids": "edge_0002"}, _req())
+    assert exc.value.code == "INVALID_EDGE_LIST"
+    with pytest.raises(main.AppError) as exc:
+        main.post_simulation(
+            {"target_transaction_id": "txn_84721",
+             "ignored_edge_ids": ["edge_0002", 7]}, _req())
+    assert exc.value.code == "INVALID_EDGE_LIST"
+    with pytest.raises(main.AppError) as exc:
+        main.ai_followup("inv_84721", ["nope"], _req()).send(None)
+    assert exc.value.code == "INVALID_BODY"
+
+
 def test_pages_render_with_live_state(tmp_store):
     for response in (main.command_center(_req()),
                      main.investigation_page(_req(), "inv_84721"),
@@ -119,3 +161,22 @@ def test_investigation_renders_when_model_configured(tmp_store, monkeypatch):
     assert "Run AI analysis" in html
     assert "39-item evidence package" in html
     assert "test-key" not in html
+
+
+def test_simulation_input_caps_reject_abuse(tmp_store):
+    before = (len(tmp_store.state["simulations"]),
+              len(tmp_store.state["audits"]))
+    with pytest.raises(main.AppError) as exc:
+        main.post_simulation(
+            {"target_transaction_id": "txn_84721",
+             "ignored_edge_ids": [], "assumption": "a" * 10001}, _req())
+    assert exc.value.code == "ASSUMPTION_TOO_LONG"
+    with pytest.raises(main.AppError) as exc:
+        main.post_simulation(
+            {"target_transaction_id": "txn_84721",
+             "ignored_edge_ids": ["edge_0002"] * 10001,
+             "assumption": "fine"}, _req())
+    assert exc.value.code == "TOO_MANY_IGNORED_EDGES"
+    after = (len(tmp_store.state["simulations"]),
+             len(tmp_store.state["audits"]))
+    assert before == after

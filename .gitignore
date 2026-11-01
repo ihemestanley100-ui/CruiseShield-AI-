@@ -6,4 +6,6 @@ pytest-of-*/
 .env
 data/*
 !data/.gitkeep
+frontend/test-output*.txt
+test-output*.txt
 .DS_Store

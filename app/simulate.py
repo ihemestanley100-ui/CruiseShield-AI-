@@ -11,8 +11,19 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
+MAX_ASSUMPTION_CHARS = 10000
+MAX_IGNORED_EDGES = 10000
+
+
 def run(state: dict, target_transaction_id: str, ignored_edge_ids: list[str],
         assumption: str, trace_id: str) -> dict:
+    if len(ignored_edge_ids) > MAX_IGNORED_EDGES:
+        raise ValueError(
+            f"TOO_MANY_IGNORED_EDGES: {len(ignored_edge_ids)} > "
+            f"{MAX_IGNORED_EDGES}")
+    if len(assumption or "") > MAX_ASSUMPTION_CHARS:
+        raise ValueError(
+            f"ASSUMPTION_TOO_LONG: {len(assumption)} > {MAX_ASSUMPTION_CHARS}")
     known = {e["edge_id"] for e in state["edges"]}
     unknown = sorted(set(ignored_edge_ids) - known)
     if unknown:

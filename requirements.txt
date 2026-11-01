@@ -1,9 +1,34 @@
 # Pinned to environment-verified versions (2026-10-28). No installs were
 # performed in the offline sandbox; install on a networked machine with:
 #   .venv/Scripts/python -m pip install -r requirements.txt
-fastapi==0.128.0
+# P2.2A: FastAPI lift for starlette>=1.3.1 compat (installed 0.128.0
+# capped starlette<0.51; 0.133.0 is the first release unbounded above).
+fastapi==0.133.0
+# P2.2A: starlette>=1.3.1 clears CVE-2026-48710/48817/48818/54282/54283.
+starlette==1.3.1
+# P2.2A: anyio>=4.14.2 clears CVE-2026-63374 (CRITICAL) + CVE-2026-64847.
+anyio==4.14.2
+# P2.2A: urllib3>=2.7.0 clears CVE-2026-44431/44432; 2.8.0 additionally
+# clears PYSEC-2026-4175/4176/4177 (found by same-phase pip-audit).
+urllib3==2.8.0
+# P2.2A: idna>=3.15 clears PYSEC-2026-215 / CVE-2026-45409.
+idna==3.15
+# P2.2A: certifi>=2026.10.19 clears GHSA-6q48-6c7w-9gw2 (CRITICAL).
+certifi==2026.10.19
 uvicorn==0.40.0
 pydantic==2.12.5
 httpx==0.28.1
 jinja2==3.1.6
-pytest==9.0.2
+# P2.2A: pytest 9.0.3 clears PYSEC-2026-1845 (same-phase pip-audit).
+pytest==9.0.3
+psycopg==3.3.2
+# Phase 5.4F/P1 backup crypto (environment-verified 2026-10-30).
+# Advisory status: VERIFIED 2026-11-01 — `python scripts/security_gate.py`
+# GATE PASS locally (pip_audit: no open vulnerabilities, 37 pins,
+# 463 hashes). Re-run the gate before any production use.
+pynacl==1.6.2
+shamir-mnemonic==0.3.0
+# P2.0: CVE-2026-111943 remediation per AWS bulletin 2026-150
+# (botocore >= 1.43.117; verified installed 2026-10-30).
+boto3==1.43.117
+botocore==1.43.117

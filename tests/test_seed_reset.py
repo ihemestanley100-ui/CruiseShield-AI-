@@ -1,7 +1,14 @@
 """T-001: reset determinism, expected counts, and pinned risk bands."""
+import threading
+
 import pytest
 
 from app.store import Store
+
+
+def test_missing_state_file_warns_before_reseed(tmp_path):
+    with pytest.warns(RuntimeWarning, match="seeding fresh demo state"):
+        Store(tmp_path / "missing.json")
 
 
 def test_reset_twice_reproduces_seed(tmp_path):
@@ -54,3 +61,64 @@ def test_unknown_scenario_rejected(tmp_path):
     store = Store(tmp_path / "state.json")
     with pytest.raises(ValueError, match="UNKNOWN_SCENARIO"):
         store.reset("scn_nope")
+
+
+def test_ambiguous_scenario_moderate_needs_judgment(tmp_path):
+    store = Store(tmp_path / "state.json")
+    store.reset("scn_ambiguous")
+    counts = store.state["manifest"]["expected_graph_counts"]
+    assert (counts["nodes"], counts["edges"], counts["transactions"],
+            counts["events"]) == (4, 4, 2, 2)
+    assert store.state["manifest"]["expected_risk_band"] == {
+        "transaction": "LOW", "network": "MODERATE"}
+    results = {r["rule_id"]: r["triggered"]
+               for r in store.state["rule_results"]["txn_84740"]}
+    assert results == {"R-001": False, "R-002": True, "R-003": True,
+                       "R-004": False, "R-005": False, "R-006": False,
+                       "R-007": True, "R-008": False}
+    assert store.state["risk"]["txn_84740"]["transaction"]["score"] == 20
+    assert store.state["risk"]["txn_84740"]["network"]["score"] == 38
+    # Own investigation/case identities; switching scenarios is explicit.
+    assert store.state["cases"][0]["case_id"] == "case_84740"
+    assert store.state["investigations"][0]["investigation_id"] == "inv_84740"
+
+
+def test_restart_reloads_decisions_and_audit(tmp_path):
+    # G18: the JSON store survives a process restart (re-init from disk).
+    from app import cases as cases_mod
+    path = tmp_path / "state.json"
+    store = Store(path)
+    store.reset("scn_primary")
+    cases_mod.record_decision(store, "case_84721", "Monitor", "TRIAGED",
+                              "Triage.", "inv1")
+    assert path.exists()
+    revived = Store(path)
+    assert revived.state["scenario_id"] == "scn_primary"
+    assert revived.state["cases"][0]["status"] == "TRIAGED"
+    assert len(revived.state["decisions"]) == 1
+    assert revived.state["decisions"][0]["reason"] == "Triage."
+    assert revived.state["audits"][-1]["action"] == "case.decision"
+    assert revived.state["risk"]["txn_84721"]["network"]["score"] == 84
+
+
+def test_concurrent_saves_do_not_collide(tmp_path):
+    # Phase 11 (PERF-001): concurrent POST /api/v1/simulations returned
+    # HTTP 500 — every _save() shared one fixed tmp path (WinError 32).
+    store = Store(tmp_path / "state.json")
+    errors: list = []
+
+    def worker(n: int) -> None:
+        try:
+            for i in range(5):
+                store.save_simulation({"simulation_id": f"race_{n}_{i}"})
+        except Exception as exc:  # noqa: BLE001 — collected, asserted below
+            errors.append(exc)
+
+    threads = [threading.Thread(target=worker, args=(n,)) for n in range(16)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+    assert errors == []
+    revived = Store(tmp_path / "state.json")
+    assert len(revived.state["simulations"]) == 80

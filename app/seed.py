@@ -188,6 +188,67 @@ def build_false_positive() -> dict:
     }
 
 
+def build_ambiguous() -> dict:
+    """Mid-size repeat transfer with one shared device (MODERATE network).
+
+    txn_84740: acct_M -> acct_N, NGN 250,000 (below the R-001 amount line)
+    plus a second acct_M payment (R-002, R-007) and one device shared by
+    exactly two accounts (R-003). Expected: transaction 20 LOW (12+8),
+    network 38 MODERATE (12+8+12+6). Nothing else triggers.
+    """
+    specs = [
+        ("txn_84740", 25000000, "MOBILE_APP", "acct_M", "acct_N", 0),
+        ("txn_84741", 18000000, "TRANSFER_NIP", "acct_M", "acct_O", 30),
+    ]
+    txns, events = [], []
+    for txn_id, amount, channel, sender, receiver, mins in specs:
+        num = txn_id.split("_")[1]
+        txn = {
+            "transaction_id": txn_id, "amount_minor": amount, "currency": "NGN",
+            "channel": channel, "sender_account_id": sender,
+            "receiver_account_id": receiver, "occurred_at": _ts(mins),
+            "device_id": "dev_09", "phone_id": None, "ip_id": None,
+            "location_id": None, "merchant_id": None,
+        }
+        txns.append(txn)
+        events.append({
+            "event_id": f"evt_demo_{num}",
+            "event_type": "financial.transaction.created",
+            "schema_version": "1.0", "occurred_at": _ts(mins),
+            "source": "synthetic_demo", "trace_id": f"trace_demo_{num}",
+            "privacy_classification": "synthetic",
+            "transaction": txn, "entities": {"device_id": "dev_09"},
+        })
+    nodes = [
+        {"node_id": nid, "node_type": _node_type(nid),
+         "display_label": _label(nid), "synthetic_flag": True,
+         "source_record_ids": [f"seed:scn_ambiguous:{nid}"]}
+        for nid in ("acct_M", "acct_N", "acct_O", "dev_09")
+    ]
+    edges = []
+    links = [("acct_M", "acct_N", "SENT_TO", "txn_84740"),
+             ("acct_M", "acct_O", "SENT_TO", "txn_84741"),
+             ("acct_M", "dev_09", "USES_DEVICE", "txn_84740"),
+             ("acct_N", "dev_09", "USES_DEVICE", "txn_84740")]
+    for i, (src, tgt, rel, txn) in enumerate(links, start=1):
+        num = txn.split("_")[1]
+        edges.append({
+            "edge_id": f"edge_amb_{i:04d}", "source_node_id": src,
+            "target_node_id": tgt, "relationship_type": rel,
+            "source_event_ids": [f"evt_demo_{num}"],
+            "evidence_ids": [f"evidence_edge_amb_{i:04d}"],
+            "valid_from": SEED_DATETIME, "valid_to": None,
+            "synthetic_flag": True, "trace_id": f"trace_demo_{num}",
+        })
+    return {
+        "scenario_id": "scn_ambiguous", "transactions": txns, "events": events,
+        "nodes": nodes, "edges": edges,
+        "primary_transaction_id": "txn_84740",
+        "title": "Ambiguous pattern — mid-size repeat transfer, one shared device",
+        "purpose": "Show a MODERATE case needing human judgment, not auto-escalation.",
+    }
+
+
 def seed_hash(scenario: dict) -> str:
     canonical = json.dumps(
         {k: scenario[k] for k in ("transactions", "events", "nodes", "edges")},
@@ -202,4 +263,6 @@ def available_scenarios() -> list[dict[str, str]]:
          "title": "Seeded suspicious network — Transaction #84721"},
         {"scenario_id": "scn_false_positive",
          "title": "False-positive check — large but unconnected transfer"},
+        {"scenario_id": "scn_ambiguous",
+         "title": "Ambiguous pattern — mid-size repeat transfer, one shared device"},
     ]
