@@ -4,6 +4,7 @@
  * the visual graph. Lists every edge exactly as returned by the backend. */
 
 import type { GraphEdge, GraphNode } from "../lib/api";
+import { useTranslation } from "../lib/i18n/context";
 
 interface Props {
   nodes: GraphNode[];
@@ -11,30 +12,28 @@ interface Props {
 }
 
 export function GraphTable({ nodes, edges }: Props) {
+  const { t } = useTranslation("graph");
   const label = new Map(nodes.map((n) => [n.node_id, n.display_label]));
   return (
-    <section className="card" aria-label="Relationship table">
-      <h2>All relationships</h2>
+    <section className="card" aria-label={t("tableLabel")}>
+      <h2>{t("tableTitle")}</h2>
       <p className="muted" data-testid="graph-table-counts">
-        {nodes.length} nodes, {edges.length} edges — the complete record
-        behind the graph above.
+        {t("tableCounts", { a: nodes.length, b: edges.length })}
       </p>
       {edges.length === 0 ? (
-        <p className="muted">No relationships in this graph.</p>
+        <p className="muted">{t("tableEmpty")}</p>
       ) : (
         <div className="table-scroll">
           <table>
-            <caption className="muted">
-              Every relationship with provenance and evidence references.
-            </caption>
+            <caption className="muted">{t("tableCaption")}</caption>
             <thead>
               <tr>
-                <th scope="col">Edge</th>
-                <th scope="col">Source</th>
-                <th scope="col">Relationship</th>
-                <th scope="col">Target</th>
-                <th scope="col">Provenance events</th>
-                <th scope="col">Evidence</th>
+                <th scope="col">{t("thEdge")}</th>
+                <th scope="col">{t("thSource")}</th>
+                <th scope="col">{t("thRel")}</th>
+                <th scope="col">{t("thTarget")}</th>
+                <th scope="col">{t("thProv")}</th>
+                <th scope="col">{t("thEvidence")}</th>
               </tr>
             </thead>
             <tbody>

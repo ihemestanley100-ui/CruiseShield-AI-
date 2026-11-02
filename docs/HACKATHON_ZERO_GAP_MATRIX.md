@@ -52,3 +52,22 @@ N = not verified. Skipped tests are never counted as passed.
 **Counts:** 42 requirements — 24 PASS_VERIFIED · 7 PASS_WITH_LIMITATIONS · 7 PARTIAL ·
 2 FAIL (pilot/product bar, out of demo scope) · 1 NOT_VERIFIED · 1 MISSING (DEMO-04).
 Zero requirements unassessed.
+
+## Supersession addendum (2026-11-01, J3 closeout P12)
+
+Rows above are the frozen 10-31 audit; preserved as history. Three rows
+are superseded by later verified work (do not read them as current):
+
+- TECH-05 (auth/rate-limit "Absent" FAIL): superseded — protected-demo
+  login (HMAC sessions, roles, CSRF, throttle) + API rate limiting were
+  implemented in Phase 5 and verified in J3 (`tests/test_auth.py`,
+  `tests/test_rate_limit.py`).
+- TECH-06 (JSON "unlocked" PARTIAL): superseded in-process — PERF-001
+  lock serializes concurrent writes (`app/store.py`, race-tested);
+  multi-process writes remain out of scope (see KNOWN_LIMITATIONS).
+- TECH-09 ("280 + 201" counts): counts superseded — current verified
+  counts are backend 341 passed / 103 skipped and frontend 261/261
+  (see `docs/J3_FULL_REGRESSION_EVIDENCE.md`).
+- PERF-001 pointer requested by the audit: no such row exists in this
+  matrix (auditor stale reference, recorded as no-op; the lock is
+  `app/store.py` + KNOWN_LIMITATIONS).

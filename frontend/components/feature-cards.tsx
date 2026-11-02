@@ -1,8 +1,11 @@
+"use client";
+
 /* Feature cards: polished navigation to the real destinations. Every
  * footer is either a live backend value or a feature description —
  * never an invented metric. */
 
 import Link from "next/link";
+import { useTranslation } from "../lib/i18n/context";
 
 interface Props {
   invId: string;
@@ -26,53 +29,66 @@ export function FeatureCards(props: Props) {
     graphCounts,
     evidenceCount,
   } = props;
+  const { t } = useTranslation("command");
   const cards = [
     {
-      title: "Investigations",
-      desc: "Scores, rules, evidence and AI analysis.",
+      key: "inv",
+      title: t("featInv"),
+      desc: t("featInvDesc"),
       href: `/investigations/${invId}`,
-      foot: `${invId} · ${invStatus}`,
+      foot: t("caseStatusLine", { case: invId, status: invStatus }),
     },
     {
-      title: "Network Explorer",
-      desc: "Accounts, devices, phones and merchants.",
+      key: "net",
+      title: t("featNet"),
+      desc: t("featNetDesc"),
       href: `/network/${txnId}`,
       foot:
         graphCounts === null
-          ? "Graph unavailable"
-          : `${graphCounts.nodes} nodes · ${graphCounts.edges} edges`,
+          ? t("featGraphDown")
+          : t("featGraphFoot", {
+              a: graphCounts.nodes,
+              b: graphCounts.edges,
+            }),
     },
     {
-      title: "Replay & Simulation",
-      desc: "Recreate events and test what-if scenarios.",
+      key: "replay",
+      title: t("featReplay"),
+      desc: t("featReplayDesc"),
       href: `/replay/${scenarioId}`,
-      foot: "Deterministic replay",
+      foot: t("featReplayFoot"),
     },
     {
-      title: "Evidence",
-      desc: "Linked evidence and provenance.",
+      key: "ev",
+      title: t("featEv"),
+      desc: t("featEvDesc"),
       href: `/investigations/${invId}#evidence-h`,
-      foot: evidenceCount === null ? "Unavailable" : `${evidenceCount} records`,
+      foot:
+        evidenceCount === null
+          ? t("featEvDown")
+          : t("featEvFoot", { n: evidenceCount }),
     },
     {
-      title: "Cases",
-      desc: "Case status and human decisions.",
+      key: "cases",
+      title: t("featCases"),
+      desc: t("featCasesDesc"),
       href: `/cases/${caseId}`,
-      foot: `${caseId} · ${caseStatus}`,
+      foot: t("caseStatusLine", { case: caseId, status: caseStatus }),
     },
     {
-      title: "Audit Trail",
-      desc: "System and analyst activity.",
+      key: "audit",
+      title: t("featAudit"),
+      desc: t("featAuditDesc"),
       href: `/cases/${caseId}/audit`,
-      foot: "Full history",
+      foot: t("featAuditFoot"),
     },
   ];
   return (
     <section aria-labelledby="feat-h" className="command-section">
-      <h2 id="feat-h">Explore</h2>
+      <h2 id="feat-h">{t("featTitle")}</h2>
       <div className="feature-grid">
         {cards.map((card) => (
-          <Link key={card.title} href={card.href} className="feature-card">
+          <Link key={card.key} href={card.href} className="feature-card">
             <strong>{card.title}</strong>
             <span className="feature-desc">{card.desc}</span>
             <span className="feature-foot muted">{card.foot}</span>

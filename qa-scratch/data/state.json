@@ -1,0 +1,3193 @@
+{
+  "scenario_id": "scn_primary",
+  "scenario_version": "1.0.0",
+  "run_id": "d179fc6193a4440a850c234e60ccc40b",
+  "trace_id": "trace_run_d179fc6193a4",
+  "seed_hash": "97203739e738225e21f7c2235c95a78fa2e5398baee28bc2064d8272362f4c28",
+  "manifest": {
+    "scenario_id": "scn_primary",
+    "scenario_version": "1.0.0",
+    "title": "Seeded suspicious network \u2014 Transaction #84721",
+    "purpose": "Demonstrate network-level investigation of txn_84721.",
+    "seed_hash": "97203739e738225e21f7c2235c95a78fa2e5398baee28bc2064d8272362f4c28",
+    "synthetic_notice": "Synthetic demo data.",
+    "event_sequence": [
+      "evt_demo_84721",
+      "evt_demo_84722",
+      "evt_demo_84723",
+      "evt_demo_84724",
+      "evt_demo_84725",
+      "evt_demo_84726",
+      "evt_demo_84727",
+      "evt_demo_84728",
+      "evt_demo_84729",
+      "evt_demo_84731",
+      "evt_demo_84732"
+    ],
+    "expected_rule_results": {
+      "R-001": true,
+      "R-002": true,
+      "R-003": true,
+      "R-004": true,
+      "R-005": true,
+      "R-006": true,
+      "R-007": true,
+      "R-008": true
+    },
+    "expected_graph_counts": {
+      "nodes": 22,
+      "edges": 30,
+      "accounts": 12,
+      "devices": 4,
+      "phones": 3,
+      "merchants": 2,
+      "beneficiaries": 1,
+      "transactions": 11,
+      "events": 11
+    },
+    "expected_risk_band": {
+      "transaction": "MODERATE",
+      "network": "HIGH"
+    },
+    "expected_evidence_ids": [
+      "evidence_edge_0001",
+      "evidence_edge_0002",
+      "evidence_edge_0003",
+      "evidence_edge_0004",
+      "evidence_edge_0005",
+      "evidence_edge_0006",
+      "evidence_edge_0007",
+      "evidence_edge_0008",
+      "evidence_edge_0009",
+      "evidence_edge_0010",
+      "evidence_edge_0011",
+      "evidence_edge_0012",
+      "evidence_edge_0013",
+      "evidence_edge_0014",
+      "evidence_edge_0015",
+      "evidence_edge_0016",
+      "evidence_edge_0017",
+      "evidence_edge_0018",
+      "evidence_edge_0019",
+      "evidence_edge_0020",
+      "evidence_edge_0021",
+      "evidence_edge_0022",
+      "evidence_edge_0023",
+      "evidence_edge_0024",
+      "evidence_edge_0025",
+      "evidence_edge_0026",
+      "evidence_edge_0027",
+      "evidence_edge_0028",
+      "evidence_edge_0029",
+      "evidence_edge_0030",
+      "evidence_rr_R-001_84721",
+      "evidence_rr_R-002_84721",
+      "evidence_rr_R-003_84721",
+      "evidence_rr_R-004_84721",
+      "evidence_rr_R-005_84721",
+      "evidence_rr_R-006_84721",
+      "evidence_rr_R-007_84721",
+      "evidence_rr_R-008_84721",
+      "evidence_txn_84721"
+    ]
+  },
+  "transactions": [
+    {
+      "transaction_id": "txn_84721",
+      "amount_minor": 48000000,
+      "currency": "NGN",
+      "channel": "MOBILE_APP",
+      "sender_account_id": "acct_A",
+      "receiver_account_id": "acct_B",
+      "occurred_at": "2026-10-27T10:00:00Z",
+      "device_id": "dev_04",
+      "phone_id": "phn_03",
+      "ip_id": "ip_02",
+      "location_id": "loc_01",
+      "merchant_id": null
+    },
+    {
+      "transaction_id": "txn_84722",
+      "amount_minor": 12000000,
+      "currency": "NGN",
+      "channel": "TRANSFER_NIP",
+      "sender_account_id": "acct_C",
+      "receiver_account_id": "acct_D",
+      "occurred_at": "2026-10-27T10:06:00Z",
+      "device_id": null,
+      "phone_id": null,
+      "ip_id": null,
+      "location_id": null,
+      "merchant_id": null
+    },
+    {
+      "transaction_id": "txn_84723",
+      "amount_minor": 9500000,
+      "currency": "NGN",
+      "channel": "USSD",
+      "sender_account_id": "acct_D",
+      "receiver_account_id": "acct_E",
+      "occurred_at": "2026-10-27T10:11:00Z",
+      "device_id": null,
+      "phone_id": null,
+      "ip_id": null,
+      "location_id": null,
+      "merchant_id": null
+    },
+    {
+      "transaction_id": "txn_84724",
+      "amount_minor": 22000000,
+      "currency": "NGN",
+      "channel": "POS",
+      "sender_account_id": "acct_G",
+      "receiver_account_id": "acct_H",
+      "occurred_at": "2026-10-27T10:17:00Z",
+      "device_id": "dev_02",
+      "phone_id": null,
+      "ip_id": null,
+      "location_id": null,
+      "merchant_id": null
+    },
+    {
+      "transaction_id": "txn_84725",
+      "amount_minor": 7400000,
+      "currency": "NGN",
+      "channel": "TRANSFER_NIP",
+      "sender_account_id": "acct_J",
+      "receiver_account_id": "acct_K",
+      "occurred_at": "2026-10-27T10:23:00Z",
+      "device_id": null,
+      "phone_id": "phn_01",
+      "ip_id": null,
+      "location_id": null,
+      "merchant_id": null
+    },
+    {
+      "transaction_id": "txn_84726",
+      "amount_minor": 31000000,
+      "currency": "NGN",
+      "channel": "MOBILE_APP",
+      "sender_account_id": "acct_C",
+      "receiver_account_id": "acct_B",
+      "occurred_at": "2026-10-27T10:29:00Z",
+      "device_id": null,
+      "phone_id": null,
+      "ip_id": null,
+      "location_id": null,
+      "merchant_id": null
+    },
+    {
+      "transaction_id": "txn_84727",
+      "amount_minor": 18500000,
+      "currency": "NGN",
+      "channel": "ATM",
+      "sender_account_id": "acct_D",
+      "receiver_account_id": "acct_B",
+      "occurred_at": "2026-10-27T10:34:00Z",
+      "device_id": null,
+      "phone_id": null,
+      "ip_id": null,
+      "location_id": null,
+      "merchant_id": null
+    },
+    {
+      "transaction_id": "txn_84728",
+      "amount_minor": 26000000,
+      "currency": "NGN",
+      "channel": "POS",
+      "sender_account_id": "acct_A",
+      "receiver_account_id": "acct_C",
+      "occurred_at": "2026-10-27T10:40:00Z",
+      "device_id": null,
+      "phone_id": null,
+      "ip_id": null,
+      "location_id": null,
+      "merchant_id": null
+    },
+    {
+      "transaction_id": "txn_84729",
+      "amount_minor": 15000000,
+      "currency": "NGN",
+      "channel": "WEB",
+      "sender_account_id": "acct_B",
+      "receiver_account_id": "acct_E",
+      "occurred_at": "2026-10-27T10:47:00Z",
+      "device_id": "dev_04",
+      "phone_id": "phn_03",
+      "ip_id": null,
+      "location_id": null,
+      "merchant_id": null
+    },
+    {
+      "transaction_id": "txn_84731",
+      "amount_minor": 8800000,
+      "currency": "NGN",
+      "channel": "QR",
+      "sender_account_id": "acct_F",
+      "receiver_account_id": "acct_I",
+      "occurred_at": "2026-10-27T10:52:00Z",
+      "device_id": "dev_02",
+      "phone_id": "phn_02",
+      "ip_id": null,
+      "location_id": null,
+      "merchant_id": null
+    },
+    {
+      "transaction_id": "txn_84732",
+      "amount_minor": 5400000,
+      "currency": "NGN",
+      "channel": "AGENT_AGENCY",
+      "sender_account_id": "acct_L",
+      "receiver_account_id": "acct_K",
+      "occurred_at": "2026-10-27T10:58:00Z",
+      "device_id": "dev_03",
+      "phone_id": null,
+      "ip_id": null,
+      "location_id": null,
+      "merchant_id": null
+    }
+  ],
+  "events": [
+    {
+      "event_id": "evt_demo_84721",
+      "event_type": "financial.transaction.created",
+      "schema_version": "1.0",
+      "occurred_at": "2026-10-27T10:00:00Z",
+      "source": "synthetic_demo",
+      "trace_id": "trace_demo_84721",
+      "privacy_classification": "synthetic",
+      "transaction": {
+        "transaction_id": "txn_84721",
+        "amount_minor": 48000000,
+        "currency": "NGN",
+        "channel": "MOBILE_APP",
+        "sender_account_id": "acct_A",
+        "receiver_account_id": "acct_B",
+        "occurred_at": "2026-10-27T10:00:00Z",
+        "device_id": "dev_04",
+        "phone_id": "phn_03",
+        "ip_id": "ip_02",
+        "location_id": "loc_01",
+        "merchant_id": null
+      },
+      "entities": {
+        "device_id": "dev_04",
+        "phone_id": "phn_03",
+        "ip_id": "ip_02",
+        "location_id": "loc_01"
+      }
+    },
+    {
+      "event_id": "evt_demo_84722",
+      "event_type": "financial.transaction.created",
+      "schema_version": "1.0",
+      "occurred_at": "2026-10-27T10:06:00Z",
+      "source": "synthetic_demo",
+      "trace_id": "trace_demo_84722",
+      "privacy_classification": "synthetic",
+      "transaction": {
+        "transaction_id": "txn_84722",
+        "amount_minor": 12000000,
+        "currency": "NGN",
+        "channel": "TRANSFER_NIP",
+        "sender_account_id": "acct_C",
+        "receiver_account_id": "acct_D",
+        "occurred_at": "2026-10-27T10:06:00Z",
+        "device_id": null,
+        "phone_id": null,
+        "ip_id": null,
+        "location_id": null,
+        "merchant_id": null
+      },
+      "entities": {}
+    },
+    {
+      "event_id": "evt_demo_84723",
+      "event_type": "financial.transaction.created",
+      "schema_version": "1.0",
+      "occurred_at": "2026-10-27T10:11:00Z",
+      "source": "synthetic_demo",
+      "trace_id": "trace_demo_84723",
+      "privacy_classification": "synthetic",
+      "transaction": {
+        "transaction_id": "txn_84723",
+        "amount_minor": 9500000,
+        "currency": "NGN",
+        "channel": "USSD",
+        "sender_account_id": "acct_D",
+        "receiver_account_id": "acct_E",
+        "occurred_at": "2026-10-27T10:11:00Z",
+        "device_id": null,
+        "phone_id": null,
+        "ip_id": null,
+        "location_id": null,
+        "merchant_id": null
+      },
+      "entities": {}
+    },
+    {
+      "event_id": "evt_demo_84724",
+      "event_type": "financial.transaction.created",
+      "schema_version": "1.0",
+      "occurred_at": "2026-10-27T10:17:00Z",
+      "source": "synthetic_demo",
+      "trace_id": "trace_demo_84724",
+      "privacy_classification": "synthetic",
+      "transaction": {
+        "transaction_id": "txn_84724",
+        "amount_minor": 22000000,
+        "currency": "NGN",
+        "channel": "POS",
+        "sender_account_id": "acct_G",
+        "receiver_account_id": "acct_H",
+        "occurred_at": "2026-10-27T10:17:00Z",
+        "device_id": "dev_02",
+        "phone_id": null,
+        "ip_id": null,
+        "location_id": null,
+        "merchant_id": null
+      },
+      "entities": {
+        "device_id": "dev_02"
+      }
+    },
+    {
+      "event_id": "evt_demo_84725",
+      "event_type": "financial.transaction.created",
+      "schema_version": "1.0",
+      "occurred_at": "2026-10-27T10:23:00Z",
+      "source": "synthetic_demo",
+      "trace_id": "trace_demo_84725",
+      "privacy_classification": "synthetic",
+      "transaction": {
+        "transaction_id": "txn_84725",
+        "amount_minor": 7400000,
+        "currency": "NGN",
+        "channel": "TRANSFER_NIP",
+        "sender_account_id": "acct_J",
+        "receiver_account_id": "acct_K",
+        "occurred_at": "2026-10-27T10:23:00Z",
+        "device_id": null,
+        "phone_id": "phn_01",
+        "ip_id": null,
+        "location_id": null,
+        "merchant_id": null
+      },
+      "entities": {
+        "phone_id": "phn_01"
+      }
+    },
+    {
+      "event_id": "evt_demo_84726",
+      "event_type": "financial.transaction.created",
+      "schema_version": "1.0",
+      "occurred_at": "2026-10-27T10:29:00Z",
+      "source": "synthetic_demo",
+      "trace_id": "trace_demo_84726",
+      "privacy_classification": "synthetic",
+      "transaction": {
+        "transaction_id": "txn_84726",
+        "amount_minor": 31000000,
+        "currency": "NGN",
+        "channel": "MOBILE_APP",
+        "sender_account_id": "acct_C",
+        "receiver_account_id": "acct_B",
+        "occurred_at": "2026-10-27T10:29:00Z",
+        "device_id": null,
+        "phone_id": null,
+        "ip_id": null,
+        "location_id": null,
+        "merchant_id": null
+      },
+      "entities": {}
+    },
+    {
+      "event_id": "evt_demo_84727",
+      "event_type": "financial.transaction.created",
+      "schema_version": "1.0",
+      "occurred_at": "2026-10-27T10:34:00Z",
+      "source": "synthetic_demo",
+      "trace_id": "trace_demo_84727",
+      "privacy_classification": "synthetic",
+      "transaction": {
+        "transaction_id": "txn_84727",
+        "amount_minor": 18500000,
+        "currency": "NGN",
+        "channel": "ATM",
+        "sender_account_id": "acct_D",
+        "receiver_account_id": "acct_B",
+        "occurred_at": "2026-10-27T10:34:00Z",
+        "device_id": null,
+        "phone_id": null,
+        "ip_id": null,
+        "location_id": null,
+        "merchant_id": null
+      },
+      "entities": {}
+    },
+    {
+      "event_id": "evt_demo_84728",
+      "event_type": "financial.transaction.created",
+      "schema_version": "1.0",
+      "occurred_at": "2026-10-27T10:40:00Z",
+      "source": "synthetic_demo",
+      "trace_id": "trace_demo_84728",
+      "privacy_classification": "synthetic",
+      "transaction": {
+        "transaction_id": "txn_84728",
+        "amount_minor": 26000000,
+        "currency": "NGN",
+        "channel": "POS",
+        "sender_account_id": "acct_A",
+        "receiver_account_id": "acct_C",
+        "occurred_at": "2026-10-27T10:40:00Z",
+        "device_id": null,
+        "phone_id": null,
+        "ip_id": null,
+        "location_id": null,
+        "merchant_id": null
+      },
+      "entities": {}
+    },
+    {
+      "event_id": "evt_demo_84729",
+      "event_type": "financial.transaction.created",
+      "schema_version": "1.0",
+      "occurred_at": "2026-10-27T10:47:00Z",
+      "source": "synthetic_demo",
+      "trace_id": "trace_demo_84729",
+      "privacy_classification": "synthetic",
+      "transaction": {
+        "transaction_id": "txn_84729",
+        "amount_minor": 15000000,
+        "currency": "NGN",
+        "channel": "WEB",
+        "sender_account_id": "acct_B",
+        "receiver_account_id": "acct_E",
+        "occurred_at": "2026-10-27T10:47:00Z",
+        "device_id": "dev_04",
+        "phone_id": "phn_03",
+        "ip_id": null,
+        "location_id": null,
+        "merchant_id": null
+      },
+      "entities": {
+        "device_id": "dev_04",
+        "phone_id": "phn_03"
+      }
+    },
+    {
+      "event_id": "evt_demo_84731",
+      "event_type": "financial.transaction.created",
+      "schema_version": "1.0",
+      "occurred_at": "2026-10-27T10:52:00Z",
+      "source": "synthetic_demo",
+      "trace_id": "trace_demo_84731",
+      "privacy_classification": "synthetic",
+      "transaction": {
+        "transaction_id": "txn_84731",
+        "amount_minor": 8800000,
+        "currency": "NGN",
+        "channel": "QR",
+        "sender_account_id": "acct_F",
+        "receiver_account_id": "acct_I",
+        "occurred_at": "2026-10-27T10:52:00Z",
+        "device_id": "dev_02",
+        "phone_id": "phn_02",
+        "ip_id": null,
+        "location_id": null,
+        "merchant_id": null
+      },
+      "entities": {
+        "device_id": "dev_02",
+        "phone_id": "phn_02"
+      }
+    },
+    {
+      "event_id": "evt_demo_84732",
+      "event_type": "financial.transaction.created",
+      "schema_version": "1.0",
+      "occurred_at": "2026-10-27T10:58:00Z",
+      "source": "synthetic_demo",
+      "trace_id": "trace_demo_84732",
+      "privacy_classification": "synthetic",
+      "transaction": {
+        "transaction_id": "txn_84732",
+        "amount_minor": 5400000,
+        "currency": "NGN",
+        "channel": "AGENT_AGENCY",
+        "sender_account_id": "acct_L",
+        "receiver_account_id": "acct_K",
+        "occurred_at": "2026-10-27T10:58:00Z",
+        "device_id": "dev_03",
+        "phone_id": null,
+        "ip_id": null,
+        "location_id": null,
+        "merchant_id": null
+      },
+      "entities": {
+        "device_id": "dev_03"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "acct_A",
+      "node_type": "account",
+      "display_label": "Account A",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:acct_A"
+      ]
+    },
+    {
+      "node_id": "acct_B",
+      "node_type": "account",
+      "display_label": "Account B",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:acct_B"
+      ]
+    },
+    {
+      "node_id": "acct_C",
+      "node_type": "account",
+      "display_label": "Account C",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:acct_C"
+      ]
+    },
+    {
+      "node_id": "acct_D",
+      "node_type": "account",
+      "display_label": "Account D",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:acct_D"
+      ]
+    },
+    {
+      "node_id": "acct_E",
+      "node_type": "account",
+      "display_label": "Account E",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:acct_E"
+      ]
+    },
+    {
+      "node_id": "acct_F",
+      "node_type": "account",
+      "display_label": "Account F",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:acct_F"
+      ]
+    },
+    {
+      "node_id": "acct_G",
+      "node_type": "account",
+      "display_label": "Account G",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:acct_G"
+      ]
+    },
+    {
+      "node_id": "acct_H",
+      "node_type": "account",
+      "display_label": "Account H",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:acct_H"
+      ]
+    },
+    {
+      "node_id": "acct_I",
+      "node_type": "account",
+      "display_label": "Account I",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:acct_I"
+      ]
+    },
+    {
+      "node_id": "acct_J",
+      "node_type": "account",
+      "display_label": "Account J",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:acct_J"
+      ]
+    },
+    {
+      "node_id": "acct_K",
+      "node_type": "account",
+      "display_label": "Account K",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:acct_K"
+      ]
+    },
+    {
+      "node_id": "acct_L",
+      "node_type": "account",
+      "display_label": "Account L",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:acct_L"
+      ]
+    },
+    {
+      "node_id": "ben_01",
+      "node_type": "beneficiary",
+      "display_label": "Beneficiary 01",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:ben_01"
+      ]
+    },
+    {
+      "node_id": "dev_01",
+      "node_type": "device",
+      "display_label": "Device 01",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:dev_01"
+      ]
+    },
+    {
+      "node_id": "dev_02",
+      "node_type": "device",
+      "display_label": "Device 02",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:dev_02"
+      ]
+    },
+    {
+      "node_id": "dev_03",
+      "node_type": "device",
+      "display_label": "Device 03",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:dev_03"
+      ]
+    },
+    {
+      "node_id": "dev_04",
+      "node_type": "device",
+      "display_label": "Device 04",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:dev_04"
+      ]
+    },
+    {
+      "node_id": "merch_01",
+      "node_type": "merchant",
+      "display_label": "Merchant 01",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:merch_01"
+      ]
+    },
+    {
+      "node_id": "merch_02",
+      "node_type": "merchant",
+      "display_label": "Merchant 02",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:merch_02"
+      ]
+    },
+    {
+      "node_id": "phn_01",
+      "node_type": "phone",
+      "display_label": "Phone 01",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:phn_01"
+      ]
+    },
+    {
+      "node_id": "phn_02",
+      "node_type": "phone",
+      "display_label": "Phone 02",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:phn_02"
+      ]
+    },
+    {
+      "node_id": "phn_03",
+      "node_type": "phone",
+      "display_label": "Phone 03",
+      "synthetic_flag": true,
+      "source_record_ids": [
+        "seed:scn_primary:phn_03"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "edge_id": "edge_0001",
+      "source_node_id": "acct_A",
+      "target_node_id": "acct_B",
+      "relationship_type": "SENT_TO",
+      "source_event_ids": [
+        "evt_demo_84721"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0001"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84721"
+    },
+    {
+      "edge_id": "edge_0002",
+      "source_node_id": "acct_B",
+      "target_node_id": "dev_04",
+      "relationship_type": "USES_DEVICE",
+      "source_event_ids": [
+        "evt_demo_84721"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0002"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84721"
+    },
+    {
+      "edge_id": "edge_0003",
+      "source_node_id": "acct_B",
+      "target_node_id": "phn_03",
+      "relationship_type": "USES_PHONE",
+      "source_event_ids": [
+        "evt_demo_84721"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0003"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84721"
+    },
+    {
+      "edge_id": "edge_0004",
+      "source_node_id": "acct_C",
+      "target_node_id": "dev_04",
+      "relationship_type": "USES_DEVICE",
+      "source_event_ids": [
+        "evt_demo_84722"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0004"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84722"
+    },
+    {
+      "edge_id": "edge_0005",
+      "source_node_id": "acct_D",
+      "target_node_id": "dev_04",
+      "relationship_type": "USES_DEVICE",
+      "source_event_ids": [
+        "evt_demo_84722"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0005"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84722"
+    },
+    {
+      "edge_id": "edge_0006",
+      "source_node_id": "acct_C",
+      "target_node_id": "acct_D",
+      "relationship_type": "SENT_TO",
+      "source_event_ids": [
+        "evt_demo_84722"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0006"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84722"
+    },
+    {
+      "edge_id": "edge_0007",
+      "source_node_id": "acct_D",
+      "target_node_id": "acct_E",
+      "relationship_type": "SENT_TO",
+      "source_event_ids": [
+        "evt_demo_84723"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0007"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84723"
+    },
+    {
+      "edge_id": "edge_0008",
+      "source_node_id": "acct_E",
+      "target_node_id": "phn_03",
+      "relationship_type": "USES_PHONE",
+      "source_event_ids": [
+        "evt_demo_84723"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0008"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84723"
+    },
+    {
+      "edge_id": "edge_0009",
+      "source_node_id": "acct_E",
+      "target_node_id": "merch_01",
+      "relationship_type": "PAID_MERCHANT",
+      "source_event_ids": [
+        "evt_demo_84723"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0009"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84723"
+    },
+    {
+      "edge_id": "edge_0010",
+      "source_node_id": "acct_F",
+      "target_node_id": "merch_01",
+      "relationship_type": "PAID_MERCHANT",
+      "source_event_ids": [
+        "evt_demo_84731"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0010"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84731"
+    },
+    {
+      "edge_id": "edge_0011",
+      "source_node_id": "acct_F",
+      "target_node_id": "dev_02",
+      "relationship_type": "USES_DEVICE",
+      "source_event_ids": [
+        "evt_demo_84731"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0011"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84731"
+    },
+    {
+      "edge_id": "edge_0012",
+      "source_node_id": "acct_G",
+      "target_node_id": "dev_02",
+      "relationship_type": "USES_DEVICE",
+      "source_event_ids": [
+        "evt_demo_84724"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0012"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84724"
+    },
+    {
+      "edge_id": "edge_0013",
+      "source_node_id": "acct_G",
+      "target_node_id": "acct_H",
+      "relationship_type": "SENT_TO",
+      "source_event_ids": [
+        "evt_demo_84724"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0013"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84724"
+    },
+    {
+      "edge_id": "edge_0014",
+      "source_node_id": "acct_H",
+      "target_node_id": "ben_01",
+      "relationship_type": "BENEFICIARY_OF",
+      "source_event_ids": [
+        "evt_demo_84724"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0014"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84724"
+    },
+    {
+      "edge_id": "edge_0015",
+      "source_node_id": "acct_I",
+      "target_node_id": "ben_01",
+      "relationship_type": "BENEFICIARY_OF",
+      "source_event_ids": [
+        "evt_demo_84731"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0015"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84731"
+    },
+    {
+      "edge_id": "edge_0016",
+      "source_node_id": "acct_I",
+      "target_node_id": "phn_01",
+      "relationship_type": "USES_PHONE",
+      "source_event_ids": [
+        "evt_demo_84731"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0016"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84731"
+    },
+    {
+      "edge_id": "edge_0017",
+      "source_node_id": "acct_J",
+      "target_node_id": "phn_01",
+      "relationship_type": "USES_PHONE",
+      "source_event_ids": [
+        "evt_demo_84725"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0017"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84725"
+    },
+    {
+      "edge_id": "edge_0018",
+      "source_node_id": "acct_J",
+      "target_node_id": "acct_K",
+      "relationship_type": "SENT_TO",
+      "source_event_ids": [
+        "evt_demo_84725"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0018"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84725"
+    },
+    {
+      "edge_id": "edge_0019",
+      "source_node_id": "acct_K",
+      "target_node_id": "merch_02",
+      "relationship_type": "PAID_MERCHANT",
+      "source_event_ids": [
+        "evt_demo_84725"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0019"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84725"
+    },
+    {
+      "edge_id": "edge_0020",
+      "source_node_id": "acct_L",
+      "target_node_id": "merch_02",
+      "relationship_type": "PAID_MERCHANT",
+      "source_event_ids": [
+        "evt_demo_84732"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0020"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84732"
+    },
+    {
+      "edge_id": "edge_0021",
+      "source_node_id": "acct_K",
+      "target_node_id": "dev_01",
+      "relationship_type": "USES_DEVICE",
+      "source_event_ids": [
+        "evt_demo_84725"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0021"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84725"
+    },
+    {
+      "edge_id": "edge_0022",
+      "source_node_id": "acct_L",
+      "target_node_id": "dev_03",
+      "relationship_type": "USES_DEVICE",
+      "source_event_ids": [
+        "evt_demo_84732"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0022"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84732"
+    },
+    {
+      "edge_id": "edge_0023",
+      "source_node_id": "acct_F",
+      "target_node_id": "phn_02",
+      "relationship_type": "USES_PHONE",
+      "source_event_ids": [
+        "evt_demo_84731"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0023"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84731"
+    },
+    {
+      "edge_id": "edge_0024",
+      "source_node_id": "acct_H",
+      "target_node_id": "phn_02",
+      "relationship_type": "USES_PHONE",
+      "source_event_ids": [
+        "evt_demo_84724"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0024"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84724"
+    },
+    {
+      "edge_id": "edge_0025",
+      "source_node_id": "acct_C",
+      "target_node_id": "acct_B",
+      "relationship_type": "SENT_TO",
+      "source_event_ids": [
+        "evt_demo_84726"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0025"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84726"
+    },
+    {
+      "edge_id": "edge_0026",
+      "source_node_id": "acct_D",
+      "target_node_id": "acct_B",
+      "relationship_type": "SENT_TO",
+      "source_event_ids": [
+        "evt_demo_84727"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0026"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84727"
+    },
+    {
+      "edge_id": "edge_0027",
+      "source_node_id": "acct_A",
+      "target_node_id": "acct_C",
+      "relationship_type": "SENT_TO",
+      "source_event_ids": [
+        "evt_demo_84728"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0027"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84728"
+    },
+    {
+      "edge_id": "edge_0028",
+      "source_node_id": "acct_B",
+      "target_node_id": "acct_E",
+      "relationship_type": "SENT_TO",
+      "source_event_ids": [
+        "evt_demo_84729"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0028"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84729"
+    },
+    {
+      "edge_id": "edge_0029",
+      "source_node_id": "acct_F",
+      "target_node_id": "acct_I",
+      "relationship_type": "SENT_TO",
+      "source_event_ids": [
+        "evt_demo_84731"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0029"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84731"
+    },
+    {
+      "edge_id": "edge_0030",
+      "source_node_id": "acct_L",
+      "target_node_id": "acct_K",
+      "relationship_type": "SENT_TO",
+      "source_event_ids": [
+        "evt_demo_84732"
+      ],
+      "evidence_ids": [
+        "evidence_edge_0030"
+      ],
+      "valid_from": "2026-10-27T10:00:00Z",
+      "valid_to": null,
+      "synthetic_flag": true,
+      "trace_id": "trace_demo_84732"
+    }
+  ],
+  "seen_event_ids": [
+    "evt_demo_84721",
+    "evt_demo_84722",
+    "evt_demo_84723",
+    "evt_demo_84724",
+    "evt_demo_84725",
+    "evt_demo_84726",
+    "evt_demo_84727",
+    "evt_demo_84728",
+    "evt_demo_84729",
+    "evt_demo_84731",
+    "evt_demo_84732"
+  ],
+  "primary_transaction_id": "txn_84721",
+  "rule_results": {
+    "txn_84721": [
+      {
+        "rule_result_id": "rr_R-001_84721",
+        "rule_id": "R-001",
+        "rule_version": "1.0",
+        "triggered": true,
+        "observed_values": {
+          "amount_minor": 48000000
+        },
+        "threshold": "amount_minor >= 40000000",
+        "explanation": "Observed 48000000 kobo vs threshold 40000000 kobo.",
+        "source_record_ids": [
+          "txn_84721"
+        ],
+        "evidence_ids": [
+          "evidence_rr_R-001_84721"
+        ],
+        "trace_id": "trace_run_d179fc6193a4"
+      },
+      {
+        "rule_result_id": "rr_R-002_84721",
+        "rule_id": "R-002",
+        "rule_version": "1.0",
+        "triggered": true,
+        "observed_values": {
+          "sender_outgoing_120m": 2
+        },
+        "threshold": "sender_outgoing_120m >= 2",
+        "explanation": "Sender acct_A issued 2 transfers within 120 minutes (threshold 2).",
+        "source_record_ids": [
+          "txn_84721"
+        ],
+        "evidence_ids": [
+          "evidence_rr_R-002_84721"
+        ],
+        "trace_id": "trace_run_d179fc6193a4"
+      },
+      {
+        "rule_result_id": "rr_R-003_84721",
+        "rule_id": "R-003",
+        "rule_version": "1.0",
+        "triggered": true,
+        "observed_values": {
+          "device_sharing_max": 3,
+          "device_sharing": {
+            "dev_04": [
+              "acct_B",
+              "acct_C",
+              "acct_D"
+            ],
+            "dev_02": [
+              "acct_F",
+              "acct_G"
+            ],
+            "dev_01": [
+              "acct_K"
+            ],
+            "dev_03": [
+              "acct_L"
+            ]
+          }
+        },
+        "threshold": "device_sharing_max >= 2",
+        "explanation": "Max device sharing is 3 accounts (threshold 2).",
+        "source_record_ids": [
+          "txn_84721"
+        ],
+        "evidence_ids": [
+          "evidence_rr_R-003_84721"
+        ],
+        "trace_id": "trace_run_d179fc6193a4"
+      },
+      {
+        "rule_result_id": "rr_R-004_84721",
+        "rule_id": "R-004",
+        "rule_version": "1.0",
+        "triggered": true,
+        "observed_values": {
+          "phone_sharing_max": 2,
+          "phone_sharing": {
+            "phn_03": [
+              "acct_B",
+              "acct_E"
+            ],
+            "phn_01": [
+              "acct_I",
+              "acct_J"
+            ],
+            "phn_02": [
+              "acct_F",
+              "acct_H"
+            ]
+          }
+        },
+        "threshold": "phone_sharing_max >= 2",
+        "explanation": "Max phone sharing is 2 accounts (threshold 2).",
+        "source_record_ids": [
+          "txn_84721"
+        ],
+        "evidence_ids": [
+          "evidence_rr_R-004_84721"
+        ],
+        "trace_id": "trace_run_d179fc6193a4"
+      },
+      {
+        "rule_result_id": "rr_R-005_84721",
+        "rule_id": "R-005",
+        "rule_version": "1.0",
+        "triggered": true,
+        "observed_values": {
+          "beneficiary_links_max": 2,
+          "beneficiary_links": {
+            "ben_01": [
+              "acct_H",
+              "acct_I"
+            ]
+          }
+        },
+        "threshold": "beneficiary_links_max >= 2",
+        "explanation": "Max beneficiary linkage is 2 accounts (threshold 2).",
+        "source_record_ids": [
+          "txn_84721"
+        ],
+        "evidence_ids": [
+          "evidence_rr_R-005_84721"
+        ],
+        "trace_id": "trace_run_d179fc6193a4"
+      },
+      {
+        "rule_result_id": "rr_R-006_84721",
+        "rule_id": "R-006",
+        "rule_version": "1.0",
+        "triggered": true,
+        "observed_values": {
+          "fan_in_distinct_senders": 3,
+          "fan_in_senders": [
+            "acct_A",
+            "acct_C",
+            "acct_D"
+          ]
+        },
+        "threshold": "fan_in_distinct_senders >= 3",
+        "explanation": "Receiver acct_B has 3 distinct senders (threshold 3).",
+        "source_record_ids": [
+          "txn_84721"
+        ],
+        "evidence_ids": [
+          "evidence_rr_R-006_84721"
+        ],
+        "trace_id": "trace_run_d179fc6193a4"
+      },
+      {
+        "rule_result_id": "rr_R-007_84721",
+        "rule_id": "R-007",
+        "rule_version": "1.0",
+        "triggered": true,
+        "observed_values": {
+          "fan_out_distinct_receivers": 2,
+          "fan_out_receivers": [
+            "acct_B",
+            "acct_C"
+          ]
+        },
+        "threshold": "fan_out_distinct_receivers >= 2",
+        "explanation": "Sender acct_A pays 2 distinct receivers (threshold 2).",
+        "source_record_ids": [
+          "txn_84721"
+        ],
+        "evidence_ids": [
+          "evidence_rr_R-007_84721"
+        ],
+        "trace_id": "trace_run_d179fc6193a4"
+      },
+      {
+        "rule_result_id": "rr_R-008_84721",
+        "rule_id": "R-008",
+        "rule_version": "1.0",
+        "triggered": true,
+        "observed_values": {
+          "merchant_sharing_max": 2,
+          "merchant_sharing": {
+            "merch_01": [
+              "acct_E",
+              "acct_F"
+            ],
+            "merch_02": [
+              "acct_K",
+              "acct_L"
+            ]
+          }
+        },
+        "threshold": "merchant_sharing_max >= 2",
+        "explanation": "Max merchant sharing is 2 accounts (threshold 2).",
+        "source_record_ids": [
+          "txn_84721"
+        ],
+        "evidence_ids": [
+          "evidence_rr_R-008_84721"
+        ],
+        "trace_id": "trace_run_d179fc6193a4"
+      }
+    ]
+  },
+  "risk": {
+    "txn_84721": {
+      "transaction": {
+        "risk_assessment_id": "risk_transaction_84721",
+        "target_id": "txn_84721",
+        "target_type": "transaction",
+        "score": 35,
+        "band": "MODERATE",
+        "score_version": "risk-score-v1",
+        "contributions": [
+          {
+            "rule_id": "R-001",
+            "weight": 15,
+            "triggered": true
+          },
+          {
+            "rule_id": "R-002",
+            "weight": 8,
+            "triggered": true
+          }
+        ],
+        "rule_results": [
+          "rr_R-001_84721",
+          "rr_R-002_84721"
+        ],
+        "evidence_ids": [
+          "evidence_rr_R-001_84721",
+          "evidence_rr_R-002_84721"
+        ],
+        "computed_at": "2026-10-29T20:32:15.807274Z",
+        "trace_id": "trace_run_d179fc6193a4",
+        "limitations": "Deterministic demo risk score from versioned rules over synthetic data. A risk signal is not proof of criminal intent."
+      },
+      "network": {
+        "risk_assessment_id": "risk_network_84721",
+        "target_id": "txn_84721",
+        "target_type": "network",
+        "score": 84,
+        "band": "HIGH",
+        "score_version": "risk-score-v1",
+        "contributions": [
+          {
+            "rule_id": "R-001",
+            "weight": 15,
+            "triggered": true
+          },
+          {
+            "rule_id": "R-002",
+            "weight": 8,
+            "triggered": true
+          },
+          {
+            "rule_id": "R-003",
+            "weight": 12,
+            "triggered": true
+          },
+          {
+            "rule_id": "R-004",
+            "weight": 10,
+            "triggered": true
+          },
+          {
+            "rule_id": "R-005",
+            "weight": 8,
+            "triggered": true
+          },
+          {
+            "rule_id": "R-006",
+            "weight": 8,
+            "triggered": true
+          },
+          {
+            "rule_id": "R-007",
+            "weight": 6,
+            "triggered": true
+          },
+          {
+            "rule_id": "R-008",
+            "weight": 5,
+            "triggered": true
+          }
+        ],
+        "rule_results": [
+          "rr_R-001_84721",
+          "rr_R-002_84721",
+          "rr_R-003_84721",
+          "rr_R-004_84721",
+          "rr_R-005_84721",
+          "rr_R-006_84721",
+          "rr_R-007_84721",
+          "rr_R-008_84721"
+        ],
+        "evidence_ids": [
+          "evidence_rr_R-001_84721",
+          "evidence_rr_R-002_84721",
+          "evidence_rr_R-003_84721",
+          "evidence_rr_R-004_84721",
+          "evidence_rr_R-005_84721",
+          "evidence_rr_R-006_84721",
+          "evidence_rr_R-007_84721",
+          "evidence_rr_R-008_84721"
+        ],
+        "computed_at": "2026-10-29T20:32:15.807874Z",
+        "trace_id": "trace_run_d179fc6193a4",
+        "limitations": "Deterministic demo risk score from versioned rules over synthetic data. A risk signal is not proof of criminal intent."
+      }
+    }
+  },
+  "alerts": [
+    {
+      "alert_id": "alert_84721",
+      "transaction_id": "txn_84721",
+      "title": "HIGH network risk: transaction #84721",
+      "status": "OPEN",
+      "risk_assessment_id": "risk_network_84721",
+      "created_at": "2026-10-29T20:32:15.825280Z",
+      "trace_id": "trace_run_d179fc6193a4"
+    }
+  ],
+  "investigations": [
+    {
+      "investigation_id": "inv_84721",
+      "alert_id": "alert_84721",
+      "transaction_id": "txn_84721",
+      "status": "OPEN",
+      "created_at": "2026-10-29T20:32:15.825280Z",
+      "trace_id": "trace_run_d179fc6193a4"
+    }
+  ],
+  "evidence_packages": {
+    "inv_84721": {
+      "package_id": "evidence_pkg_scn_primary_1.0.0",
+      "scenario_id": "scn_primary",
+      "scenario_version": "1.0.0",
+      "trace_id": "trace_run_d179fc6193a4",
+      "items": [
+        {
+          "evidence_id": "evidence_edge_0001",
+          "evidence_type": "graph_relationship",
+          "title": "acct_A SENT_TO acct_B",
+          "description": "Provenance: evt_demo_84721. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84721"
+          ],
+          "graph_node_ids": [
+            "acct_A",
+            "acct_B"
+          ],
+          "graph_edge_ids": [
+            "edge_0001"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0002",
+          "evidence_type": "graph_relationship",
+          "title": "acct_B USES_DEVICE dev_04",
+          "description": "Provenance: evt_demo_84721. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84721"
+          ],
+          "graph_node_ids": [
+            "acct_B",
+            "dev_04"
+          ],
+          "graph_edge_ids": [
+            "edge_0002"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0003",
+          "evidence_type": "graph_relationship",
+          "title": "acct_B USES_PHONE phn_03",
+          "description": "Provenance: evt_demo_84721. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84721"
+          ],
+          "graph_node_ids": [
+            "acct_B",
+            "phn_03"
+          ],
+          "graph_edge_ids": [
+            "edge_0003"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0004",
+          "evidence_type": "graph_relationship",
+          "title": "acct_C USES_DEVICE dev_04",
+          "description": "Provenance: evt_demo_84722. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84722"
+          ],
+          "graph_node_ids": [
+            "acct_C",
+            "dev_04"
+          ],
+          "graph_edge_ids": [
+            "edge_0004"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0005",
+          "evidence_type": "graph_relationship",
+          "title": "acct_D USES_DEVICE dev_04",
+          "description": "Provenance: evt_demo_84722. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84722"
+          ],
+          "graph_node_ids": [
+            "acct_D",
+            "dev_04"
+          ],
+          "graph_edge_ids": [
+            "edge_0005"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0006",
+          "evidence_type": "graph_relationship",
+          "title": "acct_C SENT_TO acct_D",
+          "description": "Provenance: evt_demo_84722. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84722"
+          ],
+          "graph_node_ids": [
+            "acct_C",
+            "acct_D"
+          ],
+          "graph_edge_ids": [
+            "edge_0006"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0007",
+          "evidence_type": "graph_relationship",
+          "title": "acct_D SENT_TO acct_E",
+          "description": "Provenance: evt_demo_84723. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84723"
+          ],
+          "graph_node_ids": [
+            "acct_D",
+            "acct_E"
+          ],
+          "graph_edge_ids": [
+            "edge_0007"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0008",
+          "evidence_type": "graph_relationship",
+          "title": "acct_E USES_PHONE phn_03",
+          "description": "Provenance: evt_demo_84723. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84723"
+          ],
+          "graph_node_ids": [
+            "acct_E",
+            "phn_03"
+          ],
+          "graph_edge_ids": [
+            "edge_0008"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0009",
+          "evidence_type": "graph_relationship",
+          "title": "acct_E PAID_MERCHANT merch_01",
+          "description": "Provenance: evt_demo_84723. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84723"
+          ],
+          "graph_node_ids": [
+            "acct_E",
+            "merch_01"
+          ],
+          "graph_edge_ids": [
+            "edge_0009"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0010",
+          "evidence_type": "graph_relationship",
+          "title": "acct_F PAID_MERCHANT merch_01",
+          "description": "Provenance: evt_demo_84731. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84731"
+          ],
+          "graph_node_ids": [
+            "acct_F",
+            "merch_01"
+          ],
+          "graph_edge_ids": [
+            "edge_0010"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0011",
+          "evidence_type": "graph_relationship",
+          "title": "acct_F USES_DEVICE dev_02",
+          "description": "Provenance: evt_demo_84731. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84731"
+          ],
+          "graph_node_ids": [
+            "acct_F",
+            "dev_02"
+          ],
+          "graph_edge_ids": [
+            "edge_0011"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0012",
+          "evidence_type": "graph_relationship",
+          "title": "acct_G USES_DEVICE dev_02",
+          "description": "Provenance: evt_demo_84724. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84724"
+          ],
+          "graph_node_ids": [
+            "acct_G",
+            "dev_02"
+          ],
+          "graph_edge_ids": [
+            "edge_0012"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0013",
+          "evidence_type": "graph_relationship",
+          "title": "acct_G SENT_TO acct_H",
+          "description": "Provenance: evt_demo_84724. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84724"
+          ],
+          "graph_node_ids": [
+            "acct_G",
+            "acct_H"
+          ],
+          "graph_edge_ids": [
+            "edge_0013"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0014",
+          "evidence_type": "graph_relationship",
+          "title": "acct_H BENEFICIARY_OF ben_01",
+          "description": "Provenance: evt_demo_84724. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84724"
+          ],
+          "graph_node_ids": [
+            "acct_H",
+            "ben_01"
+          ],
+          "graph_edge_ids": [
+            "edge_0014"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0015",
+          "evidence_type": "graph_relationship",
+          "title": "acct_I BENEFICIARY_OF ben_01",
+          "description": "Provenance: evt_demo_84731. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84731"
+          ],
+          "graph_node_ids": [
+            "acct_I",
+            "ben_01"
+          ],
+          "graph_edge_ids": [
+            "edge_0015"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0016",
+          "evidence_type": "graph_relationship",
+          "title": "acct_I USES_PHONE phn_01",
+          "description": "Provenance: evt_demo_84731. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84731"
+          ],
+          "graph_node_ids": [
+            "acct_I",
+            "phn_01"
+          ],
+          "graph_edge_ids": [
+            "edge_0016"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0017",
+          "evidence_type": "graph_relationship",
+          "title": "acct_J USES_PHONE phn_01",
+          "description": "Provenance: evt_demo_84725. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84725"
+          ],
+          "graph_node_ids": [
+            "acct_J",
+            "phn_01"
+          ],
+          "graph_edge_ids": [
+            "edge_0017"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0018",
+          "evidence_type": "graph_relationship",
+          "title": "acct_J SENT_TO acct_K",
+          "description": "Provenance: evt_demo_84725. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84725"
+          ],
+          "graph_node_ids": [
+            "acct_J",
+            "acct_K"
+          ],
+          "graph_edge_ids": [
+            "edge_0018"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0019",
+          "evidence_type": "graph_relationship",
+          "title": "acct_K PAID_MERCHANT merch_02",
+          "description": "Provenance: evt_demo_84725. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84725"
+          ],
+          "graph_node_ids": [
+            "acct_K",
+            "merch_02"
+          ],
+          "graph_edge_ids": [
+            "edge_0019"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0020",
+          "evidence_type": "graph_relationship",
+          "title": "acct_L PAID_MERCHANT merch_02",
+          "description": "Provenance: evt_demo_84732. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84732"
+          ],
+          "graph_node_ids": [
+            "acct_L",
+            "merch_02"
+          ],
+          "graph_edge_ids": [
+            "edge_0020"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0021",
+          "evidence_type": "graph_relationship",
+          "title": "acct_K USES_DEVICE dev_01",
+          "description": "Provenance: evt_demo_84725. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84725"
+          ],
+          "graph_node_ids": [
+            "acct_K",
+            "dev_01"
+          ],
+          "graph_edge_ids": [
+            "edge_0021"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0022",
+          "evidence_type": "graph_relationship",
+          "title": "acct_L USES_DEVICE dev_03",
+          "description": "Provenance: evt_demo_84732. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84732"
+          ],
+          "graph_node_ids": [
+            "acct_L",
+            "dev_03"
+          ],
+          "graph_edge_ids": [
+            "edge_0022"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0023",
+          "evidence_type": "graph_relationship",
+          "title": "acct_F USES_PHONE phn_02",
+          "description": "Provenance: evt_demo_84731. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84731"
+          ],
+          "graph_node_ids": [
+            "acct_F",
+            "phn_02"
+          ],
+          "graph_edge_ids": [
+            "edge_0023"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0024",
+          "evidence_type": "graph_relationship",
+          "title": "acct_H USES_PHONE phn_02",
+          "description": "Provenance: evt_demo_84724. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84724"
+          ],
+          "graph_node_ids": [
+            "acct_H",
+            "phn_02"
+          ],
+          "graph_edge_ids": [
+            "edge_0024"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0025",
+          "evidence_type": "graph_relationship",
+          "title": "acct_C SENT_TO acct_B",
+          "description": "Provenance: evt_demo_84726. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84726"
+          ],
+          "graph_node_ids": [
+            "acct_C",
+            "acct_B"
+          ],
+          "graph_edge_ids": [
+            "edge_0025"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0026",
+          "evidence_type": "graph_relationship",
+          "title": "acct_D SENT_TO acct_B",
+          "description": "Provenance: evt_demo_84727. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84727"
+          ],
+          "graph_node_ids": [
+            "acct_D",
+            "acct_B"
+          ],
+          "graph_edge_ids": [
+            "edge_0026"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0027",
+          "evidence_type": "graph_relationship",
+          "title": "acct_A SENT_TO acct_C",
+          "description": "Provenance: evt_demo_84728. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84728"
+          ],
+          "graph_node_ids": [
+            "acct_A",
+            "acct_C"
+          ],
+          "graph_edge_ids": [
+            "edge_0027"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0028",
+          "evidence_type": "graph_relationship",
+          "title": "acct_B SENT_TO acct_E",
+          "description": "Provenance: evt_demo_84729. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84729"
+          ],
+          "graph_node_ids": [
+            "acct_B",
+            "acct_E"
+          ],
+          "graph_edge_ids": [
+            "edge_0028"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0029",
+          "evidence_type": "graph_relationship",
+          "title": "acct_F SENT_TO acct_I",
+          "description": "Provenance: evt_demo_84731. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84731"
+          ],
+          "graph_node_ids": [
+            "acct_F",
+            "acct_I"
+          ],
+          "graph_edge_ids": [
+            "edge_0029"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_edge_0030",
+          "evidence_type": "graph_relationship",
+          "title": "acct_L SENT_TO acct_K",
+          "description": "Provenance: evt_demo_84732. Synthetic seeded relationship.",
+          "source_record_ids": [],
+          "event_ids": [
+            "evt_demo_84732"
+          ],
+          "graph_node_ids": [
+            "acct_L",
+            "acct_K"
+          ],
+          "graph_edge_ids": [
+            "edge_0030"
+          ],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_rr_R-001_84721",
+          "evidence_type": "rule_result",
+          "title": "Rule R-001 TRIGGERED",
+          "description": "Observed 48000000 kobo vs threshold 40000000 kobo.",
+          "source_record_ids": [
+            "txn_84721"
+          ],
+          "event_ids": [],
+          "graph_node_ids": [],
+          "graph_edge_ids": [],
+          "rule_result_ids": [
+            "rr_R-001_84721"
+          ],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_rr_R-002_84721",
+          "evidence_type": "rule_result",
+          "title": "Rule R-002 TRIGGERED",
+          "description": "Sender acct_A issued 2 transfers within 120 minutes (threshold 2).",
+          "source_record_ids": [
+            "txn_84721"
+          ],
+          "event_ids": [],
+          "graph_node_ids": [],
+          "graph_edge_ids": [],
+          "rule_result_ids": [
+            "rr_R-002_84721"
+          ],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_rr_R-003_84721",
+          "evidence_type": "rule_result",
+          "title": "Rule R-003 TRIGGERED",
+          "description": "Max device sharing is 3 accounts (threshold 2).",
+          "source_record_ids": [
+            "txn_84721"
+          ],
+          "event_ids": [],
+          "graph_node_ids": [],
+          "graph_edge_ids": [],
+          "rule_result_ids": [
+            "rr_R-003_84721"
+          ],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_rr_R-004_84721",
+          "evidence_type": "rule_result",
+          "title": "Rule R-004 TRIGGERED",
+          "description": "Max phone sharing is 2 accounts (threshold 2).",
+          "source_record_ids": [
+            "txn_84721"
+          ],
+          "event_ids": [],
+          "graph_node_ids": [],
+          "graph_edge_ids": [],
+          "rule_result_ids": [
+            "rr_R-004_84721"
+          ],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_rr_R-005_84721",
+          "evidence_type": "rule_result",
+          "title": "Rule R-005 TRIGGERED",
+          "description": "Max beneficiary linkage is 2 accounts (threshold 2).",
+          "source_record_ids": [
+            "txn_84721"
+          ],
+          "event_ids": [],
+          "graph_node_ids": [],
+          "graph_edge_ids": [],
+          "rule_result_ids": [
+            "rr_R-005_84721"
+          ],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_rr_R-006_84721",
+          "evidence_type": "rule_result",
+          "title": "Rule R-006 TRIGGERED",
+          "description": "Receiver acct_B has 3 distinct senders (threshold 3).",
+          "source_record_ids": [
+            "txn_84721"
+          ],
+          "event_ids": [],
+          "graph_node_ids": [],
+          "graph_edge_ids": [],
+          "rule_result_ids": [
+            "rr_R-006_84721"
+          ],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_rr_R-007_84721",
+          "evidence_type": "rule_result",
+          "title": "Rule R-007 TRIGGERED",
+          "description": "Sender acct_A pays 2 distinct receivers (threshold 2).",
+          "source_record_ids": [
+            "txn_84721"
+          ],
+          "event_ids": [],
+          "graph_node_ids": [],
+          "graph_edge_ids": [],
+          "rule_result_ids": [
+            "rr_R-007_84721"
+          ],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_rr_R-008_84721",
+          "evidence_type": "rule_result",
+          "title": "Rule R-008 TRIGGERED",
+          "description": "Max merchant sharing is 2 accounts (threshold 2).",
+          "source_record_ids": [
+            "txn_84721"
+          ],
+          "event_ids": [],
+          "graph_node_ids": [],
+          "graph_edge_ids": [],
+          "rule_result_ids": [
+            "rr_R-008_84721"
+          ],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        },
+        {
+          "evidence_id": "evidence_txn_84721",
+          "evidence_type": "transaction",
+          "title": "Transaction #84721: \u20a6480,000 acct_A -> acct_B",
+          "description": "Channel MOBILE_APP at 2026-10-27T10:00:00Z. Synthetic demo record.",
+          "source_record_ids": [
+            "txn_84721"
+          ],
+          "event_ids": [
+            "evt_demo_84721"
+          ],
+          "graph_node_ids": [],
+          "graph_edge_ids": [],
+          "rule_result_ids": [],
+          "observed_at": "2026-10-27T10:00:00Z",
+          "trace_id": "trace_run_d179fc6193a4",
+          "synthetic_flag": true,
+          "evidence_version": "1.0"
+        }
+      ],
+      "package_hash": "427a527dd6ef63ea1b7059c2025762b31282863d05fb629134db4dd10af90bdd",
+      "evidence_version": "1.0"
+    }
+  },
+  "cases": [
+    {
+      "case_id": "case_84721",
+      "investigation_id": "inv_84721",
+      "status": "NEW",
+      "created_at": "2026-10-29T20:32:15.825280Z",
+      "updated_at": "2026-10-29T20:32:15.825280Z",
+      "trace_id": "trace_run_d179fc6193a4"
+    }
+  ],
+  "decisions": [],
+  "audits": [
+    {
+      "audit_event_id": "audit_0001",
+      "actor_type": "system",
+      "actor_id": "demo-reset",
+      "action": "scenario.reset",
+      "target_type": "scenario",
+      "target_id": "scn_primary",
+      "previous_state_reference": "",
+      "new_state_reference": "d179fc6193a4440a850c234e60ccc40b",
+      "reason": "Reset to scn_primary v1.0.0",
+      "timestamp": "2026-10-29T20:32:15.829032Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "trace_run_d179fc6193a4"
+    },
+    {
+      "audit_event_id": "audit_0002",
+      "actor_type": "system",
+      "actor_id": "demo-reset",
+      "action": "case.opened",
+      "target_type": "case",
+      "target_id": "case_84721",
+      "previous_state_reference": "",
+      "new_state_reference": "NEW",
+      "reason": "Case opened for primary investigation",
+      "timestamp": "2026-10-29T20:32:15.842663Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "trace_run_d179fc6193a4"
+    },
+    {
+      "audit_event_id": "audit_0003",
+      "actor_type": "service",
+      "actor_id": "ai-adapter",
+      "action": "ai.run.succeeded",
+      "target_type": "agent_run",
+      "target_id": "agentrun_0001",
+      "previous_state_reference": "PENDING",
+      "new_state_reference": "SUCCEEDED",
+      "reason": "Model muse-spark-1.3 validation VALIDATED/VALIDATED",
+      "timestamp": "2026-10-30T05:04:19.413289Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "ae0c91283cca"
+    },
+    {
+      "audit_event_id": "audit_0004",
+      "actor_type": "service",
+      "actor_id": "ai-adapter",
+      "action": "ai.run.succeeded",
+      "target_type": "agent_run",
+      "target_id": "agentrun_0002",
+      "previous_state_reference": "PENDING",
+      "new_state_reference": "SUCCEEDED",
+      "reason": "Model muse-spark-1.3 validation VALIDATED/VALIDATED",
+      "timestamp": "2026-10-30T05:08:03.436980Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "0f08d4805066"
+    },
+    {
+      "audit_event_id": "audit_0005",
+      "actor_type": "human",
+      "actor_id": "investigator",
+      "action": "simulation.run",
+      "target_type": "simulation",
+      "target_id": "sim_0001",
+      "previous_state_reference": "84",
+      "new_state_reference": "84",
+      "reason": "For this counterfactual only, assume the shared device relationship is coincidental. This is a hypothetical test, not a verified fact. Preserve the authoritative baseline risk score.",
+      "timestamp": "2026-10-30T05:23:27.338164Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "624677f8010b"
+    },
+    {
+      "audit_event_id": "audit_0006",
+      "actor_type": "user",
+      "actor_id": "qa_es",
+      "action": "auth.login",
+      "target_type": "session",
+      "target_id": "qa_es",
+      "previous_state_reference": "",
+      "new_state_reference": "investigator",
+      "reason": "demo login",
+      "timestamp": "2026-11-02T14:40:36.966596Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "4ab6fc9cf446"
+    },
+    {
+      "audit_event_id": "audit_0007",
+      "actor_type": "user",
+      "actor_id": "qa_ar",
+      "action": "auth.login",
+      "target_type": "session",
+      "target_id": "qa_ar",
+      "previous_state_reference": "",
+      "new_state_reference": "auditor",
+      "reason": "demo login",
+      "timestamp": "2026-11-02T14:40:37.340532Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "e26ec5ebe602"
+    },
+    {
+      "audit_event_id": "audit_0008",
+      "actor_type": "user",
+      "actor_id": "qa_es",
+      "action": "auth.login",
+      "target_type": "session",
+      "target_id": "qa_es",
+      "previous_state_reference": "",
+      "new_state_reference": "investigator",
+      "reason": "demo login",
+      "timestamp": "2026-11-02T14:41:23.093252Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "bc2686e6cea5"
+    },
+    {
+      "audit_event_id": "audit_0009",
+      "actor_type": "user",
+      "actor_id": "qa_ar",
+      "action": "auth.login",
+      "target_type": "session",
+      "target_id": "qa_ar",
+      "previous_state_reference": "",
+      "new_state_reference": "auditor",
+      "reason": "demo login",
+      "timestamp": "2026-11-02T14:41:23.624775Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "0c20f23ff4ec"
+    },
+    {
+      "audit_event_id": "audit_0010",
+      "actor_type": "user",
+      "actor_id": "qa_es",
+      "action": "auth.login",
+      "target_type": "session",
+      "target_id": "qa_es",
+      "previous_state_reference": "",
+      "new_state_reference": "investigator",
+      "reason": "demo login",
+      "timestamp": "2026-11-02T14:47:40.261121Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "541a97da166b"
+    },
+    {
+      "audit_event_id": "audit_0011",
+      "actor_type": "user",
+      "actor_id": "qa_ar",
+      "action": "auth.login",
+      "target_type": "session",
+      "target_id": "qa_ar",
+      "previous_state_reference": "",
+      "new_state_reference": "auditor",
+      "reason": "demo login",
+      "timestamp": "2026-11-02T14:47:40.697188Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "1e7e993bdb25"
+    },
+    {
+      "audit_event_id": "audit_0012",
+      "actor_type": "user",
+      "actor_id": "qa_es",
+      "action": "auth.login",
+      "target_type": "session",
+      "target_id": "qa_es",
+      "previous_state_reference": "",
+      "new_state_reference": "investigator",
+      "reason": "demo login",
+      "timestamp": "2026-11-02T14:57:25.928995Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "cbef952cfaa5"
+    },
+    {
+      "audit_event_id": "audit_0013",
+      "actor_type": "user",
+      "actor_id": "qa_ar",
+      "action": "auth.login",
+      "target_type": "session",
+      "target_id": "qa_ar",
+      "previous_state_reference": "",
+      "new_state_reference": "auditor",
+      "reason": "demo login",
+      "timestamp": "2026-11-02T14:57:26.337251Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "6c4b6b64a53a"
+    },
+    {
+      "audit_event_id": "audit_0014",
+      "actor_type": "user",
+      "actor_id": "qa_es",
+      "action": "auth.login",
+      "target_type": "session",
+      "target_id": "qa_es",
+      "previous_state_reference": "",
+      "new_state_reference": "investigator",
+      "reason": "demo login",
+      "timestamp": "2026-11-02T15:06:40.023839Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "8c9a4de29f70"
+    },
+    {
+      "audit_event_id": "audit_0015",
+      "actor_type": "user",
+      "actor_id": "qa_ar",
+      "action": "auth.login",
+      "target_type": "session",
+      "target_id": "qa_ar",
+      "previous_state_reference": "",
+      "new_state_reference": "auditor",
+      "reason": "demo login",
+      "timestamp": "2026-11-02T15:06:40.362374Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "775a70ea0b94"
+    },
+    {
+      "audit_event_id": "audit_0016",
+      "actor_type": "user",
+      "actor_id": "qa_es",
+      "action": "auth.logout",
+      "target_type": "session",
+      "target_id": "qa_es",
+      "previous_state_reference": "investigator",
+      "new_state_reference": "",
+      "reason": "demo logout",
+      "timestamp": "2026-11-02T15:06:56.211984Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "257b76675691"
+    },
+    {
+      "audit_event_id": "audit_0017",
+      "actor_type": "user",
+      "actor_id": "qa_es",
+      "action": "auth.login",
+      "target_type": "session",
+      "target_id": "qa_es",
+      "previous_state_reference": "",
+      "new_state_reference": "investigator",
+      "reason": "demo login",
+      "timestamp": "2026-11-02T15:07:03.260771Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "caf4416814be"
+    },
+    {
+      "audit_event_id": "audit_0018",
+      "actor_type": "user",
+      "actor_id": "qa_ar",
+      "action": "auth.login",
+      "target_type": "session",
+      "target_id": "qa_ar",
+      "previous_state_reference": "",
+      "new_state_reference": "auditor",
+      "reason": "demo login",
+      "timestamp": "2026-11-02T15:07:03.659668Z",
+      "trace_id": "trace_run_d179fc6193a4",
+      "request_id": "76a8a108e0c1"
+    }
+  ],
+  "ai_runs": [
+    {
+      "agent_run_id": "agentrun_0001",
+      "provider": "meta",
+      "model_id": "muse-spark-1.3",
+      "prompt_version": "cs-prompt-v2",
+      "followup_question": "",
+      "request_id": "chatcmpl-01a18b31-d668-77ac-8763-d4164d611b35",
+      "trace_id": "trace_run_d179fc6193a4",
+      "evidence_package_id": "evidence_pkg_scn_primary_1.0.0",
+      "evidence_ids_sent": [
+        "evidence_edge_0001",
+        "evidence_edge_0002",
+        "evidence_edge_0003",
+        "evidence_edge_0004",
+        "evidence_edge_0005",
+        "evidence_edge_0006",
+        "evidence_edge_0007",
+        "evidence_edge_0008",
+        "evidence_edge_0009",
+        "evidence_edge_0010",
+        "evidence_edge_0011",
+        "evidence_edge_0012",
+        "evidence_edge_0013",
+        "evidence_edge_0014",
+        "evidence_edge_0015",
+        "evidence_edge_0016",
+        "evidence_edge_0017",
+        "evidence_edge_0018",
+        "evidence_edge_0019",
+        "evidence_edge_0020",
+        "evidence_edge_0021",
+        "evidence_edge_0022",
+        "evidence_edge_0023",
+        "evidence_edge_0024",
+        "evidence_edge_0025",
+        "evidence_edge_0026",
+        "evidence_edge_0027",
+        "evidence_edge_0028",
+        "evidence_edge_0029",
+        "evidence_edge_0030",
+        "evidence_rr_R-001_84721",
+        "evidence_rr_R-002_84721",
+        "evidence_rr_R-003_84721",
+        "evidence_rr_R-004_84721",
+        "evidence_rr_R-005_84721",
+        "evidence_rr_R-006_84721",
+        "evidence_rr_R-007_84721",
+        "evidence_rr_R-008_84721",
+        "evidence_txn_84721"
+      ],
+      "started_at": "2026-10-30T05:03:55.814363Z",
+      "completed_at": "2026-10-30T05:04:19.407462Z",
+      "latency_ms": 23590,
+      "status": "SUCCEEDED",
+      "response_reference": "chatcmpl-01a18b31-d668-77ac-8763-d4164d611b35",
+      "schema_validation_status": "VALIDATED",
+      "evidence_reference_validation_status": "VALIDATED",
+      "error_code": "",
+      "synthetic_data_flag": true,
+      "result": {
+        "summary": "Transaction #84721 was observed as acct_A -> acct_B for \u20a6480,000 via MOBILE_APP at 2026-10-27T10:00:00Z. Rules R-001 through R-008 were recorded as TRIGGERED for this transaction, covering amount, velocity, device/phone/beneficiary/merchant sharing, and fan-in/fan-out counts. Graph evidence shows multiple SENT_TO links and shared devices, phones, beneficiaries and merchants involving accounts A-L, all from synthetic seeded records with the same observed timestamp.",
+        "key_findings": [
+          {
+            "finding": "Primary transfer acct_A SENT_TO acct_B observed as Transaction #84721 for \u20a6480,000 via MOBILE_APP.",
+            "evidence_ids": [
+              "evidence_txn_84721",
+              "evidence_edge_0001"
+            ],
+            "confidence_label": "high",
+            "caveat": "Fact directly stated in synthetic records; no independent corroboration and all records share the same observed_at."
+          },
+          {
+            "finding": "Rule R-001 triggered for 48000000 kobo vs 40000000 kobo threshold, Rule R-002 triggered for sender acct_A issuing 2 transfers within 120 minutes, and Rule R-007 triggered for sender acct_A paying 2 distinct receivers, consistent with observed edges acct_A SENT_TO acct_B and acct_A SENT_TO acct_C.",
+            "evidence_ids": [
+              "evidence_rr_R-001_84721",
+              "evidence_rr_R-002_84721",
+              "evidence_rr_R-007_84721",
+              "evidence_edge_0001",
+              "evidence_edge_0027"
+            ],
+            "confidence_label": "high",
+            "caveat": "Trigger facts are observed; underlying transfer details beyond txn_84721 amounts and timing are not provided in evidence."
+          },
+          {
+            "finding": "Device dev_04 is shared by acct_B, acct_C and acct_D, with Rule R-003 triggered for max device sharing of 3 accounts vs threshold 2.",
+            "evidence_ids": [
+              "evidence_edge_0002",
+              "evidence_edge_0004",
+              "evidence_edge_0005",
+              "evidence_rr_R-003_84721"
+            ],
+            "confidence_label": "high",
+            "caveat": "Sharing is observed as graph relationships only; no device ownership, login, or usage context provided."
+          },
+          {
+            "finding": "Receiver acct_B has observed inbound SENT_TO from acct_A, acct_C and acct_D, with Rule R-006 triggered for 3 distinct senders vs threshold 3; additional links show acct_C SENT_TO acct_D, acct_D SENT_TO acct_E, acct_B SENT_TO acct_E, and acct_C SENT_TO acct_B, plus phone phn_03 shared by acct_B and acct_E with Rule R-004 triggered.",
+            "evidence_ids": [
+              "evidence_edge_0001",
+              "evidence_edge_0025",
+              "evidence_edge_0026",
+              "evidence_edge_0006",
+              "evidence_edge_0007",
+              "evidence_edge_0028",
+              "evidence_edge_0003",
+              "evidence_edge_0008",
+              "evidence_rr_R-006_84721",
+              "evidence_rr_R-004_84721"
+            ],
+            "confidence_label": "medium",
+            "caveat": "Network pattern is observed but all edges share identical observed_at and lack amounts, sequence, or purpose; interpretation as coordinated activity is not established."
+          },
+          {
+            "finding": "Wider graph shows additional shared identifiers: acct_F and acct_G share dev_02, acct_I and acct_J share phn_01, acct_F and acct_H share phn_02, acct_H and acct_I share beneficiary ben_01 with Rule R-005 triggered, acct_E and acct_F share merch_01 and acct_K and acct_L share merch_02 with Rule R-008 triggered, with other links including acct_G SENT_TO acct_H, acct_J SENT_TO acct_K, acct_L SENT_TO acct_K and acct_F SENT_TO acct_I.",
+            "evidence_ids": [
+              "evidence_edge_0009",
+              "evidence_edge_0010",
+              "evidence_edge_0011",
+              "evidence_edge_0012",
+              "evidence_edge_0013",
+              "evidence_edge_0014",
+              "evidence_edge_0015",
+              "evidence_edge_0016",
+              "evidence_edge_0017",
+              "evidence_edge_0018",
+              "evidence_edge_0019",
+              "evidence_edge_0020",
+              "evidence_edge_0023",
+              "evidence_edge_0024",
+              "evidence_edge_0029",
+              "evidence_edge_0030",
+              "evidence_rr_R-005_84721",
+              "evidence_rr_R-008_84721"
+            ],
+            "confidence_label": "medium",
+            "caveat": "Observations are synthetic seeded relationships only; no evidence links these secondary clusters to txn_84721 purpose or timing beyond shared thresholds."
+          }
+        ],
+        "alternative_explanations": [
+          "Shared devices and phones may reflect legitimate household, family, workplace, or shared/public device use rather than common control.",
+          "Multiple transfers and fan-in/fan-out may reflect legitimate peer payments, collections, or business activity.",
+          "Shared merchants and beneficiaries may reflect common popular merchants or family beneficiaries rather than coordination.",
+          "Identical observed timestamps and seeded synthetic patterns may reflect test data construction rather than real-world behavior."
+        ],
+        "missing_information": [
+          "Account holder identities, KYC, and stated relationships or legitimate reasons for sharing devices, phones, beneficiaries, or merchants.",
+          "Full transaction histories, amounts, timestamps, sequencing, channels, and purposes for edges other than txn_84721.",
+          "Device and phone ownership, login/IP logs, and verification status.",
+          "Merchant details, goods/services, and beneficiary relationship context.",
+          "Historical baselines and prior rule performance to assess whether thresholds indicate anomaly."
+        ],
+        "suggested_next_steps": [
+          {
+            "action": "Request authorized human review of accounts acct_A, acct_B, acct_C, acct_D and acct_E including KYC and stated purpose of transfers.",
+            "rationale": "To contextualize fan-in/fan-out and phone/device sharing before any further action.",
+            "evidence_ids": [
+              "evidence_txn_84721",
+              "evidence_edge_0001",
+              "evidence_edge_0025",
+              "evidence_edge_0026",
+              "evidence_edge_0027",
+              "evidence_rr_R-006_84721",
+              "evidence_rr_R-007_84721"
+            ],
+            "requires_human_approval": true
+          },
+          {
+            "action": "Verify device dev_04 and phone phn_03 usage through authorized system logs and holder confirmation.",
+            "rationale": "To determine whether sharing reflects legitimate shared use or requires further review.",
+            "evidence_ids": [
+              "evidence_edge_0002",
+              "evidence_edge_0004",
+              "evidence_edge_0005",
+              "evidence_edge_0003",
+              "evidence_edge_0008",
+              "evidence_rr_R-003_84721",
+              "evidence_rr_R-004_84721"
+            ],
+            "requires_human_approval": true
+          },
+          {
+            "action": "Collect complete transaction records and merchant/beneficiary context for secondary links and shared identifiers.",
+            "rationale": "Evidence provides only single amount and seeded relationships without sequence or purpose.",
+            "evidence_ids": [
+              "evidence_txn_84721",
+              "evidence_edge_0009",
+              "evidence_edge_0010",
+              "evidence_edge_0014",
+              "evidence_edge_0015",
+              "evidence_edge_0019",
+              "evidence_edge_0020",
+              "evidence_rr_R-005_84721",
+              "evidence_rr_R-008_84721"
+            ],
+            "requires_human_approval": true
+          }
+        ],
+        "conclusion": "requires_review",
+        "disclaimer": "Advisory only: analysis uses solely the provided synthetic evidence package for investigation inv_84721, does not compute a risk score or determine intent, and requires authorized human review before any decision."
+      },
+      "structured_output": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 6275,
+        "completion_tokens": 4632,
+        "total_tokens": 10907
+      },
+      "diagnostics": {
+        "content_length": 6488,
+        "top_level_keys": [
+          "alternative_explanations",
+          "conclusion",
+          "disclaimer",
+          "key_findings",
+          "missing_information",
+          "suggested_next_steps",
+          "summary"
+        ],
+        "attempts": 1
+      }
+    },
+    {
+      "agent_run_id": "agentrun_0002",
+      "provider": "meta",
+      "model_id": "muse-spark-1.3",
+      "prompt_version": "cs-prompt-v2-followup",
+      "followup_question": "Using only the validated evidence references in this investigation, identify:  1. Which findings are directly supported by transaction-level evidence? 2. Which findings are supported only by graph relationships? 3. Which claims lack independent timestamps, amounts, ownership records or transaction context? 4. What additional evidence would an investigator need to validate the R-002 velocity finding? 5. Which accounts and relationships should receive priority for further investigation, and why?  Do not invent evidence, infer criminal intent, modify risk scores, create new evidence IDs, or recommend an automatic enforcement action.  Return a structured evidence-gap assessment with confidence levels and exact evidence references. Maintain the conclusion requires_review.",
+      "request_id": "chatcmpl-01a18b35-41d8-76c5-b2d1-6a949e400827",
+      "trace_id": "trace_run_d179fc6193a4",
+      "evidence_package_id": "evidence_pkg_scn_primary_1.0.0",
+      "evidence_ids_sent": [
+        "evidence_edge_0001",
+        "evidence_edge_0002",
+        "evidence_edge_0003",
+        "evidence_edge_0004",
+        "evidence_edge_0005",
+        "evidence_edge_0006",
+        "evidence_edge_0007",
+        "evidence_edge_0008",
+        "evidence_edge_0009",
+        "evidence_edge_0010",
+        "evidence_edge_0011",
+        "evidence_edge_0012",
+        "evidence_edge_0013",
+        "evidence_edge_0014",
+        "evidence_edge_0015",
+        "evidence_edge_0016",
+        "evidence_edge_0017",
+        "evidence_edge_0018",
+        "evidence_edge_0019",
+        "evidence_edge_0020",
+        "evidence_edge_0021",
+        "evidence_edge_0022",
+        "evidence_edge_0023",
+        "evidence_edge_0024",
+        "evidence_edge_0025",
+        "evidence_edge_0026",
+        "evidence_edge_0027",
+        "evidence_edge_0028",
+        "evidence_edge_0029",
+        "evidence_edge_0030",
+        "evidence_rr_R-001_84721",
+        "evidence_rr_R-002_84721",
+        "evidence_rr_R-003_84721",
+        "evidence_rr_R-004_84721",
+        "evidence_rr_R-005_84721",
+        "evidence_rr_R-006_84721",
+        "evidence_rr_R-007_84721",
+        "evidence_rr_R-008_84721",
+        "evidence_txn_84721"
+      ],
+      "started_at": "2026-10-30T05:07:38.139826Z",
+      "completed_at": "2026-10-30T05:08:03.432640Z",
+      "latency_ms": 25291,
+      "status": "SUCCEEDED",
+      "response_reference": "chatcmpl-01a18b35-41d8-76c5-b2d1-6a949e400827",
+      "schema_validation_status": "VALIDATED",
+      "evidence_reference_validation_status": "VALIDATED",
+      "error_code": "",
+      "synthetic_data_flag": true,
+      "result": {
+        "summary": "Only Transaction #84721 acct_A -> acct_B for \u20a6480,000 via MOBILE_APP and its R-001 amount threshold result are directly supported by transaction-level evidence, while R-002 through R-008 and all device/phone/beneficiary/merchant and SENT_TO fan-in/fan-out findings rest only on synthetic graph relationships with identical observed timestamps and no independent amounts or ownership records. Validation of velocity and network findings and prioritized review of central accounts requires additional transaction, timestamp and ownership evidence and authorized human review.",
+        "key_findings": [
+          {
+            "finding": "Transaction #84721 acct_A -> acct_B \u20a6480,000 via MOBILE_APP at 2026-10-27T10:00:00Z is the only transaction-level record observed in the package",
+            "evidence_ids": [
+              "evidence_txn_84721"
+            ],
+            "confidence_label": "high",
+            "caveat": "Single synthetic demo record; no other transaction records with amounts or counterparties provided"
+          },
+          {
+            "finding": "R-001 amount finding is directly supported by transaction-level evidence observing 48000000 kobo vs 40000000 kobo threshold for txn_84721",
+            "evidence_ids": [
+              "evidence_rr_R-001_84721",
+              "evidence_txn_84721"
+            ],
+            "confidence_label": "high",
+            "caveat": "Synthetic threshold comparison limited to this single transaction; no broader amount history"
+          },
+          {
+            "finding": "R-002 velocity finding asserting 2 transfers by acct_A within 120 minutes lacks a second transaction-level record in the package",
+            "evidence_ids": [
+              "evidence_rr_R-002_84721",
+              "evidence_txn_84721"
+            ],
+            "confidence_label": "low",
+            "caveat": "Package contains only source_record txn_84721; no second transfer timestamp, amount or counterparty record observed"
+          },
+          {
+            "finding": "Device-sharing finding is supported only by graph relationships without ownership records: dev_04 linked to acct_B, acct_C, acct_D and dev_02 linked to acct_F, acct_G",
+            "evidence_ids": [
+              "evidence_edge_0002",
+              "evidence_edge_0004",
+              "evidence_edge_0005",
+              "evidence_edge_0011",
+              "evidence_edge_0012",
+              "evidence_rr_R-003_84721"
+            ],
+            "confidence_label": "medium",
+            "caveat": "Synthetic seeded relationships, all with same observed_at, no device ownership or login logs"
+          },
+          {
+            "finding": "Phone-sharing finding is supported only by graph relationships without ownership records: phn_03 linked to acct_B and acct_E, phn_01 to acct_I and acct_J, phn_02 to acct_F and acct_H",
+            "evidence_ids": [
+              "evidence_edge_0003",
+              "evidence_edge_0008",
+              "evidence_edge_0016",
+              "evidence_edge_0017",
+              "evidence_edge_0023",
+              "evidence_edge_0024",
+              "evidence_rr_R-004_84721"
+            ],
+            "confidence_label": "medium",
+            "caveat": "Synthetic seeded relationships, same observed_at, no phone subscription or ownership records"
+          },
+          {
+            "finding": "Beneficiary and merchant sharing findings are supported only by graph relationships without ownership or payment context: ben_01 linked to acct_H and acct_I, merch_01 to acct_E and acct_F, merch_02 to acct_K and acct_L",
+            "evidence_ids": [
+              "evidence_edge_0014",
+              "evidence_edge_0015",
+              "evidence_edge_0009",
+              "evidence_edge_0010",
+              "evidence_edge_0019",
+              "evidence_edge_0020",
+              "evidence_rr_R-005_84721",
+              "evidence_rr_R-008_84721"
+            ],
+            "confidence_label": "medium",
+            "caveat": "Synthetic seeded relationships, same observed_at, no beneficiary ownership or merchant transaction amounts"
+          },
+          {
+            "finding": "Fan-in to acct_B and fan-out from acct_A and other SENT_TO links are supported only by graph relationships without independent transaction amounts or timestamps: acct_A SENT_TO acct_B and acct_C, acct_C SENT_TO acct_B and acct_D, acct_D SENT_TO acct_B and acct_E, plus acct_G SENT_TO acct_H, acct_J SENT_TO acct_K and others",
+            "evidence_ids": [
+              "evidence_edge_0001",
+              "evidence_edge_0025",
+              "evidence_edge_0026",
+              "evidence_edge_0027",
+              "evidence_edge_0006",
+              "evidence_edge_0007",
+              "evidence_edge_0028",
+              "evidence_edge_0013",
+              "evidence_edge_0018",
+              "evidence_edge_0029",
+              "evidence_edge_0030",
+              "evidence_rr_R-006_84721",
+              "evidence_rr_R-007_84721"
+            ],
+            "confidence_label": "medium",
+            "caveat": "Synthetic seeded SENT_TO links, all same observed_at 2026-10-27T10:00:00Z, no amounts except for txn 84721"
+          },
+          {
+            "finding": "All graph relationships lack independent timestamps, amounts, and ownership context because every edge shares the same observed_at and synthetic seeded provenance",
+            "evidence_ids": [
+              "evidence_edge_0001",
+              "evidence_edge_0006",
+              "evidence_edge_0013",
+              "evidence_edge_0018",
+              "evidence_edge_0025",
+              "evidence_txn_84721"
+            ],
+            "confidence_label": "low",
+            "caveat": "Identical timestamps indicate seeding artifact, not observed sequence; no ledger amounts or control records"
+          },
+          {
+            "finding": "Accounts acct_A and acct_B with relationships to acct_C and acct_D via shared dev_04 and converging SENT_TO links should receive priority for further investigation because they are the subject of the observed transaction and the asserted fan-in/fan-out and device-sharing triggers",
+            "evidence_ids": [
+              "evidence_txn_84721",
+              "evidence_edge_0001",
+              "evidence_edge_0025",
+              "evidence_edge_0026",
+              "evidence_edge_0027",
+              "evidence_edge_0002",
+              "evidence_edge_0004",
+              "evidence_edge_0005",
+              "evidence_rr_R-002_84721",
+              "evidence_rr_R-006_84721",
+              "evidence_rr_R-007_84721"
+            ],
+            "confidence_label": "medium",
+            "caveat": "Priority is for investigative sequencing only; no determination of intent and no independent corroboration beyond synthetic links"
+          }
+        ],
+        "alternative_explanations": [
+          "Shared devices or phones could reflect legitimate shared access, household, agent-assisted use, or data quality issues rather than common control, but package has no ownership logs to distinguish",
+          "Identical observed_at across all edges suggests synthetic seeding artifact rather than real event sequence",
+          "Single \u20a6480,000 transfer could have a legitimate purpose consistent with channel MOBILE_APP, but package has no purpose or customer information",
+          "Apparent fan-in to acct_B and fan-out from acct_A could reflect an incomplete graph view missing legitimate counterparties and time distribution"
+        ],
+        "missing_information": [
+          "Second transfer record for acct_A within 120 minutes needed to validate R-002, including transaction IDs, timestamps, amounts, counterparties and channels",
+          "Independent event timestamps and amounts for each SENT_TO graph link including acct_C->acct_D, acct_D->acct_E, acct_G->acct_H, acct_J->acct_K, acct_C->acct_B, acct_D->acct_B, acct_A->acct_C, acct_B->acct_E, acct_F->acct_I, acct_L->acct_K",
+          "Account ownership and control records linking accounts A-L to devices dev_04, dev_02, dev_01, dev_03, phones phn_01, phn_02, phn_03, beneficiary ben_01 and merchants merch_01, merch_02",
+          "Transaction context for beneficiary ben_01 and merchants merch_01 and merch_02 including payment amounts, timestamps and purpose",
+          "Device and phone usage logs, KYC records, and channel authentication data to distinguish shared control from coincidental or seeded linkage"
+        ],
+        "suggested_next_steps": [
+          {
+            "action": "Retrieve and human-review full 120-minute transaction history for acct_A to validate R-002 velocity assertion with timestamps, amounts and counterparties",
+            "rationale": "Package asserts 2 transfers but provides only txn_84721, so velocity cannot be validated without additional records",
+            "evidence_ids": [
+              "evidence_rr_R-002_84721",
+              "evidence_txn_84721"
+            ],
+            "requires_human_approval": true
+          },
+          {
+            "action": "Collect ledger records with amounts and independent timestamps for SENT_TO links converging on acct_B and diverging from acct_A including acct_C->acct_B, acct_D->acct_B and acct_A->acct_C",
+            "rationale": "Fan-in and fan-out findings currently rely only on synthetic graph links with same observed_at and no amounts",
+            "evidence_ids": [
+              "evidence_edge_0025",
+              "evidence_edge_0026",
+              "evidence_edge_0027",
+              "evidence_edge_0001",
+              "evidence_rr_R-006_84721",
+              "evidence_rr_R-007_84721"
+            ],
+            "requires_human_approval": true
+          },
+          {
+            "action": "Verify ownership and control of shared identifiers dev_04, dev_02, phn_03, phn_02, phn_01 through KYC, subscription and device log review with focus on acct_A, acct_B, acct_C, acct_D first",
+            "rationale": "Device and phone sharing findings lack ownership records needed to interpret common use",
+            "evidence_ids": [
+              "evidence_edge_0002",
+              "evidence_edge_0004",
+              "evidence_edge_0005",
+              "evidence_edge_0003",
+              "evidence_edge_0008",
+              "evidence_rr_R-003_84721",
+              "evidence_rr_R-004_84721"
+            ],
+            "requires_human_approval": true
+          },
+          {
+            "action": "Verify beneficiary ben_01 linkage to acct_H and acct_I and merchant linkages merch_01 to acct_E/acct_F and merch_02 to acct_K/acct_L with payment records and ownership documentation",
+            "rationale": "Beneficiary and merchant sharing findings have no payment context or ownership to assess significance",
+            "evidence_ids": [
+              "evidence_edge_0014",
+              "evidence_edge_0015",
+              "evidence_edge_0009",
+              "evidence_edge_0010",
+              "evidence_edge_0019",
+              "evidence_edge_0020",
+              "evidence_rr_R-005_84721",
+              "evidence_rr_R-008_84721"
+            ],
+            "requires_human_approval": true
+          }
+        ],
+        "conclusion": "requires_review",
+        "disclaimer": "Advisory only based solely on synthetic seeded evidence package; no criminal intent determined, no risk score computed, requires authorized human review before any action"
+      },
+      "structured_output": true,
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 6617,
+        "completion_tokens": 5331,
+        "total_tokens": 11948
+      },
+      "diagnostics": {
+        "content_length": 8931,
+        "top_level_keys": [
+          "alternative_explanations",
+          "conclusion",
+          "disclaimer",
+          "key_findings",
+          "missing_information",
+          "suggested_next_steps",
+          "summary"
+        ],
+        "attempts": 1
+      }
+    }
+  ],
+  "simulations": [
+    {
+      "simulation_id": "sim_0001",
+      "scenario_id": "scn_primary",
+      "target_transaction_id": "txn_84721",
+      "ignored_edge_ids": [
+        "edge_0002"
+      ],
+      "assumption": "For this counterfactual only, assume the shared device relationship is coincidental. This is a hypothetical test, not a verified fact. Preserve the authoritative baseline risk score.",
+      "baseline_score": 84,
+      "simulated_score": 84,
+      "baseline_band": "HIGH",
+      "simulated_band": "HIGH",
+      "limitations": "Hypothetical recomputation on a filtered edge set. Not a prediction of real-world crime.",
+      "created_at": "2026-10-30T05:23:27.331638Z",
+      "trace_id": "trace_run_d179fc6193a4"
+    }
+  ],
+  "audit_counter": 18,
+  "replay": {
+    "cursor": 0
+  },
+  "created_at": "2026-10-29T20:32:15.825280Z",
+  "revoked_sessions": [
+    {
+      "nonce": "ab53a18253407db7",
+      "exp": 1793675200
+    }
+  ]
+}

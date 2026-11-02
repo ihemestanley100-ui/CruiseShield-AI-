@@ -7,6 +7,8 @@ import {
   postAiFollowup,
   type AgentRun,
 } from "../lib/api";
+import { useTranslation } from "../lib/i18n/context";
+import { useCan } from "../lib/session";
 
 const CLIENT_TIMEOUT_MS = 35000;
 
@@ -22,6 +24,7 @@ interface Followup {
 }
 
 function RunResult({ run }: { run: AgentRun }) {
+  const { t } = useTranslation("ai");
   return (
     <>
       <p>{run.result.summary}</p>
@@ -30,7 +33,8 @@ function RunResult({ run }: { run: AgentRun }) {
           <li key={index} className="finding">
             <div>{finding.finding}</div>
             <p className="muted">
-              Confidence: {finding.confidence_label} ·{" "}
+              {t("confidencePre")}
+              {finding.confidence_label} ·{" "}
               {(finding.evidence_ids ?? []).join(", ")}
             </p>
             <p className="muted">{finding.caveat}</p>
@@ -39,7 +43,7 @@ function RunResult({ run }: { run: AgentRun }) {
       </ul>
       {(run.result.missing_information ?? []).length > 0 && (
         <>
-          <p className="muted">Missing information:</p>
+          <p className="muted">{t("missingTitle")}</p>
           <ul className="stack">
             {(run.result.missing_information ?? []).map((item, index) => (
               <li key={index} className="muted">
@@ -51,7 +55,7 @@ function RunResult({ run }: { run: AgentRun }) {
       )}
       {(run.result.alternative_explanations ?? []).length > 0 && (
         <>
-          <p className="muted">Alternative explanations:</p>
+          <p className="muted">{t("altTitle")}</p>
           <ul className="stack">
             {(run.result.alternative_explanations ?? []).map((item, index) => (
               <li key={index} className="muted">
@@ -61,12 +65,15 @@ function RunResult({ run }: { run: AgentRun }) {
           </ul>
         </>
       )}
-      <p className="muted">Conclusion: {run.result.conclusion}</p>
+      <p className="muted">{t("conclusionLine", { c: run.result.conclusion })}</p>
       <p className="muted">{run.result.disclaimer}</p>
       <p className="muted">
-        {run.model_id} · {run.latency_ms} ms · schema{" "}
-        {run.schema_validation_status} · refs{" "}
-        {run.evidence_reference_validation_status} · run{" "}
+        {t("metaPre", {
+          model: run.model_id,
+          ms: run.latency_ms,
+          s: run.schema_validation_status,
+          r: run.evidence_reference_validation_status,
+        })}
         <code>{run.agent_run_id}</code>
       </p>
     </>
@@ -74,6 +81,10 @@ function RunResult({ run }: { run: AgentRun }) {
 }
 
 export function AiPanel({ invId }: { invId: string }) {
+  // J4: roles without ai_run see analysis disabled (backend enforces).
+  const runnable = useCan("ai_run");
+  const { t } = useTranslation("ai");
+  const { t: tCommon } = useTranslation("common");
   const [state, setState] = useState<AiState>({ kind: "idle" });
   const [followups, setFollowups] = useState<Followup[]>([]);
   const [question, setQuestion] = useState("");
@@ -81,11 +92,17 @@ export function AiPanel({ invId }: { invId: string }) {
   const [askError, setAskError] = useState("");
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const controller = useRef<AbortController | null>(null);
+  // J3-P4: follow-ups get their own timeout/abort pair so a hung
+  // follow-up can never outlive the panel or clash with analysis.
+  const askTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const askController = useRef<AbortController | null>(null);
 
   useEffect(
     () => () => {
       if (timer.current) clearTimeout(timer.current);
       controller.current?.abort();
+      if (askTimer.current) clearTimeout(askTimer.current);
+      askController.current?.abort();
     },
     []
   );
@@ -107,7 +124,7 @@ export function AiPanel({ invId }: { invId: string }) {
         if (next.signal.aborted) {
           setState({
             kind: "error",
-            message: "Request timed out or was cancelled.",
+            message: t("timedOut"),
           });
           return;
         }
@@ -118,34 +135,36 @@ export function AiPanel({ invId }: { invId: string }) {
               ? `${err.code}: ${err.message}`
               : err instanceof Error
                 ? err.message
-                : "request failed",
+                : tCommon("requestFailed"),
         });
       });
   };
 
   return (
     <section className="card" aria-labelledby="ai-h" aria-live="polite">
-      <h2 id="ai-h">Analyze with Muse Spark</h2>
-      <p className="muted">
-        Read-only explanation of the evidence package. The model cannot change
-        risk scores or authorize actions.
-      </p>
+      <h2 id="ai-h">{t("panelTitle")}</h2>
+      <p className="muted">{t("panelBlurb")}</p>
+      {!runnable && (
+        <p className="muted" role="note">
+          {t("cannotRun")}
+        </p>
+      )}
       {state.kind === "idle" && (
         <p>
-          <button type="button" onClick={run}>
-            Run AI analysis
+          <button type="button" onClick={run} disabled={!runnable}>
+            {t("runAnalysis")}
           </button>
         </p>
       )}
-      {state.kind === "loading" && <p className="muted">Calling model…</p>}
+      {state.kind === "loading" && <p className="muted">{t("calling")}</p>}
       {state.kind === "error" && (
         <>
           <div className="alert error" role="alert">
             {state.message}
           </div>
           <p>
-            <button type="button" onClick={run}>
-              Retry
+            <button type="button" onClick={run} disabled={!runnable}>
+              {tCommon("retry")}
             </button>
           </p>
         </>
@@ -157,7 +176,7 @@ export function AiPanel({ invId }: { invId: string }) {
             {followups.map((f) => (
               <div key={f.run.agent_run_id} className="finding">
                 <p>
-                  <strong>Q: {f.question}</strong>
+                  <strong>{t("qLine", { q: f.question })}</strong>
                 </p>
                 <RunResult run={f.run} />
               </div>
@@ -170,8 +189,17 @@ export function AiPanel({ invId }: { invId: string }) {
               if (q === "" || asking) return;
               setAsking(true);
               setAskError("");
-              postAiFollowup(invId, q)
+              askController.current?.abort();
+              const next = new AbortController();
+              askController.current = next;
+              if (askTimer.current) clearTimeout(askTimer.current);
+              askTimer.current = setTimeout(
+                () => next.abort(),
+                CLIENT_TIMEOUT_MS
+              );
+              postAiFollowup(invId, q, next.signal)
                 .then((runResult) => {
+                  if (askTimer.current) clearTimeout(askTimer.current);
                   setFollowups((prev) => [
                     ...prev,
                     { question: q, run: runResult },
@@ -179,12 +207,15 @@ export function AiPanel({ invId }: { invId: string }) {
                   setQuestion("");
                 })
                 .catch((err: unknown) => {
+                  if (askTimer.current) clearTimeout(askTimer.current);
                   setAskError(
-                    err instanceof ApiError
-                      ? `${err.code}: ${err.message}`
-                      : err instanceof Error
-                        ? err.message
-                        : "request failed"
+                    next.signal.aborted
+                      ? t("timedOut")
+                      : err instanceof ApiError
+                        ? `${err.code}: ${err.message}`
+                        : err instanceof Error
+                          ? err.message
+                          : tCommon("requestFailed")
                   );
                 })
                 .finally(() => setAsking(false));
@@ -192,7 +223,7 @@ export function AiPanel({ invId }: { invId: string }) {
           >
             <p>
               <label htmlFor="ai-followup">
-                Ask a follow-up about this evidence
+                {t("askLabel")}
               </label>
               <br />
               <input
@@ -200,7 +231,7 @@ export function AiPanel({ invId }: { invId: string }) {
                 type="text"
                 value={question}
                 onChange={(ev) => setQuestion(ev.target.value)}
-                placeholder="e.g. Why is dev_04 shared across accounts?"
+                placeholder={t("askPh")}
                 className="text-input"
               />
             </p>
@@ -212,9 +243,9 @@ export function AiPanel({ invId }: { invId: string }) {
             <p>
               <button
                 type="submit"
-                disabled={asking || question.trim() === ""}
+                disabled={asking || question.trim() === "" || !runnable}
               >
-                {asking ? "Asking…" : "Ask follow-up"}
+                {asking ? t("asking") : t("askBtn")}
               </button>
             </p>
           </form>

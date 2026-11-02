@@ -99,6 +99,18 @@ describe("CommandKpis", () => {
     ).toBe("/network/txn_84721");
   });
 
+  it("pins the derived network-vs-transaction uplift (J3-P10)", () => {
+    render(
+      <CommandKpis
+        detail={detailFixture()}
+        graph={graphFixture()}
+        graphPending={false}
+      />
+    );
+    // 84 network − 35 transaction = +49, labeled as derived, never stored.
+    expect(screen.getByText(/\+49 vs transaction-only/)).toBeTruthy();
+  });
+
   it("shows honest states when the graph is pending or missing", () => {
     const { rerender } = render(
       <CommandKpis

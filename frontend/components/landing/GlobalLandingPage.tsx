@@ -18,6 +18,7 @@ import {
 } from "./LandingPanels";
 import { CapabilityStrip, GlobalMetrics } from "./LandingStrips";
 import { WebGLFallback } from "./WebGLFallback";
+import { useTranslation } from "../../lib/i18n/context";
 
 const GlobalHeroScene = dynamic(
   () => import("./GlobalHeroScene").then((mod) => mod.GlobalHeroScene),
@@ -25,6 +26,7 @@ const GlobalHeroScene = dynamic(
 );
 
 export function GlobalLandingPage() {
+  const { t } = useTranslation("landing");
   const [motion, setMotion] = useState<"full" | "reduced">("full");
   const [paused, setPaused] = useState(false);
   const blipRef = useRef<(() => void) | null>(null);
@@ -77,9 +79,8 @@ export function GlobalLandingPage() {
       </main>
       <footer className="landing-footer">
         <p className="muted">
-          Demonstration experience · synthetic data · illustrative network
-          visuals ·{" "}
-          <a href="/demo">Enter the interactive demo</a>
+          {t("footerDemo")}
+          <a href="/demo">{t("footerLink")}</a>
         </p>
       </footer>
     </div>

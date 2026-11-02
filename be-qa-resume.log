@@ -1,0 +1,61 @@
+INFO:     Started server process [1128]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8010 (Press CTRL+C to quit)
+INFO:     127.0.0.1:54823 - "GET /api/v1/auth/mode HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54824 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54825 - "GET /api/v1/alerts HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:54851 - "POST /api/v1/auth/login HTTP/1.1" 422 Unprocessable Content
+INFO:     127.0.0.1:54852 - "POST /api/v1/auth/login HTTP/1.1" 422 Unprocessable Content
+INFO:     127.0.0.1:54853 - "GET /api/v1/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:54854 - "GET /api/v1/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:54869 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54871 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54884 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54885 - "POST /api/v1/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54925 - "GET /api/v1/alerts HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:54927 - "GET /api/v1/investigations/inv_84721 HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:54925 - "GET /api/v1/graph/txn_84721 HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:54928 - "GET /api/v1/cases/case_84721 HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:54927 - "GET /api/v1/cases/case_84721/audit HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:54926 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54930 - "GET /api/v1/auth/mode HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54930 - "GET /api/v1/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:54930 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54930 - "GET /api/v1/replay/scn_primary?cursor=0 HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:54999 - "GET /api/v1/alerts HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:54999 - "GET /api/v1/investigations/inv_84721 HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:55001 - "GET /api/v1/graph/txn_84721 HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:55002 - "GET /api/v1/cases/case_84721 HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:55003 - "GET /api/v1/cases/case_84721/audit HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:55000 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55004 - "GET /api/v1/auth/mode HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55007 - "GET /api/v1/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:55007 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55007 - "GET /api/v1/replay/scn_primary?cursor=0 HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:55068 - "GET /api/v1/alerts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55069 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55070 - "GET /api/v1/investigations/inv_84721 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55071 - "GET /api/v1/graph/txn_84721 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55073 - "GET /api/v1/cases/case_84721 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55074 - "GET /api/v1/cases/case_84721/audit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55068 - "GET /api/v1/auth/mode HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55068 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55068 - "GET /api/v1/replay/scn_primary?cursor=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55068 - "GET /api/v1/replay/scn_primary?cursor=11 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55131 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55132 - "GET /api/v1/investigations/inv_84721 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55130 - "GET /api/v1/alerts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55134 - "GET /api/v1/cases/case_84721 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55133 - "GET /api/v1/graph/txn_84721 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55135 - "GET /api/v1/cases/case_84721/audit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55131 - "GET /api/v1/auth/mode HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55147 - "GET /api/v1/cases/case_84721 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55146 - "GET /api/v1/graph/txn_84721 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55148 - "GET /api/v1/cases/case_84721/audit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55145 - "GET /api/v1/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55149 - "GET /api/v1/replay/scn_primary?cursor=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55149 - "GET /api/v1/replay/scn_primary?cursor=11 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55194 - "GET /api/v1/alerts HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:55195 - "OPTIONS /api/v1/cases/case_84721/decision HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:55196 - "GET /api/v1/auth/mode HTTP/1.1" 200 OK

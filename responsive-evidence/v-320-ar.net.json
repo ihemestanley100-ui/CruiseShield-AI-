@@ -1,0 +1,5 @@
+[
+  "t=1103ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/investigations/inv_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=1104ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/cases/case_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=1104ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/network/txn_84721?_rsc=yrUa8X5BJbbbszh9"
+]

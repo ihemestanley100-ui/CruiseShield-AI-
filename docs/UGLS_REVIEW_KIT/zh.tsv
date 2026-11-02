@@ -1,0 +1,575 @@
+# locale: zh (MACHINE-DRAFTED — human review pending)
+# version: 1.2.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
+# columns: key | en_source | draft | origin(direct=translated,fallback=English shown) | same_as_source | en_vars | draft_vars | vars_ok
+key	en_source	draft	origin	same_as_source	en_vars	draft_vars	vars_ok
+ai.altTitle	Alternative explanations:	其他解释：	direct	false			true
+ai.askBtn	Ask follow-up	提问	direct	false			true
+ai.askLabel	Ask a follow-up about this evidence	就此证据提出后续问题	direct	false			true
+ai.askPh	e.g. Why is dev_04 shared across accounts?	例如：为什么 dev_04 在多个账户间共享？	direct	false			true
+ai.asking	Asking…	正在提问…	direct	false			true
+ai.calling	Calling model…	正在调用模型…	direct	false			true
+ai.cannotRun	Your role cannot run AI analysis.	您的角色无法运行 AI 分析。	direct	false			true
+ai.conclusionLine	Conclusion: {c}	结论：{c}	direct	false	c	c	true
+ai.confidencePre	Confidence: 	置信度：	direct	false			true
+ai.metaPre	{model} · {ms} ms · schema {s} · refs {r} · run 	{model} · {ms} 毫秒 · 架构 {s} · 引用 {r} · 运行 	direct	false	model,ms,r,s	model,ms,r,s	true
+ai.missingTitle	Missing information:	缺失信息：	direct	false			true
+ai.panelBlurb	Read-only explanation of the evidence package. The model cannot change risk scores or authorize actions.	证据包的只读说明。模型无法更改风险评分或授权操作。	direct	false			true
+ai.panelTitle	Analyze with Muse Spark	Muse Spark 分析	direct	false			true
+ai.qLine	Q: {q}	问：{q}	direct	false	q	q	true
+ai.runAnalysis	Run AI analysis	运行 AI 分析	direct	false			true
+ai.timedOut	Request timed out or was cancelled.	请求超时或已取消。	direct	false			true
+audit.auditEmpty	No audit events recorded for this case.	本案暂无审计事件记录。	direct	false			true
+audit.auditLabel	Audit trail	审计追踪	direct	false			true
+audit.auditTitle	Audit trail	审计追踪	direct	false			true
+audit.caption	Every recorded action with actor, state change, and reason.	每项操作均记录执行者、状态变更和原因。	direct	false			true
+audit.events.one	{count} audit event.	{count} 条审计事件。	direct	false	count	count	true
+audit.events.other	{count} audit events.	{count} 条审计事件。	direct	false	count	count	true
+audit.thAction	Action	操作	direct	false			true
+audit.thActor	Actor	执行者	direct	false			true
+audit.thEvent	Event	事件	direct	false			true
+audit.thReason	Reason	原因	direct	false			true
+audit.thState	State change	状态变更	direct	false			true
+audit.thTime	Time	时间	direct	false			true
+auth.blurb	This hosted demo is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	此演示受保护。请使用为本次评估提供的调查员凭据登录。仅限合成数据。	direct	false			true
+auth.invalid	Invalid username or password.	用户名或密码无效。	direct	false			true
+auth.password	Password	密码	direct	false			true
+auth.rateLimited	Too many login attempts. Wait a minute and try again.	登录尝试次数过多。请等待一分钟后重试。	direct	false			true
+auth.signIn	Sign in	登录	direct	false			true
+auth.signingIn	Signing in…	正在登录…	direct	false			true
+auth.title	Demo sign in	演示登录	direct	false			true
+auth.unreachable	Backend unreachable. Check the demo server and retry.	无法连接后端。请检查演示服务器后重试。	direct	false			true
+auth.username	Username	用户名	direct	false			true
+case.advisory	Advisory only: Muse Spark analysis explains evidence and never constitutes a human decision, nor changes risk scores or case status.	仅供参考：Muse Spark 分析解释证据，不构成人工决策，也不更改风险评分或案件状态。	direct	false			true
+case.aiAssessment	AI assessment	AI 评估	direct	false			true
+case.assessEmpty	No AI investigation assessment is available yet.	暂无 AI 调查评估。	direct	false			true
+case.assessLabel	AI Investigation Assessment	AI 调查评估	direct	false			true
+case.assessTitle	AI Investigation Assessment	AI 调查评估	direct	false			true
+case.auditCrumb	Audit trail	审计追踪	direct	false			true
+case.auditHeadPre	Audit trail — Case 	审计追踪——案件 	direct	false			true
+case.auditIntro	Every recorded action on this case, in recorded order. 	本案所有已记录操作，按记录顺序排列。	direct	false			true
+case.auditLoading	Loading audit events…	正在加载审计事件…	direct	false			true
+case.auditTitle	Audit trail	审计追踪	direct	false			true
+case.auditTrail	Audit trail	审计追踪	direct	false			true
+case.backToCase	Back to case	返回案件	direct	false			true
+case.caseTitleDash	— 	——	direct	false			true
+case.caseTitlePre	Case 	案件 	direct	false			true
+case.conclusionPre	Conclusion: 	结论：	direct	false			true
+case.confidencePre	Confidence: 	置信度：	direct	false			true
+case.crumb	Case {id}	案件 {id}	direct	false	id	id	true
+case.decidedByPre	by {actor} ·	由 {actor} ·	direct	false	actor	actor	true
+case.decisionHistory	Decision history	决策历史	direct	false			true
+case.histEmpty	No human decisions recorded yet.	尚未记录人工决策。	direct	false			true
+case.histLabel	Decision history	决策历史	direct	false			true
+case.histTitle	Decision history	决策历史	direct	false			true
+case.humanDecision	Human decision	人工决策	direct	false			true
+case.invPre	Investigation 	调查 	direct	false			true
+case.loading	Loading case…	正在加载案件…	direct	false			true
+case.missingInfo	Missing information: {list}	缺失信息：{list}	direct	false	list	list	true
+case.notFoundPost	 exists in the backend.	。	direct	false			true
+case.notFoundPre	No case 	后端中不存在案件	direct	false			true
+case.notFoundTitle	Case not found	未找到案件	direct	false			true
+case.openAudit	Open full audit trail	打开完整审计追踪	direct	false			true
+case.overview	Overview	概览	direct	false			true
+case.runMetaPost	· {ms} ms · schema {s} · refs {r})	· {ms} 毫秒 · 架构 {s} · 引用 {r}）	direct	false	ms,r,s	ms,r,s	true
+case.runMetaPre	({model} · run 	（{model} · 运行 	direct	false	model	model	true
+case.title	Case {id}	案件 {id}	direct	false	id	id	true
+case.transitionsEmpty	none (terminal state, or refreshing…)	无（终态，或正在刷新…）	direct	false			true
+case.transitionsPre	Allowed transitions: 	允许的转换：	direct	false			true
+case.updatedPre	· updated	· 更新于	direct	false			true
+command.activityEmpty	No audit events recorded yet.	尚未记录审计事件。	direct	false			true
+command.activityEvents.one	{count} audit event	{count} 条审计事件	direct	false	count	count	true
+command.activityEvents.other	{count} audit events	{count} 条审计事件	direct	false	count	count	true
+command.activityMore	 — showing latest {n}	——显示最新 {n} 条	direct	false	n	n	true
+command.activityTitle	Recent activity	近期动态	direct	false			true
+command.briefAdvisory	Advisory only: explains evidence and never constitutes a human decision, nor changes risk scores or case status.	仅供参考：解释证据，不构成人工决策，也不更改风险评分或案件状态。	direct	false			true
+command.briefConclusion	Conclusion: {c}	结论：{c}	direct	false	c	c	true
+command.briefEmpty	No Muse Spark analysis is available yet.	暂无 Muse Spark 分析。	direct	false			true
+command.briefMetaPost	· {ms} ms · schema {s} · refs {f}	· {ms} 毫秒 · 架构 {s} · 引用 {f}	direct	false	f,ms,s	f,ms,s	true
+command.briefMetaPre	{m} · run 	{m} · 运行 	direct	false	m	m	true
+command.briefMissing	Missing information: {list}	缺失信息：{list}	direct	false	list	list	true
+command.briefTitle	Muse Spark brief	Muse Spark 简报	direct	false			true
+command.caseStatusLine	{case} · {status}	{case} · {status}	direct	true	case,status	case,status	true
+command.confPre	Confidence: 	置信度：	direct	false			true
+command.edgesLabel	edges	条边	direct	false			true
+command.evPackH	Evidence package	证据包	direct	false			true
+command.evRecords	evidence records	条证据记录	direct	false			true
+command.execTitle	Executive overview	执行概览	direct	false			true
+command.featAudit	Audit Trail	审计追踪	direct	false			true
+command.featAuditDesc	System and analyst activity.	系统与分析员动态。	direct	false			true
+command.featAuditFoot	Full history	完整历史	direct	false			true
+command.featCases	Cases	案件	direct	false			true
+command.featCasesDesc	Case status and human decisions.	案件状态与人工决策。	direct	false			true
+command.featEv	Evidence	证据	direct	false			true
+command.featEvDesc	Linked evidence and provenance.	关联证据与来源。	direct	false			true
+command.featEvDown	Unavailable	不可用	direct	false			true
+command.featEvFoot	{n} records	{n} 条记录	direct	false	n	n	true
+command.featGraphDown	Graph unavailable	图谱不可用	direct	false			true
+command.featGraphFoot	{a} nodes · {b} edges	{a} 个节点 · {b} 条边	direct	false	a,b	a,b	true
+command.featInv	Investigations	调查	direct	false			true
+command.featInvDesc	Scores, rules, evidence and AI analysis.	评分、规则、证据与 AI 分析。	direct	false			true
+command.featNet	Network Explorer	网络浏览器	direct	false			true
+command.featNetDesc	Accounts, devices, phones and merchants.	账户、设备、电话与商户。	direct	false			true
+command.featReplay	Replay & Simulation	重放与模拟	direct	false			true
+command.featReplayDesc	Recreate events and test what-if scenarios.	重现事件并测试假设场景。	direct	false			true
+command.featReplayFoot	Deterministic replay	确定性重放	direct	false			true
+command.featTitle	Explore	探索	direct	false			true
+command.fullExplanations	Full explanations on the investigation	在调查中查看完整解释	direct	false			true
+command.kpiActive	Active investigations	进行中的调查	direct	false			true
+command.kpiAi	AI analysis runs	AI 分析运行	direct	false			true
+command.kpiDecisions	Human decisions	人工决策	direct	false			true
+command.kpiEvidence	Evidence records	证据记录	direct	false			true
+command.kpiHigh	High-risk investigations	高风险调查	direct	false			true
+command.kpiRiskTitle	Risk intelligence	风险智能	direct	false			true
+command.kpiTxn	Transactions monitored	受监控交易	direct	false			true
+command.linkedTo	Linked to {id}	关联至 {id}	direct	false	id	id	true
+command.loadingNet	Loading network…	正在加载网络…	direct	false			true
+command.needsAction	{case} · {status} — requires analyst action	{case} · {status}——需要分析员处理	direct	false	case,status	case,status	true
+command.netBandLine	Network band {b}	网络等级 {b}	direct	false	b	b	true
+command.netDown	Network data unavailable.	网络数据不可用。	direct	false			true
+command.netH	Investigation network	调查网络	direct	false			true
+command.netRiskH	Network risk	网络风险	direct	false			true
+command.noRuns	No runs recorded	暂无运行记录	direct	false			true
+command.nodesLabel	nodes	个节点	direct	false			true
+command.openCaseAudit	Open case audit trail	打开案件审计追踪	direct	false			true
+command.openEvidence	Open evidence	打开证据	direct	false			true
+command.openFullExplorer	Open full network explorer	打开完整网络浏览器	direct	false			true
+command.openNetExplorer	Open network explorer	打开网络浏览器	direct	false			true
+command.packagePre	Package 	证据包 	direct	false			true
+command.previewAria	Network preview: {a} of {b} nodes shown	网络预览：显示 {b} 个节点中的 {a} 个	direct	false	a,b	a,b	true
+command.previewCounts	{a} nodes, {b} edges in the investigation graph. Preview shows {c} nodes and {d} relationships.	调查图谱中有 {a} 个节点、{b} 条边。预览显示 {c} 个节点和 {d} 个关系。	direct	false	a,b,c,d	a,b,c,d	true
+command.previewEmpty	No relationships in this graph.	此图谱中暂无关系。	direct	false			true
+command.previewProvErrors	Provenance errors: {list}	来源错误：{list}	direct	false	list	list	true
+command.previewTitle	Network preview	网络预览	direct	false			true
+command.provErrors	Provenance errors: {n}	来源错误：{n}	direct	false	n	n	true
+command.riskAria	Risk {score} of 100, {band}	风险 {score}/100，{band}	direct	false	band,score	band,score	true
+command.rulesAria	{a} of {b} rules triggered	{b} 条规则中已触发 {a} 条	direct	false	a,b	a,b	true
+command.rulesCounts	{a} of {b} rules triggered.	{b} 条规则中已触发 {a} 条。	direct	false	a,b	a,b	true
+command.rulesH	Rules triggered	已触发规则	direct	false			true
+command.rulesOf	{a} of {b}	{b} 条中的 {a} 条	direct	false	a,b	a,b	true
+command.rulesTitle	Rule triggers	规则触发	direct	false			true
+command.runFromInv	Run analysis from the investigation	从调查运行分析	direct	false			true
+command.txnOnlyH	Transaction-only risk	仅交易风险	direct	false			true
+command.txnOnlyNote	This transfer on its own, before network context. The network score above is authoritative for the investigation.	网络背景之前的单笔转账。上述网络评分是本次调查的权威评分。	direct	false			true
+command.txnOnlyScope	{v} · single-transfer scope	{v} · 单笔转账范围	direct	false	v	v	true
+command.txnTitleLine	Transaction #{n}	交易 #{n}	direct	false	n	n	true
+command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derived difference)	{v} · 网络范围 · {sign}{u}（相对仅交易；派生差值）	direct	false	sign,u,v	sign,u,v	true
+command.versionedRules	Versioned deterministic rules	版本化确定性规则	direct	false			true
+common.breadcrumb	Breadcrumb	面包屑导航	direct	false			true
+common.closeDialog	Close dialog	关闭对话框	direct	false			true
+common.loading	Loading…	正在加载…	direct	false			true
+common.none	none	无	direct	false			true
+common.noneYet	None yet	暂无	direct	false			true
+common.notAvailable	Not available	不可用	direct	false			true
+common.present	present	当前	direct	false			true
+common.requestFailed	request failed	请求失败	direct	false			true
+common.retry	Retry	重试	direct	false			true
+common.timelineEmpty	No events.	暂无事件。	direct	false			true
+common.unknown	unknown	未知	direct	false			true
+common.unknownModel	unknown model	未知模型	direct	false			true
+common.unknownTime	unknown time	未知时间	direct	false			true
+decision.actorLabel	Analyst ID	分析员 ID	direct	false			true
+decision.decisionLabel	Decision	决策	direct	false			true
+decision.readOnly	Your role is read-only: decisions are disabled.	您的角色为只读：决策已禁用。	direct	false			true
+decision.reasonLabel	Reason (required)	原因（必填）	direct	false			true
+decision.reasonRequired	A reason is required before recording a decision.	记录决策前须填写原因。	direct	false			true
+decision.record	Record decision	记录决策	direct	false			true
+decision.recording	Recording…	正在记录…	direct	false			true
+decision.selectFirst	Select a decision before recording.	请先选择一项决策再记录。	direct	false			true
+decision.selectPlaceholder	Select a decision…	选择一项决策…	direct	false			true
+decision.targetLabel	Move case to	将案件移至	direct	false			true
+decision.terminal	This case is in a terminal state; no further transitions are allowed.	此案件处于终态；不允许进一步转换。	direct	false			true
+decision.title	Human decision	人工决策	direct	false			true
+demo.activityDown	Activity unavailable	动态不可用	direct	false			true
+demo.aiBriefDown	AI brief unavailable	AI 简报不可用	direct	false			true
+demo.backendStatus	Backend status	后端状态	direct	false			true
+demo.checkedAt	Checked {url}…	已检查 {url}…	direct	false	url	url	true
+demo.execOverview	Executive overview	执行概览	direct	false			true
+demo.execOverviewDown	Executive overview unavailable	执行概览不可用	direct	false			true
+demo.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	金融犯罪很少出现在单笔交易中。CruiseShield AI 将可疑交易、账户、设备、受益人和商户连接成可解释的智能网络。	direct	false			true
+demo.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	其确定性风险引擎识别信号，Meta AI 帮助调查员解读证据，重放与模拟探索假设场景，人类决策始终可问责、可审计。	direct	false			true
+demo.museBrief	Muse Spark brief	Muse Spark 简报	direct	false			true
+demo.networkPreview	Network preview	网络预览	direct	false			true
+demo.networkPreviewDown	Network preview unavailable	网络预览不可用	direct	false			true
+demo.recentActivity	Recent activity	近期动态	direct	false			true
+demo.replayDown	Replay unavailable.	重放不可用。	direct	false			true
+demo.retryTitle	Retry {title}	重试{title}	direct	false	title	title	true
+demo.riskIntel	Risk intelligence	风险智能	direct	false			true
+demo.riskIntelDown	Risk intelligence unavailable	风险智能不可用	direct	false			true
+demo.startBackendPost	) and press retry.	）后按重试。	direct	false			true
+demo.startBackendPre	Start the backend (	启动后端（	direct	false			true
+demo.systemStatus	System Status	系统状态	direct	false			true
+demo.systemStatusDown	System status unavailable	系统状态不可用	direct	false			true
+evidence.clearSearch	Clear search	清除搜索	direct	false			true
+evidence.emptyFilter	No evidence items match this filter.	没有匹配的证据。	direct	false			true
+evidence.emptySearch	No evidence items match this search.	没有与此搜索匹配的证据。	direct	false			true
+evidence.filterAll	all	全部	direct	false			true
+evidence.filterByType	Filter by type	按类型筛选	direct	false			true
+evidence.hideProv	Hide provenance	隐藏来源	direct	false			true
+evidence.pkgTitle	Evidence package ({a} of {b})	证据包（共 {b} 条中的 {a} 条）	direct	false	a,b	a,b	true
+evidence.provEdges	Graph edges	图谱边	direct	false			true
+evidence.provEvents	Events	事件	direct	false			true
+evidence.provRules	Rule results	规则结果	direct	false			true
+evidence.searchLabel	Search evidence	搜索证据	direct	false			true
+evidence.searchPh	Filter by ID, type, title, or description	按 ID、类型、标题或描述筛选	direct	false			true
+evidence.showProv	Show provenance	显示来源	direct	false			true
+graph.animSpeed	Animation speed	动画速度	direct	false			true
+graph.countsLine	Showing {a} of {b} nodes, {c} of {d} edges.	显示 {b} 个节点中的 {a} 个，{d} 条边中的 {c} 条。	direct	false	a,b,c,d	a,b,c,d	true
+graph.detailEvidence	Evidence: 	证据：	direct	false			true
+graph.detailProv	Provenance: 	来源：	direct	false			true
+graph.detailSource	Source: 	来源：	direct	false			true
+graph.detailValidArrow	→	→	direct	true			true
+graph.detailValidPost	· Trace: 	· 追踪：	direct	false			true
+graph.detailValidPre	Valid:	有效：	direct	false			true
+graph.droppedEdges.one	{count} edge hidden: endpoint unknown ({ids}).	{count} 条边已隐藏：端点未知（{ids}）。	direct	false	count,ids	count,ids	true
+graph.droppedEdges.other	{count} edges hidden: endpoint unknown ({ids}).	{count} 条边已隐藏：端点未知（{ids}）。	direct	false	count,ids	count,ids	true
+graph.edgeLabel	Edge {id}: {s} {r} {t}	边 {id}：{s} {r} {t}	direct	false	id,r,s,t	id,r,s,t	true
+graph.entityFilters	Entity type filters	实体类型筛选	direct	false			true
+graph.entityLegend	Entity legend	实体图例	direct	false			true
+graph.fit	Fit to screen	适应屏幕	direct	false			true
+graph.focusIsolated	Focus has no connections in the current filter.	焦点在当前筛选项下暂无连接。	direct	false			true
+graph.graphTitle	Network graph	网络图谱	direct	false			true
+graph.hideLabels	Hide labels	隐藏标签	direct	false			true
+graph.legendNote	Shapes + labels identify types (never color alone). Ring = graph steps from focus, not risk.	形状 + 标签标识类型（绝不仅靠颜色）。圆环 = 距焦点的图谱步数，非风险。	direct	false			true
+graph.nodeFocusSuffix	, orbit focus	，轨道焦点	direct	false			true
+graph.orbitFocusBadge	· orbit focus	· 轨道焦点	direct	false			true
+graph.orbitalCounts	Focus: {focus} · Showing {a} of {b} nodes, {c} of {d} edges.	焦点：{focus} · 显示 {b} 个节点中的 {a} 个，{d} 条边中的 {c} 条。	direct	false	a,b,c,d,focus	a,b,c,d,focus	true
+graph.orbitalLabel	Orbital graph	轨道图谱	direct	false			true
+graph.orbitalNote	Synthetic demo data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	合成演示数据。圆环与动态仅为布局——不表示风险、有罪或优先级。	direct	false			true
+graph.orbitalSvg	Orbital graph focused on {focus}: {a} nodes, {b} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.	以 {focus} 为焦点的轨道图谱：{a} 个节点，{b} 条边。Tab 定位节点和边，回车选择，方向键平移。	direct	false	a,b,focus	a,b,focus	true
+graph.orbitalTitle	Orbital explorer	轨道浏览器	direct	false			true
+graph.orbitalViewControls	Orbital view controls	轨道视图控制	direct	false			true
+graph.pauseAnim	Pause animation	暂停动画	direct	false			true
+graph.pin	Pin as orbit focus	固定为轨道焦点	direct	false			true
+graph.playAnim	Play animation	播放动画	direct	false			true
+graph.reducedMotionPause	Paused by default: reduced-motion preference detected.	默认已暂停：检测到减少动态偏好。	direct	false			true
+graph.relFilters	Relationship filters	关系筛选	direct	false			true
+graph.relationships.one	{count} relationship	{count} 个关系	direct	false	count	count	true
+graph.relationships.other	{count} relationships	{count} 个关系	direct	false	count	count	true
+graph.resetView	Reset view	重置视图	direct	false			true
+graph.sectionLabel	Network graph	网络图谱	direct	false			true
+graph.selectPrompt	Select a node or edge for details.	选择节点或边以查看详情。	direct	false			true
+graph.showLabels	Show labels	显示标签	direct	false			true
+graph.speed	Speed	速度	direct	false			true
+graph.svgLabel	Network graph: {a} nodes, {b} edges. Use Tab to reach nodes and edges, Enter to select, arrow keys on the graph to pan.	网络图谱：{a} 个节点，{b} 条边。使用 Tab 定位节点和边，回车选择，在图谱上使用方向键平移。	direct	false	a,b	a,b	true
+graph.tableCaption	Every relationship with provenance and evidence references.	每条关系均附来源与证据引用。	direct	false			true
+graph.tableCounts	{a} nodes, {b} edges — the complete record behind the graph above.	{a} 个节点，{b} 条边——上图背后的完整记录。	direct	false	a,b	a,b	true
+graph.tableEmpty	No relationships in this graph.	此图谱中暂无关系。	direct	false			true
+graph.tableLabel	Relationship table	关系表	direct	false			true
+graph.tableTitle	All relationships	全部关系	direct	false			true
+graph.thEdge	Edge	边	direct	false			true
+graph.thEvidence	Evidence	证据	direct	false			true
+graph.thProv	Provenance events	来源事件	direct	false			true
+graph.thRel	Relationship	关系	direct	false			true
+graph.thSource	Source	来源	direct	false			true
+graph.thTarget	Target	目标	direct	false			true
+graph.unpin	Unpin focus	取消焦点	direct	false			true
+graph.viewControls	Graph view controls	图谱视图控制	direct	false			true
+graph.zoomIn	Zoom in	放大	direct	false			true
+graph.zoomOut	Zoom out	缩小	direct	false			true
+intel.accountCount.one	{count} account	{count} 个账户	direct	false	count	count	true
+intel.accountCount.other	{count} accounts	{count} 个账户	direct	false	count	count	true
+intel.addressPre	address: 	地址：	direct	false			true
+intel.candidateFindings.one	{count} finding	{count} 项发现	direct	false	count	count	true
+intel.candidateFindings.other	{count} findings	{count} 项发现	direct	false	count	count	true
+intel.candidateH	Candidate risk intelligence	候选风险智能	direct	false			true
+intel.candidateOff	Candidate engine risk-intelligence-v2-candidate is OFF (default). Authoritative engine: risk-score-v1. Candidate findings never replace v1 scores.	候选引擎 risk-intelligence-v2-candidate 处于关闭状态（默认）。权威引擎：risk-score-v1。候选发现绝不替代 v1 评分。	direct	false			true
+intel.candidateOnPost	, no numeric score ({note}). v1 remains authoritative.	，无数字评分（{note}）。v1 仍为权威。	direct	false	note	note	true
+intel.candidateOnPre	Candidate engine enabled: 	候选引擎已启用：	direct	false			true
+intel.deviceH	Device	设备	direct	false			true
+intel.evidencePre	Evidence: 	证据：	direct	false			true
+intel.findingsCount.one	{count} finding	{count} 项发现	direct	false	count	count	true
+intel.findingsCount.other	{count} findings	{count} 项发现	direct	false	count	count	true
+intel.findingsH	Intelligence findings	智能发现	direct	false			true
+intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic demo values only.	固定参照，非经验指纹。属性：仅声明的合成演示值。	direct	false			true
+intel.geoDisclaimer	IP-derived locations are approximate and never proof of physical presence. No GPS collection exists (permission: unavailable).	IP 派生位置为近似值，绝不能证明实际身处。不存在 GPS 采集（权限：不可用）。	direct	false			true
+intel.geoH	Geolocation	地理位置	direct	false			true
+intel.intelDown	Intelligence unavailable for this investigation.	本次调查暂无智能数据。	direct	false			true
+intel.intelTitle	Device, IP & location intelligence	设备、IP 与位置智能	direct	false			true
+intel.ipH	IP & network	IP 与网络	direct	false			true
+intel.ispLabel	ISP/ASN	ISP/ASN	direct	true			true
+intel.limitsLine	Limits: {list}	限制：{list}	direct	false	list	list	true
+intel.noDevice	No device observations. (unknown)	暂无设备观测。（未知）	direct	false			true
+intel.noFindings	No findings. (insufficient evidence)	暂无发现。（证据不足）	direct	false			true
+intel.noGeo	No location observations. (unknown)	暂无位置观测。（未知）	direct	false			true
+intel.noIp	No IP observations. (unknown)	暂无 IP 观测。（未知）	direct	false			true
+intel.noLinkage	No transaction linkage. (unknown)	暂无交易关联。（未知）	direct	false			true
+intel.obsCount.one	{count} observation	{count} 次观测	direct	false	count	count	true
+intel.obsCount.other	{count} observations	{count} 次观测	direct	false	count	count	true
+intel.observedOnly	— observed	——已观测	direct	false			true
+intel.observedPost	· source {s}	· 来源 {s}	direct	false	s	s	true
+intel.observedPre	Observed	已观测	direct	false			true
+intel.provMeta	· provenance {p} · confidence {c} · freshness {f}	· 来源 {p} · 置信度 {c} · 新鲜度 {f}	direct	false	c,f,p	c,f,p	true
+intel.repLabel	Reputation	声誉	direct	false			true
+intel.reviewLine	Human review: {r}	人工审核：{r}	direct	false	r	r	true
+intel.seeBackend	see backend	查看后端	direct	false			true
+intel.sharedDevice	— shared device	——共享设备	direct	false			true
+intel.statusLine	{findings} · {iso} · synthetic demo data.	{findings} · {iso} · 合成演示数据。	direct	false	findings,iso	findings,iso	true
+intel.syntheticTag	· synthetic demo	· 合成演示	direct	false			true
+intel.unknownShort	(unknown)	（未知）	direct	false			true
+intel.vpnLabel	VPN/proxy/Tor	VPN/代理/Tor	direct	false			true
+investigation.aiAnalysis	AI analysis	AI 分析	direct	false			true
+investigation.casePost	· status {status} (read-only in this batch)	· 状态 {status}（本批次只读）	direct	false	status	status	true
+investigation.casePre	Case 	案件 	direct	false			true
+investigation.crumb	Investigation {id}	调查 {id}	direct	false	id	id	true
+investigation.evidence	Evidence	证据	direct	false			true
+investigation.evidenceLabel	Evidence: 	证据：	direct	false			true
+investigation.intelligence	Intelligence	智能	direct	false			true
+investigation.loading	Loading investigation…	正在加载调查…	direct	false			true
+investigation.notFoundPost	 exists in the backend.	。	direct	false			true
+investigation.notFoundPre	No investigation 	后端中不存在调查	direct	false			true
+investigation.notFoundTitle	Investigation not found	未找到调查	direct	false			true
+investigation.notTriggered	not triggered	未触发	direct	false			true
+investigation.overview	Overview	概览	direct	false			true
+investigation.overviewLinePre	{sender} → {receiver} · channel {channel} ·	{sender} → {receiver} · 渠道 {channel} ·	direct	false	channel,receiver,sender	channel,receiver,sender	true
+investigation.riskLine	network risk · transaction-only {score}/100 {band} · {version}	网络风险 · 仅交易 {score}/100 {band} · {version}	direct	false	band,score,version	band,score,version	true
+investigation.title	Investigation {id}	调查 {id}	direct	false	id	id	true
+investigation.triggered	triggered	已触发	direct	false			true
+investigation.txnTitle	Transaction #{n}	交易 #{n}	direct	false	n	n	true
+investigation.whyEmpty	No rule results returned for this assessment.	本次评估未返回规则结果。	direct	false			true
+investigation.whyRisk	Why this risk?	为何存在此风险？	direct	false			true
+investigation.whyRiskLink	Why this risk	为何存在此风险	direct	false			true
+landing.beneficiaries	Built for fraud investigators, compliance teams, and financial institutions fighting money laundering and scams.	为反欺诈调查员、合规团队以及打击洗钱和诈骗的金融机构打造。	direct	false			true
+landing.brandName	CruiseShield AI™	CruiseShield AI™	direct	true			true
+landing.capSubs.0	Suspicious Patterns	可疑模式	direct	false			true
+landing.capSubs.1	Behaviour and Network	行为与网络	direct	false			true
+landing.capSubs.2	Device Linkage	设备关联	direct	false			true
+landing.capSubs.3	Network Signals	网络信号	direct	false			true
+landing.capSubs.4	Global Context	全球背景	direct	false			true
+landing.capSubs.5	Relationship Mapping	关系映射	direct	false			true
+landing.capSubs.6	Case Management	案件管理	direct	false			true
+landing.capSubs.7	Explainable Insights	可解释洞察	direct	false			true
+landing.capSubs.8	Deterministic Scoring	确定性评分	direct	false			true
+landing.capSubs.9	Full Traceability	全程可追溯	direct	false			true
+landing.capTitle	One platform, ten intelligence layers	一个平台，十层智能	direct	false			true
+landing.capTitles.0	Transaction Monitoring	交易监控	direct	false			true
+landing.capTitles.1	Account Intelligence	账户智能	direct	false			true
+landing.capTitles.2	Device Analytics	设备分析	direct	false			true
+landing.capTitles.3	IP Intelligence	IP 智能	direct	false			true
+landing.capTitles.4	Geolocation Analysis	地理位置分析	direct	false			true
+landing.capTitles.5	Network Graph	网络图谱	direct	false			true
+landing.capTitles.6	Investigations	调查	direct	false			true
+landing.capTitles.7	AI Intelligence	AI 智能	direct	false			true
+landing.capTitles.8	Risk Engine	风险引擎	direct	false			true
+landing.capTitles.9	Evidence & Audit	证据与审计	direct	false			true
+landing.controlsAmbient	Ambient sound	环境音	direct	false			true
+landing.cta	Explore CruiseShield AI™	探索 CruiseShield AI™	direct	false			true
+landing.ctaSub	Enter the Interactive Demo Experience	进入交互式演示体验	direct	false			true
+landing.enterDemo	Enter Demo	进入演示	direct	false			true
+landing.eyebrow	Global Financial Intelligence	全球金融智能	direct	false			true
+landing.fallbackNote	Interactive 3D is unavailable in this browser. The full demo experience remains open.	此浏览器不支持交互式 3D。完整演示体验仍然可用。	direct	false			true
+landing.footerDemo	Demonstration experience · synthetic data · illustrative network visuals · 	演示体验 · 合成数据 · 示意网络视觉 · 	direct	false			true
+landing.footerLine	One Platform. A Safer Financial Future. For Everyone.	一个平台。更安全的金融未来。为了每一个人。	direct	false			true
+landing.footerLink	Enter the interactive demo	进入交互式演示	direct	false			true
+landing.fullMotion	Full motion	完整动态	direct	false			true
+landing.h1	A Safer Financial World	更安全的金融世界	direct	false			true
+landing.home	CruiseShield AI home	CruiseShield AI 首页	direct	false			true
+landing.illustrative	Illustrative Network View	示意网络视图	direct	false			true
+landing.intelItems.0	Transaction Monitoring	交易监控	direct	false			true
+landing.intelItems.1	Account Intelligence	账户智能	direct	false			true
+landing.intelItems.2	Device Intelligence	设备智能	direct	false			true
+landing.intelItems.3	IP Intelligence	IP 智能	direct	false			true
+landing.intelItems.4	Geolocation Intelligence	地理位置智能	direct	false			true
+landing.intelItems.5	Network Graph	网络图谱	direct	false			true
+landing.intelItems.6	AI Investigation	AI 调查	direct	false			true
+landing.intelItems.7	Risk Analysis	风险分析	direct	false			true
+landing.intelItems.8	Evidence and Audit	证据与审计	direct	false			true
+landing.intelNote	Demonstration capabilities · synthetic data	演示功能 · 合成数据	direct	false			true
+landing.intelStatus	Demo	演示	direct	false			true
+landing.intelTitle	Global Intelligence	全球智能	direct	false			true
+landing.intelligenceModules	Intelligence modules	智能模块	direct	false			true
+landing.journey.0	DETECT	检测	direct	false			true
+landing.journey.1	CONNECT	关联	direct	false			true
+landing.journey.2	INVESTIGATE	调查	direct	false			true
+landing.journey.3	EXPLAIN	解释	direct	false			true
+landing.journey.4	VERIFY	验证	direct	false			true
+landing.journey.5	SIMULATE	模拟	direct	false			true
+landing.journey.6	DECIDE	决策	direct	false			true
+landing.journey.7	AUDIT	审计	direct	false			true
+landing.journeyLabel	Investigation workflow	调查工作流	direct	false			true
+landing.metricSubs.0	Illustrative Global Coverage	示意全球覆盖	direct	false			true
+landing.metricSubs.1	Country and Regional Intelligence	国家与区域智能	direct	false			true
+landing.metricSubs.2	Intelligence Correlation	智能关联	direct	false			true
+landing.metricSubs.3	Explainable Investigation	可解释调查	direct	false			true
+landing.metricTitles.0	Global Reach	全球覆盖	direct	false			true
+landing.metricTitles.1	Jurisdictional Context	司法管辖背景	direct	false			true
+landing.metricTitles.2	Multi-Layer	多层	direct	false			true
+landing.metricTitles.3	Human Oversight	人工监督	direct	false			true
+landing.moduleLines.0.0	Deterministic Scoring	确定性评分	direct	false			true
+landing.moduleLines.0.1	Cross-Border Risk	跨境风险	direct	false			true
+landing.moduleLines.1.0	Explainable Insights	可解释洞察	direct	false			true
+landing.moduleLines.1.1	Human Oversight	人工监督	direct	false			true
+landing.moduleLines.2.0	Regional Intelligence	区域智能	direct	false			true
+landing.moduleLines.2.1	Cross-Border Relationships	跨境关系	direct	false			true
+landing.moduleLines.3.0	Proactive Protection	主动防护	direct	false			true
+landing.moduleLines.3.1	Financial Crime Intelligence	金融犯罪智能	direct	false			true
+landing.moduleLines.4.0	Privacy	隐私	direct	false			true
+landing.moduleLines.4.1	Governance	治理	direct	false			true
+landing.moduleLines.4.2	Enterprise Architecture	企业架构	direct	false			true
+landing.moduleTitles.0	Risk Intelligence	风险智能	direct	false			true
+landing.moduleTitles.1	AI Analysis	AI 分析	direct	false			true
+landing.moduleTitles.2	Global Network	全球网络	direct	false			true
+landing.moduleTitles.3	Cyber Defense	网络防御	direct	false			true
+landing.moduleTitles.4	Secure Infrastructure	安全基础设施	direct	false			true
+landing.modulesNote	Illustrative module concepts · capabilities vary by deployment	模块概念为示意 · 功能因部署而异	direct	false			true
+landing.offWord	Off	关	direct	false			true
+landing.onWord	On	开	direct	false			true
+landing.pauseScene	Pause scene	暂停场景	direct	false			true
+landing.platformPrinciples	Platform principles	平台原则	direct	false			true
+landing.platformQualities	Platform qualities	平台特性	direct	false			true
+landing.problem	Financial crime hides in disconnected transactions. CruiseShield AI connects them — deterministic risk scoring, relationship graphs, and evidence-grounded AI explanations, with a human investigator deciding.	金融犯罪隐藏在互不关联的交易中。CruiseShield AI 将它们连接起来——确定性风险评分、关系图谱和基于证据的 AI 解释，由人类调查员作出决策。	direct	false			true
+landing.reduceMotion	Reduce motion	减少动态	direct	false			true
+landing.regions.0	North America	北美	direct	false			true
+landing.regions.1	South America	南美	direct	false			true
+landing.regions.2	Europe	欧洲	direct	false			true
+landing.regions.3	Africa	非洲	direct	false			true
+landing.regions.4	Middle East	中东	direct	false			true
+landing.regions.5	Asia Pacific	亚太	direct	false			true
+landing.regions.6	Global Oceans	全球海洋	direct	false			true
+landing.regions.7	Cross-Border Corridors	跨境通道	direct	false			true
+landing.regionsNote	Simulated regional signals · not live monitoring	模拟区域信号 · 非实时监控	direct	false			true
+landing.regionsTitle	Global Intelligence Regions	全球智能区域	direct	false			true
+landing.replayLink	try replay & simulation	试用重放与模拟	direct	false			true
+landing.resumeScene	Resume scene	恢复场景	direct	false			true
+landing.sceneMotion	Scene motion	场景动态	direct	false			true
+landing.signals.0	Secure	安全	direct	false			true
+landing.signals.1	Intelligent	智能	direct	false			true
+landing.signals.2	Global	全球	direct	false			true
+landing.signals.3	Auditable	可审计	direct	false			true
+landing.soundLabel	Sound	声音	direct	false			true
+landing.stripNote	Cards open the matching live demo screen · 	卡片将打开对应的实时演示界面 · 	direct	false			true
+landing.tagline	The Financial Crime Immune System™	The Financial Crime Immune System™	direct	true			true
+landing.volumeLabel	Volume	音量	direct	false			true
+nav.aiIntelligence	AI Intelligence	AI 智能	direct	false			true
+nav.auditTrail	Audit Trail	审计追踪	direct	false			true
+nav.brand	CruiseShield AI	CruiseShield AI	direct	true			true
+nav.cases	Cases	案件	direct	false			true
+nav.closeNav	Close navigation	关闭导航	direct	false			true
+nav.commandCenter	Command Center	指挥中心	direct	false			true
+nav.demoRole	demo role	演示角色	direct	false			true
+nav.evidence	Evidence	证据	direct	false			true
+nav.exploreNetwork	Explore Network	探索网络	direct	false			true
+nav.home	CruiseShield AI home	CruiseShield AI 首页	direct	false			true
+nav.investigations	Investigations	调查	direct	false			true
+nav.investigator	Investigator	调查员	direct	false			true
+nav.networkExplorer	Network Explorer	网络浏览器	direct	false			true
+nav.primary	Primary	主要	direct	false			true
+nav.quickActions	Quick Actions	快捷操作	direct	false			true
+nav.replaySimulation	Replay & Simulation	重放与模拟	direct	false			true
+nav.roleDemo	{role} · demo	{role} · 演示	direct	false	role	role	true
+nav.runSimulation	Run Simulation	运行模拟	direct	false			true
+nav.signOut	Sign out	退出登录	direct	false			true
+nav.signOutEverywhere	Sign out everywhere	在所有位置退出	direct	false			true
+nav.signOutEverywhereTitle	End this session on every device and browser	在所有设备和浏览器上结束此会话	direct	false			true
+nav.synthetic	Synthetic demo data	合成演示数据	direct	false			true
+nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
+nav.toggleNav	Toggle navigation	切换导航	direct	false			true
+nav.viewAuditTrail	View Audit Trail	查看审计追踪	direct	false			true
+network.countsLine	{nodes} nodes, {edges} edges · provenance errors: {n}	{nodes} 个节点，{edges} 条边 · 来源错误：{n}	direct	false	edges,n,nodes	edges,n,nodes	true
+network.crumb	Network {id}	网络 {id}	direct	false	id	id	true
+network.emptyGraph	This transaction has no network graph in the backend.	该交易在后端中没有网络图谱。	direct	false			true
+network.flat	Flat (fallback)	平面（后备）	direct	false			true
+network.headTitle	Network explorer — {id}	网络浏览器——{id}	direct	false	id	id	true
+network.loading	Loading network graph…	正在加载网络图谱…	direct	false			true
+network.notFoundPost	 exists in the backend.	。	direct	false			true
+network.notFoundPre	No transaction 	后端中不存在交易	direct	false			true
+network.notFoundTitle	Transaction not found	未找到交易	direct	false			true
+network.orbital	Orbital	轨道	direct	false			true
+network.overlayDown	Intelligence overlay unavailable.	智能覆盖层不可用。	direct	false			true
+network.overlayLine	Intelligence overlay (derived, synthetic): {nodes} nodes, {edges} edges	智能覆盖层（派生，合成）：{nodes} 个节点，{edges} 条边	direct	false	edges,nodes	edges,nodes	true
+network.overlayMissing	· unavailable: {list}	· 不可用：{list}	direct	false	list	list	true
+network.provErrors	Provenance errors: {list}	来源错误：{list}	direct	false	list	list	true
+network.title	Network {id}	网络 {id}	direct	false	id	id	true
+network.viewLabel	Graph view	图谱视图	direct	false			true
+notify.bellLoading	Notifications, loading	通知，正在加载	direct	false			true
+notify.bellOpen	Notifications, {n} open	通知，{n} 条未读	direct	false	n	n	true
+notify.closeNotif	Close notifications	关闭通知	direct	false			true
+notify.loadingAlerts	Loading alerts…	正在加载告警…	direct	false			true
+notify.networkLink	Network	网络	direct	false			true
+notify.noAlerts	No alerts.	暂无告警。	direct	false			true
+notify.openInv	Open investigation	打开调查	direct	false			true
+notify.panelLabel	Notifications	通知	direct	false			true
+notify.panelTitle	Notifications	通知	direct	false			true
+replay.cancel	Cancel	取消	direct	false			true
+replay.confirmReset	Confirm: this clears decisions, simulations, AI runs, and audit history for {id}.	确认：这将清除 {id} 的决策、模拟、AI 运行和审计历史。	direct	false	id	id	true
+replay.confirmResetBtn	Confirm reset	确认重置	direct	false			true
+replay.controlsLabel	Replay controls	重放控制	direct	false			true
+replay.controlsTitle	Deterministic replay	确定性重放	direct	false			true
+replay.crumb	Replay {id}	重放 {id}	direct	false	id	id	true
+replay.currentTxnPre	Transaction 	交易 	direct	false			true
+replay.headTitle	Replay & simulation — {title}	重放与模拟——{title}	direct	false	title	title	true
+replay.loading	Loading scenario…	正在加载场景…	direct	false			true
+replay.notFoundPost	 exists in the backend.	。	direct	false			true
+replay.notFoundPre	No scenario 	后端中不存在场景	direct	false			true
+replay.notFoundTitle	Scenario not found	未找到场景	direct	false			true
+replay.pause	Pause	暂停	direct	false			true
+replay.play	Play	播放	direct	false			true
+replay.positionLine	Step {c} of {t} · {e} events · {x} transactions · {g} edges	第 {c} 步，共 {t} 步 · {e} 个事件 · {x} 笔交易 · {g} 条边	direct	false	c,e,g,t,x	c,e,g,t,x	true
+replay.reducedMotionPlay	Auto-play disabled: reduced-motion preference detected. Use Step forward.	已禁用自动播放：检测到减少动态偏好。请使用“前进一步”。	direct	false			true
+replay.resetBlurb	Reset restores the seeded scenario exactly and clears all live state: human decisions, simulations, AI runs, and audit events beyond the reset itself.	重置将精确恢复初始场景并清除所有实时状态：人工决策、模拟、AI 运行，以及除重置本身之外的审计事件。	direct	false			true
+replay.resetDemo	Reset demo	重置演示	direct	false			true
+replay.resetDoneMid	, seed 	，种子 	direct	false			true
+replay.resetDonePost	. Reload the page to replay from the restored state.	。重新加载页面以从恢复的状态重放。	direct	false			true
+replay.resetDonePre	Reset complete: run 	重置完成：运行 	direct	false			true
+replay.resetLabel	Scenario reset	场景重置	direct	false			true
+replay.resetTitle	Scenario reset	场景重置	direct	false			true
+replay.resetting	Resetting…	正在重置…	direct	false			true
+replay.restart	Restart	重新开始	direct	false			true
+replay.scenarioPre	Scenario 	场景 	direct	false			true
+replay.startHint	At the start: no events applied yet. Step forward to begin.	位于起点：尚未应用任何事件。向前步进以开始。	direct	false			true
+replay.stepBack	Step back	后退一步	direct	false			true
+replay.stepControls	Replay step controls	重放步进控制	direct	false			true
+replay.stepFwd	Step forward	前进一步	direct	false			true
+replay.title	Replay {id}	重放 {id}	direct	false	id	id	true
+selector.buttonLabel	Select language	选择语言	direct	false			true
+selector.fallbackNote	English shown — translation unavailable	显示英文——无翻译	direct	false			true
+selector.label	Language	语言	direct	false			true
+selector.panelTitle	Select language	选择语言	direct	false			true
+selector.partialTag	Partial	部分	direct	false			true
+selector.resultsEmpty	No languages match your search.	没有与您的搜索匹配的语言。	direct	false			true
+selector.searchLabel	Search languages	搜索语言	direct	false			true
+selector.searchPlaceholder	Search languages…	搜索语言…	direct	false			true
+selector.translatedTag	Translated	已翻译	direct	false			true
+selector.unavailableTag	English fallback	英文后备	direct	false			true
+sim.assumptionLabel	Assumption (recorded with the run)	假设（随运行记录）	direct	false			true
+sim.assumptionLine	Assumption: {a}	假设：{a}	direct	false	a	a	true
+sim.assumptionPh	e.g. Shared devices are coincidental, not shared control.	例如：共享设备只是巧合，并非共享控制。	direct	false			true
+sim.baselineLine	Authoritative baseline (network): {s}/100 {b}. This value never changes.	权威基线（网络）：{s}/100 {b}。此值永不改变。	direct	false	b,s	b,s	true
+sim.ignoredPre	Ignored: 	已忽略：	direct	false			true
+sim.legendLine	Relationships to ignore ({a} of {b} selected)	要忽略的关系（已选 {b} 项中的 {a} 项）	direct	false	a,b	a,b	true
+sim.loadEdges	Load edges	加载边	direct	false			true
+sim.loadingTarget	Loading target…	正在加载目标…	direct	false			true
+sim.readOnlySim	Your role is read-only: simulations are disabled.	您的角色为只读：模拟已禁用。	direct	false			true
+sim.runSim	Run simulation	运行模拟	direct	false			true
+sim.running	Running…	正在运行…	direct	false			true
+sim.simBanner	SIMULATED — hypothetical, not a real-world prediction.	模拟——假设情景，非真实世界预测。	direct	false			true
+sim.simLabel	What-if simulation	假设模拟	direct	false			true
+sim.simRunPost	: baseline {a}/100 {b} → simulated {c}/100 {d}	：基线 {a}/100 {b} → 模拟 {c}/100 {d}	direct	false	a,b,c,d	a,b,c,d	true
+sim.simRunPre	Run 	运行 	direct	false			true
+sim.simTitle	What-if simulation	假设模拟	direct	false			true
+sim.targetDown	Target unavailable: {err}	目标不可用：{err}	direct	false	err	err	true
+sim.targetLabel	Target transaction	目标交易	direct	false			true
+system.allOk	All systems operational	所有系统运行正常	direct	false			true
+system.checkedPre	Checked	检查于	direct	false			true
+system.rowAi	AI Engine (Muse Spark)	AI 引擎（Muse Spark）	direct	false			true
+system.rowApi	API Services	API 服务	direct	false			true
+system.rowGraph	Graph Provenance	图谱来源	direct	false			true
+system.rowSeed	Seed Integrity	种子完整性	direct	false			true
+system.scenarioPre	Scenario {s} · Run 	场景 {s} · 运行 	direct	false	s	s	true
+system.stDegraded	Degraded	已降级	direct	false			true
+system.stNotConfigured	Not configured	未配置	direct	false			true
+system.stNotReported	Not reported	未报告	direct	false			true
+system.stOperational	Operational	运行正常	direct	false			true
+system.sysTitle	System Status	系统状态	direct	false			true
+theme.appearance	Appearance	外观	direct	false			true
+theme.dark	Dark	深色	direct	false			true
+theme.light	Light	浅色	direct	false			true
+theme.system	System	系统	direct	false			true
+workflow.audit	Audit	审计	direct	false			true
+workflow.connect	Connect	关联	direct	false			true
+workflow.detect	Detect	检测	direct	false			true
+workflow.explain	Explain	解释	direct	false			true
+workflow.humanDecision	Human Decision	人工决策	direct	false			true
+workflow.investigate	Investigate	调查	direct	false			true
+workflow.navLabel	Investigation workflow	调查工作流	direct	false			true
+workflow.onThisPage	On this page	本页内容	direct	false			true
+workflow.simulate	Simulate	模拟	direct	false			true

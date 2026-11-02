@@ -12,6 +12,8 @@ import {
   postDecision,
   type DecisionResponse,
 } from "../lib/api";
+import { useTranslation } from "../lib/i18n/context";
+import { useCan } from "../lib/session";
 
 /* Exact copy of DECISION_LABELS in app/cases.py; the server rejects any
  * other value, so drift here can only narrow choices, never widen them. */
@@ -30,6 +32,9 @@ interface Props {
 }
 
 export function DecisionForm({ caseId, allowedTransitions, onDecided }: Props) {
+  // J4: read-only roles see the form disabled (backend enforces too).
+  const writable = useCan("write");
+  const { t } = useTranslation("decision");
   // No preselected decision: the analyst must choose explicitly (F1).
   const [decision, setDecision] = useState("");
   const [target, setTarget] = useState(allowedTransitions[0] ?? "");
@@ -41,11 +46,11 @@ export function DecisionForm({ caseId, allowedTransitions, onDecided }: Props) {
   async function onSubmit(ev: React.FormEvent) {
     ev.preventDefault();
     if (!DECISION_LABELS.includes(decision)) {
-      setError("Select a decision before recording.");
+      setError(t("selectFirst"));
       return;
     }
     if (reason.trim() === "") {
-      setError("A reason is required before recording a decision.");
+      setError(t("reasonRequired"));
       return;
     }
     setSubmitting(true);
@@ -76,22 +81,19 @@ export function DecisionForm({ caseId, allowedTransitions, onDecided }: Props) {
 
   if (allowedTransitions.length === 0) {
     return (
-      <section className="card" aria-label="Human decision">
-        <h2 id="human-decision-h">Human decision</h2>
-        <p className="muted">
-          This case is in a terminal state; no further transitions are
-          allowed.
-        </p>
+      <section className="card" aria-label={t("title")}>
+        <h2 id="human-decision-h">{t("title")}</h2>
+        <p className="muted">{t("terminal")}</p>
       </section>
     );
   }
 
   return (
-    <section className="card" aria-label="Human decision">
-      <h2 id="human-decision-h">Human decision</h2>
+    <section className="card" aria-label={t("title")}>
+      <h2 id="human-decision-h">{t("title")}</h2>
       <form onSubmit={onSubmit}>
         <p>
-          <label htmlFor="decision-label">Decision</label>
+          <label htmlFor="decision-label">{t("decisionLabel")}</label>
           <br />
           <select
             id="decision-label"
@@ -99,7 +101,7 @@ export function DecisionForm({ caseId, allowedTransitions, onDecided }: Props) {
             onChange={(ev) => setDecision(ev.target.value)}
             required
           >
-            <option value="">Select a decision…</option>
+            <option value="">{t("selectPlaceholder")}</option>
             {DECISION_LABELS.map((d) => (
               <option key={d} value={d}>
                 {d}
@@ -108,7 +110,7 @@ export function DecisionForm({ caseId, allowedTransitions, onDecided }: Props) {
           </select>
         </p>
         <p>
-          <label htmlFor="decision-target">Move case to</label>
+          <label htmlFor="decision-target">{t("targetLabel")}</label>
           <br />
           <select
             id="decision-target"
@@ -123,7 +125,7 @@ export function DecisionForm({ caseId, allowedTransitions, onDecided }: Props) {
           </select>
         </p>
         <p>
-          <label htmlFor="decision-reason">Reason (required)</label>
+          <label htmlFor="decision-reason">{t("reasonLabel")}</label>
           <br />
           <textarea
             id="decision-reason"
@@ -134,7 +136,7 @@ export function DecisionForm({ caseId, allowedTransitions, onDecided }: Props) {
           />
         </p>
         <p>
-          <label htmlFor="decision-actor">Analyst ID</label>
+          <label htmlFor="decision-actor">{t("actorLabel")}</label>
           <br />
           <input
             id="decision-actor"
@@ -149,13 +151,18 @@ export function DecisionForm({ caseId, allowedTransitions, onDecided }: Props) {
             {error}
           </div>
         )}
+        {!writable && (
+          <p className="muted" role="note">
+            {t("readOnly")}
+          </p>
+        )}
         <p>
           <button
             type="submit"
             className="btn-commit"
-            disabled={submitting}
+            disabled={submitting || !writable}
           >
-            {submitting ? "Recording…" : "Record decision"}
+            {submitting ? t("recording") : t("record")}
           </button>
         </p>
       </form>

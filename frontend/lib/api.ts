@@ -29,6 +29,22 @@ export class ApiError extends Error {
   }
 }
 
+/* J3-P6: session-expiry signal. Any 401/403 from a data endpoint means
+ * the session is gone (or never existed): the login gate listens and
+ * re-checks /me, flipping the whole app back to sign-in so an expired
+ * session can never strand a page on a bare error card. The whole auth
+ * namespace is excluded: the gate consumes auth outcomes directly, and
+ * signalling /me re-triggers recheck() forever (observed /me storm).
+ * SSR-safe: no window on the server, no dispatch. */
+export const UNAUTHORIZED_EVENT = "csai:unauthorized";
+
+function notifyUnauthorized(path: string, status: number) {
+  if (typeof window === "undefined") return;
+  if (path.startsWith("/api/v1/auth/")) return;
+  if (status !== 401 && status !== 403) return;
+  window.dispatchEvent(new CustomEvent(UNAUTHORIZED_EVENT));
+}
+
 export function apiBaseUrl(): string {
   return process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000";
 }
@@ -51,6 +67,7 @@ async function requestJson<T>(path: string, signal?: AbortSignal): Promise<T> {
   }
   const data = (await res.json().catch(() => ({}))) as ApiErrorBody;
   if (!res.ok) {
+    notifyUnauthorized(path, res.status);
     throw new ApiError(
       data.error?.code ?? `HTTP_${res.status}`,
       data.error?.message ?? "request failed",
@@ -208,6 +225,7 @@ async function postJson<T>(
   }
   const data = (await res.json().catch(() => ({}))) as ApiErrorBody;
   if (!res.ok) {
+    notifyUnauthorized(path, res.status);
     throw new ApiError(
       data.error?.code ?? `HTTP_${res.status}`,
       data.error?.message ?? "request failed",
@@ -842,6 +860,7 @@ export interface AuthMode {
 export interface AuthSession {
   user: string;
   role: string;
+  permissions: string[];
 }
 
 export function getAuthMode(signal?: AbortSignal): Promise<AuthMode> {
@@ -866,4 +885,14 @@ export function postLogin(
 
 export function postLogout(signal?: AbortSignal): Promise<{ ok: boolean }> {
   return postJson<{ ok: boolean }>("/api/v1/auth/logout", undefined, signal);
+}
+
+export function postLogoutAll(
+  signal?: AbortSignal
+): Promise<{ ok: boolean }> {
+  return postJson<{ ok: boolean }>(
+    "/api/v1/auth/logout-all",
+    undefined,
+    signal
+  );
 }

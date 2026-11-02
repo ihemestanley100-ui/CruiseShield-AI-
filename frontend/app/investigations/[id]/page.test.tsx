@@ -338,7 +338,7 @@ describe("InvestigationPage", () => {
     render(<InvestigationPage />);
     await waitFor(() =>
       expect(screen.getByTestId("intel-status")).toHaveTextContent(
-        "0 finding(s)"
+        "0 findings"
       )
     );
     expect(

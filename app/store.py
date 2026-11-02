@@ -80,6 +80,11 @@ class Store:
             scenario = seed_mod.build_ambiguous()
         else:
             raise ValueError(f"UNKNOWN_SCENARIO: {scenario_id}")
+        # J4: a scenario reset must not log anyone out: login state
+        # survives reseeds (first seed has no prior state to keep).
+        prior = getattr(self, "state", {}) or {}
+        keep_revoked = prior.get("revoked_sessions", [])
+        keep_epochs = prior.get("user_epochs", {})
         run_id = uuid.uuid4().hex
         primary = scenario["primary_transaction_id"]
         num = primary.split("_")[-1]
@@ -142,6 +147,7 @@ class Store:
                        "updated_at": created, "trace_id": trace_id}],
             "decisions": [], "audits": [], "ai_runs": [], "simulations": [],
             "audit_counter": 0, "replay": {"cursor": 0}, "created_at": created,
+            "revoked_sessions": keep_revoked, "user_epochs": keep_epochs,
         }
         self.append_audit("system", "demo-reset", "scenario.reset", "scenario",
                           scenario_id, "", run_id,
@@ -222,3 +228,39 @@ class Store:
     def save_simulation(self, sim: dict) -> None:
         self.state["simulations"].append(sim)
         self._save()
+
+    # -- J4 session revocation / epochs ---------------------------------
+    def revoke_session(self, nonce: str, exp: int,
+                       now: float | None = None) -> None:
+        """Record a logout; prune entries expired before now (bounded)."""
+        import time
+
+        moment = time.time() if now is None else now
+        live = [r for r in self.state.get("revoked_sessions", [])
+                if int(r.get("exp", 0)) >= int(moment)
+                and r.get("nonce") != nonce]
+        live.append({"nonce": nonce, "exp": int(exp)})
+        self.state["revoked_sessions"] = live
+        self._save()
+
+    def is_revoked(self, nonce: str, now: float | None = None) -> bool:
+        import time
+
+        moment = time.time() if now is None else now
+        return any(r.get("nonce") == nonce
+                   and int(r.get("exp", 0)) >= int(moment)
+                   for r in self.state.get("revoked_sessions", []))
+
+    def bump_epoch(self, username: str,
+                   now: float | None = None) -> int:
+        """Logout-all: tokens minted before now die for the user."""
+        import time
+
+        moment = int(time.time() if now is None else now)
+        epochs = self.state.setdefault("user_epochs", {})
+        epochs[username] = max(int(epochs.get(username, 0)), moment)
+        self._save()
+        return epochs[username]
+
+    def epoch_of(self, username: str) -> int:
+        return int(self.state.get("user_epochs", {}).get(username, 0))

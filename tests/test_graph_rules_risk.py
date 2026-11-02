@@ -80,3 +80,13 @@ def test_unknown_scope_rejected(tmp_path):
         assert "UNKNOWN_SCOPE" in str(exc)
     else:
         raise AssertionError("expected UNKNOWN_SCOPE")
+
+
+def test_unknown_txn_rejected_without_stopiteration(tmp_path):
+    """J3-P3: unknown txn fails closed with UNKNOWN_TXN (no StopIteration)."""
+    import pytest
+
+    state = _state(tmp_path)
+    with pytest.raises(ValueError, match="UNKNOWN_TXN"):
+        rules_mod.evaluate("txn_missing", state["transactions"],
+                           state["edges"], "t")

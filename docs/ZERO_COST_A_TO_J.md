@@ -167,7 +167,7 @@ No code change. Vercel project settings (dashboard, owner applies):
 - Secure headers ship in `frontend/next.config.ts` (nosniff, DENY,
   referrer, permissions). No CSP — Three.js inline scripts forbid a
   strict policy; documented, unchanged from staging plan.
-- `distDir` honors `NEXT_DIST_DIR`, default `.next` — Vercel default works.
+- `distDir` default `.next` (the Phase 2B `NEXT_DIST_DIR` override was removed 2026-11-01, J3-P10) — Vercel default works.
 - No `vercel.json` is added: dashboard settings suffice and avoid a
   second config source. If the owner prefers config-as-code, the table
   above maps 1:1 to `vercel.json` + project settings.

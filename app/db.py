@@ -305,6 +305,11 @@ class PgStore:
                                " ORDER BY agent_run_id")
                 simulations = docs("SELECT document FROM simulations"
                                    " ORDER BY simulation_id")
+                cur.execute("SELECT nonce, expires_at FROM session_revocations")
+                revoked = [{"nonce": n, "exp": int(e)}
+                           for n, e in cur.fetchall()]
+                cur.execute("SELECT username, epoch FROM user_epochs")
+                epochs = {u: int(e) for u, e in cur.fetchall()}
                 cur.execute("SELECT COALESCE(MAX(seq), 0) FROM audit_events")
                 counter_row = cur.fetchone()
         finally:
@@ -323,6 +328,7 @@ class PgStore:
             "ai_runs": ai_runs, "simulations": simulations,
             "audit_counter": int(counter_row[0]) if counter_row else 0,
             "replay": {"cursor": 0}, "created_at": meta.get("created_at", ""),
+            "revoked_sessions": revoked, "user_epochs": epochs,
         }
 
     def _persist_case(self, doc: dict) -> None:
@@ -552,6 +558,76 @@ class PgStore:
         except Exception:
             conn.rollback()
             raise
+        finally:
+            conn.close()
+
+    # -- J4 session revocation / epochs (mirrors Store) -----------------
+    def revoke_session(self, nonce: str, exp: int,
+                       now: float | None = None) -> None:
+        import time
+
+        moment = int(time.time() if now is None else now)
+        conn = self._conn()
+        try:
+            with conn.cursor() as cur:
+                cur.execute("DELETE FROM session_revocations"
+                            " WHERE expires_at < %s", (moment,))
+                cur.execute("INSERT INTO session_revocations (nonce,"
+                            " expires_at) VALUES (%s, %s)"
+                            " ON CONFLICT (nonce) DO UPDATE SET"
+                            " expires_at = EXCLUDED.expires_at",
+                            (nonce, int(exp)))
+            conn.commit()
+        except Exception:
+            conn.rollback()
+            raise
+        finally:
+            conn.close()
+
+    def is_revoked(self, nonce: str, now: float | None = None) -> bool:
+        import time
+
+        moment = int(time.time() if now is None else now)
+        conn = self._conn()
+        try:
+            with conn.cursor() as cur:
+                cur.execute("SELECT 1 FROM session_revocations"
+                            " WHERE nonce = %s AND expires_at >= %s",
+                            (nonce, moment))
+                return cur.fetchone() is not None
+        finally:
+            conn.close()
+
+    def bump_epoch(self, username: str,
+                   now: float | None = None) -> int:
+        import time
+
+        moment = int(time.time() if now is None else now)
+        conn = self._conn()
+        try:
+            with conn.cursor() as cur:
+                cur.execute("INSERT INTO user_epochs (username, epoch)"
+                            " VALUES (%s, %s) ON CONFLICT (username)"
+                            " DO UPDATE SET epoch = GREATEST("
+                            "user_epochs.epoch, EXCLUDED.epoch)"
+                            " RETURNING epoch", (username, moment))
+                row = cur.fetchone()
+            conn.commit()
+            return int(row[0]) if row else moment
+        except Exception:
+            conn.rollback()
+            raise
+        finally:
+            conn.close()
+
+    def epoch_of(self, username: str) -> int:
+        conn = self._conn()
+        try:
+            with conn.cursor() as cur:
+                cur.execute("SELECT epoch FROM user_epochs"
+                            " WHERE username = %s", (username,))
+                row = cur.fetchone()
+                return int(row[0]) if row else 0
         finally:
             conn.close()
 

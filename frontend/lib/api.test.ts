@@ -84,6 +84,33 @@ describe("api client", () => {
     expect(err.traceId).toBe("t1");
   });
 
+  it("signals session expiry on 401/403 data responses (J3-P6)", async () => {
+    const seen: string[] = [];
+    const listener = (ev: Event) => seen.push(ev.type);
+    window.addEventListener("csai:unauthorized", listener);
+    try {
+      mockFetchOnce({ error: { code: "LOGIN_REQUIRED" } }, false, 401);
+      await getInvestigation("inv_84721").catch(() => null);
+      mockFetchOnce({ error: { code: "ADMIN_REQUIRED" } }, false, 403);
+      await postAiAnalysis("inv_84721").catch(() => null);
+      mockFetchOnce({ error: { code: "X" } }, false, 500);
+      await getInvestigation("inv_84721").catch(() => null);
+      // Bad-password 401 on the login endpoint itself is not an expiry.
+      mockFetchOnce({ error: { code: "INVALID_CREDENTIALS" } }, false, 401);
+      await postLogin("judge", "wrong").catch(() => null);
+      // Gate probes (/me) and logout outcomes are consumed by the gate
+      // directly: signalling them re-triggers recheck() forever (/me
+      // storm: 586 calls in one page load, observed in armed Edge QA).
+      mockFetchOnce({ error: { code: "LOGIN_REQUIRED" } }, false, 401);
+      await getAuthMe().catch(() => null);
+      mockFetchOnce({ error: { code: "LOGIN_REQUIRED" } }, false, 401);
+      await postLogout().catch(() => null);
+    } finally {
+      window.removeEventListener("csai:unauthorized", listener);
+    }
+    expect(seen).toEqual(["csai:unauthorized", "csai:unauthorized"]);
+  });
+
   it("maps network failure to BACKEND_UNREACHABLE", async () => {
     vi.stubGlobal(
       "fetch",

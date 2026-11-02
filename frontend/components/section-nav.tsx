@@ -7,6 +7,7 @@
  * and no item claims to be current. */
 
 import { useEffect, useState } from "react";
+import { useTranslation } from "../lib/i18n/context";
 
 export interface SectionNavItem {
   id: string;
@@ -15,6 +16,7 @@ export interface SectionNavItem {
 
 export function SectionNav({ items }: { items: SectionNavItem[] }) {
   const [active, setActive] = useState<string | null>(null);
+  const { t } = useTranslation("workflow");
 
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
@@ -37,7 +39,7 @@ export function SectionNav({ items }: { items: SectionNavItem[] }) {
   }, [items.map((item) => item.id).join(",")]);
 
   return (
-    <nav aria-label="On this page" className="section-nav-wrap">
+    <nav aria-label={t("onThisPage")} className="section-nav-wrap">
       <ul className="section-nav">
         {items.map((item) => (
           <li key={item.id}>

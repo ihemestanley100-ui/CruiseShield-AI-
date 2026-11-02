@@ -34,3 +34,10 @@ approved CORSMiddleware fix + backend restart). This confirms page render
 and fetch path only — checks 1–8 above remain PENDING_REVIEW until their
 own evidence (npm test output, selector/switching/persistence/system/
 flash/keyboard/motion observations) is reported.
+
+## Status pointer (2026-11-01, J3 closeout P12)
+
+Batch 1b acceptance record; verified still-accurate history (J3, no
+edits to the record above). Current frontend acceptance:
+`docs/CRUISESHIELD_AI_FRONTEND_ACCEPTANCE_REPORT.md` (49 files /
+254 vitest green, `tsc` clean, build exit 0).

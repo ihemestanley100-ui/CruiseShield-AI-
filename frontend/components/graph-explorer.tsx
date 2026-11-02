@@ -8,6 +8,7 @@
 import { useMemo, useRef, useState } from "react";
 import type { GraphEdge, GraphNode } from "../lib/api";
 import { defaultRoots, layoutGraph } from "../lib/graph-layout";
+import { useTranslation } from "../lib/i18n/context";
 
 interface Props {
   nodes: GraphNode[];
@@ -22,6 +23,8 @@ type Selection =
 const PAN_STEP = 40;
 
 export function GraphExplorer({ nodes, edges }: Props) {
+  const { t, tp } = useTranslation("graph");
+  const { t: tCommon } = useTranslation("common");
   const nodeTypes = useMemo(
     () => [...new Set(nodes.map((n) => n.node_type))].sort(),
     [nodes]
@@ -81,13 +84,17 @@ export function GraphExplorer({ nodes, edges }: Props) {
     : [];
 
   return (
-    <section className="card" aria-label="Network graph">
-      <h2>Network graph</h2>
+    <section className="card" aria-label={t("sectionLabel")}>
+      <h2>{t("graphTitle")}</h2>
       <p className="muted" aria-live="polite" data-testid="graph-counts">
-        Showing {visibleNodes.length} of {nodes.length} nodes,{" "}
-        {visibleEdges.length} of {edges.length} edges.
+        {t("countsLine", {
+          a: visibleNodes.length,
+          b: nodes.length,
+          c: visibleEdges.length,
+          d: edges.length,
+        })}
       </p>
-      <div className="chip-row" role="group" aria-label="Entity type filters">
+      <div className="chip-row" role="group" aria-label={t("entityFilters")}>
         {nodeTypes.map((t) => (
           <label key={t} className="chip-label">
             <input
@@ -99,7 +106,7 @@ export function GraphExplorer({ nodes, edges }: Props) {
           </label>
         ))}
       </div>
-      <div className="chip-row" role="group" aria-label="Relationship filters">
+      <div className="chip-row" role="group" aria-label={t("relFilters")}>
         {relTypes.map((r) => (
           <label key={r} className="chip-label">
             <input
@@ -111,20 +118,20 @@ export function GraphExplorer({ nodes, edges }: Props) {
           </label>
         ))}
       </div>
-      <div className="chip-row" role="group" aria-label="Graph view controls">
+      <div className="chip-row" role="group" aria-label={t("viewControls")}>
         <button
           type="button"
           className="chip"
           onClick={() => setZoom((z) => Math.min(3, +(z + 0.25).toFixed(2)))}
         >
-          Zoom in
+          {t("zoomIn")}
         </button>
         <button
           type="button"
           className="chip"
           onClick={() => setZoom((z) => Math.max(0.25, +(z - 0.25).toFixed(2)))}
         >
-          Zoom out
+          {t("zoomOut")}
         </button>
         <button
           type="button"
@@ -134,13 +141,16 @@ export function GraphExplorer({ nodes, edges }: Props) {
             setPan({ x: 0, y: 0 });
           }}
         >
-          Fit to screen
+          {t("fit")}
         </button>
       </div>
       <svg
         viewBox={`0 0 ${maxX} ${maxY}`}
         role="img"
-        aria-label={`Network graph: ${visibleNodes.length} nodes, ${visibleEdges.length} edges. Use Tab to reach nodes and edges, Enter to select, arrow keys on the graph to pan.`}
+        aria-label={t("svgLabel", {
+          a: visibleNodes.length,
+          b: visibleEdges.length,
+        })}
         tabIndex={0}
         data-testid="graph-svg"
         className="graph-canvas"
@@ -184,7 +194,12 @@ export function GraphExplorer({ nodes, edges }: Props) {
                 key={e.edge_id}
                 tabIndex={0}
                 role="button"
-                aria-label={`Edge ${e.edge_id}: ${e.source_node_id} ${e.relationship_type} ${e.target_node_id}`}
+                aria-label={t("edgeLabel", {
+                  id: e.edge_id,
+                  s: e.source_node_id,
+                  r: e.relationship_type,
+                  t: e.target_node_id,
+                })}
                 data-edge={e.edge_id}
                 className="graph-edge"
                 onClick={() => setSelection({ kind: "edge", id: e.edge_id })}
@@ -247,10 +262,10 @@ export function GraphExplorer({ nodes, edges }: Props) {
           <div className="alert ok">
             <strong>{selectedNode.display_label}</strong> (
             {selectedNode.node_type})<br />
-            Source:{" "}
+            {t("detailSource")}
             <code>{selectedNode.source_record_ids.join(", ")}</code>
             <br />
-            {selectedNodeRels.length} relationship(s):{" "}
+            {tp("relationships", selectedNodeRels.length)}:{" "}
             {selectedNodeRels.map((e) => (
               <span key={e.edge_id}>
                 <code>{e.edge_id}</code> {e.relationship_type}{" "}
@@ -264,17 +279,21 @@ export function GraphExplorer({ nodes, edges }: Props) {
             {selectedEdge.source_node_id} {selectedEdge.relationship_type}{" "}
             {selectedEdge.target_node_id}
             <br />
-            Provenance:{" "}
-            <code>{selectedEdge.source_event_ids.join(", ")}</code> · Evidence:{" "}
+            {t("detailProv")}
+            <code>{selectedEdge.source_event_ids.join(", ")}</code>{" "}
+            {t("detailEvidence")}
             <code>{selectedEdge.evidence_ids.join(", ")}</code>
             <br />
-            Valid: {selectedEdge.valid_from} →{" "}
-            {selectedEdge.valid_to ?? "present"} · Trace:{" "}
+            {t("detailValidPre")}{" "}
+            <bdi>{selectedEdge.valid_from}</bdi>{" "}
+            {t("detailValidArrow")}{" "}
+            <bdi>{selectedEdge.valid_to ?? tCommon("present")}</bdi>{" "}
+            {t("detailValidPost")}
             <code>{selectedEdge.trace_id}</code>
           </div>
         )}
         {!selectedNode && !selectedEdge && (
-          <p className="muted">Select a node or edge for details.</p>
+          <p className="muted">{t("selectPrompt")}</p>
         )}
       </div>
     </section>

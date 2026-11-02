@@ -1,0 +1,575 @@
+# locale: ja (MACHINE-DRAFTED — human review pending)
+# version: 1.2.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
+# columns: key | en_source | draft | origin(direct=translated,fallback=English shown) | same_as_source | en_vars | draft_vars | vars_ok
+key	en_source	draft	origin	same_as_source	en_vars	draft_vars	vars_ok
+ai.altTitle	Alternative explanations:	別の説明：	direct	false			true
+ai.askBtn	Ask follow-up	追加の質問	direct	false			true
+ai.askLabel	Ask a follow-up about this evidence	この証拠について追加の質問をする	direct	false			true
+ai.askPh	e.g. Why is dev_04 shared across accounts?	例：なぜ dev_04 は口座間で共有されているのですか？	direct	false			true
+ai.asking	Asking…	質問中…	direct	false			true
+ai.calling	Calling model…	モデルを呼び出し中…	direct	false			true
+ai.cannotRun	Your role cannot run AI analysis.	お使いの役割では AI 分析を実行できません。	direct	false			true
+ai.conclusionLine	Conclusion: {c}	結論：{c}	direct	false	c	c	true
+ai.confidencePre	Confidence: 	信頼度：	direct	false			true
+ai.metaPre	{model} · {ms} ms · schema {s} · refs {r} · run 	{model} · {ms} ms · スキーマ {s} · 参照 {r} · 実行 	direct	false	model,ms,r,s	model,ms,r,s	true
+ai.missingTitle	Missing information:	不足している情報：	direct	false			true
+ai.panelBlurb	Read-only explanation of the evidence package. The model cannot change risk scores or authorize actions.	証拠パッケージの読み取り専用説明。モデルはリスクスコアを変更したり操作を承認したりできません。	direct	false			true
+ai.panelTitle	Analyze with Muse Spark	Muse Sparkによる分析	direct	false			true
+ai.qLine	Q: {q}	質問：{q}	direct	false	q	q	true
+ai.runAnalysis	Run AI analysis	AI分析を実行	direct	false			true
+ai.timedOut	Request timed out or was cancelled.	リクエストがタイムアウトしたかキャンセルされました。	direct	false			true
+audit.auditEmpty	No audit events recorded for this case.	この案件の監査イベントは記録されていません。	direct	false			true
+audit.auditLabel	Audit trail	監査証跡	direct	false			true
+audit.auditTitle	Audit trail	監査証跡	direct	false			true
+audit.caption	Every recorded action with actor, state change, and reason.	すべての操作は実行者・状態変更・理由とともに記録されます。	direct	false			true
+audit.events.one	{count} audit event.	{count} 件の監査イベント。	direct	false	count	count	true
+audit.events.other	{count} audit events.	{count} 件の監査イベント。	direct	false	count	count	true
+audit.thAction	Action	操作	direct	false			true
+audit.thActor	Actor	実行者	direct	false			true
+audit.thEvent	Event	イベント	direct	false			true
+audit.thReason	Reason	理由	direct	false			true
+audit.thState	State change	状態変更	direct	false			true
+audit.thTime	Time	時刻	direct	false			true
+auth.blurb	This hosted demo is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	このデモは保護されています。評価用に提供された調査員の資格情報でサインインしてください。合成データのみ。	direct	false			true
+auth.invalid	Invalid username or password.	ユーザー名またはパスワードが無効です。	direct	false			true
+auth.password	Password	パスワード	direct	false			true
+auth.rateLimited	Too many login attempts. Wait a minute and try again.	試行回数が多すぎます。1分待って再試行してください。	direct	false			true
+auth.signIn	Sign in	サインイン	direct	false			true
+auth.signingIn	Signing in…	サインイン中…	direct	false			true
+auth.title	Demo sign in	デモサインイン	direct	false			true
+auth.unreachable	Backend unreachable. Check the demo server and retry.	バックエンドに到達できません。デモサーバーを確認して再試行してください。	direct	false			true
+auth.username	Username	ユーザー名	direct	false			true
+case.advisory	Advisory only: Muse Spark analysis explains evidence and never constitutes a human decision, nor changes risk scores or case status.	助言のみ：Muse Spark の分析は証拠を説明するものであり、人間の判断を構成せず、リスクスコアや案件ステータスも変更しません。	direct	false			true
+case.aiAssessment	AI assessment	AI 評価	direct	false			true
+case.assessEmpty	No AI investigation assessment is available yet.	AI 調査評価はまだありません。	direct	false			true
+case.assessLabel	AI Investigation Assessment	AI 調査評価	direct	false			true
+case.assessTitle	AI Investigation Assessment	AI 調査評価	direct	false			true
+case.auditCrumb	Audit trail	監査証跡	direct	false			true
+case.auditHeadPre	Audit trail — Case 	監査証跡 — 案件 	direct	false			true
+case.auditIntro	Every recorded action on this case, in recorded order. 	この案件の記録されたすべての操作を記録順に表示。	direct	false			true
+case.auditLoading	Loading audit events…	監査イベントを読み込み中…	direct	false			true
+case.auditTitle	Audit trail	監査証跡	direct	false			true
+case.auditTrail	Audit trail	監査証跡	direct	false			true
+case.backToCase	Back to case	案件に戻る	direct	false			true
+case.caseTitleDash	— 	— 	direct	true			true
+case.caseTitlePre	Case 	案件 	direct	false			true
+case.conclusionPre	Conclusion: 	結論：	direct	false			true
+case.confidencePre	Confidence: 	信頼度：	direct	false			true
+case.crumb	Case {id}	案件 {id}	direct	false	id	id	true
+case.decidedByPre	by {actor} ·	{actor} による ·	direct	false	actor	actor	true
+case.decisionHistory	Decision history	判断履歴	direct	false			true
+case.histEmpty	No human decisions recorded yet.	人間の判断はまだ記録されていません。	direct	false			true
+case.histLabel	Decision history	判断履歴	direct	false			true
+case.histTitle	Decision history	判断履歴	direct	false			true
+case.humanDecision	Human decision	人間の判断	direct	false			true
+case.invPre	Investigation 	調査 	direct	false			true
+case.loading	Loading case…	案件を読み込み中…	direct	false			true
+case.missingInfo	Missing information: {list}	不足している情報：{list}	direct	false	list	list	true
+case.notFoundPost	 exists in the backend.	 はバックエンドに存在しません。	direct	false			true
+case.notFoundPre	No case 	案件 	direct	false			true
+case.notFoundTitle	Case not found	案件が見つかりません	direct	false			true
+case.openAudit	Open full audit trail	完全な監査証跡を開く	direct	false			true
+case.overview	Overview	概要	direct	false			true
+case.runMetaPost	· {ms} ms · schema {s} · refs {r})	· {ms} ms · スキーマ {s} · 参照 {r}）	direct	false	ms,r,s	ms,r,s	true
+case.runMetaPre	({model} · run 	（{model} · 実行 	direct	false	model	model	true
+case.title	Case {id}	案件 {id}	direct	false	id	id	true
+case.transitionsEmpty	none (terminal state, or refreshing…)	なし（終了状態、または更新中…）	direct	false			true
+case.transitionsPre	Allowed transitions: 	許可された遷移：	direct	false			true
+case.updatedPre	· updated	· 更新	direct	false			true
+command.activityEmpty	No audit events recorded yet.	監査イベントはまだ記録されていません。	direct	false			true
+command.activityEvents.one	{count} audit event	{count} 件の監査イベント	direct	false	count	count	true
+command.activityEvents.other	{count} audit events	{count} 件の監査イベント	direct	false	count	count	true
+command.activityMore	 — showing latest {n}	 — 最新 {n} 件を表示	direct	false	n	n	true
+command.activityTitle	Recent activity	最近のアクティビティ	direct	false			true
+command.briefAdvisory	Advisory only: explains evidence and never constitutes a human decision, nor changes risk scores or case status.	助言のみ：証拠を説明するものであり、人間の判断を構成せず、リスクスコアや案件ステータスも変更しません。	direct	false			true
+command.briefConclusion	Conclusion: {c}	結論：{c}	direct	false	c	c	true
+command.briefEmpty	No Muse Spark analysis is available yet.	Muse Spark の分析はまだありません。	direct	false			true
+command.briefMetaPost	· {ms} ms · schema {s} · refs {f}	· {ms} ms · スキーマ {s} · 参照 {f}	direct	false	f,ms,s	f,ms,s	true
+command.briefMetaPre	{m} · run 	{m} · 実行 	direct	false	m	m	true
+command.briefMissing	Missing information: {list}	不足している情報：{list}	direct	false	list	list	true
+command.briefTitle	Muse Spark brief	Muse Spark ブリーフ	direct	false			true
+command.caseStatusLine	{case} · {status}	{case} · {status}	direct	true	case,status	case,status	true
+command.confPre	Confidence: 	信頼度：	direct	false			true
+command.edgesLabel	edges	エッジ	direct	false			true
+command.evPackH	Evidence package	証拠パッケージ	direct	false			true
+command.evRecords	evidence records	件の証拠記録	direct	false			true
+command.execTitle	Executive overview	エグゼクティブ概要	direct	false			true
+command.featAudit	Audit Trail	監査証跡	direct	false			true
+command.featAuditDesc	System and analyst activity.	システムとアナリストのアクティビティ。	direct	false			true
+command.featAuditFoot	Full history	完全な履歴	direct	false			true
+command.featCases	Cases	案件	direct	false			true
+command.featCasesDesc	Case status and human decisions.	案件ステータスと人間の判断。	direct	false			true
+command.featEv	Evidence	証拠	direct	false			true
+command.featEvDesc	Linked evidence and provenance.	リンクされた証拠と出所。	direct	false			true
+command.featEvDown	Unavailable	利用不可	direct	false			true
+command.featEvFoot	{n} records	{n} 件の記録	direct	false	n	n	true
+command.featGraphDown	Graph unavailable	グラフは利用不可	direct	false			true
+command.featGraphFoot	{a} nodes · {b} edges	{a} ノード · {b} エッジ	direct	false	a,b	a,b	true
+command.featInv	Investigations	調査	direct	false			true
+command.featInvDesc	Scores, rules, evidence and AI analysis.	スコア、ルール、証拠、AI 分析。	direct	false			true
+command.featNet	Network Explorer	ネットワークエクスプローラー	direct	false			true
+command.featNetDesc	Accounts, devices, phones and merchants.	口座、デバイス、電話、加盟店。	direct	false			true
+command.featReplay	Replay & Simulation	リプレイとシミュレーション	direct	false			true
+command.featReplayDesc	Recreate events and test what-if scenarios.	イベントを再現し、仮説シナリオをテスト。	direct	false			true
+command.featReplayFoot	Deterministic replay	確定的リプレイ	direct	false			true
+command.featTitle	Explore	探索	direct	false			true
+command.fullExplanations	Full explanations on the investigation	調査で完全な説明を見る	direct	false			true
+command.kpiActive	Active investigations	進行中の調査	direct	false			true
+command.kpiAi	AI analysis runs	AI 分析実行	direct	false			true
+command.kpiDecisions	Human decisions	人間の判断	direct	false			true
+command.kpiEvidence	Evidence records	証拠記録	direct	false			true
+command.kpiHigh	High-risk investigations	高リスク調査	direct	false			true
+command.kpiRiskTitle	Risk intelligence	リスクインテリジェンス	direct	false			true
+command.kpiTxn	Transactions monitored	監視中の取引	direct	false			true
+command.linkedTo	Linked to {id}	{id} にリンク	direct	false	id	id	true
+command.loadingNet	Loading network…	ネットワークを読み込み中…	direct	false			true
+command.needsAction	{case} · {status} — requires analyst action	{case} · {status} — アナリストの対応が必要	direct	false	case,status	case,status	true
+command.netBandLine	Network band {b}	ネットワークバンド {b}	direct	false	b	b	true
+command.netDown	Network data unavailable.	ネットワークデータは利用できません。	direct	false			true
+command.netH	Investigation network	調査ネットワーク	direct	false			true
+command.netRiskH	Network risk	ネットワークリスク	direct	false			true
+command.noRuns	No runs recorded	記録された実行がありません	direct	false			true
+command.nodesLabel	nodes	ノード	direct	false			true
+command.openCaseAudit	Open case audit trail	案件の監査証跡を開く	direct	false			true
+command.openEvidence	Open evidence	証拠を開く	direct	false			true
+command.openFullExplorer	Open full network explorer	完全なネットワークエクスプローラーを開く	direct	false			true
+command.openNetExplorer	Open network explorer	ネットワークエクスプローラーを開く	direct	false			true
+command.packagePre	Package 	パッケージ 	direct	false			true
+command.previewAria	Network preview: {a} of {b} nodes shown	ネットワークプレビュー：{b} 件中 {a} ノードを表示	direct	false	a,b	a,b	true
+command.previewCounts	{a} nodes, {b} edges in the investigation graph. Preview shows {c} nodes and {d} relationships.	調査グラフに {a} ノード、{b} エッジ。プレビューは {c} ノードと {d} 関係を表示しています。	direct	false	a,b,c,d	a,b,c,d	true
+command.previewEmpty	No relationships in this graph.	このグラフに関係はありません。	direct	false			true
+command.previewProvErrors	Provenance errors: {list}	出所エラー：{list}	direct	false	list	list	true
+command.previewTitle	Network preview	ネットワークプレビュー	direct	false			true
+command.provErrors	Provenance errors: {n}	出所エラー：{n}	direct	false	n	n	true
+command.riskAria	Risk {score} of 100, {band}	リスク {score}/100、{band}	direct	false	band,score	band,score	true
+command.rulesAria	{a} of {b} rules triggered	{b} 件中 {a} 件のルールがトリガー	direct	false	a,b	a,b	true
+command.rulesCounts	{a} of {b} rules triggered.	{b} 件中 {a} 件のルールがトリガー。	direct	false	a,b	a,b	true
+command.rulesH	Rules triggered	トリガーされたルール	direct	false			true
+command.rulesOf	{a} of {b}	{b} 件中 {a} 件	direct	false	a,b	a,b	true
+command.rulesTitle	Rule triggers	ルールトリガー	direct	false			true
+command.runFromInv	Run analysis from the investigation	調査から分析を実行	direct	false			true
+command.txnOnlyH	Transaction-only risk	取引のみのリスク	direct	false			true
+command.txnOnlyNote	This transfer on its own, before network context. The network score above is authoritative for the investigation.	ネットワーク文脈の前の、この送金単体。上のネットワークスコアがこの調査の権威あるスコアです。	direct	false			true
+command.txnOnlyScope	{v} · single-transfer scope	{v} · 単一送金範囲	direct	false	v	v	true
+command.txnTitleLine	Transaction #{n}	取引 #{n}	direct	false	n	n	true
+command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derived difference)	{v} · ネットワーク範囲 · 取引のみとの差 {sign}{u}（派生差分）	direct	false	sign,u,v	sign,u,v	true
+command.versionedRules	Versioned deterministic rules	バージョン管理された確定的ルール	direct	false			true
+common.breadcrumb	Breadcrumb	パンくずリスト	direct	false			true
+common.closeDialog	Close dialog	ダイアログを閉じる	direct	false			true
+common.loading	Loading…	読み込み中…	direct	false			true
+common.none	none	なし	direct	false			true
+common.noneYet	None yet	まだありません	direct	false			true
+common.notAvailable	Not available	利用不可	direct	false			true
+common.present	present	現在	direct	false			true
+common.requestFailed	request failed	リクエスト失敗	direct	false			true
+common.retry	Retry	再試行	direct	false			true
+common.timelineEmpty	No events.	イベントがありません。	direct	false			true
+common.unknown	unknown	不明	direct	false			true
+common.unknownModel	unknown model	不明なモデル	direct	false			true
+common.unknownTime	unknown time	不明な時刻	direct	false			true
+decision.actorLabel	Analyst ID	アナリストID	direct	false			true
+decision.decisionLabel	Decision	判断	direct	false			true
+decision.readOnly	Your role is read-only: decisions are disabled.	読み取り専用ロールのため判断は無効です。	direct	false			true
+decision.reasonLabel	Reason (required)	理由（必須）	direct	false			true
+decision.reasonRequired	A reason is required before recording a decision.	判断を記録する前に理由が必要です。	direct	false			true
+decision.record	Record decision	判断を記録	direct	false			true
+decision.recording	Recording…	記録中…	direct	false			true
+decision.selectFirst	Select a decision before recording.	記録する前に判断を選択してください。	direct	false			true
+decision.selectPlaceholder	Select a decision…	判断を選択…	direct	false			true
+decision.targetLabel	Move case to	案件の移動先	direct	false			true
+decision.terminal	This case is in a terminal state; no further transitions are allowed.	この案件は終了状態です。これ以上の遷移はできません。	direct	false			true
+decision.title	Human decision	人間の判断	direct	false			true
+demo.activityDown	Activity unavailable	アクティビティは利用できません	direct	false			true
+demo.aiBriefDown	AI brief unavailable	AI ブリーフは利用できません	direct	false			true
+demo.backendStatus	Backend status	バックエンドステータス	direct	false			true
+demo.checkedAt	Checked {url}…	{url} を確認…	direct	false	url	url	true
+demo.execOverview	Executive overview	エグゼクティブ概要	direct	false			true
+demo.execOverviewDown	Executive overview unavailable	エグゼクティブ概要は利用できません	direct	false			true
+demo.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	金融犯罪が1件の取引に現れることはめったにありません。CruiseShield AI は不審な取引・口座・デバイス・受益者・加盟店を、説明可能なインテリジェンスネットワークにつなぎます。	direct	false			true
+demo.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	確定的リスクエンジンがシグナルを特定し、Meta AI が調査官の証拠解釈を支援し、リプレイとシミュレーションで仮説シナリオを検討し、人間の判断は説明責任と監査可能性を保ちます。	direct	false			true
+demo.museBrief	Muse Spark brief	Muse Spark ブリーフ	direct	false			true
+demo.networkPreview	Network preview	ネットワークプレビュー	direct	false			true
+demo.networkPreviewDown	Network preview unavailable	ネットワークプレビューは利用できません	direct	false			true
+demo.recentActivity	Recent activity	最近のアクティビティ	direct	false			true
+demo.replayDown	Replay unavailable.	リプレイは利用できません。	direct	false			true
+demo.retryTitle	Retry {title}	{title} を再試行	direct	false	title	title	true
+demo.riskIntel	Risk intelligence	リスクインテリジェンス	direct	false			true
+demo.riskIntelDown	Risk intelligence unavailable	リスクインテリジェンスは利用できません	direct	false			true
+demo.startBackendPost	) and press retry.	）再試行を押してください。	direct	false			true
+demo.startBackendPre	Start the backend (	バックエンドを起動し（	direct	false			true
+demo.systemStatus	System Status	システムステータス	direct	false			true
+demo.systemStatusDown	System status unavailable	システムステータスは利用できません	direct	false			true
+evidence.clearSearch	Clear search	検索をクリア	direct	false			true
+evidence.emptyFilter	No evidence items match this filter.	一致する証拠がありません。	direct	false			true
+evidence.emptySearch	No evidence items match this search.	この検索に一致する証拠がありません。	direct	false			true
+evidence.filterAll	all	すべて	direct	false			true
+evidence.filterByType	Filter by type	種類で絞り込む	direct	false			true
+evidence.hideProv	Hide provenance	出所を隠す	direct	false			true
+evidence.pkgTitle	Evidence package ({a} of {b})	証拠パッケージ（{b}件中{a}件）	direct	false	a,b	a,b	true
+evidence.provEdges	Graph edges	グラフエッジ	direct	false			true
+evidence.provEvents	Events	イベント	direct	false			true
+evidence.provRules	Rule results	ルール結果	direct	false			true
+evidence.searchLabel	Search evidence	証拠を検索	direct	false			true
+evidence.searchPh	Filter by ID, type, title, or description	ID・種類・タイトル・説明で絞り込む	direct	false			true
+evidence.showProv	Show provenance	出所を表示	direct	false			true
+graph.animSpeed	Animation speed	アニメーション速度	direct	false			true
+graph.countsLine	Showing {a} of {b} nodes, {c} of {d} edges.	{b} 件中 {a} ノード、{d} 件中 {c} エッジを表示。	direct	false	a,b,c,d	a,b,c,d	true
+graph.detailEvidence	Evidence: 	証拠：	direct	false			true
+graph.detailProv	Provenance: 	出所：	direct	false			true
+graph.detailSource	Source: 	ソース：	direct	false			true
+graph.detailValidArrow	→	→	direct	true			true
+graph.detailValidPost	· Trace: 	· トレース：	direct	false			true
+graph.detailValidPre	Valid:	有効：	direct	false			true
+graph.droppedEdges.one	{count} edge hidden: endpoint unknown ({ids}).	{count} 件のエッジを非表示：端点不明（{ids}）。	direct	false	count,ids	count,ids	true
+graph.droppedEdges.other	{count} edges hidden: endpoint unknown ({ids}).	{count} 件のエッジを非表示：端点不明（{ids}）。	direct	false	count,ids	count,ids	true
+graph.edgeLabel	Edge {id}: {s} {r} {t}	エッジ {id}：{s} {r} {t}	direct	false	id,r,s,t	id,r,s,t	true
+graph.entityFilters	Entity type filters	エンティティ種別フィルター	direct	false			true
+graph.entityLegend	Entity legend	エンティティ凡例	direct	false			true
+graph.fit	Fit to screen	画面に合わせる	direct	false			true
+graph.focusIsolated	Focus has no connections in the current filter.	現在のフィルターではフォーカスに接続がありません。	direct	false			true
+graph.graphTitle	Network graph	ネットワークグラフ	direct	false			true
+graph.hideLabels	Hide labels	ラベルを隠す	direct	false			true
+graph.legendNote	Shapes + labels identify types (never color alone). Ring = graph steps from focus, not risk.	形状＋ラベルで種類を識別（色のみに依存しません）。リング＝フォーカスからのグラフ距離であり、リスクではありません。	direct	false			true
+graph.nodeFocusSuffix	, orbit focus	、オービタルフォーカス	direct	false			true
+graph.orbitFocusBadge	· orbit focus	· オービタルフォーカス	direct	false			true
+graph.orbitalCounts	Focus: {focus} · Showing {a} of {b} nodes, {c} of {d} edges.	フォーカス：{focus} · {b} 件中 {a} ノード、{d} 件中 {c} エッジを表示。	direct	false	a,b,c,d,focus	a,b,c,d,focus	true
+graph.orbitalLabel	Orbital graph	オービタルグラフ	direct	false			true
+graph.orbitalNote	Synthetic demo data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	合成デモデータ。リングと動きはレイアウトのみであり、リスク・有罪・優先度を示しません。	direct	false			true
+graph.orbitalSvg	Orbital graph focused on {focus}: {a} nodes, {b} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.	{focus} にフォーカスしたオービタルグラフ：{a} ノード、{b} エッジ。Tab でノードとエッジに移動、Enter で選択、矢印キーで移動。	direct	false	a,b,focus	a,b,focus	true
+graph.orbitalTitle	Orbital explorer	オービタルエクスプローラー	direct	false			true
+graph.orbitalViewControls	Orbital view controls	オービタルビュー操作	direct	false			true
+graph.pauseAnim	Pause animation	アニメーションを一時停止	direct	false			true
+graph.pin	Pin as orbit focus	オービタルフォーカスに固定	direct	false			true
+graph.playAnim	Play animation	アニメーションを再生	direct	false			true
+graph.reducedMotionPause	Paused by default: reduced-motion preference detected.	既定で一時停止：モーション軽減設定を検出しました。	direct	false			true
+graph.relFilters	Relationship filters	関係フィルター	direct	false			true
+graph.relationships.one	{count} relationship	{count} 件の関係	direct	false	count	count	true
+graph.relationships.other	{count} relationships	{count} 件の関係	direct	false	count	count	true
+graph.resetView	Reset view	ビューをリセット	direct	false			true
+graph.sectionLabel	Network graph	ネットワークグラフ	direct	false			true
+graph.selectPrompt	Select a node or edge for details.	詳細を見るノードまたはエッジを選択してください。	direct	false			true
+graph.showLabels	Show labels	ラベルを表示	direct	false			true
+graph.speed	Speed	速度	direct	false			true
+graph.svgLabel	Network graph: {a} nodes, {b} edges. Use Tab to reach nodes and edges, Enter to select, arrow keys on the graph to pan.	ネットワークグラフ：{a} ノード、{b} エッジ。Tab でノードとエッジに移動、Enter で選択、グラフ上で矢印キーで移動。	direct	false	a,b	a,b	true
+graph.tableCaption	Every relationship with provenance and evidence references.	すべての関係に出所と証拠参照付き。	direct	false			true
+graph.tableCounts	{a} nodes, {b} edges — the complete record behind the graph above.	{a} ノード、{b} エッジ — 上のグラフの背後にある完全な記録。	direct	false	a,b	a,b	true
+graph.tableEmpty	No relationships in this graph.	このグラフに関係はありません。	direct	false			true
+graph.tableLabel	Relationship table	関係テーブル	direct	false			true
+graph.tableTitle	All relationships	すべての関係	direct	false			true
+graph.thEdge	Edge	エッジ	direct	false			true
+graph.thEvidence	Evidence	証拠	direct	false			true
+graph.thProv	Provenance events	出所イベント	direct	false			true
+graph.thRel	Relationship	関係	direct	false			true
+graph.thSource	Source	ソース	direct	false			true
+graph.thTarget	Target	ターゲット	direct	false			true
+graph.unpin	Unpin focus	フォーカスを外す	direct	false			true
+graph.viewControls	Graph view controls	グラフビュー操作	direct	false			true
+graph.zoomIn	Zoom in	拡大	direct	false			true
+graph.zoomOut	Zoom out	縮小	direct	false			true
+intel.accountCount.one	{count} account	{count} 件の口座	direct	false	count	count	true
+intel.accountCount.other	{count} accounts	{count} 件の口座	direct	false	count	count	true
+intel.addressPre	address: 	アドレス：	direct	false			true
+intel.candidateFindings.one	{count} finding	{count} 件の所見	direct	false	count	count	true
+intel.candidateFindings.other	{count} findings	{count} 件の所見	direct	false	count	count	true
+intel.candidateH	Candidate risk intelligence	候補リスクインテリジェンス	direct	false			true
+intel.candidateOff	Candidate engine risk-intelligence-v2-candidate is OFF (default). Authoritative engine: risk-score-v1. Candidate findings never replace v1 scores.	候補エンジン risk-intelligence-v2-candidate はオフです（既定）。権威あるエンジン：risk-score-v1。候補の所見が v1 スコアに取って代わることはありません。	direct	false			true
+intel.candidateOnPost	, no numeric score ({note}). v1 remains authoritative.	、数値スコアなし（{note}）。v1 が権威のままです。	direct	false	note	note	true
+intel.candidateOnPre	Candidate engine enabled: 	候補エンジンが有効：	direct	false			true
+intel.deviceH	Device	デバイス	direct	false			true
+intel.evidencePre	Evidence: 	証拠：	direct	false			true
+intel.findingsCount.one	{count} finding	{count} 件の所見	direct	false	count	count	true
+intel.findingsCount.other	{count} findings	{count} 件の所見	direct	false	count	count	true
+intel.findingsH	Intelligence findings	インテリジェンス所見	direct	false			true
+intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic demo values only.	フィクスチャ参照であり、検証済みのフィンガープリントではありません。属性：申告された合成デモ値のみ。	direct	false			true
+intel.geoDisclaimer	IP-derived locations are approximate and never proof of physical presence. No GPS collection exists (permission: unavailable).	IP 由来の位置は概算であり、物理的な所在の証明にはなりません。GPS 収集はありません（許可：利用不可）。	direct	false			true
+intel.geoH	Geolocation	位置情報	direct	false			true
+intel.intelDown	Intelligence unavailable for this investigation.	この調査のインテリジェンスは利用できません。	direct	false			true
+intel.intelTitle	Device, IP & location intelligence	デバイス・IP・位置情報インテリジェンス	direct	false			true
+intel.ipH	IP & network	IP とネットワーク	direct	false			true
+intel.ispLabel	ISP/ASN	ISP/ASN	direct	true			true
+intel.limitsLine	Limits: {list}	制限：{list}	direct	false	list	list	true
+intel.noDevice	No device observations. (unknown)	デバイスの観測がありません。（不明）	direct	false			true
+intel.noFindings	No findings. (insufficient evidence)	所見がありません。（証拠不十分）	direct	false			true
+intel.noGeo	No location observations. (unknown)	位置の観測がありません。（不明）	direct	false			true
+intel.noIp	No IP observations. (unknown)	IP の観測がありません。（不明）	direct	false			true
+intel.noLinkage	No transaction linkage. (unknown)	取引の関連付けがありません。（不明）	direct	false			true
+intel.obsCount.one	{count} observation	{count} 件の観測	direct	false	count	count	true
+intel.obsCount.other	{count} observations	{count} 件の観測	direct	false	count	count	true
+intel.observedOnly	— observed	— 観測済み	direct	false			true
+intel.observedPost	· source {s}	· ソース {s}	direct	false	s	s	true
+intel.observedPre	Observed	観測済み	direct	false			true
+intel.provMeta	· provenance {p} · confidence {c} · freshness {f}	· 出所 {p} · 信頼度 {c} · 鮮度 {f}	direct	false	c,f,p	c,f,p	true
+intel.repLabel	Reputation	評価	direct	false			true
+intel.reviewLine	Human review: {r}	人間のレビュー：{r}	direct	false	r	r	true
+intel.seeBackend	see backend	バックエンド参照	direct	false			true
+intel.sharedDevice	— shared device	— 共有デバイス	direct	false			true
+intel.statusLine	{findings} · {iso} · synthetic demo data.	{findings} · {iso} · 合成デモデータ。	direct	false	findings,iso	findings,iso	true
+intel.syntheticTag	· synthetic demo	· 合成デモ	direct	false			true
+intel.unknownShort	(unknown)	（不明）	direct	false			true
+intel.vpnLabel	VPN/proxy/Tor	VPN/プロキシ/Tor	direct	false			true
+investigation.aiAnalysis	AI analysis	AI 分析	direct	false			true
+investigation.casePost	· status {status} (read-only in this batch)	· ステータス {status}（このバッチでは読み取り専用）	direct	false	status	status	true
+investigation.casePre	Case 	案件 	direct	false			true
+investigation.crumb	Investigation {id}	調査 {id}	direct	false	id	id	true
+investigation.evidence	Evidence	証拠	direct	false			true
+investigation.evidenceLabel	Evidence: 	証拠：	direct	false			true
+investigation.intelligence	Intelligence	インテリジェンス	direct	false			true
+investigation.loading	Loading investigation…	調査を読み込み中…	direct	false			true
+investigation.notFoundPost	 exists in the backend.	 はバックエンドに存在しません。	direct	false			true
+investigation.notFoundPre	No investigation 	調査 	direct	false			true
+investigation.notFoundTitle	Investigation not found	調査が見つかりません	direct	false			true
+investigation.notTriggered	not triggered	未トリガー	direct	false			true
+investigation.overview	Overview	概要	direct	false			true
+investigation.overviewLinePre	{sender} → {receiver} · channel {channel} ·	{sender} → {receiver} · チャネル {channel} ·	direct	false	channel,receiver,sender	channel,receiver,sender	true
+investigation.riskLine	network risk · transaction-only {score}/100 {band} · {version}	ネットワークリスク · 取引のみ {score}/100 {band} · {version}	direct	false	band,score,version	band,score,version	true
+investigation.title	Investigation {id}	調査 {id}	direct	false	id	id	true
+investigation.triggered	triggered	トリガー済み	direct	false			true
+investigation.txnTitle	Transaction #{n}	取引 #{n}	direct	false	n	n	true
+investigation.whyEmpty	No rule results returned for this assessment.	この評価にはルール結果が返されませんでした。	direct	false			true
+investigation.whyRisk	Why this risk?	なぜこのリスクか？	direct	false			true
+investigation.whyRiskLink	Why this risk	なぜこのリスクか	direct	false			true
+landing.beneficiaries	Built for fraud investigators, compliance teams, and financial institutions fighting money laundering and scams.	詐欺調査官、コンプライアンスチーム、マネーロンダリングや詐欺と戦う金融機関のために作られました。	direct	false			true
+landing.brandName	CruiseShield AI™	CruiseShield AI™	direct	true			true
+landing.capSubs.0	Suspicious Patterns	不審なパターン	direct	false			true
+landing.capSubs.1	Behaviour and Network	行動とネットワーク	direct	false			true
+landing.capSubs.2	Device Linkage	デバイスの関連付け	direct	false			true
+landing.capSubs.3	Network Signals	ネットワークシグナル	direct	false			true
+landing.capSubs.4	Global Context	グローバルな文脈	direct	false			true
+landing.capSubs.5	Relationship Mapping	関係マッピング	direct	false			true
+landing.capSubs.6	Case Management	ケース管理	direct	false			true
+landing.capSubs.7	Explainable Insights	説明可能な洞察	direct	false			true
+landing.capSubs.8	Deterministic Scoring	確定的スコアリング	direct	false			true
+landing.capSubs.9	Full Traceability	完全な追跡可能性	direct	false			true
+landing.capTitle	One platform, ten intelligence layers	一つのプラットフォーム、十層のインテリジェンス	direct	false			true
+landing.capTitles.0	Transaction Monitoring	取引モニタリング	direct	false			true
+landing.capTitles.1	Account Intelligence	口座インテリジェンス	direct	false			true
+landing.capTitles.2	Device Analytics	デバイス分析	direct	false			true
+landing.capTitles.3	IP Intelligence	IP インテリジェンス	direct	false			true
+landing.capTitles.4	Geolocation Analysis	位置情報分析	direct	false			true
+landing.capTitles.5	Network Graph	ネットワークグラフ	direct	false			true
+landing.capTitles.6	Investigations	調査	direct	false			true
+landing.capTitles.7	AI Intelligence	AI インテリジェンス	direct	false			true
+landing.capTitles.8	Risk Engine	リスクエンジン	direct	false			true
+landing.capTitles.9	Evidence & Audit	証拠と監査	direct	false			true
+landing.controlsAmbient	Ambient sound	環境音	direct	false			true
+landing.cta	Explore CruiseShield AI™	CruiseShield AI™ を探索	direct	false			true
+landing.ctaSub	Enter the Interactive Demo Experience	インタラクティブなデモ体験へ	direct	false			true
+landing.enterDemo	Enter Demo	デモに入る	direct	false			true
+landing.eyebrow	Global Financial Intelligence	グローバル金融インテリジェンス	direct	false			true
+landing.fallbackNote	Interactive 3D is unavailable in this browser. The full demo experience remains open.	このブラウザではインタラクティブ 3D を利用できません。完全なデモ体験は引き続きご利用いただけます。	direct	false			true
+landing.footerDemo	Demonstration experience · synthetic data · illustrative network visuals · 	デモ体験 · 合成データ · イメージのネットワークビジュアル · 	direct	false			true
+landing.footerLine	One Platform. A Safer Financial Future. For Everyone.	一つのプラットフォーム。より安全な金融の未来。すべての人のために。	direct	false			true
+landing.footerLink	Enter the interactive demo	インタラクティブなデモに入る	direct	false			true
+landing.fullMotion	Full motion	フルモーション	direct	false			true
+landing.h1	A Safer Financial World	より安全な金融の世界へ	direct	false			true
+landing.home	CruiseShield AI home	CruiseShield AI ホーム	direct	false			true
+landing.illustrative	Illustrative Network View	イメージのネットワークビュー	direct	false			true
+landing.intelItems.0	Transaction Monitoring	取引モニタリング	direct	false			true
+landing.intelItems.1	Account Intelligence	口座インテリジェンス	direct	false			true
+landing.intelItems.2	Device Intelligence	デバイスインテリジェンス	direct	false			true
+landing.intelItems.3	IP Intelligence	IP インテリジェンス	direct	false			true
+landing.intelItems.4	Geolocation Intelligence	位置情報インテリジェンス	direct	false			true
+landing.intelItems.5	Network Graph	ネットワークグラフ	direct	false			true
+landing.intelItems.6	AI Investigation	AI 調査	direct	false			true
+landing.intelItems.7	Risk Analysis	リスク分析	direct	false			true
+landing.intelItems.8	Evidence and Audit	証拠と監査	direct	false			true
+landing.intelNote	Demonstration capabilities · synthetic data	デモ機能 · 合成データ	direct	false			true
+landing.intelStatus	Demo	デモ	direct	false			true
+landing.intelTitle	Global Intelligence	グローバルインテリジェンス	direct	false			true
+landing.intelligenceModules	Intelligence modules	インテリジェンスモジュール	direct	false			true
+landing.journey.0	DETECT	検出	direct	false			true
+landing.journey.1	CONNECT	接続	direct	false			true
+landing.journey.2	INVESTIGATE	調査	direct	false			true
+landing.journey.3	EXPLAIN	説明	direct	false			true
+landing.journey.4	VERIFY	検証	direct	false			true
+landing.journey.5	SIMULATE	シミュレーション	direct	false			true
+landing.journey.6	DECIDE	判断	direct	false			true
+landing.journey.7	AUDIT	監査	direct	false			true
+landing.journeyLabel	Investigation workflow	調査ワークフロー	direct	false			true
+landing.metricSubs.0	Illustrative Global Coverage	イメージのグローバルカバレッジ	direct	false			true
+landing.metricSubs.1	Country and Regional Intelligence	国と地域のインテリジェンス	direct	false			true
+landing.metricSubs.2	Intelligence Correlation	インテリジェンスの相関	direct	false			true
+landing.metricSubs.3	Explainable Investigation	説明可能な調査	direct	false			true
+landing.metricTitles.0	Global Reach	グローバルリーチ	direct	false			true
+landing.metricTitles.1	Jurisdictional Context	管轄の文脈	direct	false			true
+landing.metricTitles.2	Multi-Layer	多層	direct	false			true
+landing.metricTitles.3	Human Oversight	人間の監督	direct	false			true
+landing.moduleLines.0.0	Deterministic Scoring	確定的スコアリング	direct	false			true
+landing.moduleLines.0.1	Cross-Border Risk	国境を越えたリスク	direct	false			true
+landing.moduleLines.1.0	Explainable Insights	説明可能な洞察	direct	false			true
+landing.moduleLines.1.1	Human Oversight	人間の監督	direct	false			true
+landing.moduleLines.2.0	Regional Intelligence	地域インテリジェンス	direct	false			true
+landing.moduleLines.2.1	Cross-Border Relationships	国境を越えた関係	direct	false			true
+landing.moduleLines.3.0	Proactive Protection	能動的防御	direct	false			true
+landing.moduleLines.3.1	Financial Crime Intelligence	金融犯罪インテリジェンス	direct	false			true
+landing.moduleLines.4.0	Privacy	プライバシー	direct	false			true
+landing.moduleLines.4.1	Governance	ガバナンス	direct	false			true
+landing.moduleLines.4.2	Enterprise Architecture	エンタープライズアーキテクチャ	direct	false			true
+landing.moduleTitles.0	Risk Intelligence	リスクインテリジェンス	direct	false			true
+landing.moduleTitles.1	AI Analysis	AI 分析	direct	false			true
+landing.moduleTitles.2	Global Network	グローバルネットワーク	direct	false			true
+landing.moduleTitles.3	Cyber Defense	サイバー防御	direct	false			true
+landing.moduleTitles.4	Secure Infrastructure	セキュアなインフラ	direct	false			true
+landing.modulesNote	Illustrative module concepts · capabilities vary by deployment	モジュール概念はイメージです · 機能は導入により異なります	direct	false			true
+landing.offWord	Off	オフ	direct	false			true
+landing.onWord	On	オン	direct	false			true
+landing.pauseScene	Pause scene	シーンを一時停止	direct	false			true
+landing.platformPrinciples	Platform principles	プラットフォームの原則	direct	false			true
+landing.platformQualities	Platform qualities	プラットフォームの特長	direct	false			true
+landing.problem	Financial crime hides in disconnected transactions. CruiseShield AI connects them — deterministic risk scoring, relationship graphs, and evidence-grounded AI explanations, with a human investigator deciding.	金融犯罪は、つながりのない取引の影に潜んでいます。CruiseShield AI はそれらをつなぎます——確定的リスクスコアリング、関係グラフ、証拠に基づく AI の説明。そして人間の調査官が判断を下します。	direct	false			true
+landing.reduceMotion	Reduce motion	動きを減らす	direct	false			true
+landing.regions.0	North America	北アメリカ	direct	false			true
+landing.regions.1	South America	南アメリカ	direct	false			true
+landing.regions.2	Europe	ヨーロッパ	direct	false			true
+landing.regions.3	Africa	アフリカ	direct	false			true
+landing.regions.4	Middle East	中東	direct	false			true
+landing.regions.5	Asia Pacific	アジア太平洋	direct	false			true
+landing.regions.6	Global Oceans	世界の海洋	direct	false			true
+landing.regions.7	Cross-Border Corridors	国境を越えた回廊	direct	false			true
+landing.regionsNote	Simulated regional signals · not live monitoring	シミュレーションによる地域シグナル · ライブ監視ではありません	direct	false			true
+landing.regionsTitle	Global Intelligence Regions	グローバルインテリジェンス地域	direct	false			true
+landing.replayLink	try replay & simulation	リプレイとシミュレーションを試す	direct	false			true
+landing.resumeScene	Resume scene	シーンを再開	direct	false			true
+landing.sceneMotion	Scene motion	シーンの動き	direct	false			true
+landing.signals.0	Secure	安全	direct	false			true
+landing.signals.1	Intelligent	インテリジェント	direct	false			true
+landing.signals.2	Global	グローバル	direct	false			true
+landing.signals.3	Auditable	監査可能	direct	false			true
+landing.soundLabel	Sound	音	direct	false			true
+landing.stripNote	Cards open the matching live demo screen · 	カードから対応するライブデモ画面を開きます · 	direct	false			true
+landing.tagline	The Financial Crime Immune System™	The Financial Crime Immune System™	direct	true			true
+landing.volumeLabel	Volume	音量	direct	false			true
+nav.aiIntelligence	AI Intelligence	AIインテリジェンス	direct	false			true
+nav.auditTrail	Audit Trail	監査証跡	direct	false			true
+nav.brand	CruiseShield AI	CruiseShield AI	direct	true			true
+nav.cases	Cases	案件	direct	false			true
+nav.closeNav	Close navigation	ナビゲーションを閉じる	direct	false			true
+nav.commandCenter	Command Center	コマンドセンター	direct	false			true
+nav.demoRole	demo role	デモ役割	direct	false			true
+nav.evidence	Evidence	証拠	direct	false			true
+nav.exploreNetwork	Explore Network	ネットワークを探索	direct	false			true
+nav.home	CruiseShield AI home	CruiseShield AI ホーム	direct	false			true
+nav.investigations	Investigations	調査	direct	false			true
+nav.investigator	Investigator	調査員	direct	false			true
+nav.networkExplorer	Network Explorer	ネットワークエクスプローラー	direct	false			true
+nav.primary	Primary	プライマリ	direct	false			true
+nav.quickActions	Quick Actions	クイックアクション	direct	false			true
+nav.replaySimulation	Replay & Simulation	リプレイとシミュレーション	direct	false			true
+nav.roleDemo	{role} · demo	{role} · デモ	direct	false	role	role	true
+nav.runSimulation	Run Simulation	シミュレーションを実行	direct	false			true
+nav.signOut	Sign out	サインアウト	direct	false			true
+nav.signOutEverywhere	Sign out everywhere	すべての場所でサインアウト	direct	false			true
+nav.signOutEverywhereTitle	End this session on every device and browser	すべてのデバイスとブラウザでこのセッションを終了	direct	false			true
+nav.synthetic	Synthetic demo data	合成デモデータ	direct	false			true
+nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
+nav.toggleNav	Toggle navigation	ナビゲーション切替	direct	false			true
+nav.viewAuditTrail	View Audit Trail	監査証跡を表示	direct	false			true
+network.countsLine	{nodes} nodes, {edges} edges · provenance errors: {n}	{nodes} ノード、{edges} エッジ · 出所エラー：{n}	direct	false	edges,n,nodes	edges,n,nodes	true
+network.crumb	Network {id}	ネットワーク {id}	direct	false	id	id	true
+network.emptyGraph	This transaction has no network graph in the backend.	この取引にはバックエンドにネットワークグラフがありません。	direct	false			true
+network.flat	Flat (fallback)	フラット（フォールバック）	direct	false			true
+network.headTitle	Network explorer — {id}	ネットワークエクスプローラー — {id}	direct	false	id	id	true
+network.loading	Loading network graph…	ネットワークグラフを読み込み中…	direct	false			true
+network.notFoundPost	 exists in the backend.	 はバックエンドに存在しません。	direct	false			true
+network.notFoundPre	No transaction 	取引 	direct	false			true
+network.notFoundTitle	Transaction not found	取引が見つかりません	direct	false			true
+network.orbital	Orbital	オービタル	direct	false			true
+network.overlayDown	Intelligence overlay unavailable.	インテリジェンスオーバーレイは利用できません。	direct	false			true
+network.overlayLine	Intelligence overlay (derived, synthetic): {nodes} nodes, {edges} edges	インテリジェンスオーバーレイ（派生・合成）：{nodes} ノード、{edges} エッジ	direct	false	edges,nodes	edges,nodes	true
+network.overlayMissing	· unavailable: {list}	· 利用不可：{list}	direct	false	list	list	true
+network.provErrors	Provenance errors: {list}	出所エラー：{list}	direct	false	list	list	true
+network.title	Network {id}	ネットワーク {id}	direct	false	id	id	true
+network.viewLabel	Graph view	グラフビュー	direct	false			true
+notify.bellLoading	Notifications, loading	通知、読み込み中	direct	false			true
+notify.bellOpen	Notifications, {n} open	通知、{n} 件未読	direct	false	n	n	true
+notify.closeNotif	Close notifications	通知を閉じる	direct	false			true
+notify.loadingAlerts	Loading alerts…	アラートを読み込み中…	direct	false			true
+notify.networkLink	Network	ネットワーク	direct	false			true
+notify.noAlerts	No alerts.	アラートはありません。	direct	false			true
+notify.openInv	Open investigation	調査を開く	direct	false			true
+notify.panelLabel	Notifications	通知	direct	false			true
+notify.panelTitle	Notifications	通知	direct	false			true
+replay.cancel	Cancel	キャンセル	direct	false			true
+replay.confirmReset	Confirm: this clears decisions, simulations, AI runs, and audit history for {id}.	確認：{id} の判断、シミュレーション、AI 実行、監査履歴をクリアします。	direct	false	id	id	true
+replay.confirmResetBtn	Confirm reset	リセットを確認	direct	false			true
+replay.controlsLabel	Replay controls	リプレイ操作	direct	false			true
+replay.controlsTitle	Deterministic replay	確定的リプレイ	direct	false			true
+replay.crumb	Replay {id}	リプレイ {id}	direct	false	id	id	true
+replay.currentTxnPre	Transaction 	取引 	direct	false			true
+replay.headTitle	Replay & simulation — {title}	リプレイとシミュレーション — {title}	direct	false	title	title	true
+replay.loading	Loading scenario…	シナリオを読み込み中…	direct	false			true
+replay.notFoundPost	 exists in the backend.	 はバックエンドに存在しません。	direct	false			true
+replay.notFoundPre	No scenario 	シナリオ 	direct	false			true
+replay.notFoundTitle	Scenario not found	シナリオが見つかりません	direct	false			true
+replay.pause	Pause	一時停止	direct	false			true
+replay.play	Play	再生	direct	false			true
+replay.positionLine	Step {c} of {t} · {e} events · {x} transactions · {g} edges	ステップ {c}/{t} · {e} イベント · {x} 取引 · {g} エッジ	direct	false	c,e,g,t,x	c,e,g,t,x	true
+replay.reducedMotionPlay	Auto-play disabled: reduced-motion preference detected. Use Step forward.	自動再生は無効です：モーション軽減設定を検出しました。「1つ進む」を使ってください。	direct	false			true
+replay.resetBlurb	Reset restores the seeded scenario exactly and clears all live state: human decisions, simulations, AI runs, and audit events beyond the reset itself.	リセットはシードシナリオを正確に復元し、すべてのライブ状態（人間の判断、シミュレーション、AI 実行、リセット自体を超える監査イベント）をクリアします。	direct	false			true
+replay.resetDemo	Reset demo	デモをリセット	direct	false			true
+replay.resetDoneMid	, seed 	、シード 	direct	false			true
+replay.resetDonePost	. Reload the page to replay from the restored state.	。復元された状態からリプレイするにはページを再読み込みしてください。	direct	false			true
+replay.resetDonePre	Reset complete: run 	リセット完了：実行 	direct	false			true
+replay.resetLabel	Scenario reset	シナリオのリセット	direct	false			true
+replay.resetTitle	Scenario reset	シナリオのリセット	direct	false			true
+replay.resetting	Resetting…	リセット中…	direct	false			true
+replay.restart	Restart	最初から	direct	false			true
+replay.scenarioPre	Scenario 	シナリオ 	direct	false			true
+replay.startHint	At the start: no events applied yet. Step forward to begin.	開始地点：まだイベントは適用されていません。進んで開始してください。	direct	false			true
+replay.stepBack	Step back	1つ戻る	direct	false			true
+replay.stepControls	Replay step controls	リプレイステップ操作	direct	false			true
+replay.stepFwd	Step forward	1つ進む	direct	false			true
+replay.title	Replay {id}	リプレイ {id}	direct	false	id	id	true
+selector.buttonLabel	Select language	言語を選択	direct	false			true
+selector.fallbackNote	English shown — translation unavailable	英語を表示 — 翻訳がありません	direct	false			true
+selector.label	Language	言語	direct	false			true
+selector.panelTitle	Select language	言語を選択	direct	false			true
+selector.partialTag	Partial	一部	direct	false			true
+selector.resultsEmpty	No languages match your search.	検索に一致する言語がありません。	direct	false			true
+selector.searchLabel	Search languages	言語を検索	direct	false			true
+selector.searchPlaceholder	Search languages…	言語を検索…	direct	false			true
+selector.translatedTag	Translated	翻訳済み	direct	false			true
+selector.unavailableTag	English fallback	英語フォールバック	direct	false			true
+sim.assumptionLabel	Assumption (recorded with the run)	仮定（実行とともに記録）	direct	false			true
+sim.assumptionLine	Assumption: {a}	仮定：{a}	direct	false	a	a	true
+sim.assumptionPh	e.g. Shared devices are coincidental, not shared control.	例：共有デバイスは偶然であり、共有支配ではない。	direct	false			true
+sim.baselineLine	Authoritative baseline (network): {s}/100 {b}. This value never changes.	権威あるベースライン（ネットワーク）：{s}/100 {b}。この値は変わりません。	direct	false	b,s	b,s	true
+sim.ignoredPre	Ignored: 	無視：	direct	false			true
+sim.legendLine	Relationships to ignore ({a} of {b} selected)	無視する関係（{b} 件中 {a} 件選択）	direct	false	a,b	a,b	true
+sim.loadEdges	Load edges	エッジを読み込む	direct	false			true
+sim.loadingTarget	Loading target…	対象を読み込み中…	direct	false			true
+sim.readOnlySim	Your role is read-only: simulations are disabled.	読み取り専用ロールのためシミュレーションは無効です。	direct	false			true
+sim.runSim	Run simulation	シミュレーションを実行	direct	false			true
+sim.running	Running…	実行中…	direct	false			true
+sim.simBanner	SIMULATED — hypothetical, not a real-world prediction.	シミュレーション — 仮説であり、現実世界の予測ではありません。	direct	false			true
+sim.simLabel	What-if simulation	仮説シミュレーション	direct	false			true
+sim.simRunPost	: baseline {a}/100 {b} → simulated {c}/100 {d}	：ベースライン {a}/100 {b} → シミュレーション {c}/100 {d}	direct	false	a,b,c,d	a,b,c,d	true
+sim.simRunPre	Run 	実行 	direct	false			true
+sim.simTitle	What-if simulation	仮説シミュレーション	direct	false			true
+sim.targetDown	Target unavailable: {err}	対象は利用不可：{err}	direct	false	err	err	true
+sim.targetLabel	Target transaction	対象取引	direct	false			true
+system.allOk	All systems operational	すべてのシステムは正常です	direct	false			true
+system.checkedPre	Checked	確認	direct	false			true
+system.rowAi	AI Engine (Muse Spark)	AI エンジン（Muse Spark）	direct	false			true
+system.rowApi	API Services	API サービス	direct	false			true
+system.rowGraph	Graph Provenance	グラフ出所	direct	false			true
+system.rowSeed	Seed Integrity	シード整合性	direct	false			true
+system.scenarioPre	Scenario {s} · Run 	シナリオ {s} · 実行 	direct	false	s	s	true
+system.stDegraded	Degraded	低下	direct	false			true
+system.stNotConfigured	Not configured	未設定	direct	false			true
+system.stNotReported	Not reported	未報告	direct	false			true
+system.stOperational	Operational	正常	direct	false			true
+system.sysTitle	System Status	システムステータス	direct	false			true
+theme.appearance	Appearance	外観	direct	false			true
+theme.dark	Dark	ダーク	direct	false			true
+theme.light	Light	ライト	direct	false			true
+theme.system	System	システム	direct	false			true
+workflow.audit	Audit	監査	direct	false			true
+workflow.connect	Connect	接続	direct	false			true
+workflow.detect	Detect	検出	direct	false			true
+workflow.explain	Explain	説明	direct	false			true
+workflow.humanDecision	Human Decision	人間の判断	direct	false			true
+workflow.investigate	Investigate	調査	direct	false			true
+workflow.navLabel	Investigation workflow	調査ワークフロー	direct	false			true
+workflow.onThisPage	On this page	このページ内	direct	false			true
+workflow.simulate	Simulate	シミュレーション	direct	false			true

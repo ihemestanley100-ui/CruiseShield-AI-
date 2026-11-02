@@ -33,7 +33,11 @@ describe("SystemStatus", () => {
     expect(screen.getByText("Not configured")).toBeTruthy();
     expect(screen.getByText("Scenario scn_primary", { exact: false })).toBeTruthy();
     expect(screen.getByText("run_test", { exact: false })).toBeTruthy();
-    expect(screen.getByText("Checked Oct 30, 2026")).toBeTruthy();
+    // UGLS-02: the timestamp sits in <bdi> (RTL isolation), so the
+    // sentence spans two elements; textContent is unchanged.
+    const stamp = screen.getByText("Oct 30, 2026");
+    expect(stamp.tagName).toBe("BDI");
+    expect(stamp.parentElement?.textContent).toBe("Checked Oct 30, 2026");
   });
 
   it("treats PASS with backend detail as operational and shows the detail", () => {

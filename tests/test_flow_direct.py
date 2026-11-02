@@ -3,6 +3,8 @@
 Runs everywhere, including sandboxes that forbid socket creation.
 Transport-level coverage lives in test_api_flow.py (TestClient, gated).
 """
+import json
+
 import pytest
 from starlette.requests import Request
 
@@ -26,7 +28,8 @@ def test_route_table_matches_contract():
         "/api/v1/investigations/{inv_id}/evidence-package",
         "/api/v1/investigations/{inv_id}/ai-analysis",
         "/api/v1/investigations/{inv_id}/ai-followup",
-        "/api/v1/ai-runs/{run_id}", "/api/v1/replay/{scenario_id}",
+        "/api/v1/ai-runs/{run_id}", "/api/v1/auth/logout-all",
+        "/api/v1/replay/{scenario_id}",
         "/api/v1/simulations", "/api/v1/cases", "/api/v1/cases/{case_id}",
         "/api/v1/cases/{case_id}/decisions", "/api/v1/cases/{case_id}/audit",
         "/api/v1/events",
@@ -180,3 +183,105 @@ def test_simulation_input_caps_reject_abuse(tmp_store):
     after = (len(tmp_store.state["simulations"]),
              len(tmp_store.state["audits"]))
     assert before == after
+
+
+def _pump(coro):
+    try:
+        coro.send(None)
+    except StopIteration as exc:
+        return exc.value
+    raise AssertionError("coroutine suspended on real I/O")
+
+
+def test_unknown_ids_404_direct(tmp_store):
+    """J3-P9: every unknown-identifier read fails closed with its code."""
+    cases = [
+        (main.get_investigation, ("inv_nope",), "UNKNOWN_INVESTIGATION"),
+        (main.build_evidence_package, ("inv_nope",), "UNKNOWN_INVESTIGATION"),
+        (main.get_case, ("case_nope",), "CASE_NOT_FOUND"),
+        (main.case_audit, ("case_nope",), "CASE_NOT_FOUND"),
+        (main.get_transaction, ("txn_nope",), "UNKNOWN_TRANSACTION"),
+        (main.get_graph, ("txn_nope",), "UNKNOWN_TRANSACTION"),
+        (main.get_risk, ("txn_nope",), "UNKNOWN_TRANSACTION"),
+        (main.get_replay, ("scn_nope",), "UNKNOWN_SCENARIO"),
+        (main.get_ai_run, ("agentrun_9999",), "UNKNOWN_RUN"),
+    ]
+    for fn, args, code in cases:
+        with pytest.raises(main.AppError) as exc:
+            fn(*args)
+        assert (exc.value.code, exc.value.status) == (code, 404), fn.__name__
+
+
+def test_risk_bogus_scope_400_direct(tmp_store):
+    with pytest.raises(main.AppError) as exc:
+        main.get_risk("txn_84721", scope="bogus")
+    assert (exc.value.code, exc.value.status) == ("UNKNOWN_SCOPE", 400)
+
+
+def test_ai_endpoints_validate_before_model_call(tmp_store, monkeypatch):
+    """J3-P9: unknown-inv + bad followup bodies 404/400 pre-provider."""
+    from app import ai_adapter
+
+    monkeypatch.setattr(ai_adapter, "MODEL_API_KEY", "")
+    with pytest.raises(main.AppError) as exc:
+        _pump(main.ai_analysis("inv_nope", _req()))
+    assert exc.value.code == "UNKNOWN_INVESTIGATION"
+    with pytest.raises(main.AppError) as exc:
+        _pump(main.ai_followup("inv_nope", {"question": "q?"}, _req()))
+    assert exc.value.code == "UNKNOWN_INVESTIGATION"
+    with pytest.raises(main.AppError) as exc:
+        _pump(main.ai_followup("inv_84721", {"question": "  "}, _req()))
+    assert (exc.value.code, exc.value.status) == ("QUESTION_REQUIRED", 400)
+    with pytest.raises(main.AppError) as exc:
+        _pump(main.ai_followup(
+            "inv_84721", {"question": "q" * 2001}, _req()))
+    assert (exc.value.code, exc.value.status) == ("QUESTION_TOO_LONG", 400)
+
+
+def test_simulation_and_decision_domain_errors_direct(tmp_store):
+    with pytest.raises(main.AppError) as exc:
+        main.post_simulation({"target_transaction_id": "txn_nope",
+                              "ignored_edge_ids": [], "assumption": "a"},
+                             _req())
+    assert exc.value.status == 404
+    with pytest.raises(main.AppError) as exc:
+        main.post_simulation({"target_transaction_id": "txn_84721",
+                              "ignored_edge_ids": ["edge_nope"],
+                              "assumption": "a"}, _req())
+    assert (exc.value.code, exc.value.status) == ("UNKNOWN_EDGE", 404)
+    with pytest.raises(main.AppError) as exc:
+        main.post_decision("case_nope", {"decision": "Escalate",
+                                         "reason": "r"}, _req())
+    assert (exc.value.code, exc.value.status) == ("CASE_NOT_FOUND", 404)
+    with pytest.raises(main.AppError) as exc:
+        main.post_decision("case_84721", {"decision": "CONFIRM",
+                                          "reason": "r"}, _req())
+    assert (exc.value.code, exc.value.status) == ("INVALID_DECISION", 400)
+
+
+def test_demo_reset_unknown_scenario_404_direct(tmp_store):
+    # J3 closeout (backend EV2): reset payload errors fail closed.
+    with pytest.raises(main.AppError) as exc:
+        main.demo_reset(_req(), {"scenario_id": "scn_nope"})
+    assert (exc.value.code, exc.value.status) == ("UNKNOWN_SCENARIO", 404)
+    with pytest.raises(main.AppError) as exc:
+        main.demo_start("scn_nope", _req())
+    assert (exc.value.code, exc.value.status) == ("UNKNOWN_SCENARIO", 404)
+
+
+def test_ai_run_read_roundtrip_direct(tmp_store):
+    # J3 closeout (AI EV21): a persisted run reads back by ID.
+    tmp_store.save_ai_run({"agent_run_id": "agentrun_42",
+                           "status": "SUCCEEDED"})
+    run = main.get_ai_run("agentrun_42")
+    assert run["status"] == "SUCCEEDED"
+
+
+def test_ready_envelope_direct(tmp_store):
+    # J3 closeout (backend EV0): readiness contract without sockets.
+    response = main.ready()
+    assert response.status_code == 200
+    body = json.loads(response.body.decode("utf-8"))
+    assert body["ready"] is True
+    assert body["store"] is True
+    assert body["backend"] == "json"

@@ -4,7 +4,8 @@ Design (zero-cost staging):
 - Stateless signed-cookie sessions (HMAC-SHA256, 12 h expiry). No server
   storage, so Render Free (no disk) and Neon-backed deployments all work.
 - Demo users from env: DEMO_USERS="name:role:hash,name:role:hash" with
-  PBKDF2-HMAC-SHA256 password records. Roles: investigator, admin.
+  PBKDF2-HMAC-SHA256 password records. Roles: investigator, admin,
+  auditor, demo_viewer (see PERMISSIONS; least privilege by default).
 - When SESSION_SECRET is UNSET (local demo default) auth is DISABLED and
   every endpoint behaves exactly as before (open). Setting the secret
   arms login enforcement. The write token (SEC-012) remains as a
@@ -15,6 +16,8 @@ Design (zero-cost staging):
 
 Generate a password record (owner runs locally, never commits values):
     python -m app.auth hash
+Provision a DEMO_USERS entry (prompts password, prints name:role:hash):
+    python -m app.auth provision <username> <role>
 """
 from __future__ import annotations
 
@@ -28,8 +31,23 @@ import time
 SESSION_COOKIE = "csai_session"
 SESSION_TTL_SECONDS = 12 * 3600
 PBKDF2_ITERATIONS = 210_000
-ROLES = ("investigator", "admin")
+ROLES = ("investigator", "admin", "auditor", "demo_viewer")
 LOGIN_LIMIT_PER_MINUTE = 10
+
+# J4: canonical role → permission matrix. Least privilege by default:
+# only investigator/admin mutate authoritative data; auditor reads
+# everything incl. audit trail; demo_viewer reads but not audits/AI.
+PERMISSIONS: dict[str, frozenset] = {
+    "admin": frozenset({"read", "audit_read", "ai_run", "write", "manage"}),
+    "investigator": frozenset({"read", "audit_read", "ai_run", "write"}),
+    "auditor": frozenset({"read", "audit_read"}),
+    "demo_viewer": frozenset({"read"}),
+}
+
+
+def can(role: str, perm: str) -> bool:
+    """True when the role grants the permission (unknown role: False)."""
+    return perm in PERMISSIONS.get(role, frozenset())
 
 
 def hash_password(password: str, salt: bytes | None = None) -> str:
@@ -82,15 +100,20 @@ def create_session(username: str, role: str, secret: str,
     moment = time.time() if now is None else now
     payload = _b64e(json.dumps(
         {"u": username, "r": role, "exp": int(moment) + SESSION_TTL_SECONDS,
-         "n": secrets.token_hex(8)}, separators=(",", ":")).encode())
+         "iat": int(moment), "n": secrets.token_hex(8)},
+        separators=(",", ":")).encode())
     sig = _b64e(hmac.new(secret.encode(), payload.encode(),
                          hashlib.sha256).digest())
     return payload + "." + sig
 
 
-def verify_session(token: str, secret: str,
-                   now: float | None = None) -> tuple[str, str] | None:
-    """Return (username, role) or None. Never raises on bad input."""
+def parse_session(token: str, secret: str,
+                  now: float | None = None) -> dict | None:
+    """Validate signature + expiry; return claims or None.
+
+    Never raises on bad input. Pre-J4 tokens lack "iat" (default 0):
+    they stay valid unless the user's epoch was bumped past 0.
+    """
     try:
         payload, sig = token.split(".", 1)
         expect = _b64e(hmac.new(secret.encode(), payload.encode(),
@@ -104,17 +127,71 @@ def verify_session(token: str, secret: str,
         user, role = str(data.get("u", "")), str(data.get("r", ""))
         if not user or role not in ROLES:
             return None
-        return user, role
+        return {"user": user, "role": role, "nonce": str(data.get("n", "")),
+                "iat": int(data.get("iat", 0)),
+                "exp": int(data.get("exp", 0))}
     except (ValueError, TypeError, KeyError):
         return None
+
+
+def verify_session(token: str, secret: str,
+                   now: float | None = None) -> tuple[str, str] | None:
+    """Return (username, role) or None. Never raises on bad input."""
+    claims = parse_session(token, secret, now)
+    if claims is None:
+        return None
+    return claims["user"], claims["role"]
+
+
+def verify_session_live(token: str, secret: str, store,
+                        users: dict[str, tuple[str, str]],
+                        now: float | None = None) -> dict | None:
+    """Full J4 validation: signature, expiry, revocation, epoch, status.
+
+    `store` supplies is_revoked(nonce, now) + epoch_of(user) (both
+    backends). `users` is parse_users(). Rejects: revoked nonce,
+    pre-epoch token (logout-all), deprovisioned user, changed role.
+    """
+    claims = parse_session(token, secret, now)
+    if claims is None:
+        return None
+    moment = time.time() if now is None else now
+    if store.is_revoked(claims["nonce"], moment):
+        return None
+    if claims["iat"] < store.epoch_of(claims["user"]):
+        return None
+    current = users.get(claims["user"])
+    if current is None or current[0] != claims["role"]:
+        return None
+    return claims
+
+
+def provision_line(username: str, role: str, password: str) -> str:
+    """Build one DEMO_USERS entry. Raises ValueError on bad input."""
+    name = (username or "").strip()
+    if not name or ":" in name or "," in name:
+        raise ValueError("bad username")
+    if role not in ROLES:
+        raise ValueError("unknown role: %s" % role)
+    return "%s:%s:%s" % (name, role, hash_password(password))
 
 
 if __name__ == "__main__":  # pragma: no cover - owner tooling
     import getpass
     import sys
 
-    if len(sys.argv) != 2 or sys.argv[1] != "hash":
-        print("usage: python -m app.auth hash")
+    if len(sys.argv) == 2 and sys.argv[1] == "hash":
+        print(hash_password(getpass.getpass("password: ")))
+    elif len(sys.argv) == 4 and sys.argv[1] == "provision":
+        try:
+            line = provision_line(
+                sys.argv[2], sys.argv[3],
+                getpass.getpass("password for %s: " % sys.argv[2]))
+        except ValueError as exc:
+            print("error: %s" % exc)
+            raise SystemExit(2)
+        print(line)
+    else:
+        print("usage: python -m app.auth hash |"
+              " provision <username> <role>")
         raise SystemExit(2)
-    secret_in = getpass.getpass("password: ")
-    print(hash_password(secret_in))

@@ -43,9 +43,24 @@ describe("GlobalLandingPage", () => {
     expect(
       screen.getByRole("heading", { name: "A Safer Financial World" })
     ).toBeTruthy();
-    for (const step of ["DETECT", "CONNECT", "EXPLAIN", "PREVENT", "PROTECT"]) {
+    for (const step of [
+      "DETECT",
+      "CONNECT",
+      "INVESTIGATE",
+      "EXPLAIN",
+      "VERIFY",
+      "SIMULATE",
+      "DECIDE",
+      "AUDIT",
+    ]) {
       expect(screen.getByText(step)).toBeTruthy();
     }
+    // Honest impact copy: problem, product, beneficiaries.
+    expect(
+      screen.getByText(/Financial crime hides in disconnected transactions/)
+    ).toBeTruthy();
+    expect(screen.getByText(/fraud investigators, compliance teams/)).toBeTruthy();
+    expect(screen.getByText("Auditable")).toBeTruthy();
     // Hero CTA + WebGL-fallback CTA both target /demo (jsdom has no WebGL).
     const ctas = screen.getAllByRole("link", { name: /Explore CruiseShield AI/ });
     expect(ctas.length).toBeGreaterThanOrEqual(1);
@@ -66,13 +81,13 @@ describe("GlobalLandingPage", () => {
       screen.getAllByText("Transaction Monitoring").length
     ).toBeGreaterThanOrEqual(2);
     expect(screen.getByText("Evidence and Audit")).toBeTruthy();
-    expect(screen.getByText("Satellite Intelligence")).toBeTruthy();
+    expect(screen.getByText("Risk Intelligence")).toBeTruthy();
     expect(screen.getByText("Secure Infrastructure")).toBeTruthy();
     expect(
       screen.getByRole("heading", { name: "Global Intelligence Regions" })
     ).toBeTruthy();
     expect(screen.getByText("Illustrative Network View")).toBeTruthy();
-    expect(screen.getByText("Orbital Layer")).toBeTruthy();
+    expect(screen.getByText("Cross-Border Corridors")).toBeTruthy();
     expect(
       screen.getByRole("heading", { name: "One platform, ten intelligence layers" })
     ).toBeTruthy();

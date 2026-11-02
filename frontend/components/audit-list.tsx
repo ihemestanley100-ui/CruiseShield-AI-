@@ -4,6 +4,7 @@
  * GET /api/v1/cases/{id}/audit, newest last (server order preserved). */
 
 import type { AuditEntry } from "../lib/api";
+import { useTranslation } from "../lib/i18n/context";
 
 /* Display trims fractional seconds ("2026-10-29 20:32:15 UTC"); the
  * full precision stays in dateTime/title. Shapes this cannot parse
@@ -21,28 +22,27 @@ interface Props {
 }
 
 export function AuditList({ audits }: Props) {
+  const { t, tp } = useTranslation("audit");
   return (
-    <section className="card" aria-label="Audit trail">
-      <h2 id="audit-h">Audit trail</h2>
+    <section className="card" aria-label={t("auditLabel")}>
+      <h2 id="audit-h">{t("auditTitle")}</h2>
       <p className="muted" data-testid="audit-counts">
-        {audits.length} audit event{audits.length === 1 ? "" : "s"}.
+        {tp("events", audits.length)}
       </p>
       {audits.length === 0 ? (
-        <p className="muted">No audit events recorded for this case.</p>
+        <p className="muted">{t("auditEmpty")}</p>
       ) : (
         <div className="table-scroll">
           <table>
-            <caption className="muted">
-              Every recorded action with actor, state change, and reason.
-            </caption>
+            <caption className="muted">{t("caption")}</caption>
             <thead>
               <tr>
-                <th scope="col">Event</th>
-                <th scope="col">Time</th>
-                <th scope="col">Actor</th>
-                <th scope="col">Action</th>
-                <th scope="col">State change</th>
-                <th scope="col">Reason</th>
+                <th scope="col">{t("thEvent")}</th>
+                <th scope="col">{t("thTime")}</th>
+                <th scope="col">{t("thActor")}</th>
+                <th scope="col">{t("thAction")}</th>
+                <th scope="col">{t("thState")}</th>
+                <th scope="col">{t("thReason")}</th>
               </tr>
             </thead>
             <tbody>

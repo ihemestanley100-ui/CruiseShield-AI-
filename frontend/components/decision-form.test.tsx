@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ApiError } from "../lib/api";
+import { publishSession } from "../lib/session";
 import { DecisionForm } from "./decision-form";
 
 const { postDecisionMock } = vi.hoisted(() => ({ postDecisionMock: vi.fn() }));
@@ -151,5 +152,46 @@ describe("DecisionForm", () => {
     );
     expect(screen.getByText(/terminal state/i)).toBeTruthy();
     expect(screen.queryByRole("button", { name: "Record decision" })).toBeNull();
+  });
+});
+
+describe("DecisionForm role gating (J4)", () => {
+  const AUDITOR = {
+    user: "ann",
+    role: "auditor",
+    permissions: ["read", "audit_read"],
+  };
+
+  beforeEach(() => {
+    publishSession({ mode: "open" });
+  });
+
+  it("disables submit with a notice for read-only roles", () => {
+    publishSession({ mode: "authed", session: AUDITOR });
+    render(
+      <DecisionForm
+        caseId="case_84721"
+        allowedTransitions={["TRIAGED"]}
+        onDecided={vi.fn()}
+      />
+    );
+    expect(
+      screen.getByRole("button", { name: "Record decision" })
+    ).toBeDisabled();
+    expect(screen.getByRole("note")).toHaveTextContent("read-only");
+  });
+
+  it("enables submit in open-demo mode", () => {
+    render(
+      <DecisionForm
+        caseId="case_84721"
+        allowedTransitions={["TRIAGED"]}
+        onDecided={vi.fn()}
+      />
+    );
+    expect(
+      screen.getByRole("button", { name: "Record decision" })
+    ).toBeEnabled();
+    expect(screen.queryByRole("note")).toBeNull();
   });
 });

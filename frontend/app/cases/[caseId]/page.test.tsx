@@ -391,4 +391,18 @@ describe("CasePage", () => {
       within(nav).getByText("Case case_84721").getAttribute("aria-current")
     ).toBe("page");
   });
+
+  it("isolates the ISO timestamp in <bdi> so RTL cannot scramble it", async () => {
+    // UGLS-02 Edge RTL QA: "2026-10-28T20:32:15.829Z" rendered as
+    // "29T20:32:15.82528OZ-10-2026" inside the Arabic sentence. The
+    // <bdi> wrapper keeps the value intact in RTL and is invisible
+    // in LTR (textContent pins below still hold).
+    render(<CasePage />);
+    const matches = await screen.findAllByText("2026-10-28T01:00:00Z");
+    const stamp = matches.find((el) => el.tagName === "BDI");
+    expect(stamp).toBeTruthy();
+    expect(stamp?.parentElement?.textContent).toBe(
+      "Investigation inv_84721 · updated 2026-10-28T01:00:00Z"
+    );
+  });
 });

@@ -104,6 +104,95 @@ def test_success_path_with_mock_transport(tmp_path, monkeypatch):
     assert "test-key" not in json.dumps(run)
 
 
+def _run_error(tmp_path, monkeypatch, handler):
+    """J3-P8 helper: drive analyze() against a mock transport; return AIError."""
+    package = _package(tmp_path)
+    monkeypatch.setattr(ai_adapter, "MODEL_API_KEY", "test-key")
+    with pytest.raises(ai_adapter.AIError) as exc:
+        asyncio.run(ai_adapter.analyze(
+            package, "summary", "trace_x", "agentrun_9",
+            transport=httpx.MockTransport(handler), retry_delays=()))
+    return exc.value
+
+
+@pytest.mark.skipif(
+    not CAN_LOOP,
+    reason="no event loop in this sandbox; runs in CI/user envs")
+def test_provider_429_retries_then_rate_limited(tmp_path, monkeypatch):
+    calls = []
+
+    def handler(request):
+        calls.append(request)
+        return httpx.Response(429, json={"error": "slow down"})
+
+    err = _run_error(tmp_path, monkeypatch, handler)
+    assert err.code == "MODEL_RATE_LIMITED"
+    assert len(calls) == ai_adapter.MAX_ATTEMPTS
+
+
+@pytest.mark.skipif(
+    not CAN_LOOP,
+    reason="no event loop in this sandbox; runs in CI/user envs")
+def test_provider_500_maps_without_retry(tmp_path, monkeypatch):
+    calls = []
+
+    def handler(request):
+        calls.append(request)
+        return httpx.Response(500, json={"error": "boom"})
+
+    err = _run_error(tmp_path, monkeypatch, handler)
+    assert err.code == "MODEL_PROVIDER_ERROR"
+    assert len(calls) == 1
+
+
+@pytest.mark.skipif(
+    not CAN_LOOP,
+    reason="no event loop in this sandbox; runs in CI/user envs")
+def test_provider_auth_failure_maps_without_retry(tmp_path, monkeypatch):
+    calls = []
+
+    def handler(request):
+        calls.append(request)
+        return httpx.Response(401, json={"error": "bad key"})
+
+    err = _run_error(tmp_path, monkeypatch, handler)
+    assert err.code == "MODEL_AUTH_FAILED"
+    assert len(calls) == 1
+
+
+@pytest.mark.skipif(
+    not CAN_LOOP,
+    reason="no event loop in this sandbox; runs in CI/user envs")
+def test_provider_timeout_fails_fast(tmp_path, monkeypatch):
+    def handler(request):
+        raise httpx.TimeoutException("too slow", request=request)
+
+    err = _run_error(tmp_path, monkeypatch, handler)
+    assert err.code == "MODEL_TIMEOUT"
+
+
+@pytest.mark.skipif(
+    not CAN_LOOP,
+    reason="no event loop in this sandbox; runs in CI/user envs")
+def test_provider_connection_error_maps(tmp_path, monkeypatch):
+    def handler(request):
+        raise httpx.ConnectError("refused")
+
+    err = _run_error(tmp_path, monkeypatch, handler)
+    assert err.code == "MODEL_PROVIDER_UNAVAILABLE"
+
+
+@pytest.mark.skipif(
+    not CAN_LOOP,
+    reason="no event loop in this sandbox; runs in CI/user envs")
+def test_provider_non_json_body_maps(tmp_path, monkeypatch):
+    def handler(request):
+        return httpx.Response(200, content=b"not json{")
+
+    err = _run_error(tmp_path, monkeypatch, handler)
+    assert err.code == "MALFORMED_RESPONSE"
+
+
 def _body(content=None, finish_reason="stop", request_id="req_1", **message_extra):
     message = {"role": "assistant"}
     if content is not None:
@@ -312,7 +401,7 @@ def test_hostile_followup_changes_nothing_authoritative(tmp_store,
     seen = {}
 
     async def hostile_analyze(package, summary, trace_id, run_id,
-                              question="", prior_context="",
+                              timeout=30, question="", prior_context="",
                               transport=None, retry_delays=None):
         seen["question"] = question
         return {"agent_run_id": run_id, "provider": "meta",
@@ -583,3 +672,50 @@ def test_ai_persistence_preserves_authoritative_state(tmp_path):
     assert after == before
     assert store.state["ai_runs"][-1]["agent_run_id"] == "agentrun_x"
     assert store.state["audits"][-1]["action"] == "ai.run.succeeded"
+
+
+def test_hostile_prior_context_cannot_forge_structure(tmp_path):
+    # J3 closeout (AI EV16): hostile prior analysis is neutralized by
+    # the shared quoter, exactly like the follow-up question.
+    package = _package(tmp_path)
+    messages = ai_adapter.build_followup_messages(
+        package, "summary", "Why?", HOSTILE_QUESTION)
+    user_text = messages[1]["content"]
+    assert user_text.count(ai_adapter.QUESTION_OPEN) == 1
+    assert user_text.count(ai_adapter.QUESTION_CLOSE) == 1
+    assert "<<<ANALYST_QUESTION" not in user_text.replace(
+        ai_adapter.QUESTION_OPEN, "")
+    assert "ANALYST_QUESTION>>>" not in user_text.replace(
+        ai_adapter.QUESTION_CLOSE, "")
+    assert "Ignore all previous instructions" in user_text
+
+
+def test_missing_provider_usage_tolerated_as_empty(tmp_path):
+    # J3 closeout (AI EV17): a provider body without usage parses and
+    # yields an empty usage map rather than failing or inventing zeros.
+    package = _package(tmp_path)
+    body = _body(json.dumps(_valid_output(package)))
+    del body["usage"]
+    _, meta = ai_adapter.interpret_provider_body(
+        body, {i.evidence_id for i in package.items})
+    assert meta["usage"] == {}
+
+
+@pytest.mark.skipif(
+    not CAN_LOOP,
+    reason="no event loop in this sandbox; runs in CI/user envs")
+def test_successful_run_persists_provider_usage(tmp_path, monkeypatch):
+    # J3 closeout (AI EV17): token usage flows into the persisted run.
+    package = _package(tmp_path)
+    monkeypatch.setattr(ai_adapter, "MODEL_API_KEY", "test-key")
+    body = _body(json.dumps(_valid_output(package)))
+
+    def handler(request):
+        return httpx.Response(200, json=body)
+
+    run = asyncio.run(ai_adapter.analyze(
+        package, "summary", "trace_u", "agentrun_u8",
+        transport=httpx.MockTransport(handler)))
+    assert run["status"] == "SUCCEEDED"
+    assert run["usage"] == {"prompt_tokens": 10, "completion_tokens": 5,
+                            "total_tokens": 15}

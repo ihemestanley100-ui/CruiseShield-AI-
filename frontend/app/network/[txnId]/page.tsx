@@ -19,6 +19,7 @@ import {
   type GraphResponse,
   type OverlayResponse,
 } from "../../../lib/api";
+import { useTranslation } from "../../../lib/i18n/context";
 
 type State =
   | { kind: "loading" }
@@ -49,23 +50,23 @@ function mergedEdges(
 }
 
 function OverlayStatus({ overlay }: { overlay: OverlayResponse | null }) {
+  const { t } = useTranslation("network");
   if (!overlay) {
     return (
       <p className="muted" data-testid="overlay-status">
-        Intelligence overlay unavailable.
+        {t("overlayDown")}
       </p>
     );
   }
   const missing = Object.entries(overlay.unavailable);
   return (
     <p className="muted" data-testid="overlay-status">
-      Intelligence overlay (derived, synthetic): {overlay.counts.overlay_nodes}{" "}
-      nodes, {overlay.counts.overlay_edges} edges
+      {t("overlayLine", {
+        nodes: overlay.counts.overlay_nodes,
+        edges: overlay.counts.overlay_edges,
+      })}
       {missing.length > 0 && (
-        <>
-          {" "}· unavailable:{" "}
-          {missing.map(([k, v]) => `${k} (${v})`).join(", ")}
-        </>
+        <> {t("overlayMissing", { list: missing.map(([k, v]) => `${k} (${v})`).join(", ") })}</>
       )}
     </p>
   );
@@ -74,6 +75,9 @@ function OverlayStatus({ overlay }: { overlay: OverlayResponse | null }) {
 export default function NetworkPage() {
   const params = useParams<{ txnId: string }>();
   const txnId = params.txnId;
+  const { t } = useTranslation("network");
+  const { t: tCommon } = useTranslation("common");
+  const { t: tNav } = useTranslation("nav");
   const [state, setState] = useState<State>({ kind: "loading" });
   const [view, setView] = useState<"orbital" | "flat">("orbital");
 
@@ -100,7 +104,7 @@ export default function NetworkPage() {
               ? `${err.code}: ${err.message}`
               : err instanceof Error
                 ? err.message
-                : "request failed",
+                : tCommon("requestFailed"),
         });
       });
     return () => controller.abort();
@@ -110,33 +114,35 @@ export default function NetworkPage() {
     <main className="main">
       <Breadcrumbs
         items={[
-          { label: "Command Center", href: "/demo" },
-          { label: `Network ${txnId}` },
+          { label: tNav("commandCenter"), href: "/demo" },
+          { label: t("crumb", { id: txnId }) },
         ]}
       />
       {state.kind === "loading" && (
         <section className="card" aria-live="polite">
-          <h1>Network {txnId}</h1>
-          <p className="muted">Loading network graph…</p>
+          <h1>{t("title", { id: txnId })}</h1>
+          <p className="muted">{t("loading")}</p>
         </section>
       )}
       {state.kind === "not-found" && (
         <section className="card" aria-live="assertive">
-          <h1>Transaction not found</h1>
+          <h1>{t("notFoundTitle")}</h1>
           <p className="muted">
-            No transaction <code>{txnId}</code> exists in the backend.
+            {t("notFoundPre")}
+            <code>{txnId}</code>
+            {t("notFoundPost")}
           </p>
         </section>
       )}
       {state.kind === "error" && (
         <section className="card" aria-live="assertive">
-          <h1>Network {txnId}</h1>
+          <h1>{t("title", { id: txnId })}</h1>
           <div className="alert error" role="alert">
             {state.message}
           </div>
           <p>
             <button type="button" onClick={() => window.location.reload()}>
-              Retry
+              {tCommon("retry")}
             </button>
           </p>
         </section>
@@ -144,29 +150,30 @@ export default function NetworkPage() {
       {state.kind === "ready" && (
         <>
           <div className="page-head">
-            <h1>Network explorer — {state.graph.transaction_id}</h1>
+            <h1>{t("headTitle", { id: state.graph.transaction_id })}</h1>
             <p className="muted" data-testid="network-counts">
-              {state.graph.counts.nodes} nodes, {state.graph.counts.edges}{" "}
-              edges · provenance errors:{" "}
-              {state.graph.provenance_errors.length}
+              {t("countsLine", {
+                nodes: state.graph.counts.nodes,
+                edges: state.graph.counts.edges,
+                n: state.graph.provenance_errors.length,
+              })}
             </p>
             <OverlayStatus overlay={state.overlay} />
             {state.graph.provenance_errors.length > 0 && (
               <div className="alert error" role="alert">
-                Provenance errors:{" "}
-                {state.graph.provenance_errors.join(", ")}
+                {t("provErrors", {
+                  list: state.graph.provenance_errors.join(", "),
+                })}
               </div>
             )}
           </div>
           {state.graph.counts.nodes === 0 ? (
             <section className="card" aria-live="polite">
-              <p className="muted">
-                This transaction has no network graph in the backend.
-              </p>
+              <p className="muted">{t("emptyGraph")}</p>
             </section>
           ) : (
             <>
-              <div className="chip-row" role="radiogroup" aria-label="Graph view">
+              <div className="chip-row" role="radiogroup" aria-label={t("viewLabel")}>
                 <label className="chip-label">
                   <input
                     type="radio"
@@ -175,7 +182,7 @@ export default function NetworkPage() {
                     checked={view === "orbital"}
                     onChange={() => setView("orbital")}
                   />{" "}
-                  Orbital
+                  {t("orbital")}
                 </label>
                 <label className="chip-label">
                   <input
@@ -185,7 +192,7 @@ export default function NetworkPage() {
                     checked={view === "flat"}
                     onChange={() => setView("flat")}
                   />{" "}
-                  Flat (fallback)
+                  {t("flat")}
                 </label>
               </div>
               {view === "orbital" ? (

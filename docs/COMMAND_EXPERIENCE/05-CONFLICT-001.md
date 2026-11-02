@@ -36,3 +36,10 @@ CMD ["sh", "-c", "python -m uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8
 Per transformation-brief §14, Dockerfile/render.yaml stay untouched during
 initial frontend work. Apply only after explicit approval, then re-verify
 with a deploy (or a local `docker run -e PORT=9000` bind check).
+
+## Closure (2026-11-01, J3 closeout P12)
+
+CLOSED. The proposed shell-form CMD is live in `Dockerfile:18`
+(`--port ${PORT:-8000}`), verified by direct read. The record above is
+preserved as history; the port question is no longer open. Runtime bind
+proof still awaits staging (owner-gated R5).

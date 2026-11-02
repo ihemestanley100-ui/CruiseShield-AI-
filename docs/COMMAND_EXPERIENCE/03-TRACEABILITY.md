@@ -52,3 +52,11 @@ PENDING_REVIEW. "Frontend" below means the planned Next.js app (missing).
   (default 10000). Risk: deploy health-check failure. Smallest fix
   (needs approval, barred by §14 during initial work): shell-form CMD
   honoring `${PORT:-8000}`, or a `dockerCommand` override. PENDING_REVIEW.
+
+## Supersession pointer (2026-11-01, J3 closeout P12)
+
+Frozen 10-28 traceability; preserved as history. CONFLICT-001 is now
+CLOSED (see 05-CONFLICT-001 closure addendum); the AI follow-up
+endpoint (§13 gap) has since been implemented and tested
+(`/api/v1/investigations/{id}/ai-followup`). Current acceptance state:
+the `docs/J3_*` closeout set.

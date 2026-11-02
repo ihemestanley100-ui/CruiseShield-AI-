@@ -17,3 +17,19 @@ def tmp_store(tmp_path, monkeypatch):
 def client(tmp_store):
     with TestClient(main.app) as http:
         yield http
+
+
+@pytest.fixture(autouse=True)
+def _no_live_provider_calls(monkeypatch):
+    """Hermetic tests: a test process must never spend owner AI quota.
+
+    J4 fix: config loads ROOT/.env at import, so unsandboxed runs used
+    to inherit a real MODEL_API_KEY and the socket-gated full-stack
+    test made live provider calls. Every test now starts keyless;
+    tests needing a key set it explicitly via monkeypatch.
+    """
+    import app.config as config_mod
+    from app import ai_adapter
+
+    monkeypatch.setattr(ai_adapter, "MODEL_API_KEY", "")
+    monkeypatch.setattr(config_mod, "MODEL_API_KEY", "")

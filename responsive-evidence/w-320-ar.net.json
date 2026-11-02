@@ -1,0 +1,8 @@
+[
+  "t=1430ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/investigations/inv_84721",
+  "t=1430ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/graph/txn_84721",
+  "t=1431ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721",
+  "t=1431ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721/audit",
+  "t=1616ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721",
+  "t=1616ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721/audit"
+]

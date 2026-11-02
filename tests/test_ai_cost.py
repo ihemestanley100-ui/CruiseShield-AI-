@@ -44,6 +44,9 @@ def test_daily_cap_rejects_with_audit_and_no_run(tmp_store, monkeypatch):
         _pump(main._run_ai(package, "summary", "agentrun_99", "trace_cap"))
     assert (exc.value.code, exc.value.status) == (
         "AI_DAILY_LIMIT_EXCEEDED", 429)
+    # J3-P7: quota message names used/limit + reset time.
+    assert "1/1 used today" in str(exc.value)
+    assert "resets 00:00 UTC" in str(exc.value)
     assert len(tmp_store.state["ai_runs"]) == 1  # no run persisted
     assert len(tmp_store.state["audits"]) == audits_before + 1
     assert tmp_store.state["audits"][-1]["action"] == "ai.run.rejected"

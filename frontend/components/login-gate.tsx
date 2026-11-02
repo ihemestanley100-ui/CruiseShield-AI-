@@ -8,15 +8,19 @@
  * backend session guard, so an unreachable backend just shows the
  * pages' existing backend-error states. */
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ApiError,
+  UNAUTHORIZED_EVENT,
   getAuthMe,
   getAuthMode,
   postLogin,
   postLogout,
+  postLogoutAll,
   type AuthSession,
 } from "../lib/api";
+import { useTranslation } from "../lib/i18n/context";
+import { publishSession } from "../lib/session";
 
 export type GateState =
   | { status: "open" }
@@ -29,6 +33,22 @@ export function useDemoSession() {
   // exactly as before until the mode check resolves.
   const [gate, setGate] = useState<GateState>({ status: "open" });
 
+  // J3-P6: session-expiry re-gating. Any 401/403 from a data call
+  // re-runs the check: a live session keeps the app open, an expired
+  // one flips the whole shell back to sign-in (the re-login affordance).
+  const armed = useRef(false);
+  const recheck = useCallback(async () => {
+    if (!armed.current) return;
+    try {
+      const session = await getAuthMe();
+      setGate({ status: "authed", session });
+    } catch (err: unknown) {
+      if (err instanceof ApiError && err.status === 401) {
+        setGate({ status: "login" });
+      }
+    }
+  }, []);
+
   useEffect(() => {
     const controller = new AbortController();
     let live = true;
@@ -36,25 +56,23 @@ export function useDemoSession() {
       try {
         const mode = await getAuthMode(controller.signal);
         if (!live || !mode.auth_enabled) return;
-        try {
-          const session = await getAuthMe(controller.signal);
-          if (live) setGate({ status: "authed", session });
-        } catch (err: unknown) {
-          if (live && err instanceof ApiError && err.status === 401) {
-            setGate({ status: "login" });
-          }
-          // Other /me failures fail open: pages surface their own errors.
-        }
+        armed.current = true;
+        await recheck();
+        // Other /me failures fail open: pages surface their own errors.
       } catch {
         // Unreachable backend: fail open, existing behavior preserved.
       }
     })();
+    const onUnauthorized = () => void recheck();
+    window.addEventListener(UNAUTHORIZED_EVENT, onUnauthorized);
     return () => {
       live = false;
       controller.abort();
+      window.removeEventListener(UNAUTHORIZED_EVENT, onUnauthorized);
     };
-  }, []);
+  }, [recheck]);
 
+  const { t: tAuth } = useTranslation("auth");
   const login = useCallback(
     async (username: string, password: string): Promise<string | null> => {
       try {
@@ -63,15 +81,15 @@ export function useDemoSession() {
         return null;
       } catch (err: unknown) {
         if (err instanceof ApiError && err.status === 429) {
-          return "Too many login attempts. Wait a minute and try again.";
+          return tAuth("rateLimited");
         }
         if (err instanceof ApiError && err.code === "BACKEND_UNREACHABLE") {
-          return "Backend unreachable. Check the demo server and retry.";
+          return tAuth("unreachable");
         }
-        return "Invalid username or password.";
+        return tAuth("invalid");
       }
     },
-    []
+    [tAuth]
   );
 
   const logout = useCallback(async () => {
@@ -83,7 +101,27 @@ export function useDemoSession() {
     setGate({ status: "login" });
   }, []);
 
-  return { gate, login, logout };
+  const logoutAll = useCallback(async () => {
+    try {
+      await postLogoutAll();
+    } catch {
+      // Same fail-safe as logout.
+    }
+    setGate({ status: "login" });
+  }, []);
+
+  // J4: publish for role-aware controls (decision/AI/simulation gates).
+  useEffect(() => {
+    publishSession(
+      gate.status === "authed"
+        ? { mode: "authed", session: gate.session }
+        : gate.status === "login"
+          ? { mode: "login" }
+          : { mode: "open" }
+    );
+  }, [gate]);
+
+  return { gate, login, logout, logoutAll };
 }
 
 export function LoginCard({
@@ -95,6 +133,7 @@ export function LoginCard({
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const { t } = useTranslation("auth");
 
   async function submit(ev: React.FormEvent) {
     ev.preventDefault();
@@ -109,14 +148,11 @@ export function LoginCard({
   return (
     <div className="login-wrap">
       <section className="card login-card" aria-labelledby="login-h">
-        <h2 id="login-h">Demo sign in</h2>
-        <p className="muted">
-          This hosted demo is protected. Sign in with the investigator
-          credentials supplied for this evaluation. Synthetic data only.
-        </p>
+        <h2 id="login-h">{t("title")}</h2>
+        <p className="muted">{t("blurb")}</p>
         <form onSubmit={submit}>
           <label>
-            Username
+            {t("username")}
             <input
               className="text-input"
               type="text"
@@ -128,7 +164,7 @@ export function LoginCard({
             />
           </label>
           <label>
-            Password
+            {t("password")}
             <input
               className="text-input"
               type="password"
@@ -145,7 +181,7 @@ export function LoginCard({
             </p>
           )}
           <button type="submit" disabled={busy} className="btn-commit">
-            {busy ? "Signing in…" : "Sign in"}
+            {busy ? t("signingIn") : t("signIn")}
           </button>
         </form>
       </section>

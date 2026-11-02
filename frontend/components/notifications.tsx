@@ -15,6 +15,7 @@ import {
   listAlerts,
   type AlertItem,
 } from "../lib/api";
+import { useTranslation } from "../lib/i18n/context";
 
 type State =
   | { kind: "loading" }
@@ -27,6 +28,8 @@ function investigationIdFor(alert: AlertItem): string | null {
 }
 
 export function Notifications() {
+  const { t } = useTranslation("notify");
+  const { t: tCommon } = useTranslation("common");
   const [state, setState] = useState<State>({ kind: "loading" });
   const [open, setOpen] = useState(false);
   const bell = useRef<HTMLButtonElement | null>(null);
@@ -46,7 +49,7 @@ export function Notifications() {
               ? `${err.code}: ${err.message}`
               : err instanceof Error
                 ? err.message
-                : "request failed",
+                : tCommon("requestFailed"),
         });
       }
     );
@@ -87,8 +90,8 @@ export function Notifications() {
         aria-controls="notif-panel"
         aria-label={
           state.kind === "loading"
-            ? "Notifications, loading"
-            : `Notifications, ${openCount} open`
+            ? t("bellLoading")
+            : t("bellOpen", { n: openCount })
         }
         onClick={() => setOpen(!open)}
       >
@@ -112,21 +115,21 @@ export function Notifications() {
           <button
             type="button"
             className="popover-overlay"
-            aria-label="Close notifications"
+            aria-label={t("closeNotif")}
             onClick={() => setOpen(false)}
           />
           <div
             id="notif-panel"
             role="dialog"
-            aria-label="Notifications"
+            aria-label={t("panelLabel")}
             className="notif-panel"
           >
             <h2 ref={heading} tabIndex={-1}>
-              Notifications
+              {t("panelTitle")}
             </h2>
             {state.kind === "loading" && (
               <p className="muted" aria-live="polite">
-                Loading alerts…
+                {t("loadingAlerts")}
               </p>
             )}
             {state.kind === "error" && (
@@ -136,7 +139,7 @@ export function Notifications() {
             )}
             {state.kind === "ready" &&
               (state.alerts.length === 0 ? (
-                <p className="muted">No alerts.</p>
+                <p className="muted">{t("noAlerts")}</p>
               ) : (
                 <ul className="stack">
                   {state.alerts.map((alert) => {
@@ -148,7 +151,8 @@ export function Notifications() {
                           <span className="badge">{alert.status}</span>
                         </div>
                         <p className="muted">
-                          <code>{alert.alert_id}</code> · {alert.created_at}
+                          <code>{alert.alert_id}</code> ·{" "}
+                          <bdi>{alert.created_at}</bdi>
                         </p>
                         <p>
                           {invId !== null && (
@@ -157,7 +161,7 @@ export function Notifications() {
                                 href={`/investigations/${invId}`}
                                 onClick={() => setOpen(false)}
                               >
-                                Open investigation
+                                {t("openInv")}
                               </Link>{" "}
                             </>
                           )}
@@ -165,7 +169,7 @@ export function Notifications() {
                             href={`/network/${alert.transaction_id}`}
                             onClick={() => setOpen(false)}
                           >
-                            Network
+                            {t("networkLink")}
                           </Link>
                         </p>
                       </li>

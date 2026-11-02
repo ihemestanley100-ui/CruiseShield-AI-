@@ -5,11 +5,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { LandingAudio } from "../../lib/landing-audio";
+import { useTranslation } from "../../lib/i18n/context";
 
 export function AudioControl({ onBlipRef }: {
   onBlipRef: React.MutableRefObject<(() => void) | null>;
 }) {
   const audioRef = useRef<LandingAudio | null>(null);
+  const { t } = useTranslation("landing");
   const [on, setOn] = useState(false);
   const [volume, setVolume] = useState(0.5);
 
@@ -37,17 +39,17 @@ export function AudioControl({ onBlipRef }: {
   };
 
   return (
-    <div className="landing-audio" role="group" aria-label="Ambient sound">
+    <div className="landing-audio" role="group" aria-label={t("controlsAmbient")}>
       <button
         type="button"
         className="landing-control-btn"
         aria-pressed={on}
         onClick={() => void toggle()}
       >
-        Sound: {on ? "On" : "Off"}
+        {t("soundLabel")}: {on ? t("onWord") : t("offWord")}
       </button>
       <label className="landing-volume">
-        Volume
+        {t("volumeLabel")}
         <input
           type="range"
           min={0}
@@ -77,15 +79,16 @@ export function MotionControl({
   onMotion: (motion: "full" | "reduced") => void;
   onPaused: (paused: boolean) => void;
 }) {
+  const { t } = useTranslation("landing");
   return (
-    <div className="landing-motion" role="group" aria-label="Scene motion">
+    <div className="landing-motion" role="group" aria-label={t("sceneMotion")}>
       <button
         type="button"
         className="landing-control-btn"
         aria-pressed={motion === "reduced"}
         onClick={() => onMotion(motion === "full" ? "reduced" : "full")}
       >
-        {motion === "full" ? "Reduce motion" : "Full motion"}
+        {motion === "full" ? t("reduceMotion") : t("fullMotion")}
       </button>
       <button
         type="button"
@@ -93,7 +96,7 @@ export function MotionControl({
         aria-pressed={paused}
         onClick={() => onPaused(!paused)}
       >
-        {paused ? "Resume scene" : "Pause scene"}
+        {paused ? t("resumeScene") : t("pauseScene")}
       </button>
     </div>
   );

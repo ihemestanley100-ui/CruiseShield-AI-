@@ -1,29 +1,34 @@
+"use client";
+
 /* System status panel: renders exactly the checks returned by
  * GET /api/v1/health. No service is ever shown operational unless its
  * check passed; unconfigured or unknown checks say so in text. */
 
 import type { HealthCheck } from "../lib/api";
+import { useTranslation } from "../lib/i18n/context";
 
-const ROWS: { label: string; check: string }[] = [
-  { label: "API Services", check: "store" },
-  { label: "Seed Integrity", check: "seed_integrity" },
-  { label: "Graph Provenance", check: "graph_provenance" },
-  { label: "AI Engine (Muse Spark)", check: "model_configured" },
+const ROWS: { key: "rowApi" | "rowSeed" | "rowGraph" | "rowAi"; check: string }[] = [
+  { key: "rowApi", check: "store" },
+  { key: "rowSeed", check: "seed_integrity" },
+  { key: "rowGraph", check: "graph_provenance" },
+  { key: "rowAi", check: "model_configured" },
 ];
 
+type StatusKey = "stNotReported" | "stOperational" | "stNotConfigured" | "stDegraded";
+
 function describe(result: string | undefined): {
-  text: string;
+  key: StatusKey;
   tone: "ok" | "warn" | "bad";
   detail: string;
 } {
   if (result === undefined)
-    return { text: "Not reported", tone: "warn", detail: "" };
+    return { key: "stNotReported", tone: "warn", detail: "" };
   const verdict = result.split(" ", 1)[0];
   const detail = result.slice(verdict.length).trim();
-  if (verdict === "PASS") return { text: "Operational", tone: "ok", detail };
+  if (verdict === "PASS") return { key: "stOperational", tone: "ok", detail };
   if (verdict === "NOT_CONFIGURED")
-    return { text: "Not configured", tone: "warn", detail };
-  return { text: "Degraded", tone: "bad", detail };
+    return { key: "stNotConfigured", tone: "warn", detail };
+  return { key: "stDegraded", tone: "bad", detail };
 }
 
 interface Props {
@@ -32,6 +37,7 @@ interface Props {
 }
 
 export function SystemStatus({ health, checkedAt }: Props) {
+  const { t } = useTranslation("system");
   const operational = health.status === "healthy";
   const known = new Set(ROWS.map((row) => row.check));
   const extra = Object.keys(health.checks).filter((key) => !known.has(key));
@@ -40,13 +46,13 @@ export function SystemStatus({ health, checkedAt }: Props) {
       className="card glass command-section status-panel"
       aria-labelledby="sys-status-h"
     >
-      <h2 id="sys-status-h">System Status</h2>
+      <h2 id="sys-status-h">{t("sysTitle")}</h2>
       <p>
         <span className={`badge ${operational ? "ok" : "bad"}`}>
           {health.status}
         </span>{" "}
         {operational && (
-          <span className="muted">All systems operational</span>
+          <span className="muted">{t("allOk")}</span>
         )}
       </p>
       <ul className="status-list">
@@ -59,9 +65,9 @@ export function SystemStatus({ health, checkedAt }: Props) {
                 className={`dot dot-${state.tone}`}
                 aria-hidden="true"
               />
-              <span>{row.label}</span>
+              <span>{t(row.key)}</span>
               <span className="muted">
-                {state.text}
+                {t(state.key)}
                 {state.detail !== "" ? `: ${state.detail}` : ""}
               </span>
             </li>
@@ -77,7 +83,7 @@ export function SystemStatus({ health, checkedAt }: Props) {
               />
               <span>{key}</span>
               <span className="muted">
-                {state.text}
+                {t(state.key)}
                 {state.detail !== "" ? `: ${state.detail}` : ""}
               </span>
             </li>
@@ -85,9 +91,13 @@ export function SystemStatus({ health, checkedAt }: Props) {
         })}
       </ul>
       <p className="muted">
-        Scenario {health.scenario_id} · Run <code>{health.run_id}</code>
+        {t("scenarioPre", { s: health.scenario_id })}
+        <code>{health.run_id}</code>
       </p>
-      <p className="muted">Checked {checkedAt}</p>
+      <p className="muted">
+        {t("checkedPre")}{" "}
+        <bdi>{checkedAt}</bdi>
+      </p>
     </section>
   );
 }

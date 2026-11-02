@@ -1,7 +1,10 @@
 /* Shared breadcrumb navigation. The last item is the current page
  * (no link, aria-current); earlier items link to existing routes. */
 
+"use client";
+
 import Link from "next/link";
+import { useTranslation } from "../lib/i18n/context";
 
 export interface Crumb {
   label: string;
@@ -9,8 +12,9 @@ export interface Crumb {
 }
 
 export function Breadcrumbs({ items }: { items: Crumb[] }) {
+  const { t } = useTranslation("common");
   return (
-    <nav aria-label="Breadcrumb">
+    <nav aria-label={t("breadcrumb")}>
       <ol className="breadcrumbs">
         {items.map((item, index) => {
           const last = index === items.length - 1;

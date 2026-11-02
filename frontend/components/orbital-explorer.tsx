@@ -9,6 +9,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { GraphEdge, GraphNode } from "../lib/api";
+import { useTranslation } from "../lib/i18n/context";
 import {
   adaptGraph,
   bfsDepths,
@@ -118,6 +119,8 @@ function NodeGlyph({
 }
 
 export function OrbitalExplorer({ nodes, edges }: Props) {
+  const { t, tp } = useTranslation("graph");
+  const { t: tCommon } = useTranslation("common");
   const adapted = useMemo(() => adaptGraph(nodes, edges), [nodes, edges]);
   const initialFocus = useMemo(
     () => defaultFocus(adapted.nodes, adapted.edges),
@@ -241,17 +244,23 @@ export function OrbitalExplorer({ nodes, edges }: Props) {
   );
 
   return (
-    <section className="card" aria-label="Orbital graph">
-      <h2>Orbital explorer</h2>
-      <p className="muted">Synthetic demo data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.</p>
+    <section className="card" aria-label={t("orbitalLabel")}>
+      <h2>{t("orbitalTitle")}</h2>
+      <p className="muted">{t("orbitalNote")}</p>
       <p className="muted" aria-live="polite" data-testid="orbital-counts">
-        Focus: {focusNode?.display_label ?? focus} · Showing{" "}
-        {visibleNodes.length} of {adapted.nodes.length} nodes,{" "}
-        {visibleEdges.length} of {adapted.edges.length} edges.
+        {t("orbitalCounts", {
+          focus: focusNode?.display_label ?? focus,
+          a: visibleNodes.length,
+          b: adapted.nodes.length,
+          c: visibleEdges.length,
+          d: adapted.edges.length,
+        })}
         {adapted.droppedEdgeIds.length > 0 &&
-          ` ${adapted.droppedEdgeIds.length} edge(s) hidden: endpoint unknown (${adapted.droppedEdgeIds.join(", ")}).`}
+          ` ${tp("droppedEdges", adapted.droppedEdgeIds.length, {
+            ids: adapted.droppedEdgeIds.join(", "),
+          })}`}
       </p>
-      <div className="chip-row" role="group" aria-label="Entity type filters">
+      <div className="chip-row" role="group" aria-label={t("entityFilters")}>
         {nodeTypes.map((t) => (
           <label key={t} className="chip-label">
             <input
@@ -263,7 +272,7 @@ export function OrbitalExplorer({ nodes, edges }: Props) {
           </label>
         ))}
       </div>
-      <div className="chip-row" role="group" aria-label="Relationship filters">
+      <div className="chip-row" role="group" aria-label={t("relFilters")}>
         {relTypes.map((r) => (
           <label key={r} className="chip-label">
             <input
@@ -275,25 +284,25 @@ export function OrbitalExplorer({ nodes, edges }: Props) {
           </label>
         ))}
       </div>
-      <div className="chip-row" role="group" aria-label="Orbital view controls">
+      <div className="chip-row" role="group" aria-label={t("orbitalViewControls")}>
         <button type="button" className="chip" onClick={() => setZoom((z) => Math.min(3, +(z + 0.25).toFixed(2)))}>
-          Zoom in
+          {t("zoomIn")}
         </button>
         <button type="button" className="chip" onClick={() => setZoom((z) => Math.max(0.25, +(z - 0.25).toFixed(2)))}>
-          Zoom out
+          {t("zoomOut")}
         </button>
         <button type="button" className="chip" onClick={() => { setZoom(1); setPan({ x: 0, y: 0 }); }}>
-          Fit to screen
+          {t("fit")}
         </button>
         <button type="button" className="chip" aria-pressed={showLabels} onClick={() => setShowLabels((s) => !s)}>
-          {showLabels ? "Hide labels" : "Show labels"}
+          {showLabels ? t("hideLabels") : t("showLabels")}
         </button>
         <button type="button" className="chip" onClick={resetView}>
-          Reset view
+          {t("resetView")}
         </button>
         <label className="chip-label">
-          Speed{" "}
-          <select value={speed} onChange={(ev) => setSpeed(ev.target.value)} aria-label="Animation speed">
+          {t("speed")}{" "}
+          <select value={speed} onChange={(ev) => setSpeed(ev.target.value)} aria-label={t("animSpeed")}>
             {Object.keys(SPEEDS).map((s) => (
               <option key={s} value={s}>{s}</option>
             ))}
@@ -305,15 +314,19 @@ export function OrbitalExplorer({ nodes, edges }: Props) {
           type="button"
           className="chip orbital-play"
           onClick={() => setPlaying((p) => !p)}
-          aria-label={playing ? "Pause animation" : "Play animation"}
-          title={reducedMotion.current ? "Paused by default: reduced-motion preference detected." : undefined}
+          aria-label={playing ? t("pauseAnim") : t("playAnim")}
+          title={reducedMotion.current ? t("reducedMotionPause") : undefined}
         >
           {playing ? "⏸" : "▶"}
         </button>
         <svg
           viewBox={`0 0 ${ORBIT_WIDTH} ${ORBIT_HEIGHT}`}
           role="img"
-          aria-label={`Orbital graph focused on ${focusNode?.display_label ?? focus}: ${visibleNodes.length} nodes, ${visibleEdges.length} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.`}
+          aria-label={t("orbitalSvg", {
+            focus: focusNode?.display_label ?? focus,
+            a: visibleNodes.length,
+            b: visibleEdges.length,
+          })}
           tabIndex={0}
           data-testid="orbital-svg"
           className="graph-canvas orbital-canvas"
@@ -361,7 +374,12 @@ export function OrbitalExplorer({ nodes, edges }: Props) {
                   key={e.edge_id}
                   tabIndex={0}
                   role="button"
-                  aria-label={`Edge ${e.edge_id}: ${e.source_node_id} ${e.relationship_type} ${e.target_node_id}`}
+                  aria-label={t("edgeLabel", {
+                    id: e.edge_id,
+                    s: e.source_node_id,
+                    r: e.relationship_type,
+                    t: e.target_node_id,
+                  })}
                   data-edge={e.edge_id}
                   className="graph-edge orbital-edge"
                   onClick={() => setSelection({ kind: "edge", id: e.edge_id })}
@@ -389,7 +407,7 @@ export function OrbitalExplorer({ nodes, edges }: Props) {
                   key={n.node_id}
                   tabIndex={0}
                   role="button"
-                  aria-label={`${n.display_label} (${n.node_type})${isFocus ? ", orbit focus" : ""}`}
+                  aria-label={`${n.display_label} (${n.node_type})${isFocus ? t("nodeFocusSuffix") : ""}`}
                   data-node={n.node_id}
                   className="graph-node"
                   onClick={() => setSelection({ kind: "node", id: n.node_id })}
@@ -412,23 +430,24 @@ export function OrbitalExplorer({ nodes, edges }: Props) {
           </g>
         </svg>
       </div>
-      <ul className="legend" aria-label="Entity legend">
+      <ul className="legend" aria-label={t("entityLegend")}>
         {nodeTypes.map((t) => (
           <li key={t}>
             <span className={`legend-swatch legend-${t}`} aria-hidden="true" /> {t}
           </li>
         ))}
-        <li className="muted">Shapes + labels identify types (never color alone). Ring = graph steps from focus, not risk.</li>
+        <li className="muted">{t("legendNote")}</li>
       </ul>
       <div aria-live="polite" data-testid="orbital-detail">
         {selectedNode && (
           <div className="alert ok">
             <strong>{selectedNode.display_label}</strong> ({selectedNode.node_type})
-            {selectedNode.node_id === focus ? " · orbit focus" : ""}
+            {selectedNode.node_id === focus ? t("orbitFocusBadge") : ""}
             <br />
-            Source: <code>{selectedNode.source_record_ids.join(", ")}</code>
+            {t("detailSource")}
+            <code>{selectedNode.source_record_ids.join(", ")}</code>
             <br />
-            {selectedNodeRels.length} relationship(s):{" "}
+            {tp("relationships", selectedNodeRels.length)}:{" "}
             {selectedNodeRels.map((e) => (
               <span key={e.edge_id}>
                 <code>{e.edge_id}</code> {e.relationship_type}{" "}
@@ -437,11 +456,11 @@ export function OrbitalExplorer({ nodes, edges }: Props) {
             <br />
             {pinned && focus === selectedNode.node_id ? (
               <button type="button" className="chip" onClick={() => { setFocusId(null); setPinned(false); }}>
-                Unpin focus
+                {t("unpin")}
               </button>
             ) : (
               <button type="button" className="chip" onClick={() => { setFocusId(selectedNode.node_id); setPinned(true); }}>
-                Pin as orbit focus
+                {t("pin")}
               </button>
             )}
           </div>
@@ -451,15 +470,21 @@ export function OrbitalExplorer({ nodes, edges }: Props) {
             <strong>{selectedEdge.edge_id}</strong>: {selectedEdge.source_node_id}{" "}
             {selectedEdge.relationship_type} {selectedEdge.target_node_id}
             <br />
-            Provenance: <code>{selectedEdge.source_event_ids.join(", ")}</code> · Evidence:{" "}
+            {t("detailProv")}
+            <code>{selectedEdge.source_event_ids.join(", ")}</code>{" "}
+            {t("detailEvidence")}
             <code>{selectedEdge.evidence_ids.join(", ")}</code>
             <br />
-            Valid: {selectedEdge.valid_from} → {selectedEdge.valid_to ?? "present"} · Trace:{" "}
+            {t("detailValidPre")}{" "}
+            <bdi>{selectedEdge.valid_from}</bdi>{" "}
+            {t("detailValidArrow")}{" "}
+            <bdi>{selectedEdge.valid_to ?? tCommon("present")}</bdi>{" "}
+            {t("detailValidPost")}
             <code>{selectedEdge.trace_id}</code>
           </div>
         )}
         {!selectedNode && !selectedEdge && (
-          <p className="muted">Select a node or edge for details.{depths.size === 0 && focus !== "" ? " Focus has no connections in the current filter." : ""}</p>
+          <p className="muted">{t("selectPrompt")}{depths.size === 0 && focus !== "" ? ` ${t("focusIsolated")}` : ""}</p>
         )}
       </div>
     </section>

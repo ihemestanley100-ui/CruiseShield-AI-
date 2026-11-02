@@ -259,8 +259,16 @@ describe("AppShell", () => {
 
   it("shows the session user and signs out from the profile", async () => {
     modeMock.mockResolvedValue({ auth_enabled: true });
-    meMock.mockResolvedValue({ user: "judge", role: "investigator" });
-    loginMock.mockResolvedValue({ user: "judge", role: "investigator" });
+    meMock.mockResolvedValue({
+      user: "judge",
+      role: "investigator",
+      permissions: ["read", "audit_read", "ai_run", "write"],
+    });
+    loginMock.mockResolvedValue({
+      user: "judge",
+      role: "investigator",
+      permissions: ["read", "audit_read", "ai_run", "write"],
+    });
     render(
       <AppShell>
         <p>child</p>

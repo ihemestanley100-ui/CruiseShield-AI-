@@ -1,0 +1,20 @@
+[
+  "LOG: Access to fetch at 'http://127.0.0.1:8000/api/v1/investigations/inv_84721' from origin 'http://127.0.0.1:3000' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Credentials' header in the response is '' which must be 'true' when the request's credentials mode is 'include'. @ http://127.0.0.1:3000/demo",
+  "LOG: Failed to load resource: net::ERR_FAILED @ http://127.0.0.1:8000/api/v1/investigations/inv_84721",
+  "LOG: Access to fetch at 'http://127.0.0.1:8000/api/v1/health' from origin 'http://127.0.0.1:3000' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Credentials' header in the response is '' which must be 'true' when the request's credentials mode is 'include'. @ http://127.0.0.1:3000/demo",
+  "LOG: Failed to load resource: net::ERR_FAILED @ http://127.0.0.1:8000/api/v1/health",
+  "LOG: Access to fetch at 'http://127.0.0.1:8000/api/v1/alerts' from origin 'http://127.0.0.1:3000' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Credentials' header in the response is '' which must be 'true' when the request's credentials mode is 'include'. @ http://127.0.0.1:3000/demo",
+  "LOG: Failed to load resource: net::ERR_FAILED @ http://127.0.0.1:8000/api/v1/alerts",
+  "LOG: Access to fetch at 'http://127.0.0.1:8000/api/v1/auth/mode' from origin 'http://127.0.0.1:3000' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Credentials' header in the response is '' which must be 'true' when the request's credentials mode is 'include'. @ http://127.0.0.1:3000/demo",
+  "LOG: Failed to load resource: net::ERR_FAILED @ http://127.0.0.1:8000/api/v1/auth/mode",
+  "LOG: Access to fetch at 'http://127.0.0.1:8000/api/v1/graph/txn_84721' from origin 'http://127.0.0.1:3000' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Credentials' header in the response is '' which must be 'true' when the request's credentials mode is 'include'. @ http://127.0.0.1:3000/demo",
+  "LOG: Failed to load resource: net::ERR_FAILED @ http://127.0.0.1:8000/api/v1/graph/txn_84721",
+  "LOG: Access to fetch at 'http://127.0.0.1:8000/api/v1/cases/case_84721' from origin 'http://127.0.0.1:3000' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Credentials' header in the response is '' which must be 'true' when the request's credentials mode is 'include'. @ http://127.0.0.1:3000/demo",
+  "LOG: Failed to load resource: net::ERR_FAILED @ http://127.0.0.1:8000/api/v1/cases/case_84721",
+  "LOG: Access to fetch at 'http://127.0.0.1:8000/api/v1/cases/case_84721/audit' from origin 'http://127.0.0.1:3000' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Credentials' header in the response is '' which must be 'true' when the request's credentials mode is 'include'. @ http://127.0.0.1:3000/demo",
+  "LOG: Failed to load resource: net::ERR_FAILED @ http://127.0.0.1:8000/api/v1/cases/case_84721/audit",
+  "LOG: Access to fetch at 'http://127.0.0.1:8000/api/v1/cases/case_84721' from origin 'http://127.0.0.1:3000' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Credentials' header in the response is '' which must be 'true' when the request's credentials mode is 'include'. @ http://127.0.0.1:3000/demo",
+  "LOG: Failed to load resource: net::ERR_FAILED @ http://127.0.0.1:8000/api/v1/cases/case_84721",
+  "LOG: Access to fetch at 'http://127.0.0.1:8000/api/v1/cases/case_84721/audit' from origin 'http://127.0.0.1:3000' has been blocked by CORS policy: The value of the 'Access-Control-Allow-Credentials' header in the response is '' which must be 'true' when the request's credentials mode is 'include'. @ http://127.0.0.1:3000/demo",
+  "LOG: Failed to load resource: net::ERR_FAILED @ http://127.0.0.1:8000/api/v1/cases/case_84721/audit"
+]

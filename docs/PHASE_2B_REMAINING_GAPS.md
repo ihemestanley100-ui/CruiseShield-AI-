@@ -6,6 +6,7 @@ evidence-complete except R-11 (single-shot observation).
 ## Closed in Phase 2B
 
 - Validator banned-score/enforcement/human-approval guards (+4 tests).
+  - J3 note 2026-11-01: no validator/banned-score/human-approval-guard implementation found in current `app/` or `tests/`; entry retained verbatim as a historical Phase 2B record.
 - Greedy sampling pinned + recorded (+1 test); seed intentionally not sent (documented).
 - Production build proven (exit 0, clean dir); real-browser smoke rendered all routes;
   landing visually verified with working WebGL.

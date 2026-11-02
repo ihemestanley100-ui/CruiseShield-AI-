@@ -160,9 +160,11 @@ describe("AiPanel", () => {
         screen.getByText("dev_04 is shared by three accounts.")
       ).toBeTruthy();
     });
+    // J3-P4: follow-ups now pass their abort signal (35 s client timeout).
     expect(postAiFollowupMock).toHaveBeenCalledWith(
       "inv_84721",
-      "Why is dev_04 shared?"
+      "Why is dev_04 shared?",
+      expect.any(AbortSignal)
     );
     expect(screen.getByText(/agentrun_10/)).toBeTruthy();
   });
@@ -210,6 +212,47 @@ describe("AiPanel", () => {
       expect(screen.getByText(/timed out or was cancelled/)).toBeTruthy();
       expect(
         screen.getByRole("button", { name: "Retry" })
+      ).toBeTruthy();
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("times out a hung follow-up without touching analysis", async () => {
+    vi.useFakeTimers();
+    try {
+      postAiFollowupMock.mockImplementation(
+        (_id: string, _q: string, signal?: AbortSignal) =>
+          new Promise<never>((_resolve, reject) => {
+            signal?.addEventListener("abort", () =>
+              reject(new DOMException("Aborted", "AbortError"))
+            );
+          })
+      );
+      postAiAnalysisMock.mockResolvedValue(runFixture());
+      render(<AiPanel invId="inv_84721" />);
+      fireEvent.click(screen.getByRole("button", { name: "Run AI analysis" }));
+      // Flush the resolved analysis under fake timers (findBy would hang).
+      await act(async () => {
+        vi.advanceTimersByTime(0);
+      });
+      expect(screen.getByTestId("followups")).toBeTruthy();
+      fireEvent.change(screen.getByLabelText(/follow-up about/), {
+        target: { value: "why?" },
+      });
+      fireEvent.click(screen.getByRole("button", { name: "Ask follow-up" }));
+      expect(postAiFollowupMock).toHaveBeenCalledWith(
+        "inv_84721",
+        "why?",
+        expect.any(AbortSignal)
+      );
+      await act(async () => {
+        vi.advanceTimersByTime(36000);
+      });
+      expect(screen.getByText(/timed out or was cancelled/)).toBeTruthy();
+      // The ready assessment survives the follow-up abort untouched.
+      expect(
+        screen.getByText(/Seeded network shows shared infrastructure/)
       ).toBeTruthy();
     } finally {
       vi.useRealTimers();

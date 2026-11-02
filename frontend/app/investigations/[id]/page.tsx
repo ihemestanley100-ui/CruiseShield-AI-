@@ -23,6 +23,7 @@ import {
   type RiskIntelResult,
 } from "../../../lib/api";
 import { formatKobo } from "../../../lib/format";
+import { useTranslation } from "../../../lib/i18n/context";
 
 type State =
   | { kind: "loading" }
@@ -40,6 +41,9 @@ type State =
 export default function InvestigationPage() {
   const params = useParams<{ id: string }>();
   const invId = params.id;
+  const { t } = useTranslation("investigation");
+  const { t: tCommon } = useTranslation("common");
+  const { t: tNav } = useTranslation("nav");
   const [state, setState] = useState<State>({ kind: "loading" });
 
   useEffect(() => {
@@ -72,7 +76,7 @@ export default function InvestigationPage() {
               ? `${err.code}: ${err.message}`
               : err instanceof Error
                 ? err.message
-                : "request failed",
+                : tCommon("requestFailed"),
         });
       });
     return () => controller.abort();
@@ -82,33 +86,35 @@ export default function InvestigationPage() {
     <main className="main">
       <Breadcrumbs
         items={[
-          { label: "Command Center", href: "/demo" },
-          { label: `Investigation ${invId}` },
+          { label: tNav("commandCenter"), href: "/demo" },
+          { label: t("crumb", { id: invId }) },
         ]}
       />
       {state.kind === "loading" && (
         <section className="card" aria-live="polite">
-          <h1>Investigation {invId}</h1>
-          <p className="muted">Loading investigation…</p>
+          <h1>{t("title", { id: invId })}</h1>
+          <p className="muted">{t("loading")}</p>
         </section>
       )}
       {state.kind === "not-found" && (
         <section className="card" aria-live="assertive">
-          <h1>Investigation not found</h1>
+          <h1>{t("notFoundTitle")}</h1>
           <p className="muted">
-            No investigation <code>{invId}</code> exists in the backend.
+            {t("notFoundPre")}
+            <code>{invId}</code>
+            {t("notFoundPost")}
           </p>
         </section>
       )}
       {state.kind === "error" && (
         <section className="card" aria-live="assertive">
-          <h1>Investigation {invId}</h1>
+          <h1>{t("title", { id: invId })}</h1>
           <div className="alert error" role="alert">
             {state.message}
           </div>
           <p>
             <button type="button" onClick={() => window.location.reload()}>
-              Retry
+              {tCommon("retry")}
             </button>
           </p>
         </section>
@@ -117,16 +123,18 @@ export default function InvestigationPage() {
         <>
           <SectionNav
             items={[
-              { id: "overview-h", label: "Overview" },
-              { id: "why-risk-h", label: "Why this risk?" },
-              { id: "evidence-h", label: "Evidence" },
-              { id: "intel-h", label: "Intelligence" },
-              { id: "ai-h", label: "AI analysis" },
+              { id: "overview-h", label: t("overview") },
+              { id: "why-risk-h", label: t("whyRisk") },
+              { id: "evidence-h", label: t("evidence") },
+              { id: "intel-h", label: t("intelligence") },
+              { id: "ai-h", label: t("aiAnalysis") },
             ]}
           />
           <div className="page-head">
             <h1 id="overview-h">
-              Transaction #{state.detail.transaction.transaction_id.split("_")[1]}{" "}
+              {t("txnTitle", {
+                n: state.detail.transaction.transaction_id.split("_")[1],
+              })}{" "}
               —{" "}
               {formatKobo(
                 state.detail.transaction.amount_minor,
@@ -134,10 +142,12 @@ export default function InvestigationPage() {
               )}
             </h1>
             <p>
-              {state.detail.transaction.sender_account_id} →{" "}
-              {state.detail.transaction.receiver_account_id} · channel{" "}
-              {state.detail.transaction.channel} ·{" "}
-              {state.detail.transaction.occurred_at}
+              {t("overviewLinePre", {
+                sender: state.detail.transaction.sender_account_id,
+                receiver: state.detail.transaction.receiver_account_id,
+                channel: state.detail.transaction.channel,
+              })}{" "}
+              <bdi>{state.detail.transaction.occurred_at}</bdi>
             </p>
             <p>
               <RiskBadge
@@ -145,17 +155,20 @@ export default function InvestigationPage() {
                 band={state.detail.risk_network.band}
               />{" "}
               <span className="muted">
-                network risk · transaction-only{" "}
-                {state.detail.risk_transaction.score}/100{" "}
-                {state.detail.risk_transaction.band} ·{" "}
-                {state.detail.risk_network.score_version}
+                {t("riskLine", {
+                  score: state.detail.risk_transaction.score,
+                  band: state.detail.risk_transaction.band,
+                  version: state.detail.risk_network.score_version,
+                })}
               </span>
             </p>
             <p className="muted">{state.detail.risk_network.limitations}</p>
             <p className="muted">
-              Case{" "}
-              <code>{state.detail.case?.case_id ?? "none"}</code> · status{" "}
-              {state.detail.case?.status ?? "—"} (read-only in this batch)
+              {t("casePre")}
+              <code>{state.detail.case?.case_id ?? "none"}</code>{" "}
+              {t("casePost", {
+                status: state.detail.case?.status ?? "—",
+              })}
             </p>
           </div>
           <WhyRiskPanel rules={state.detail.rule_results} />

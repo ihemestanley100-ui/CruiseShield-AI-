@@ -91,7 +91,11 @@ describe("useDemoSession", () => {
 
   it("restores the session when a valid cookie exists", async () => {
     modeMock.mockResolvedValue({ auth_enabled: true });
-    meMock.mockResolvedValue({ user: "judge", role: "investigator" });
+    meMock.mockResolvedValue({
+      user: "judge",
+      role: "investigator",
+      permissions: ["read", "audit_read", "ai_run", "write"],
+    });
     render(
       <Harness>
         <p>child</p>
@@ -104,10 +108,41 @@ describe("useDemoSession", () => {
     expect(await screen.findByRole("button", { name: "out" })).toBeTruthy();
   });
 
+  it("re-gates on mid-session expiry, stays open on live session", async () => {
+    modeMock.mockResolvedValue({ auth_enabled: true });
+    meMock.mockResolvedValue({
+      user: "judge",
+      role: "investigator",
+      permissions: ["read", "audit_read", "ai_run", "write"],
+    });
+    render(
+      <Harness>
+        <p>child</p>
+      </Harness>
+    );
+    await screen.findByRole("button", { name: "out" });
+    // Live session: unauthorized noise re-checks but never gates.
+    window.dispatchEvent(new CustomEvent("csai:unauthorized"));
+    await vi.waitFor(() => expect(meMock.mock.calls.length).toBeGreaterThan(1));
+    expect(screen.getByText("child")).toBeTruthy();
+    expect(
+      screen.queryByRole("heading", { name: "Demo sign in" })
+    ).toBeNull();
+    // Expired session: the same event flips the shell to sign-in.
+    meMock.mockRejectedValue(auth401());
+    window.dispatchEvent(new CustomEvent("csai:unauthorized"));
+    await screen.findByRole("heading", { name: "Demo sign in" });
+    expect(screen.queryByText("child")).toBeNull();
+  });
+
   it("signs in through the form and signs out again", async () => {
     modeMock.mockResolvedValue({ auth_enabled: true });
     meMock.mockRejectedValue(auth401());
-    loginMock.mockResolvedValue({ user: "judge", role: "admin" });
+    loginMock.mockResolvedValue({
+      user: "judge",
+      role: "admin",
+      permissions: ["read", "audit_read", "ai_run", "write", "manage"],
+    });
     render(
       <Harness>
         <p>child</p>

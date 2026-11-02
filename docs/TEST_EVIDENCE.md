@@ -81,3 +81,14 @@ User-reported result (attributed, not agent-observed):
 
 Phase 2 verification is complete on all gates. Phase 3 remains blocked
 pending explicit user approval.
+
+## Addendum 2026-11-01 (J3; historical sections above retained verbatim)
+
+- Backend: 334 passed / 102 skipped / 0 failed (437 collected). Skips:
+  socket-gated TestClient suites + loop-gated provider-mock suites.
+  One node-shell test is sandbox-EPERM-blocked, proven green unsandboxed.
+- Frontend: 49 files / 254 tests pass; `tsc --noEmit` clean;
+  `next build` exit 0 (fresh BUILD_ID).
+- Pinned values unchanged: 22 nodes / 30 edges, txn 35 MODERATE /
+  network 84 HIGH, 8 rules, 39 evidence, sim 84 → 72, 11 replay events.
+- `data/state.json`: `BA1D4DB4…3790FE`, 101417 B, unchanged.

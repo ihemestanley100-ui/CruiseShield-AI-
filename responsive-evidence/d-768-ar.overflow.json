@@ -1,0 +1,30 @@
+{
+  "viewport": 768,
+  "scrollW": 805,
+  "offenders": [
+    {
+      "el": "div.profile",
+      "right": 805,
+      "width": 112,
+      "text": "INInvestigatordemo role"
+    },
+    {
+      "el": "span.profile-text",
+      "right": 805,
+      "width": 72,
+      "text": "Investigatordemo role"
+    },
+    {
+      "el": "strong",
+      "right": 805,
+      "width": 72,
+      "text": "Investigator"
+    },
+    {
+      "el": "span.muted",
+      "right": 805,
+      "width": 72,
+      "text": "demo role"
+    }
+  ]
+}

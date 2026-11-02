@@ -17,6 +17,7 @@ import {
   resetDemo,
   type DemoResetResult,
 } from "../../../lib/api";
+import { useTranslation } from "../../../lib/i18n/context";
 
 type State =
   | { kind: "loading" }
@@ -27,6 +28,9 @@ type State =
 export default function ReplayPage() {
   const params = useParams<{ scenarioId: string }>();
   const scenarioId = params.scenarioId;
+  const { t } = useTranslation("replay");
+  const { t: tCommon } = useTranslation("common");
+  const { t: tNav } = useTranslation("nav");
   const [state, setState] = useState<State>({ kind: "loading" });
   const [confirming, setConfirming] = useState(false);
   const [resetting, setResetting] = useState(false);
@@ -64,7 +68,7 @@ export default function ReplayPage() {
               ? `${err.code}: ${err.message}`
               : err instanceof Error
                 ? err.message
-                : "request failed",
+                : tCommon("requestFailed"),
         });
       });
     return () => controller.abort();
@@ -84,7 +88,7 @@ export default function ReplayPage() {
           ? `${err.code}: ${err.message}`
           : err instanceof Error
             ? err.message
-            : "request failed"
+            : tCommon("requestFailed")
       );
     } finally {
       setResetting(false);
@@ -95,33 +99,35 @@ export default function ReplayPage() {
     <main className="main">
       <Breadcrumbs
         items={[
-          { label: "Command Center", href: "/demo" },
-          { label: `Replay ${scenarioId}` },
+          { label: tNav("commandCenter"), href: "/demo" },
+          { label: t("crumb", { id: scenarioId }) },
         ]}
       />
       {state.kind === "loading" && (
         <section className="card" aria-live="polite">
-          <h1>Replay {scenarioId}</h1>
-          <p className="muted">Loading scenario…</p>
+          <h1>{t("title", { id: scenarioId })}</h1>
+          <p className="muted">{t("loading")}</p>
         </section>
       )}
       {state.kind === "not-found" && (
         <section className="card" aria-live="assertive">
-          <h1>Scenario not found</h1>
+          <h1>{t("notFoundTitle")}</h1>
           <p className="muted">
-            No scenario <code>{scenarioId}</code> exists in the backend.
+            {t("notFoundPre")}
+            <code>{scenarioId}</code>
+            {t("notFoundPost")}
           </p>
         </section>
       )}
       {state.kind === "error" && (
         <section className="card" aria-live="assertive">
-          <h1>Replay {scenarioId}</h1>
+          <h1>{t("title", { id: scenarioId })}</h1>
           <div className="alert error" role="alert">
             {state.message}
           </div>
           <p>
             <button type="button" onClick={() => window.location.reload()}>
-              Retry
+              {tCommon("retry")}
             </button>
           </p>
         </section>
@@ -129,28 +135,24 @@ export default function ReplayPage() {
       {state.kind === "ready" && (
         <>
           <div className="page-head">
-            <h1>Replay & simulation — {state.title}</h1>
+            <h1>{t("headTitle", { title: state.title })}</h1>
             <p className="muted">
-              Scenario <code>{scenarioId}</code>
+              {t("scenarioPre")}
+              <code>{scenarioId}</code>
             </p>
           </div>
-          <section className="card" aria-label="Scenario reset">
-            <h2>Scenario reset</h2>
-            <p className="muted">
-              Reset restores the seeded scenario exactly and clears all live
-              state: human decisions, simulations, AI runs, and audit events
-              beyond the reset itself.
-            </p>
+          <section className="card" aria-label={t("resetLabel")}>
+            <h2>{t("resetTitle")}</h2>
+            <p className="muted">{t("resetBlurb")}</p>
             {!confirming && resetResult === null && (
               <button type="button" onClick={() => setConfirming(true)}>
-                Reset demo
+                {t("resetDemo")}
               </button>
             )}
             {confirming && (
               <p>
                 <strong>
-                  Confirm: this clears decisions, simulations, AI runs, and
-                  audit history for {scenarioId}.{" "}
+                  {t("confirmReset", { id: scenarioId })}{" "}
                 </strong>
                 <button
                   type="button"
@@ -158,7 +160,7 @@ export default function ReplayPage() {
                   disabled={resetting}
                   onClick={onReset}
                 >
-                  {resetting ? "Resetting…" : "Confirm reset"}
+                  {resetting ? t("resetting") : t("confirmResetBtn")}
                 </button>{" "}
                 <button
                   type="button"
@@ -166,7 +168,7 @@ export default function ReplayPage() {
                   disabled={resetting}
                   onClick={() => setConfirming(false)}
                 >
-                  Cancel
+                  {t("cancel")}
                 </button>
               </p>
             )}
@@ -177,9 +179,11 @@ export default function ReplayPage() {
             )}
             {resetResult !== null && (
               <div className="alert ok" role="status" data-testid="reset-result">
-                Reset complete: run <code>{resetResult.run_id}</code>, seed{" "}
-                <code>{resetResult.seed_hash.slice(0, 12)}…</code>. Reload the
-                page to replay from the restored state.
+                {t("resetDonePre")}
+                <code>{resetResult.run_id}</code>
+                {t("resetDoneMid")}
+                <code>{resetResult.seed_hash.slice(0, 12)}…</code>
+                {t("resetDonePost")}
               </div>
             )}
           </section>

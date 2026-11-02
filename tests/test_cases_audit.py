@@ -118,3 +118,17 @@ def test_case_detail_reports_latest_ai_run(tmp_store):
              if isinstance(v, list)}
     assert after["decisions"] == before["decisions"]
     assert after["audits"] == before["audits"]
+
+
+def test_case_detail_skips_failed_run_for_latest(tmp_store):
+    """J3-P5: a newer FAILED run never masks the latest SUCCEEDED one."""
+    package_id = tmp_store.state["evidence_packages"]["inv_84721"]["package_id"]
+    tmp_store.save_ai_run(_ai_run(package_id, "agentrun_2"))
+    failed = _ai_run(package_id, "agentrun_3")
+    failed["status"] = "FAILED"
+    failed["result"] = {}
+    tmp_store.save_ai_run(failed)
+    detail = main.get_case("case_84721")
+    latest = detail["latest_ai_run"]
+    assert latest["agent_run_id"] == "agentrun_2"
+    assert latest["conclusion"] == "requires_review"

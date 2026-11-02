@@ -1,0 +1,575 @@
+# locale: hi (MACHINE-DRAFTED — human review pending)
+# version: 1.2.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
+# columns: key | en_source | draft | origin(direct=translated,fallback=English shown) | same_as_source | en_vars | draft_vars | vars_ok
+key	en_source	draft	origin	same_as_source	en_vars	draft_vars	vars_ok
+ai.altTitle	Alternative explanations:	वैकल्पिक व्याख्याएं:	direct	false			true
+ai.askBtn	Ask follow-up	अनुवर्ती पूछें	direct	false			true
+ai.askLabel	Ask a follow-up about this evidence	इस साक्ष्य पर अनुवर्ती प्रश्न पूछें	direct	false			true
+ai.askPh	e.g. Why is dev_04 shared across accounts?	जैसे, dev_04 खातों में साझा क्यों है?	direct	false			true
+ai.asking	Asking…	पूछा जा रहा है…	direct	false			true
+ai.calling	Calling model…	मॉडल को कॉल किया जा रहा है…	direct	false			true
+ai.cannotRun	Your role cannot run AI analysis.	आपकी भूमिका AI विश्लेषण नहीं चला सकती।	direct	false			true
+ai.conclusionLine	Conclusion: {c}	निष्कर्ष: {c}	direct	false	c	c	true
+ai.confidencePre	Confidence: 	विश्वास: 	direct	false			true
+ai.metaPre	{model} · {ms} ms · schema {s} · refs {r} · run 	{model} · {ms} मि.से. · स्कीमा {s} · संदर्भ {r} · रन 	direct	false	model,ms,r,s	model,ms,r,s	true
+ai.missingTitle	Missing information:	गुम जानकारी:	direct	false			true
+ai.panelBlurb	Read-only explanation of the evidence package. The model cannot change risk scores or authorize actions.	साक्ष्य पैकेज की केवल-पठन व्याख्या। मॉडल जोखिम स्कोर नहीं बदल सकता और न कार्रवाई अधिकृत कर सकता है।	direct	false			true
+ai.panelTitle	Analyze with Muse Spark	Muse Spark द्वारा विश्लेषण	direct	false			true
+ai.qLine	Q: {q}	प्रश्न: {q}	direct	false	q	q	true
+ai.runAnalysis	Run AI analysis	AI विश्लेषण चलाएं	direct	false			true
+ai.timedOut	Request timed out or was cancelled.	अनुरोध समयबाह्य हुआ या रद्द किया गया।	direct	false			true
+audit.auditEmpty	No audit events recorded for this case.	इस मामले हेतु कोई ऑडिट ईवेंट दर्ज नहीं।	direct	false			true
+audit.auditLabel	Audit trail	ऑडिट ट्रेल	direct	false			true
+audit.auditTitle	Audit trail	ऑडिट ट्रेल	direct	false			true
+audit.caption	Every recorded action with actor, state change, and reason.	प्रत्येक कार्रवाई कर्ता, स्थिति परिवर्तन और कारण सहित दर्ज है।	direct	false			true
+audit.events.one	{count} audit event.	{count} ऑडिट ईवेंट।	direct	false	count	count	true
+audit.events.other	{count} audit events.	{count} ऑडिट ईवेंट।	direct	false	count	count	true
+audit.thAction	Action	कार्रवाई	direct	false			true
+audit.thActor	Actor	कर्ता	direct	false			true
+audit.thEvent	Event	ईवेंट	direct	false			true
+audit.thReason	Reason	कारण	direct	false			true
+audit.thState	State change	स्थिति परिवर्तन	direct	false			true
+audit.thTime	Time	समय	direct	false			true
+auth.blurb	This hosted demo is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	यह डेमो सुरक्षित है। इस मूल्यांकन हेतु दिए गए जांचकर्ता क्रेडेंशियल से साइन इन करें। केवल सिंथेटिक डेटा।	direct	false			true
+auth.invalid	Invalid username or password.	अमान्य उपयोगकर्ता नाम या पासवर्ड।	direct	false			true
+auth.password	Password	पासवर्ड	direct	false			true
+auth.rateLimited	Too many login attempts. Wait a minute and try again.	बहुत अधिक प्रयास। एक मिनट प्रतीक्षा करें और पुनः प्रयास करें।	direct	false			true
+auth.signIn	Sign in	साइन इन	direct	false			true
+auth.signingIn	Signing in…	साइन इन हो रहा है…	direct	false			true
+auth.title	Demo sign in	डेमो साइन इन	direct	false			true
+auth.unreachable	Backend unreachable. Check the demo server and retry.	बैकएंड पहुंच से बाहर। डेमो सर्वर जांचें और पुनः प्रयास करें।	direct	false			true
+auth.username	Username	उपयोगकर्ता नाम	direct	false			true
+case.advisory	Advisory only: Muse Spark analysis explains evidence and never constitutes a human decision, nor changes risk scores or case status.	केवल परामर्श: Muse Spark विश्लेषण साक्ष्य समझाता है, मानव निर्णय नहीं बनता, न जोखिम स्कोर बदलता है न मामला स्थिति।	direct	false			true
+case.aiAssessment	AI assessment	AI आकलन	direct	false			true
+case.assessEmpty	No AI investigation assessment is available yet.	अभी कोई AI जांच आकलन उपलब्ध नहीं है।	direct	false			true
+case.assessLabel	AI Investigation Assessment	AI जांच आकलन	direct	false			true
+case.assessTitle	AI Investigation Assessment	AI जांच आकलन	direct	false			true
+case.auditCrumb	Audit trail	ऑडिट ट्रेल	direct	false			true
+case.auditHeadPre	Audit trail — Case 	ऑडिट ट्रेल — मामला 	direct	false			true
+case.auditIntro	Every recorded action on this case, in recorded order. 	इस मामले पर प्रत्येक दर्ज कार्रवाई, दर्ज क्रम में।	direct	false			true
+case.auditLoading	Loading audit events…	ऑडिट ईवेंट लोड हो रहे हैं…	direct	false			true
+case.auditTitle	Audit trail	ऑडिट ट्रेल	direct	false			true
+case.auditTrail	Audit trail	ऑडिट ट्रेल	direct	false			true
+case.backToCase	Back to case	मामले पर वापस	direct	false			true
+case.caseTitleDash	— 	— 	direct	true			true
+case.caseTitlePre	Case 	मामला 	direct	false			true
+case.conclusionPre	Conclusion: 	निष्कर्ष: 	direct	false			true
+case.confidencePre	Confidence: 	विश्वास: 	direct	false			true
+case.crumb	Case {id}	मामला {id}	direct	false	id	id	true
+case.decidedByPre	by {actor} ·	{actor} द्वारा ·	direct	false	actor	actor	true
+case.decisionHistory	Decision history	निर्णय इतिहास	direct	false			true
+case.histEmpty	No human decisions recorded yet.	अभी कोई मानव निर्णय दर्ज नहीं।	direct	false			true
+case.histLabel	Decision history	निर्णय इतिहास	direct	false			true
+case.histTitle	Decision history	निर्णय इतिहास	direct	false			true
+case.humanDecision	Human decision	मानव निर्णय	direct	false			true
+case.invPre	Investigation 	जांच 	direct	false			true
+case.loading	Loading case…	मामला लोड हो रहा है…	direct	false			true
+case.missingInfo	Missing information: {list}	गुम जानकारी: {list}	direct	false	list	list	true
+case.notFoundPost	 exists in the backend.	 मौजूद नहीं है।	direct	false			true
+case.notFoundPre	No case 	बैकएंड में कोई मामला 	direct	false			true
+case.notFoundTitle	Case not found	मामला नहीं मिला	direct	false			true
+case.openAudit	Open full audit trail	पूर्ण ऑडिट ट्रेल खोलें	direct	false			true
+case.overview	Overview	अवलोकन	direct	false			true
+case.runMetaPost	· {ms} ms · schema {s} · refs {r})	· {ms} मि.से. · स्कीमा {s} · संदर्भ {r})	direct	false	ms,r,s	ms,r,s	true
+case.runMetaPre	({model} · run 	({model} · रन 	direct	false	model	model	true
+case.title	Case {id}	मामला {id}	direct	false	id	id	true
+case.transitionsEmpty	none (terminal state, or refreshing…)	कोई नहीं (अंतिम स्थिति, या ताज़ा हो रहा है…)	direct	false			true
+case.transitionsPre	Allowed transitions: 	अनुमत परिवर्तन: 	direct	false			true
+case.updatedPre	· updated	· अद्यतन	direct	false			true
+command.activityEmpty	No audit events recorded yet.	अभी कोई ऑडिट ईवेंट दर्ज नहीं।	direct	false			true
+command.activityEvents.one	{count} audit event	{count} ऑडिट ईवेंट	direct	false	count	count	true
+command.activityEvents.other	{count} audit events	{count} ऑडिट ईवेंट	direct	false	count	count	true
+command.activityMore	 — showing latest {n}	 — नवीनतम {n} दिखाए जा रहे हैं	direct	false	n	n	true
+command.activityTitle	Recent activity	हाल की गतिविधि	direct	false			true
+command.briefAdvisory	Advisory only: explains evidence and never constitutes a human decision, nor changes risk scores or case status.	केवल परामर्श: साक्ष्य समझाता है, मानव निर्णय नहीं बनता, न जोखिम स्कोर बदलता है न मामला स्थिति।	direct	false			true
+command.briefConclusion	Conclusion: {c}	निष्कर्ष: {c}	direct	false	c	c	true
+command.briefEmpty	No Muse Spark analysis is available yet.	अभी कोई Muse Spark विश्लेषण उपलब्ध नहीं है।	direct	false			true
+command.briefMetaPost	· {ms} ms · schema {s} · refs {f}	· {ms} मि.से. · स्कीमा {s} · संदर्भ {f}	direct	false	f,ms,s	f,ms,s	true
+command.briefMetaPre	{m} · run 	{m} · रन 	direct	false	m	m	true
+command.briefMissing	Missing information: {list}	गुम जानकारी: {list}	direct	false	list	list	true
+command.briefTitle	Muse Spark brief	Muse Spark ब्रीफ़	direct	false			true
+command.caseStatusLine	{case} · {status}	{case} · {status}	direct	true	case,status	case,status	true
+command.confPre	Confidence: 	विश्वास: 	direct	false			true
+command.edgesLabel	edges	एज	direct	false			true
+command.evPackH	Evidence package	साक्ष्य पैकेज	direct	false			true
+command.evRecords	evidence records	साक्ष्य रिकॉर्ड	direct	false			true
+command.execTitle	Executive overview	कार्यकारी अवलोकन	direct	false			true
+command.featAudit	Audit Trail	ऑडिट ट्रेल	direct	false			true
+command.featAuditDesc	System and analyst activity.	सिस्टम और विश्लेषक गतिविधि।	direct	false			true
+command.featAuditFoot	Full history	पूर्ण इतिहास	direct	false			true
+command.featCases	Cases	मामले	direct	false			true
+command.featCasesDesc	Case status and human decisions.	मामला स्थिति और मानव निर्णय।	direct	false			true
+command.featEv	Evidence	साक्ष्य	direct	false			true
+command.featEvDesc	Linked evidence and provenance.	जुड़े साक्ष्य और उत्पत्ति।	direct	false			true
+command.featEvDown	Unavailable	उपलब्ध नहीं	direct	false			true
+command.featEvFoot	{n} records	{n} रिकॉर्ड	direct	false	n	n	true
+command.featGraphDown	Graph unavailable	ग्राफ़ उपलब्ध नहीं	direct	false			true
+command.featGraphFoot	{a} nodes · {b} edges	{a} नोड · {b} एज	direct	false	a,b	a,b	true
+command.featInv	Investigations	जांचें	direct	false			true
+command.featInvDesc	Scores, rules, evidence and AI analysis.	स्कोर, नियम, साक्ष्य और AI विश्लेषण।	direct	false			true
+command.featNet	Network Explorer	नेटवर्क एक्सप्लोरर	direct	false			true
+command.featNetDesc	Accounts, devices, phones and merchants.	खाते, डिवाइस, फ़ोन और व्यापारी।	direct	false			true
+command.featReplay	Replay & Simulation	रीप्ले व सिमुलेशन	direct	false			true
+command.featReplayDesc	Recreate events and test what-if scenarios.	ईवेंट पुनर्निर्मित करें और परिकल्पनात्मक परिदृश्य परखें।	direct	false			true
+command.featReplayFoot	Deterministic replay	नियतात्मक रीप्ले	direct	false			true
+command.featTitle	Explore	खोजें	direct	false			true
+command.fullExplanations	Full explanations on the investigation	जांच पर पूर्ण व्याख्याएं	direct	false			true
+command.kpiActive	Active investigations	सक्रिय जांचें	direct	false			true
+command.kpiAi	AI analysis runs	AI विश्लेषण रन	direct	false			true
+command.kpiDecisions	Human decisions	मानव निर्णय	direct	false			true
+command.kpiEvidence	Evidence records	साक्ष्य रिकॉर्ड	direct	false			true
+command.kpiHigh	High-risk investigations	उच्च-जोखिम जांचें	direct	false			true
+command.kpiRiskTitle	Risk intelligence	जोखिम इंटेलिजेंस	direct	false			true
+command.kpiTxn	Transactions monitored	निगरानीकृत लेन-देन	direct	false			true
+command.linkedTo	Linked to {id}	{id} से जुड़ा	direct	false	id	id	true
+command.loadingNet	Loading network…	नेटवर्क लोड हो रहा है…	direct	false			true
+command.needsAction	{case} · {status} — requires analyst action	{case} · {status} — विश्लेषक कार्रवाई आवश्यक	direct	false	case,status	case,status	true
+command.netBandLine	Network band {b}	नेटवर्क बैंड {b}	direct	false	b	b	true
+command.netDown	Network data unavailable.	नेटवर्क डेटा उपलब्ध नहीं।	direct	false			true
+command.netH	Investigation network	जांच नेटवर्क	direct	false			true
+command.netRiskH	Network risk	नेटवर्क जोखिम	direct	false			true
+command.noRuns	No runs recorded	कोई रन दर्ज नहीं	direct	false			true
+command.nodesLabel	nodes	नोड	direct	false			true
+command.openCaseAudit	Open case audit trail	मामला ऑडिट ट्रेल खोलें	direct	false			true
+command.openEvidence	Open evidence	साक्ष्य खोलें	direct	false			true
+command.openFullExplorer	Open full network explorer	पूर्ण नेटवर्क एक्सप्लोरर खोलें	direct	false			true
+command.openNetExplorer	Open network explorer	नेटवर्क एक्सप्लोरर खोलें	direct	false			true
+command.packagePre	Package 	पैकेज 	direct	false			true
+command.previewAria	Network preview: {a} of {b} nodes shown	नेटवर्क पूर्वावलोकन: {b} में से {a} नोड दिख रहे हैं	direct	false	a,b	a,b	true
+command.previewCounts	{a} nodes, {b} edges in the investigation graph. Preview shows {c} nodes and {d} relationships.	जांच ग्राफ़ में {a} नोड, {b} एज। पूर्वावलोकन में {c} नोड और {d} संबंध दिख रहे हैं।	direct	false	a,b,c,d	a,b,c,d	true
+command.previewEmpty	No relationships in this graph.	इस ग्राफ़ में कोई संबंध नहीं।	direct	false			true
+command.previewProvErrors	Provenance errors: {list}	उत्पत्ति त्रुटियां: {list}	direct	false	list	list	true
+command.previewTitle	Network preview	नेटवर्क पूर्वावलोकन	direct	false			true
+command.provErrors	Provenance errors: {n}	उत्पत्ति त्रुटियां: {n}	direct	false	n	n	true
+command.riskAria	Risk {score} of 100, {band}	जोखिम {score}/100, {band}	direct	false	band,score	band,score	true
+command.rulesAria	{a} of {b} rules triggered	{b} में से {a} नियम ट्रिगर हुए	direct	false	a,b	a,b	true
+command.rulesCounts	{a} of {b} rules triggered.	{b} में से {a} नियम ट्रिगर हुए।	direct	false	a,b	a,b	true
+command.rulesH	Rules triggered	ट्रिगर हुए नियम	direct	false			true
+command.rulesOf	{a} of {b}	{b} में से {a}	direct	false	a,b	a,b	true
+command.rulesTitle	Rule triggers	नियम ट्रिगर	direct	false			true
+command.runFromInv	Run analysis from the investigation	जांच से विश्लेषण चलाएं	direct	false			true
+command.txnOnlyH	Transaction-only risk	केवल लेन-देन जोखिम	direct	false			true
+command.txnOnlyNote	This transfer on its own, before network context. The network score above is authoritative for the investigation.	नेटवर्क संदर्भ से पहले, अपने आप में यह हस्तांतरण। ऊपर का नेटवर्क स्कोर जांच हेतु आधिकारिक है।	direct	false			true
+command.txnOnlyScope	{v} · single-transfer scope	{v} · एकल-हस्तांतरण दायरा	direct	false	v	v	true
+command.txnTitleLine	Transaction #{n}	लेन-देन #{n}	direct	false	n	n	true
+command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derived difference)	{v} · नेटवर्क दायरा · केवल लेन-देन से {sign}{u} (व्युत्पन्न अंतर)	direct	false	sign,u,v	sign,u,v	true
+command.versionedRules	Versioned deterministic rules	संस्करणबद्ध नियतात्मक नियम	direct	false			true
+common.breadcrumb	Breadcrumb	ब्रेडक्रम्ब	direct	false			true
+common.closeDialog	Close dialog	संवाद बंद करें	direct	false			true
+common.loading	Loading…	लोड हो रहा है…	direct	false			true
+common.none	none	कोई नहीं	direct	false			true
+common.noneYet	None yet	अभी कोई नहीं	direct	false			true
+common.notAvailable	Not available	उपलब्ध नहीं	direct	false			true
+common.present	present	वर्तमान	direct	false			true
+common.requestFailed	request failed	अनुरोध विफल	direct	false			true
+common.retry	Retry	पुनः प्रयास	direct	false			true
+common.timelineEmpty	No events.	कोई ईवेंट नहीं।	direct	false			true
+common.unknown	unknown	अज्ञात	direct	false			true
+common.unknownModel	unknown model	अज्ञात मॉडल	direct	false			true
+common.unknownTime	unknown time	अज्ञात समय	direct	false			true
+decision.actorLabel	Analyst ID	विश्लेषक ID	direct	false			true
+decision.decisionLabel	Decision	निर्णय	direct	false			true
+decision.readOnly	Your role is read-only: decisions are disabled.	आपकी भूमिका केवल-पठन है: निर्णय अक्षम हैं।	direct	false			true
+decision.reasonLabel	Reason (required)	कारण (आवश्यक)	direct	false			true
+decision.reasonRequired	A reason is required before recording a decision.	निर्णय दर्ज करने से पहले कारण आवश्यक है।	direct	false			true
+decision.record	Record decision	निर्णय दर्ज करें	direct	false			true
+decision.recording	Recording…	दर्ज हो रहा है…	direct	false			true
+decision.selectFirst	Select a decision before recording.	दर्ज करने से पहले निर्णय चुनें।	direct	false			true
+decision.selectPlaceholder	Select a decision…	निर्णय चुनें…	direct	false			true
+decision.targetLabel	Move case to	मामला यहां ले जाएं	direct	false			true
+decision.terminal	This case is in a terminal state; no further transitions are allowed.	यह मामला अंतिम स्थिति में है; आगे कोई परिवर्तन अनुमत नहीं है।	direct	false			true
+decision.title	Human decision	मानव निर्णय	direct	false			true
+demo.activityDown	Activity unavailable	गतिविधि उपलब्ध नहीं	direct	false			true
+demo.aiBriefDown	AI brief unavailable	AI ब्रीफ़ उपलब्ध नहीं	direct	false			true
+demo.backendStatus	Backend status	बैकएंड स्थिति	direct	false			true
+demo.checkedAt	Checked {url}…	{url} जांचा गया…	direct	false	url	url	true
+demo.execOverview	Executive overview	कार्यकारी अवलोकन	direct	false			true
+demo.execOverviewDown	Executive overview unavailable	कार्यकारी अवलोकन उपलब्ध नहीं	direct	false			true
+demo.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	वित्तीय अपराध शायद ही कभी एक लेन-देन में दिखता है। CruiseShield AI संदिग्ध लेन-देन, खातों, डिवाइसों, लाभार्थियों और व्यापारियों को एक व्याख्यायोग्य इंटेलिजेंस नेटवर्क में जोड़ता है।	direct	false			true
+demo.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	इसका नियतात्मक जोखिम इंजन संकेतों की पहचान करता है, Meta AI जांचकर्ताओं को साक्ष्य समझने में मदद करती है, रीप्ले और सिमुलेशन परिकल्पनात्मक परिदृश्यों का पता लगाते हैं, और मानव निर्णय जवाबदेह व लेखापरीक्षणीय बने रहते हैं।	direct	false			true
+demo.museBrief	Muse Spark brief	Muse Spark ब्रीफ़	direct	false			true
+demo.networkPreview	Network preview	नेटवर्क पूर्वावलोकन	direct	false			true
+demo.networkPreviewDown	Network preview unavailable	नेटवर्क पूर्वावलोकन उपलब्ध नहीं	direct	false			true
+demo.recentActivity	Recent activity	हाल की गतिविधि	direct	false			true
+demo.replayDown	Replay unavailable.	रीप्ले उपलब्ध नहीं।	direct	false			true
+demo.retryTitle	Retry {title}	{title} पुनः प्रयास करें	direct	false	title	title	true
+demo.riskIntel	Risk intelligence	जोखिम इंटेलिजेंस	direct	false			true
+demo.riskIntelDown	Risk intelligence unavailable	जोखिम इंटेलिजेंस उपलब्ध नहीं	direct	false			true
+demo.startBackendPost	) and press retry.	) और पुनः प्रयास दबाएं।	direct	false			true
+demo.startBackendPre	Start the backend (	बैकएंड प्रारंभ करें (	direct	false			true
+demo.systemStatus	System Status	सिस्टम स्थिति	direct	false			true
+demo.systemStatusDown	System status unavailable	सिस्टम स्थिति उपलब्ध नहीं	direct	false			true
+evidence.clearSearch	Clear search	खोज साफ़ करें	direct	false			true
+evidence.emptyFilter	No evidence items match this filter.	कोई मेल खाता साक्ष्य नहीं।	direct	false			true
+evidence.emptySearch	No evidence items match this search.	इस खोज से कोई साक्ष्य मेल नहीं खाता।	direct	false			true
+evidence.filterAll	all	सभी	direct	false			true
+evidence.filterByType	Filter by type	प्रकार से फ़िल्टर करें	direct	false			true
+evidence.hideProv	Hide provenance	उत्पत्ति छिपाएं	direct	false			true
+evidence.pkgTitle	Evidence package ({a} of {b})	साक्ष्य पैकेज ({b} में से {a})	direct	false	a,b	a,b	true
+evidence.provEdges	Graph edges	ग्राफ़ एज	direct	false			true
+evidence.provEvents	Events	ईवेंट	direct	false			true
+evidence.provRules	Rule results	नियम परिणाम	direct	false			true
+evidence.searchLabel	Search evidence	साक्ष्य खोजें	direct	false			true
+evidence.searchPh	Filter by ID, type, title, or description	ID, प्रकार, शीर्षक या विवरण से फ़िल्टर करें	direct	false			true
+evidence.showProv	Show provenance	उत्पत्ति दिखाएं	direct	false			true
+graph.animSpeed	Animation speed	एनिमेशन गति	direct	false			true
+graph.countsLine	Showing {a} of {b} nodes, {c} of {d} edges.	{b} में से {a} नोड, {d} में से {c} एज दिख रहे हैं।	direct	false	a,b,c,d	a,b,c,d	true
+graph.detailEvidence	Evidence: 	साक्ष्य: 	direct	false			true
+graph.detailProv	Provenance: 	उत्पत्ति: 	direct	false			true
+graph.detailSource	Source: 	स्रोत: 	direct	false			true
+graph.detailValidArrow	→	→	direct	true			true
+graph.detailValidPost	· Trace: 	· ट्रेस: 	direct	false			true
+graph.detailValidPre	Valid:	मान्य:	direct	false			true
+graph.droppedEdges.one	{count} edge hidden: endpoint unknown ({ids}).	{count} एज छिपा: अंतिम-बिंदु अज्ञात ({ids})।	direct	false	count,ids	count,ids	true
+graph.droppedEdges.other	{count} edges hidden: endpoint unknown ({ids}).	{count} एज छिपे: अंतिम-बिंदु अज्ञात ({ids})।	direct	false	count,ids	count,ids	true
+graph.edgeLabel	Edge {id}: {s} {r} {t}	एज {id}: {s} {r} {t}	direct	false	id,r,s,t	id,r,s,t	true
+graph.entityFilters	Entity type filters	इकाई प्रकार फ़िल्टर	direct	false			true
+graph.entityLegend	Entity legend	इकाई लेजेंड	direct	false			true
+graph.fit	Fit to screen	स्क्रीन पर फ़िट करें	direct	false			true
+graph.focusIsolated	Focus has no connections in the current filter.	वर्तमान फ़िल्टर में फ़ोकस का कोई संबंध नहीं।	direct	false			true
+graph.graphTitle	Network graph	नेटवर्क ग्राफ़	direct	false			true
+graph.hideLabels	Hide labels	लेबल छिपाएं	direct	false			true
+graph.legendNote	Shapes + labels identify types (never color alone). Ring = graph steps from focus, not risk.	आकृतियां + लेबल प्रकार पहचानते हैं (केवल रंग कभी नहीं)। छल्ला = फ़ोकस से ग्राफ़ चरण, जोखिम नहीं।	direct	false			true
+graph.nodeFocusSuffix	, orbit focus	, कक्षीय फ़ोकस	direct	false			true
+graph.orbitFocusBadge	· orbit focus	· कक्षीय फ़ोकस	direct	false			true
+graph.orbitalCounts	Focus: {focus} · Showing {a} of {b} nodes, {c} of {d} edges.	फ़ोकस: {focus} · {b} में से {a} नोड, {d} में से {c} एज दिख रहे हैं।	direct	false	a,b,c,d,focus	a,b,c,d,focus	true
+graph.orbitalLabel	Orbital graph	कक्षीय ग्राफ़	direct	false			true
+graph.orbitalNote	Synthetic demo data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	कृत्रिम डेमो डेटा। छल्ले और गति केवल लेआउट हैं — वे जोखिम, अपराध या प्राथमिकता नहीं दर्शाते।	direct	false			true
+graph.orbitalSvg	Orbital graph focused on {focus}: {a} nodes, {b} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.	{focus} पर केंद्रित कक्षीय ग्राफ़: {a} नोड, {b} एज। नोड और एज तक Tab, चुनने हेतु Enter, पैन हेतु तीर कुंजियां।	direct	false	a,b,focus	a,b,focus	true
+graph.orbitalTitle	Orbital explorer	कक्षीय एक्सप्लोरर	direct	false			true
+graph.orbitalViewControls	Orbital view controls	कक्षीय दृश्य नियंत्रण	direct	false			true
+graph.pauseAnim	Pause animation	एनिमेशन रोकें	direct	false			true
+graph.pin	Pin as orbit focus	कक्षीय फ़ोकस बनाएं	direct	false			true
+graph.playAnim	Play animation	एनिमेशन चलाएं	direct	false			true
+graph.reducedMotionPause	Paused by default: reduced-motion preference detected.	डिफ़ॉल्टतः रोका गया: कम-गति वरीयता पाई गई।	direct	false			true
+graph.relFilters	Relationship filters	संबंध फ़िल्टर	direct	false			true
+graph.relationships.one	{count} relationship	{count} संबंध	direct	false	count	count	true
+graph.relationships.other	{count} relationships	{count} संबंध	direct	false	count	count	true
+graph.resetView	Reset view	दृश्य रीसेट करें	direct	false			true
+graph.sectionLabel	Network graph	नेटवर्क ग्राफ़	direct	false			true
+graph.selectPrompt	Select a node or edge for details.	विवरण हेतु नोड या एज चुनें।	direct	false			true
+graph.showLabels	Show labels	लेबल दिखाएं	direct	false			true
+graph.speed	Speed	गति	direct	false			true
+graph.svgLabel	Network graph: {a} nodes, {b} edges. Use Tab to reach nodes and edges, Enter to select, arrow keys on the graph to pan.	नेटवर्क ग्राफ़: {a} नोड, {b} एज। नोड और एज तक पहुंचने हेतु Tab, चुनने हेतु Enter, ग्राफ़ पर पैन हेतु तीर कुंजियां उपयोग करें।	direct	false	a,b	a,b	true
+graph.tableCaption	Every relationship with provenance and evidence references.	प्रत्येक संबंध उत्पत्ति व साक्ष्य संदर्भों सहित।	direct	false			true
+graph.tableCounts	{a} nodes, {b} edges — the complete record behind the graph above.	{a} नोड, {b} एज — ऊपर के ग्राफ़ के पीछे का पूर्ण रिकॉर्ड।	direct	false	a,b	a,b	true
+graph.tableEmpty	No relationships in this graph.	इस ग्राफ़ में कोई संबंध नहीं।	direct	false			true
+graph.tableLabel	Relationship table	संबंध तालिका	direct	false			true
+graph.tableTitle	All relationships	सभी संबंध	direct	false			true
+graph.thEdge	Edge	एज	direct	false			true
+graph.thEvidence	Evidence	साक्ष्य	direct	false			true
+graph.thProv	Provenance events	उत्पत्ति ईवेंट	direct	false			true
+graph.thRel	Relationship	संबंध	direct	false			true
+graph.thSource	Source	स्रोत	direct	false			true
+graph.thTarget	Target	लक्ष्य	direct	false			true
+graph.unpin	Unpin focus	फ़ोकस हटाएं	direct	false			true
+graph.viewControls	Graph view controls	ग्राफ़ दृश्य नियंत्रण	direct	false			true
+graph.zoomIn	Zoom in	ज़ूम इन	direct	false			true
+graph.zoomOut	Zoom out	ज़ूम आउट	direct	false			true
+intel.accountCount.one	{count} account	{count} खाता	direct	false	count	count	true
+intel.accountCount.other	{count} accounts	{count} खाते	direct	false	count	count	true
+intel.addressPre	address: 	पता: 	direct	false			true
+intel.candidateFindings.one	{count} finding	{count} निष्कर्ष	direct	false	count	count	true
+intel.candidateFindings.other	{count} findings	{count} निष्कर्ष	direct	false	count	count	true
+intel.candidateH	Candidate risk intelligence	उम्मीदवार जोखिम इंटेलिजेंस	direct	false			true
+intel.candidateOff	Candidate engine risk-intelligence-v2-candidate is OFF (default). Authoritative engine: risk-score-v1. Candidate findings never replace v1 scores.	उम्मीदवार इंजन risk-intelligence-v2-candidate बंद है (डिफ़ॉल्ट)। आधिकारिक इंजन: risk-score-v1। उम्मीदवार निष्कर्ष v1 स्कोर का स्थान कभी नहीं लेते।	direct	false			true
+intel.candidateOnPost	, no numeric score ({note}). v1 remains authoritative.	, कोई संख्यात्मक स्कोर नहीं ({note})। v1 आधिकारिक बना रहता है।	direct	false	note	note	true
+intel.candidateOnPre	Candidate engine enabled: 	उम्मीदवार इंजन सक्षम: 	direct	false			true
+intel.deviceH	Device	डिवाइस	direct	false			true
+intel.evidencePre	Evidence: 	साक्ष्य: 	direct	false			true
+intel.findingsCount.one	{count} finding	{count} निष्कर्ष	direct	false	count	count	true
+intel.findingsCount.other	{count} findings	{count} निष्कर्ष	direct	false	count	count	true
+intel.findingsH	Intelligence findings	इंटेलिजेंस निष्कर्ष	direct	false			true
+intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic demo values only.	फिक्सचर संदर्भ, सत्यापित फिंगरप्रिंट नहीं। विशेषताएं: केवल घोषित कृत्रिम डेमो मान।	direct	false			true
+intel.geoDisclaimer	IP-derived locations are approximate and never proof of physical presence. No GPS collection exists (permission: unavailable).	IP-व्युत्पन्न स्थान अनुमानित हैं और भौतिक उपस्थिति का प्रमाण कभी नहीं। कोई GPS संग्रह नहीं (अनुमति: उपलब्ध नहीं)।	direct	false			true
+intel.geoH	Geolocation	भू-स्थान	direct	false			true
+intel.intelDown	Intelligence unavailable for this investigation.	इस जांच हेतु इंटेलिजेंस उपलब्ध नहीं।	direct	false			true
+intel.intelTitle	Device, IP & location intelligence	डिवाइस, IP व स्थान इंटेलिजेंस	direct	false			true
+intel.ipH	IP & network	IP व नेटवर्क	direct	false			true
+intel.ispLabel	ISP/ASN	ISP/ASN	direct	true			true
+intel.limitsLine	Limits: {list}	सीमाएं: {list}	direct	false	list	list	true
+intel.noDevice	No device observations. (unknown)	कोई डिवाइस अवलोकन नहीं। (अज्ञात)	direct	false			true
+intel.noFindings	No findings. (insufficient evidence)	कोई निष्कर्ष नहीं। (अपर्याप्त साक्ष्य)	direct	false			true
+intel.noGeo	No location observations. (unknown)	कोई स्थान अवलोकन नहीं। (अज्ञात)	direct	false			true
+intel.noIp	No IP observations. (unknown)	कोई IP अवलोकन नहीं। (अज्ञात)	direct	false			true
+intel.noLinkage	No transaction linkage. (unknown)	कोई लेन-देन जुड़ाव नहीं। (अज्ञात)	direct	false			true
+intel.obsCount.one	{count} observation	{count} अवलोकन	direct	false	count	count	true
+intel.obsCount.other	{count} observations	{count} अवलोकन	direct	false	count	count	true
+intel.observedOnly	— observed	— अवलोकित	direct	false			true
+intel.observedPost	· source {s}	· स्रोत {s}	direct	false	s	s	true
+intel.observedPre	Observed	अवलोकित	direct	false			true
+intel.provMeta	· provenance {p} · confidence {c} · freshness {f}	· उत्पत्ति {p} · विश्वास {c} · ताज़गी {f}	direct	false	c,f,p	c,f,p	true
+intel.repLabel	Reputation	प्रतिष्ठा	direct	false			true
+intel.reviewLine	Human review: {r}	मानव समीक्षा: {r}	direct	false	r	r	true
+intel.seeBackend	see backend	बैकएंड देखें	direct	false			true
+intel.sharedDevice	— shared device	— साझा डिवाइस	direct	false			true
+intel.statusLine	{findings} · {iso} · synthetic demo data.	{findings} · {iso} · कृत्रिम डेमो डेटा।	direct	false	findings,iso	findings,iso	true
+intel.syntheticTag	· synthetic demo	· कृत्रिम डेमो	direct	false			true
+intel.unknownShort	(unknown)	(अज्ञात)	direct	false			true
+intel.vpnLabel	VPN/proxy/Tor	VPN/प्रॉक्सी/Tor	direct	false			true
+investigation.aiAnalysis	AI analysis	AI विश्लेषण	direct	false			true
+investigation.casePost	· status {status} (read-only in this batch)	· स्थिति {status} (इस बैच में केवल-पठन)	direct	false	status	status	true
+investigation.casePre	Case 	मामला 	direct	false			true
+investigation.crumb	Investigation {id}	जांच {id}	direct	false	id	id	true
+investigation.evidence	Evidence	साक्ष्य	direct	false			true
+investigation.evidenceLabel	Evidence: 	साक्ष्य: 	direct	false			true
+investigation.intelligence	Intelligence	इंटेलिजेंस	direct	false			true
+investigation.loading	Loading investigation…	जांच लोड हो रही है…	direct	false			true
+investigation.notFoundPost	 exists in the backend.	 मौजूद नहीं है।	direct	false			true
+investigation.notFoundPre	No investigation 	बैकएंड में कोई जांच 	direct	false			true
+investigation.notFoundTitle	Investigation not found	जांच नहीं मिली	direct	false			true
+investigation.notTriggered	not triggered	ट्रिगर नहीं हुआ	direct	false			true
+investigation.overview	Overview	अवलोकन	direct	false			true
+investigation.overviewLinePre	{sender} → {receiver} · channel {channel} ·	{sender} → {receiver} · चैनल {channel} ·	direct	false	channel,receiver,sender	channel,receiver,sender	true
+investigation.riskLine	network risk · transaction-only {score}/100 {band} · {version}	नेटवर्क जोखिम · केवल लेन-देन {score}/100 {band} · {version}	direct	false	band,score,version	band,score,version	true
+investigation.title	Investigation {id}	जांच {id}	direct	false	id	id	true
+investigation.triggered	triggered	ट्रिगर हुआ	direct	false			true
+investigation.txnTitle	Transaction #{n}	लेन-देन #{n}	direct	false	n	n	true
+investigation.whyEmpty	No rule results returned for this assessment.	इस आकलन हेतु कोई नियम परिणाम नहीं लौटे।	direct	false			true
+investigation.whyRisk	Why this risk?	यह जोखिम क्यों?	direct	false			true
+investigation.whyRiskLink	Why this risk	यह जोखिम क्यों	direct	false			true
+landing.beneficiaries	Built for fraud investigators, compliance teams, and financial institutions fighting money laundering and scams.	धोखाधड़ी अन्वेषकों, अनुपालन टीमों और धन-शोधन व घोटालों से लड़ने वाली वित्तीय संस्थाओं के लिए निर्मित।	direct	false			true
+landing.brandName	CruiseShield AI™	CruiseShield AI™	direct	true			true
+landing.capSubs.0	Suspicious Patterns	संदिग्ध पैटर्न	direct	false			true
+landing.capSubs.1	Behaviour and Network	व्यवहार व नेटवर्क	direct	false			true
+landing.capSubs.2	Device Linkage	डिवाइस जुड़ाव	direct	false			true
+landing.capSubs.3	Network Signals	नेटवर्क संकेत	direct	false			true
+landing.capSubs.4	Global Context	वैश्विक संदर्भ	direct	false			true
+landing.capSubs.5	Relationship Mapping	संबंध मानचित्रण	direct	false			true
+landing.capSubs.6	Case Management	मामला प्रबंधन	direct	false			true
+landing.capSubs.7	Explainable Insights	व्याख्यायोग्य अंतर्दृष्टि	direct	false			true
+landing.capSubs.8	Deterministic Scoring	नियतात्मक स्कोरिंग	direct	false			true
+landing.capSubs.9	Full Traceability	पूर्ण अनुरेखणीयता	direct	false			true
+landing.capTitle	One platform, ten intelligence layers	एक प्लेटफ़ॉर्म, आसूचना की दस परतें	direct	false			true
+landing.capTitles.0	Transaction Monitoring	लेन-देन निगरानी	direct	false			true
+landing.capTitles.1	Account Intelligence	खाता आसूचना	direct	false			true
+landing.capTitles.2	Device Analytics	डिवाइस विश्लेषण	direct	false			true
+landing.capTitles.3	IP Intelligence	IP आसूचना	direct	false			true
+landing.capTitles.4	Geolocation Analysis	भू-स्थान विश्लेषण	direct	false			true
+landing.capTitles.5	Network Graph	नेटवर्क ग्राफ़	direct	false			true
+landing.capTitles.6	Investigations	जाँचें	direct	false			true
+landing.capTitles.7	AI Intelligence	AI आसूचना	direct	false			true
+landing.capTitles.8	Risk Engine	जोखिम इंजन	direct	false			true
+landing.capTitles.9	Evidence & Audit	साक्ष्य व लेखापरीक्षा	direct	false			true
+landing.controlsAmbient	Ambient sound	परिवेश ध्वनि	direct	false			true
+landing.cta	Explore CruiseShield AI™	CruiseShield AI™ खोजें	direct	false			true
+landing.ctaSub	Enter the Interactive Demo Experience	इंटरैक्टिव डेमो अनुभव में प्रवेश करें	direct	false			true
+landing.enterDemo	Enter Demo	डेमो में प्रवेश करें	direct	false			true
+landing.eyebrow	Global Financial Intelligence	वैश्विक वित्तीय आसूचना	direct	false			true
+landing.fallbackNote	Interactive 3D is unavailable in this browser. The full demo experience remains open.	इस ब्राउज़र में इंटरैक्टिव 3D उपलब्ध नहीं है। पूर्ण डेमो अनुभव खुला रहता है।	direct	false			true
+landing.footerDemo	Demonstration experience · synthetic data · illustrative network visuals · 	डेमो अनुभव · कृत्रिम डेटा · चित्रात्मक नेटवर्क दृश्य · 	direct	false			true
+landing.footerLine	One Platform. A Safer Financial Future. For Everyone.	एक प्लेटफ़ॉर्म। एक अधिक सुरक्षित वित्तीय भविष्य। सभी के लिए।	direct	false			true
+landing.footerLink	Enter the interactive demo	इंटरैक्टिव डेमो में प्रवेश करें	direct	false			true
+landing.fullMotion	Full motion	पूर्ण गति	direct	false			true
+landing.h1	A Safer Financial World	एक अधिक सुरक्षित वित्तीय विश्व	direct	false			true
+landing.home	CruiseShield AI home	CruiseShield AI होम	direct	false			true
+landing.illustrative	Illustrative Network View	चित्रात्मक नेटवर्क दृश्य	direct	false			true
+landing.intelItems.0	Transaction Monitoring	लेन-देन निगरानी	direct	false			true
+landing.intelItems.1	Account Intelligence	खाता आसूचना	direct	false			true
+landing.intelItems.2	Device Intelligence	डिवाइस आसूचना	direct	false			true
+landing.intelItems.3	IP Intelligence	IP आसूचना	direct	false			true
+landing.intelItems.4	Geolocation Intelligence	भू-स्थान आसूचना	direct	false			true
+landing.intelItems.5	Network Graph	नेटवर्क ग्राफ़	direct	false			true
+landing.intelItems.6	AI Investigation	AI जाँच	direct	false			true
+landing.intelItems.7	Risk Analysis	जोखिम विश्लेषण	direct	false			true
+landing.intelItems.8	Evidence and Audit	साक्ष्य व लेखापरीक्षा	direct	false			true
+landing.intelNote	Demonstration capabilities · synthetic data	डेमो क्षमताएँ · कृत्रिम डेटा	direct	false			true
+landing.intelStatus	Demo	डेमो	direct	false			true
+landing.intelTitle	Global Intelligence	वैश्विक आसूचना	direct	false			true
+landing.intelligenceModules	Intelligence modules	आसूचना मॉड्यूल	direct	false			true
+landing.journey.0	DETECT	पता लगाएँ	direct	false			true
+landing.journey.1	CONNECT	जोड़ें	direct	false			true
+landing.journey.2	INVESTIGATE	जाँच करें	direct	false			true
+landing.journey.3	EXPLAIN	समझाएँ	direct	false			true
+landing.journey.4	VERIFY	सत्यापित करें	direct	false			true
+landing.journey.5	SIMULATE	अनुकरण करें	direct	false			true
+landing.journey.6	DECIDE	निर्णय लें	direct	false			true
+landing.journey.7	AUDIT	लेखापरीक्षा करें	direct	false			true
+landing.journeyLabel	Investigation workflow	जाँच कार्यप्रवाह	direct	false			true
+landing.metricSubs.0	Illustrative Global Coverage	चित्रात्मक वैश्विक कवरेज	direct	false			true
+landing.metricSubs.1	Country and Regional Intelligence	राष्ट्रीय व क्षेत्रीय आसूचना	direct	false			true
+landing.metricSubs.2	Intelligence Correlation	आसूचना सहसंबंध	direct	false			true
+landing.metricSubs.3	Explainable Investigation	व्याख्यायोग्य जाँच	direct	false			true
+landing.metricTitles.0	Global Reach	वैश्विक पहुँच	direct	false			true
+landing.metricTitles.1	Jurisdictional Context	क्षेत्राधिकार संदर्भ	direct	false			true
+landing.metricTitles.2	Multi-Layer	बहु-स्तरीय	direct	false			true
+landing.metricTitles.3	Human Oversight	मानव पर्यवेक्षण	direct	false			true
+landing.moduleLines.0.0	Deterministic Scoring	नियतात्मक स्कोरिंग	direct	false			true
+landing.moduleLines.0.1	Cross-Border Risk	सीमापार जोखिम	direct	false			true
+landing.moduleLines.1.0	Explainable Insights	व्याख्यायोग्य अंतर्दृष्टि	direct	false			true
+landing.moduleLines.1.1	Human Oversight	मानव पर्यवेक्षण	direct	false			true
+landing.moduleLines.2.0	Regional Intelligence	क्षेत्रीय आसूचना	direct	false			true
+landing.moduleLines.2.1	Cross-Border Relationships	सीमापार संबंध	direct	false			true
+landing.moduleLines.3.0	Proactive Protection	सक्रिय सुरक्षा	direct	false			true
+landing.moduleLines.3.1	Financial Crime Intelligence	वित्तीय अपराध आसूचना	direct	false			true
+landing.moduleLines.4.0	Privacy	गोपनीयता	direct	false			true
+landing.moduleLines.4.1	Governance	अभिशासन	direct	false			true
+landing.moduleLines.4.2	Enterprise Architecture	उद्यम वास्तुकला	direct	false			true
+landing.moduleTitles.0	Risk Intelligence	जोखिम आसूचना	direct	false			true
+landing.moduleTitles.1	AI Analysis	AI विश्लेषण	direct	false			true
+landing.moduleTitles.2	Global Network	वैश्विक नेटवर्क	direct	false			true
+landing.moduleTitles.3	Cyber Defense	साइबर रक्षा	direct	false			true
+landing.moduleTitles.4	Secure Infrastructure	सुरक्षित अवसंरचना	direct	false			true
+landing.modulesNote	Illustrative module concepts · capabilities vary by deployment	चित्रात्मक मॉड्यूल अवधारणाएँ · क्षमताएँ परिनियोजन के अनुसार भिन्न	direct	false			true
+landing.offWord	Off	बंद	direct	false			true
+landing.onWord	On	चालू	direct	false			true
+landing.pauseScene	Pause scene	दृश्य रोकें	direct	false			true
+landing.platformPrinciples	Platform principles	प्लेटफ़ॉर्म सिद्धांत	direct	false			true
+landing.platformQualities	Platform qualities	प्लेटफ़ॉर्म गुण	direct	false			true
+landing.problem	Financial crime hides in disconnected transactions. CruiseShield AI connects them — deterministic risk scoring, relationship graphs, and evidence-grounded AI explanations, with a human investigator deciding.	वित्तीय अपराध असंबद्ध लेन-देन में छिपते हैं। CruiseShield AI उन्हें जोड़ता है — नियतात्मक जोखिम स्कोरिंग, संबंध ग्राफ़ और साक्ष्य-आधारित AI व्याख्याएँ, जिनमें एक मानव अन्वेषक निर्णय लेता है।	direct	false			true
+landing.reduceMotion	Reduce motion	गति घटाएँ	direct	false			true
+landing.regions.0	North America	उत्तरी अमेरिका	direct	false			true
+landing.regions.1	South America	दक्षिण अमेरिका	direct	false			true
+landing.regions.2	Europe	यूरोप	direct	false			true
+landing.regions.3	Africa	अफ़्रीका	direct	false			true
+landing.regions.4	Middle East	मध्य पूर्व	direct	false			true
+landing.regions.5	Asia Pacific	एशिया-प्रशांत	direct	false			true
+landing.regions.6	Global Oceans	वैश्विक महासागर	direct	false			true
+landing.regions.7	Cross-Border Corridors	सीमापार गलियारे	direct	false			true
+landing.regionsNote	Simulated regional signals · not live monitoring	अनुकरित क्षेत्रीय संकेत · कोई लाइव निगरानी नहीं	direct	false			true
+landing.regionsTitle	Global Intelligence Regions	वैश्विक आसूचना क्षेत्र	direct	false			true
+landing.replayLink	try replay & simulation	रीप्ले व अनुकरण आज़माएँ	direct	false			true
+landing.resumeScene	Resume scene	दृश्य पुनः आरंभ करें	direct	false			true
+landing.sceneMotion	Scene motion	दृश्य गति	direct	false			true
+landing.signals.0	Secure	सुरक्षित	direct	false			true
+landing.signals.1	Intelligent	बुद्धिमान	direct	false			true
+landing.signals.2	Global	वैश्विक	direct	false			true
+landing.signals.3	Auditable	लेखापरीक्षणीय	direct	false			true
+landing.soundLabel	Sound	ध्वनि	direct	false			true
+landing.stripNote	Cards open the matching live demo screen · 	कार्ड संबंधित लाइव डेमो स्क्रीन खोलते हैं · 	direct	false			true
+landing.tagline	The Financial Crime Immune System™	The Financial Crime Immune System™	direct	true			true
+landing.volumeLabel	Volume	आवाज़	direct	false			true
+nav.aiIntelligence	AI Intelligence	AI इंटेलिजेंस	direct	false			true
+nav.auditTrail	Audit Trail	ऑडिट ट्रेल	direct	false			true
+nav.brand	CruiseShield AI	CruiseShield AI	direct	true			true
+nav.cases	Cases	मामले	direct	false			true
+nav.closeNav	Close navigation	नेविगेशन बंद करें	direct	false			true
+nav.commandCenter	Command Center	कमांड सेंटर	direct	false			true
+nav.demoRole	demo role	डेमो भूमिका	direct	false			true
+nav.evidence	Evidence	साक्ष्य	direct	false			true
+nav.exploreNetwork	Explore Network	नेटवर्क खोजें	direct	false			true
+nav.home	CruiseShield AI home	CruiseShield AI होम	direct	false			true
+nav.investigations	Investigations	जांच	direct	false			true
+nav.investigator	Investigator	जांचकर्ता	direct	false			true
+nav.networkExplorer	Network Explorer	नेटवर्क एक्सप्लोरर	direct	false			true
+nav.primary	Primary	मुख्य	direct	false			true
+nav.quickActions	Quick Actions	त्वरित कार्रवाइयाँ	direct	false			true
+nav.replaySimulation	Replay & Simulation	रीप्ले और सिमुलेशन	direct	false			true
+nav.roleDemo	{role} · demo	{role} · डेमो	direct	false	role	role	true
+nav.runSimulation	Run Simulation	सिमुलेशन चलाएं	direct	false			true
+nav.signOut	Sign out	साइन आउट	direct	false			true
+nav.signOutEverywhere	Sign out everywhere	सभी जगह साइन आउट	direct	false			true
+nav.signOutEverywhereTitle	End this session on every device and browser	सभी डिवाइस और ब्राउज़र पर यह सत्र समाप्त करें	direct	false			true
+nav.synthetic	Synthetic demo data	सिंथेटिक डेमो डेटा	direct	false			true
+nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
+nav.toggleNav	Toggle navigation	नेविगेशन टॉगल करें	direct	false			true
+nav.viewAuditTrail	View Audit Trail	ऑडिट ट्रेल देखें	direct	false			true
+network.countsLine	{nodes} nodes, {edges} edges · provenance errors: {n}	{nodes} नोड, {edges} एज · उत्पत्ति त्रुटियां: {n}	direct	false	edges,n,nodes	edges,n,nodes	true
+network.crumb	Network {id}	नेटवर्क {id}	direct	false	id	id	true
+network.emptyGraph	This transaction has no network graph in the backend.	इस लेन-देन का बैकएंड में कोई नेटवर्क ग्राफ़ नहीं है।	direct	false			true
+network.flat	Flat (fallback)	सपाट (विकल्प)	direct	false			true
+network.headTitle	Network explorer — {id}	नेटवर्क एक्सप्लोरर — {id}	direct	false	id	id	true
+network.loading	Loading network graph…	नेटवर्क ग्राफ़ लोड हो रहा है…	direct	false			true
+network.notFoundPost	 exists in the backend.	 मौजूद नहीं है।	direct	false			true
+network.notFoundPre	No transaction 	बैकएंड में कोई लेन-देन 	direct	false			true
+network.notFoundTitle	Transaction not found	लेन-देन नहीं मिला	direct	false			true
+network.orbital	Orbital	कक्षीय	direct	false			true
+network.overlayDown	Intelligence overlay unavailable.	इंटेलिजेंस ओवरले उपलब्ध नहीं।	direct	false			true
+network.overlayLine	Intelligence overlay (derived, synthetic): {nodes} nodes, {edges} edges	इंटेलिजेंस ओवरले (व्युत्पन्न, कृत्रिम): {nodes} नोड, {edges} एज	direct	false	edges,nodes	edges,nodes	true
+network.overlayMissing	· unavailable: {list}	· उपलब्ध नहीं: {list}	direct	false	list	list	true
+network.provErrors	Provenance errors: {list}	उत्पत्ति त्रुटियां: {list}	direct	false	list	list	true
+network.title	Network {id}	नेटवर्क {id}	direct	false	id	id	true
+network.viewLabel	Graph view	ग्राफ़ दृश्य	direct	false			true
+notify.bellLoading	Notifications, loading	सूचनाएं, लोड हो रही हैं	direct	false			true
+notify.bellOpen	Notifications, {n} open	सूचनाएं, {n} खुली	direct	false	n	n	true
+notify.closeNotif	Close notifications	सूचनाएं बंद करें	direct	false			true
+notify.loadingAlerts	Loading alerts…	अलर्ट लोड हो रहे हैं…	direct	false			true
+notify.networkLink	Network	नेटवर्क	direct	false			true
+notify.noAlerts	No alerts.	कोई अलर्ट नहीं।	direct	false			true
+notify.openInv	Open investigation	जांच खोलें	direct	false			true
+notify.panelLabel	Notifications	सूचनाएं	direct	false			true
+notify.panelTitle	Notifications	सूचनाएं	direct	false			true
+replay.cancel	Cancel	रद्द करें	direct	false			true
+replay.confirmReset	Confirm: this clears decisions, simulations, AI runs, and audit history for {id}.	पुष्टि करें: यह {id} के निर्णय, सिमुलेशन, AI रन और ऑडिट इतिहास साफ़ करता है।	direct	false	id	id	true
+replay.confirmResetBtn	Confirm reset	रीसेट की पुष्टि करें	direct	false			true
+replay.controlsLabel	Replay controls	रीप्ले नियंत्रण	direct	false			true
+replay.controlsTitle	Deterministic replay	नियतात्मक रीप्ले	direct	false			true
+replay.crumb	Replay {id}	रीप्ले {id}	direct	false	id	id	true
+replay.currentTxnPre	Transaction 	लेन-देन 	direct	false			true
+replay.headTitle	Replay & simulation — {title}	रीप्ले और सिमुलेशन — {title}	direct	false	title	title	true
+replay.loading	Loading scenario…	परिदृश्य लोड हो रहा है…	direct	false			true
+replay.notFoundPost	 exists in the backend.	 मौजूद नहीं है।	direct	false			true
+replay.notFoundPre	No scenario 	बैकएंड में कोई परिदृश्य 	direct	false			true
+replay.notFoundTitle	Scenario not found	परिदृश्य नहीं मिला	direct	false			true
+replay.pause	Pause	रोकें	direct	false			true
+replay.play	Play	चलाएं	direct	false			true
+replay.positionLine	Step {c} of {t} · {e} events · {x} transactions · {g} edges	चरण {c}/{t} · {e} ईवेंट · {x} लेन-देन · {g} एज	direct	false	c,e,g,t,x	c,e,g,t,x	true
+replay.reducedMotionPlay	Auto-play disabled: reduced-motion preference detected. Use Step forward.	स्वतः-चलाना अक्षम: कम-गति वरीयता पाई गई। आगे बढ़ें का उपयोग करें।	direct	false			true
+replay.resetBlurb	Reset restores the seeded scenario exactly and clears all live state: human decisions, simulations, AI runs, and audit events beyond the reset itself.	रीसेट बीज परिदृश्य को यथावत पुनर्स्थापित करता है और सभी लाइव स्थिति साफ़ करता है: मानव निर्णय, सिमुलेशन, AI रन, और रीसेट के अतिरिक्त ऑडिट ईवेंट।	direct	false			true
+replay.resetDemo	Reset demo	डेमो रीसेट करें	direct	false			true
+replay.resetDoneMid	, seed 	, बीज 	direct	false			true
+replay.resetDonePost	. Reload the page to replay from the restored state.	। पुनर्स्थापित स्थिति से रीप्ले हेतु पृष्ठ पुनः लोड करें।	direct	false			true
+replay.resetDonePre	Reset complete: run 	रीसेट पूर्ण: रन 	direct	false			true
+replay.resetLabel	Scenario reset	परिदृश्य रीसेट	direct	false			true
+replay.resetTitle	Scenario reset	परिदृश्य रीसेट	direct	false			true
+replay.resetting	Resetting…	रीसेट हो रहा है…	direct	false			true
+replay.restart	Restart	पुनः आरंभ	direct	false			true
+replay.scenarioPre	Scenario 	परिदृश्य 	direct	false			true
+replay.startHint	At the start: no events applied yet. Step forward to begin.	आरंभ में: अभी कोई ईवेंट लागू नहीं। शुरू करने हेतु आगे बढ़ें।	direct	false			true
+replay.stepBack	Step back	पीछे जाएं	direct	false			true
+replay.stepControls	Replay step controls	रीप्ले चरण नियंत्रण	direct	false			true
+replay.stepFwd	Step forward	आगे बढ़ें	direct	false			true
+replay.title	Replay {id}	रीप्ले {id}	direct	false	id	id	true
+selector.buttonLabel	Select language	भाषा चुनें	direct	false			true
+selector.fallbackNote	English shown — translation unavailable	अंग्रेज़ी दिखाई जा रही है — अनुवाद उपलब्ध नहीं	direct	false			true
+selector.label	Language	भाषा	direct	false			true
+selector.panelTitle	Select language	भाषा चुनें	direct	false			true
+selector.partialTag	Partial	आंशिक	direct	false			true
+selector.resultsEmpty	No languages match your search.	आपकी खोज से कोई भाषा मेल नहीं खाती।	direct	false			true
+selector.searchLabel	Search languages	भाषाएं खोजें	direct	false			true
+selector.searchPlaceholder	Search languages…	भाषाएं खोजें…	direct	false			true
+selector.translatedTag	Translated	अनूदित	direct	false			true
+selector.unavailableTag	English fallback	अंग्रेज़ी विकल्प	direct	false			true
+sim.assumptionLabel	Assumption (recorded with the run)	धारणा (रन के साथ दर्ज)	direct	false			true
+sim.assumptionLine	Assumption: {a}	धारणा: {a}	direct	false	a	a	true
+sim.assumptionPh	e.g. Shared devices are coincidental, not shared control.	जैसे, साझा डिवाइस संयोग हैं, साझा नियंत्रण नहीं।	direct	false			true
+sim.baselineLine	Authoritative baseline (network): {s}/100 {b}. This value never changes.	आधिकारिक आधाररेखा (नेटवर्क): {s}/100 {b}। यह मान कभी नहीं बदलता।	direct	false	b,s	b,s	true
+sim.ignoredPre	Ignored: 	अनदेखा: 	direct	false			true
+sim.legendLine	Relationships to ignore ({a} of {b} selected)	अनदेखा करने हेतु संबंध ({b} में से {a} चयनित)	direct	false	a,b	a,b	true
+sim.loadEdges	Load edges	एज लोड करें	direct	false			true
+sim.loadingTarget	Loading target…	लक्ष्य लोड हो रहा है…	direct	false			true
+sim.readOnlySim	Your role is read-only: simulations are disabled.	आपकी भूमिका केवल-पठन है: सिमुलेशन अक्षम हैं।	direct	false			true
+sim.runSim	Run simulation	सिमुलेशन चलाएं	direct	false			true
+sim.running	Running…	चल रहा है…	direct	false			true
+sim.simBanner	SIMULATED — hypothetical, not a real-world prediction.	सिमुलेटेड — परिकल्पनात्मक, वास्तविक-विश्व पूर्वानुमान नहीं।	direct	false			true
+sim.simLabel	What-if simulation	परिकल्पनात्मक सिमुलेशन	direct	false			true
+sim.simRunPost	: baseline {a}/100 {b} → simulated {c}/100 {d}	: आधाररेखा {a}/100 {b} → सिमुलेटेड {c}/100 {d}	direct	false	a,b,c,d	a,b,c,d	true
+sim.simRunPre	Run 	रन 	direct	false			true
+sim.simTitle	What-if simulation	परिकल्पनात्मक सिमुलेशन	direct	false			true
+sim.targetDown	Target unavailable: {err}	लक्ष्य उपलब्ध नहीं: {err}	direct	false	err	err	true
+sim.targetLabel	Target transaction	लक्ष्य लेन-देन	direct	false			true
+system.allOk	All systems operational	सभी सिस्टम चालू	direct	false			true
+system.checkedPre	Checked	जांचा गया	direct	false			true
+system.rowAi	AI Engine (Muse Spark)	AI इंजन (Muse Spark)	direct	false			true
+system.rowApi	API Services	API सेवाएं	direct	false			true
+system.rowGraph	Graph Provenance	ग्राफ़ उत्पत्ति	direct	false			true
+system.rowSeed	Seed Integrity	बीज अखंडता	direct	false			true
+system.scenarioPre	Scenario {s} · Run 	परिदृश्य {s} · रन 	direct	false	s	s	true
+system.stDegraded	Degraded	अवनत	direct	false			true
+system.stNotConfigured	Not configured	कॉन्फ़िगर नहीं	direct	false			true
+system.stNotReported	Not reported	रिपोर्ट नहीं	direct	false			true
+system.stOperational	Operational	चालू	direct	false			true
+system.sysTitle	System Status	सिस्टम स्थिति	direct	false			true
+theme.appearance	Appearance	दिखावट	direct	false			true
+theme.dark	Dark	गहरा	direct	false			true
+theme.light	Light	हल्का	direct	false			true
+theme.system	System	सिस्टम	direct	false			true
+workflow.audit	Audit	ऑडिट	direct	false			true
+workflow.connect	Connect	जोड़ें	direct	false			true
+workflow.detect	Detect	पहचानें	direct	false			true
+workflow.explain	Explain	समझाएं	direct	false			true
+workflow.humanDecision	Human Decision	मानव निर्णय	direct	false			true
+workflow.investigate	Investigate	जांच करें	direct	false			true
+workflow.navLabel	Investigation workflow	जांच कार्यप्रवाह	direct	false			true
+workflow.onThisPage	On this page	इस पृष्ठ पर	direct	false			true
+workflow.simulate	Simulate	अनुकरण करें	direct	false			true

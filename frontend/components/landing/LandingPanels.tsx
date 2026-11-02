@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useTranslation } from "../../lib/i18n/context";
 
 /* Floating holographic panels: capabilities, module cards, regions.
  * All coverage language is illustrative; nothing claims live global
@@ -8,22 +11,16 @@ const TXN = "txn_84721";
 const INV = "inv_84721";
 const CASE = "case_84721";
 
-interface PanelItem {
-  label: string;
-  href: string;
-  status: string;
-}
-
-const INTEL_ITEMS: PanelItem[] = [
-  { label: "Transaction Monitoring", href: "/demo", status: "Demo" },
-  { label: "Account Intelligence", href: `/network/${TXN}`, status: "Demo" },
-  { label: "Device Intelligence", href: `/network/${TXN}`, status: "Demo" },
-  { label: "IP Intelligence", href: `/investigations/${INV}`, status: "Demo" },
-  { label: "Geolocation Intelligence", href: `/investigations/${INV}`, status: "Demo" },
-  { label: "Network Graph", href: `/network/${TXN}`, status: "Demo" },
-  { label: "AI Investigation", href: `/investigations/${INV}#ai-h`, status: "Demo" },
-  { label: "Risk Analysis", href: "/demo", status: "Demo" },
-  { label: "Evidence and Audit", href: `/cases/${CASE}`, status: "Demo" },
+const INTEL_HREFS = [
+  "/demo",
+  `/network/${TXN}`,
+  `/network/${TXN}`,
+  `/investigations/${INV}`,
+  `/investigations/${INV}`,
+  `/network/${TXN}`,
+  `/investigations/${INV}#ai-h`,
+  "/demo",
+  `/cases/${CASE}`,
 ];
 
 function PanelIcon({ index }: { index: number }) {
@@ -45,90 +42,78 @@ function PanelIcon({ index }: { index: number }) {
 }
 
 export function IntelligencePanel() {
+  const { t, tl } = useTranslation("landing");
+  const labels = tl("intelItems");
   return (
     <aside
       className="landing-panel landing-panel-left"
       aria-labelledby="landing-intel-h"
     >
-      <h2 id="landing-intel-h">Global Intelligence</h2>
+      <h2 id="landing-intel-h">{t("intelTitle")}</h2>
       <ul>
-        {INTEL_ITEMS.map((item, index) => (
-          <li key={item.label}>
-            <Link href={item.href} className="landing-panel-link">
+        {labels.map((label, index) => (
+          /* Index key: hrefs repeat across items, labels localize. */
+          <li key={index}>
+            <Link
+              href={INTEL_HREFS[index] ?? "/demo"}
+              className="landing-panel-link"
+            >
               <span className="landing-panel-icon">
                 <PanelIcon index={index} />
               </span>
-              <span>{item.label}</span>
-              <span className="landing-status">{item.status}</span>
+              <span>{label}</span>
+              <span className="landing-status">{t("intelStatus")}</span>
             </Link>
           </li>
         ))}
       </ul>
-      <p className="landing-panel-note">
-        Demonstration capabilities · synthetic data
-      </p>
+      <p className="landing-panel-note">{t("intelNote")}</p>
     </aside>
   );
 }
 
-const MODULES: { title: string; lines: string[] }[] = [
-  { title: "Satellite Intelligence", lines: ["Global Monitoring", "Cross-Border Risk"] },
-  { title: "AI Analysis", lines: ["Explainable Insights", "Human Oversight"] },
-  { title: "Global Network", lines: ["Regional Intelligence", "Cross-Border Relationships"] },
-  { title: "Cyber Defense", lines: ["Proactive Protection", "Financial Crime Intelligence"] },
-  { title: "Secure Infrastructure", lines: ["Privacy", "Governance", "Enterprise Architecture"] },
-];
-
 export function ModuleCards() {
+  const { t, tl } = useTranslation("landing");
+  const titles = tl("moduleTitles");
   return (
-    <div className="landing-modules" aria-label="Intelligence modules">
-      {MODULES.map((module, index) => (
-        <article key={module.title} className={`landing-module module-${index}`}>
-          <h3>{module.title}</h3>
-          <ul>
-            {module.lines.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
-        </article>
-      ))}
-      <p className="landing-modules-note">
-        Illustrative module concepts · capabilities vary by deployment
-      </p>
+    <div className="landing-modules" aria-label={t("intelligenceModules")}>
+      {titles.map((title, index) => {
+        const lines = tl(`moduleLines.${index}`);
+        return (
+          <article key={title} className={`landing-module module-${index}`}>
+            <h3>{title}</h3>
+            <ul>
+              {lines.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+          </article>
+        );
+      })}
+      <p className="landing-modules-note">{t("modulesNote")}</p>
     </div>
   );
 }
 
-const REGIONS = [
-  "North America",
-  "South America",
-  "Europe",
-  "Africa",
-  "Middle East",
-  "Asia Pacific",
-  "Global Oceans",
-  "Orbital Layer",
-];
-
 export function CoveragePanel() {
+  const { t, tl } = useTranslation("landing");
+  const regions = tl("regions");
   return (
     <aside
       className="landing-panel landing-panel-right"
       aria-labelledby="landing-regions-h"
     >
-      <h2 id="landing-regions-h">Global Intelligence Regions</h2>
-      <p className="landing-illustrative">Illustrative Network View</p>
+      <h2 id="landing-regions-h">{t("regionsTitle")}</h2>
+      <p className="landing-illustrative">{t("illustrative")}</p>
       <ul>
-        {REGIONS.map((region) => (
+        {regions.map((region) => (
           <li key={region}>
             <span className="landing-region-dot" aria-hidden="true" />
             <span>{region}</span>
           </li>
         ))}
       </ul>
-      <p className="landing-panel-note">
-        Simulated regional signals · not live monitoring
-      </p>
+      <p className="landing-panel-note">{t("regionsNote")}</p>
     </aside>
   );
 }

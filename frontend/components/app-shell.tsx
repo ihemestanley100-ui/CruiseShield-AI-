@@ -10,9 +10,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { LanguageSelector } from "./language-selector";
 import { LoginCard, useDemoSession } from "./login-gate";
 import { Notifications } from "./notifications";
 import { ThemeSelector } from "./theme-selector";
+import { useTranslation } from "../lib/i18n/context";
 
 const INV_ID = "inv_84721";
 const TXN_ID = "txn_84721";
@@ -20,25 +22,25 @@ const CASE_ID = "case_84721";
 const SCENARIO_ID = "scn_primary";
 
 interface NavItem {
-  label: string;
+  key: string;
   href: string;
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: "Command Center", href: "/demo" },
-  { label: "Investigations", href: `/investigations/${INV_ID}` },
-  { label: "Cases", href: `/cases/${CASE_ID}` },
-  { label: "Network Explorer", href: `/network/${TXN_ID}` },
-  { label: "Replay & Simulation", href: `/replay/${SCENARIO_ID}` },
-  { label: "Evidence", href: `/investigations/${INV_ID}#evidence-h` },
-  { label: "AI Intelligence", href: `/investigations/${INV_ID}#ai-h` },
-  { label: "Audit Trail", href: `/cases/${CASE_ID}/audit` },
+  { key: "commandCenter", href: "/demo" },
+  { key: "investigations", href: `/investigations/${INV_ID}` },
+  { key: "cases", href: `/cases/${CASE_ID}` },
+  { key: "networkExplorer", href: `/network/${TXN_ID}` },
+  { key: "replaySimulation", href: `/replay/${SCENARIO_ID}` },
+  { key: "evidence", href: `/investigations/${INV_ID}#evidence-h` },
+  { key: "aiIntelligence", href: `/investigations/${INV_ID}#ai-h` },
+  { key: "auditTrail", href: `/cases/${CASE_ID}/audit` },
 ];
 
 const QUICK_ACTIONS: NavItem[] = [
-  { label: "Explore Network", href: `/network/${TXN_ID}` },
-  { label: "Run Simulation", href: `/replay/${SCENARIO_ID}` },
-  { label: "View Audit Trail", href: `/cases/${CASE_ID}/audit` },
+  { key: "exploreNetwork", href: `/network/${TXN_ID}` },
+  { key: "runSimulation", href: `/replay/${SCENARIO_ID}` },
+  { key: "viewAuditTrail", href: `/cases/${CASE_ID}/audit` },
 ];
 
 function isActive(pathname: string, href: string): boolean {
@@ -65,8 +67,9 @@ function ShieldMark() {
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation("nav");
   const pathname = usePathname();
-  const { gate, login, logout } = useDemoSession();
+  const { gate, login, logout, logoutAll } = useDemoSession();
   const menu = useRef<HTMLButtonElement | null>(null);
   const drawer = useRef<HTMLElement | null>(null);
   const wasOpen = useRef(false);
@@ -122,17 +125,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <header className="topbar shell-topbar">
           <Link
             href="/"
-            aria-label="CruiseShield AI home"
+            aria-label={t("home")}
             className="shell-brand"
           >
             <ShieldMark />
             <span className="shell-brand-text">
-              <span className="brand">CruiseShield AI</span>
-              <span className="tagline">Financial Crime Immune System™</span>
+              <span className="brand">{t("brand")}</span>
+              <span className="tagline">{t("tagline")}</span>
             </span>
           </Link>
           <ThemeSelector />
-          <span className="badge synthetic">Synthetic demo data</span>
+          <LanguageSelector compact />
+          <span className="badge synthetic">{t("synthetic")}</span>
         </header>
         <div className="shell-body">
           <div className="shell-main">
@@ -152,7 +156,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           className="menu-btn btn-secondary btn-icon"
           aria-expanded={open}
           aria-controls="app-sidebar"
-          aria-label="Toggle navigation"
+          aria-label={t("toggleNav")}
           onClick={() => setOpen(!open)}
         >
           <svg
@@ -171,18 +175,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </button>
         <Link
           href="/"
-          aria-label="CruiseShield AI home"
+          aria-label={t("home")}
           className="shell-brand"
         >
           <ShieldMark />
           <span className="shell-brand-text">
-            <span className="brand">CruiseShield AI</span>
-            <span className="tagline">Financial Crime Immune System™</span>
+            <span className="brand">{t("brand")}</span>
+            <span className="tagline">{t("tagline")}</span>
           </span>
         </Link>
         <ThemeSelector />
+        <LanguageSelector compact />
         <Notifications />
-        <span className="badge synthetic">Synthetic demo data</span>
+        <span className="badge synthetic">{t("synthetic")}</span>
         {gate.status === "authed" ? (
           <div className="profile">
             <span className="avatar" aria-hidden="true">
@@ -190,14 +195,24 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </span>
             <span className="profile-text">
               <strong>{gate.session.user}</strong>
-              <span className="muted">{gate.session.role} · demo</span>
+              <span className="muted">
+                {t("roleDemo", { role: gate.session.role })}
+              </span>
             </span>
             <button
               type="button"
               className="btn-tertiary"
               onClick={() => void logout()}
             >
-              Sign out
+              {t("signOut")}
+            </button>
+            <button
+              type="button"
+              className="btn-tertiary"
+              title={t("signOutEverywhereTitle")}
+              onClick={() => void logoutAll()}
+            >
+              {t("signOutEverywhere")}
             </button>
           </div>
         ) : (
@@ -206,8 +221,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               IN
             </span>
             <span className="profile-text">
-              <strong>Investigator</strong>
-              <span className="muted">demo role</span>
+              <strong>{t("investigator")}</strong>
+              <span className="muted">{t("demoRole")}</span>
             </span>
           </div>
         )}
@@ -219,10 +234,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           tabIndex={-1}
           className={open ? "sidebar open" : "sidebar"}
         >
-          <nav aria-label="Primary">
+          <nav aria-label={t("primary")}>
             <ul className="side-nav">
               {NAV_ITEMS.map((item) => (
-                <li key={item.label}>
+                <li key={item.href}>
                   <Link
                     href={item.href}
                     aria-current={
@@ -230,7 +245,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     }
                     onClick={() => setOpen(false)}
                   >
-                    {item.label}
+                    {t(item.key)}
                   </Link>
                 </li>
               ))}
@@ -238,7 +253,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </nav>
           {/* Label, not a section heading: keeps the document outline
               starting at the page h1 (a11y audit P7). */}
-          <p className="side-label">Quick Actions</p>
+          <p className="side-label">{t("quickActions")}</p>
           <ul className="side-actions">
             {QUICK_ACTIONS.map((item) => (
               <li key={item.href}>
@@ -247,7 +262,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   className="action-btn"
                   onClick={() => setOpen(false)}
                 >
-                  {item.label}
+                  {t(item.key)}
                 </Link>
               </li>
             ))}
@@ -257,7 +272,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <button
             type="button"
             className="side-overlay"
-            aria-label="Close navigation"
+            aria-label={t("closeNav")}
             onClick={() => setOpen(false)}
           />
         )}

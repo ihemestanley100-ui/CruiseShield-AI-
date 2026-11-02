@@ -1,3 +1,5 @@
+"use client";
+
 /* Command Center network preview. A small static SVG drawn from the
  * real graph response: a deterministic node subset (sorted by ID) with
  * honest "preview of N of M" labelling. The full explorer owns
@@ -6,10 +8,12 @@
 import Link from "next/link";
 import type { GraphResponse } from "../lib/api";
 import { defaultRoots, layoutGraph } from "../lib/graph-layout";
+import { useTranslation } from "../lib/i18n/context";
 
 const PREVIEW_NODES = 12;
 
 export function CommandNetworkPreview({ graph }: { graph: GraphResponse }) {
+  const { t } = useTranslation("command");
   const nodes = [...graph.nodes]
     .sort((a, b) => a.node_id.localeCompare(b.node_id))
     .slice(0, PREVIEW_NODES);
@@ -23,24 +27,32 @@ export function CommandNetworkPreview({ graph }: { graph: GraphResponse }) {
 
   return (
     <section className="card command-section" aria-labelledby="net-prev-h">
-      <h2 id="net-prev-h">Network preview</h2>
+      <h2 id="net-prev-h">{t("previewTitle")}</h2>
       <p className="muted" data-testid="network-preview-counts">
-        {graph.counts.nodes} nodes, {graph.counts.edges} edges in the
-        investigation graph. Preview shows {nodes.length} nodes and{" "}
-        {edges.length} relationships.
+        {t("previewCounts", {
+          a: graph.counts.nodes,
+          b: graph.counts.edges,
+          c: nodes.length,
+          d: edges.length,
+        })}
       </p>
       {graph.provenance_errors.length > 0 && (
         <div className="alert error" role="alert">
-          Provenance errors: {graph.provenance_errors.join("; ")}
+          {t("previewProvErrors", {
+            list: graph.provenance_errors.join("; "),
+          })}
         </div>
       )}
       {nodes.length === 0 ? (
-        <p className="muted">No relationships in this graph.</p>
+        <p className="muted">{t("previewEmpty")}</p>
       ) : (
         <svg
           className="graph-canvas"
           role="img"
-          aria-label={`Network preview: ${nodes.length} of ${graph.counts.nodes} nodes shown`}
+          aria-label={t("previewAria", {
+            a: nodes.length,
+            b: graph.counts.nodes,
+          })}
           viewBox={`0 0 ${maxX} ${maxY}`}
         >
           {edges.map((e) => {
@@ -78,7 +90,7 @@ export function CommandNetworkPreview({ graph }: { graph: GraphResponse }) {
       )}
       <p>
         <Link href={`/network/${graph.transaction_id}`}>
-          Open full network explorer
+          {t("openFullExplorer")}
         </Link>
       </p>
     </section>

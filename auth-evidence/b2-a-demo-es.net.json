@@ -1,0 +1,7 @@
+[
+  "t=934ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/investigations/inv_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=938ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/cases/case_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=1007ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/graph/txn_84721",
+  "t=1007ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721",
+  "t=1007ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721/audit"
+]

@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { LanguageSelector } from "../language-selector";
+import { useTranslation } from "../../lib/i18n/context";
 
 /* Top navigation bar + hero headlines + primary call to action. */
 
@@ -28,48 +32,49 @@ export function OfficialLogo() {
   );
 }
 
-const JOURNEY = ["DETECT", "CONNECT", "EXPLAIN", "PREVENT", "PROTECT"];
-
-const SIGNALS = ["Secure", "Intelligent", "Global", "Always On"];
-
 export function LandingNav() {
+  const { t, tl } = useTranslation("landing");
+  const signals = tl("signals");
   return (
     <header className="landing-nav">
-      <Link href="/" className="landing-brand" aria-label="CruiseShield AI home">
+      <Link href="/" className="landing-brand" aria-label={t("home")}>
         <OfficialLogo />
         <span>
-          <strong>CruiseShield AI™</strong>
-          <small>The Financial Crime Immune System™</small>
+          <strong>{t("brandName")}</strong>
+          <small>{t("tagline")}</small>
         </span>
       </Link>
-      <nav className="landing-signals" aria-label="Platform qualities">
-        {SIGNALS.map((signal) => (
+      <nav className="landing-signals" aria-label={t("platformQualities")}>
+        {signals.map((signal) => (
           <span key={signal} className="landing-signal">
             <span className="landing-signal-dot" aria-hidden="true" />
             {signal}
           </span>
         ))}
       </nav>
+      <LanguageSelector compact />
       <Link href="/demo" className="landing-enter">
-        Enter Demo
+        {t("enterDemo")}
       </Link>
     </header>
   );
 }
 
 export function LandingHeroCopy() {
+  /* Canonical investigation workflow; must match the demo's 8 stages. */
+  const { t, tl } = useTranslation("landing");
+  const journey = tl("journey");
   return (
     <div className="landing-hero-copy">
-      <p className="landing-eyebrow">Global Financial Intelligence</p>
-      <h1 id="landing-h1">A Safer Financial World</h1>
-      <p className="landing-sub">
-        Powered by Intelligence. Driven by Trust. Built for the Future.
-      </p>
-      <ol className="landing-journey" aria-label="Platform journey">
-        {JOURNEY.map((step, index) => (
+      <p className="landing-eyebrow">{t("eyebrow")}</p>
+      <h1 id="landing-h1">{t("h1")}</h1>
+      <p className="landing-sub">{t("problem")}</p>
+      <p className="landing-sub">{t("beneficiaries")}</p>
+      <ol className="landing-journey" aria-label={t("journeyLabel")}>
+        {journey.map((step, index) => (
           <li key={step}>
             <span>{step}</span>
-            {index < JOURNEY.length - 1 && (
+            {index < journey.length - 1 && (
               <span className="landing-journey-arrow" aria-hidden="true">
                 →
               </span>
@@ -82,6 +87,7 @@ export function LandingHeroCopy() {
 }
 
 export function LandingCta({ onActivate }: { onActivate?: () => void }) {
+  const { t } = useTranslation("landing");
   return (
     <div className="landing-cta-wrap">
       <Link
@@ -90,9 +96,9 @@ export function LandingCta({ onActivate }: { onActivate?: () => void }) {
         onMouseEnter={onActivate}
         onClick={onActivate}
       >
-        Explore CruiseShield AI™ <span aria-hidden="true">→</span>
+        {t("cta")} <span aria-hidden="true">→</span>
       </Link>
-      <p className="landing-cta-sub">Enter the Interactive Demo Experience</p>
+      <p className="landing-cta-sub">{t("ctaSub")}</p>
     </div>
   );
 }
