@@ -4,6 +4,7 @@
 
 export const ar = {
   nav: {
+    skipToContent: "تخطَّ إلى المحتوى الرئيسي",
     commandCenter: "مركز القيادة",
     investigations: "التحقيقات",
     cases: "القضايا",
@@ -208,6 +209,9 @@ export const ar = {
     loading: "جارٍ التحميل…",
     retry: "إعادة المحاولة",
     requestFailed: "فشل الطلب",
+    loadFailed: "تعذّر تحميل هذا القسم.",
+    notPermitted: "غير متاح لدورك.",
+    unreachable: "تعذّر الوصول إلى الخادم. تحقق من خادم العرض التجريبي وأعد المحاولة.",
     closeDialog: "إغلاق مربع الحوار",
     breadcrumb: "مسار التنقل",
     timelineEmpty: "لا توجد أحداث.",

@@ -57,8 +57,9 @@ done. Remaining actions (all user/organizer-side):
 1. Obtain official rules; confirm Q-REUSE-1, Q-NEW-1, Q-REPO-1,
    Q-SUB-1/2, Q-IP-1, Q-IP-2, LGPL question, acceptance (R-13).
 2. Confirm team roster + track; record in submission.
-3. Confirm logo rights; preserve the `.png.png` original (byte-identical
-   documented original — do NOT delete; see provenance report).
+3. Confirm logo rights (Q1 SELF + Q2 YES recorded 11-03; Q4
+   RETIRED the `.png.png` reference — no restore, no deletion
+   action; canonical logo verified intact).
 4. Decide on commit/push (selective; never `.env`, `data/`, `.next/`,
    `node_modules/`); set visibility only if/then required.
 5. Preserve `%TEMP%\smoke32f` + `%TEMP%\smoke33` evidence (or re-run).

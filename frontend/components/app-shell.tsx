@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import { LanguageSelector } from "./language-selector";
 import { LoginCard, useDemoSession } from "./login-gate";
 import { Notifications } from "./notifications";
+import { SkipLink } from "./skip-link";
 import { ThemeSelector } from "./theme-selector";
 import { useTranslation } from "../lib/i18n/context";
 
@@ -65,9 +66,42 @@ function ShieldMark() {
   );
 }
 
+/* Minimal pre-auth chrome: brand, theme, language, badge. Shared by
+ * the login card and the checking state so first paint is stable. */
+function GateChrome({ children }: { children: React.ReactNode }) {
+  const { t } = useTranslation("nav");
+  return (
+    <div className="app-shell">
+      <SkipLink />
+      <header className="topbar shell-topbar">
+        <Link
+          href="/"
+          aria-label={t("home")}
+          className="shell-brand"
+        >
+          <ShieldMark />
+          <span className="shell-brand-text">
+            <span className="brand">{t("brand")}</span>
+            <span className="tagline">{t("tagline")}</span>
+          </span>
+        </Link>
+        <ThemeSelector />
+        <LanguageSelector compact />
+        <span className="badge synthetic">{t("synthetic")}</span>
+      </header>
+      <div className="shell-body">
+        <main className="shell-main" id="main-content" tabIndex={-1}>
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+}
+
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation("nav");
+  const { t: tCommon } = useTranslation("common");
   const pathname = usePathname();
   const { gate, login, logout, logoutAll } = useDemoSession();
   const menu = useRef<HTMLButtonElement | null>(null);
@@ -117,38 +151,31 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     return <div className="landing-shell">{children}</div>;
   }
 
+  /* Checking: withhold children (and their data fetches) until the
+   * mode check resolves — no content flash before the login card. */
+  if (gate.status === "checking") {
+    return (
+      <GateChrome>
+        <p className="muted" role="status">
+          {tCommon("loading")}
+        </p>
+      </GateChrome>
+    );
+  }
+
   /* Phase 5: hosted demos with login armed show the sign-in card
    * instead of any demo route until the session cookie is set. */
   if (gate.status === "login") {
     return (
-      <div className="app-shell">
-        <header className="topbar shell-topbar">
-          <Link
-            href="/"
-            aria-label={t("home")}
-            className="shell-brand"
-          >
-            <ShieldMark />
-            <span className="shell-brand-text">
-              <span className="brand">{t("brand")}</span>
-              <span className="tagline">{t("tagline")}</span>
-            </span>
-          </Link>
-          <ThemeSelector />
-          <LanguageSelector compact />
-          <span className="badge synthetic">{t("synthetic")}</span>
-        </header>
-        <div className="shell-body">
-          <div className="shell-main">
-            <LoginCard onLogin={login} />
-          </div>
-        </div>
-      </div>
+      <GateChrome>
+        <LoginCard onLogin={login} />
+      </GateChrome>
     );
   }
 
   return (
     <div className="app-shell">
+      <SkipLink />
       <header className="topbar shell-topbar">
         <button
           ref={menu}
@@ -276,7 +303,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             onClick={() => setOpen(false)}
           />
         )}
-        <div className="shell-main">{children}</div>
+        <main className="shell-main" id="main-content" tabIndex={-1}>
+          {children}
+        </main>
       </div>
     </div>
   );

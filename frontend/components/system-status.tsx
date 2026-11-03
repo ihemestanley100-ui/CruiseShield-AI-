@@ -36,6 +36,17 @@ interface Props {
   checkedAt: string;
 }
 
+/* Humanize machine check keys for display ("storage_backend" ->
+ * "Storage backend", short acronyms uppercased). Raw keys stay in
+ * API responses and tests of behavior; this is presentation only. */
+function humanize(key: string): string {
+  const words = key
+    .split("_")
+    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(" ");
+  return words.length <= 3 ? words.toUpperCase() : words;
+}
+
 export function SystemStatus({ health, checkedAt }: Props) {
   const { t } = useTranslation("system");
   const operational = health.status === "healthy";
@@ -81,7 +92,7 @@ export function SystemStatus({ health, checkedAt }: Props) {
                 className={`dot dot-${state.tone}`}
                 aria-hidden="true"
               />
-              <span>{key}</span>
+              <span>{humanize(key)}</span>
               <span className="muted">
                 {t(state.key)}
                 {state.detail !== "" ? `: ${state.detail}` : ""}

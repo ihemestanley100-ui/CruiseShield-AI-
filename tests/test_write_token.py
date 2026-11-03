@@ -58,11 +58,12 @@ def test_wrong_scheme_rejected(monkeypatch):
 def test_valid_session_satisfies_gate_without_token(monkeypatch):
     # J3 closeout (backend EV14): either credential satisfies the gate.
     monkeypatch.setattr(config_mod, "DEMO_WRITE_TOKEN", "s3cret-demo")
-    monkeypatch.setattr(config_mod, "SESSION_SECRET", "test-secret")
+    monkeypatch.setattr(config_mod, "SESSION_SECRET",
+                        "test-secret-not-a-real-credential")
     monkeypatch.setattr(
         config_mod, "DEMO_USERS",
         "judge:investigator:%s" % auth_mod.hash_password("pw"))
     session = auth_mod.create_session("judge", "investigator",
-                                      "test-secret")
+                                      "test-secret-not-a-real-credential")
     main._require_write_token(_req("Bearer wrong", cookie=session))
     main._require_write_token(_req(None, cookie=session))

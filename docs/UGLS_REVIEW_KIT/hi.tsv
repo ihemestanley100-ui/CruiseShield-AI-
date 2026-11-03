@@ -156,10 +156,12 @@ command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derive
 command.versionedRules	Versioned deterministic rules	संस्करणबद्ध नियतात्मक नियम	direct	false			true
 common.breadcrumb	Breadcrumb	ब्रेडक्रम्ब	direct	false			true
 common.closeDialog	Close dialog	संवाद बंद करें	direct	false			true
+common.loadFailed	Couldn't load this section.	यह अनुभाग लोड नहीं हो सका।	direct	false			true
 common.loading	Loading…	लोड हो रहा है…	direct	false			true
 common.none	none	कोई नहीं	direct	false			true
 common.noneYet	None yet	अभी कोई नहीं	direct	false			true
 common.notAvailable	Not available	उपलब्ध नहीं	direct	false			true
+common.notPermitted	Not available for your role.	आपकी भूमिका के लिए उपलब्ध नहीं है।	direct	false			true
 common.present	present	वर्तमान	direct	false			true
 common.requestFailed	request failed	अनुरोध विफल	direct	false			true
 common.retry	Retry	पुनः प्रयास	direct	false			true
@@ -167,6 +169,7 @@ common.timelineEmpty	No events.	कोई ईवेंट नहीं।	direct
 common.unknown	unknown	अज्ञात	direct	false			true
 common.unknownModel	unknown model	अज्ञात मॉडल	direct	false			true
 common.unknownTime	unknown time	अज्ञात समय	direct	false			true
+common.unreachable	Backend unreachable. Check the demo server and retry.	बैकएंड उपलब्ध नहीं है। डेमो सर्वर जांचें और पुनः प्रयास करें।	direct	false			true
 decision.actorLabel	Analyst ID	विश्लेषक ID	direct	false			true
 decision.decisionLabel	Decision	निर्णय	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	आपकी भूमिका केवल-पठन है: निर्णय अक्षम हैं।	direct	false			true
@@ -460,6 +463,7 @@ nav.runSimulation	Run Simulation	सिमुलेशन चलाएं	direct
 nav.signOut	Sign out	साइन आउट	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	सभी जगह साइन आउट	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	सभी डिवाइस और ब्राउज़र पर यह सत्र समाप्त करें	direct	false			true
+nav.skipToContent	Skip to main content	मुख्य सामग्री पर जाएं	direct	false			true
 nav.synthetic	Synthetic demo data	सिंथेटिक डेमो डेटा	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	नेविगेशन टॉगल करें	direct	false			true

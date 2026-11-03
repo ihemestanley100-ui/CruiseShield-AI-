@@ -156,10 +156,12 @@ command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derive
 command.versionedRules	Versioned deterministic rules	Àwọn òfin tó dájú pẹ̀lú ẹ̀yà	direct	false			true
 common.breadcrumb	Breadcrumb	Ọ̀nà ìtọ́sọ́nà	direct	false			true
 common.closeDialog	Close dialog	Pa ìjíròrò	direct	false			true
+common.loadFailed	Couldn't load this section.	A kò le gbe apakan yii.	direct	false			true
 common.loading	Loading…	Ń ṣe…	direct	false			true
 common.none	none	Kò sí	direct	false			true
 common.noneYet	None yet	Kò sí báyìí	direct	false			true
 common.notAvailable	Not available	Kò sí	direct	false			true
+common.notPermitted	Not available for your role.	Kò sí fún ipa rẹ.	direct	false			true
 common.present	present	wà báyìí	direct	false			true
 common.requestFailed	request failed	Ìbéèrè kùnà	direct	false			true
 common.retry	Retry	Tún gbìyànjú	direct	false			true
@@ -167,6 +169,7 @@ common.timelineEmpty	No events.	Kò sí ìṣẹ̀lẹ̀.	direct	false			true
 common.unknown	unknown	A kò mọ̀	direct	false			true
 common.unknownModel	unknown model	awoṣe àìmọ̀	direct	false			true
 common.unknownTime	unknown time	àkókò àìmọ̀	direct	false			true
+common.unreachable	Backend unreachable. Check the demo server and retry.	A kò le dé ẹrọ abánidáró. Ṣayẹwo ẹrọ ìfihàn kí o sì tún gbìyànjú.	direct	false			true
 decision.actorLabel	Analyst ID	ID olùṣàyẹ̀wò	direct	false			true
 decision.decisionLabel	Decision	Ìpinnu	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	Ipa rẹ jẹ́ kíkà nìkan: a ti pa ìpinnu.	direct	false			true
@@ -460,6 +463,7 @@ nav.runSimulation	Run Simulation	Ṣiṣe Ìdánwò	direct	false			true
 nav.signOut	Sign out	Jáde	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	Jáde níbikibi	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	Parí ìgbà yìí lórí gbogbo ẹ̀rọ àti aṣàwákiri	direct	false			true
+nav.skipToContent	Skip to main content	Rekọja lọ sí àkóónú pàtàkì	direct	false			true
 nav.synthetic	Synthetic demo data	Dátà àfihàn tí a ṣe	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	Yí ìtọ́sọ́nà	direct	false			true

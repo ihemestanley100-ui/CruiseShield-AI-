@@ -50,6 +50,22 @@ DEMO_WRITE_TOKEN = os.environ.get("DEMO_WRITE_TOKEN", "")
 SESSION_SECRET = os.environ.get("SESSION_SECRET", "")
 DEMO_USERS = os.environ.get("DEMO_USERS", "")
 
+# R09-F2: minimum HMAC signing-secret strength. A set-but-short secret
+# is a misconfiguration: auth fails closed (503 AUTH_MISCONFIGURED)
+# rather than signing sessions with weak key material. Unset/empty
+# keeps the documented open local-demo default.
+MIN_SESSION_SECRET_LENGTH = 32
+
+
+def session_auth_armed() -> bool:
+    """True only when a strong signing secret is configured."""
+    return len(SESSION_SECRET or "") >= MIN_SESSION_SECRET_LENGTH
+
+
+def session_secret_misconfigured() -> bool:
+    """True when a secret is set but too weak to arm auth."""
+    return bool(SESSION_SECRET) and not session_auth_armed()
+
 
 def _safe_int(raw: str | None, default: int) -> int:
     try:
@@ -92,7 +108,7 @@ def cors_options() -> dict:
     allows X-Requested-With through preflight (required CSRF header for
     cookie-authed POSTs).
     """
-    armed = bool(SESSION_SECRET)
+    armed = session_auth_armed()
     headers = ["Content-Type", "X-Request-ID"]
     if armed:
         headers = headers + ["X-Requested-With"]

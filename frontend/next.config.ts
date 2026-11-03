@@ -35,6 +35,15 @@ const nextConfig: NextConfig = {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
           },
+          // R09-F4: HSTS. Static config cannot see the request scheme,
+          // so this is served on HTTP too — browsers MUST ignore HSTS
+          // over insecure transport (RFC 6797 8.1), keeping local
+          // http://localhost dev unaffected. No includeSubDomains
+          // (shared parent domains on managed hosting), no preload.
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000",
+          },
           { key: "Content-Security-Policy", value: csp },
         ],
       },

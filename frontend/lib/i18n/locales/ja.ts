@@ -4,6 +4,7 @@
 
 export const ja = {
   nav: {
+    skipToContent: "メインコンテンツへスキップ",
     commandCenter: "コマンドセンター",
     investigations: "調査",
     cases: "案件",
@@ -210,6 +211,9 @@ export const ja = {
     loading: "読み込み中…",
     retry: "再試行",
     requestFailed: "リクエスト失敗",
+    loadFailed: "このセクションを読み込めませんでした。",
+    notPermitted: "お使いのロールでは利用できません。",
+    unreachable: "バックエンドに到達できません。デモサーバーを確認して再試行してください。",
     closeDialog: "ダイアログを閉じる",
     breadcrumb: "パンくずリスト",
     timelineEmpty: "イベントがありません。",

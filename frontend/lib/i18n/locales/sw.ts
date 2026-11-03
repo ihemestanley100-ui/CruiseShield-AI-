@@ -4,6 +4,7 @@
 
 export const sw = {
   nav: {
+    skipToContent: "Ruka hadi maudhui kuu",
     commandCenter: "Kituo cha Amri",
     investigations: "Uchunguzi",
     cases: "Kesi",
@@ -214,6 +215,9 @@ export const sw = {
     loading: "Inapakia…",
     retry: "Jaribu tena",
     requestFailed: "Ombi limeshindwa",
+    loadFailed: "Imeshindwa kupakia sehemu hii.",
+    notPermitted: "Haipatikani kwa jukumu lako.",
+    unreachable: "Seva haipatikani. Angalia seva ya maonyesho na ujaribu tena.",
     closeDialog: "Funga kidirisha",
     breadcrumb: "Njia ya urambazaji",
     timelineEmpty: "Hakuna matukio.",

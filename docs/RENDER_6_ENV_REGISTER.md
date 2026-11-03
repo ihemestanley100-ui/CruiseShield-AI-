@@ -9,7 +9,7 @@ DATE: 2026-11-01 | NAMES ONLY — no values. († = set in render.yaml; ‡ = Re
 - FRONTEND_ORIGINS † — comma-separated allowed origins; MUST be the deployed frontend URL (default localhost:3000/127.0.0.1:3000 for local).
 - STORE_BACKEND (unset → `json`) — leave unset; `pg` is scratch-only.
 - DEMO_WRITE_TOKEN (gap-closure D-002; Render secret prompt) — empty = open demo; set = POSTs require it. Owner-generated (`secrets.token_urlsafe(32)`).
-- SESSION_SECRET ‡ — HMAC session signing; empty = demo login disabled (open demo, honest 503 on /auth/login).
+- SESSION_SECRET ‡ — HMAC session signing; empty = demo login disabled (open demo, honest 503 on /auth/login). R09-F2: minimum 32 characters when set (`secrets.token_urlsafe(32)`); shorter fails closed (503 AUTH_MISCONFIGURED).
 - DEMO_USERS ‡ — `user:role:pbkdf2-hash` CSV for demo login (investigator/admin roles).
 - AI_DAILY_CALL_LIMIT † (default 100) · AI_TIMEOUT_SECONDS † (default 30) — AI cost controls; enforced pre-call with audited rejections.
 - DATABASE_URL (unset until Neon cutover, §E-gated) · PG_CONNECT_TIMEOUT (default 5, fail-safe on garbage per J3-P1) · PORT (Render-provided; local default 8000).

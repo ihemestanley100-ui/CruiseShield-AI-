@@ -156,10 +156,12 @@ command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derive
 command.versionedRules	Versioned deterministic rules	Tabbatattun dokoki masu sigar	direct	false			true
 common.breadcrumb	Breadcrumb	Hanyar kewayawa	direct	false			true
 common.closeDialog	Close dialog	Rufe	direct	false			true
+common.loadFailed	Couldn't load this section.	Ba a iya loda wannan sashe ba.	direct	false			true
 common.loading	Loading…	Ana lodawa…	direct	false			true
 common.none	none	Babu	direct	false			true
 common.noneYet	None yet	Babu tukuna	direct	false			true
 common.notAvailable	Not available	Ba ya nan	direct	false			true
+common.notPermitted	Not available for your role.	Babu shi don rawar da kake takawa.	direct	false			true
 common.present	present	yana nan	direct	false			true
 common.requestFailed	request failed	Buƙatar ta gaza	direct	false			true
 common.retry	Retry	Sake gwadawa	direct	false			true
@@ -167,6 +169,7 @@ common.timelineEmpty	No events.	Babu abubuwan da suka faru.	direct	false			true
 common.unknown	unknown	Ba a sani ba	direct	false			true
 common.unknownModel	unknown model	samfurin da ba a sani ba	direct	false			true
 common.unknownTime	unknown time	lokacin da ba a sani ba	direct	false			true
+common.unreachable	Backend unreachable. Check the demo server and retry.	Ba a iya isa ga uwar garken ba. Duba uwar garken nunawa kuma a sake gwadawa.	direct	false			true
 decision.actorLabel	Analyst ID	ID manazarci	direct	false			true
 decision.decisionLabel	Decision	Shawara	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	Matsayinka karatu kaɗai ne: an kashe shawarwari.	direct	false			true
@@ -460,6 +463,7 @@ nav.runSimulation	Run Simulation	Gudanar da gwaji	direct	false			true
 nav.signOut	Sign out	Fita	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	Fita a ko'ina	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	Ƙare wannan zaman a duk na'urori da masu bincike	direct	false			true
+nav.skipToContent	Skip to main content	Tsallake zuwa ga ainihin abun ciki	direct	false			true
 nav.synthetic	Synthetic demo data	Bayanan nunin roƙa	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	Canja kewayawa	direct	false			true

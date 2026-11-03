@@ -69,6 +69,36 @@ def test_middleware_exempts_health():
         assert resp.status_code == 200
 
 
+def test_bucket_store_stays_bounded():
+    """R09-F1: forged keys (unique XFFs) must not grow memory unbounded."""
+    for i in range(rl.MAX_BUCKETS + 500):
+        rl.check_and_consume(f"flood-{i}", now=1000.0)
+    assert len(rl._buckets) <= rl.MAX_BUCKETS
+
+
+def test_expired_buckets_swept_first():
+    """R09-F1: at capacity, expired buckets are evicted before fresh ones."""
+    for i in range(rl.MAX_BUCKETS):
+        rl.check_and_consume(f"old-{i}", now=1000.0)
+    allowed, _ = rl.check_and_consume(
+        "new-key", now=1000.0 + rl.WINDOW_SECONDS + 1)
+    assert allowed
+    assert "new-key" in rl._buckets
+    assert len(rl._buckets) <= rl.MAX_BUCKETS
+    assert not any(k.startswith("old-") for k in rl._buckets)
+
+
+def test_oldest_evicted_when_full_and_fresh():
+    """R09-F1: at capacity with no expired buckets, oldest goes first."""
+    for i in range(rl.MAX_BUCKETS):
+        rl.check_and_consume(f"fresh-{i}", now=1000.0 + i * 0.001)
+    allowed, _ = rl.check_and_consume("late-key", now=1000.0 + 5)
+    assert allowed
+    assert len(rl._buckets) == rl.MAX_BUCKETS
+    assert "fresh-0" not in rl._buckets
+    assert "late-key" in rl._buckets
+
+
 def test_middleware_throttles_with_429_envelope():
     for _ in range(rl.LIMIT_PER_MINUTE):
         resp = _drive(main.rate_limit_guard(

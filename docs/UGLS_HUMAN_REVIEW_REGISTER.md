@@ -26,7 +26,7 @@ tests, UI, or reports.
 
 (Versions corrected 2026-11-02 to match `meta.ts`, the declared
 authority: all twelve at 1.2.0. All eleven non-en locales hold FULL
-571-key machine drafts — kit-verified, 0 fallback rows — superseding
+575-key machine drafts — kit-verified, 0 fallback rows — superseding
 earlier 66-key figures wherever they describe current state.)
 
 207 remaining registry languages: no dictionary, nothing to review;
@@ -62,7 +62,7 @@ normal test gate (parity + switching + browser spot-check).
 
 ## Review kit (ready 2026-11-02, linguists pending)
 
-`docs/UGLS_REVIEW_KIT/` — one TSV per locale (571 rows each) built
+`docs/UGLS_REVIEW_KIT/` — one TSV per locale (575 rows each) built
 from the production `lookup()` machinery: en source, draft,
 direct/fallback origin, same-as-source flag, per-side `{vars}` and
 match flag. Freshness pinned by

@@ -11,11 +11,12 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
-  ApiError,
   listAlerts,
+  userErrorMessage,
   type AlertItem,
 } from "../lib/api";
 import { useTranslation } from "../lib/i18n/context";
+import { formatDate } from "../lib/i18n/format";
 
 type State =
   | { kind: "loading" }
@@ -28,7 +29,7 @@ function investigationIdFor(alert: AlertItem): string | null {
 }
 
 export function Notifications() {
-  const { t } = useTranslation("notify");
+  const { t, locale } = useTranslation("notify");
   const { t: tCommon } = useTranslation("common");
   const [state, setState] = useState<State>({ kind: "loading" });
   const [open, setOpen] = useState(false);
@@ -44,12 +45,7 @@ export function Notifications() {
         if (controller.signal.aborted) return;
         setState({
           kind: "error",
-          message:
-            err instanceof ApiError
-              ? `${err.code}: ${err.message}`
-              : err instanceof Error
-                ? err.message
-                : tCommon("requestFailed"),
+          message: userErrorMessage(err, tCommon),
         });
       }
     );
@@ -152,7 +148,12 @@ export function Notifications() {
                         </div>
                         <p className="muted">
                           <code>{alert.alert_id}</code> ·{" "}
-                          <bdi>{alert.created_at}</bdi>
+                          <bdi>
+                            {formatDate(locale, alert.created_at, {
+                              dateStyle: "medium",
+                              timeStyle: "short",
+                            })}
+                          </bdi>
                         </p>
                         <p>
                           {invId !== null && (

@@ -142,7 +142,7 @@ describe("DecisionForm", () => {
     });
     fireEvent.click(screen.getByRole("button", { name: "Record decision" }));
     await waitFor(() =>
-      expect(screen.getByText("INVALID_TRANSITION: bad move")).toBeTruthy()
+      expect(screen.getByText("Couldn't load this section.")).toBeTruthy()
     );
   });
 

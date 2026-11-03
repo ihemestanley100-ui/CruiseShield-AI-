@@ -4,6 +4,7 @@
 
 export const ha = {
   nav: {
+    skipToContent: "Tsallake zuwa ga ainihin abun ciki",
     commandCenter: "Cibiyar Umurni",
     investigations: "Bincike",
     cases: "Shari'o'i",
@@ -212,6 +213,9 @@ export const ha = {
     loading: "Ana lodawa…",
     retry: "Sake gwadawa",
     requestFailed: "Buƙatar ta gaza",
+    loadFailed: "Ba a iya loda wannan sashe ba.",
+    notPermitted: "Babu shi don rawar da kake takawa.",
+    unreachable: "Ba a iya isa ga uwar garken ba. Duba uwar garken nunawa kuma a sake gwadawa.",
     closeDialog: "Rufe",
     breadcrumb: "Hanyar kewayawa",
     timelineEmpty: "Babu abubuwan da suka faru.",

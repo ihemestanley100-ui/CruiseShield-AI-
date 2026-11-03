@@ -7,6 +7,7 @@
 
 export const en = {
   nav: {
+    skipToContent: "Skip to main content",
     commandCenter: "Command Center",
     investigations: "Investigations",
     cases: "Cases",
@@ -212,6 +213,9 @@ export const en = {
     loading: "Loading…",
     retry: "Retry",
     requestFailed: "request failed",
+    loadFailed: "Couldn't load this section.",
+    notPermitted: "Not available for your role.",
+    unreachable: "Backend unreachable. Check the demo server and retry.",
     closeDialog: "Close dialog",
     breadcrumb: "Breadcrumb",
     timelineEmpty: "No events.",

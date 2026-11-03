@@ -9,7 +9,7 @@ directive.
 
 | # | Criterion | Verdict | Evidence |
 | - | --------- | ------- | -------- |
-| A1 | All translation namespaces inventoried | PASS | 571 keys / 22 namespaces, generated dump |
+| A1 | All translation namespaces inventoried | PASS | 575 keys / 22 namespaces (571 + 4 closure-program keys), generated dump |
 | A2 | Truthful coverage classification per language | PASS | 3 translated / 11 partial / 207 unavailable; tested counts |
 | A3 | No missing keys hidden by fallback | PASS | Ledger + `[key]` markers + mixing test; zero markers in browser |
 | A4 | RTL visual browser testing passes | PASS | 20 Edge screenshots + 8 DOMs, 3 breakpoints, findings fixed |
@@ -32,7 +32,7 @@ visually. `data/state.json` (BA1D4DB4…3790FE, 101417 B) is untouched.
 ## Scope notes (read before calling this "complete translation")
 
 - Only English is human-authoritative. fr/ar are COMPLETE but
-  machine-drafted (571/571); nine priority locales are full 571-key
+  machine-drafted (575/575); nine priority locales are full 575-key
   machine drafts (completed UGLS-02 final; earlier 11.6% figures
   superseded); 207 languages intentionally fall back to English.
   Human review (register + review kit provided) is the remaining

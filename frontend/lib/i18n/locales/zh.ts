@@ -4,6 +4,7 @@
 
 export const zh = {
   nav: {
+    skipToContent: "跳到主要内容",
     commandCenter: "指挥中心",
     investigations: "调查",
     cases: "案件",
@@ -181,6 +182,9 @@ export const zh = {
     loading: "正在加载…",
     retry: "重试",
     requestFailed: "请求失败",
+    loadFailed: "无法加载此部分。",
+    notPermitted: "您的角色不可用。",
+    unreachable: "无法访问后端。请检查演示服务器并重试。",
     closeDialog: "关闭对话框",
     breadcrumb: "面包屑导航",
     timelineEmpty: "暂无事件。",

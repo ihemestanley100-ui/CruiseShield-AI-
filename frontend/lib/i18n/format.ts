@@ -18,6 +18,9 @@ export function formatDate(
   options?: Intl.DateTimeFormatOptions
 ): string {
   const date = value instanceof Date ? value : new Date(value);
+  // Unparseable input (already-formatted display strings) renders
+  // verbatim — never "Invalid Date", never guessed.
+  if (Number.isNaN(date.getTime())) return String(value);
   try {
     return new Intl.DateTimeFormat(safeTag(tag), options).format(date);
   } catch {

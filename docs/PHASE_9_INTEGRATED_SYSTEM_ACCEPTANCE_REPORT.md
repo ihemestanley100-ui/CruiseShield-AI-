@@ -26,7 +26,7 @@ the current tree — and was still re-run fresh for this report.
 | Phase 3.5 script | Delivered | File present, routes referenced all exist — HOLDS |
 | Phases 4–8 | COMPLETE_WITH_LIMITATIONS | 69/69 re-run, suites green — HOLDS |
 | Security/provenance audits | Clean / greenfield | Re-scans clean; conclusions hold — HOLDS |
-| Control report (2 errata) | Corrected | A1 (23) + A2 (preserve `.png.png`) verified in place — HOLDS |
+| Control report (2 errata) | Corrected | A1 (23) HOLDS; A2 SUPERSEDED by Q4 RETIRE 2026-11-03 (reference retired, no restore; canonical verified intact) |
 
 Frontend suite now 233/233 (+1 shell test since the 4–8 report);
 backend 289/68/0; build exit 0. No reconciling conflicts found.

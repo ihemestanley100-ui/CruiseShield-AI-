@@ -15,6 +15,7 @@ import {
   getReplay,
   listScenarios,
   resetDemo,
+  userErrorMessage,
   type DemoResetResult,
 } from "../../../lib/api";
 import { useTranslation } from "../../../lib/i18n/context";
@@ -63,12 +64,7 @@ export default function ReplayPage() {
         }
         setState({
           kind: "error",
-          message:
-            err instanceof ApiError
-              ? `${err.code}: ${err.message}`
-              : err instanceof Error
-                ? err.message
-                : tCommon("requestFailed"),
+          message: userErrorMessage(err, tCommon),
         });
       });
     return () => controller.abort();
@@ -83,13 +79,7 @@ export default function ReplayPage() {
       setResetResult(result);
       setConfirming(false);
     } catch (err: unknown) {
-      setResetError(
-        err instanceof ApiError
-          ? `${err.code}: ${err.message}`
-          : err instanceof Error
-            ? err.message
-            : tCommon("requestFailed")
-      );
+      setResetError(userErrorMessage(err, tCommon));
     } finally {
       setResetting(false);
     }

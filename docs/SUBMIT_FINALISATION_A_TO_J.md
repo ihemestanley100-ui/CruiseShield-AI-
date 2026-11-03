@@ -23,7 +23,7 @@ PRIOR DELIVERABLES (not rebuilt): `docs/SUBMIT_A…J_*` (prep programme), `docs/
 
 ## D. Logo rights memo
 - Asset: `frontend/public/assets/cruiseshield-logo-original.png`, 1273370 B, SHA-256 1A0CC66B…C32A623 (re-verified 11-01). Referenced by app-shell.tsx:56, LandingChrome.tsx:7 (+2 tests). Original artwork preserved; display via contain-fit.
-- Duplicate `.png.png`: identical hash/size, ZERO references (proven 11-01). Safe to delete; KEPT pending owner approval.
+- Duplicate `.png.png`: identical hash/size, ZERO references (proven 11-01). Was KEPT pending approval; Q4 erratum 2026-11-03: RETIRED per owner decision, no restore.
 - Ownership: developer asserts original authorship — RECORDED, NOT independently verified. No licence/assignment document exists.
 - Risk: reported ownership clause (entrants must own everything + grant broad licence) makes this the top IP item.
 - MEMO DECISION REQUIRED (owner): confirm in writing (a) you created/own the logo, (b) it may be submitted, (c) your position on organiser/press reuse. Without this memo, item stays NOT_VERIFIED and submission carries IP risk. No ownership invented here.
@@ -63,7 +63,7 @@ Cleared since closeout: none pending re-verification — tree frozen, hashes hol
 ## J. Owner approval checklist (exact next actions)
 - [ ] J1 File acceptance proof; accept Official Rules in portal (record version/date).
 - [ ] J2 Verify + record track/theme/roster from portal (report any mismatch; I change nothing).
-- [ ] J3 Sign the D logo memo (create/own/submit/reuse position); decide `.png.png` deletion.
+- [x] J3 Logo memo positions recorded (Q1 SELF + Q2 YES 11-03); `.png.png` RETIRED per owner Q4 (no deletion action). Q3 reuse still pending terms review.
 - [ ] J4 Approve backup destination + secret handling (E a–d); I execute + verify.
 - [ ] J5 Confirm video specs in portal; approve recording; record; approve upload; deliver URL.
 - [ ] J6 Decide commit/push/visibility per G; I execute exactly as instructed.

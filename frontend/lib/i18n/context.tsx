@@ -10,6 +10,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -90,13 +91,17 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   /* SSR-safe initial state: the server cannot know the visitor's stored
    * choice, so the first render always uses the fallback. Reading
    * storage here mismatches SSR text on every returning visit (React
-   * #418). The mount effect applies the real locale before paint
-   * settles; returning visitors may see one fallback frame. */
+   * #418). The layout effect below applies the real locale before
+   * paint, so there is no fallback frame either. */
   const [locale, setLocaleState] = useState<string>(FALLBACK_LOCALE);
 
   /* Initial locale, once: an explicit `?locale=` override wins and
-   * is persisted; else the stored choice; else browser detection. */
-  useEffect(() => {
+   * is persisted; else the stored choice; else browser detection.
+   * Layout effect (not passive): runs before paint, so the first
+   * painted frame already shows the resolved locale. Dev-only cost:
+   * React logs a useLayoutEffect-does-nothing-on-the-server warning
+   * during SSR; production output is unaffected. */
+  useLayoutEffect(() => {
     const override = urlLocaleOverride();
     if (override !== null) {
       try {

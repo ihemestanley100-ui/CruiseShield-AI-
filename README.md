@@ -6,6 +6,17 @@ investigation. *"The transaction is only the beginning. The network is the signa
 > All data is deterministic synthetic demo fixtures, labelled in the UI. No real
 > financial data is used anywhere.
 
+## Hackathon provenance (Meta Global AI Developer Hackathon, Oct 26 – Nov 4, 2026)
+
+Everything in `app/`, `frontend/`, `tests/`, `migrations/`,
+`.github/` and the deployment config was built during the
+hackathon window (commits `7b39f60`…`753a6c5`, all dated Oct 28 –
+Nov 2, 2026). Pre-existing and NOT presented as new: the v5.0
+specification text (`CRUISESHIELD_AI_*_V5.0.txt`, authored Oct 8),
+third-party open-source libraries, and the owner-supplied logo
+asset (integrated, not created). Evidence:
+`docs/NEW_WORK_CONTRIBUTION_MATRIX.md`.
+
 ## Problem
 
 Transaction-by-transaction monitoring misses suspicious relationships spread across

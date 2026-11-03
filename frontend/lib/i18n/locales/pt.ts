@@ -4,6 +4,7 @@
 
 export const pt = {
   nav: {
+    skipToContent: "Saltar para o conteúdo principal",
     commandCenter: "Centro de Comando",
     investigations: "Investigações",
     cases: "Casos",
@@ -213,6 +214,9 @@ export const pt = {
     loading: "A carregar…",
     retry: "Tentar novamente",
     requestFailed: "Pedido falhou",
+    loadFailed: "Não foi possível carregar esta seção.",
+    notPermitted: "Indisponível para a sua função.",
+    unreachable: "Servidor inacessível. Verifique o servidor de demonstração e tente novamente.",
     closeDialog: "Fechar diálogo",
     breadcrumb: "Trilha de navegação",
     timelineEmpty: "Sem eventos.",

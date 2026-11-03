@@ -2,7 +2,7 @@
 
 One TSV per machine-drafted locale (fr, ar, ig, yo, ha, pt, es, zh,
 hi, sw, ja). Each row is one English source key with its draft.
-All 11 locales currently ship FULL 571-key drafts (see counts
+All 11 locales currently ship FULL 575-key drafts (see counts
 below); nothing here is human-verified.
 
 ## Columns
@@ -25,7 +25,7 @@ Cell escaping: tabs → space, newlines → literal `\n`.
 
 ## Current integrity snapshot (2026-11-02)
 
-- Rows per locale: 571 (fr, ar, all nine drafts). Fallback rows: 0.
+- Rows per locale: 575 (fr, ar, all nine drafts). Fallback rows: 0.
 - `same_as_source`: fr 25, ar 6, ig/yo/ha/es 15, pt 14, zh 7,
   hi/sw 8–9, ja 8 — brand/data terms, reviewer to confirm each.
 - `vars_ok=false`: 0 everywhere except ar (8 rows, all `.one`

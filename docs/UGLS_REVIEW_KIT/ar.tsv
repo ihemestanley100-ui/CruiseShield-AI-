@@ -156,10 +156,12 @@ command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derive
 command.versionedRules	Versioned deterministic rules	قواعد حتمية بالإصدارات	direct	false			true
 common.breadcrumb	Breadcrumb	مسار التنقل	direct	false			true
 common.closeDialog	Close dialog	إغلاق مربع الحوار	direct	false			true
+common.loadFailed	Couldn't load this section.	تعذّر تحميل هذا القسم.	direct	false			true
 common.loading	Loading…	جارٍ التحميل…	direct	false			true
 common.none	none	لا شيء	direct	false			true
 common.noneYet	None yet	لا يوجد بعد	direct	false			true
 common.notAvailable	Not available	غير متوفر	direct	false			true
+common.notPermitted	Not available for your role.	غير متاح لدورك.	direct	false			true
 common.present	present	الحاضر	direct	false			true
 common.requestFailed	request failed	فشل الطلب	direct	false			true
 common.retry	Retry	إعادة المحاولة	direct	false			true
@@ -167,6 +169,7 @@ common.timelineEmpty	No events.	لا توجد أحداث.	direct	false			true
 common.unknown	unknown	غير معروف	direct	false			true
 common.unknownModel	unknown model	نموذج غير معروف	direct	false			true
 common.unknownTime	unknown time	وقت غير معروف	direct	false			true
+common.unreachable	Backend unreachable. Check the demo server and retry.	تعذّر الوصول إلى الخادم. تحقق من خادم العرض التجريبي وأعد المحاولة.	direct	false			true
 decision.actorLabel	Analyst ID	معرّف المحلل	direct	false			true
 decision.decisionLabel	Decision	القرار	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	دورك للقراءة فقط: القرارات معطّلة.	direct	false			true
@@ -460,6 +463,7 @@ nav.runSimulation	Run Simulation	تشغيل المحاكاة	direct	false			true
 nav.signOut	Sign out	تسجيل الخروج	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	تسجيل الخروج من كل مكان	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	إنهاء هذه الجلسة على جميع الأجهزة والمتصفحات	direct	false			true
+nav.skipToContent	Skip to main content	تخطَّ إلى المحتوى الرئيسي	direct	false			true
 nav.synthetic	Synthetic demo data	بيانات تجريبية اصطناعية	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	تبديل التنقل	direct	false			true

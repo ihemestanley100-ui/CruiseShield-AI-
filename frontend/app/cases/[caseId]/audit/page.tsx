@@ -14,6 +14,7 @@ import { Breadcrumbs } from "../../../../components/breadcrumbs";
 import {
   ApiError,
   getCaseAudit,
+  userErrorMessage,
   type AuditEntry,
 } from "../../../../lib/api";
 
@@ -44,12 +45,7 @@ export default function CaseAuditPage() {
         }
         setState({
           kind: "error",
-          message:
-            err instanceof ApiError
-              ? `${err.code}: ${err.message}`
-              : err instanceof Error
-                ? err.message
-                : tCommon("requestFailed"),
+          message: userErrorMessage(err, tCommon),
         });
       });
     return () => controller.abort();

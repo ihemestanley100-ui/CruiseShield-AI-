@@ -4,6 +4,7 @@
 
 export const fr = {
   nav: {
+    skipToContent: "Aller au contenu principal",
     commandCenter: "Centre de commandement",
     investigations: "Enquêtes",
     cases: "Dossiers",
@@ -209,6 +210,9 @@ export const fr = {
     loading: "Chargement…",
     retry: "Réessayer",
     requestFailed: "requête échouée",
+    loadFailed: "Impossible de charger cette section.",
+    notPermitted: "Non disponible pour votre rôle.",
+    unreachable: "Serveur inaccessible. Vérifiez le serveur de démonstration et réessayez.",
     closeDialog: "Fermer la boîte de dialogue",
     breadcrumb: "Fil d'Ariane",
     timelineEmpty: "Aucun événement.",

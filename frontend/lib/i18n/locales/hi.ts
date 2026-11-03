@@ -4,6 +4,7 @@
 
 export const hi = {
   nav: {
+    skipToContent: "मुख्य सामग्री पर जाएं",
     commandCenter: "कमांड सेंटर",
     investigations: "जांच",
     cases: "मामले",
@@ -208,6 +209,9 @@ export const hi = {
     loading: "लोड हो रहा है…",
     retry: "पुनः प्रयास",
     requestFailed: "अनुरोध विफल",
+    loadFailed: "यह अनुभाग लोड नहीं हो सका।",
+    notPermitted: "आपकी भूमिका के लिए उपलब्ध नहीं है।",
+    unreachable: "बैकएंड उपलब्ध नहीं है। डेमो सर्वर जांचें और पुनः प्रयास करें।",
     closeDialog: "संवाद बंद करें",
     breadcrumb: "ब्रेडक्रम्ब",
     timelineEmpty: "कोई ईवेंट नहीं।",

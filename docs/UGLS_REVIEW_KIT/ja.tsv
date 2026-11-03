@@ -156,10 +156,12 @@ command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derive
 command.versionedRules	Versioned deterministic rules	バージョン管理された確定的ルール	direct	false			true
 common.breadcrumb	Breadcrumb	パンくずリスト	direct	false			true
 common.closeDialog	Close dialog	ダイアログを閉じる	direct	false			true
+common.loadFailed	Couldn't load this section.	このセクションを読み込めませんでした。	direct	false			true
 common.loading	Loading…	読み込み中…	direct	false			true
 common.none	none	なし	direct	false			true
 common.noneYet	None yet	まだありません	direct	false			true
 common.notAvailable	Not available	利用不可	direct	false			true
+common.notPermitted	Not available for your role.	お使いのロールでは利用できません。	direct	false			true
 common.present	present	現在	direct	false			true
 common.requestFailed	request failed	リクエスト失敗	direct	false			true
 common.retry	Retry	再試行	direct	false			true
@@ -167,6 +169,7 @@ common.timelineEmpty	No events.	イベントがありません。	direct	false		
 common.unknown	unknown	不明	direct	false			true
 common.unknownModel	unknown model	不明なモデル	direct	false			true
 common.unknownTime	unknown time	不明な時刻	direct	false			true
+common.unreachable	Backend unreachable. Check the demo server and retry.	バックエンドに到達できません。デモサーバーを確認して再試行してください。	direct	false			true
 decision.actorLabel	Analyst ID	アナリストID	direct	false			true
 decision.decisionLabel	Decision	判断	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	読み取り専用ロールのため判断は無効です。	direct	false			true
@@ -460,6 +463,7 @@ nav.runSimulation	Run Simulation	シミュレーションを実行	direct	false	
 nav.signOut	Sign out	サインアウト	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	すべての場所でサインアウト	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	すべてのデバイスとブラウザでこのセッションを終了	direct	false			true
+nav.skipToContent	Skip to main content	メインコンテンツへスキップ	direct	false			true
 nav.synthetic	Synthetic demo data	合成デモデータ	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	ナビゲーション切替	direct	false			true

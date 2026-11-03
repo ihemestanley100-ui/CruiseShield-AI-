@@ -88,3 +88,18 @@ Row-level matrices for the new workstreams live in the
 | ID | Item | Status | Evidence |
 |----|------|--------|----------|
 | J10-1 | Independent audit | PASS | docs/J10_INDEPENDENT_RELEASE_AUDIT.md: 7/7 code/docs/state claims VERIFIED; execution sample sandbox-skipped (env), full E2E green unsandboxed; no 100%/production-ready claims found |
+
+## J11 launch control (added 2026-11-03; reconciled, no prior row altered)
+
+| ID | Item | Status | Evidence |
+|----|------|--------|----------|
+| J11-1 | R-09 fixes F1–F4 | PASS | Bounded rate-limit store; 32-char secret minimum w/ fail-closed 503; failed-login audits; HSTS. pytest 403/73, vitest 354/354, tsc 0, build 0, gate 6/6 live |
+| J11-2 | Zero-cost register | PASS | docs/ZERO_COST_INFRASTRUCTURE_REGISTER.md; Vercel Hobby REJECTED (ToS, upholds J8-1); Render Free × 2 selected; $0 hosting target (total $0 unclaimable per J8 rule) |
+| J11-3 | Render deployment package | PASS | 9 FINAL_* docs (audit, manifest, env register, DB/backup, security, acceptance plan, gate register, storyboard, submission checklist); deployment values derived from source |
+| J11-4 | Live deployment | BLOCKED | Nothing provisioned/pushed; 9 gates closed pending owner approval (FINAL_DEPLOYMENT_GATE_REGISTER.md) |
+| J11-5 | Live AI verification | NOT_VERIFIED | Key present; validity needs 1 approved call (G-AI-SPEND); standing 11-01 live success cited, not re-fabricated |
+| J11-6 | Hackathon video/submission | NOT_VERIFIED | Truthful storyboard + checklist ready; footage and submission await G-RELEASE |
+| J11-7 | Q-IP-1 owner decisions | PASS_WITH_LIMITATIONS | Q1 SELF + Q2 YES OWNER_CONFIRMED 2026-11-03 (registers: `Q-IP-1_OWNER_CONFIRMATION_REGISTER.md`, `FINAL_QIP1_CONFIRMATION_REGISTER.md`); Q3 REVIEW pending (no official terms in repo — owner must supply); Q4 RETIRE confirmed, doc reconciliation pending separate approval |
+| J11-8 | Hackathon compliance audit | PARTIAL | New-work PASS_WITH_LIMITATIONS (all commits in-window; v5.0 spec text disclosed prior work); Meta integration PARTIAL (code + 11-01 live run verified, current key NOT_VERIFIED); repo PUBLIC (200 unauthenticated) but release unpushed; track/team/waiver/video NOT_VERIFIED (owner inputs). Docs: rules audit + contribution matrix + Meta evidence + repo/track/demo/gate files 11-03 |
+| J11-9 | Zero-gap remediation (UX/docs) | PASS | favicon.ico generated (valid ICO, 404 closed) + served-asset manifest test; loading/error/not-found boundaries + tests; status-label humanization; README hackathon section; Q4 errata across 10 docs. tsc 0, vitest 366/366 (68 files), build exit 0, 11-03 |
+| J11-10 | Owner inputs (track/team/eligibility) | PASS | INDIE DEVELOPER selected; SOLO roster; age/eligibility OWNER-CONFIRMED 2026-11-03 (`FINAL_TRACK_AND_TEAM_REGISTER.md`). Waiver acceptance NOT claimed (portal act, no evidence); Q3 terms review still pending official text |

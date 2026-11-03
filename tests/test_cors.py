@@ -61,7 +61,8 @@ def test_config_has_no_wildcard_but_allows_credentials():
 
 def test_staging_arms_credentialed_cors_without_wildcard(monkeypatch):
     """SESSION_SECRET set (login armed): cookies + XRW allowed, no '*'."""
-    monkeypatch.setattr(config_mod, "SESSION_SECRET", "staging-secret")
+    monkeypatch.setattr(config_mod, "SESSION_SECRET",
+                        "staging-secret-not-a-real-credential")
     options = cors_options()
     assert options["allow_credentials"] is True
     assert "*" not in options["allow_origins"]
@@ -112,7 +113,8 @@ def test_preflight_allows_post_with_json():
 
 
 def test_staging_preflight_allows_xrw_header(monkeypatch):
-    monkeypatch.setattr(config_mod, "SESSION_SECRET", "staging-secret")
+    monkeypatch.setattr(config_mod, "SESSION_SECRET",
+                        "staging-secret-not-a-real-credential")
     status, headers = _run("OPTIONS", "http://localhost:3000", [
         (b"access-control-request-method", b"POST"),
         (b"access-control-request-headers", b"x-requested-with"),
@@ -136,7 +138,8 @@ def test_armed_guard_401_carries_cors_headers(client, monkeypatch):
     sat inside session_guard, so guard short-circuits bypassed it and the
     browser reported BACKEND_UNREACHABLE instead of a login gate.
     """
-    monkeypatch.setattr(config_mod, "SESSION_SECRET", "staging-secret")
+    monkeypatch.setattr(config_mod, "SESSION_SECRET",
+                        "staging-secret-not-a-real-credential")
     monkeypatch.setattr(config_mod, "DEMO_USERS", "")
     response = client.get("/api/v1/alerts",
                           headers={"Origin": "http://127.0.0.1:3000"})
@@ -154,7 +157,8 @@ def test_armed_preflight_answered_before_guard(client, monkeypatch):
     under staging options is covered by
     test_staging_preflight_allows_xrw_header.
     """
-    monkeypatch.setattr(config_mod, "SESSION_SECRET", "staging-secret")
+    monkeypatch.setattr(config_mod, "SESSION_SECRET",
+                        "staging-secret-not-a-real-credential")
     monkeypatch.setattr(config_mod, "DEMO_USERS", "")
     response = client.options(
         "/api/v1/cases/case_84721/decision",

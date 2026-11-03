@@ -6,11 +6,11 @@
 > TRANSLATED / PARTIAL sets plus `coverageFor()` counts). Statuses:
 > translated = source English (en + BCP 47 variants); partial = full
 > machine-drafted dictionary, review pending (tiers denote REVIEW
-> STATE, not key count — corrected 2026-11-02: all eleven hold 571
+> STATE, not key count — corrected 2026-11-02: all eleven hold 575
 > keys, kit-verified); unavailable = no dictionary, whole-UI English
 > fallback with selector badge. No other status exists.
 
-| # | Tag | Native name | English name | Family | RTL | Status | Keys/571 |
+| # | Tag | Native name | English name | Family | RTL | Status | Keys/575 |
 | - | --- | ----------- | ------------ | ------ | --- | ------ | -------- |
 | 1 | `aa` | Afaraf | Afar | Afro-Asiatic | no | unavailable | 0 |
 | 2 | `ab` | аҧсуа бызшәа | Abkhaz | Northwest Caucasian | no | unavailable | 0 |
@@ -20,7 +20,7 @@
 | 6 | `am` | አማርኛ | Amharic | Afro-Asiatic | no | unavailable | 0 |
 | 7 | `am-Ethi` | አማርኛ (ኢትዮጵያ) | Amharic (Ethiopic) | Afro-Asiatic | no | unavailable | 0 |
 | 8 | `an` | aragonés | Aragonese | Indo-European | no | unavailable | 0 |
-| 9 | `ar` | العربية | Arabic | Afro-Asiatic | yes | partial | 571 |
+| 9 | `ar` | العربية | Arabic | Afro-Asiatic | yes | partial | 575 |
 | 10 | `ar-EG` | العربية (مصر) | Arabic (Egypt) | Afro-Asiatic | yes | unavailable | 0 |
 | 11 | `ar-SA` | العربية (السعودية) | Arabic (Saudi Arabia) | Afro-Asiatic | yes | unavailable | 0 |
 | 12 | `as` | অসমীয়া | Assamese | Indo-European | no | unavailable | 0 |
@@ -55,11 +55,11 @@
 | 41 | `ee` | Eʋegbe | Ewe | Niger-Congo | no | unavailable | 0 |
 | 42 | `efi` | Efik | Efik | Niger-Congo | no | unavailable | 0 |
 | 43 | `el` | Ελληνικά | Greek | Indo-European | no | unavailable | 0 |
-| 44 | `en` | English | English | Indo-European | no | translated | 571 |
-| 45 | `en-GB` | English (UK) | English (United Kingdom) | Indo-European | no | translated | 571 |
-| 46 | `en-NG` | English (Nigeria) | English (Nigeria) | Indo-European | no | translated | 571 |
+| 44 | `en` | English | English | Indo-European | no | translated | 575 |
+| 45 | `en-GB` | English (UK) | English (United Kingdom) | Indo-European | no | translated | 575 |
+| 46 | `en-NG` | English (Nigeria) | English (Nigeria) | Indo-European | no | translated | 575 |
 | 47 | `eo` | Esperanto | Esperanto | Constructed | no | unavailable | 0 |
-| 48 | `es` | español | Spanish | Indo-European | no | partial | 571 (100%) |
+| 48 | `es` | español | Spanish | Indo-European | no | partial | 575 (100%) |
 | 49 | `es-MX` | español (México) | Spanish (Mexico) | Indo-European | no | unavailable | 0 |
 | 50 | `es-AR` | español (Argentina) | Spanish (Argentina) | Indo-European | no | unavailable | 0 |
 | 51 | `et` | eesti | Estonian | Uralic | no | unavailable | 0 |
@@ -71,7 +71,7 @@
 | 57 | `fj` | Na Vosa Vakaviti | Fijian | Austronesian | no | unavailable | 0 |
 | 58 | `fo` | føroyskt | Faroese | Indo-European | no | unavailable | 0 |
 | 59 | `fon` | Fon | Fon | Niger-Congo | no | unavailable | 0 |
-| 60 | `fr` | français | French | Indo-European | no | partial | 571 |
+| 60 | `fr` | français | French | Indo-European | no | partial | 575 |
 | 61 | `fr-CA` | français (Canada) | French (Canada) | Indo-European | no | unavailable | 0 |
 | 62 | `fr-BE` | français (Belgique) | French (Belgium) | Indo-European | no | unavailable | 0 |
 | 63 | `fy` | Frysk | Western Frisian | Indo-European | no | unavailable | 0 |
@@ -81,12 +81,12 @@
 | 67 | `gn` | Avañe'ẽ | Guarani | Tupian | no | unavailable | 0 |
 | 68 | `gu` | ગુજરાતી | Gujarati | Indo-European | no | unavailable | 0 |
 | 69 | `gv` | Gaelg | Manx | Indo-European | no | unavailable | 0 |
-| 70 | `ha` | Hausa | Hausa | Afro-Asiatic | no | partial | 571 (100%) |
+| 70 | `ha` | Hausa | Hausa | Afro-Asiatic | no | partial | 575 (100%) |
 | 71 | `ha-Latn` | Hausa (Latin) | Hausa (Latin) | Afro-Asiatic | no | unavailable | 0 |
 | 72 | `ha-Arab` | هَرْشَن هَوْسَ | Hausa (Ajami) | Afro-Asiatic | yes | unavailable | 0 |
 | 73 | `haw` | ʻŌlelo Hawaiʻi | Hawaiian | Austronesian | no | unavailable | 0 |
 | 74 | `he` | עברית | Hebrew | Afro-Asiatic | yes | unavailable | 0 |
-| 75 | `hi` | हिन्दी | Hindi | Indo-European | no | partial | 571 (100%) |
+| 75 | `hi` | हिन्दी | Hindi | Indo-European | no | partial | 575 (100%) |
 | 76 | `ho` | Hiri Motu | Hiri Motu | Creole | no | unavailable | 0 |
 | 77 | `hr` | hrvatski | Croatian | Indo-European | no | unavailable | 0 |
 | 78 | `ht` | Kreyòl ayisyen | Haitian Creole | Creole | no | unavailable | 0 |
@@ -96,14 +96,14 @@
 | 82 | `ia` | interlingua | Interlingua | Constructed | no | unavailable | 0 |
 | 83 | `id` | Bahasa Indonesia | Indonesian | Austronesian | no | unavailable | 0 |
 | 84 | `ie` | Interlingue | Interlingue | Constructed | no | unavailable | 0 |
-| 85 | `ig` | Igbo | Igbo | Niger-Congo | no | partial | 571 (100%) |
+| 85 | `ig` | Igbo | Igbo | Niger-Congo | no | partial | 575 (100%) |
 | 86 | `ii` | ꆈꌠ꒿ | Nuosu Yi | Sino-Tibetan | no | unavailable | 0 |
 | 87 | `ik` | Iñupiaq | Inupiaq | Eskimo-Aleut | no | unavailable | 0 |
 | 88 | `io` | Ido | Ido | Constructed | no | unavailable | 0 |
 | 89 | `is` | íslenska | Icelandic | Indo-European | no | unavailable | 0 |
 | 90 | `it` | italiano | Italian | Indo-European | no | unavailable | 0 |
 | 91 | `iu` | ᐃᓄᒃᑑᑦ | Inuktitut | Eskimo-Aleut | no | unavailable | 0 |
-| 92 | `ja` | 日本語 | Japanese | Japonic | no | partial | 571 (100%) |
+| 92 | `ja` | 日本語 | Japanese | Japonic | no | partial | 575 (100%) |
 | 93 | `jv` | basa Jawa | Javanese | Austronesian | no | unavailable | 0 |
 | 94 | `ka` | ქართული | Georgian | Kartvelian | no | unavailable | 0 |
 | 95 | `kg` | Kikongo | Kongo | Niger-Congo | no | unavailable | 0 |
@@ -167,7 +167,7 @@
 | 153 | `pi` | पालि | Pali | Indo-European | no | unavailable | 0 |
 | 154 | `pl` | polski | Polish | Indo-European | no | unavailable | 0 |
 | 155 | `ps` | پښتو | Pashto | Indo-European | yes | unavailable | 0 |
-| 156 | `pt` | português | Portuguese | Indo-European | no | partial | 571 (100%) |
+| 156 | `pt` | português | Portuguese | Indo-European | no | partial | 575 (100%) |
 | 157 | `pt-BR` | português (Brasil) | Portuguese (Brazil) | Indo-European | no | unavailable | 0 |
 | 158 | `pt-PT` | português (Portugal) | Portuguese (Portugal) | Indo-European | no | unavailable | 0 |
 | 159 | `qu` | Runa Simi | Quechua | Quechuan | no | unavailable | 0 |
@@ -195,7 +195,7 @@
 | 181 | `st` | Sesotho | Southern Sotho | Niger-Congo | no | unavailable | 0 |
 | 182 | `su` | Basa Sunda | Sundanese | Austronesian | no | unavailable | 0 |
 | 183 | `sv` | svenska | Swedish | Indo-European | no | unavailable | 0 |
-| 184 | `sw` | Kiswahili | Swahili | Niger-Congo | no | partial | 571 (100%) |
+| 184 | `sw` | Kiswahili | Swahili | Niger-Congo | no | partial | 575 (100%) |
 | 185 | `syc` | ܣܘܪܝܝܐ | Classical Syriac | Afro-Asiatic | yes | unavailable | 0 |
 | 186 | `ta` | தமிழ் | Tamil | Dravidian | no | unavailable | 0 |
 | 187 | `te` | తెలుగు | Telugu | Dravidian | no | unavailable | 0 |
@@ -227,9 +227,9 @@
 | 213 | `wo` | Wolof | Wolof | Niger-Congo | no | unavailable | 0 |
 | 214 | `xh` | isiXhosa | Xhosa | Niger-Congo | no | unavailable | 0 |
 | 215 | `yi` | ייִדיש | Yiddish | Indo-European | yes | unavailable | 0 |
-| 216 | `yo` | Yorùbá | Yoruba | Niger-Congo | no | partial | 571 (100%) |
+| 216 | `yo` | Yorùbá | Yoruba | Niger-Congo | no | partial | 575 (100%) |
 | 217 | `za` | Sawndip | Zhuang | Tai-Kadai | no | unavailable | 0 |
-| 218 | `zh` | 中文 | Chinese | Sino-Tibetan | no | partial | 571 (100%) |
+| 218 | `zh` | 中文 | Chinese | Sino-Tibetan | no | partial | 575 (100%) |
 | 219 | `zh-Hans` | 简体中文 | Chinese (Simplified) | Sino-Tibetan | no | unavailable | 0 |
 | 220 | `zh-Hant` | 繁體中文 | Chinese (Traditional) | Sino-Tibetan | no | unavailable | 0 |
 | 221 | `zu` | isiZulu | Zulu | Niger-Congo | no | unavailable | 0 |

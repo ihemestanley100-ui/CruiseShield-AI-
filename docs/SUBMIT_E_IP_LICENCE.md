@@ -7,7 +7,7 @@ Greenfield in-window authorship (T1 3 commits 10-28 + T2 baseline record + T3 mt
 
 ## Logo / brand — NOT_VERIFIED (highest-value IP action)
 - `frontend/public/assets/cruiseshield-logo-original.png`: 1273370 B, SHA-256 1A0CC66B…C32A623 (re-verified 11-01).
-- Duplicate `.png.png`: identical hash + size, ZERO code references (proven 11-01) — safe to delete, KEPT pending owner approval.
+- Duplicate `.png.png`: identical hash + size, ZERO code references (proven 11-01) — was KEPT pending approval; Q4 erratum 2026-11-03: RETIRED per owner decision, no restore.
 - Developer asserts original authorship (recorded, no document). No licence/assignment on file.
 - S2 reports entrants must own everything + grant organisers a broad licence → Q-IP-1: owner must file a rights memo (creator, ownership, submission/press-reuse position) BEFORE submitting.
 - "Meta"/"Muse Spark"/model IDs used as integration facts + provider labels, not endorsement (Q-IP-2: check mark-attribution rules in full Rules text).

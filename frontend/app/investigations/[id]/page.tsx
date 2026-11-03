@@ -16,6 +16,7 @@ import {
   getInvestigation,
   getInvestigationIntel,
   getRiskIntel,
+  userErrorMessage,
   type EvidencePackage,
   type IntelEvidence,
   type InvIntel,
@@ -24,6 +25,7 @@ import {
 } from "../../../lib/api";
 import { formatKobo } from "../../../lib/format";
 import { useTranslation } from "../../../lib/i18n/context";
+import { formatDate } from "../../../lib/i18n/format";
 
 type State =
   | { kind: "loading" }
@@ -41,7 +43,7 @@ type State =
 export default function InvestigationPage() {
   const params = useParams<{ id: string }>();
   const invId = params.id;
-  const { t } = useTranslation("investigation");
+  const { t, locale } = useTranslation("investigation");
   const { t: tCommon } = useTranslation("common");
   const { t: tNav } = useTranslation("nav");
   const [state, setState] = useState<State>({ kind: "loading" });
@@ -71,12 +73,7 @@ export default function InvestigationPage() {
         }
         setState({
           kind: "error",
-          message:
-            err instanceof ApiError
-              ? `${err.code}: ${err.message}`
-              : err instanceof Error
-                ? err.message
-                : tCommon("requestFailed"),
+          message: userErrorMessage(err, tCommon),
         });
       });
     return () => controller.abort();
@@ -138,7 +135,8 @@ export default function InvestigationPage() {
               —{" "}
               {formatKobo(
                 state.detail.transaction.amount_minor,
-                state.detail.transaction.currency
+                state.detail.transaction.currency,
+                locale
               )}
             </h1>
             <p>
@@ -147,7 +145,12 @@ export default function InvestigationPage() {
                 receiver: state.detail.transaction.receiver_account_id,
                 channel: state.detail.transaction.channel,
               })}{" "}
-              <bdi>{state.detail.transaction.occurred_at}</bdi>
+              <bdi>
+                {formatDate(locale, state.detail.transaction.occurred_at, {
+                  dateStyle: "medium",
+                  timeStyle: "short",
+                })}
+              </bdi>
             </p>
             <p>
               <RiskBadge

@@ -43,4 +43,11 @@ describe("locale formatting", () => {
     expect(() => formatDate("xx", "2026-01-01T00:00:00Z")).not.toThrow();
     expect(() => formatRelative("xx", 3, "day")).not.toThrow();
   });
+
+  it("renders unparseable date input verbatim, never Invalid Date", () => {
+    expect(
+      formatDate("en", "10:00", { dateStyle: "medium", timeStyle: "short" })
+    ).toBe("10:00");
+    expect(formatDate("fr", "not a date")).toBe("not a date");
+  });
 });

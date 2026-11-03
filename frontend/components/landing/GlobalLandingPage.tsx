@@ -18,6 +18,7 @@ import {
 } from "./LandingPanels";
 import { CapabilityStrip, GlobalMetrics } from "./LandingStrips";
 import { WebGLFallback } from "./WebGLFallback";
+import { SkipLink } from "../skip-link";
 import { useTranslation } from "../../lib/i18n/context";
 
 const GlobalHeroScene = dynamic(
@@ -43,8 +44,9 @@ export function GlobalLandingPage() {
 
   return (
     <div className="landing">
+      <SkipLink />
       <LandingNav />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <section className="landing-hero" aria-labelledby="landing-h1">
           <div className="landing-hero-stage">
             <GlobalHeroScene motion={motion} paused={paused} />

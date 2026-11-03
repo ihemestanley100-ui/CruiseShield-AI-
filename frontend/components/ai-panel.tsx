@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  ApiError,
   postAiAnalysis,
   postAiFollowup,
+  userErrorMessage,
   type AgentRun,
 } from "../lib/api";
 import { useTranslation } from "../lib/i18n/context";
@@ -130,12 +130,7 @@ export function AiPanel({ invId }: { invId: string }) {
         }
         setState({
           kind: "error",
-          message:
-            err instanceof ApiError
-              ? `${err.code}: ${err.message}`
-              : err instanceof Error
-                ? err.message
-                : tCommon("requestFailed"),
+          message: userErrorMessage(err, tCommon),
         });
       });
   };
@@ -211,11 +206,7 @@ export function AiPanel({ invId }: { invId: string }) {
                   setAskError(
                     next.signal.aborted
                       ? t("timedOut")
-                      : err instanceof ApiError
-                        ? `${err.code}: ${err.message}`
-                        : err instanceof Error
-                          ? err.message
-                          : tCommon("requestFailed")
+                      : userErrorMessage(err, tCommon)
                   );
                 })
                 .finally(() => setAsking(false));

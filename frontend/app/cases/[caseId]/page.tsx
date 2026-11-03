@@ -18,6 +18,7 @@ import {
   getCase,
   getCaseAudit,
   getInvestigation,
+  userErrorMessage,
   type AiAssessment,
   type AuditEntry,
   type CaseDetail,
@@ -154,12 +155,7 @@ export default function CasePage() {
         }
         setState({
           kind: "error",
-          message:
-            err instanceof ApiError
-              ? `${err.code}: ${err.message}`
-              : err instanceof Error
-                ? err.message
-                : tCommon("requestFailed"),
+          message: userErrorMessage(err, tCommon),
         });
       });
     return () => controller.abort();

@@ -156,10 +156,12 @@ command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derive
 command.versionedRules	Versioned deterministic rules	Iwu doro anya nwere ụdị	direct	false			true
 common.breadcrumb	Breadcrumb	Ụzọ nchọgharị	direct	false			true
 common.closeDialog	Close dialog	Mechie	direct	false			true
+common.loadFailed	Couldn't load this section.	Enweghị ike ibu ngalaba a.	direct	false			true
 common.loading	Loading…	Na-ebu…	direct	false			true
 common.none	none	Ọ dịghị	direct	false			true
 common.noneYet	None yet	Ọ dịghị ugbu a	direct	false			true
 common.notAvailable	Not available	Adịghị	direct	false			true
+common.notPermitted	Not available for your role.	Adịghị maka ọrụ gị.	direct	false			true
 common.present	present	dị ugbu a	direct	false			true
 common.requestFailed	request failed	Arịrịọ dara	direct	false			true
 common.retry	Retry	Nwaa ọzọ	direct	false			true
@@ -167,6 +169,7 @@ common.timelineEmpty	No events.	Ọ dịghị ihe omume.	direct	false			true
 common.unknown	unknown	Amaghị	direct	false			true
 common.unknownModel	unknown model	ụdị amaghị	direct	false			true
 common.unknownTime	unknown time	oge amaghị	direct	false			true
+common.unreachable	Backend unreachable. Check the demo server and retry.	Enweghị ike iru sava. Lelee sava ngosi wee nwaa ọzọ.	direct	false			true
 decision.actorLabel	Analyst ID	ID onye nyocha	direct	false			true
 decision.decisionLabel	Decision	Mkpebi	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	Ọrụ gị bụ ịgụ naanị: mkpebi adịghị.	direct	false			true
@@ -460,6 +463,7 @@ nav.runSimulation	Run Simulation	Gbaa nnwale	direct	false			true
 nav.signOut	Sign out	Pụọ	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	Pụọ ebe niile	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	Kwụsị nnọkọ a na ngwa na ihe nchọgharị niile	direct	false			true
+nav.skipToContent	Skip to main content	Mafere gaa na isi ọdịnaya	direct	false			true
 nav.synthetic	Synthetic demo data	Data ngosi arụpụtara	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	Gbanwee nsoroụzọ	direct	false			true

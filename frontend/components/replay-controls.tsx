@@ -5,12 +5,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  ApiError,
   getReplay,
+  userErrorMessage,
   type ReplayState,
 } from "../lib/api";
 import { formatKobo } from "../lib/format";
 import { useTranslation } from "../lib/i18n/context";
+import { formatDate } from "../lib/i18n/format";
 
 interface Props {
   scenarioId: string;
@@ -19,7 +20,7 @@ interface Props {
 const PLAY_INTERVAL_MS = 1500;
 
 export function ReplayControls({ scenarioId }: Props) {
-  const { t } = useTranslation("replay");
+  const { t, locale } = useTranslation("replay");
   const { t: tCommon } = useTranslation("common");
   const [cursor, setCursor] = useState(0);
   const [nonce, setNonce] = useState(0);
@@ -48,13 +49,7 @@ export function ReplayControls({ scenarioId }: Props) {
         if (controller.signal.aborted) return;
         setLoading(false);
         setPlaying(false);
-        setError(
-          err instanceof ApiError
-            ? `${err.code}: ${err.message}`
-            : err instanceof Error
-              ? err.message
-              : tCommon("requestFailed")
-        );
+        setError(userErrorMessage(err, tCommon));
       });
     return () => controller.abort();
   }, [scenarioId, cursor, nonce]);
@@ -145,11 +140,20 @@ export function ReplayControls({ scenarioId }: Props) {
       {evt !== null && (
         <div className="alert ok" data-testid="replay-current">
           <strong>{evt.event_id}</strong> · {evt.event_type} ·{" "}
-          {evt.occurred_at}
+          <bdi>
+            {formatDate(locale, evt.occurred_at, {
+              dateStyle: "medium",
+              timeStyle: "short",
+            })}
+          </bdi>
           <br />
           {t("currentTxnPre")}
           <code>{evt.transaction.transaction_id}</code> ·{" "}
-          {formatKobo(evt.transaction.amount_minor, evt.transaction.currency)}{" "}
+          {formatKobo(
+            evt.transaction.amount_minor,
+            evt.transaction.currency,
+            locale
+          )}{" "}
           · {evt.transaction.sender_account_id} →{" "}
           {evt.transaction.receiver_account_id}
         </div>

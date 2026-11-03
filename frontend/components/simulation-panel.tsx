@@ -7,10 +7,10 @@
 
 import { useCallback, useEffect, useState } from "react";
 import {
-  ApiError,
   getGraph,
   getRisk,
   postSimulation,
+  userErrorMessage,
   type GraphEdge,
   type SimulationResult,
 } from "../lib/api";
@@ -59,13 +59,7 @@ export function SimulationPanel({ defaultTxnId }: Props) {
     } catch (err: unknown) {
       setEdges(null);
       setBaseline(null);
-      setLoadError(
-        err instanceof ApiError
-          ? `${err.code}: ${err.message}`
-          : err instanceof Error
-            ? err.message
-            : tCommon("requestFailed")
-      );
+      setLoadError(userErrorMessage(err, tCommon));
     } finally {
       setLoading(false);
     }
@@ -93,12 +87,7 @@ export function SimulationPanel({ defaultTxnId }: Props) {
     } catch (err: unknown) {
       setRun({
         kind: "error",
-        message:
-          err instanceof ApiError
-            ? `${err.code}: ${err.message}`
-            : err instanceof Error
-              ? err.message
-              : tCommon("requestFailed"),
+        message: userErrorMessage(err, tCommon),
       });
     }
   }

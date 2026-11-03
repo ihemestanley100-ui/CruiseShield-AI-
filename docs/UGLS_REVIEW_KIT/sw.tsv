@@ -156,10 +156,12 @@ command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derive
 command.versionedRules	Versioned deterministic rules	Sheria za kubainika zenye matoleo	direct	false			true
 common.breadcrumb	Breadcrumb	Njia ya urambazaji	direct	false			true
 common.closeDialog	Close dialog	Funga kidirisha	direct	false			true
+common.loadFailed	Couldn't load this section.	Imeshindwa kupakia sehemu hii.	direct	false			true
 common.loading	Loading…	Inapakia…	direct	false			true
 common.none	none	Hakuna	direct	false			true
 common.noneYet	None yet	Hakuna bado	direct	false			true
 common.notAvailable	Not available	Haipatikani	direct	false			true
+common.notPermitted	Not available for your role.	Haipatikani kwa jukumu lako.	direct	false			true
 common.present	present	sasa	direct	false			true
 common.requestFailed	request failed	Ombi limeshindwa	direct	false			true
 common.retry	Retry	Jaribu tena	direct	false			true
@@ -167,6 +169,7 @@ common.timelineEmpty	No events.	Hakuna matukio.	direct	false			true
 common.unknown	unknown	Haijulikani	direct	false			true
 common.unknownModel	unknown model	muundo usiojulikana	direct	false			true
 common.unknownTime	unknown time	wakati usiojulikana	direct	false			true
+common.unreachable	Backend unreachable. Check the demo server and retry.	Seva haipatikani. Angalia seva ya maonyesho na ujaribu tena.	direct	false			true
 decision.actorLabel	Analyst ID	Kitambulisho cha mchambuzi	direct	false			true
 decision.decisionLabel	Decision	Uamuzi	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	Jukumu lako ni la kusoma pekee: maamuzi yamezimwa.	direct	false			true
@@ -460,6 +463,7 @@ nav.runSimulation	Run Simulation	Endesha Uigaji	direct	false			true
 nav.signOut	Sign out	Toka	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	Toka kila mahali	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	Maliza kipindi hiki kwenye kila kifaa na kivinjari	direct	false			true
+nav.skipToContent	Skip to main content	Ruka hadi maudhui kuu	direct	false			true
 nav.synthetic	Synthetic demo data	Data bandia za onyesho	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	Badilisha urambazaji	direct	false			true

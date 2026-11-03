@@ -58,6 +58,16 @@ async def body_size_guard(request: Request, call_next):
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     response.headers["Permissions-Policy"] = \
         "camera=(), microphone=(), geolocation=()"
+    # R09-F4: HSTS only when the request arrived over TLS — direct
+    # https or first X-Forwarded-Proto hop (TLS-terminating proxy,
+    # same rule as the Secure cookie flag). Local plain-HTTP dev
+    # gets no header. No includeSubDomains: the demo shares parent
+    # domains on managed hosting; no preload (one-way decision).
+    first_proto = request.headers.get(
+        "x-forwarded-proto", "").split(",")[0].strip().lower()
+    if request.url.scheme == "https" or first_proto == "https":
+        response.headers["Strict-Transport-Security"] = \
+            "max-age=31536000"
     return response
 
 
@@ -66,7 +76,7 @@ RATE_LIMIT_EXEMPT = frozenset({"/api/v1/health", "/api/v1/ready",
                                "/system-health"})
 
 
-# Paths reachable without login when SESSION_SECRET is set. Health/ready
+# Paths reachable without login when auth is armed. Health/ready
 # for orchestrators; login to obtain a session; legacy index + static so a
 # logged-out visitor sees branding (all DATA endpoints stay gated).
 AUTH_MODE_PATH = "/api/v1/auth/mode"
@@ -79,7 +89,20 @@ AUTH_ADMIN_PREFIXES = ("/api/v1/demo/",)
 @app.middleware("http")
 async def session_guard(request: Request, call_next):
     """Phase 5: login enforcement (SEC-013). Inert when unconfigured."""
-    if config_mod.SESSION_SECRET:
+    if config_mod.session_secret_misconfigured():
+        # R09-F2: weak secret fails closed — guarded paths refuse to
+        # serve; only the always-open paths (health/ready/branding)
+        # stay reachable. No session can be minted or validated.
+        path = request.url.path
+        if path not in AUTH_OPEN_PATHS and not path.startswith("/static/"):
+            return JSONResponse(
+                status_code=503,
+                content={"error": {
+                    "code": "AUTH_MISCONFIGURED",
+                    "message": "session secret too weak to arm auth",
+                    "trace_id": _trace(request)}})
+        return await call_next(request)
+    if config_mod.session_auth_armed():
         path = request.url.path
         if path not in AUTH_OPEN_PATHS and not path.startswith("/static/"):
             kind, role = _credential(request)
@@ -170,9 +193,9 @@ def _session_of(request: Request | None) -> tuple[str, str] | None:
     J4: full live validation (signature, expiry, revocation, epoch,
     provisioning, role). Open when auth is unconfigured.
     """
-    secret = config_mod.SESSION_SECRET or ""
-    if not secret or request is None:
+    if not config_mod.session_auth_armed() or request is None:
         return None
+    secret = config_mod.SESSION_SECRET or ""
     users = auth_mod.parse_users(config_mod.DEMO_USERS or "")
     claims = auth_mod.verify_session_live(
         request.cookies.get(auth_mod.SESSION_COOKIE, ""), secret,
@@ -184,9 +207,9 @@ def _session_of(request: Request | None) -> tuple[str, str] | None:
 
 def _session_claims(request: Request | None) -> dict | None:
     """Live session claims (incl. nonce/iat) or None. J4 logout path."""
-    secret = config_mod.SESSION_SECRET or ""
-    if not secret or request is None:
+    if not config_mod.session_auth_armed() or request is None:
         return None
+    secret = config_mod.SESSION_SECRET or ""
     users = auth_mod.parse_users(config_mod.DEMO_USERS or "")
     return auth_mod.verify_session_live(
         request.cookies.get(auth_mod.SESSION_COOKIE, ""), secret,
@@ -421,6 +444,9 @@ def ready() -> JSONResponse:
 @app.post(AUTH_LOGIN_PATH)
 def auth_login(body: dict[str, Any], request: Request) -> JSONResponse:
     """Phase 5: demo login. 503 when auth is not configured."""
+    if config_mod.session_secret_misconfigured():
+        raise AppError("AUTH_MISCONFIGURED",
+                       "session secret too weak to arm auth", 503)
     secret = config_mod.SESSION_SECRET or ""
     if not secret:
         raise AppError("AUTH_DISABLED", "demo login is not configured", 503)
@@ -443,6 +469,14 @@ def auth_login(body: dict[str, Any], request: Request) -> JSONResponse:
                                         "$" + "0" * 64))
     if username not in users or not auth_mod.verify_password(password,
                                                              record):
+        # R09-F3: audit rejected logins for brute-force forensics.
+        # Actor/target carry the presented username only — never the
+        # password, and no token/secret material exists on this path.
+        store.append_audit("user", username or "unknown",
+                           "auth.login.failed", "session",
+                           username or "unknown", "", "",
+                           "invalid username or password",
+                           store.state["trace_id"], _trace(request))
         raise AppError("INVALID_CREDENTIALS",
                        "invalid username or password", 401)
     token = auth_mod.create_session(username, role, secret)
@@ -505,7 +539,7 @@ def auth_me(request: Request) -> dict[str, Any]:
 
 @app.get(AUTH_MODE_PATH)
 def auth_mode() -> dict[str, Any]:
-    return {"auth_enabled": bool(config_mod.SESSION_SECRET or "")}
+    return {"auth_enabled": config_mod.session_auth_armed()}
 
 
 @app.get("/api/v1/demo/scenarios")

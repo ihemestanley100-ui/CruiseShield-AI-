@@ -8,8 +8,8 @@
 
 import { useState } from "react";
 import {
-  ApiError,
   postDecision,
+  userErrorMessage,
   type DecisionResponse,
 } from "../lib/api";
 import { useTranslation } from "../lib/i18n/context";
@@ -35,6 +35,7 @@ export function DecisionForm({ caseId, allowedTransitions, onDecided }: Props) {
   // J4: read-only roles see the form disabled (backend enforces too).
   const writable = useCan("write");
   const { t } = useTranslation("decision");
+  const { t: tCommon } = useTranslation("common");
   // No preselected decision: the analyst must choose explicitly (F1).
   const [decision, setDecision] = useState("");
   const [target, setTarget] = useState(allowedTransitions[0] ?? "");
@@ -67,13 +68,7 @@ export function DecisionForm({ caseId, allowedTransitions, onDecided }: Props) {
       setReason("");
       onDecided(response);
     } catch (err: unknown) {
-      setError(
-        err instanceof ApiError
-          ? `${err.code}: ${err.message}`
-          : err instanceof Error
-            ? err.message
-            : "request failed"
-      );
+      setError(userErrorMessage(err, tCommon));
     } finally {
       setSubmitting(false);
     }

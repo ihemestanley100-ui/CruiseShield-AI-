@@ -375,7 +375,7 @@ describe("CasePage", () => {
     render(<CasePage />);
     await waitFor(() =>
       expect(
-        screen.getByText("BACKEND_UNREACHABLE: Failed to fetch")
+        screen.getByText("Backend unreachable. Check the demo server and retry.")
       ).toBeTruthy()
     );
     expect(screen.getByRole("button", { name: "Retry" })).toBeTruthy();

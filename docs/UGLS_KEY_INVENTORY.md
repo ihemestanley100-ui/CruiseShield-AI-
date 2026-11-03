@@ -1,7 +1,7 @@
 # UGLS-02 Task 1 — Translation-Key Inventory & Missing-Key Report
 
 Date: 2026-11-02. Source of truth: `frontend/lib/i18n/locales/en.ts`
-(571 keys) via `englishKeyPaths()` / `coverageFor()` — the same functions
+(575 keys) via `englishKeyPaths()` / `coverageFor()` — the same functions
 the parity gate test executes. Raw dump:
 [UGLS_KEY_INVENTORY_GENERATED.txt](UGLS_KEY_INVENTORY_GENERATED.txt)
 (EN_KEYS + full key list + per-locale missing lists, 5128 lines).
@@ -21,7 +21,7 @@ explanations, model IDs, timestamps, counts. These render verbatim in
 every locale — verified by the RTL DOM dumps (`verbatim-id=True`, zero
 `[key]` markers on all 8 pages).
 
-## Namespace inventory (22 namespaces, 571 keys)
+## Namespace inventory (22 namespaces, 575 keys)
 
 | Namespace | Keys | UI area |
 | --------- | ---- | ------- |
@@ -48,7 +48,7 @@ every locale — verified by the RTL DOM dumps (`verbatim-id=True`, zero
 | auth | 9 | Login gate card |
 | theme | 4 | Theme selector |
 
-Total: 571. No key is referenced by components without existing in
+Total: 575. No key is referenced by components without existing in
 `en.ts` (missing-in-English renders `[key]` and is ledger-tracked as a
 product bug; the full browser matrix recorded zero markers).
 

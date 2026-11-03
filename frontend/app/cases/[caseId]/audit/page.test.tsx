@@ -83,7 +83,9 @@ describe("CaseAuditPage", () => {
       new ApiError("BACKEND_UNREACHABLE", "Failed to fetch", 0, "")
     );
     render(<CaseAuditPage />);
-    expect(await screen.findByText(/BACKEND_UNREACHABLE/)).toBeTruthy();
+    expect(
+      await screen.findByText("Backend unreachable. Check the demo server and retry.")
+    ).toBeTruthy();
     expect(screen.getByRole("button", { name: "Retry" })).toBeTruthy();
   });
 

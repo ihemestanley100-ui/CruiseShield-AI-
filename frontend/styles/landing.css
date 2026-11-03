@@ -674,6 +674,13 @@
   text-align: center;
 }
 
+/* The landing stays dark in both themes: muted copy inside it must use
+ * the landing token, never the theme-flipping global one (light-mode
+ * dark text on the dark landing surface fails contrast). */
+.landing .muted {
+  color: var(--landing-muted);
+}
+
 /* --- Responsive --- */
 
 @media (max-width: 1200px) {

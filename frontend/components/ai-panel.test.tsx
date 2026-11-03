@@ -117,7 +117,7 @@ describe("AiPanel", () => {
     render(<AiPanel invId="inv_84721" />);
     fireEvent.click(screen.getByRole("button", { name: "Run AI analysis" }));
     await waitFor(() => {
-      expect(screen.getByText(/MODEL_TIMEOUT/)).toBeTruthy();
+      expect(screen.getByText("Couldn't load this section.")).toBeTruthy();
     });
     fireEvent.click(screen.getByRole("button", { name: "Retry" }));
     expect(postAiAnalysisMock).toHaveBeenCalledTimes(2);
@@ -130,7 +130,7 @@ describe("AiPanel", () => {
     render(<AiPanel invId="inv_84721" />);
     fireEvent.click(screen.getByRole("button", { name: "Run AI analysis" }));
     await waitFor(() => {
-      expect(screen.getByText(/MODEL_OUTPUT_INVALID/)).toBeTruthy();
+      expect(screen.getByText("Couldn't load this section.")).toBeTruthy();
     });
     expect(screen.queryByText("Calling model…")).toBeNull();
   });
@@ -187,7 +187,7 @@ describe("AiPanel", () => {
     });
     fireEvent.click(screen.getByRole("button", { name: "Ask follow-up" }));
     await waitFor(() => {
-      expect(screen.getByText("MODEL_TIMEOUT: timed out")).toBeTruthy();
+      expect(screen.getByText("Couldn't load this section.")).toBeTruthy();
     });
     // The original validated analysis is untouched by the failed follow-up.
     expect(screen.getByText(/shared infrastructure/)).toBeTruthy();

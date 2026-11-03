@@ -4,6 +4,7 @@
 "use client";
 
 import { useTranslation } from "../lib/i18n/context";
+import { formatDate } from "../lib/i18n/format";
 
 export interface TimelineItem {
   id: string;
@@ -13,7 +14,7 @@ export interface TimelineItem {
 }
 
 export function Timeline({ items }: { items: TimelineItem[] }) {
-  const { t } = useTranslation("common");
+  const { t, locale } = useTranslation("common");
   if (items.length === 0) {
     return <p className="muted">{t("timelineEmpty")}</p>;
   }
@@ -22,7 +23,12 @@ export function Timeline({ items }: { items: TimelineItem[] }) {
       {items.map((item) => (
         <li key={item.id} className="timeline-item">
           <div className="timeline-time muted">
-            <bdi>{item.time}</bdi>
+            <bdi>
+              {formatDate(locale, item.time, {
+                dateStyle: "medium",
+                timeStyle: "short",
+              })}
+            </bdi>
           </div>
           <div className="timeline-title">{item.title}</div>
           {item.detail !== undefined && item.detail !== "" && (

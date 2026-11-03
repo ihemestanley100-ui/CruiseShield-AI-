@@ -222,7 +222,9 @@ describe("InvestigationPage", () => {
     getEvidencePackageMock.mockResolvedValue(packageFixture());
     render(<InvestigationPage />);
     await waitFor(() => {
-      expect(screen.getByText(/BACKEND_UNREACHABLE/)).toBeTruthy();
+      expect(
+        screen.getByText("Backend unreachable. Check the demo server and retry.")
+      ).toBeTruthy();
     });
   });
 
@@ -249,7 +251,7 @@ describe("InvestigationPage", () => {
     });
     fireEvent.click(screen.getByRole("button", { name: "Run AI analysis" }));
     await waitFor(() => {
-      expect(screen.getByText(/MODEL_TIMEOUT/)).toBeTruthy();
+      expect(screen.getByText("Couldn't load this section.")).toBeTruthy();
     });
     // Reduced motion (stubbed above) renders the authoritative final score
     // immediately; this wait covers the async data load only.

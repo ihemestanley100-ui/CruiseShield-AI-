@@ -38,7 +38,7 @@ describe("translation coverage", () => {
   });
 
   it("keeps full drafts machine-drafted, never human-verified", () => {
-    // UGLS final: all 571 keys drafted per locale, but unreviewed
+    // UGLS final: all 575 keys drafted per locale, but unreviewed
     // output must never report as human-verified.
     for (const tag of ["fr", "ar", ...DRAFT_TAGS]) {
       expect(getLocaleMeta(tag)?.review).toBe("machine-drafted");

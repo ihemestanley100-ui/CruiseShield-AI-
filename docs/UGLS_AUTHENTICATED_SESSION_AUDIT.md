@@ -62,10 +62,9 @@ prefetch + React refetch aborts), never 4xx/5xx.
 3. **Locale hydration mismatch** (`frontend/lib/i18n/context.tsx`):
    provider initialised state from `localStorage`, mismatching SSR
    English on every returning visit (React #418). Fix: fallback
-   first render, stored/override/detected locale in the mount
-   effect. Regression: `context.test.tsx` first-render test
-   (fail pre-fix). Tradeoff: returning visitors may see one
-   fallback frame.
+   first render, stored/override/detected locale in a layout effect
+   (runs pre-paint, so no fallback frame either). Regression:
+   `context.test.tsx` first-render test (fail pre-fix).
 
 ## Verdict
 

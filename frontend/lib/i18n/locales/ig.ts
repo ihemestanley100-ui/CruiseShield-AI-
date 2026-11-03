@@ -4,6 +4,7 @@
 
 export const ig = {
   nav: {
+    skipToContent: "Mafere gaa na isi ọdịnaya",
     commandCenter: "Ebe Iwu",
     investigations: "Nnyocha",
     cases: "Okwu",
@@ -209,6 +210,9 @@ export const ig = {
     loading: "Na-ebu…",
     retry: "Nwaa ọzọ",
     requestFailed: "Arịrịọ dara",
+    loadFailed: "Enweghị ike ibu ngalaba a.",
+    notPermitted: "Adịghị maka ọrụ gị.",
+    unreachable: "Enweghị ike iru sava. Lelee sava ngosi wee nwaa ọzọ.",
     closeDialog: "Mechie",
     breadcrumb: "Ụzọ nchọgharị",
     timelineEmpty: "Ọ dịghị ihe omume.",

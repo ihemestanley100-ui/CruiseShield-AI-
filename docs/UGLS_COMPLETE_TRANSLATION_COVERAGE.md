@@ -2,30 +2,31 @@
 
 Date: 2026-11-02. Registry: 221 entries (`frontend/lib/i18n/registry.ts`,
 verified by parse). Dictionaries: 12 (`frontend/lib/i18n/locales/`).
-English source: 571 keys. Full per-language table:
+English source: 575 keys. Full per-language table:
 [UGLS_LANGUAGE_MATRIX_GENERATED.md](UGLS_LANGUAGE_MATRIX_GENERATED.md).
 This document supersedes the UGLS-01 counts in `UGLS_COVERAGE_REPORT.md`
 (historical; preserved as-is).
 
 Correction 2026-11-02: the nine drafts were completed to full parity
-during UGLS-02 final (code + parity gate pin it; kit-verified at 571
-rows, 0 fallbacks); earlier 66-key / 11.6% figures below are
-superseded where they describe current state.
+during UGLS-02 final (code + parity gate pin it; kit-verified at 575
+rows, 0 fallbacks — 571 + 3 common error keys + nav.skipToContent);
+earlier 66-key / 11.6% figures below are superseded where they
+describe current state.
 
 ## Tier summary
 
 | Tier | Locales | Keys each | Count |
 | ---- | ------- | --------- | ----- |
-| translated (source) | en, en-GB, en-NG | 571 (100%) | 3 |
-| partial, complete drafts | fr, ar | 571 (100%) | 2 |
-| partial, full drafts (review pending) | ig, yo, ha, pt, es, zh, hi, sw, ja | 571 (100%) | 9 |
+| translated (source) | en, en-GB, en-NG | 575 (100%) | 3 |
+| partial, complete drafts | fr, ar | 575 (100%) | 2 |
+| partial, full drafts (review pending) | ig, yo, ha, pt, es, zh, hi, sw, ja | 575 (100%) | 9 |
 | unavailable (English fallback + badge) | remaining registry | 0 | 207 |
 | TOTAL | | | 221 |
 
 `en-GB` / `en-NG` resolve to the English dictionary through BCP 47
 fallback and are therefore honestly `translated`. All eleven
 dictionaried locales (fr, ar + nine drafts) hold exact key parity
-with English — 571/571 each, gate test fails the suite on any drift
+with English — 575/575 each, gate test fails the suite on any drift
 (`coverage.test.ts` → "holds every dictionaried locale at exact key
 parity"). Fallback/ledger machinery stays tested via undictionaried
 locales. Tier `partial` denotes review state (machine-drafted,

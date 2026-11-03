@@ -29,6 +29,25 @@ export class ApiError extends Error {
   }
 }
 
+/* User-worded failure text. Raw API codes and English server detail
+ * never reach the UI: every failure maps to a translated `common`
+ * string by class (permission / unreachable / load / unknown).
+ * Pass the common-namespace translator from the rendering component.
+ * Server detail stays in the console/network log for debugging. */
+export function userErrorMessage(
+  err: unknown,
+  t: (key: string) => string
+): string {
+  if (err instanceof ApiError) {
+    if (err.code === "BACKEND_UNREACHABLE" || err.status === 0)
+      return t("unreachable");
+    if (err.status === 401 || err.status === 403) return t("notPermitted");
+    return t("loadFailed");
+  }
+  if (err instanceof Error) return t("loadFailed");
+  return t("requestFailed");
+}
+
 /* J3-P6: session-expiry signal. Any 401/403 from a data endpoint means
  * the session is gone (or never existed): the login gate listens and
  * re-checks /me, flipping the whole app back to sign-in so an expired

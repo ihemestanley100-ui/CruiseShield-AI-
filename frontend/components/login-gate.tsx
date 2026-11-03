@@ -23,15 +23,17 @@ import { useTranslation } from "../lib/i18n/context";
 import { publishSession } from "../lib/session";
 
 export type GateState =
+  | { status: "checking" }
   | { status: "open" }
   | { status: "authed"; session: AuthSession }
   | { status: "login" };
 
 export function useDemoSession() {
-  // Optimistic open: open-demo first paint is unchanged, and every
-  // existing shell render (including tests without a backend) behaves
-  // exactly as before until the mode check resolves.
-  const [gate, setGate] = useState<GateState>({ status: "open" });
+  // Checking first: the shell withholds children until the mode check
+  // resolves, so logged-out armed visitors never see data sections
+  // flash (and fire doomed fetches) before the login card. One tiny
+  // GET delays open-demo first paint by milliseconds.
+  const [gate, setGate] = useState<GateState>({ status: "checking" });
 
   // J3-P6: session-expiry re-gating. Any 401/403 from a data call
   // re-runs the check: a live session keeps the app open, an expired
@@ -55,12 +57,21 @@ export function useDemoSession() {
     (async () => {
       try {
         const mode = await getAuthMode(controller.signal);
-        if (!live || !mode.auth_enabled) return;
+        if (!live) return;
+        if (!mode.auth_enabled) {
+          setGate({ status: "open" });
+          return;
+        }
         armed.current = true;
         await recheck();
         // Other /me failures fail open: pages surface their own errors.
+        if (live)
+          setGate((g) =>
+            g.status === "checking" ? { status: "open" } : g
+          );
       } catch {
         // Unreachable backend: fail open, existing behavior preserved.
+        if (live) setGate({ status: "open" });
       }
     })();
     const onUnauthorized = () => void recheck();

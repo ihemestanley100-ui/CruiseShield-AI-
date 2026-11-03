@@ -11,7 +11,6 @@ import { FeatureCards } from "../../components/feature-cards";
 import { SystemStatus } from "../../components/system-status";
 import { WorkflowStrip } from "../../components/workflow-strip";
 import {
-  ApiError,
   apiBaseUrl,
   getCase,
   getCaseAudit,
@@ -19,6 +18,7 @@ import {
   getHealth,
   getInvestigation,
   getReplay,
+  userErrorMessage,
   type AuditEntry,
   type CaseDetail,
   type GraphResponse,
@@ -26,6 +26,7 @@ import {
   type InvestigationDetail,
 } from "../../lib/api";
 import { useTranslation } from "../../lib/i18n/context";
+import { formatDate } from "../../lib/i18n/format";
 
 /* Signature demo identifiers. These select which seeded records to fetch;
  * every value rendered comes from the backend responses, never from
@@ -116,13 +117,10 @@ const LOADERS: Record<FetchKey, (signal: AbortSignal) => Promise<unknown>> = {
 
 export default function CommandPage() {
   const { t } = useTranslation("demo");
-  const { t: tCommon } = useTranslation("common");
+  const { t: tCommon, locale } = useTranslation("common");
   const { t: tLanding } = useTranslation("landing");
-  const toMessage = (err: unknown): string => {
-    if (err instanceof ApiError) return `${err.code}: ${err.message}`;
-    if (err instanceof Error) return err.message;
-    return tCommon("requestFailed");
-  };
+  const toMessage = (err: unknown): string =>
+    userErrorMessage(err, tCommon);
   const [state, setState] = useState<Dashboard>(INITIAL);
   const [checkedAt, setCheckedAt] = useState<string | null>(null);
   /* Sections queued for (re)load. Initial mount queues all five; each
@@ -168,7 +166,13 @@ export default function CommandPage() {
             setQueued((prev) => (prev.includes(key) ? [...prev] : prev));
             return;
           }
-          if (key === "health") setCheckedAt(new Date().toLocaleString());
+          if (key === "health")
+            setCheckedAt(
+              formatDate(locale, new Date(), {
+                dateStyle: "medium",
+                timeStyle: "medium",
+              })
+            );
           patch(key, { kind: "ready", data } as Dashboard[FetchKey]);
           setQueued((prev) => prev.filter((k) => k !== key));
         },

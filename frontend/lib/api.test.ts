@@ -27,6 +27,7 @@ import {
   postLogout,
   postSimulation,
   resetDemo,
+  userErrorMessage,
 } from "./api";
 
 function mockFetchOnce(payload: unknown, ok = true, status = 200) {
@@ -45,6 +46,45 @@ afterEach(() => {
 });
 
 describe("api client", () => {
+  it("maps failures to user-worded messages without raw codes", () => {
+    const t = (key: string) => `<${key}>`;
+    expect(
+      userErrorMessage(
+        new ApiError("ADMIN_REQUIRED", "admin role required", 403, ""),
+        t
+      )
+    ).toBe("<notPermitted>");
+    expect(
+      userErrorMessage(
+        new ApiError("LOGIN_REQUIRED", "demo login required", 401, ""),
+        t
+      )
+    ).toBe("<notPermitted>");
+    expect(
+      userErrorMessage(
+        new ApiError("BACKEND_UNREACHABLE", "down", 0, ""),
+        t
+      )
+    ).toBe("<unreachable>");
+    expect(
+      userErrorMessage(
+        new ApiError("SIM_FAILED", "diverged", 500, ""),
+        t
+      )
+    ).toBe("<loadFailed>");
+    expect(userErrorMessage(new Error("boom"), t)).toBe("<loadFailed>");
+    expect(userErrorMessage(null, t)).toBe("<requestFailed>");
+    // No code or English server text may leak into user-facing output.
+    for (const code of ["ADMIN_REQUIRED", "LOGIN_REQUIRED", "SIM_FAILED"]) {
+      const out = userErrorMessage(
+        new ApiError(code, "server detail here", 500, ""),
+        t
+      );
+      expect(out).not.toContain(code);
+      expect(out).not.toContain("server detail here");
+    }
+  });
+
   it("calls the investigation endpoint with an encoded id", async () => {
     const fetchMock = mockFetchOnce({ investigation: {} });
     await getInvestigation("inv_84721");

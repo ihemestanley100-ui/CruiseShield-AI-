@@ -4,6 +4,7 @@
 
 export const es = {
   nav: {
+    skipToContent: "Saltar al contenido principal",
     commandCenter: "Centro de mando",
     investigations: "Investigaciones",
     cases: "Casos",
@@ -213,6 +214,9 @@ export const es = {
     loading: "Cargando…",
     retry: "Reintentar",
     requestFailed: "La solicitud falló",
+    loadFailed: "No se pudo cargar esta sección.",
+    notPermitted: "No disponible para tu rol.",
+    unreachable: "Servidor inaccesible. Compruebe el servidor de demostración e inténtelo de nuevo.",
     closeDialog: "Cerrar diálogo",
     breadcrumb: "Migas de pan",
     timelineEmpty: "Sin eventos.",

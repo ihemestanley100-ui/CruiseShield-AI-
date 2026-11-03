@@ -156,10 +156,12 @@ command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derive
 command.versionedRules	Versioned deterministic rules	版本化确定性规则	direct	false			true
 common.breadcrumb	Breadcrumb	面包屑导航	direct	false			true
 common.closeDialog	Close dialog	关闭对话框	direct	false			true
+common.loadFailed	Couldn't load this section.	无法加载此部分。	direct	false			true
 common.loading	Loading…	正在加载…	direct	false			true
 common.none	none	无	direct	false			true
 common.noneYet	None yet	暂无	direct	false			true
 common.notAvailable	Not available	不可用	direct	false			true
+common.notPermitted	Not available for your role.	您的角色不可用。	direct	false			true
 common.present	present	当前	direct	false			true
 common.requestFailed	request failed	请求失败	direct	false			true
 common.retry	Retry	重试	direct	false			true
@@ -167,6 +169,7 @@ common.timelineEmpty	No events.	暂无事件。	direct	false			true
 common.unknown	unknown	未知	direct	false			true
 common.unknownModel	unknown model	未知模型	direct	false			true
 common.unknownTime	unknown time	未知时间	direct	false			true
+common.unreachable	Backend unreachable. Check the demo server and retry.	无法访问后端。请检查演示服务器并重试。	direct	false			true
 decision.actorLabel	Analyst ID	分析员 ID	direct	false			true
 decision.decisionLabel	Decision	决策	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	您的角色为只读：决策已禁用。	direct	false			true
@@ -460,6 +463,7 @@ nav.runSimulation	Run Simulation	运行模拟	direct	false			true
 nav.signOut	Sign out	退出登录	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	在所有位置退出	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	在所有设备和浏览器上结束此会话	direct	false			true
+nav.skipToContent	Skip to main content	跳到主要内容	direct	false			true
 nav.synthetic	Synthetic demo data	合成演示数据	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	切换导航	direct	false			true

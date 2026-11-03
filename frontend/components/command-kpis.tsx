@@ -10,7 +10,8 @@ import Link from "next/link";
 import type { GraphResponse, InvestigationDetail } from "../lib/api";
 import { formatKobo } from "../lib/format";
 import { useCountUp } from "../lib/use-count-up";
-import { useTranslation } from "../lib/i18n/context";
+import { useLocale, useTranslation } from "../lib/i18n/context";
+import { formatNumber } from "../lib/i18n/format";
 import { RiskBadge } from "./risk-badge";
 
 interface Props {
@@ -20,16 +21,20 @@ interface Props {
 }
 
 function KpiValue({ value, label }: { value: number; label: string }) {
+  const { locale } = useLocale();
   const display = useCountUp(value);
   return (
-    <span className="kpi-value" aria-label={`${value} ${label}`}>
-      <span aria-hidden="true">{display}</span>
+    <span
+      className="kpi-value"
+      aria-label={`${formatNumber(locale, value)} ${label}`}
+    >
+      <span aria-hidden="true">{formatNumber(locale, display)}</span>
     </span>
   );
 }
 
 export function CommandKpis({ detail, graph, graphPending }: Props) {
-  const { t } = useTranslation("command");
+  const { t, locale } = useTranslation("command");
   const { t: tInv } = useTranslation("investigation");
   const txn = detail.transaction;
   const txnNumber = txn.transaction_id.split("_")[1] ?? txn.transaction_id;
@@ -49,7 +54,7 @@ export function CommandKpis({ detail, graph, graphPending }: Props) {
           <p>
             <strong>{t("txnTitleLine", { n: txnNumber })}</strong>{" "}
             <span className="muted">
-              {formatKobo(txn.amount_minor, txn.currency)} ·{" "}
+              {formatKobo(txn.amount_minor, txn.currency, locale)} ·{" "}
               {txn.sender_account_id} → {txn.receiver_account_id} ·{" "}
               {txn.channel}
             </span>

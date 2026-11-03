@@ -54,7 +54,9 @@ describe("SystemStatus", () => {
         checkedAt="now"
       />
     );
-    expect(screen.getByText("storage_backend")).toBeTruthy();
+    // Display fix: machine keys render humanized ("Storage Backend").
+    expect(screen.getByText("Storage Backend")).toBeTruthy();
+    expect(screen.getByText("PG")).toBeTruthy();
     expect(
       screen.getByText("Operational: active=json selected=json", {
         exact: false,

@@ -14,6 +14,7 @@ import {
   ApiError,
   getGraph,
   getGraphOverlay,
+  userErrorMessage,
   type GraphEdge,
   type GraphNode,
   type GraphResponse,
@@ -99,12 +100,7 @@ export default function NetworkPage() {
         }
         setState({
           kind: "error",
-          message:
-            err instanceof ApiError
-              ? `${err.code}: ${err.message}`
-              : err instanceof Error
-                ? err.message
-                : tCommon("requestFailed"),
+          message: userErrorMessage(err, tCommon),
         });
       });
     return () => controller.abort();

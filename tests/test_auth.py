@@ -190,8 +190,8 @@ def test_cookie_not_secure_on_plain_local_http(monkeypatch, tmp_store):
     assert "Secure" not in _login_cookie(monkeypatch, "http")
 
 
-def test_login_rejects_bad_password_no_enumeration(monkeypatch):
-    req = _login_req(monkeypatch)
+def test_login_rejects_bad_password_no_enumeration(monkeypatch, tmp_store):
+    req = _login_req(monkeypatch, xff="11.0.0.78")
     with pytest.raises(main.AppError) as exc:
         main.auth_login({"username": "judge", "password": "wrong"}, req)
     assert exc.value.status == 401
@@ -201,7 +201,26 @@ def test_login_rejects_bad_password_no_enumeration(monkeypatch):
         exc.value.status, exc.value.code)
 
 
-def test_login_rate_limited(monkeypatch):
+def test_failed_login_audited_without_secrets(monkeypatch, tmp_store):
+    """R09-F3: rejected logins audit the username, never the password."""
+    req = _login_req(monkeypatch, xff="11.0.0.79")
+    with pytest.raises(main.AppError):
+        main.auth_login({"username": "judge", "password": "wrong-pw-9"},
+                        req)
+    with pytest.raises(main.AppError):
+        main.auth_login({"username": "ghost", "password": "wrong-pw-9"},
+                        req)
+    failed = [a for a in tmp_store.state["audits"]
+              if a["action"] == "auth.login.failed"]
+    assert len(failed) == 2
+    assert {a["actor_id"] for a in failed} == {"judge", "ghost"}
+    blob = json.dumps(failed)
+    assert "wrong-pw-9" not in blob
+    assert SECRET not in blob
+    assert RECORD not in blob
+
+
+def test_login_rate_limited(monkeypatch, tmp_store):
     req = _login_req(monkeypatch, xff="11.0.0.77")
     for _ in range(auth_mod.LOGIN_LIMIT_PER_MINUTE):
         with pytest.raises(main.AppError):
@@ -209,6 +228,10 @@ def test_login_rate_limited(monkeypatch):
                             req)
     resp = main.auth_login({"username": "judge", "password": "wrong"}, req)
     assert resp.status_code == 429
+    # R09-F3: credential rejections audit; the 429 itself adds none.
+    failed = [a for a in tmp_store.state["audits"]
+              if a["action"] == "auth.login.failed"]
+    assert len(failed) == auth_mod.LOGIN_LIMIT_PER_MINUTE
 
 
 def test_login_disabled_without_secret(monkeypatch):
@@ -225,6 +248,39 @@ def test_auth_mode_reflects_secret(monkeypatch):
     assert main.auth_mode() == {"auth_enabled": False}
     monkeypatch.setattr(config_mod, "SESSION_SECRET", SECRET)
     assert main.auth_mode() == {"auth_enabled": True}
+
+
+def _weak_users(monkeypatch):
+    monkeypatch.setattr(config_mod, "SESSION_SECRET", "short-secret")
+    monkeypatch.setattr(
+        config_mod, "DEMO_USERS", "judge:investigator:%s" % RECORD)
+
+
+def test_weak_secret_guard_fails_closed(monkeypatch):
+    """R09-F2: weak signing secret refuses guarded paths (503)."""
+    _weak_users(monkeypatch)
+    resp = _guard(Request(_scope("/api/v1/alerts")))
+    assert resp.status_code == 503
+    assert _code(resp) == "AUTH_MISCONFIGURED"
+    assert _guard(Request(_scope("/api/v1/health"))).status_code == 200
+
+
+def test_weak_secret_login_refused(monkeypatch):
+    """R09-F2: no session can be minted with a weak secret."""
+    _weak_users(monkeypatch)
+    rl.reset()
+    with pytest.raises(main.AppError) as exc:
+        main.auth_login({"username": "judge", "password": "demo-pass-1"},
+                        Request(_scope("/api/v1/auth/login", method="POST")))
+    assert (exc.value.status, exc.value.code) == (503, "AUTH_MISCONFIGURED")
+
+
+def test_weak_secret_sessions_invalid_and_mode_off(monkeypatch):
+    """R09-F2: weak-secret cookies validate nothing; mode reports off."""
+    _weak_users(monkeypatch)
+    cookie = auth_mod.create_session("judge", "investigator", "short-secret")
+    assert main._session_of(Request(_scope("/x", cookie=cookie))) is None
+    assert main.auth_mode() == {"auth_enabled": False}
 
 
 def test_auth_routes_wired_to_handlers():

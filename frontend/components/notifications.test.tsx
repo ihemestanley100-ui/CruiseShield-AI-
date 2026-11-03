@@ -99,7 +99,7 @@ describe("Notifications", () => {
       await screen.findByRole("button", { name: "Notifications, 0 open" })
     );
     expect(screen.getByRole("alert").textContent).toContain(
-      "BACKEND_UNREACHABLE: Failed to fetch"
+      "Backend unreachable. Check the demo server and retry."
     );
     expect(screen.queryByRole("link")).toBeNull();
   });

@@ -156,10 +156,12 @@ command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derive
 command.versionedRules	Versioned deterministic rules	Règles déterministes versionnées	direct	false			true
 common.breadcrumb	Breadcrumb	Fil d'Ariane	direct	false			true
 common.closeDialog	Close dialog	Fermer la boîte de dialogue	direct	false			true
+common.loadFailed	Couldn't load this section.	Impossible de charger cette section.	direct	false			true
 common.loading	Loading…	Chargement…	direct	false			true
 common.none	none	aucun	direct	false			true
 common.noneYet	None yet	Rien pour l'instant	direct	false			true
 common.notAvailable	Not available	Non disponible	direct	false			true
+common.notPermitted	Not available for your role.	Non disponible pour votre rôle.	direct	false			true
 common.present	present	présent	direct	false			true
 common.requestFailed	request failed	requête échouée	direct	false			true
 common.retry	Retry	Réessayer	direct	false			true
@@ -167,6 +169,7 @@ common.timelineEmpty	No events.	Aucun événement.	direct	false			true
 common.unknown	unknown	inconnu	direct	false			true
 common.unknownModel	unknown model	modèle inconnu	direct	false			true
 common.unknownTime	unknown time	heure inconnue	direct	false			true
+common.unreachable	Backend unreachable. Check the demo server and retry.	Serveur inaccessible. Vérifiez le serveur de démonstration et réessayez.	direct	false			true
 decision.actorLabel	Analyst ID	Identifiant de l'analyste	direct	false			true
 decision.decisionLabel	Decision	Décision	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	Votre rôle est en lecture seule : les décisions sont désactivées.	direct	false			true
@@ -460,6 +463,7 @@ nav.runSimulation	Run Simulation	Lancer la simulation	direct	false			true
 nav.signOut	Sign out	Se déconnecter	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	Se déconnecter partout	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	Terminer cette session sur tous les appareils et navigateurs	direct	false			true
+nav.skipToContent	Skip to main content	Aller au contenu principal	direct	false			true
 nav.synthetic	Synthetic demo data	Données de démonstration synthétiques	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	Basculer la navigation	direct	false			true

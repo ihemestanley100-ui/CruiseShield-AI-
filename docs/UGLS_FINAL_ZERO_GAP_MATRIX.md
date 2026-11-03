@@ -9,7 +9,7 @@ Statuses: PASS (implemented + independently verified), PARTIAL
 
 | # | Requirement | Status | Evidence |
 | - | ----------- | ------ | -------- |
-| T1.1 | All routes/components inspected (demo, investigation, network, replay, evidence, audit, notifications, auth, decisions, forms, errors, modals, tables, empty states, tooltips, loading, a11y labels) | PASS | 571-key inventory, 22 namespaces; `docs/UGLS_KEY_INVENTORY.md` + generated dump |
+| T1.1 | All routes/components inspected (demo, investigation, network, replay, evidence, audit, notifications, auth, decisions, forms, errors, modals, tables, empty states, tooltips, loading, a11y labels) | PASS | 575-key inventory (571 + 4 closure-program keys), 22 namespaces; `docs/UGLS_KEY_INVENTORY.md` + generated dump |
 | T1.2 | Every user-facing string extracted | PASS | fr/ar parity gate (any unextracted key fails suite); browser matrix zero `[key]` markers on 8 pages |
 | T1.3 | Data values never translated (evidence, IDs, audit, risk) | PASS | DOM dumps: verbatim IDs/scores/bands; aria `المخاطر 84 من 100، HIGH`; state hash unchanged |
 | T1.4 | Exhaustive key inventory + missing-key report | PASS | `UGLS_KEY_INVENTORY.md` + `UGLS_KEY_INVENTORY_GENERATED.txt` (5128 lines) |
@@ -20,7 +20,7 @@ Statuses: PASS (implemented + independently verified), PARTIAL
 | - | ----------- | ------ | -------- |
 | T2.1 | 221-entry registry preserved | PASS | Parse-verified 221 rows; `registry.test.ts` (>200, unique, `Intl.Locale`-valid) |
 | T2.2 | Truthful availability matrix, every language | PASS | `UGLS_LANGUAGE_MATRIX_GENERATED.md` (3/11/207) + `UGLS_COMPLETE_TRANSLATION_COVERAGE.md` |
-| T2.3 | Priority order en→fr→ar→ig/yo/ha/pt/es/zh/hi/sw/ja→rest | PASS | en 571 source; fr/ar 571; nine drafts 571 each (full, machine-drafted — completed UGLS-02 final, parity-gated); 207 fallback-badged |
+| T2.3 | Priority order en→fr→ar→ig/yo/ha/pt/es/zh/hi/sw/ja→rest | PASS | en 575 source; fr/ar 575; nine drafts 575 each (full, machine-drafted — completed UGLS-02 final, parity-gated); 207 fallback-badged |
 | T2.4 | Missing keys identified per locale | PASS | coverage module + tests; 0 missing (full parity; ledger machinery tested via undictionaried locales) |
 | T2.5 | Placeholders preserved | PASS | Switching integration test (zero markers, empty ledger fr/ar) + `{count}` plural audit test |
 | T2.6 | Plurals validated | PASS | `Intl.PluralRules` per locale; ar six forms; dedicated dictionaries test |
@@ -83,9 +83,10 @@ authenticated staging environment, which is owner-gated.
 
 Closes the UGLS-02 remainders above (T3.4, T4.3, X.2 → PASS, see rows)
 plus the Section B/C/D acceptance programme. Section A (translations):
-fr/ar 571/571 plus nine full 571-key drafts, all machine-drafted,
+fr/ar 575/575 plus nine full 575-key drafts, all machine-drafted,
 207 fallback-badged (corrected 2026-11-02: drafts completed during
-UGLS-02 final; earlier 66-key figures superseded); human review
+UGLS-02 final; earlier 66-key figures superseded; +4 keys in the
+closure program: 3 common error + nav.skipToContent); human review
 still owner-side per `UGLS_HUMAN_REVIEW_REGISTER.md`, review kit
 ready at `docs/UGLS_REVIEW_KIT/`.
 

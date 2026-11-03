@@ -16,7 +16,7 @@ needs_sockets = pytest.mark.skipif(
     not CAN_SOCKETS,
     reason="socket creation forbidden in this sandbox; runs in CI/user envs")
 
-SECRET = "test-secret-j4-e2e"
+SECRET = "test-secret-j4-e2e-not-a-real-cred"
 RECORD = auth_mod.hash_password("demo-pass-1")
 XRW = {"X-Requested-With": "XMLHttpRequest"}
 

@@ -4,6 +4,7 @@
 
 export const yo = {
   nav: {
+    skipToContent: "Rekọja lọ sí àkóónú pàtàkì",
     commandCenter: "Ilé Àṣẹ",
     investigations: "Ìwádìí",
     cases: "Ọ̀ràn",
@@ -211,6 +212,9 @@ export const yo = {
     loading: "Ń ṣe…",
     retry: "Tún gbìyànjú",
     requestFailed: "Ìbéèrè kùnà",
+    loadFailed: "A kò le gbe apakan yii.",
+    notPermitted: "Kò sí fún ipa rẹ.",
+    unreachable: "A kò le dé ẹrọ abánidáró. Ṣayẹwo ẹrọ ìfihàn kí o sì tún gbìyànjú.",
     closeDialog: "Pa ìjíròrò",
     breadcrumb: "Ọ̀nà ìtọ́sọ́nà",
     timelineEmpty: "Kò sí ìṣẹ̀lẹ̀.",

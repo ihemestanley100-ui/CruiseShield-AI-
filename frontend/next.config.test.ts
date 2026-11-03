@@ -14,6 +14,8 @@ describe("next.config secure headers", () => {
       "X-Frame-Options": "DENY",
       "Referrer-Policy": "strict-origin-when-cross-origin",
       "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+      // R09-F4: HSTS without includeSubDomains/preload (shared hosting).
+      "Strict-Transport-Security": "max-age=31536000",
     });
   });
 
