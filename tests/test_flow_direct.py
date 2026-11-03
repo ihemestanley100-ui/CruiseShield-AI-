@@ -57,7 +57,7 @@ def test_full_judge_flow_direct(tmp_store, monkeypatch):
 
     inv = main.get_investigation("inv_84721")
     assert inv["evidence_count"] == 39
-    package = main.build_evidence_package("inv_84721")
+    package = main.build_evidence_package("inv_84721", _req())
     assert package["package_id"].startswith("evidence_pkg_scn_primary")
 
     replay0 = main.get_replay("scn_primary", cursor=0)
@@ -197,7 +197,8 @@ def test_unknown_ids_404_direct(tmp_store):
     """J3-P9: every unknown-identifier read fails closed with its code."""
     cases = [
         (main.get_investigation, ("inv_nope",), "UNKNOWN_INVESTIGATION"),
-        (main.build_evidence_package, ("inv_nope",), "UNKNOWN_INVESTIGATION"),
+        (main.build_evidence_package, ("inv_nope", _req()),
+         "UNKNOWN_INVESTIGATION"),
         (main.get_case, ("case_nope",), "CASE_NOT_FOUND"),
         (main.case_audit, ("case_nope",), "CASE_NOT_FOUND"),
         (main.get_transaction, ("txn_nope",), "UNKNOWN_TRANSACTION"),

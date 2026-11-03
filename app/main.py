@@ -113,14 +113,20 @@ async def session_guard(request: Request, call_next):
                         "code": "LOGIN_REQUIRED",
                         "message": "demo login required",
                         "trace_id": _trace(request)}})
+            # R1: admin prefixes need a genuine admin SESSION. The
+            # public demo token (kind "token") must never satisfy an
+            # admin gate — it previously skipped this check entirely
+            # (F-PRIV-1: anonymous browsers outranked non-admin logins
+            # on /api/v1/demo/*).
+            if path.startswith(AUTH_ADMIN_PREFIXES) and not (
+                    kind == "session" and role == "admin"):
+                return JSONResponse(
+                    status_code=403,
+                    content={"error": {
+                        "code": "ADMIN_REQUIRED",
+                        "message": "admin role required",
+                        "trace_id": _trace(request)}})
             if kind == "session":
-                if path.startswith(AUTH_ADMIN_PREFIXES) and role != "admin":
-                    return JSONResponse(
-                        status_code=403,
-                        content={"error": {
-                            "code": "ADMIN_REQUIRED",
-                            "message": "admin role required",
-                            "trace_id": _trace(request)}})
                 if request.method == "POST" and not request.headers.get(
                         "x-requested-with"):
                     return JSONResponse(
@@ -270,6 +276,30 @@ def _credential(request: Request) -> tuple[str, str | None]:
     if _token_ok(request):
         return "token", None
     return "none", None
+
+
+def _decision_actor(request: Request | None, claimed: str) -> str:
+    """R2: token creds cannot self-assert an audit identity (F-AUDIT-1).
+
+    Token-authenticated decisions are attributed to "demo-token";
+    anything else is taken from the (authenticated or local) caller.
+    """
+    kind, _ = _credential(request)  # type: ignore[arg-type]
+    if kind == "token":
+        return "demo-token"
+    return claimed
+
+
+def _require_login(request: Request | None) -> None:
+    """R3: AI endpoints need an authenticated login session (F-QUOTA-1).
+
+    Armed mode only — the unarmed local demo has no sessions and
+    keeps working unchanged.
+    """
+    if config_mod.session_auth_armed() and _session_of(request) is None:
+        raise AppError("AI_LOGIN_REQUIRED",
+                       "authenticated login required for AI operations",
+                       403)
 
 
 @app.exception_handler(AppError)
@@ -767,7 +797,15 @@ def get_investigation(inv_id: str) -> dict[str, Any]:
 
 
 @app.post("/api/v1/investigations/{inv_id}/evidence-package")
-def build_evidence_package(inv_id: str) -> dict[str, Any]:
+def build_evidence_package(inv_id: str,
+                           request: Request) -> dict[str, Any]:
+    # R4: same write gate as every other state-changing POST
+    # (F-CONSIST-1; the handler stays a read-only alias of GET).
+    _require_write_token(request)
+    return _evidence_package(inv_id)
+
+
+def _evidence_package(inv_id: str) -> dict[str, Any]:
     inv = store.get_investigation(inv_id)
     if inv is None:
         raise AppError("UNKNOWN_INVESTIGATION", inv_id, 404)
@@ -776,7 +814,7 @@ def build_evidence_package(inv_id: str) -> dict[str, Any]:
 
 @app.get("/api/v1/investigations/{inv_id}/evidence-package")
 def read_evidence_package(inv_id: str) -> dict[str, Any]:
-    return build_evidence_package(inv_id)
+    return _evidence_package(inv_id)
 
 
 async def _run_ai(package: EvidencePackage, summary: str, run_id: str,
@@ -858,6 +896,7 @@ def _investigation_summary(inv_id: str) -> tuple[dict, EvidencePackage, str]:
 @app.post("/api/v1/investigations/{inv_id}/ai-analysis")
 async def ai_analysis(inv_id: str, request: Request) -> dict[str, Any]:
     _require_write_token(request)
+    _require_login(request)
     _, package, summary = _investigation_summary(inv_id)
     run_id = f"agentrun_{len(store.state['ai_runs']) + 1:04d}"
     return await _run_ai(package, summary, run_id, _trace(request))
@@ -867,6 +906,7 @@ async def ai_analysis(inv_id: str, request: Request) -> dict[str, Any]:
 async def ai_followup(inv_id: str, body: dict[str, Any],
                       request: Request) -> dict[str, Any]:
     _require_write_token(request)
+    _require_login(request)
     _, package, summary = _investigation_summary(inv_id)
     if not isinstance(body, dict):
         raise AppError("INVALID_BODY", "request body must be a JSON object", 400)
@@ -992,7 +1032,8 @@ def post_decision(case_id: str, body: dict[str, Any],
         record, audit = cases_mod.record_decision(
             store, case_id, body.get("decision", ""),
             body.get("target_status", ""), body.get("reason", ""),
-            body.get("actor_id", "investigator"),
+            _decision_actor(request,
+                            body.get("actor_id", "investigator")),
             body.get("evidence_viewed", []),
             body.get("recommendation", ""), _trace(request))
     except ValueError as exc:
