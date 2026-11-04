@@ -11,8 +11,9 @@ Design (zero-cost staging):
   arms login enforcement. The write token (SEC-012) remains as a
   non-browser fallback credential when both are configured.
 - CSRF: cookie-authed POSTs must carry an X-Requested-With header
-  (SameSite=Lax + explicit header; token-authed calls are exempt since
-  browsers never attach that header cross-origin by themselves).
+  (SameSite=None on HTTPS, Lax on plain-HTTP dev, + explicit header;
+  token-authed calls are exempt since browsers never attach that header
+  cross-origin by themselves).
 
 Generate a password record (owner runs locally, never commits values):
     python -m app.auth hash

@@ -471,6 +471,20 @@ def ready() -> JSONResponse:
     return JSONResponse(status_code=200 if ok else 503, content=detail)
 
 
+def _session_cookie_attrs(request: Request) -> dict[str, Any]:
+    """X-ORIGIN: cookie transport attributes shared by set + delete sites.
+
+    Cross-site Netlify -> Render fetch withholds SameSite=Lax cookies, so
+    use None whenever the channel is Secure; on plain-HTTP local dev
+    browsers reject SameSite=None without Secure, so keep Lax there.
+    Secure detection is the existing J3-P2 rule (Render terminates TLS).
+    """
+    forwarded = request.headers.get("x-forwarded-proto", "")
+    first_hop = forwarded.split(",")[0].strip().lower()
+    secure = request.url.scheme == "https" or first_hop == "https"
+    return {"secure": secure, "samesite": "none" if secure else "lax"}
+
+
 @app.post(AUTH_LOGIN_PATH)
 def auth_login(body: dict[str, Any], request: Request) -> JSONResponse:
     """Phase 5: demo login. 503 when auth is not configured."""
@@ -514,15 +528,11 @@ def auth_login(body: dict[str, Any], request: Request) -> JSONResponse:
                        "", role, "demo login",
                        store.state["trace_id"], _trace(request))
     response = JSONResponse({"user": username, "role": role})
-    # J3-P2: behind a TLS-terminating proxy (Render) uvicorn sees http;
-    # honor X-Forwarded-Proto so Secure is not silently dropped.
-    forwarded = request.headers.get("x-forwarded-proto", "")
-    first_hop = forwarded.split(",")[0].strip().lower()
-    secure = request.url.scheme == "https" or first_hop == "https"
+    attrs = _session_cookie_attrs(request)
     response.set_cookie(auth_mod.SESSION_COOKIE, token,
                         max_age=auth_mod.SESSION_TTL_SECONDS,
-                        httponly=True, secure=secure,
-                        samesite="lax", path="/")
+                        httponly=True, secure=attrs["secure"],
+                        samesite=attrs["samesite"], path="/")
     return response
 
 
@@ -537,7 +547,10 @@ def auth_logout(request: Request) -> JSONResponse:
                            "demo logout", store.state["trace_id"],
                            _trace(request))
     response = JSONResponse({"ok": True})
-    response.delete_cookie(auth_mod.SESSION_COOKIE, path="/")
+    attrs = _session_cookie_attrs(request)
+    response.delete_cookie(auth_mod.SESSION_COOKIE, path="/",
+                           secure=attrs["secure"],
+                           samesite=attrs["samesite"])
     return response
 
 
@@ -553,7 +566,10 @@ def auth_logout_all(request: Request) -> JSONResponse:
                        "demo logout-all", store.state["trace_id"],
                        _trace(request))
     response = JSONResponse({"ok": True})
-    response.delete_cookie(auth_mod.SESSION_COOKIE, path="/")
+    attrs = _session_cookie_attrs(request)
+    response.delete_cookie(auth_mod.SESSION_COOKIE, path="/",
+                           secure=attrs["secure"],
+                           samesite=attrs["samesite"])
     return response
 
 

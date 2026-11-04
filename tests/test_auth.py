@@ -190,6 +190,49 @@ def test_cookie_not_secure_on_plain_local_http(monkeypatch, tmp_store):
     assert "Secure" not in _login_cookie(monkeypatch, "http")
 
 
+def test_cookie_samesite_none_on_direct_https(monkeypatch, tmp_store):
+    """X-ORIGIN: cross-site Netlify->Render fetch needs SameSite=None."""
+    assert "samesite=none" in _login_cookie(monkeypatch, "https").lower()
+
+
+def test_cookie_samesite_none_behind_tls_proxy(monkeypatch, tmp_store):
+    cookie = _login_cookie(monkeypatch, "http",
+                           [(b"x-forwarded-proto", b"https")])
+    assert "samesite=none" in cookie.lower()
+
+
+def test_cookie_samesite_lax_on_plain_local_http(monkeypatch, tmp_store):
+    """X-ORIGIN: browsers reject SameSite=None without Secure; keep Lax."""
+    cookie = _login_cookie(monkeypatch, "http").lower()
+    assert "samesite=lax" in cookie and "samesite=none" not in cookie
+
+
+def test_logout_clears_cookie_with_matching_attrs(monkeypatch, tmp_store):
+    """X-ORIGIN: deletion must mirror set attrs or Chrome keeps the cookie."""
+    _users(monkeypatch)
+    token = auth_mod.create_session("judge", "investigator", SECRET)
+    scope = _scope("/api/v1/auth/logout", method="POST", cookie=token,
+                   xrw=True)
+    scope["scheme"] = "https"
+    resp = main.auth_logout(Request(scope))
+    assert resp.status_code == 200
+    cleared = resp.headers["set-cookie"].lower()
+    assert "samesite=none" in cleared and "secure" in cleared
+
+
+def test_logout_all_clears_cookie_with_matching_attrs(monkeypatch, tmp_store):
+    """X-ORIGIN: logout-all deletion must mirror set attrs (all sessions)."""
+    _users(monkeypatch)
+    token = auth_mod.create_session("judge", "investigator", SECRET)
+    scope = _scope("/api/v1/auth/logout-all", method="POST", cookie=token,
+                   xrw=True)
+    scope["scheme"] = "https"
+    resp = main.auth_logout_all(Request(scope))
+    assert resp.status_code == 200
+    cleared = resp.headers["set-cookie"].lower()
+    assert "samesite=none" in cleared and "secure" in cleared
+
+
 def test_login_rejects_bad_password_no_enumeration(monkeypatch, tmp_store):
     req = _login_req(monkeypatch, xff="11.0.0.78")
     with pytest.raises(main.AppError) as exc:
