@@ -26,6 +26,7 @@ import {
   postLogin,
   postLogout,
   postSimulation,
+  REQUEST_TIMEOUT_MS,
   resetDemo,
   userErrorMessage,
 } from "./api";
@@ -72,6 +73,15 @@ describe("api client", () => {
         t
       )
     ).toBe("<loadFailed>");
+    expect(
+      userErrorMessage(
+        new ApiError("REQUEST_TIMEOUT", "aborted", 0, ""),
+        t
+      )
+    ).toBe("<timedOut>");
+    expect(
+      userErrorMessage(new ApiError("HTTP_503", "down", 503, ""), t)
+    ).toBe("<unavailable>");
     expect(userErrorMessage(new Error("boom"), t)).toBe("<loadFailed>");
     expect(userErrorMessage(null, t)).toBe("<requestFailed>");
     // No code or English server text may leak into user-facing output.
@@ -92,6 +102,65 @@ describe("api client", () => {
       "http://127.0.0.1:8000/api/v1/investigations/inv_84721",
       expect.objectContaining({ cache: "no-store" })
     );
+  });
+
+  it("times out a hung backend with REQUEST_TIMEOUT, not a hang", async () => {
+    vi.useFakeTimers();
+    try {
+      // Behaves like real fetch: pends until its signal aborts.
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockImplementation(
+          (_url: string, init?: { signal?: AbortSignal }) =>
+            new Promise((_resolve, reject) => {
+              init?.signal?.addEventListener("abort", () => {
+                reject(
+                  init.signal?.reason ??
+                    new DOMException("Aborted", "AbortError")
+                );
+              });
+            })
+        )
+      );
+      const pending = getHealth();
+      const assertion = expect(pending).rejects.toMatchObject({
+        code: "REQUEST_TIMEOUT",
+      });
+      await vi.advanceTimersByTimeAsync(REQUEST_TIMEOUT_MS + 100);
+      await assertion;
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("keeps caller cancellation as REQUEST_TIMEOUT and clears its timer", async () => {
+    vi.useFakeTimers();
+    try {
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockImplementation(
+          (_url: string, init?: { signal?: AbortSignal }) =>
+            new Promise((_resolve, reject) => {
+              init?.signal?.addEventListener("abort", () => {
+                reject(
+                  init.signal?.reason ??
+                    new DOMException("Aborted", "AbortError")
+                );
+              });
+            })
+        )
+      );
+      const controller = new AbortController();
+      const pending = getHealth(controller.signal);
+      const assertion = expect(pending).rejects.toMatchObject({
+        code: "REQUEST_TIMEOUT",
+      });
+      controller.abort();
+      await assertion;
+      expect(vi.getTimerCount()).toBe(0);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("lists alerts from the alerts endpoint", async () => {

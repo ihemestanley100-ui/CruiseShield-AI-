@@ -44,8 +44,8 @@ describe("LanguageSelector", () => {
     fireEvent.change(search, { target: { value: "العربية" } });
     const listbox = screen.getByRole("listbox");
     const options = within(listbox).getAllByRole("option");
-    // ar plus its ar-EG and ar-SA regional variants.
-    expect(options.length).toBe(3);
+    // Only ar: ar-EG/ar-SA have no dictionary and stay hidden.
+    expect(options.length).toBe(1);
     for (const option of options) {
       expect(option.textContent).toContain("العربية");
     }
@@ -56,11 +56,11 @@ describe("LanguageSelector", () => {
   it("selects with mouse/touch click and persists the preference", () => {
     open();
     const search = screen.getByRole("combobox");
-    fireEvent.change(search, { target: { value: "français (Canada)" } });
+    fireEvent.change(search, { target: { value: "français" } });
     const option = screen.getByRole("option", { name: /français/ });
     fireEvent.click(option);
-    expect(window.localStorage.getItem(LOCALE_STORAGE_KEY)).toBe("fr-CA");
-    expect(document.documentElement.lang).toBe("fr-CA");
+    expect(window.localStorage.getItem(LOCALE_STORAGE_KEY)).toBe("fr");
+    expect(document.documentElement.lang).toBe("fr");
     expect(screen.getByRole("button", { name: /français/ })).toBeTruthy();
   });
 
@@ -71,8 +71,8 @@ describe("LanguageSelector", () => {
     fireEvent.keyDown(search, { key: "Home" });
     fireEvent.keyDown(search, { key: "ArrowDown" });
     fireEvent.keyDown(search, { key: "Enter" });
-    // First entry is Afar (aa), second Abkhaz (ab).
-    expect(window.localStorage.getItem(LOCALE_STORAGE_KEY)).toBe("ab");
+    // Dictionaries only: first entry ar, second en.
+    expect(window.localStorage.getItem(LOCALE_STORAGE_KEY)).toBe("en");
   });
 
   it("closes on Escape and returns focus to the button", () => {
@@ -83,17 +83,31 @@ describe("LanguageSelector", () => {
     expect(document.activeElement).toBe(button);
   });
 
-  it("badges translation status and warns on English fallback", () => {
+  it("hides entries without translations and never badges fallback", () => {
     open();
     const search = screen.getByRole("combobox");
-    // isiZulu (zu) has no dictionary: the honest unavailable example.
+    // isiZulu (zu) has no dictionary: hidden from the list entirely.
     fireEvent.change(search, { target: { value: "isiZulu" } });
-    const option = screen.getByRole("option", { name: /isiZulu/ });
-    expect(option.textContent).toContain("English fallback");
-    fireEvent.click(option);
-    // Unavailable locale: UI stays English with an explicit note on reopen.
-    expect(screen.getByRole("button", { name: /isiZulu/ })).toBeTruthy();
-    fireEvent.click(screen.getByRole("button", { name: /isiZulu/ }));
+    expect(
+      screen.getByText("No languages match your search.")
+    ).toBeTruthy();
+    fireEvent.change(search, { target: { value: "" } });
+    expect(
+      screen.queryByText("English fallback")
+    ).toBeNull();
+  });
+
+  it("keeps the explicit note for legacy persisted unavailable locales", () => {
+    // Users who picked an unavailable locale before it was hidden
+    // still get English plus the explicit fallback note.
+    window.localStorage.setItem(LOCALE_STORAGE_KEY, "zu");
+    render(
+      <LocaleProvider>
+        <LanguageSelector />
+      </LocaleProvider>
+    );
+    const button = screen.getByRole("button", { name: /isiZulu/ });
+    fireEvent.click(button);
     expect(
       screen.getByText("English shown — translation unavailable")
     ).toBeTruthy();
@@ -110,6 +124,23 @@ describe("LanguageSelector", () => {
     expect(
       screen.queryByText("English shown — translation unavailable")
     ).toBeNull();
+  });
+
+  it("isolates non-Latin endonyms for bidirectional text", () => {
+    open();
+    const search = screen.getByRole("combobox");
+    // Arabic (RTL) and Japanese (CJK) render in their own scripts,
+    // isolated so they cannot reorder the surrounding row text.
+    fireEvent.change(search, { target: { value: "العربية" } });
+    const arabic = screen.getByRole("option", { name: /العربية/ });
+    const arabicNative = within(arabic).getByText("العربية");
+    expect(arabicNative.tagName).toBe("BDI");
+    expect(arabicNative.getAttribute("lang")).toBe("ar");
+    fireEvent.change(search, { target: { value: "日本語" } });
+    const japanese = screen.getByRole("option", { name: /日本語/ });
+    const japaneseNative = within(japanese).getByText("日本語");
+    expect(japaneseNative.tagName).toBe("BDI");
+    expect(japaneseNative.getAttribute("lang")).toBe("ja");
   });
 
   it("marks the current option selected for screen readers", () => {

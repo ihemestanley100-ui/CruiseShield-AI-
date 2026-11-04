@@ -4,8 +4,9 @@
  * name, dropdown arrow, rounded orange border (reference design).
  * Searchable listbox panel: full keyboard navigation (arrows/Home/
  * End/Enter/Escape/type-to-filter), screen-reader labelled, and
- * touch-friendly targets. Unavailable languages stay selectable but
- * are badged with the English-fallback status — never silent. */
+ * touch-friendly targets. Only locales with a dictionary
+ * (translated + partial) are listed; entries without
+ * translations stay hidden until their dictionaries ship. */
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import {
@@ -74,17 +75,23 @@ export function LanguageSelector({ compact = false }: { compact?: boolean }) {
   const listId = useId();
   const searchId = useId();
 
+  // Selectable = dictionaries only. Entries with status
+  // "unavailable" stay hidden until translations exist.
+  const supported = useMemo(
+    () => LANGUAGES.filter((entry) => entry.status !== "unavailable"),
+    []
+  );
   const results = useMemo(() => {
     const needle = query.trim().toLowerCase();
-    if (needle === "") return LANGUAGES;
-    return LANGUAGES.filter(
+    if (needle === "") return supported;
+    return supported.filter(
       (entry) =>
         entry.native.toLowerCase().includes(needle) ||
         entry.english.toLowerCase().includes(needle) ||
         entry.tag.toLowerCase().includes(needle) ||
         entry.iso.toLowerCase() === needle
     );
-  }, [query]);
+  }, [query, supported]);
 
   useEffect(() => {
     setActiveIndex(0);
@@ -169,9 +176,9 @@ export function LanguageSelector({ compact = false }: { compact?: boolean }) {
         onClick={() => setOpen((v) => !v)}
       >
         <GlobeIcon />
-        <span className="lang-current" lang={current?.tag}>
+        <bdi className="lang-current" lang={current?.tag}>
           {current?.native ?? locale}
-        </span>
+        </bdi>
         <ChevronIcon open={open} />
       </button>
       {open && (
@@ -221,11 +228,11 @@ export function LanguageSelector({ compact = false }: { compact?: boolean }) {
                   onMouseEnter={() => setActiveIndex(index)}
                   className="lang-option"
                 >
-                  <span className="lang-option-native" lang={entry.tag}>
+                  <bdi className="lang-option-native" lang={entry.tag}>
                     {entry.native}
-                  </span>
+                  </bdi>
                   <span className="muted lang-option-meta">
-                    {entry.english} · {entry.tag}
+                    <bdi>{entry.english}</bdi> · <bdi>{entry.tag}</bdi>
                   </span>
                   <span
                     className={`lang-status lang-status-${entry.status}`}

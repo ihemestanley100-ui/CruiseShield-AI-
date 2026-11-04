@@ -24,6 +24,14 @@ vi.mock("./GlobalHeroScene", () => ({
   ),
 }));
 
+// The nav bell fetches on mount; keep landing tests hermetic.
+vi.mock("../../lib/api", async (importOriginal) => ({
+  ...((await importOriginal()) as object),
+  listNotifications: vi
+    .fn()
+    .mockResolvedValue({ notifications: [], unread_count: 0 }),
+}));
+
 beforeEach(() => {
   vi.stubGlobal(
     "matchMedia",
@@ -177,6 +185,23 @@ describe("GlobalLandingPage", () => {
     expect(home.textContent).toContain("The Financial Crime Immune System™");
   });
 
+  it("collapses and expands each side panel independently", () => {
+    render(<GlobalLandingPage />);
+    const toggles = screen.getAllByRole("button", { name: "Collapse panel" });
+    expect(toggles).toHaveLength(2);
+    fireEvent.click(toggles[0]);
+    expect(
+      screen.getByRole("button", { name: "Expand panel" })
+    ).toBeTruthy();
+    // "Device Intelligence" is unique to the intel panel (the strip
+    // card reads "Device Analytics"), so its absence proves collapse.
+    expect(screen.queryByText("Device Intelligence")).toBeNull();
+    // The regions panel stays open: collapse is per-panel.
+    expect(screen.getByText("Cross-Border Corridors")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Expand panel" }));
+    expect(screen.getByText("Device Intelligence")).toBeTruthy();
+  });
+
   it("keeps audio OFF by default with a working toggle", () => {
     render(<GlobalLandingPage />);
     const toggle = screen.getByRole("button", { name: /Sound:/ });
@@ -185,5 +210,9 @@ describe("GlobalLandingPage", () => {
     // No AudioContext in jsdom: stays OFF without crashing.
     expect(toggle.getAttribute("aria-pressed")).toBe("false");
     expect(screen.getByLabelText("Volume")).toBeTruthy();
+    // Mute is offered but unavailable while the sound is off.
+    const mute = screen.getByRole("button", { name: "Mute" });
+    expect(mute.getAttribute("aria-pressed")).toBe("false");
+    expect(mute.hasAttribute("disabled")).toBe(true);
   });
 });

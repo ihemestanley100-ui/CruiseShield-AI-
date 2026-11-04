@@ -4,8 +4,9 @@
  * `status` distinguishes selector availability from translation
  * completeness: 'translated' (full dictionary), 'partial'
  * (representative namespaces, machine-drafted, human review pending),
- * 'unavailable' (selectable for discovery; UI falls back to English
- * with an explicit fallback note — never wrong-language text).
+ * 'unavailable' (no dictionary; hidden from the selector until
+ * translations ship — legacy persisted tags still fall back to
+ * English with an explicit note, never wrong-language text).
  * Regional variants resolve through BCP 47 fallback (tag -> base).
  */
 
@@ -32,8 +33,8 @@ export interface LanguageEntry {
 }
 
 /* [tag, iso, native, english, family, rtl] — status derives below:
- * en (+en-GB/en-NG, same dictionary) translated; fr/ar partial;
- * everything else unavailable. */
+ * en (+en-GB/en-NG, same dictionary) translated; 11 partial
+ * (ar/es/fr/ha/hi/ig/ja/pt/sw/yo/zh); everything else unavailable. */
 const RAW: Array<[string, string, string, string, string, boolean]> = [
   ["aa", "aa", "Afaraf", "Afar", "Afro-Asiatic", false],
   ["ab", "ab", "аҧсуа бызшәа", "Abkhaz", "Northwest Caucasian", false],

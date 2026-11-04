@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { LanguageSelector } from "../language-selector";
+import { Notifications } from "../notifications";
+import { ThemeSelector } from "../theme-selector";
 import { useTranslation } from "../../lib/i18n/context";
 
 /* Top navigation bar + hero headlines + primary call to action. */
@@ -53,6 +55,8 @@ export function LandingNav() {
         ))}
       </nav>
       <LanguageSelector compact />
+      <Notifications />
+      <ThemeSelector />
       <Link href="/demo" className="landing-enter">
         {t("enterDemo")}
       </Link>

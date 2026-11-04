@@ -1,13 +1,24 @@
 /* Client-only Three.js hero canvas: composition, camera, lights,
  * animation loop, resize handling, reduced-motion + pause support,
- * and full resource cleanup on unmount. Rendered via next/dynamic
- * with ssr:false so no browser API runs on the server. */
+ * drag/zoom/region-pick interactions, keyboard equivalents, WebGL
+ * context-loss handling, and full resource cleanup on unmount. Rendered
+ * via next/dynamic with ssr:false so no browser API runs on the
+ * server. View state lives in the shared GlobeController so buttons,
+ * keyboard, and pointer gestures stay in sync. */
 
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { useTranslation } from "../../lib/i18n/context";
 import { buildBrain } from "./scene/brain";
+import {
+  CLICK_MAX_TRAVEL_PX,
+  handleGlobeKey,
+  PINCH_ZOOM_PER_PX,
+  WHEEL_ZOOM_PER_DELTA,
+  type GlobeController,
+} from "./scene/controls";
 import { buildEarth, EARTH_RADIUS, REGION_HUBS } from "./scene/earth";
 import { buildNetwork } from "./scene/network";
 import { buildOrbital } from "./scene/orbital";
@@ -22,16 +33,21 @@ const BRAIN_Y = 1.75;
 interface Props {
   motion: "full" | "reduced";
   paused: boolean;
+  controller: GlobeController;
 }
 
-export function GlobalHeroScene({ motion, paused }: Props) {
+export function GlobalHeroScene({ motion, paused, controller }: Props) {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const motionRef = useRef(motion);
   const pausedRef = useRef(paused);
   const hiddenRef = useRef(false);
+  const controllerRef = useRef(controller);
   const [failed, setFailed] = useState(false);
+  const [contextLost, setContextLost] = useState(false);
+  const { t } = useTranslation("landing");
   motionRef.current = motion;
   pausedRef.current = paused;
+  controllerRef.current = controller;
 
   useEffect(() => {
     const host = hostRef.current;
@@ -44,10 +60,16 @@ export function GlobalHeroScene({ motion, paused }: Props) {
     let renderer: THREE.WebGLRenderer | null = null;
     let frame = 0;
     let disposed = false;
+    let lost = false;
+    let lastT = 0;
     const parts: ScenePart[] = [];
     const clock = new THREE.Clock();
     const pointer = new THREE.Vector2(0, 0);
+    const ndc = new THREE.Vector2();
     const cameraBase = new THREE.Vector3();
+    const lookTarget = new THREE.Vector3(0, -0.3, 0);
+    const view = { yaw: 0, pitch: 0 };
+    const raycaster = new THREE.Raycaster();
 
     const isMobileViewport = () =>
       host.clientWidth < 768 || window.innerHeight < 560;
@@ -65,7 +87,8 @@ export function GlobalHeroScene({ motion, paused }: Props) {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.05;
-    host.appendChild(renderer.domElement);
+    const canvas = renderer.domElement;
+    host.appendChild(canvas);
 
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(COLORS.deepSpace, 0.012);
@@ -81,7 +104,7 @@ export function GlobalHeroScene({ motion, paused }: Props) {
 
     // Composition: brain floats above the globe, network links them.
     const stars = buildStars(quality);
-    const earth = buildEarth(quality);
+    const earth = buildEarth(quality, view);
     earth.group.position.y = EARTH_Y;
     const brain = buildBrain(quality);
     brain.group.position.y = BRAIN_Y;
@@ -109,8 +132,12 @@ export function GlobalHeroScene({ motion, paused }: Props) {
       renderer?.setSize(width, height, false);
       camera.aspect = width / height;
       // Pull back on narrow screens so brain + globe stay in frame.
-      camera.position.set(0, mobile ? 0.7 : 0.35, mobile ? 9.6 : 7.2);
-      camera.lookAt(0, 0.2, 0);
+      // The safe-area cell is shorter than the old full-hero stage,
+      // so the camera sits lower and looks below center: the globe
+      // fills the frame instead of sinking to its bottom edge.
+      camera.position.set(0, mobile ? 0.4 : 0.1, mobile ? 9.6 : 7.2);
+      lookTarget.set(0, mobile ? -0.1 : -0.3, 0);
+      camera.lookAt(lookTarget);
       cameraBase.copy(camera.position);
       camera.updateProjectionMatrix();
     };
@@ -128,24 +155,135 @@ export function GlobalHeroScene({ motion, paused }: Props) {
     document.addEventListener("visibilitychange", onVisibility);
     window.addEventListener("pointermove", onPointer);
 
+    // --- Atlas gestures: drag to rotate, wheel/pinch to zoom, tap to
+    // pick a region hub. User-driven motion stays available under
+    // reduced motion (explicit interaction, like scrolling).
+    const activePointers = new Map<number, { x: number; y: number }>();
+    let downAt: { x: number; y: number } | null = null;
+    let pinchDistance = 0;
+
+    const pick = (clientX: number, clientY: number) => {
+      const rect = canvas.getBoundingClientRect();
+      ndc.set(
+        ((clientX - rect.left) / rect.width) * 2 - 1,
+        -(((clientY - rect.top) / rect.height) * 2 - 1)
+      );
+      raycaster.setFromCamera(ndc, camera);
+      const hits = raycaster.intersectObject(earth.group, true);
+      const first = hits[0]?.object.userData.hubIndex;
+      controllerRef.current.select(
+        typeof first === "number" ? first : -1
+      );
+    };
+
+    const onPointerDown = (event: PointerEvent) => {
+      activePointers.set(event.pointerId, {
+        x: event.clientX,
+        y: event.clientY,
+      });
+      if (activePointers.size === 1) {
+        downAt = { x: event.clientX, y: event.clientY };
+        try {
+          canvas.setPointerCapture(event.pointerId);
+        } catch {
+          // Capture unsupported; drag tracking still works.
+        }
+      } else if (activePointers.size === 2) {
+        const [a, b] = [...activePointers.values()] as [
+          { x: number; y: number },
+          { x: number; y: number },
+        ];
+        pinchDistance = Math.hypot(a.x - b.x, a.y - b.y);
+        downAt = null;
+      }
+    };
+    const onPointerMove = (event: PointerEvent) => {
+      const previous = activePointers.get(event.pointerId);
+      if (!previous) return;
+      activePointers.set(event.pointerId, {
+        x: event.clientX,
+        y: event.clientY,
+      });
+      if (activePointers.size === 1) {
+        controllerRef.current.addRotation(
+          event.clientX - previous.x,
+          event.clientY - previous.y
+        );
+      } else if (activePointers.size === 2) {
+        const [a, b] = [...activePointers.values()] as [
+          { x: number; y: number },
+          { x: number; y: number },
+        ];
+        const distance = Math.hypot(a.x - b.x, a.y - b.y);
+        controllerRef.current.zoomBy(
+          -(distance - pinchDistance) * PINCH_ZOOM_PER_PX
+        );
+        pinchDistance = distance;
+      }
+    };
+    const endPointer = (event: PointerEvent) => {
+      activePointers.delete(event.pointerId);
+      if (downAt !== null && activePointers.size === 0) {
+        const travel = Math.hypot(
+          event.clientX - downAt.x,
+          event.clientY - downAt.y
+        );
+        if (travel <= CLICK_MAX_TRAVEL_PX) pick(event.clientX, event.clientY);
+      }
+      if (activePointers.size < 2) pinchDistance = 0;
+      if (activePointers.size === 0) downAt = null;
+    };
+    const onWheel = (event: WheelEvent) => {
+      // Non-passive: zooming the atlas must not scroll the page.
+      event.preventDefault();
+      controllerRef.current.zoomBy(event.deltaY * WHEEL_ZOOM_PER_DELTA);
+    };
+    canvas.addEventListener("pointerdown", onPointerDown);
+    canvas.addEventListener("pointermove", onPointerMove);
+    canvas.addEventListener("pointerup", endPointer);
+    canvas.addEventListener("pointercancel", endPointer);
+    canvas.addEventListener("wheel", onWheel, { passive: false });
+
+    const onContextLost = (event: Event) => {
+      // Keep the context recoverable; pause rendering until restore.
+      event.preventDefault();
+      lost = true;
+      setContextLost(true);
+    };
+    const onContextRestored = () => {
+      lost = false;
+      setContextLost(false);
+    };
+    canvas.addEventListener("webglcontextlost", onContextLost);
+    canvas.addEventListener("webglcontextrestored", onContextRestored);
+
     const renderFrame = () => {
       if (!renderer || disposed) return;
       const allowMotion =
         !pausedRef.current && motionRef.current === "full";
-      const dt = allowMotion ? Math.min(clock.getDelta(), 0.05) : 0;
-      const t = clock.elapsedTime;
+      const state = controllerRef.current.getState();
+      view.yaw = state.yaw;
+      view.pitch = state.pitch;
+      camera.position.z = cameraBase.z + state.zoom;
       if (allowMotion) {
+        const dt = Math.min(clock.getDelta(), 0.05);
+        const t = clock.elapsedTime;
+        lastT = t;
         parts.forEach((part) => part.update(dt, t));
         // Gentle parallax, disabled under reduced motion.
         camera.position.x +=
           (cameraBase.x + pointer.x * 0.25 - camera.position.x) * 0.04;
         camera.position.y +=
           (cameraBase.y + pointer.y * 0.18 - camera.position.y) * 0.04;
-        camera.lookAt(0, 0.2, 0);
+        camera.lookAt(lookTarget);
       } else {
         clock.getDelta();
+        // Static frame, but explicit user view offsets still apply.
+        earth.update(0, lastT);
       }
-      renderer.render(scene, camera);
+      if (!lost) {
+        renderer.render(scene, camera);
+      }
     };
 
     // Reduced motion / paused: render one static frame (plus resizes).
@@ -168,6 +306,13 @@ export function GlobalHeroScene({ motion, paused }: Props) {
       window.removeEventListener("resize", layout);
       window.removeEventListener("pointermove", onPointer);
       document.removeEventListener("visibilitychange", onVisibility);
+      canvas.removeEventListener("pointerdown", onPointerDown);
+      canvas.removeEventListener("pointermove", onPointerMove);
+      canvas.removeEventListener("pointerup", endPointer);
+      canvas.removeEventListener("pointercancel", endPointer);
+      canvas.removeEventListener("wheel", onWheel);
+      canvas.removeEventListener("webglcontextlost", onContextLost);
+      canvas.removeEventListener("webglcontextrestored", onContextRestored);
       parts.forEach((part) => {
         scene.remove(part.group);
         part.dispose();
@@ -176,13 +321,16 @@ export function GlobalHeroScene({ motion, paused }: Props) {
       renderer?.domElement.remove();
       renderer = null;
     };
-    // Intentionally once per mount; motion/paused flow through refs and
-    // the static-frame effect below.
+    // Intentionally once per mount; motion/paused/controller flow
+    // through refs. The static-frame path above reads them every frame.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Re-render a static frame when entering reduced/paused states is
-  // handled by the loop above reading refs every frame.
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    if (handleGlobeKey(event.key, controller, REGION_HUBS.length)) {
+      event.preventDefault();
+    }
+  };
 
   if (failed) {
     return <WebGLFallback />;
@@ -191,9 +339,18 @@ export function GlobalHeroScene({ motion, paused }: Props) {
     <div
       ref={hostRef}
       className="hero-canvas"
-      role="img"
-      aria-label="Animated 3D scene: a luminous AI neural core above a rotating digital Earth with global connection paths. Illustrative visualization."
+      role="group"
+      tabIndex={0}
+      aria-label="Interactive 3D world atlas: a luminous AI neural core above a rotating digital Earth with global connection paths. Illustrative visualization."
+      aria-describedby="globe-hint"
       data-testid="hero-scene"
-    />
+      onKeyDown={onKeyDown}
+    >
+      {contextLost && (
+        <p className="globe-context-note" role="status">
+          {t("globeContextLost")}
+        </p>
+      )}
+    </div>
   );
 }

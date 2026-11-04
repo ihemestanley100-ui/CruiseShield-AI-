@@ -196,6 +196,19 @@ export const en = {
     pauseScene: "Pause scene",
     fallbackNote:
       "Interactive 3D is unavailable in this browser. The full demo experience remains open.",
+    collapsePanel: "Collapse panel",
+    expandPanel: "Expand panel",
+    globeControls: "World Atlas controls",
+    zoomIn: "Zoom in",
+    zoomOut: "Zoom out",
+    resetView: "Reset view",
+    globeHint:
+      "Drag to rotate. Arrow keys rotate, plus and minus zoom, 0 resets the view.",
+    regionSignal: "Illustrative signal",
+    closeRegion: "Clear region selection",
+    globeContextLost: "3D context lost — illustration paused.",
+    mute: "Mute",
+    unmute: "Unmute",
   },
   selector: {
     label: "Language",
@@ -216,6 +229,8 @@ export const en = {
     loadFailed: "Couldn't load this section.",
     notPermitted: "Not available for your role.",
     unreachable: "Backend unreachable. Check the demo server and retry.",
+    timedOut: "Request timed out. Retry.",
+    unavailable: "Service temporarily unavailable. Retry shortly.",
     closeDialog: "Close dialog",
     breadcrumb: "Breadcrumb",
     timelineEmpty: "No events.",
@@ -417,6 +432,8 @@ export const en = {
     noAlerts: "No alerts.",
     openInv: "Open investigation",
     networkLink: "Network",
+    markRead: "Mark read",
+    markAllRead: "Mark all read",
   },
   ai: {
     panelTitle: "Analyze with Muse Spark",

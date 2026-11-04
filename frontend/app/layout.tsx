@@ -8,6 +8,7 @@ import { LocaleProvider } from "../lib/i18n/context";
 import { resolveMetadataBase } from "../lib/site-url";
 import "./globals.css";
 import "../styles/landing.css";
+import "../styles/hackathon-panel.css";
 
 export const metadata: Metadata = {
   // J3 closeout (frontend EV38): absolute openGraph URLs resolve against

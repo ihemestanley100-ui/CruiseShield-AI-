@@ -5,14 +5,14 @@ import { AppShell } from "./app-shell";
 
 const {
   usePathnameMock,
-  listAlertsMock,
+  listNotificationsMock,
   modeMock,
   meMock,
   loginMock,
   logoutMock,
 } = vi.hoisted(() => ({
   usePathnameMock: vi.fn(() => "/demo"),
-  listAlertsMock: vi.fn(),
+  listNotificationsMock: vi.fn(),
   modeMock: vi.fn(),
   meMock: vi.fn(),
   loginMock: vi.fn(),
@@ -41,7 +41,7 @@ vi.mock("next/navigation", () => ({
 
 vi.mock("../lib/api", async (importOriginal) => ({
   ...((await importOriginal()) as object),
-  listAlerts: listAlertsMock,
+  listNotifications: listNotificationsMock,
   getAuthMode: modeMock,
   getAuthMe: meMock,
   postLogin: loginMock,
@@ -51,8 +51,12 @@ vi.mock("../lib/api", async (importOriginal) => ({
 beforeEach(() => {
   usePathnameMock.mockReset();
   usePathnameMock.mockReturnValue("/demo");
-  listAlertsMock.mockReset();
-  listAlertsMock.mockResolvedValue({ alerts: [] });
+  listNotificationsMock.mockReset();
+  listNotificationsMock.mockResolvedValue({
+    notifications: [],
+    unread_count: 0,
+    synthetic_notice: "Synthetic demo data.",
+  });
   modeMock.mockReset();
   meMock.mockReset();
   loginMock.mockReset();
@@ -306,19 +310,20 @@ describe("AppShell", () => {
     ).toBeNull();
   });
 
-  it("badges the bell with the real open-alert count", async () => {
-    listAlertsMock.mockResolvedValue({
-      alerts: [
+  it("badges the bell with the real unread count", async () => {
+    listNotificationsMock.mockResolvedValue({
+      notifications: [
         {
-          alert_id: "alert_84721",
+          notification_id: "alert_84721",
           transaction_id: "txn_84721",
           title: "t",
           status: "OPEN",
-          risk_assessment_id: "r",
           created_at: "2026-10-29T20:32:15Z",
-          trace_id: "t",
+          read: false,
         },
       ],
+      unread_count: 1,
+      synthetic_notice: "Synthetic demo data.",
     });
     render(
       <AppShell>

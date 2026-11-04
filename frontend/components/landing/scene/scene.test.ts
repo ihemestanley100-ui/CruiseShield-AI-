@@ -14,7 +14,13 @@ const LITE = { particleScale: 0.5 };
 describe("landing scene builders", () => {
   it("builds an earth with globe, atmosphere, hubs, and rings", () => {
     const earth = buildEarth(FULL);
-    expect(earth.group.children.length).toBeGreaterThan(10);
+    // Spin group + 2 orbital rings at top level; the planet's parts
+    // live inside the spin group so drags rotate one rigid body.
+    let descendants = 0;
+    earth.group.traverse(() => {
+      descendants += 1;
+    });
+    expect(descendants).toBeGreaterThan(10);
     expect(REGION_HUBS).toHaveLength(8);
     earth.update(0.016, 1);
     expect(() => earth.dispose()).not.toThrow();
@@ -94,16 +100,40 @@ describe("landing scene builders", () => {
 
   it("rotates globe and brain independently within specified periods", () => {
     const earth = buildEarth(FULL);
-    const globe = earth.group.children[0] as THREE.Mesh;
+    // The spin group (first child) carries globe + markers + labels as
+    // one rigid planet; its yaw advances at the specified rate.
+    const spin = earth.group.children[0] as THREE.Group;
     earth.update(1, 0);
     // 0.05 rad/s -> ~125.7 s/rev (spec 90-150 s).
-    expect(globe.rotation.y).toBeCloseTo(0.05, 5);
+    expect(spin.rotation.y).toBeCloseTo(0.05, 5);
     const brain = buildBrain(FULL);
     brain.update(1, 0);
     // 0.09 rad/s -> ~69.8 s/rev (spec 45-75 s).
     expect(brain.group.rotation.y).toBeCloseTo(0.09, 5);
     earth.dispose();
     brain.dispose();
+  });
+
+  it("adds user yaw/pitch offsets on top of auto-rotation", () => {
+    const earth = buildEarth(FULL, { yaw: 0.5, pitch: 0.2 });
+    earth.update(1, 0);
+    const spin = earth.group.children[0] as THREE.Group;
+    expect(spin.rotation.y).toBeCloseTo(0.05 + 0.5, 5);
+    expect(spin.rotation.x).toBeCloseTo(0.2, 5);
+    earth.dispose();
+  });
+
+  it("tags every hub marker with a pickable region index", () => {
+    const earth = buildEarth(FULL);
+    const tagged: number[] = [];
+    earth.group.traverse((c) => {
+      const index = (c as THREE.Mesh).userData?.hubIndex;
+      if (typeof index === "number") tagged.push(index);
+    });
+    // Marker + invisible hit sphere + halo + label per hub.
+    expect(tagged).toHaveLength(REGION_HUBS.length * 4);
+    expect(new Set(tagged).size).toBe(REGION_HUBS.length);
+    earth.dispose();
   });
 
   it("cycles hemisphere illumination in antiphase", () => {
@@ -127,11 +157,15 @@ describe("landing scene builders", () => {
   it("illuminates region hubs sequentially, not uniformly", () => {
     const earth = buildEarth(FULL);
     earth.update(0.016, 0);
-    const halos = earth.group.children.filter(
-      (c): c is THREE.Sprite =>
+    const halos: THREE.Sprite[] = [];
+    earth.group.traverse((c) => {
+      if (
         c instanceof THREE.Sprite &&
         (c.material as THREE.SpriteMaterial).opacity < 1
-    );
+      ) {
+        halos.push(c);
+      }
+    });
     expect(halos).toHaveLength(REGION_HUBS.length);
     const values = halos.map(
       (h) => (h.material as THREE.SpriteMaterial).opacity

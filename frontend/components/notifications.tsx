@@ -1,30 +1,31 @@
 "use client";
 
-/* Notification bell + panel. Lists exactly the alerts returned by
- * GET /api/v1/alerts; the badge counts alerts whose backend status is
- * OPEN. Investigation links derive from the backend invariant that
- * alert/investigation/case IDs share one numeric suffix (see
- * store.reset, the single alert creation site); alerts not matching
- * that shape get no investigation link, never a guessed one. Read-only:
- * nothing here marks alerts read or mutates the backend. */
+/* Notification bell + panel over GET /api/v1/notifications. The badge
+ * counts the backend's unread_count (OPEN + unread by this caller).
+ * Per-item and mark-all-read POST to /api/v1/notifications/read and
+ * persist server-side per caller identity. Investigation links derive
+ * from the backend invariant that alert/investigation IDs share one
+ * numeric suffix; anything not matching that shape gets no
+ * investigation link, never a guessed one. */
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
-  listAlerts,
+  listNotifications,
+  markNotificationsRead,
   userErrorMessage,
-  type AlertItem,
+  type NotificationItem,
 } from "../lib/api";
 import { useTranslation } from "../lib/i18n/context";
 import { formatDate } from "../lib/i18n/format";
 
 type State =
   | { kind: "loading" }
-  | { kind: "ready"; alerts: AlertItem[] }
+  | { kind: "ready"; items: NotificationItem[]; unread: number }
   | { kind: "error"; message: string };
 
-function investigationIdFor(alert: AlertItem): string | null {
-  const match = /^alert_(.+)$/.exec(alert.alert_id);
+function investigationIdFor(item: NotificationItem): string | null {
+  const match = /^alert_(.+)$/.exec(item.notification_id);
   return match ? `inv_${match[1]}` : null;
 }
 
@@ -33,14 +34,21 @@ export function Notifications() {
   const { t: tCommon } = useTranslation("common");
   const [state, setState] = useState<State>({ kind: "loading" });
   const [open, setOpen] = useState(false);
+  const [acting, setActing] = useState(false);
   const bell = useRef<HTMLButtonElement | null>(null);
   const heading = useRef<HTMLHeadingElement | null>(null);
   const wasOpen = useRef(false);
 
-  useEffect(() => {
+  const refresh = useCallback(() => {
     const controller = new AbortController();
-    listAlerts(controller.signal).then(
-      (res) => setState({ kind: "ready", alerts: res.alerts }),
+    setState({ kind: "loading" });
+    listNotifications(controller.signal).then(
+      (res) =>
+        setState({
+          kind: "ready",
+          items: res.notifications,
+          unread: res.unread_count,
+        }),
       (err: unknown) => {
         if (controller.signal.aborted) return;
         setState({
@@ -50,7 +58,9 @@ export function Notifications() {
       }
     );
     return () => controller.abort();
-  }, []);
+  }, [tCommon]);
+
+  useEffect(() => refresh(), [refresh]);
 
   useEffect(() => {
     if (open) {
@@ -71,10 +81,40 @@ export function Notifications() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open ]);
 
-  const openCount =
-    state.kind === "ready"
-      ? state.alerts.filter((a) => a.status === "OPEN").length
-      : 0;
+  async function mark(
+    body: { notification_ids?: string[]; all?: boolean },
+    apply: (items: NotificationItem[], marked: string[]) => NotificationItem[]
+  ) {
+    if (state.kind !== "ready" || acting) return;
+    setActing(true);
+    try {
+      const res = await markNotificationsRead(body);
+      setState({
+        kind: "ready",
+        items: apply(state.items, res.marked),
+        unread: res.unread_count,
+      });
+    } catch (err: unknown) {
+      setState({ kind: "error", message: userErrorMessage(err, tCommon) });
+    } finally {
+      setActing(false);
+    }
+  }
+
+  const markOne = (id: string) =>
+    mark({ notification_ids: [id] }, (items, marked) =>
+      items.map((n) =>
+        marked.includes(n.notification_id) ? { ...n, read: true } : n
+      )
+    );
+  const markAll = () =>
+    mark({ all: true }, (items, marked) =>
+      items.map((n) =>
+        marked.includes(n.notification_id) ? { ...n, read: true } : n
+      )
+    );
+
+  const unread = state.kind === "ready" ? state.unread : 0;
 
   return (
     <div className="notif-wrap">
@@ -87,7 +127,7 @@ export function Notifications() {
         aria-label={
           state.kind === "loading"
             ? t("bellLoading")
-            : t("bellOpen", { n: openCount })
+            : t("bellOpen", { n: unread })
         }
         onClick={() => setOpen(!open)}
       >
@@ -100,9 +140,9 @@ export function Notifications() {
             strokeLinejoin="round"
           />
         </svg>
-        {openCount > 0 && (
+        {unread > 0 && (
           <span className="notif-badge" aria-hidden="true">
-            {openCount}
+            {unread}
           </span>
         )}
       </button>
@@ -123,6 +163,24 @@ export function Notifications() {
             <h2 ref={heading} tabIndex={-1}>
               {t("panelTitle")}
             </h2>
+            <p className="notif-actions">
+              <button
+                type="button"
+                className="btn-secondary"
+                disabled={acting || state.kind !== "ready" || unread === 0}
+                onClick={() => void markAll()}
+              >
+                {t("markAllRead")}
+              </button>{" "}
+              <button
+                type="button"
+                className="btn-secondary"
+                disabled={acting || state.kind === "loading"}
+                onClick={() => refresh()}
+              >
+                {tCommon("retry")}
+              </button>
+            </p>
             {state.kind === "loading" && (
               <p className="muted" aria-live="polite">
                 {t("loadingAlerts")}
@@ -134,22 +192,25 @@ export function Notifications() {
               </div>
             )}
             {state.kind === "ready" &&
-              (state.alerts.length === 0 ? (
+              (state.items.length === 0 ? (
                 <p className="muted">{t("noAlerts")}</p>
               ) : (
                 <ul className="stack">
-                  {state.alerts.map((alert) => {
-                    const invId = investigationIdFor(alert);
+                  {state.items.map((item) => {
+                    const invId = investigationIdFor(item);
                     return (
-                      <li key={alert.alert_id} className="rule-row">
+                      <li key={item.notification_id} className="rule-row">
                         <div>
-                          <strong>{alert.title}</strong>{" "}
-                          <span className="badge">{alert.status}</span>
+                          <strong>{item.title}</strong>{" "}
+                          <span className="badge">{item.status}</span>
+                          {!item.read && (
+                            <span className="badge badge-unread">•</span>
+                          )}
                         </div>
                         <p className="muted">
-                          <code>{alert.alert_id}</code> ·{" "}
+                          <code>{item.notification_id}</code> ·{" "}
                           <bdi>
-                            {formatDate(locale, alert.created_at, {
+                            {formatDate(locale, item.created_at, {
                               dateStyle: "medium",
                               timeStyle: "short",
                             })}
@@ -166,12 +227,26 @@ export function Notifications() {
                               </Link>{" "}
                             </>
                           )}
-                          <Link
-                            href={`/network/${alert.transaction_id}`}
-                            onClick={() => setOpen(false)}
-                          >
-                            {t("networkLink")}
-                          </Link>
+                          {item.transaction_id !== null && (
+                            <>
+                              <Link
+                                href={`/network/${item.transaction_id}`}
+                                onClick={() => setOpen(false)}
+                              >
+                                {t("networkLink")}
+                              </Link>{" "}
+                            </>
+                          )}
+                          {!item.read && (
+                            <button
+                              type="button"
+                              className="btn-link"
+                              disabled={acting}
+                              onClick={() => void markOne(item.notification_id)}
+                            >
+                              {t("markRead")}
+                            </button>
+                          )}
                         </p>
                       </li>
                     );

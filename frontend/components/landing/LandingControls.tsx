@@ -13,6 +13,7 @@ export function AudioControl({ onBlipRef }: {
   const audioRef = useRef<LandingAudio | null>(null);
   const { t } = useTranslation("landing");
   const [on, setOn] = useState(false);
+  const [muted, setMuted] = useState(false);
   const [volume, setVolume] = useState(0.5);
 
   useEffect(() => {
@@ -47,6 +48,19 @@ export function AudioControl({ onBlipRef }: {
         onClick={() => void toggle()}
       >
         {t("soundLabel")}: {on ? t("onWord") : t("offWord")}
+      </button>
+      <button
+        type="button"
+        className="landing-control-btn"
+        aria-pressed={muted}
+        disabled={!on}
+        onClick={() => {
+          const next = !muted;
+          setMuted(next);
+          audioRef.current?.setMuted(next);
+        }}
+      >
+        {muted ? t("unmute") : t("mute")}
       </button>
       <label className="landing-volume">
         {t("volumeLabel")}

@@ -251,7 +251,7 @@ describe("InvestigationPage", () => {
     });
     fireEvent.click(screen.getByRole("button", { name: "Run AI analysis" }));
     await waitFor(() => {
-      expect(screen.getByText("Couldn't load this section.")).toBeTruthy();
+      expect(screen.getByText("Service temporarily unavailable. Retry shortly.")).toBeTruthy();
     });
     // Reduced motion (stubbed above) renders the authoritative final score
     // immediately; this wait covers the async data load only.

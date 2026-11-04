@@ -1663,6 +1663,31 @@ button:active:not(:disabled) {
 
 /* Phase 3 notifications. New classes only; no existing rule above
  * is modified. */
+.notif-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem;
+}
+
+.btn-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--link, #7cb8ff);
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
+
+.btn-link:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.badge-unread {
+  background: var(--bad);
+  color: #fff;
+}
 
 .notif-wrap {
   position: relative;
@@ -1848,6 +1873,11 @@ code {
   background: transparent;
   color: var(--ink);
   font: inherit;
+  /* Same multi-script stack as the panel: the current-language
+   * endonym must render in Arabic, Devanagari, CJK, and beyond. */
+  font-family: "Segoe UI", system-ui, "Noto Sans", "Noto Sans Arabic",
+    "Noto Sans Devanagari", "Noto Sans CJK SC", "Noto Sans Ethiopic",
+    "Noto Sans Thai", "Noto Sans Hebrew", sans-serif;
   cursor: pointer;
 }
 
@@ -1891,7 +1921,8 @@ code {
   background: var(--panel);
   box-shadow: var(--shadow-2);
   font-family: "Segoe UI", system-ui, "Noto Sans", "Noto Sans Arabic",
-    "Noto Sans Devanagari", "Noto Sans CJK SC", sans-serif;
+    "Noto Sans Devanagari", "Noto Sans CJK SC", "Noto Sans Ethiopic",
+    "Noto Sans Thai", "Noto Sans Hebrew", sans-serif;
 }
 
 .lang-search {
@@ -1922,6 +1953,8 @@ code {
 
 .lang-option-native {
   font-weight: 600;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .lang-option-meta {

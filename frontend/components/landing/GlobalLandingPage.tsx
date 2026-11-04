@@ -1,5 +1,8 @@
-/* Cinematic landing composition: hero scene, copy, panels,
- * strips, and controls. The 3D canvas loads client-side only. */
+/* Cinematic landing composition: hero copy, atlas row (side panels
+ * flanking a dedicated globe safe area), CTA, controls, then the
+ * capability sections below the fold. The 3D canvas loads
+ * client-side only. Nothing overlaps the central atlas: panels and
+ * cards occupy their own grid cells, never absolute layers. */
 
 "use client";
 
@@ -17,6 +20,9 @@ import {
   ModuleCards,
 } from "./LandingPanels";
 import { CapabilityStrip, GlobalMetrics } from "./LandingStrips";
+import { GlobeControls } from "./GlobeControls";
+import { HackathonRecognitionPanel } from "./HackathonRecognitionPanel";
+import { GlobeController } from "./scene/controls";
 import { WebGLFallback } from "./WebGLFallback";
 import { SkipLink } from "../skip-link";
 import { useTranslation } from "../../lib/i18n/context";
@@ -30,6 +36,7 @@ export function GlobalLandingPage() {
   const { t } = useTranslation("landing");
   const [motion, setMotion] = useState<"full" | "reduced">("full");
   const [paused, setPaused] = useState(false);
+  const [controller] = useState(() => new GlobeController());
   const blipRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
@@ -48,34 +55,42 @@ export function GlobalLandingPage() {
       <LandingNav />
       <main id="main-content" tabIndex={-1}>
         <section className="landing-hero" aria-labelledby="landing-h1">
-          <div className="landing-hero-stage">
-            <GlobalHeroScene motion={motion} paused={paused} />
-            <div className="landing-hero-overlay">
-              <LandingHeroCopy />
+          <LandingHeroCopy />
+          <div className="landing-atlas-row">
+            <IntelligencePanel />
+            <div className="landing-safe-area">
+              <GlobalHeroScene
+                motion={motion}
+                paused={paused}
+                controller={controller}
+              />
               <div className="landing-core-label" aria-hidden="true">
                 <strong>CruiseShield AI™</strong>
                 <span>Global Intelligence Core</span>
               </div>
+              <GlobeControls controller={controller} />
             </div>
-            <IntelligencePanel />
             <CoveragePanel />
-            <ModuleCards />
-            <LandingCta
-              onActivate={() => {
-                blipRef.current?.();
-              }}
-            />
-            <div className="landing-controls">
-              <MotionControl
-                motion={motion}
-                paused={paused}
-                onMotion={setMotion}
-                onPaused={setPaused}
-              />
-              <AudioControl onBlipRef={blipRef} />
-            </div>
           </div>
+          <LandingCta
+            onActivate={() => {
+              blipRef.current?.();
+            }}
+          />
+          <div className="landing-controls">
+            <MotionControl
+              motion={motion}
+              paused={paused}
+              onMotion={setMotion}
+              onPaused={setPaused}
+            />
+            <AudioControl onBlipRef={blipRef} />
+          </div>
+          <HackathonRecognitionPanel />
         </section>
+        <div className="landing-modules-section">
+          <ModuleCards />
+        </div>
         <CapabilityStrip />
         <GlobalMetrics />
       </main>
