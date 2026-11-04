@@ -8,11 +8,13 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslation } from "../../../../lib/i18n/context";
 import { AuditList } from "../../../../components/audit-list";
 import { Breadcrumbs } from "../../../../components/breadcrumbs";
 import {
   ApiError,
   getCaseAudit,
+  userErrorMessage,
   type AuditEntry,
 } from "../../../../lib/api";
 
@@ -25,6 +27,9 @@ type State =
 export default function CaseAuditPage() {
   const params = useParams<{ caseId: string }>();
   const caseId = params.caseId;
+  const { t } = useTranslation("case");
+  const { t: tCommon } = useTranslation("common");
+  const { t: tNav } = useTranslation("nav");
   const [state, setState] = useState<State>({ kind: "loading" });
 
   useEffect(() => {
@@ -40,12 +45,7 @@ export default function CaseAuditPage() {
         }
         setState({
           kind: "error",
-          message:
-            err instanceof ApiError
-              ? `${err.code}: ${err.message}`
-              : err instanceof Error
-                ? err.message
-                : "request failed",
+          message: userErrorMessage(err, tCommon),
         });
       });
     return () => controller.abort();
@@ -55,34 +55,36 @@ export default function CaseAuditPage() {
     <main className="main">
       <Breadcrumbs
         items={[
-          { label: "Command Center", href: "/demo" },
-          { label: `Case ${caseId}`, href: `/cases/${caseId}` },
-          { label: "Audit trail" },
+          { label: tNav("commandCenter"), href: "/demo" },
+          { label: t("crumb", { id: caseId }), href: `/cases/${caseId}` },
+          { label: t("auditCrumb") },
         ]}
       />
       {state.kind === "loading" && (
         <section className="card" aria-live="polite">
-          <h1>Audit trail</h1>
-          <p className="muted">Loading audit events…</p>
+          <h1>{t("auditTitle")}</h1>
+          <p className="muted">{t("auditLoading")}</p>
         </section>
       )}
       {state.kind === "not-found" && (
         <section className="card" aria-live="assertive">
-          <h1>Case not found</h1>
+          <h1>{t("notFoundTitle")}</h1>
           <p className="muted">
-            No case <code>{caseId}</code> exists in the backend.
+            {t("notFoundPre")}
+            <code>{caseId}</code>
+            {t("notFoundPost")}
           </p>
         </section>
       )}
       {state.kind === "error" && (
         <section className="card" aria-live="assertive">
-          <h1>Audit trail</h1>
+          <h1>{t("auditTitle")}</h1>
           <div className="alert error" role="alert">
             {state.message}
           </div>
           <p>
             <button type="button" onClick={() => window.location.reload()}>
-              Retry
+              {tCommon("retry")}
             </button>
           </p>
         </section>
@@ -91,12 +93,13 @@ export default function CaseAuditPage() {
         <>
           <div className="page-head">
             <h1>
-              Audit trail — Case <code>{caseId}</code>
+              {t("auditHeadPre")}
+              <code>{caseId}</code>
             </h1>
             <p className="muted">
-              Every recorded action on this case, in recorded order.{" "}
+              {t("auditIntro")}
               <Link href={`/cases/${caseId}`} className="back-link">
-                Back to case
+                {t("backToCase")}
               </Link>
             </p>
           </div>

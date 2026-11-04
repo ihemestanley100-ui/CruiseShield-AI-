@@ -9,3 +9,20 @@ data/*
 frontend/test-output*.txt
 test-output*.txt
 .DS_Store
+# J1 hardening (D2, applied J3 closeout P13): env variants, logs,
+# coverage. Bare .env.* deliberately NOT used: it would swallow
+# .env.example. Verified: no tracked/required file newly ignored.
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.test
+*.log
+coverage/
+# J3 closeout P13 (auditor additions): key material, backup archives,
+# coverage data files.
+*.pem
+*.key
+*.csbk1
+.coverage
+htmlcov/

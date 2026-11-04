@@ -1,4 +1,5 @@
 """T-009: every evidence item maps to real source records."""
+from app import evidence as evidence_mod
 from app.models import EvidencePackage
 from app.store import Store
 
@@ -21,3 +22,17 @@ def test_evidence_package_maps_to_real_records(tmp_path):
     assert [i.evidence_id for i in package.items] == sorted(
         i.evidence_id for i in package.items)
     assert package.package_hash
+
+
+def test_find_unknown_ids_flags_model_cited_forgeries(tmp_path):
+    # J3 closeout (P11-b): IDs cited by the model outside the sent
+    # package are detected, sorted, and deduplicated.
+    store = Store(tmp_path / "state.json")
+    package = EvidencePackage.model_validate(
+        store.state["evidence_packages"]["inv_84721"])
+    sent = {i.evidence_id for i in package.items}
+    assert evidence_mod.find_unknown_ids(package, set(sent)) == []
+    forged = (set(sent) | {"evidence_hacker_2", "evidence_hacker_1",
+                           "evidence_hacker_1"})
+    assert evidence_mod.find_unknown_ids(package, forged) == [
+        "evidence_hacker_1", "evidence_hacker_2"]

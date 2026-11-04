@@ -148,6 +148,18 @@ CREATE TABLE IF NOT EXISTS simulations (
     simulated_score INTEGER NOT NULL,
     document JSONB NOT NULL
 );
+
+-- J4 runtime auth state (environment-local: never migrated by the
+-- loader, never in LOAD_ORDER, survives demo reset by design).
+CREATE TABLE IF NOT EXISTS session_revocations (
+    nonce TEXT PRIMARY KEY,
+    expires_at BIGINT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS user_epochs (
+    username TEXT PRIMARY KEY,
+    epoch INTEGER NOT NULL
+);
 """
 
 # Tables in FK-safe load order (parents before children).

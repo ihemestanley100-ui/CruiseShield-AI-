@@ -26,7 +26,9 @@ import {
   postLogin,
   postLogout,
   postSimulation,
+  REQUEST_TIMEOUT_MS,
   resetDemo,
+  userErrorMessage,
 } from "./api";
 
 function mockFetchOnce(payload: unknown, ok = true, status = 200) {
@@ -45,6 +47,54 @@ afterEach(() => {
 });
 
 describe("api client", () => {
+  it("maps failures to user-worded messages without raw codes", () => {
+    const t = (key: string) => `<${key}>`;
+    expect(
+      userErrorMessage(
+        new ApiError("ADMIN_REQUIRED", "admin role required", 403, ""),
+        t
+      )
+    ).toBe("<notPermitted>");
+    expect(
+      userErrorMessage(
+        new ApiError("LOGIN_REQUIRED", "demo login required", 401, ""),
+        t
+      )
+    ).toBe("<notPermitted>");
+    expect(
+      userErrorMessage(
+        new ApiError("BACKEND_UNREACHABLE", "down", 0, ""),
+        t
+      )
+    ).toBe("<unreachable>");
+    expect(
+      userErrorMessage(
+        new ApiError("SIM_FAILED", "diverged", 500, ""),
+        t
+      )
+    ).toBe("<loadFailed>");
+    expect(
+      userErrorMessage(
+        new ApiError("REQUEST_TIMEOUT", "aborted", 0, ""),
+        t
+      )
+    ).toBe("<timedOut>");
+    expect(
+      userErrorMessage(new ApiError("HTTP_503", "down", 503, ""), t)
+    ).toBe("<unavailable>");
+    expect(userErrorMessage(new Error("boom"), t)).toBe("<loadFailed>");
+    expect(userErrorMessage(null, t)).toBe("<requestFailed>");
+    // No code or English server text may leak into user-facing output.
+    for (const code of ["ADMIN_REQUIRED", "LOGIN_REQUIRED", "SIM_FAILED"]) {
+      const out = userErrorMessage(
+        new ApiError(code, "server detail here", 500, ""),
+        t
+      );
+      expect(out).not.toContain(code);
+      expect(out).not.toContain("server detail here");
+    }
+  });
+
   it("calls the investigation endpoint with an encoded id", async () => {
     const fetchMock = mockFetchOnce({ investigation: {} });
     await getInvestigation("inv_84721");
@@ -52,6 +102,65 @@ describe("api client", () => {
       "http://127.0.0.1:8000/api/v1/investigations/inv_84721",
       expect.objectContaining({ cache: "no-store" })
     );
+  });
+
+  it("times out a hung backend with REQUEST_TIMEOUT, not a hang", async () => {
+    vi.useFakeTimers();
+    try {
+      // Behaves like real fetch: pends until its signal aborts.
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockImplementation(
+          (_url: string, init?: { signal?: AbortSignal }) =>
+            new Promise((_resolve, reject) => {
+              init?.signal?.addEventListener("abort", () => {
+                reject(
+                  init.signal?.reason ??
+                    new DOMException("Aborted", "AbortError")
+                );
+              });
+            })
+        )
+      );
+      const pending = getHealth();
+      const assertion = expect(pending).rejects.toMatchObject({
+        code: "REQUEST_TIMEOUT",
+      });
+      await vi.advanceTimersByTimeAsync(REQUEST_TIMEOUT_MS + 100);
+      await assertion;
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("keeps caller cancellation as REQUEST_TIMEOUT and clears its timer", async () => {
+    vi.useFakeTimers();
+    try {
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockImplementation(
+          (_url: string, init?: { signal?: AbortSignal }) =>
+            new Promise((_resolve, reject) => {
+              init?.signal?.addEventListener("abort", () => {
+                reject(
+                  init.signal?.reason ??
+                    new DOMException("Aborted", "AbortError")
+                );
+              });
+            })
+        )
+      );
+      const controller = new AbortController();
+      const pending = getHealth(controller.signal);
+      const assertion = expect(pending).rejects.toMatchObject({
+        code: "REQUEST_TIMEOUT",
+      });
+      controller.abort();
+      await assertion;
+      expect(vi.getTimerCount()).toBe(0);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it("lists alerts from the alerts endpoint", async () => {
@@ -82,6 +191,33 @@ describe("api client", () => {
     expect(err.code).toBe("UNKNOWN_INVESTIGATION");
     expect(err.status).toBe(404);
     expect(err.traceId).toBe("t1");
+  });
+
+  it("signals session expiry on 401/403 data responses (J3-P6)", async () => {
+    const seen: string[] = [];
+    const listener = (ev: Event) => seen.push(ev.type);
+    window.addEventListener("csai:unauthorized", listener);
+    try {
+      mockFetchOnce({ error: { code: "LOGIN_REQUIRED" } }, false, 401);
+      await getInvestigation("inv_84721").catch(() => null);
+      mockFetchOnce({ error: { code: "ADMIN_REQUIRED" } }, false, 403);
+      await postAiAnalysis("inv_84721").catch(() => null);
+      mockFetchOnce({ error: { code: "X" } }, false, 500);
+      await getInvestigation("inv_84721").catch(() => null);
+      // Bad-password 401 on the login endpoint itself is not an expiry.
+      mockFetchOnce({ error: { code: "INVALID_CREDENTIALS" } }, false, 401);
+      await postLogin("judge", "wrong").catch(() => null);
+      // Gate probes (/me) and logout outcomes are consumed by the gate
+      // directly: signalling them re-triggers recheck() forever (/me
+      // storm: 586 calls in one page load, observed in armed Edge QA).
+      mockFetchOnce({ error: { code: "LOGIN_REQUIRED" } }, false, 401);
+      await getAuthMe().catch(() => null);
+      mockFetchOnce({ error: { code: "LOGIN_REQUIRED" } }, false, 401);
+      await postLogout().catch(() => null);
+    } finally {
+      window.removeEventListener("csai:unauthorized", listener);
+    }
+    expect(seen).toEqual(["csai:unauthorized", "csai:unauthorized"]);
   });
 
   it("maps network failure to BACKEND_UNREACHABLE", async () => {

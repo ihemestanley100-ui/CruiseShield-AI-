@@ -1,0 +1,11 @@
+[
+  "FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/investigations/inv_84721?_rsc=yrUa8X5BJbbbszh9",
+  "FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/cases/case_84721?_rsc=yrUa8X5BJbbbszh9",
+  "FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/network/txn_84721?_rsc=yrUa8X5BJbbbszh9",
+  "FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/replay/scn_primary?_rsc=yrUa8X5BJbbbszh9",
+  "FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/cases/case_84721/audit?_rsc=yrUa8X5BJbbbszh9",
+  "FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721/audit",
+  "FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/graph/txn_84721",
+  "FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721",
+  "FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721/audit"
+]

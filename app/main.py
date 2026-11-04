@@ -33,7 +33,6 @@ AUTH_LOGIN_PATH = "/api/v1/auth/login"
 APP_VERSION = "1.0.0-p0"
 
 app = FastAPI(title="CruiseShield AI", version=APP_VERSION)
-app.add_middleware(CORSMiddleware, **cors_options())
 
 # Render staging (SEC-009): transport-level body cap. SEC-001 caps fields
 # AFTER JSON parsing; a giant body would be fully read first. Legitimate
@@ -59,6 +58,16 @@ async def body_size_guard(request: Request, call_next):
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     response.headers["Permissions-Policy"] = \
         "camera=(), microphone=(), geolocation=()"
+    # R09-F4: HSTS only when the request arrived over TLS — direct
+    # https or first X-Forwarded-Proto hop (TLS-terminating proxy,
+    # same rule as the Secure cookie flag). Local plain-HTTP dev
+    # gets no header. No includeSubDomains: the demo shares parent
+    # domains on managed hosting; no preload (one-way decision).
+    first_proto = request.headers.get(
+        "x-forwarded-proto", "").split(",")[0].strip().lower()
+    if request.url.scheme == "https" or first_proto == "https":
+        response.headers["Strict-Transport-Security"] = \
+            "max-age=31536000"
     return response
 
 
@@ -67,7 +76,7 @@ RATE_LIMIT_EXEMPT = frozenset({"/api/v1/health", "/api/v1/ready",
                                "/system-health"})
 
 
-# Paths reachable without login when SESSION_SECRET is set. Health/ready
+# Paths reachable without login when auth is armed. Health/ready
 # for orchestrators; login to obtain a session; legacy index + static so a
 # logged-out visitor sees branding (all DATA endpoints stay gated).
 AUTH_MODE_PATH = "/api/v1/auth/mode"
@@ -80,7 +89,20 @@ AUTH_ADMIN_PREFIXES = ("/api/v1/demo/",)
 @app.middleware("http")
 async def session_guard(request: Request, call_next):
     """Phase 5: login enforcement (SEC-013). Inert when unconfigured."""
-    if config_mod.SESSION_SECRET:
+    if config_mod.session_secret_misconfigured():
+        # R09-F2: weak secret fails closed — guarded paths refuse to
+        # serve; only the always-open paths (health/ready/branding)
+        # stay reachable. No session can be minted or validated.
+        path = request.url.path
+        if path not in AUTH_OPEN_PATHS and not path.startswith("/static/"):
+            return JSONResponse(
+                status_code=503,
+                content={"error": {
+                    "code": "AUTH_MISCONFIGURED",
+                    "message": "session secret too weak to arm auth",
+                    "trace_id": _trace(request)}})
+        return await call_next(request)
+    if config_mod.session_auth_armed():
         path = request.url.path
         if path not in AUTH_OPEN_PATHS and not path.startswith("/static/"):
             kind, role = _credential(request)
@@ -91,14 +113,20 @@ async def session_guard(request: Request, call_next):
                         "code": "LOGIN_REQUIRED",
                         "message": "demo login required",
                         "trace_id": _trace(request)}})
+            # R1: admin prefixes need a genuine admin SESSION. The
+            # public demo token (kind "token") must never satisfy an
+            # admin gate — it previously skipped this check entirely
+            # (F-PRIV-1: anonymous browsers outranked non-admin logins
+            # on /api/v1/demo/*).
+            if path.startswith(AUTH_ADMIN_PREFIXES) and not (
+                    kind == "session" and role == "admin"):
+                return JSONResponse(
+                    status_code=403,
+                    content={"error": {
+                        "code": "ADMIN_REQUIRED",
+                        "message": "admin role required",
+                        "trace_id": _trace(request)}})
             if kind == "session":
-                if path.startswith(AUTH_ADMIN_PREFIXES) and role != "admin":
-                    return JSONResponse(
-                        status_code=403,
-                        content={"error": {
-                            "code": "ADMIN_REQUIRED",
-                            "message": "admin role required",
-                            "trace_id": _trace(request)}})
                 if request.method == "POST" and not request.headers.get(
                         "x-requested-with"):
                     return JSONResponse(
@@ -106,6 +134,14 @@ async def session_guard(request: Request, call_next):
                         content={"error": {
                             "code": "CSRF_HEADER_REQUIRED",
                             "message": "X-Requested-With header required",
+                            "trace_id": _trace(request)}})
+                need = _required_perm(request.method, path)
+                if not auth_mod.can(role, need):
+                    return JSONResponse(
+                        status_code=403,
+                        content={"error": {
+                            "code": "PERMISSION_DENIED",
+                            "message": "role '%s' lacks '%s'" % (role, need),
                             "trace_id": _trace(request)}})
             request.state.auth_kind = kind
             request.state.auth_role = role
@@ -131,6 +167,14 @@ async def rate_limit_guard(request: Request, call_next):
                     "trace_id": _trace(request)}},
                 headers={"Retry-After": str(retry_after)})
     return await call_next(request)
+
+
+# CORS is registered LAST so it runs FIRST (outermost): guard
+# short-circuits (401/403/429/413) must carry ACAO headers or browsers
+# hide them as network failures, and preflights must be answered before
+# the session guard. Registered earlier, armed-mode login was
+# unreachable from any browser.
+app.add_middleware(CORSMiddleware, **cors_options())
 app.mount("/static", StaticFiles(directory=ROOT / "static"), name="static")
 templates = Jinja2Templates(directory=ROOT / "templates")
 templates.env.globals["naira"] = evidence_mod.kobo_to_naira
@@ -150,12 +194,46 @@ def _trace(request: Request) -> str:
 
 
 def _session_of(request: Request | None) -> tuple[str, str] | None:
-    """Valid session cookie -> (username, role), else None."""
-    secret = config_mod.SESSION_SECRET or ""
-    if not secret or request is None:
+    """Live session cookie -> (username, role), else None.
+
+    J4: full live validation (signature, expiry, revocation, epoch,
+    provisioning, role). Open when auth is unconfigured.
+    """
+    if not config_mod.session_auth_armed() or request is None:
         return None
-    return auth_mod.verify_session(
-        request.cookies.get(auth_mod.SESSION_COOKIE, ""), secret)
+    secret = config_mod.SESSION_SECRET or ""
+    users = auth_mod.parse_users(config_mod.DEMO_USERS or "")
+    claims = auth_mod.verify_session_live(
+        request.cookies.get(auth_mod.SESSION_COOKIE, ""), secret,
+        store, users)
+    if claims is None:
+        return None
+    return claims["user"], claims["role"]
+
+
+def _session_claims(request: Request | None) -> dict | None:
+    """Live session claims (incl. nonce/iat) or None. J4 logout path."""
+    if not config_mod.session_auth_armed() or request is None:
+        return None
+    secret = config_mod.SESSION_SECRET or ""
+    users = auth_mod.parse_users(config_mod.DEMO_USERS or "")
+    return auth_mod.verify_session_live(
+        request.cookies.get(auth_mod.SESSION_COOKIE, ""), secret,
+        store, users)
+
+
+def _required_perm(method: str, path: str) -> str:
+    """J4: permission a guarded request needs (token creds exempt)."""
+    if path in ("/api/v1/auth/logout", "/api/v1/auth/logout-all",
+                "/api/v1/auth/me"):
+        return "read"
+    if path.endswith("/audit") or "/ai-runs/" in path:
+        return "audit_read" if method == "GET" else "write"
+    if path.endswith("/ai-analysis") or path.endswith("/ai-followup"):
+        return "ai_run"
+    if method in ("POST", "PUT", "PATCH", "DELETE"):
+        return "write"
+    return "read"
 
 
 def _token_ok(request: Request | None) -> bool:
@@ -173,8 +251,14 @@ def _token_ok(request: Request | None) -> bool:
 def _require_write_token(request: Request | None) -> None:
     """D-002: shared write-token gate (SEC-012). Open when unconfigured.
 
-    A valid login session also satisfies the gate (either credential)."""
-    if _session_of(request) is not None:
+    A valid login session with the write permission also satisfies the
+    gate (J4: read-only roles cannot pass even when logged in)."""
+    session = _session_of(request)
+    if session is not None:
+        if not auth_mod.can(session[1], "write"):
+            raise AppError("PERMISSION_DENIED",
+                           "role '%s' cannot modify data" % session[1],
+                           403)
         return
     expected = config_mod.DEMO_WRITE_TOKEN or ""
     if not expected:
@@ -192,6 +276,30 @@ def _credential(request: Request) -> tuple[str, str | None]:
     if _token_ok(request):
         return "token", None
     return "none", None
+
+
+def _decision_actor(request: Request | None, claimed: str) -> str:
+    """R2: token creds cannot self-assert an audit identity (F-AUDIT-1).
+
+    Token-authenticated decisions are attributed to "demo-token";
+    anything else is taken from the (authenticated or local) caller.
+    """
+    kind, _ = _credential(request)  # type: ignore[arg-type]
+    if kind == "token":
+        return "demo-token"
+    return claimed
+
+
+def _require_login(request: Request | None) -> None:
+    """R3: AI endpoints need an authenticated login session (F-QUOTA-1).
+
+    Armed mode only — the unarmed local demo has no sessions and
+    keeps working unchanged.
+    """
+    if config_mod.session_auth_armed() and _session_of(request) is None:
+        raise AppError("AI_LOGIN_REQUIRED",
+                       "authenticated login required for AI operations",
+                       403)
 
 
 @app.exception_handler(AppError)
@@ -363,9 +471,26 @@ def ready() -> JSONResponse:
     return JSONResponse(status_code=200 if ok else 503, content=detail)
 
 
+def _session_cookie_attrs(request: Request) -> dict[str, Any]:
+    """X-ORIGIN: cookie transport attributes shared by set + delete sites.
+
+    Cross-site Netlify -> Render fetch withholds SameSite=Lax cookies, so
+    use None whenever the channel is Secure; on plain-HTTP local dev
+    browsers reject SameSite=None without Secure, so keep Lax there.
+    Secure detection is the existing J3-P2 rule (Render terminates TLS).
+    """
+    forwarded = request.headers.get("x-forwarded-proto", "")
+    first_hop = forwarded.split(",")[0].strip().lower()
+    secure = request.url.scheme == "https" or first_hop == "https"
+    return {"secure": secure, "samesite": "none" if secure else "lax"}
+
+
 @app.post(AUTH_LOGIN_PATH)
 def auth_login(body: dict[str, Any], request: Request) -> JSONResponse:
     """Phase 5: demo login. 503 when auth is not configured."""
+    if config_mod.session_secret_misconfigured():
+        raise AppError("AUTH_MISCONFIGURED",
+                       "session secret too weak to arm auth", 503)
     secret = config_mod.SESSION_SECRET or ""
     if not secret:
         raise AppError("AUTH_DISABLED", "demo login is not configured", 503)
@@ -388,22 +513,63 @@ def auth_login(body: dict[str, Any], request: Request) -> JSONResponse:
                                         "$" + "0" * 64))
     if username not in users or not auth_mod.verify_password(password,
                                                              record):
+        # R09-F3: audit rejected logins for brute-force forensics.
+        # Actor/target carry the presented username only — never the
+        # password, and no token/secret material exists on this path.
+        store.append_audit("user", username or "unknown",
+                           "auth.login.failed", "session",
+                           username or "unknown", "", "",
+                           "invalid username or password",
+                           store.state["trace_id"], _trace(request))
         raise AppError("INVALID_CREDENTIALS",
                        "invalid username or password", 401)
     token = auth_mod.create_session(username, role, secret)
+    store.append_audit("user", username, "auth.login", "session", username,
+                       "", role, "demo login",
+                       store.state["trace_id"], _trace(request))
     response = JSONResponse({"user": username, "role": role})
+    attrs = _session_cookie_attrs(request)
     response.set_cookie(auth_mod.SESSION_COOKIE, token,
                         max_age=auth_mod.SESSION_TTL_SECONDS,
-                        httponly=True,
-                        secure=(request.url.scheme == "https"),
-                        samesite="lax", path="/")
+                        httponly=True, secure=attrs["secure"],
+                        samesite=attrs["samesite"], path="/")
     return response
 
 
 @app.post("/api/v1/auth/logout")
-def auth_logout() -> JSONResponse:
+def auth_logout(request: Request) -> JSONResponse:
+    """J4: logout revokes this session server-side (not just the cookie)."""
+    claims = _session_claims(request)
+    if claims is not None:
+        store.revoke_session(claims["nonce"], claims["exp"])
+        store.append_audit("user", claims["user"], "auth.logout",
+                           "session", claims["user"], claims["role"], "",
+                           "demo logout", store.state["trace_id"],
+                           _trace(request))
     response = JSONResponse({"ok": True})
-    response.delete_cookie(auth_mod.SESSION_COOKIE, path="/")
+    attrs = _session_cookie_attrs(request)
+    response.delete_cookie(auth_mod.SESSION_COOKIE, path="/",
+                           secure=attrs["secure"],
+                           samesite=attrs["samesite"])
+    return response
+
+
+@app.post("/api/v1/auth/logout-all")
+def auth_logout_all(request: Request) -> JSONResponse:
+    """J4: invalidate every session for the calling user (epoch bump)."""
+    claims = _session_claims(request)
+    if claims is None:
+        raise AppError("LOGIN_REQUIRED", "demo login required", 401)
+    store.bump_epoch(claims["user"])
+    store.append_audit("user", claims["user"], "auth.logout_all",
+                       "session", claims["user"], claims["role"], "",
+                       "demo logout-all", store.state["trace_id"],
+                       _trace(request))
+    response = JSONResponse({"ok": True})
+    attrs = _session_cookie_attrs(request)
+    response.delete_cookie(auth_mod.SESSION_COOKIE, path="/",
+                           secure=attrs["secure"],
+                           samesite=attrs["samesite"])
     return response
 
 
@@ -413,12 +579,13 @@ def auth_me(request: Request) -> dict[str, Any]:
     if session is None:
         raise AppError("LOGIN_REQUIRED", "demo login required", 401)
     username, role = session
-    return {"user": username, "role": role}
+    return {"user": username, "role": role,
+            "permissions": sorted(auth_mod.PERMISSIONS.get(role, ()))}
 
 
 @app.get(AUTH_MODE_PATH)
 def auth_mode() -> dict[str, Any]:
-    return {"auth_enabled": bool(config_mod.SESSION_SECRET or "")}
+    return {"auth_enabled": config_mod.session_auth_armed()}
 
 
 @app.get("/api/v1/demo/scenarios")
@@ -646,7 +813,15 @@ def get_investigation(inv_id: str) -> dict[str, Any]:
 
 
 @app.post("/api/v1/investigations/{inv_id}/evidence-package")
-def build_evidence_package(inv_id: str) -> dict[str, Any]:
+def build_evidence_package(inv_id: str,
+                           request: Request) -> dict[str, Any]:
+    # R4: same write gate as every other state-changing POST
+    # (F-CONSIST-1; the handler stays a read-only alias of GET).
+    _require_write_token(request)
+    return _evidence_package(inv_id)
+
+
+def _evidence_package(inv_id: str) -> dict[str, Any]:
     inv = store.get_investigation(inv_id)
     if inv is None:
         raise AppError("UNKNOWN_INVESTIGATION", inv_id, 404)
@@ -655,7 +830,7 @@ def build_evidence_package(inv_id: str) -> dict[str, Any]:
 
 @app.get("/api/v1/investigations/{inv_id}/evidence-package")
 def read_evidence_package(inv_id: str) -> dict[str, Any]:
-    return build_evidence_package(inv_id)
+    return _evidence_package(inv_id)
 
 
 async def _run_ai(package: EvidencePackage, summary: str, run_id: str,
@@ -670,16 +845,16 @@ async def _run_ai(package: EvidencePackage, summary: str, run_id: str,
     request; rejections are audited but persist no run (no call made).
     """
     limit = config_mod.AI_DAILY_CALL_LIMIT
-    if limit > 0 and ai_adapter.attempts_today(
-            store.state.get("ai_runs", [])) >= limit:
+    # J3-P7: quota visibility — name used/limit + reset time, not just the cap.
+    used = ai_adapter.attempts_today(store.state.get("ai_runs", []))
+    if limit > 0 and used >= limit:
+        quota_msg = (f"daily live-model call limit reached "
+                     f"({used}/{limit} used today; resets 00:00 UTC)")
         store.append_audit(
             "service", "ai-adapter", "ai.run.rejected", "agent_run", run_id,
-            "PENDING", "REJECTED",
-            f"daily live-model call limit reached ({limit}/day)",
+            "PENDING", "REJECTED", quota_msg,
             store.state["trace_id"], trace_id)
-        raise AppError("AI_DAILY_LIMIT_EXCEEDED",
-                       f"daily live-model call limit reached ({limit}/day)",
-                       429)
+        raise AppError("AI_DAILY_LIMIT_EXCEEDED", quota_msg, 429)
     t0 = time.monotonic()
     try:
         run = await ai_adapter.analyze(package, summary,
@@ -737,6 +912,7 @@ def _investigation_summary(inv_id: str) -> tuple[dict, EvidencePackage, str]:
 @app.post("/api/v1/investigations/{inv_id}/ai-analysis")
 async def ai_analysis(inv_id: str, request: Request) -> dict[str, Any]:
     _require_write_token(request)
+    _require_login(request)
     _, package, summary = _investigation_summary(inv_id)
     run_id = f"agentrun_{len(store.state['ai_runs']) + 1:04d}"
     return await _run_ai(package, summary, run_id, _trace(request))
@@ -746,6 +922,7 @@ async def ai_analysis(inv_id: str, request: Request) -> dict[str, Any]:
 async def ai_followup(inv_id: str, body: dict[str, Any],
                       request: Request) -> dict[str, Any]:
     _require_write_token(request)
+    _require_login(request)
     _, package, summary = _investigation_summary(inv_id)
     if not isinstance(body, dict):
         raise AppError("INVALID_BODY", "request body must be a JSON object", 400)
@@ -821,6 +998,10 @@ def latest_ai_run_for_case(case: dict[str, Any]) -> dict[str, Any] | None:
     for run in reversed(store.state["ai_runs"]):
         if package_id is not None and run.get("evidence_package_id") != package_id:
             continue
+        # J3-P5: a FAILED run (empty result) must never mask the latest
+        # SUCCEEDED assessment the case page would otherwise show.
+        if run.get("status") != "SUCCEEDED":
+            continue
         result = run.get("result") if isinstance(run.get("result"), dict) else {}
         findings = []
         for finding in result.get("key_findings", []) or []:
@@ -867,7 +1048,8 @@ def post_decision(case_id: str, body: dict[str, Any],
         record, audit = cases_mod.record_decision(
             store, case_id, body.get("decision", ""),
             body.get("target_status", ""), body.get("reason", ""),
-            body.get("actor_id", "investigator"),
+            _decision_actor(request,
+                            body.get("actor_id", "investigator")),
             body.get("evidence_viewed", []),
             body.get("recommendation", ""), _trace(request))
     except ValueError as exc:

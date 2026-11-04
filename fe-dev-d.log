@@ -1,0 +1,38 @@
+
+> cruiseshield-frontend@0.1.0 dev
+> next dev --port 3000
+
+   ▲ Next.js 15.5.28
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.4:3000
+
+ ✓ Starting...
+ ✓ Ready in 14s
+ ○ Compiling / ...
+ ✓ Compiled / in 19s (765 modules)
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET / 200 in 358ms
+ ○ Compiling /demo ...
+ ✓ Compiled /demo in 3.5s (773 modules)
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /demo?locale=ar 200 in 5074ms
+ GET /demo 200 in 291ms
+ GET /demo 200 in 359ms
+ GET /demo 200 in 427ms
+ GET /demo 200 in 367ms
+ GET /demo 200 in 339ms
+ GET /demo?locale=ar 200 in 678ms
+ GET /demo 200 in 572ms
+ GET /demo?locale=ar 200 in 700ms
+ GET /demo 200 in 519ms
+ GET /demo?locale=ar 200 in 394ms
+ GET /demo 200 in 447ms
+ GET /demo?locale=ar 200 in 431ms
+ GET /demo 200 in 485ms
+ GET /demo?locale=ar 200 in 439ms
+ GET /demo 200 in 504ms
+ GET /demo?locale=ar 200 in 425ms
+ ○ Compiling /investigations/[id] ...
+ ✓ Compiled /investigations/[id] in 3.1s (766 modules)
+ ⚠ metadataBase property in metadata export is not set for resolving social open graph or twitter images, using "http://localhost:3000". See https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
+ GET /investigations/inv_84721 200 in 6943ms

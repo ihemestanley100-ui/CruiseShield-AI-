@@ -1,0 +1,579 @@
+# locale: pt (MACHINE-DRAFTED — human review pending)
+# version: 1.2.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
+# columns: key | en_source | draft | origin(direct=translated,fallback=English shown) | same_as_source | en_vars | draft_vars | vars_ok
+key	en_source	draft	origin	same_as_source	en_vars	draft_vars	vars_ok
+ai.altTitle	Alternative explanations:	Explicações alternativas:	direct	false			true
+ai.askBtn	Ask follow-up	Perguntar seguimento	direct	false			true
+ai.askLabel	Ask a follow-up about this evidence	Faça uma pergunta de seguimento sobre estas evidências	direct	false			true
+ai.askPh	e.g. Why is dev_04 shared across accounts?	p. ex., Porque é que dev_04 é partilhado entre contas?	direct	false			true
+ai.asking	Asking…	A perguntar…	direct	false			true
+ai.calling	Calling model…	A chamar o modelo…	direct	false			true
+ai.cannotRun	Your role cannot run AI analysis.	A sua função não pode executar análise de IA.	direct	false			true
+ai.conclusionLine	Conclusion: {c}	Conclusão: {c}	direct	false	c	c	true
+ai.confidencePre	Confidence: 	Confiança: 	direct	false			true
+ai.metaPre	{model} · {ms} ms · schema {s} · refs {r} · run 	{model} · {ms} ms · esquema {s} · refs {r} · execução 	direct	false	model,ms,r,s	model,ms,r,s	true
+ai.missingTitle	Missing information:	Informação em falta:	direct	false			true
+ai.panelBlurb	Read-only explanation of the evidence package. The model cannot change risk scores or authorize actions.	Explicação só de leitura do pacote de evidências. O modelo não pode alterar pontuações de risco nem autorizar ações.	direct	false			true
+ai.panelTitle	Analyze with Muse Spark	Análise pela Muse Spark	direct	false			true
+ai.qLine	Q: {q}	P: {q}	direct	false	q	q	true
+ai.runAnalysis	Run AI analysis	Executar análise de IA	direct	false			true
+ai.timedOut	Request timed out or was cancelled.	O pedido expirou ou foi cancelado.	direct	false			true
+audit.auditEmpty	No audit events recorded for this case.	Sem eventos de auditoria registados para este caso.	direct	false			true
+audit.auditLabel	Audit trail	Trilha de auditoria	direct	false			true
+audit.auditTitle	Audit trail	Trilha de auditoria	direct	false			true
+audit.caption	Every recorded action with actor, state change, and reason.	Cada ação registada com ator, mudança de estado e motivo.	direct	false			true
+audit.events.one	{count} audit event.	{count} evento de auditoria.	direct	false	count	count	true
+audit.events.other	{count} audit events.	{count} eventos de auditoria.	direct	false	count	count	true
+audit.thAction	Action	Ação	direct	false			true
+audit.thActor	Actor	Ator	direct	false			true
+audit.thEvent	Event	Evento	direct	false			true
+audit.thReason	Reason	Motivo	direct	false			true
+audit.thState	State change	Mudança de estado	direct	false			true
+audit.thTime	Time	Hora	direct	false			true
+auth.blurb	This hosted demo is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	Esta demonstração está protegida. Entre com as credenciais de investigador fornecidas para esta avaliação. Apenas dados sintéticos.	direct	false			true
+auth.invalid	Invalid username or password.	Nome de utilizador ou palavra-passe inválidos.	direct	false			true
+auth.password	Password	Palavra-passe	direct	false			true
+auth.rateLimited	Too many login attempts. Wait a minute and try again.	Demasiadas tentativas. Aguarde um minuto e tente novamente.	direct	false			true
+auth.signIn	Sign in	Entrar	direct	false			true
+auth.signingIn	Signing in…	A entrar…	direct	false			true
+auth.title	Demo sign in	Entrar na demonstração	direct	false			true
+auth.unreachable	Backend unreachable. Check the demo server and retry.	Servidor inacessível. Verifique o servidor de demonstração e tente novamente.	direct	false			true
+auth.username	Username	Nome de utilizador	direct	false			true
+case.advisory	Advisory only: Muse Spark analysis explains evidence and never constitutes a human decision, nor changes risk scores or case status.	Apenas consultivo: a análise Muse Spark explica evidências e nunca constitui uma decisão humana, nem altera pontuações de risco ou o estado do caso.	direct	false			true
+case.aiAssessment	AI assessment	Avaliação de IA	direct	false			true
+case.assessEmpty	No AI investigation assessment is available yet.	Ainda sem avaliação de investigação de IA disponível.	direct	false			true
+case.assessLabel	AI Investigation Assessment	Avaliação de Investigação de IA	direct	false			true
+case.assessTitle	AI Investigation Assessment	Avaliação de Investigação de IA	direct	false			true
+case.auditCrumb	Audit trail	Trilha de auditoria	direct	false			true
+case.auditHeadPre	Audit trail — Case 	Trilha de auditoria — Caso 	direct	false			true
+case.auditIntro	Every recorded action on this case, in recorded order. 	Cada ação registada neste caso, por ordem de registo. 	direct	false			true
+case.auditLoading	Loading audit events…	A carregar eventos de auditoria…	direct	false			true
+case.auditTitle	Audit trail	Trilha de auditoria	direct	false			true
+case.auditTrail	Audit trail	Trilha de auditoria	direct	false			true
+case.backToCase	Back to case	Voltar ao caso	direct	false			true
+case.caseTitleDash	— 	— 	direct	true			true
+case.caseTitlePre	Case 	Caso 	direct	false			true
+case.conclusionPre	Conclusion: 	Conclusão: 	direct	false			true
+case.confidencePre	Confidence: 	Confiança: 	direct	false			true
+case.crumb	Case {id}	Caso {id}	direct	false	id	id	true
+case.decidedByPre	by {actor} ·	por {actor} ·	direct	false	actor	actor	true
+case.decisionHistory	Decision history	Histórico de decisões	direct	false			true
+case.histEmpty	No human decisions recorded yet.	Ainda sem decisões humanas registadas.	direct	false			true
+case.histLabel	Decision history	Histórico de decisões	direct	false			true
+case.histTitle	Decision history	Histórico de decisões	direct	false			true
+case.humanDecision	Human decision	Decisão humana	direct	false			true
+case.invPre	Investigation 	Investigação 	direct	false			true
+case.loading	Loading case…	A carregar caso…	direct	false			true
+case.missingInfo	Missing information: {list}	Informação em falta: {list}	direct	false	list	list	true
+case.notFoundPost	 exists in the backend.	 existe no servidor.	direct	false			true
+case.notFoundPre	No case 	Nenhum caso 	direct	false			true
+case.notFoundTitle	Case not found	Caso não encontrado	direct	false			true
+case.openAudit	Open full audit trail	Abrir trilha de auditoria completa	direct	false			true
+case.overview	Overview	Resumo	direct	false			true
+case.runMetaPost	· {ms} ms · schema {s} · refs {r})	· {ms} ms · esquema {s} · refs {r})	direct	false	ms,r,s	ms,r,s	true
+case.runMetaPre	({model} · run 	({model} · execução 	direct	false	model	model	true
+case.title	Case {id}	Caso {id}	direct	false	id	id	true
+case.transitionsEmpty	none (terminal state, or refreshing…)	nenhuma (estado terminal, ou a atualizar…)	direct	false			true
+case.transitionsPre	Allowed transitions: 	Transições permitidas: 	direct	false			true
+case.updatedPre	· updated	· atualizado	direct	false			true
+command.activityEmpty	No audit events recorded yet.	Ainda sem eventos de auditoria registados.	direct	false			true
+command.activityEvents.one	{count} audit event	{count} evento de auditoria	direct	false	count	count	true
+command.activityEvents.other	{count} audit events	{count} eventos de auditoria	direct	false	count	count	true
+command.activityMore	 — showing latest {n}	 — a mostrar os últimos {n}	direct	false	n	n	true
+command.activityTitle	Recent activity	Atividade recente	direct	false			true
+command.briefAdvisory	Advisory only: explains evidence and never constitutes a human decision, nor changes risk scores or case status.	Apenas consultivo: explica evidências e nunca constitui uma decisão humana, nem altera pontuações de risco ou o estado do caso.	direct	false			true
+command.briefConclusion	Conclusion: {c}	Conclusão: {c}	direct	false	c	c	true
+command.briefEmpty	No Muse Spark analysis is available yet.	Ainda sem análise Muse Spark disponível.	direct	false			true
+command.briefMetaPost	· {ms} ms · schema {s} · refs {f}	· {ms} ms · esquema {s} · refs {f}	direct	false	f,ms,s	f,ms,s	true
+command.briefMetaPre	{m} · run 	{m} · execução 	direct	false	m	m	true
+command.briefMissing	Missing information: {list}	Informação em falta: {list}	direct	false	list	list	true
+command.briefTitle	Muse Spark brief	Resumo Muse Spark	direct	false			true
+command.caseStatusLine	{case} · {status}	{case} · {status}	direct	true	case,status	case,status	true
+command.confPre	Confidence: 	Confiança: 	direct	false			true
+command.edgesLabel	edges	arestas	direct	false			true
+command.evPackH	Evidence package	Pacote de evidências	direct	false			true
+command.evRecords	evidence records	registos de evidências	direct	false			true
+command.execTitle	Executive overview	Resumo executivo	direct	false			true
+command.featAudit	Audit Trail	Trilha de Auditoria	direct	false			true
+command.featAuditDesc	System and analyst activity.	Atividade do sistema e de analistas.	direct	false			true
+command.featAuditFoot	Full history	Histórico completo	direct	false			true
+command.featCases	Cases	Casos	direct	false			true
+command.featCasesDesc	Case status and human decisions.	Estado de casos e decisões humanas.	direct	false			true
+command.featEv	Evidence	Evidências	direct	false			true
+command.featEvDesc	Linked evidence and provenance.	Evidências ligadas e proveniência.	direct	false			true
+command.featEvDown	Unavailable	Indisponível	direct	false			true
+command.featEvFoot	{n} records	{n} registos	direct	false	n	n	true
+command.featGraphDown	Graph unavailable	Grafo indisponível	direct	false			true
+command.featGraphFoot	{a} nodes · {b} edges	{a} nós · {b} arestas	direct	false	a,b	a,b	true
+command.featInv	Investigations	Investigações	direct	false			true
+command.featInvDesc	Scores, rules, evidence and AI analysis.	Pontuações, regras, evidências e análise de IA.	direct	false			true
+command.featNet	Network Explorer	Explorador de Rede	direct	false			true
+command.featNetDesc	Accounts, devices, phones and merchants.	Contas, dispositivos, telefones e comerciantes.	direct	false			true
+command.featReplay	Replay & Simulation	Reprodução e Simulação	direct	false			true
+command.featReplayDesc	Recreate events and test what-if scenarios.	Recrie eventos e teste cenários hipotéticos.	direct	false			true
+command.featReplayFoot	Deterministic replay	Reprodução determinística	direct	false			true
+command.featTitle	Explore	Explorar	direct	false			true
+command.fullExplanations	Full explanations on the investigation	Explicações completas na investigação	direct	false			true
+command.kpiActive	Active investigations	Investigações ativas	direct	false			true
+command.kpiAi	AI analysis runs	Execuções de análise de IA	direct	false			true
+command.kpiDecisions	Human decisions	Decisões humanas	direct	false			true
+command.kpiEvidence	Evidence records	Registos de evidências	direct	false			true
+command.kpiHigh	High-risk investigations	Investigações de alto risco	direct	false			true
+command.kpiRiskTitle	Risk intelligence	Inteligência de risco	direct	false			true
+command.kpiTxn	Transactions monitored	Transações monitorizadas	direct	false			true
+command.linkedTo	Linked to {id}	Ligado a {id}	direct	false	id	id	true
+command.loadingNet	Loading network…	A carregar rede…	direct	false			true
+command.needsAction	{case} · {status} — requires analyst action	{case} · {status} — requer ação do analista	direct	false	case,status	case,status	true
+command.netBandLine	Network band {b}	Faixa de rede {b}	direct	false	b	b	true
+command.netDown	Network data unavailable.	Dados de rede indisponíveis.	direct	false			true
+command.netH	Investigation network	Rede de investigação	direct	false			true
+command.netRiskH	Network risk	Risco de rede	direct	false			true
+command.noRuns	No runs recorded	Sem execuções registadas	direct	false			true
+command.nodesLabel	nodes	nós	direct	false			true
+command.openCaseAudit	Open case audit trail	Abrir trilha de auditoria do caso	direct	false			true
+command.openEvidence	Open evidence	Abrir evidências	direct	false			true
+command.openFullExplorer	Open full network explorer	Abrir explorador de rede completo	direct	false			true
+command.openNetExplorer	Open network explorer	Abrir explorador de rede	direct	false			true
+command.packagePre	Package 	Pacote 	direct	false			true
+command.previewAria	Network preview: {a} of {b} nodes shown	Pré-visualização da rede: {a} de {b} nós mostrados	direct	false	a,b	a,b	true
+command.previewCounts	{a} nodes, {b} edges in the investigation graph. Preview shows {c} nodes and {d} relationships.	{a} nós, {b} arestas no grafo de investigação. A pré-visualização mostra {c} nós e {d} relações.	direct	false	a,b,c,d	a,b,c,d	true
+command.previewEmpty	No relationships in this graph.	Sem relações neste grafo.	direct	false			true
+command.previewProvErrors	Provenance errors: {list}	Erros de proveniência: {list}	direct	false	list	list	true
+command.previewTitle	Network preview	Pré-visualização da rede	direct	false			true
+command.provErrors	Provenance errors: {n}	Erros de proveniência: {n}	direct	false	n	n	true
+command.riskAria	Risk {score} of 100, {band}	Risco {score} de 100, {band}	direct	false	band,score	band,score	true
+command.rulesAria	{a} of {b} rules triggered	{a} de {b} regras acionadas	direct	false	a,b	a,b	true
+command.rulesCounts	{a} of {b} rules triggered.	{a} de {b} regras acionadas.	direct	false	a,b	a,b	true
+command.rulesH	Rules triggered	Regras acionadas	direct	false			true
+command.rulesOf	{a} of {b}	{a} de {b}	direct	false	a,b	a,b	true
+command.rulesTitle	Rule triggers	Acionamentos de regras	direct	false			true
+command.runFromInv	Run analysis from the investigation	Executar análise a partir da investigação	direct	false			true
+command.txnOnlyH	Transaction-only risk	Risco só de transação	direct	false			true
+command.txnOnlyNote	This transfer on its own, before network context. The network score above is authoritative for the investigation.	Esta transferência por si só, antes do contexto de rede. A pontuação de rede acima é autoritativa para a investigação.	direct	false			true
+command.txnOnlyScope	{v} · single-transfer scope	{v} · âmbito de transferência única	direct	false	v	v	true
+command.txnTitleLine	Transaction #{n}	Transação #{n}	direct	false	n	n	true
+command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derived difference)	{v} · âmbito de rede · {sign}{u} vs só transação (diferença derivada)	direct	false	sign,u,v	sign,u,v	true
+command.versionedRules	Versioned deterministic rules	Regras determinísticas versionadas	direct	false			true
+common.breadcrumb	Breadcrumb	Trilha de navegação	direct	false			true
+common.closeDialog	Close dialog	Fechar diálogo	direct	false			true
+common.loadFailed	Couldn't load this section.	Não foi possível carregar esta seção.	direct	false			true
+common.loading	Loading…	A carregar…	direct	false			true
+common.none	none	Nenhum	direct	false			true
+common.noneYet	None yet	Nenhum ainda	direct	false			true
+common.notAvailable	Not available	Indisponível	direct	false			true
+common.notPermitted	Not available for your role.	Indisponível para a sua função.	direct	false			true
+common.present	present	presente	direct	false			true
+common.requestFailed	request failed	Pedido falhou	direct	false			true
+common.retry	Retry	Tentar novamente	direct	false			true
+common.timelineEmpty	No events.	Sem eventos.	direct	false			true
+common.unknown	unknown	Desconhecido	direct	false			true
+common.unknownModel	unknown model	modelo desconhecido	direct	false			true
+common.unknownTime	unknown time	hora desconhecida	direct	false			true
+common.unreachable	Backend unreachable. Check the demo server and retry.	Servidor inacessível. Verifique o servidor de demonstração e tente novamente.	direct	false			true
+decision.actorLabel	Analyst ID	ID do analista	direct	false			true
+decision.decisionLabel	Decision	Decisão	direct	false			true
+decision.readOnly	Your role is read-only: decisions are disabled.	A sua função é só de leitura: decisões desativadas.	direct	false			true
+decision.reasonLabel	Reason (required)	Motivo (obrigatório)	direct	false			true
+decision.reasonRequired	A reason is required before recording a decision.	É necessário um motivo antes de registar uma decisão.	direct	false			true
+decision.record	Record decision	Registar decisão	direct	false			true
+decision.recording	Recording…	A registar…	direct	false			true
+decision.selectFirst	Select a decision before recording.	Selecione uma decisão antes de registar.	direct	false			true
+decision.selectPlaceholder	Select a decision…	Selecione uma decisão…	direct	false			true
+decision.targetLabel	Move case to	Mover o caso para	direct	false			true
+decision.terminal	This case is in a terminal state; no further transitions are allowed.	Este caso está num estado terminal; não são permitidas mais transições.	direct	false			true
+decision.title	Human decision	Decisão humana	direct	false			true
+demo.activityDown	Activity unavailable	Atividade indisponível	direct	false			true
+demo.aiBriefDown	AI brief unavailable	Resumo de IA indisponível	direct	false			true
+demo.backendStatus	Backend status	Estado do servidor	direct	false			true
+demo.checkedAt	Checked {url}…	Verificado {url}…	direct	false	url	url	true
+demo.execOverview	Executive overview	Resumo executivo	direct	false			true
+demo.execOverviewDown	Executive overview unavailable	Resumo executivo indisponível	direct	false			true
+demo.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	A criminalidade financeira raramente aparece numa só transação. O CruiseShield AI liga transações, contas, dispositivos, beneficiários e comerciantes suspeitos numa rede de inteligência explicável.	direct	false			true
+demo.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	O seu motor de risco determinístico identifica sinais, a Meta AI ajuda os investigadores a interpretar evidências, a reprodução e a simulação exploram cenários hipotéticos, e as decisões humanas mantêm-se responsáveis e auditáveis.	direct	false			true
+demo.museBrief	Muse Spark brief	Resumo Muse Spark	direct	false			true
+demo.networkPreview	Network preview	Pré-visualização da rede	direct	false			true
+demo.networkPreviewDown	Network preview unavailable	Pré-visualização da rede indisponível	direct	false			true
+demo.recentActivity	Recent activity	Atividade recente	direct	false			true
+demo.replayDown	Replay unavailable.	Reprodução indisponível.	direct	false			true
+demo.retryTitle	Retry {title}	Tentar {title} novamente	direct	false	title	title	true
+demo.riskIntel	Risk intelligence	Inteligência de risco	direct	false			true
+demo.riskIntelDown	Risk intelligence unavailable	Inteligência de risco indisponível	direct	false			true
+demo.startBackendPost	) and press retry.	) e prima tentar novamente.	direct	false			true
+demo.startBackendPre	Start the backend (	Inicie o servidor (	direct	false			true
+demo.systemStatus	System Status	Estado do Sistema	direct	false			true
+demo.systemStatusDown	System status unavailable	Estado do sistema indisponível	direct	false			true
+evidence.clearSearch	Clear search	Limpar pesquisa	direct	false			true
+evidence.emptyFilter	No evidence items match this filter.	Sem evidências correspondentes.	direct	false			true
+evidence.emptySearch	No evidence items match this search.	Nenhuma evidência corresponde a esta pesquisa.	direct	false			true
+evidence.filterAll	all	Tudo	direct	false			true
+evidence.filterByType	Filter by type	Filtrar por tipo	direct	false			true
+evidence.hideProv	Hide provenance	Ocultar proveniência	direct	false			true
+evidence.pkgTitle	Evidence package ({a} of {b})	Pacote de evidências ({a} de {b})	direct	false	a,b	a,b	true
+evidence.provEdges	Graph edges	Arestas do grafo	direct	false			true
+evidence.provEvents	Events	Eventos	direct	false			true
+evidence.provRules	Rule results	Resultados de regras	direct	false			true
+evidence.searchLabel	Search evidence	Pesquisar evidências	direct	false			true
+evidence.searchPh	Filter by ID, type, title, or description	Filtrar por ID, tipo, título ou descrição	direct	false			true
+evidence.showProv	Show provenance	Mostrar proveniência	direct	false			true
+graph.animSpeed	Animation speed	Velocidade de animação	direct	false			true
+graph.countsLine	Showing {a} of {b} nodes, {c} of {d} edges.	A mostrar {a} de {b} nós, {c} de {d} arestas.	direct	false	a,b,c,d	a,b,c,d	true
+graph.detailEvidence	Evidence: 	Evidências: 	direct	false			true
+graph.detailProv	Provenance: 	Proveniência: 	direct	false			true
+graph.detailSource	Source: 	Fonte: 	direct	false			true
+graph.detailValidArrow	→	→	direct	true			true
+graph.detailValidPost	· Trace: 	· Rasto: 	direct	false			true
+graph.detailValidPre	Valid:	Válido:	direct	false			true
+graph.droppedEdges.one	{count} edge hidden: endpoint unknown ({ids}).	{count} aresta oculta: extremidade desconhecida ({ids}).	direct	false	count,ids	count,ids	true
+graph.droppedEdges.other	{count} edges hidden: endpoint unknown ({ids}).	{count} arestas ocultas: extremidade desconhecida ({ids}).	direct	false	count,ids	count,ids	true
+graph.edgeLabel	Edge {id}: {s} {r} {t}	Aresta {id}: {s} {r} {t}	direct	false	id,r,s,t	id,r,s,t	true
+graph.entityFilters	Entity type filters	Filtros de tipo de entidade	direct	false			true
+graph.entityLegend	Entity legend	Legenda de entidades	direct	false			true
+graph.fit	Fit to screen	Ajustar ao ecrã	direct	false			true
+graph.focusIsolated	Focus has no connections in the current filter.	O foco não tem ligações no filtro atual.	direct	false			true
+graph.graphTitle	Network graph	Grafo da rede	direct	false			true
+graph.hideLabels	Hide labels	Ocultar rótulos	direct	false			true
+graph.legendNote	Shapes + labels identify types (never color alone). Ring = graph steps from focus, not risk.	Formas + rótulos identificam tipos (nunca só cor). Anel = passos do grafo desde o foco, não risco.	direct	false			true
+graph.nodeFocusSuffix	, orbit focus	, foco orbital	direct	false			true
+graph.orbitFocusBadge	· orbit focus	· foco orbital	direct	false			true
+graph.orbitalCounts	Focus: {focus} · Showing {a} of {b} nodes, {c} of {d} edges.	Foco: {focus} · A mostrar {a} de {b} nós, {c} de {d} arestas.	direct	false	a,b,c,d,focus	a,b,c,d,focus	true
+graph.orbitalLabel	Orbital graph	Grafo orbital	direct	false			true
+graph.orbitalNote	Synthetic demo data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	Dados sintéticos de demonstração. Anéis e movimento são só disposição — não indicam risco, culpa ou prioridade.	direct	false			true
+graph.orbitalSvg	Orbital graph focused on {focus}: {a} nodes, {b} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.	Grafo orbital focado em {focus}: {a} nós, {b} arestas. Tab para alcançar nós e arestas, Enter para selecionar, setas para deslocar.	direct	false	a,b,focus	a,b,focus	true
+graph.orbitalTitle	Orbital explorer	Explorador orbital	direct	false			true
+graph.orbitalViewControls	Orbital view controls	Controlos de vista orbital	direct	false			true
+graph.pauseAnim	Pause animation	Pausar animação	direct	false			true
+graph.pin	Pin as orbit focus	Fixar como foco orbital	direct	false			true
+graph.playAnim	Play animation	Reproduzir animação	direct	false			true
+graph.reducedMotionPause	Paused by default: reduced-motion preference detected.	Pausado por predefinição: preferência de movimento reduzido detetada.	direct	false			true
+graph.relFilters	Relationship filters	Filtros de relação	direct	false			true
+graph.relationships.one	{count} relationship	{count} relação	direct	false	count	count	true
+graph.relationships.other	{count} relationships	{count} relações	direct	false	count	count	true
+graph.resetView	Reset view	Repor vista	direct	false			true
+graph.sectionLabel	Network graph	Grafo da rede	direct	false			true
+graph.selectPrompt	Select a node or edge for details.	Selecione um nó ou aresta para detalhes.	direct	false			true
+graph.showLabels	Show labels	Mostrar rótulos	direct	false			true
+graph.speed	Speed	Velocidade	direct	false			true
+graph.svgLabel	Network graph: {a} nodes, {b} edges. Use Tab to reach nodes and edges, Enter to select, arrow keys on the graph to pan.	Grafo da rede: {a} nós, {b} arestas. Use Tab para alcançar nós e arestas, Enter para selecionar, setas no grafo para deslocar.	direct	false	a,b	a,b	true
+graph.tableCaption	Every relationship with provenance and evidence references.	Cada relação com proveniência e referências de evidências.	direct	false			true
+graph.tableCounts	{a} nodes, {b} edges — the complete record behind the graph above.	{a} nós, {b} arestas — o registo completo por trás do grafo acima.	direct	false	a,b	a,b	true
+graph.tableEmpty	No relationships in this graph.	Sem relações neste grafo.	direct	false			true
+graph.tableLabel	Relationship table	Tabela de relações	direct	false			true
+graph.tableTitle	All relationships	Todas as relações	direct	false			true
+graph.thEdge	Edge	Aresta	direct	false			true
+graph.thEvidence	Evidence	Evidências	direct	false			true
+graph.thProv	Provenance events	Eventos de proveniência	direct	false			true
+graph.thRel	Relationship	Relação	direct	false			true
+graph.thSource	Source	Fonte	direct	false			true
+graph.thTarget	Target	Destino	direct	false			true
+graph.unpin	Unpin focus	Remover foco	direct	false			true
+graph.viewControls	Graph view controls	Controlos de vista do grafo	direct	false			true
+graph.zoomIn	Zoom in	Aproximar	direct	false			true
+graph.zoomOut	Zoom out	Afastar	direct	false			true
+intel.accountCount.one	{count} account	{count} conta	direct	false	count	count	true
+intel.accountCount.other	{count} accounts	{count} contas	direct	false	count	count	true
+intel.addressPre	address: 	endereço: 	direct	false			true
+intel.candidateFindings.one	{count} finding	{count} achado	direct	false	count	count	true
+intel.candidateFindings.other	{count} findings	{count} achados	direct	false	count	count	true
+intel.candidateH	Candidate risk intelligence	Inteligência de risco candidata	direct	false			true
+intel.candidateOff	Candidate engine risk-intelligence-v2-candidate is OFF (default). Authoritative engine: risk-score-v1. Candidate findings never replace v1 scores.	O motor candidato risk-intelligence-v2-candidate está DESLIGADO (predefinição). Motor autoritativo: risk-score-v1. Achados candidatos nunca substituem pontuações v1.	direct	false			true
+intel.candidateOnPost	, no numeric score ({note}). v1 remains authoritative.	, sem pontuação numérica ({note}). v1 mantém-se autoritativo.	direct	false	note	note	true
+intel.candidateOnPre	Candidate engine enabled: 	Motor candidato ativado: 	direct	false			true
+intel.deviceH	Device	Dispositivo	direct	false			true
+intel.evidencePre	Evidence: 	Evidências: 	direct	false			true
+intel.findingsCount.one	{count} finding	{count} achado	direct	false	count	count	true
+intel.findingsCount.other	{count} findings	{count} achados	direct	false	count	count	true
+intel.findingsH	Intelligence findings	Achados de inteligência	direct	false			true
+intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic demo values only.	Referência fixa, não uma impressão digital verificada. Atributos: apenas valores sintéticos de demonstração declarados.	direct	false			true
+intel.geoDisclaimer	IP-derived locations are approximate and never proof of physical presence. No GPS collection exists (permission: unavailable).	Localizações derivadas de IP são aproximadas e nunca provam presença física. Não existe recolha de GPS (permissão: indisponível).	direct	false			true
+intel.geoH	Geolocation	Geolocalização	direct	false			true
+intel.intelDown	Intelligence unavailable for this investigation.	Inteligência indisponível para esta investigação.	direct	false			true
+intel.intelTitle	Device, IP & location intelligence	Inteligência de dispositivos, IP e localização	direct	false			true
+intel.ipH	IP & network	IP e rede	direct	false			true
+intel.ispLabel	ISP/ASN	ISP/ASN	direct	true			true
+intel.limitsLine	Limits: {list}	Limites: {list}	direct	false	list	list	true
+intel.noDevice	No device observations. (unknown)	Sem observações de dispositivos. (desconhecido)	direct	false			true
+intel.noFindings	No findings. (insufficient evidence)	Sem achados. (evidência insuficiente)	direct	false			true
+intel.noGeo	No location observations. (unknown)	Sem observações de localização. (desconhecido)	direct	false			true
+intel.noIp	No IP observations. (unknown)	Sem observações de IP. (desconhecido)	direct	false			true
+intel.noLinkage	No transaction linkage. (unknown)	Sem ligação de transações. (desconhecido)	direct	false			true
+intel.obsCount.one	{count} observation	{count} observação	direct	false	count	count	true
+intel.obsCount.other	{count} observations	{count} observações	direct	false	count	count	true
+intel.observedOnly	— observed	— observado	direct	false			true
+intel.observedPost	· source {s}	· fonte {s}	direct	false	s	s	true
+intel.observedPre	Observed	Observado	direct	false			true
+intel.provMeta	· provenance {p} · confidence {c} · freshness {f}	· proveniência {p} · confiança {c} · atualidade {f}	direct	false	c,f,p	c,f,p	true
+intel.repLabel	Reputation	Reputação	direct	false			true
+intel.reviewLine	Human review: {r}	Revisão humana: {r}	direct	false	r	r	true
+intel.seeBackend	see backend	ver servidor	direct	false			true
+intel.sharedDevice	— shared device	— dispositivo partilhado	direct	false			true
+intel.statusLine	{findings} · {iso} · synthetic demo data.	{findings} · {iso} · dados sintéticos de demonstração.	direct	false	findings,iso	findings,iso	true
+intel.syntheticTag	· synthetic demo	· demonstração sintética	direct	false			true
+intel.unknownShort	(unknown)	(desconhecido)	direct	false			true
+intel.vpnLabel	VPN/proxy/Tor	VPN/proxy/Tor	direct	true			true
+investigation.aiAnalysis	AI analysis	Análise de IA	direct	false			true
+investigation.casePost	· status {status} (read-only in this batch)	· estado {status} (só de leitura neste lote)	direct	false	status	status	true
+investigation.casePre	Case 	Caso 	direct	false			true
+investigation.crumb	Investigation {id}	Investigação {id}	direct	false	id	id	true
+investigation.evidence	Evidence	Evidências	direct	false			true
+investigation.evidenceLabel	Evidence: 	Evidências: 	direct	false			true
+investigation.intelligence	Intelligence	Inteligência	direct	false			true
+investigation.loading	Loading investigation…	A carregar investigação…	direct	false			true
+investigation.notFoundPost	 exists in the backend.	 existe no servidor.	direct	false			true
+investigation.notFoundPre	No investigation 	Nenhuma investigação 	direct	false			true
+investigation.notFoundTitle	Investigation not found	Investigação não encontrada	direct	false			true
+investigation.notTriggered	not triggered	não acionada	direct	false			true
+investigation.overview	Overview	Resumo	direct	false			true
+investigation.overviewLinePre	{sender} → {receiver} · channel {channel} ·	{sender} → {receiver} · canal {channel} ·	direct	false	channel,receiver,sender	channel,receiver,sender	true
+investigation.riskLine	network risk · transaction-only {score}/100 {band} · {version}	risco de rede · só transação {score}/100 {band} · {version}	direct	false	band,score,version	band,score,version	true
+investigation.title	Investigation {id}	Investigação {id}	direct	false	id	id	true
+investigation.triggered	triggered	acionada	direct	false			true
+investigation.txnTitle	Transaction #{n}	Transação #{n}	direct	false	n	n	true
+investigation.whyEmpty	No rule results returned for this assessment.	Sem resultados de regras para esta avaliação.	direct	false			true
+investigation.whyRisk	Why this risk?	Porquê este risco?	direct	false			true
+investigation.whyRiskLink	Why this risk	Porquê este risco	direct	false			true
+landing.beneficiaries	Built for fraud investigators, compliance teams, and financial institutions fighting money laundering and scams.	Criado para investigadores de fraude, equipas de conformidade e instituições financeiras que combatem o branqueamento de capitais e as burlas.	direct	false			true
+landing.brandName	CruiseShield AI™	CruiseShield AI™	direct	true			true
+landing.capSubs.0	Suspicious Patterns	Padrões suspeitos	direct	false			true
+landing.capSubs.1	Behaviour and Network	Comportamento e rede	direct	false			true
+landing.capSubs.2	Device Linkage	Ligação de dispositivos	direct	false			true
+landing.capSubs.3	Network Signals	Sinais de rede	direct	false			true
+landing.capSubs.4	Global Context	Contexto global	direct	false			true
+landing.capSubs.5	Relationship Mapping	Mapeamento de relações	direct	false			true
+landing.capSubs.6	Case Management	Gestão de casos	direct	false			true
+landing.capSubs.7	Explainable Insights	Conclusões explicáveis	direct	false			true
+landing.capSubs.8	Deterministic Scoring	Pontuação determinística	direct	false			true
+landing.capSubs.9	Full Traceability	Rastreabilidade total	direct	false			true
+landing.capTitle	One platform, ten intelligence layers	Uma plataforma, dez camadas de inteligência	direct	false			true
+landing.capTitles.0	Transaction Monitoring	Monitorização de transações	direct	false			true
+landing.capTitles.1	Account Intelligence	Inteligência de contas	direct	false			true
+landing.capTitles.2	Device Analytics	Análise de dispositivos	direct	false			true
+landing.capTitles.3	IP Intelligence	Inteligência IP	direct	false			true
+landing.capTitles.4	Geolocation Analysis	Análise de geolocalização	direct	false			true
+landing.capTitles.5	Network Graph	Grafo de rede	direct	false			true
+landing.capTitles.6	Investigations	Investigações	direct	false			true
+landing.capTitles.7	AI Intelligence	Inteligência de IA	direct	false			true
+landing.capTitles.8	Risk Engine	Motor de risco	direct	false			true
+landing.capTitles.9	Evidence & Audit	Provas e auditoria	direct	false			true
+landing.controlsAmbient	Ambient sound	Som ambiente	direct	false			true
+landing.cta	Explore CruiseShield AI™	Explorar o CruiseShield AI™	direct	false			true
+landing.ctaSub	Enter the Interactive Demo Experience	Entre na experiência de demonstração interativa	direct	false			true
+landing.enterDemo	Enter Demo	Entrar na demo	direct	false			true
+landing.eyebrow	Global Financial Intelligence	Inteligência financeira global	direct	false			true
+landing.fallbackNote	Interactive 3D is unavailable in this browser. The full demo experience remains open.	O 3D interativo não está disponível neste navegador. A experiência demo completa continua aberta.	direct	false			true
+landing.footerDemo	Demonstration experience · synthetic data · illustrative network visuals · 	Experiência de demonstração · dados sintéticos · visuais de rede ilustrativos · 	direct	false			true
+landing.footerLine	One Platform. A Safer Financial Future. For Everyone.	Uma plataforma. Um futuro financeiro mais seguro. Para todos.	direct	false			true
+landing.footerLink	Enter the interactive demo	Entrar na demo interativa	direct	false			true
+landing.fullMotion	Full motion	Movimento total	direct	false			true
+landing.h1	A Safer Financial World	Um mundo financeiro mais seguro	direct	false			true
+landing.home	CruiseShield AI home	Início do CruiseShield AI	direct	false			true
+landing.illustrative	Illustrative Network View	Vista de rede ilustrativa	direct	false			true
+landing.intelItems.0	Transaction Monitoring	Monitorização de transações	direct	false			true
+landing.intelItems.1	Account Intelligence	Inteligência de contas	direct	false			true
+landing.intelItems.2	Device Intelligence	Inteligência de dispositivos	direct	false			true
+landing.intelItems.3	IP Intelligence	Inteligência IP	direct	false			true
+landing.intelItems.4	Geolocation Intelligence	Inteligência de geolocalização	direct	false			true
+landing.intelItems.5	Network Graph	Grafo de rede	direct	false			true
+landing.intelItems.6	AI Investigation	Investigação com IA	direct	false			true
+landing.intelItems.7	Risk Analysis	Análise de risco	direct	false			true
+landing.intelItems.8	Evidence and Audit	Provas e auditoria	direct	false			true
+landing.intelNote	Demonstration capabilities · synthetic data	Capacidades de demonstração · dados sintéticos	direct	false			true
+landing.intelStatus	Demo	Demo	direct	true			true
+landing.intelTitle	Global Intelligence	Inteligência global	direct	false			true
+landing.intelligenceModules	Intelligence modules	Módulos de inteligência	direct	false			true
+landing.journey.0	DETECT	DETETAR	direct	false			true
+landing.journey.1	CONNECT	LIGAR	direct	false			true
+landing.journey.2	INVESTIGATE	INVESTIGAR	direct	false			true
+landing.journey.3	EXPLAIN	EXPLICAR	direct	false			true
+landing.journey.4	VERIFY	VERIFICAR	direct	false			true
+landing.journey.5	SIMULATE	SIMULAR	direct	false			true
+landing.journey.6	DECIDE	DECIDIR	direct	false			true
+landing.journey.7	AUDIT	AUDITAR	direct	false			true
+landing.journeyLabel	Investigation workflow	Fluxo de investigação	direct	false			true
+landing.metricSubs.0	Illustrative Global Coverage	Cobertura global ilustrativa	direct	false			true
+landing.metricSubs.1	Country and Regional Intelligence	Inteligência nacional e regional	direct	false			true
+landing.metricSubs.2	Intelligence Correlation	Correlação de inteligência	direct	false			true
+landing.metricSubs.3	Explainable Investigation	Investigação explicável	direct	false			true
+landing.metricTitles.0	Global Reach	Alcance global	direct	false			true
+landing.metricTitles.1	Jurisdictional Context	Contexto jurisdicional	direct	false			true
+landing.metricTitles.2	Multi-Layer	Multicamadas	direct	false			true
+landing.metricTitles.3	Human Oversight	Supervisão humana	direct	false			true
+landing.moduleLines.0.0	Deterministic Scoring	Pontuação determinística	direct	false			true
+landing.moduleLines.0.1	Cross-Border Risk	Risco transfronteiriço	direct	false			true
+landing.moduleLines.1.0	Explainable Insights	Conclusões explicáveis	direct	false			true
+landing.moduleLines.1.1	Human Oversight	Supervisão humana	direct	false			true
+landing.moduleLines.2.0	Regional Intelligence	Inteligência regional	direct	false			true
+landing.moduleLines.2.1	Cross-Border Relationships	Relações transfronteiriças	direct	false			true
+landing.moduleLines.3.0	Proactive Protection	Proteção proativa	direct	false			true
+landing.moduleLines.3.1	Financial Crime Intelligence	Inteligência sobre criminalidade financeira	direct	false			true
+landing.moduleLines.4.0	Privacy	Privacidade	direct	false			true
+landing.moduleLines.4.1	Governance	Governação	direct	false			true
+landing.moduleLines.4.2	Enterprise Architecture	Arquitetura empresarial	direct	false			true
+landing.moduleTitles.0	Risk Intelligence	Inteligência de risco	direct	false			true
+landing.moduleTitles.1	AI Analysis	Análise com IA	direct	false			true
+landing.moduleTitles.2	Global Network	Rede global	direct	false			true
+landing.moduleTitles.3	Cyber Defense	Ciberdefesa	direct	false			true
+landing.moduleTitles.4	Secure Infrastructure	Infraestrutura segura	direct	false			true
+landing.modulesNote	Illustrative module concepts · capabilities vary by deployment	Conceitos ilustrativos de módulos · as capacidades variam com a implementação	direct	false			true
+landing.offWord	Off	Desligado	direct	false			true
+landing.onWord	On	Ligado	direct	false			true
+landing.pauseScene	Pause scene	Pausar cena	direct	false			true
+landing.platformPrinciples	Platform principles	Princípios da plataforma	direct	false			true
+landing.platformQualities	Platform qualities	Qualidades da plataforma	direct	false			true
+landing.problem	Financial crime hides in disconnected transactions. CruiseShield AI connects them — deterministic risk scoring, relationship graphs, and evidence-grounded AI explanations, with a human investigator deciding.	A criminalidade financeira esconde-se em transações desligadas. O CruiseShield AI liga-as: pontuação de risco determinística, grafos de relações e explicações de IA baseadas em provas, com um investigador humano a decidir.	direct	false			true
+landing.reduceMotion	Reduce motion	Reduzir movimento	direct	false			true
+landing.regions.0	North America	América do Norte	direct	false			true
+landing.regions.1	South America	América do Sul	direct	false			true
+landing.regions.2	Europe	Europa	direct	false			true
+landing.regions.3	Africa	África	direct	false			true
+landing.regions.4	Middle East	Médio Oriente	direct	false			true
+landing.regions.5	Asia Pacific	Ásia-Pacífico	direct	false			true
+landing.regions.6	Global Oceans	Oceanos globais	direct	false			true
+landing.regions.7	Cross-Border Corridors	Corredores transfronteiriços	direct	false			true
+landing.regionsNote	Simulated regional signals · not live monitoring	Sinais regionais simulados · sem monitorização em direto	direct	false			true
+landing.regionsTitle	Global Intelligence Regions	Regiões de inteligência global	direct	false			true
+landing.replayLink	try replay & simulation	experimentar reprodução e simulação	direct	false			true
+landing.resumeScene	Resume scene	Retomar cena	direct	false			true
+landing.sceneMotion	Scene motion	Movimento da cena	direct	false			true
+landing.signals.0	Secure	Seguro	direct	false			true
+landing.signals.1	Intelligent	Inteligente	direct	false			true
+landing.signals.2	Global	Global	direct	true			true
+landing.signals.3	Auditable	Auditável	direct	false			true
+landing.soundLabel	Sound	Som	direct	false			true
+landing.stripNote	Cards open the matching live demo screen · 	Os cartões abrem o ecrã demo em direto · 	direct	false			true
+landing.tagline	The Financial Crime Immune System™	The Financial Crime Immune System™	direct	true			true
+landing.volumeLabel	Volume	Volume	direct	true			true
+nav.aiIntelligence	AI Intelligence	Inteligência de IA	direct	false			true
+nav.auditTrail	Audit Trail	Trilha de Auditoria	direct	false			true
+nav.brand	CruiseShield AI	CruiseShield AI	direct	true			true
+nav.cases	Cases	Casos	direct	false			true
+nav.closeNav	Close navigation	Fechar navegação	direct	false			true
+nav.commandCenter	Command Center	Centro de Comando	direct	false			true
+nav.demoRole	demo role	função de demonstração	direct	false			true
+nav.evidence	Evidence	Evidências	direct	false			true
+nav.exploreNetwork	Explore Network	Explorar Rede	direct	false			true
+nav.home	CruiseShield AI home	Início do CruiseShield AI	direct	false			true
+nav.investigations	Investigations	Investigações	direct	false			true
+nav.investigator	Investigator	Investigador	direct	false			true
+nav.networkExplorer	Network Explorer	Explorador de Rede	direct	false			true
+nav.primary	Primary	Principal	direct	false			true
+nav.quickActions	Quick Actions	Ações Rápidas	direct	false			true
+nav.replaySimulation	Replay & Simulation	Reprodução e Simulação	direct	false			true
+nav.roleDemo	{role} · demo	{role} · demo	direct	true	role	role	true
+nav.runSimulation	Run Simulation	Executar Simulação	direct	false			true
+nav.signOut	Sign out	Sair	direct	false			true
+nav.signOutEverywhere	Sign out everywhere	Sair em todo o lado	direct	false			true
+nav.signOutEverywhereTitle	End this session on every device and browser	Terminar esta sessão em todos os dispositivos e navegadores	direct	false			true
+nav.skipToContent	Skip to main content	Saltar para o conteúdo principal	direct	false			true
+nav.synthetic	Synthetic demo data	Dados sintéticos de demonstração	direct	false			true
+nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
+nav.toggleNav	Toggle navigation	Alternar navegação	direct	false			true
+nav.viewAuditTrail	View Audit Trail	Ver Trilha de Auditoria	direct	false			true
+network.countsLine	{nodes} nodes, {edges} edges · provenance errors: {n}	{nodes} nós, {edges} arestas · erros de proveniência: {n}	direct	false	edges,n,nodes	edges,n,nodes	true
+network.crumb	Network {id}	Rede {id}	direct	false	id	id	true
+network.emptyGraph	This transaction has no network graph in the backend.	Esta transação não tem grafo de rede no servidor.	direct	false			true
+network.flat	Flat (fallback)	Plana (alternativa)	direct	false			true
+network.headTitle	Network explorer — {id}	Explorador de rede — {id}	direct	false	id	id	true
+network.loading	Loading network graph…	A carregar grafo da rede…	direct	false			true
+network.notFoundPost	 exists in the backend.	 existe no servidor.	direct	false			true
+network.notFoundPre	No transaction 	Nenhuma transação 	direct	false			true
+network.notFoundTitle	Transaction not found	Transação não encontrada	direct	false			true
+network.orbital	Orbital	Orbital	direct	true			true
+network.overlayDown	Intelligence overlay unavailable.	Camada de inteligência indisponível.	direct	false			true
+network.overlayLine	Intelligence overlay (derived, synthetic): {nodes} nodes, {edges} edges	Camada de inteligência (derivada, sintética): {nodes} nós, {edges} arestas	direct	false	edges,nodes	edges,nodes	true
+network.overlayMissing	· unavailable: {list}	· indisponível: {list}	direct	false	list	list	true
+network.provErrors	Provenance errors: {list}	Erros de proveniência: {list}	direct	false	list	list	true
+network.title	Network {id}	Rede {id}	direct	false	id	id	true
+network.viewLabel	Graph view	Vista do grafo	direct	false			true
+notify.bellLoading	Notifications, loading	Notificações, a carregar	direct	false			true
+notify.bellOpen	Notifications, {n} open	Notificações, {n} abertas	direct	false	n	n	true
+notify.closeNotif	Close notifications	Fechar notificações	direct	false			true
+notify.loadingAlerts	Loading alerts…	A carregar alertas…	direct	false			true
+notify.networkLink	Network	Rede	direct	false			true
+notify.noAlerts	No alerts.	Sem alertas.	direct	false			true
+notify.openInv	Open investigation	Abrir investigação	direct	false			true
+notify.panelLabel	Notifications	Notificações	direct	false			true
+notify.panelTitle	Notifications	Notificações	direct	false			true
+replay.cancel	Cancel	Cancelar	direct	false			true
+replay.confirmReset	Confirm: this clears decisions, simulations, AI runs, and audit history for {id}.	Confirmar: isto limpa decisões, simulações, execuções de IA e histórico de auditoria de {id}.	direct	false	id	id	true
+replay.confirmResetBtn	Confirm reset	Confirmar reposição	direct	false			true
+replay.controlsLabel	Replay controls	Controlos de reprodução	direct	false			true
+replay.controlsTitle	Deterministic replay	Reprodução determinística	direct	false			true
+replay.crumb	Replay {id}	Reprodução {id}	direct	false	id	id	true
+replay.currentTxnPre	Transaction 	Transação 	direct	false			true
+replay.headTitle	Replay & simulation — {title}	Reprodução e simulação — {title}	direct	false	title	title	true
+replay.loading	Loading scenario…	A carregar cenário…	direct	false			true
+replay.notFoundPost	 exists in the backend.	 existe no servidor.	direct	false			true
+replay.notFoundPre	No scenario 	Nenhum cenário 	direct	false			true
+replay.notFoundTitle	Scenario not found	Cenário não encontrado	direct	false			true
+replay.pause	Pause	Pausa	direct	false			true
+replay.play	Play	Reproduzir	direct	false			true
+replay.positionLine	Step {c} of {t} · {e} events · {x} transactions · {g} edges	Passo {c} de {t} · {e} eventos · {x} transações · {g} arestas	direct	false	c,e,g,t,x	c,e,g,t,x	true
+replay.reducedMotionPlay	Auto-play disabled: reduced-motion preference detected. Use Step forward.	Reprodução automática desativada: preferência de movimento reduzido detetada. Use Passo em frente.	direct	false			true
+replay.resetBlurb	Reset restores the seeded scenario exactly and clears all live state: human decisions, simulations, AI runs, and audit events beyond the reset itself.	A reposição restaura o cenário inicial exatamente e limpa todo o estado ativo: decisões humanas, simulações, execuções de IA e eventos de auditoria além da própria reposição.	direct	false			true
+replay.resetDemo	Reset demo	Repor demo	direct	false			true
+replay.resetDoneMid	, seed 	, semente 	direct	false			true
+replay.resetDonePost	. Reload the page to replay from the restored state.	. Recarregue a página para reproduzir a partir do estado restaurado.	direct	false			true
+replay.resetDonePre	Reset complete: run 	Reposição concluída: execução 	direct	false			true
+replay.resetLabel	Scenario reset	Reposição do cenário	direct	false			true
+replay.resetTitle	Scenario reset	Reposição do cenário	direct	false			true
+replay.resetting	Resetting…	A repor…	direct	false			true
+replay.restart	Restart	Reiniciar	direct	false			true
+replay.scenarioPre	Scenario 	Cenário 	direct	false			true
+replay.startHint	At the start: no events applied yet. Step forward to begin.	No início: ainda sem eventos aplicados. Avance para começar.	direct	false			true
+replay.stepBack	Step back	Passo atrás	direct	false			true
+replay.stepControls	Replay step controls	Controlos de passo da reprodução	direct	false			true
+replay.stepFwd	Step forward	Passo em frente	direct	false			true
+replay.title	Replay {id}	Reprodução {id}	direct	false	id	id	true
+selector.buttonLabel	Select language	Selecionar idioma	direct	false			true
+selector.fallbackNote	English shown — translation unavailable	Inglês apresentado — tradução indisponível	direct	false			true
+selector.label	Language	Idioma	direct	false			true
+selector.panelTitle	Select language	Selecionar idioma	direct	false			true
+selector.partialTag	Partial	Parcial	direct	false			true
+selector.resultsEmpty	No languages match your search.	Nenhum idioma corresponde à sua pesquisa.	direct	false			true
+selector.searchLabel	Search languages	Pesquisar idiomas	direct	false			true
+selector.searchPlaceholder	Search languages…	Pesquisar idiomas…	direct	false			true
+selector.translatedTag	Translated	Traduzido	direct	false			true
+selector.unavailableTag	English fallback	Inglês alternativo	direct	false			true
+sim.assumptionLabel	Assumption (recorded with the run)	Pressuposto (registado com a execução)	direct	false			true
+sim.assumptionLine	Assumption: {a}	Pressuposto: {a}	direct	false	a	a	true
+sim.assumptionPh	e.g. Shared devices are coincidental, not shared control.	p. ex., Dispositivos partilhados são coincidência, não controlo partilhado.	direct	false			true
+sim.baselineLine	Authoritative baseline (network): {s}/100 {b}. This value never changes.	Linha de base autoritativa (rede): {s}/100 {b}. Este valor nunca muda.	direct	false	b,s	b,s	true
+sim.ignoredPre	Ignored: 	Ignoradas: 	direct	false			true
+sim.legendLine	Relationships to ignore ({a} of {b} selected)	Relações a ignorar ({a} de {b} selecionadas)	direct	false	a,b	a,b	true
+sim.loadEdges	Load edges	Carregar arestas	direct	false			true
+sim.loadingTarget	Loading target…	A carregar alvo…	direct	false			true
+sim.readOnlySim	Your role is read-only: simulations are disabled.	A sua função é só de leitura: simulações desativadas.	direct	false			true
+sim.runSim	Run simulation	Executar simulação	direct	false			true
+sim.running	Running…	A executar…	direct	false			true
+sim.simBanner	SIMULATED — hypothetical, not a real-world prediction.	SIMULADO — hipotético, não uma previsão do mundo real.	direct	false			true
+sim.simLabel	What-if simulation	Simulação hipotética	direct	false			true
+sim.simRunPost	: baseline {a}/100 {b} → simulated {c}/100 {d}	: base {a}/100 {b} → simulado {c}/100 {d}	direct	false	a,b,c,d	a,b,c,d	true
+sim.simRunPre	Run 	Execução 	direct	false			true
+sim.simTitle	What-if simulation	Simulação hipotética	direct	false			true
+sim.targetDown	Target unavailable: {err}	Alvo indisponível: {err}	direct	false	err	err	true
+sim.targetLabel	Target transaction	Transação-alvo	direct	false			true
+system.allOk	All systems operational	Todos os sistemas operacionais	direct	false			true
+system.checkedPre	Checked	Verificado	direct	false			true
+system.rowAi	AI Engine (Muse Spark)	Motor de IA (Muse Spark)	direct	false			true
+system.rowApi	API Services	Serviços API	direct	false			true
+system.rowGraph	Graph Provenance	Proveniência do grafo	direct	false			true
+system.rowSeed	Seed Integrity	Integridade da semente	direct	false			true
+system.scenarioPre	Scenario {s} · Run 	Cenário {s} · Execução 	direct	false	s	s	true
+system.stDegraded	Degraded	Degradado	direct	false			true
+system.stNotConfigured	Not configured	Não configurado	direct	false			true
+system.stNotReported	Not reported	Não reportado	direct	false			true
+system.stOperational	Operational	Operacional	direct	false			true
+system.sysTitle	System Status	Estado do Sistema	direct	false			true
+theme.appearance	Appearance	Aparência	direct	false			true
+theme.dark	Dark	Escuro	direct	false			true
+theme.light	Light	Claro	direct	false			true
+theme.system	System	Sistema	direct	false			true
+workflow.audit	Audit	Auditoria	direct	false			true
+workflow.connect	Connect	Ligar	direct	false			true
+workflow.detect	Detect	Detetar	direct	false			true
+workflow.explain	Explain	Explicar	direct	false			true
+workflow.humanDecision	Human Decision	Decisão humana	direct	false			true
+workflow.investigate	Investigate	Investigar	direct	false			true
+workflow.navLabel	Investigation workflow	Fluxo de investigação	direct	false			true
+workflow.onThisPage	On this page	Nesta página	direct	false			true
+workflow.simulate	Simulate	Simular	direct	false			true

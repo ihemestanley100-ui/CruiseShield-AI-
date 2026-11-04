@@ -45,9 +45,26 @@ DEMO_WRITE_TOKEN = os.environ.get("DEMO_WRITE_TOKEN", "")
 # Zero-cost staging auth (Phase 5). SESSION_SECRET unset = auth DISABLED
 # (open local demo, byte-identical behavior). Set = login enforcement on.
 # DEMO_USERS format: "name:role:pbkdf2$iter$salt$hex,..." (generate records
-# with `python -m app.auth hash`; roles: investigator, admin).
+# with `python -m app.auth hash`; roles: investigator, admin, auditor,
+# demo_viewer).
 SESSION_SECRET = os.environ.get("SESSION_SECRET", "")
 DEMO_USERS = os.environ.get("DEMO_USERS", "")
+
+# R09-F2: minimum HMAC signing-secret strength. A set-but-short secret
+# is a misconfiguration: auth fails closed (503 AUTH_MISCONFIGURED)
+# rather than signing sessions with weak key material. Unset/empty
+# keeps the documented open local-demo default.
+MIN_SESSION_SECRET_LENGTH = 32
+
+
+def session_auth_armed() -> bool:
+    """True only when a strong signing secret is configured."""
+    return len(SESSION_SECRET or "") >= MIN_SESSION_SECRET_LENGTH
+
+
+def session_secret_misconfigured() -> bool:
+    """True when a secret is set but too weak to arm auth."""
+    return bool(SESSION_SECRET) and not session_auth_armed()
 
 
 def _safe_int(raw: str | None, default: int) -> int:
@@ -81,19 +98,24 @@ FRONTEND_ORIGINS = _frontend_origins()
 def cors_options() -> dict:
     """Single source of truth for CORSMiddleware wiring (also used by tests).
 
-    Open local demo (SESSION_SECRET unset): byte-identical legacy policy.
-    Staging (secret set, login armed): credentialed CORS so the HttpOnly
-    session cookie flows Vercel -> Render, plus X-Requested-With through
-    preflight (required CSRF header for cookie-authed POSTs). Origins stay
-    an explicit allowlist in both modes — never "*".
+    Credentialed in BOTH modes: the frontend always sends
+    credentials:"include" (required for the HttpOnly session cookie in
+    armed staging), and browsers reject a credentialed response that
+    lacks Access-Control-Allow-Credentials — with allow_credentials off,
+    every open-demo browser fetch fails as BACKEND_UNREACHABLE (found by
+    UGLS-02 Edge RTL QA). Origins stay an explicit allowlist in both
+    modes — never "*" — so ACA-C:true is safe. Staging additionally
+    allows X-Requested-With through preflight (required CSRF header for
+    cookie-authed POSTs).
     """
-    armed = bool(SESSION_SECRET)
+    armed = session_auth_armed()
     headers = ["Content-Type", "X-Request-ID"]
     if armed:
         headers = headers + ["X-Requested-With"]
     return {
         "allow_origins": list(FRONTEND_ORIGINS),
-        "allow_credentials": armed,
+        # Always True: see docstring. Explicit origins only, never "*".
+        "allow_credentials": True,
         "allow_methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": headers,
         "max_age": 600,
@@ -121,4 +143,7 @@ def validate_backend(value: str) -> str:
 
 STORE_BACKEND = validate_backend(os.environ.get("STORE_BACKEND", "json"))
 DATABASE_URL = os.environ.get("DATABASE_URL", "")
-PG_CONNECT_TIMEOUT = int(os.environ.get("PG_CONNECT_TIMEOUT", "5"))
+# J3-P1: garbage must fall back to 5, never crash the import/boot.
+PG_CONNECT_TIMEOUT = _safe_int(os.environ.get("PG_CONNECT_TIMEOUT"), 5)
+if PG_CONNECT_TIMEOUT <= 0:
+    PG_CONNECT_TIMEOUT = 5

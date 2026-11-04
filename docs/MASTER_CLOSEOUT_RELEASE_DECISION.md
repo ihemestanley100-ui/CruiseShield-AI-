@@ -24,7 +24,7 @@ GOVERNANCE: no commit/push/merge/tag/visibility change/deploy/submit/video/conta
 
 ## 3. FINAL_DEFECT_AND_REMEDIATION_REGISTER (delta since Phase 12)
 CLOSED in closeout: D-004 (forced `--disable-3d-apis` run: fallback renders, CTA /demo, hero intact, screenshot) · D-006 (`security_gate.py` GATE PASS: 0 vulns, 463 hashes, secret scan clean — corrects Phase 10 NOT_VERIFIED; tool was installed) · L2 (browser decision → decision_0001/TRIAGED/audit_0006 on disposable; persistent hash unchanged) · D-011-static (Firefox 159 renders all 6 routes styled; fallback confirmed; interactive/console still open) · D-013 NEW→CLOSED (fallback CTA overlapped cards y596 vs y541; bounded+compacted+label-yield fix; boxes re-measured clear; guard test added; 69/69 re-green).
-PROVEN (disposition = owner approval): `.png.png` is byte-identical (SHA-256 1A0CC66B… equal) and ZERO-referenced — safe to delete, NOT deleted (rule 5).
+PROVEN (disposition = owner approval): `.png.png` is byte-identical (SHA-256 1A0CC66B… equal) and ZERO-referenced — safe to delete, NOT deleted (rule 5). Q4 erratum 2026-11-03: RETIRED per owner decision — no restore, no deletion action (file absent from disk since ~11-01).
 OPEN (unchanged): D-001, D-002 (demo-accepted, loopback-only) · D-003 (no AT) · D-005 (no adversarial-spend approval) · D-007 (tmpw_ unreadable, owner) · D-008 (backup unapproved) · D-009 (video) · D-010 (organizers) · D-011-interactive/Safari/devices · D-012 (multi-worker).
 OPERATIONAL FINDING: dev server evicts the prod `.next` build — never run `dev` + `start` concurrently (rebuilt, exit 0, CSS verified 200). Recorded for the demo runbook.
 
@@ -56,7 +56,7 @@ These coexist by design; no single PASS is forced.
 ## A–F. Owner handoff
 A. COMPLETE: verified demo product (234+294 tests, 69/69 browsers ×3 incl. fix, Firefox renders, WebGL fallback proven, browser write proven, gate PASS, licences clean, docs Phases 1–15 + closeout).
 B. INCOMPLETE: video, backup execution, push/visibility, submission, pilot gates, AT pass, red-team, Safari/devices, tmpw_ review.
-C. NEEDS YOUR APPROVAL: backup destination (§6 request), `.png.png` deletion (proven safe), video record/upload, commit/push/visibility, submission, any pilot/real-data step.
+C. NEEDS YOUR APPROVAL: backup destination (§6 request), video record/upload, commit/push/visibility, submission, any pilot/real-data step. (`.png.png`: RETIRED per owner Q4 2026-11-03 — decided, no action.)
 D. NEEDS ORGANIZER/EXTERNAL: R-13 acceptance, full rules text, Q-REUSE-1/Q-NEW-1/Q-REPO-1/Q-SUB-1/2 (or portal answers).
 E. NEEDS FUTURE PARTNER: institution sponsorship, DPIA/agreements, G-P1…G-P8 staffing/build, independent validation.
 F. NEXT ACTIONS (priority): 1) confirm acceptance NOW (deadline Nov 4 9pm ET) 2) read full rules 3) confirm track/team/logo 4) approve backup destination 5) record video 6) push per rules 7) submit + retain receipt.

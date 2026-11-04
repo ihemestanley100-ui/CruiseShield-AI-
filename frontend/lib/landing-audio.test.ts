@@ -7,6 +7,9 @@ function mockAudioContext() {
     value: 0,
     setValueAtTime: vi.fn(),
     exponentialRampToValueAtTime: vi.fn(),
+    linearRampToValueAtTime: vi.fn(),
+    setTargetAtTime: vi.fn(),
+    cancelScheduledValues: vi.fn(),
   });
   const context = {
     currentTime: 0,
@@ -47,6 +50,7 @@ function mockAudioContext() {
 
 afterEach(() => {
   vi.unstubAllGlobals();
+  vi.useRealTimers();
 });
 
 describe("LandingAudio", () => {
@@ -71,5 +75,45 @@ describe("LandingAudio", () => {
     expect(audio.playing).toBe(false);
     audio.dispose();
     expect(context.close).toHaveBeenCalled();
+  });
+
+  it("fades in on start and schedules crystalline plucks", async () => {
+    vi.useFakeTimers();
+    const context = mockAudioContext();
+    vi.stubGlobal("AudioContext", vi.fn(() => context));
+    const audio = new LandingAudio();
+    await audio.start();
+    // Fade-in ramp programmed on the master bus.
+    const master = context.createGain.mock.results[0]?.value as {
+      gain: { linearRampToValueAtTime: (...a: unknown[]) => void };
+    };
+    expect(master.gain.linearRampToValueAtTime).toHaveBeenCalled();
+    // Pad (3) + filter LFO + tremolo = 5 oscillators at start.
+    expect(context.createOscillator).toHaveBeenCalledTimes(5);
+    // Advancing past the pluck interval adds a pluck voice.
+    await vi.advanceTimersByTimeAsync(2300);
+    expect(context.createOscillator).toHaveBeenCalledTimes(6);
+    audio.dispose();
+  });
+
+  it("mutes without stopping, then fades out on stop", async () => {
+    vi.useFakeTimers();
+    const context = mockAudioContext();
+    vi.stubGlobal("AudioContext", vi.fn(() => context));
+    const audio = new LandingAudio();
+    await audio.start();
+    audio.setMuted(true);
+    expect(audio.isMuted()).toBe(true);
+    expect(audio.playing).toBe(true);
+    const master = context.createGain.mock.results[0]?.value as {
+      gain: { setTargetAtTime: (...a: unknown[]) => void };
+    };
+    expect(master.gain.setTargetAtTime).toHaveBeenCalled();
+    audio.setMuted(false);
+    expect(audio.isMuted()).toBe(false);
+    audio.stop();
+    expect(audio.playing).toBe(false);
+    // Nodes release after the fade-out tail, not synchronously.
+    audio.dispose();
   });
 });

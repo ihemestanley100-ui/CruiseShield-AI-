@@ -130,8 +130,22 @@ function drawCityLights(seed: number): HTMLCanvasElement {
   return canvas;
 }
 
-export function buildEarth(quality: SceneQuality): ScenePart {
+export interface EarthView {
+  /** User yaw offset in radians (added to auto-rotation). */
+  yaw: number;
+  /** User pitch offset in radians. */
+  pitch: number;
+}
+
+export function buildEarth(
+  quality: SceneQuality,
+  view?: EarthView
+): ScenePart {
   const group = new THREE.Group();
+  /* Spin group: globe, guides, markers, and labels rotate together so
+   * user drags and auto-rotation move the whole planet as one body. */
+  const spin = new THREE.Group();
+  group.add(spin);
   const map = new THREE.CanvasTexture(drawSurface());
   map.colorSpace = THREE.SRGBColorSpace;
   const emissiveMap = new THREE.CanvasTexture(drawCityLights(84721));
@@ -147,7 +161,7 @@ export function buildEarth(quality: SceneQuality): ScenePart {
       metalness: 0.15,
     })
   );
-  group.add(globe);
+  spin.add(globe);
 
   // Atmosphere: fresnel-glow shell.
   const atmosphere = new THREE.Mesh(
@@ -177,7 +191,7 @@ export function buildEarth(quality: SceneQuality): ScenePart {
       depthWrite: false,
     })
   );
-  group.add(atmosphere);
+  spin.add(atmosphere);
 
   // Guide rings hugging the surface (equator + two latitudes).
   const guideMaterial = new THREE.LineBasicMaterial({
@@ -196,7 +210,7 @@ export function buildEarth(quality: SceneQuality): ScenePart {
         Math.sin(a) * radius
       ));
     }
-    group.add(new THREE.Line(
+    spin.add(new THREE.Line(
       new THREE.BufferGeometry().setFromPoints(points),
       guideMaterial
     ));
@@ -208,7 +222,7 @@ export function buildEarth(quality: SceneQuality): ScenePart {
   const hubCount = Math.max(
     4, Math.round(REGION_HUBS.length * quality.particleScale)
   );
-  REGION_HUBS.slice(0, hubCount).forEach((hub) => {
+  REGION_HUBS.slice(0, hubCount).forEach((hub, hubIndex) => {
     const pos = latLongToVec3(hub.lat, hub.lon, EARTH_RADIUS * 1.01);
     const marker = new THREE.Mesh(
       new THREE.SphereGeometry(0.028, 12, 12),
@@ -217,7 +231,25 @@ export function buildEarth(quality: SceneQuality): ScenePart {
       })
     );
     marker.position.copy(pos);
-    group.add(marker);
+    /* Pickable: click/Enter on a marker selects its region. Larger
+     * invisible hit sphere keeps touch targets forgiving. */
+    marker.userData.hubIndex = hubIndex;
+    spin.add(marker);
+    const hit = new THREE.Mesh(
+      new THREE.SphereGeometry(0.09, 8, 8),
+      /* colorWrite off: nothing visible, but the mesh still raycasts
+       * on every three.js version (material.visible is skipped by
+       * some raycast paths, so it cannot be used for hit targets). */
+      new THREE.MeshBasicMaterial({
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+        colorWrite: false,
+      })
+    );
+    hit.position.copy(pos);
+    hit.userData.hubIndex = hubIndex;
+    spin.add(hit);
     const halo = new THREE.Sprite(new THREE.SpriteMaterial({
       map: glow,
       color: hub.gold ? COLORS.gold : COLORS.cyan,
@@ -227,11 +259,13 @@ export function buildEarth(quality: SceneQuality): ScenePart {
     }));
     halo.scale.set(0.22, 0.22, 1);
     halo.position.copy(pos);
-    group.add(halo);
+    halo.userData.hubIndex = hubIndex;
+    spin.add(halo);
     hubHalos.push(halo);
     const label = makeLabelSprite(hub.name, hub.gold ? "#ffc66d" : "#8beaff");
     label.position.copy(pos.clone().multiplyScalar(1.22));
-    group.add(label);
+    label.userData.hubIndex = hubIndex;
+    spin.add(label);
   });
 
   // Tilted orbital guide rings.
@@ -257,11 +291,16 @@ export function buildEarth(quality: SceneQuality): ScenePart {
   group.add(ring2);
 
   const disposables: { dispose: () => void }[] = [map, emissiveMap, glow];
+  let autoAngle = 0;
   return {
     group,
     update: (dt, t) => {
-      // ~125.7 s per revolution (spec: 90-150 s).
-      globe.rotation.y += dt * 0.05;
+      // ~125.7 s per revolution (spec: 90-150 s). The whole planet
+      // (surface, markers, labels) spins as one body; user drag adds
+      // an offset on top instead of fighting the auto-rotation.
+      autoAngle += dt * 0.05;
+      spin.rotation.y = autoAngle + (view?.yaw ?? 0);
+      spin.rotation.x = view?.pitch ?? 0;
       ring1.rotation.z += dt * 0.03;
       ring2.rotation.z -= dt * 0.02;
       // Sequential hub illumination: a brightness wave travelling the hubs.

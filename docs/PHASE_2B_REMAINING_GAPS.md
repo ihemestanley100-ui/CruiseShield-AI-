@@ -6,6 +6,7 @@ evidence-complete except R-11 (single-shot observation).
 ## Closed in Phase 2B
 
 - Validator banned-score/enforcement/human-approval guards (+4 tests).
+  - J3 note 2026-11-01: no validator/banned-score/human-approval-guard implementation found in current `app/` or `tests/`; entry retained verbatim as a historical Phase 2B record.
 - Greedy sampling pinned + recorded (+1 test); seed intentionally not sent (documented).
 - Production build proven (exit 0, clean dir); real-browser smoke rendered all routes;
   landing visually verified with working WebGL.
@@ -40,7 +41,8 @@ evidence-complete except R-11 (single-shot observation).
   loading-state artifact of the one-shot CLI capture.
 - Logo: user-supplied original integrated via byte-identical copy
   (`cruiseshield-logo-original.png`, SHA-256 `1A0CC66B…C32A623`);
-  original `.png.png` file untouched (same hash); 69×73 intrinsic dims
+  original `.png.png` file untouched (same hash; Q4 erratum
+  2026-11-03: reference RETIRED per owner decision, no restore); 69×73 intrinsic dims
   match the 1219×1290 aspect exactly; renders verified in landing nav
   and app shell with zero logo 404s.
 

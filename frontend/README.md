@@ -1,4 +1,4 @@
-# CruiseShield AI — Next.js frontend (Batch 1 scaffold)
+# CruiseShield AI — Next.js frontend
 
 Thin command shell over the existing FastAPI backend. The backend remains
 authoritative for risk, evidence, cases, and audit; this app only renders

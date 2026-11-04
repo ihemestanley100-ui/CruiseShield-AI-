@@ -91,3 +91,109 @@ def test_stable_error_format(client):
     dup = client.post("/api/v1/events", json={"event_id": "x"})
     assert dup.status_code == 422
     assert dup.json()["error"]["code"] == "SCHEMA_INVALID"
+
+
+def test_health_and_ready_envelopes(client):
+    health = client.get("/api/v1/health")
+    assert health.status_code == 200
+    body = health.json()
+    assert body["status"] in ("healthy", "degraded")
+    assert body["scenario_id"] == "scn_primary"
+    ready = client.get("/api/v1/ready")
+    assert ready.status_code == 200
+
+
+def test_core_reads_over_transport(client):
+    assert client.get("/api/v1/alerts").json()["alerts"] != []
+    assert client.get("/api/v1/cases").json()["cases"] != []
+    inv = client.get("/api/v1/investigations/inv_84721")
+    assert inv.json()["evidence_count"] == 39
+    txn = client.get("/api/v1/transactions/txn_84721")
+    assert txn.json()["transaction"]["amount_minor"] == 48000000
+    graph = client.get("/api/v1/graph/txn_84721")
+    assert graph.json()["counts"] == {"nodes": 22, "edges": 30}
+    risk = client.get("/api/v1/risk/txn_84721",
+                      params={"scope": "network"})
+    assert risk.json()["assessment"]["score"] == 84
+    pkg = client.get("/api/v1/investigations/inv_84721/evidence-package")
+    assert pkg.json()["package_id"].startswith("evidence_pkg_")
+
+
+def _code(resp):
+    """Error code from a transport error envelope."""
+    return resp.json()["error"]["code"]
+
+
+def test_unknown_ids_404_over_transport(client):
+    cases = [
+        ("/api/v1/investigations/nope", "UNKNOWN_INVESTIGATION"),
+        ("/api/v1/investigations/nope/evidence-package",
+         "UNKNOWN_INVESTIGATION"),
+        ("/api/v1/cases/nope", "CASE_NOT_FOUND"),
+        ("/api/v1/cases/nope/audit", "CASE_NOT_FOUND"),
+        ("/api/v1/transactions/nope", "UNKNOWN_TRANSACTION"),
+        ("/api/v1/graph/nope", "UNKNOWN_TRANSACTION"),
+        ("/api/v1/risk/nope", "UNKNOWN_TRANSACTION"),
+        ("/api/v1/replay/nope", "UNKNOWN_SCENARIO"),
+        ("/api/v1/ai-runs/agentrun_9999", "UNKNOWN_RUN"),
+    ]
+    for path, code in cases:
+        resp = client.get(path)
+        assert resp.status_code == 404, path
+        assert _code(resp) == code, path
+
+
+def test_risk_bogus_scope_400_over_transport(client):
+    resp = client.get("/api/v1/risk/txn_84721", params={"scope": "bogus"})
+    assert resp.status_code == 400
+    assert _code(resp) == "UNKNOWN_SCOPE"
+
+
+def test_ai_endpoints_validate_pre_provider(client, monkeypatch):
+    from app import ai_adapter
+
+    monkeypatch.setattr(ai_adapter, "MODEL_API_KEY", "")
+    resp = client.post("/api/v1/investigations/nope/ai-analysis")
+    assert resp.status_code == 404
+    resp = client.post("/api/v1/investigations/inv_84721/ai-followup",
+                       json={"question": "  "})
+    assert resp.status_code == 400
+    assert _code(resp) == "QUESTION_REQUIRED"
+
+
+def test_simulation_domain_errors_over_transport(client):
+    resp = client.post("/api/v1/simulations",
+                       json={"target_transaction_id": "txn_nope",
+                             "ignored_edge_ids": [], "assumption": "a"})
+    assert resp.status_code == 404
+    resp = client.post("/api/v1/simulations",
+                       json={"target_transaction_id": "txn_84721",
+                             "ignored_edge_ids": ["edge_nope"],
+                             "assumption": "a"})
+    assert resp.status_code == 404
+    assert _code(resp) == "UNKNOWN_EDGE"
+
+
+def test_decision_unknown_case_over_transport(client):
+    resp = client.post("/api/v1/cases/nope/decisions",
+                       json={"decision": "Escalate", "reason": "r"})
+    assert resp.status_code == 404
+    assert _code(resp) == "CASE_NOT_FOUND"
+
+
+def test_legacy_pages_render_over_transport(client):
+    for path in ("/", "/investigations/inv_84721", "/system-health"):
+        resp = client.get(path)
+        assert resp.status_code == 200, path
+        assert "text/html" in resp.headers["content-type"], path
+
+
+def test_events_schema_rejection_over_transport(client):
+    resp = client.post("/api/v1/events", json={"bogus": True})
+    assert resp.status_code == 422
+    assert _code(resp) == "SCHEMA_INVALID"
+
+
+def test_auth_mode_open_by_default(client):
+    assert client.get("/api/v1/auth/mode").json() == {
+        "auth_enabled": False}

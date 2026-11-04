@@ -11,7 +11,8 @@ BASE: `docs/HACKATHON_ASSET_AND_CODE_PROVENANCE.md`. This file reconciles it aga
 - V5.0 master blueprint text (105301 B, mtime 10-08): sole pre-event artifact; a specification, not code. References external IP (Frontier Enterprise AI Platform™, CruiseTech sections) NOT present in this repo — claim no ownership, disclose the reference (Q-REUSE-1).
 
 ## Logo (UNVERIFIED — heightened by S2 ownership clause)
-- `frontend/public/assets/cruiseshield-logo-original.png` (1273370 B, high-res) + byte-identical duplicate `cruiseshield-logo-original.png.png` (1273370 B) — duplicate PRESERVED per erratum A2 (do not delete without owner approval).
+- `frontend/public/assets/cruiseshield-logo-original.png` (1273370 B, high-res) + byte-identical duplicate `cruiseshield-logo-original.png.png` (1273370 B) — duplicate PRESERVED per erratum A2 (do not delete without owner approval). Q4 erratum 2026-11-03: RETIRED per owner decision — no restore; canonical re-verified intact by hash 11-03.
+- J3 addendum 2026-11-01: duplicate EXCLUDED from J1 per owner D1 and absent from disk at reconciliation (see J1 manifest §3); canonical hash-verified intact.
 - Developer asserts original authorship (recorded, NOT independently verified). No license/assignment document on file.
 - S2 reports entrants must own everything submitted + grant organizers a broad licence → Q-IP-1 (confirm ownership + submission/press reuse rights) is now the highest-value IP action.
 - Meta/Muse marks appear as integration facts/labels only (Q-IP-2: attribution requirements from full rules text).

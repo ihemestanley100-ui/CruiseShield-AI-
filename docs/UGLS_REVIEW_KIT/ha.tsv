@@ -1,0 +1,579 @@
+# locale: ha (MACHINE-DRAFTED — human review pending)
+# version: 1.2.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
+# columns: key | en_source | draft | origin(direct=translated,fallback=English shown) | same_as_source | en_vars | draft_vars | vars_ok
+key	en_source	draft	origin	same_as_source	en_vars	draft_vars	vars_ok
+ai.altTitle	Alternative explanations:	Madadin bayani:	direct	false			true
+ai.askBtn	Ask follow-up	Yi tambayar biyo baya	direct	false			true
+ai.askLabel	Ask a follow-up about this evidence	Yi tambayar biyo baya game da wannan shaida	direct	false			true
+ai.askPh	e.g. Why is dev_04 shared across accounts?	misali. Me ya sa ake raba dev_04 tsakanin asusu?	direct	false			true
+ai.asking	Asking…	Ana tambaya…	direct	false			true
+ai.calling	Calling model…	Ana kiran samfuri…	direct	false			true
+ai.cannotRun	Your role cannot run AI analysis.	Matsayinka ba zai iya gudanar da binciken AI ba.	direct	false			true
+ai.conclusionLine	Conclusion: {c}	Ƙarshe: {c}	direct	false	c	c	true
+ai.confidencePre	Confidence: 	Amincewa: 	direct	false			true
+ai.metaPre	{model} · {ms} ms · schema {s} · refs {r} · run 	{model} · {ms} ms · tsari {s} · nassoshi {r} · gudu 	direct	false	model,ms,r,s	model,ms,r,s	true
+ai.missingTitle	Missing information:	Bayanin da ya ɓace:	direct	false			true
+ai.panelBlurb	Read-only explanation of the evidence package. The model cannot change risk scores or authorize actions.	Bayani na karatu kaɗai na kunshin shaida. Samfurin ba zai iya canza makin haɗari ba ko amincewa da ayyuka.	direct	false			true
+ai.panelTitle	Analyze with Muse Spark	Bincike da Muse Spark	direct	false			true
+ai.qLine	Q: {q}	Tambaya: {q}	direct	false	q	q	true
+ai.runAnalysis	Run AI analysis	Gudanar da binciken AI	direct	false			true
+ai.timedOut	Request timed out or was cancelled.	Buƙatar ta ƙare ko an soke ta.	direct	false			true
+audit.auditEmpty	No audit events recorded for this case.	Ba a yi rikodin abubuwan bita na wannan shari'a ba.	direct	false			true
+audit.auditLabel	Audit trail	Tarihin bincike	direct	false			true
+audit.auditTitle	Audit trail	Tarihin bincike	direct	false			true
+audit.caption	Every recorded action with actor, state change, and reason.	An yi rikodin kowane aiki tare da wanda ya yi shi, canjin matsayi da dalili.	direct	false			true
+audit.events.one	{count} audit event.	{count} abu na bita.	direct	false	count	count	true
+audit.events.other	{count} audit events.	{count} abubuwan bita.	direct	false	count	count	true
+audit.thAction	Action	Aiki	direct	false			true
+audit.thActor	Actor	Wanda ya yi	direct	false			true
+audit.thEvent	Event	Abu	direct	false			true
+audit.thReason	Reason	Dalili	direct	false			true
+audit.thState	State change	Canjin matsayi	direct	false			true
+audit.thTime	Time	Lokaci	direct	false			true
+auth.blurb	This hosted demo is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	An kare wannan nunin. Shiga da sunan mai binciken da aka ba ka. Bayanan roƙa kaɗai.	direct	false			true
+auth.invalid	Invalid username or password.	Sunan mai amfani ko kalmar sirri ba daidai ba.	direct	false			true
+auth.password	Password	Kalmar sirri	direct	false			true
+auth.rateLimited	Too many login attempts. Wait a minute and try again.	Yunkurin shiga sun yi yawa. Jira minti ɗaya ka sake gwadawa.	direct	false			true
+auth.signIn	Sign in	Shiga	direct	false			true
+auth.signingIn	Signing in…	Ana shiga…	direct	false			true
+auth.title	Demo sign in	Shigar nunawa	direct	false			true
+auth.unreachable	Backend unreachable. Check the demo server and retry.	Ba a iya isa ga uwar garken ba. Duba uwar garken nunawa ka sake gwadawa.	direct	false			true
+auth.username	Username	Sunan mai amfani	direct	false			true
+case.advisory	Advisory only: Muse Spark analysis explains evidence and never constitutes a human decision, nor changes risk scores or case status.	Shawara kaɗai: binciken Muse Spark yana bayyana shaida kuma ba shawarar ɗan adam ba ce, ba ya canza makin haɗari ko matsayin shari'a.	direct	false			true
+case.aiAssessment	AI assessment	Ƙimar AI	direct	false			true
+case.assessEmpty	No AI investigation assessment is available yet.	Babu ƙimar binciken AI tukuna.	direct	false			true
+case.assessLabel	AI Investigation Assessment	Ƙimar Binciken AI	direct	false			true
+case.assessTitle	AI Investigation Assessment	Ƙimar Binciken AI	direct	false			true
+case.auditCrumb	Audit trail	Tarihin bincike	direct	false			true
+case.auditHeadPre	Audit trail — Case 	Tarihin bincike — Shari'a 	direct	false			true
+case.auditIntro	Every recorded action on this case, in recorded order. 	Kowane aiki da aka yi rikodi a wannan shari'a, bisa tsarin rikodi. 	direct	false			true
+case.auditLoading	Loading audit events…	Ana loda abubuwan bita…	direct	false			true
+case.auditTitle	Audit trail	Tarihin bincike	direct	false			true
+case.auditTrail	Audit trail	Tarihin bincike	direct	false			true
+case.backToCase	Back to case	Koma zuwa shari'a	direct	false			true
+case.caseTitleDash	— 	— 	direct	true			true
+case.caseTitlePre	Case 	Shari'a 	direct	false			true
+case.conclusionPre	Conclusion: 	Ƙarshe: 	direct	false			true
+case.confidencePre	Confidence: 	Amincewa: 	direct	false			true
+case.crumb	Case {id}	Shari'a {id}	direct	false	id	id	true
+case.decidedByPre	by {actor} ·	ta wurin {actor} ·	direct	false	actor	actor	true
+case.decisionHistory	Decision history	Tarihin shawarwari	direct	false			true
+case.histEmpty	No human decisions recorded yet.	Ba a yi rikodin shawarar ɗan adam ba tukuna.	direct	false			true
+case.histLabel	Decision history	Tarihin shawarwari	direct	false			true
+case.histTitle	Decision history	Tarihin shawarwari	direct	false			true
+case.humanDecision	Human decision	Shawarar ɗan adam	direct	false			true
+case.invPre	Investigation 	Bincike 	direct	false			true
+case.loading	Loading case…	Ana loda shari'a…	direct	false			true
+case.missingInfo	Missing information: {list}	Bayanin da ya ɓace: {list}	direct	false	list	list	true
+case.notFoundPost	 exists in the backend.	 a uwar garke.	direct	false			true
+case.notFoundPre	No case 	Babu shari'a 	direct	false			true
+case.notFoundTitle	Case not found	Ba a sami shari'a ba	direct	false			true
+case.openAudit	Open full audit trail	Buɗe cikakken tarihin bincike	direct	false			true
+case.overview	Overview	Taƙaitaccen bayani	direct	false			true
+case.runMetaPost	· {ms} ms · schema {s} · refs {r})	· {ms} ms · tsari {s} · nassoshi {r})	direct	false	ms,r,s	ms,r,s	true
+case.runMetaPre	({model} · run 	({model} · gudu 	direct	false	model	model	true
+case.title	Case {id}	Shari'a {id}	direct	false	id	id	true
+case.transitionsEmpty	none (terminal state, or refreshing…)	babu (matsayi na ƙarshe, ko ana sabuntawa…)	direct	false			true
+case.transitionsPre	Allowed transitions: 	Canje-canjen da aka yarda: 	direct	false			true
+case.updatedPre	· updated	· an sabunta	direct	false			true
+command.activityEmpty	No audit events recorded yet.	Ba a yi rikodin abubuwan bita ba tukuna.	direct	false			true
+command.activityEvents.one	{count} audit event	{count} abu na bita	direct	false	count	count	true
+command.activityEvents.other	{count} audit events	{count} abubuwan bita	direct	false	count	count	true
+command.activityMore	 — showing latest {n}	 — ana nuna {n} na ƙarshe	direct	false	n	n	true
+command.activityTitle	Recent activity	Ayyukan kwanan nan	direct	false			true
+command.briefAdvisory	Advisory only: explains evidence and never constitutes a human decision, nor changes risk scores or case status.	Shawara kaɗai: yana bayyana shaida kuma ba shawarar ɗan adam ba ce, ba ya canza makin haɗari ko matsayin shari'a.	direct	false			true
+command.briefConclusion	Conclusion: {c}	Ƙarshe: {c}	direct	false	c	c	true
+command.briefEmpty	No Muse Spark analysis is available yet.	Babu binciken Muse Spark tukuna.	direct	false			true
+command.briefMetaPost	· {ms} ms · schema {s} · refs {f}	· {ms} ms · tsari {s} · nassoshi {f}	direct	false	f,ms,s	f,ms,s	true
+command.briefMetaPre	{m} · run 	{m} · gudu 	direct	false	m	m	true
+command.briefMissing	Missing information: {list}	Bayanin da ya ɓace: {list}	direct	false	list	list	true
+command.briefTitle	Muse Spark brief	Taƙaitaccen bayanin Muse Spark	direct	false			true
+command.caseStatusLine	{case} · {status}	{case} · {status}	direct	true	case,status	case,status	true
+command.confPre	Confidence: 	Amincewa: 	direct	false			true
+command.edgesLabel	edges	gefuna	direct	false			true
+command.evPackH	Evidence package	Kunshin shaida	direct	false			true
+command.evRecords	evidence records	rikodin shaida	direct	false			true
+command.execTitle	Executive overview	Taƙaitaccen bayani na zartarwa	direct	false			true
+command.featAudit	Audit Trail	Tarihin Bincike	direct	false			true
+command.featAuditDesc	System and analyst activity.	Aikin tsarin da manazarci.	direct	false			true
+command.featAuditFoot	Full history	Cikakken tarihi	direct	false			true
+command.featCases	Cases	Shari'o'i	direct	false			true
+command.featCasesDesc	Case status and human decisions.	Matsayin shari'a da shawarwarin ɗan adam.	direct	false			true
+command.featEv	Evidence	Shaida	direct	false			true
+command.featEvDesc	Linked evidence and provenance.	Shaidar da aka haɗa da asali.	direct	false			true
+command.featEvDown	Unavailable	Ba ya nan	direct	false			true
+command.featEvFoot	{n} records	rikodi {n}	direct	false	n	n	true
+command.featGraphDown	Graph unavailable	Taswira ba ya nan	direct	false			true
+command.featGraphFoot	{a} nodes · {b} edges	ƙulli {a} · gefuna {b}	direct	false	a,b	a,b	true
+command.featInv	Investigations	Bincike	direct	false			true
+command.featInvDesc	Scores, rules, evidence and AI analysis.	Maki, dokoki, shaida da binciken AI.	direct	false			true
+command.featNet	Network Explorer	Binciken Hanyar Sadarwa	direct	false			true
+command.featNetDesc	Accounts, devices, phones and merchants.	Asusu, na'urori, wayoyi da 'yan kasuwa.	direct	false			true
+command.featReplay	Replay & Simulation	Sake kunnawa & Gwaji	direct	false			true
+command.featReplayDesc	Recreate events and test what-if scenarios.	Sake ƙirƙirar abubuwa kuma ka gwada yanayin hasashe.	direct	false			true
+command.featReplayFoot	Deterministic replay	Sake kunnawa tabbatacciya	direct	false			true
+command.featTitle	Explore	Bincika	direct	false			true
+command.fullExplanations	Full explanations on the investigation	Cikakkun bayani a binciken	direct	false			true
+command.kpiActive	Active investigations	Binciken da ke gudana	direct	false			true
+command.kpiAi	AI analysis runs	Gudanarwar binciken AI	direct	false			true
+command.kpiDecisions	Human decisions	Shawarwarin ɗan adam	direct	false			true
+command.kpiEvidence	Evidence records	Rikodin shaida	direct	false			true
+command.kpiHigh	High-risk investigations	Binciken haɗari mai yawa	direct	false			true
+command.kpiRiskTitle	Risk intelligence	Hankalin haɗari	direct	false			true
+command.kpiTxn	Transactions monitored	Mu'amalolin da ake sa ido	direct	false			true
+command.linkedTo	Linked to {id}	An haɗa da {id}	direct	false	id	id	true
+command.loadingNet	Loading network…	Ana loda hanyar sadarwa…	direct	false			true
+command.needsAction	{case} · {status} — requires analyst action	{case} · {status} — yana buƙatar aikin manazarci	direct	false	case,status	case,status	true
+command.netBandLine	Network band {b}	Rukunin hanyar sadarwa {b}	direct	false	b	b	true
+command.netDown	Network data unavailable.	Bayanan hanyar sadarwa ba su nan.	direct	false			true
+command.netH	Investigation network	Hanyar sadarwar bincike	direct	false			true
+command.netRiskH	Network risk	Haɗarin hanyar sadarwa	direct	false			true
+command.noRuns	No runs recorded	Babu gudu da aka yi rikodi	direct	false			true
+command.nodesLabel	nodes	ƙulli	direct	false			true
+command.openCaseAudit	Open case audit trail	Buɗe tarihin binciken shari'a	direct	false			true
+command.openEvidence	Open evidence	Buɗe shaida	direct	false			true
+command.openFullExplorer	Open full network explorer	Buɗe cikakken binciken hanyar sadarwa	direct	false			true
+command.openNetExplorer	Open network explorer	Buɗe binciken hanyar sadarwa	direct	false			true
+command.packagePre	Package 	Kunshi 	direct	false			true
+command.previewAria	Network preview: {a} of {b} nodes shown	Dubawar hanyar sadarwa: ana nuna ƙulli {a} daga {b}	direct	false	a,b	a,b	true
+command.previewCounts	{a} nodes, {b} edges in the investigation graph. Preview shows {c} nodes and {d} relationships.	Ƙulli {a}, gefuna {b} a taswirar bincike. Dubawa tana nuna ƙulli {c} da alaƙa {d}.	direct	false	a,b,c,d	a,b,c,d	true
+command.previewEmpty	No relationships in this graph.	Babu alaƙa a wannan taswira.	direct	false			true
+command.previewProvErrors	Provenance errors: {list}	Kurakuran asali: {list}	direct	false	list	list	true
+command.previewTitle	Network preview	Dubawar hanyar sadarwa	direct	false			true
+command.provErrors	Provenance errors: {n}	Kurakuran asali: {n}	direct	false	n	n	true
+command.riskAria	Risk {score} of 100, {band}	Haɗari {score} daga 100, {band}	direct	false	band,score	band,score	true
+command.rulesAria	{a} of {b} rules triggered	{a} daga {b} dokoki sun tashi	direct	false	a,b	a,b	true
+command.rulesCounts	{a} of {b} rules triggered.	{a} daga {b} dokoki sun tashi.	direct	false	a,b	a,b	true
+command.rulesH	Rules triggered	Dokokin da suka tashi	direct	false			true
+command.rulesOf	{a} of {b}	{a} daga {b}	direct	false	a,b	a,b	true
+command.rulesTitle	Rule triggers	Tashin doka	direct	false			true
+command.runFromInv	Run analysis from the investigation	Gudanar da bincike daga bincike	direct	false			true
+command.txnOnlyH	Transaction-only risk	Haɗarin mu'amala kaɗai	direct	false			true
+command.txnOnlyNote	This transfer on its own, before network context. The network score above is authoritative for the investigation.	Wannan canjin kaɗai, kafin mahallin hanyar sadarwa. Makin hanyar sadarwa da ke sama shi ne iko ga binciken.	direct	false			true
+command.txnOnlyScope	{v} · single-transfer scope	{v} · iyakar canji ɗaya	direct	false	v	v	true
+command.txnTitleLine	Transaction #{n}	Mu'amala #{n}	direct	false	n	n	true
+command.upliftLine	{v} · network scope · {sign}{u} vs transaction-only (derived difference)	{v} · iyakar hanyar sadarwa · {sign}{u} da mu'amala kaɗai (bambancin da aka samo)	direct	false	sign,u,v	sign,u,v	true
+command.versionedRules	Versioned deterministic rules	Tabbatattun dokoki masu sigar	direct	false			true
+common.breadcrumb	Breadcrumb	Hanyar kewayawa	direct	false			true
+common.closeDialog	Close dialog	Rufe	direct	false			true
+common.loadFailed	Couldn't load this section.	Ba a iya loda wannan sashe ba.	direct	false			true
+common.loading	Loading…	Ana lodawa…	direct	false			true
+common.none	none	Babu	direct	false			true
+common.noneYet	None yet	Babu tukuna	direct	false			true
+common.notAvailable	Not available	Ba ya nan	direct	false			true
+common.notPermitted	Not available for your role.	Babu shi don rawar da kake takawa.	direct	false			true
+common.present	present	yana nan	direct	false			true
+common.requestFailed	request failed	Buƙatar ta gaza	direct	false			true
+common.retry	Retry	Sake gwadawa	direct	false			true
+common.timelineEmpty	No events.	Babu abubuwan da suka faru.	direct	false			true
+common.unknown	unknown	Ba a sani ba	direct	false			true
+common.unknownModel	unknown model	samfurin da ba a sani ba	direct	false			true
+common.unknownTime	unknown time	lokacin da ba a sani ba	direct	false			true
+common.unreachable	Backend unreachable. Check the demo server and retry.	Ba a iya isa ga uwar garken ba. Duba uwar garken nunawa kuma a sake gwadawa.	direct	false			true
+decision.actorLabel	Analyst ID	ID manazarci	direct	false			true
+decision.decisionLabel	Decision	Shawara	direct	false			true
+decision.readOnly	Your role is read-only: decisions are disabled.	Matsayinka karatu kaɗai ne: an kashe shawarwari.	direct	false			true
+decision.reasonLabel	Reason (required)	Dalili (wajibi ne)	direct	false			true
+decision.reasonRequired	A reason is required before recording a decision.	Ana buƙatar dalili kafin yin rikodin shawara.	direct	false			true
+decision.record	Record decision	Yi rikodin shawara	direct	false			true
+decision.recording	Recording…	Ana yin rikodi…	direct	false			true
+decision.selectFirst	Select a decision before recording.	Zaɓi shawara kafin yin rikodi.	direct	false			true
+decision.selectPlaceholder	Select a decision…	Zaɓi shawara…	direct	false			true
+decision.targetLabel	Move case to	Matsar da shari'a zuwa	direct	false			true
+decision.terminal	This case is in a terminal state; no further transitions are allowed.	Wannan shari'a tana cikin matsayi na ƙarshe; ba a yarda da ƙarin canji ba.	direct	false			true
+decision.title	Human decision	Shawarar ɗan adam	direct	false			true
+demo.activityDown	Activity unavailable	Ayyuka ba su nan	direct	false			true
+demo.aiBriefDown	AI brief unavailable	Taƙaitaccen bayanin AI ba ya nan	direct	false			true
+demo.backendStatus	Backend status	Matsayin uwar garke	direct	false			true
+demo.checkedAt	Checked {url}…	An duba {url}…	direct	false	url	url	true
+demo.execOverview	Executive overview	Taƙaitaccen bayani na zartarwa	direct	false			true
+demo.execOverviewDown	Executive overview unavailable	Taƙaitaccen bayanin zartarwa ba ya nan	direct	false			true
+demo.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	Laifukan kuɗi ba safai suke bayyana a mu'amala ɗaya ba. CruiseShield AI na haɗa mu'amaloli, asusu, na'urori, masu amfana da 'yan kasuwa masu tuhuma cikin hanyar hankali mai bayani.	direct	false			true
+demo.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	Injinta na ƙididdigar haɗari tabbatacciya na gano siginoni, Meta AI na taimaka wa masu bincike wajen fassara shaida, sake kunnawa da gwaji suna binciko yanayi na hasashe, shawarwarin ɗan adam kuma suna nan masu alhaki da bita.	direct	false			true
+demo.museBrief	Muse Spark brief	Taƙaitaccen bayanin Muse Spark	direct	false			true
+demo.networkPreview	Network preview	Dubawa ta hanyar sadarwa	direct	false			true
+demo.networkPreviewDown	Network preview unavailable	Dubawar hanyar sadarwa ba ta nan	direct	false			true
+demo.recentActivity	Recent activity	Ayyukan kwanan nan	direct	false			true
+demo.replayDown	Replay unavailable.	Sake kunnawa ba ya nan.	direct	false			true
+demo.retryTitle	Retry {title}	Sake gwada {title}	direct	false	title	title	true
+demo.riskIntel	Risk intelligence	Hankalin haɗari	direct	false			true
+demo.riskIntelDown	Risk intelligence unavailable	Hankalin haɗari ba ya nan	direct	false			true
+demo.startBackendPost	) and press retry.	) sannan ka danna sake gwadawa.	direct	false			true
+demo.startBackendPre	Start the backend (	Fara uwar garke (	direct	false			true
+demo.systemStatus	System Status	Matsayin Tsarin	direct	false			true
+demo.systemStatusDown	System status unavailable	Matsayin tsarin ba ya nan	direct	false			true
+evidence.clearSearch	Clear search	Share bincike	direct	false			true
+evidence.emptyFilter	No evidence items match this filter.	Babu shaidar da ta dace.	direct	false			true
+evidence.emptySearch	No evidence items match this search.	Babu shaidar da ta dace da wannan bincike.	direct	false			true
+evidence.filterAll	all	Duka	direct	false			true
+evidence.filterByType	Filter by type	Tace ta nau'i	direct	false			true
+evidence.hideProv	Hide provenance	Ɓoye asali	direct	false			true
+evidence.pkgTitle	Evidence package ({a} of {b})	Kunshin shaida ({a} daga {b})	direct	false	a,b	a,b	true
+evidence.provEdges	Graph edges	Gefunan taswira	direct	false			true
+evidence.provEvents	Events	Abubuwa	direct	false			true
+evidence.provRules	Rule results	Sakamakon doka	direct	false			true
+evidence.searchLabel	Search evidence	Nemi shaida	direct	false			true
+evidence.searchPh	Filter by ID, type, title, or description	Tace ta ID, nau'i, take ko bayani	direct	false			true
+evidence.showProv	Show provenance	Nuna asali	direct	false			true
+graph.animSpeed	Animation speed	Gudun motsi	direct	false			true
+graph.countsLine	Showing {a} of {b} nodes, {c} of {d} edges.	Ana nuna ƙulli {a} daga {b}, gefuna {c} daga {d}.	direct	false	a,b,c,d	a,b,c,d	true
+graph.detailEvidence	Evidence: 	Shaida: 	direct	false			true
+graph.detailProv	Provenance: 	Asali: 	direct	false			true
+graph.detailSource	Source: 	Tushe: 	direct	false			true
+graph.detailValidArrow	→	→	direct	true			true
+graph.detailValidPost	· Trace: 	· Bincike: 	direct	false			true
+graph.detailValidPre	Valid:	Ingantacce:	direct	false			true
+graph.droppedEdges.one	{count} edge hidden: endpoint unknown ({ids}).	{count} gefuna a ɓoye: ƙarshen ba a sani ba ({ids}).	direct	false	count,ids	count,ids	true
+graph.droppedEdges.other	{count} edges hidden: endpoint unknown ({ids}).	{count} gefuna a ɓoye: ƙarshen ba a sani ba ({ids}).	direct	false	count,ids	count,ids	true
+graph.edgeLabel	Edge {id}: {s} {r} {t}	Gefuna {id}: {s} {r} {t}	direct	false	id,r,s,t	id,r,s,t	true
+graph.entityFilters	Entity type filters	Matatan nau'in mahaluƙi	direct	false			true
+graph.entityLegend	Entity legend	Bayanan mahaluƙi	direct	false			true
+graph.fit	Fit to screen	Daidaita da allo	direct	false			true
+graph.focusIsolated	Focus has no connections in the current filter.	Mayar da hankali ba shi da haɗin kai a cikin tacewar yanzu.	direct	false			true
+graph.graphTitle	Network graph	Taswirar hanyar sadarwa	direct	false			true
+graph.hideLabels	Hide labels	Ɓoye alamomi	direct	false			true
+graph.legendNote	Shapes + labels identify types (never color alone). Ring = graph steps from focus, not risk.	Siffofi + alamomi suna gano nau'o'i (ba launi kaɗai ba). Zobe = matakan taswira daga mayar da hankali, ba haɗari ba.	direct	false			true
+graph.nodeFocusSuffix	, orbit focus	, mayar da hankalin zagaye	direct	false			true
+graph.orbitFocusBadge	· orbit focus	· mayar da hankalin zagaye	direct	false			true
+graph.orbitalCounts	Focus: {focus} · Showing {a} of {b} nodes, {c} of {d} edges.	Mayar da hankali: {focus} · Ana nuna ƙulli {a} daga {b}, gefuna {c} daga {d}.	direct	false	a,b,c,d,focus	a,b,c,d,focus	true
+graph.orbitalLabel	Orbital graph	Taswirar zagaye	direct	false			true
+graph.orbitalNote	Synthetic demo data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	Bayanan nunin ƙirƙira. Zobba da motsi shimfiɗa ne kaɗai — ba sa nuna haɗari, laifi, ko fifiko.	direct	false			true
+graph.orbitalSvg	Orbital graph focused on {focus}: {a} nodes, {b} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.	Taswirar zagaye da aka mayar da hankali kan {focus}: ƙulli {a}, gefuna {b}. Tab don isa ƙulli da gefuna, Shiga don zaɓa, maɓallan kibiya don motsawa.	direct	false	a,b,focus	a,b,focus	true
+graph.orbitalTitle	Orbital explorer	Binciken zagaye	direct	false			true
+graph.orbitalViewControls	Orbital view controls	Abubuwan sarrafa duban zagaye	direct	false			true
+graph.pauseAnim	Pause animation	Dakata da motsi	direct	false			true
+graph.pin	Pin as orbit focus	Sanya a matsayin mayar da hankalin zagaye	direct	false			true
+graph.playAnim	Play animation	Kunna motsi	direct	false			true
+graph.reducedMotionPause	Paused by default: reduced-motion preference detected.	An dakata ta tsoho: an gano zaɓin rage motsi.	direct	false			true
+graph.relFilters	Relationship filters	Matatan alaƙa	direct	false			true
+graph.relationships.one	{count} relationship	{count} alaƙa	direct	false	count	count	true
+graph.relationships.other	{count} relationships	{count} alaƙa	direct	false	count	count	true
+graph.resetView	Reset view	Sake saita dubawa	direct	false			true
+graph.sectionLabel	Network graph	Taswirar hanyar sadarwa	direct	false			true
+graph.selectPrompt	Select a node or edge for details.	Zaɓi ƙulli ko gefuna don cikakkun bayanai.	direct	false			true
+graph.showLabels	Show labels	Nuna alamomi	direct	false			true
+graph.speed	Speed	Gudun	direct	false			true
+graph.svgLabel	Network graph: {a} nodes, {b} edges. Use Tab to reach nodes and edges, Enter to select, arrow keys on the graph to pan.	Taswirar hanyar sadarwa: ƙulli {a}, gefuna {b}. Yi amfani da Tab don isa ƙulli da gefuna, Shiga don zaɓa, maɓallan kibiya a taswira don motsawa.	direct	false	a,b	a,b	true
+graph.tableCaption	Every relationship with provenance and evidence references.	Kowace alaƙa tare da asali da nassoshin shaida.	direct	false			true
+graph.tableCounts	{a} nodes, {b} edges — the complete record behind the graph above.	Ƙulli {a}, gefuna {b} — cikakken rikodin da ke bayan taswirar da ke sama.	direct	false	a,b	a,b	true
+graph.tableEmpty	No relationships in this graph.	Babu alaƙa a wannan taswira.	direct	false			true
+graph.tableLabel	Relationship table	Teburin alaƙa	direct	false			true
+graph.tableTitle	All relationships	Duk alaƙoƙi	direct	false			true
+graph.thEdge	Edge	Gefuna	direct	false			true
+graph.thEvidence	Evidence	Shaida	direct	false			true
+graph.thProv	Provenance events	Abubuwan asali	direct	false			true
+graph.thRel	Relationship	Alaƙa	direct	false			true
+graph.thSource	Source	Tushe	direct	false			true
+graph.thTarget	Target	Manufa	direct	false			true
+graph.unpin	Unpin focus	Cire mayar da hankali	direct	false			true
+graph.viewControls	Graph view controls	Abubuwan sarrafa duban taswira	direct	false			true
+graph.zoomIn	Zoom in	Kusanto	direct	false			true
+graph.zoomOut	Zoom out	Nesanta	direct	false			true
+intel.accountCount.one	{count} account	{count} asusu	direct	false	count	count	true
+intel.accountCount.other	{count} accounts	{count} asusu	direct	false	count	count	true
+intel.addressPre	address: 	adireshi: 	direct	false			true
+intel.candidateFindings.one	{count} finding	{count} sakamako	direct	false	count	count	true
+intel.candidateFindings.other	{count} findings	{count} sakamako	direct	false	count	count	true
+intel.candidateH	Candidate risk intelligence	Hankalin haɗari na ɗan takara	direct	false			true
+intel.candidateOff	Candidate engine risk-intelligence-v2-candidate is OFF (default). Authoritative engine: risk-score-v1. Candidate findings never replace v1 scores.	Injin ɗan takara risk-intelligence-v2-candidate A KASHE yake (tsoho). Injin iko: risk-score-v1. Sakamakon ɗan takara ba sa maye gurbin makin v1.	direct	false			true
+intel.candidateOnPost	, no numeric score ({note}). v1 remains authoritative.	, babu makin lamba ({note}). v1 ya ci gaba da iko.	direct	false	note	note	true
+intel.candidateOnPre	Candidate engine enabled: 	An kunna injin ɗan takara: 	direct	false			true
+intel.deviceH	Device	Na'ura	direct	false			true
+intel.evidencePre	Evidence: 	Shaida: 	direct	false			true
+intel.findingsCount.one	{count} finding	{count} sakamako	direct	false	count	count	true
+intel.findingsCount.other	{count} findings	{count} sakamako	direct	false	count	count	true
+intel.findingsH	Intelligence findings	Sakamakon hankali	direct	false			true
+intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic demo values only.	Nassin tabbatacce, ba hoton yatsa da aka tabbatar ba. Halaye: ƙimar nunin ƙirƙira da aka bayyana kaɗai.	direct	false			true
+intel.geoDisclaimer	IP-derived locations are approximate and never proof of physical presence. No GPS collection exists (permission: unavailable).	Wuraren da aka samo daga IP ƙididdiga ne kuma ba su taɓa tabbatar da kasancewar jiki ba. Babu tattara GPS (izini: ba ya nan).	direct	false			true
+intel.geoH	Geolocation	Wurin ƙasa	direct	false			true
+intel.intelDown	Intelligence unavailable for this investigation.	Hankali ba ya nan don wannan bincike.	direct	false			true
+intel.intelTitle	Device, IP & location intelligence	Hankalin na'ura, IP da wuri	direct	false			true
+intel.ipH	IP & network	IP da hanyar sadarwa	direct	false			true
+intel.ispLabel	ISP/ASN	ISP/ASN	direct	true			true
+intel.limitsLine	Limits: {list}	Iyakoki: {list}	direct	false	list	list	true
+intel.noDevice	No device observations. (unknown)	Babu lura da na'ura. (ba a sani ba)	direct	false			true
+intel.noFindings	No findings. (insufficient evidence)	Babu sakamako. (shaida bai isa ba)	direct	false			true
+intel.noGeo	No location observations. (unknown)	Babu lura da wuri. (ba a sani ba)	direct	false			true
+intel.noIp	No IP observations. (unknown)	Babu lura da IP. (ba a sani ba)	direct	false			true
+intel.noLinkage	No transaction linkage. (unknown)	Babu alaƙar mu'amala. (ba a sani ba)	direct	false			true
+intel.obsCount.one	{count} observation	{count} lura	direct	false	count	count	true
+intel.obsCount.other	{count} observations	{count} lura	direct	false	count	count	true
+intel.observedOnly	— observed	— an lura	direct	false			true
+intel.observedPost	· source {s}	· tushe {s}	direct	false	s	s	true
+intel.observedPre	Observed	An lura	direct	false			true
+intel.provMeta	· provenance {p} · confidence {c} · freshness {f}	· asali {p} · amincewa {c} · sabo {f}	direct	false	c,f,p	c,f,p	true
+intel.repLabel	Reputation	Suna	direct	false			true
+intel.reviewLine	Human review: {r}	Bitan ɗan adam: {r}	direct	false	r	r	true
+intel.seeBackend	see backend	duba uwar garke	direct	false			true
+intel.sharedDevice	— shared device	— na'urar raba	direct	false			true
+intel.statusLine	{findings} · {iso} · synthetic demo data.	{findings} · {iso} · bayanan nunin ƙirƙira.	direct	false	findings,iso	findings,iso	true
+intel.syntheticTag	· synthetic demo	· nunin ƙirƙira	direct	false			true
+intel.unknownShort	(unknown)	(ba a sani ba)	direct	false			true
+intel.vpnLabel	VPN/proxy/Tor	VPN/proxy/Tor	direct	true			true
+investigation.aiAnalysis	AI analysis	Binciken AI	direct	false			true
+investigation.casePost	· status {status} (read-only in this batch)	· matsayi {status} (karatu kaɗai a wannan rukuni)	direct	false	status	status	true
+investigation.casePre	Case 	Shari'a 	direct	false			true
+investigation.crumb	Investigation {id}	Bincike {id}	direct	false	id	id	true
+investigation.evidence	Evidence	Shaida	direct	false			true
+investigation.evidenceLabel	Evidence: 	Shaida: 	direct	false			true
+investigation.intelligence	Intelligence	Hankali	direct	false			true
+investigation.loading	Loading investigation…	Ana loda bincike…	direct	false			true
+investigation.notFoundPost	 exists in the backend.	 a uwar garke.	direct	false			true
+investigation.notFoundPre	No investigation 	Babu bincike 	direct	false			true
+investigation.notFoundTitle	Investigation not found	Ba a sami bincike ba	direct	false			true
+investigation.notTriggered	not triggered	ba ta tashi ba	direct	false			true
+investigation.overview	Overview	Taƙaitaccen bayani	direct	false			true
+investigation.overviewLinePre	{sender} → {receiver} · channel {channel} ·	{sender} → {receiver} · tasha {channel} ·	direct	false	channel,receiver,sender	channel,receiver,sender	true
+investigation.riskLine	network risk · transaction-only {score}/100 {band} · {version}	haɗarin hanyar sadarwa · mu'amala kaɗai {score}/100 {band} · {version}	direct	false	band,score,version	band,score,version	true
+investigation.title	Investigation {id}	Bincike {id}	direct	false	id	id	true
+investigation.triggered	triggered	ta tashi	direct	false			true
+investigation.txnTitle	Transaction #{n}	Mu'amala #{n}	direct	false	n	n	true
+investigation.whyEmpty	No rule results returned for this assessment.	Babu sakamakon doka da aka dawo don wannan ƙima.	direct	false			true
+investigation.whyRisk	Why this risk?	Me ya sa wannan haɗarin?	direct	false			true
+investigation.whyRiskLink	Why this risk	Dalilin haɗari	direct	false			true
+landing.beneficiaries	Built for fraud investigators, compliance teams, and financial institutions fighting money laundering and scams.	An ƙirƙira ta ne don masu binciken zamba, ƙungiyoyin bin doka da cibiyoyin kuɗi da ke yaƙi da wankin kuɗi da zamba.	direct	false			true
+landing.brandName	CruiseShield AI™	CruiseShield AI™	direct	true			true
+landing.capSubs.0	Suspicious Patterns	Alamun tuhuma	direct	false			true
+landing.capSubs.1	Behaviour and Network	Hali da hanyar sadarwa	direct	false			true
+landing.capSubs.2	Device Linkage	Haɗa na'ura	direct	false			true
+landing.capSubs.3	Network Signals	Siginonin hanyar sadarwa	direct	false			true
+landing.capSubs.4	Global Context	Mahallin duniya	direct	false			true
+landing.capSubs.5	Relationship Mapping	Taswirar alaƙa	direct	false			true
+landing.capSubs.6	Case Management	Gudanar da shari'a	direct	false			true
+landing.capSubs.7	Explainable Insights	Fahimta bayyananniya	direct	false			true
+landing.capSubs.8	Deterministic Scoring	Ƙididdiga tabbatacciya	direct	false			true
+landing.capSubs.9	Full Traceability	Bibiya cikakke	direct	false			true
+landing.capTitle	One platform, ten intelligence layers	Dandamali ɗaya, matakan hankali goma	direct	false			true
+landing.capTitles.0	Transaction Monitoring	Sa ido kan mu'amaloli	direct	false			true
+landing.capTitles.1	Account Intelligence	Hankalin asusu	direct	false			true
+landing.capTitles.2	Device Analytics	Nazarin na'ura	direct	false			true
+landing.capTitles.3	IP Intelligence	Hankalin IP	direct	false			true
+landing.capTitles.4	Geolocation Analysis	Nazarin wuri	direct	false			true
+landing.capTitles.5	Network Graph	Taswirar hanyar sadarwa	direct	false			true
+landing.capTitles.6	Investigations	Bincike	direct	false			true
+landing.capTitles.7	AI Intelligence	Hankalin AI	direct	false			true
+landing.capTitles.8	Risk Engine	Injin haɗari	direct	false			true
+landing.capTitles.9	Evidence & Audit	Shaida da bita	direct	false			true
+landing.controlsAmbient	Ambient sound	Sautin yanayi	direct	false			true
+landing.cta	Explore CruiseShield AI™	Binciko CruiseShield AI™	direct	false			true
+landing.ctaSub	Enter the Interactive Demo Experience	Shiga ƙwarewar nunin mu'amala	direct	false			true
+landing.enterDemo	Enter Demo	Shiga nuni	direct	false			true
+landing.eyebrow	Global Financial Intelligence	Hankalin kuɗi na duniya	direct	false			true
+landing.fallbackNote	Interactive 3D is unavailable in this browser. The full demo experience remains open.	3D na mu'amala ba ya nan a wannan burauza. Cikakkiyar ƙwarewar nuni a buɗe take.	direct	false			true
+landing.footerDemo	Demonstration experience · synthetic data · illustrative network visuals · 	Ƙwarewar nuni · bayanan ƙirƙira · hotunan hanyar sadarwa misalai · 	direct	false			true
+landing.footerLine	One Platform. A Safer Financial Future. For Everyone.	Dandamali ɗaya. Makomar kuɗi mai aminci. Ga kowa.	direct	false			true
+landing.footerLink	Enter the interactive demo	Shiga nunin mu'amala	direct	false			true
+landing.fullMotion	Full motion	Cikakken motsi	direct	false			true
+landing.h1	A Safer Financial World	Duniyar kuɗi mai aminci	direct	false			true
+landing.home	CruiseShield AI home	Gidan CruiseShield AI	direct	false			true
+landing.illustrative	Illustrative Network View	Duban hanyar sadarwa misali	direct	false			true
+landing.intelItems.0	Transaction Monitoring	Sa ido kan mu'amaloli	direct	false			true
+landing.intelItems.1	Account Intelligence	Hankalin asusu	direct	false			true
+landing.intelItems.2	Device Intelligence	Hankalin na'ura	direct	false			true
+landing.intelItems.3	IP Intelligence	Hankalin IP	direct	false			true
+landing.intelItems.4	Geolocation Intelligence	Hankalin wuri	direct	false			true
+landing.intelItems.5	Network Graph	Taswirar hanyar sadarwa	direct	false			true
+landing.intelItems.6	AI Investigation	Binciken AI	direct	false			true
+landing.intelItems.7	Risk Analysis	Nazarin haɗari	direct	false			true
+landing.intelItems.8	Evidence and Audit	Shaida da bita	direct	false			true
+landing.intelNote	Demonstration capabilities · synthetic data	Ƙarfin nuni · bayanan ƙirƙira	direct	false			true
+landing.intelStatus	Demo	Nuni	direct	false			true
+landing.intelTitle	Global Intelligence	Hankalin duniya	direct	false			true
+landing.intelligenceModules	Intelligence modules	Kayayyakin hankali	direct	false			true
+landing.journey.0	DETECT	GANO	direct	false			true
+landing.journey.1	CONNECT	HAƊA	direct	false			true
+landing.journey.2	INVESTIGATE	BINCKE	direct	false			true
+landing.journey.3	EXPLAIN	BAYYANA	direct	false			true
+landing.journey.4	VERIFY	TABBTAR	direct	false			true
+landing.journey.5	SIMULATE	GWADA	direct	false			true
+landing.journey.6	DECIDE	HUKUNCI	direct	false			true
+landing.journey.7	AUDIT	BITAR LITTAFI	direct	false			true
+landing.journeyLabel	Investigation workflow	Tsarin bincike	direct	false			true
+landing.metricSubs.0	Illustrative Global Coverage	Rufin duniya misali	direct	false			true
+landing.metricSubs.1	Country and Regional Intelligence	Hankalin ƙasa da yanki	direct	false			true
+landing.metricSubs.2	Intelligence Correlation	Haɗin hankali	direct	false			true
+landing.metricSubs.3	Explainable Investigation	Bincike bayyananne	direct	false			true
+landing.metricTitles.0	Global Reach	Rufin duniya	direct	false			true
+landing.metricTitles.1	Jurisdictional Context	Mahallin iko	direct	false			true
+landing.metricTitles.2	Multi-Layer	Matakai da yawa	direct	false			true
+landing.metricTitles.3	Human Oversight	Kulawar ɗan adam	direct	false			true
+landing.moduleLines.0.0	Deterministic Scoring	Ƙididdiga tabbatacciya	direct	false			true
+landing.moduleLines.0.1	Cross-Border Risk	Haɗarin ƙetare iyaka	direct	false			true
+landing.moduleLines.1.0	Explainable Insights	Fahimta bayyananniya	direct	false			true
+landing.moduleLines.1.1	Human Oversight	Kulawar ɗan adam	direct	false			true
+landing.moduleLines.2.0	Regional Intelligence	Hankalin yanki	direct	false			true
+landing.moduleLines.2.1	Cross-Border Relationships	Alaƙa ta ƙetare iyaka	direct	false			true
+landing.moduleLines.3.0	Proactive Protection	Kariya ta rigakafi	direct	false			true
+landing.moduleLines.3.1	Financial Crime Intelligence	Hankalin laifukan kuɗi	direct	false			true
+landing.moduleLines.4.0	Privacy	Sirri	direct	false			true
+landing.moduleLines.4.1	Governance	Mulki	direct	false			true
+landing.moduleLines.4.2	Enterprise Architecture	Tsarin kamfani	direct	false			true
+landing.moduleTitles.0	Risk Intelligence	Hankalin haɗari	direct	false			true
+landing.moduleTitles.1	AI Analysis	Nazarin AI	direct	false			true
+landing.moduleTitles.2	Global Network	Hanyar duniya	direct	false			true
+landing.moduleTitles.3	Cyber Defense	Tsaron yanar gizo	direct	false			true
+landing.moduleTitles.4	Secure Infrastructure	Kayayyakin more rayuwa masu aminci	direct	false			true
+landing.modulesNote	Illustrative module concepts · capabilities vary by deployment	Ra'ayoyin kayayyaki misalai · ƙarfi ya bambanta	direct	false			true
+landing.offWord	Off	A kashe	direct	false			true
+landing.onWord	On	A kunne	direct	false			true
+landing.pauseScene	Pause scene	Dakata da fage	direct	false			true
+landing.platformPrinciples	Platform principles	Ƙa'idodin dandamali	direct	false			true
+landing.platformQualities	Platform qualities	Halayen dandamali	direct	false			true
+landing.problem	Financial crime hides in disconnected transactions. CruiseShield AI connects them — deterministic risk scoring, relationship graphs, and evidence-grounded AI explanations, with a human investigator deciding.	Laifukan kuɗi suna ɓoye a cikin mu'amaloli marasa alaƙa. CruiseShield AI na haɗa su — ƙididdigar haɗari tabbatacciya, taswirorin alaƙa da bayanan AI bisa shaida, tare da mai bincike ɗan adam mai yanke hukunci.	direct	false			true
+landing.reduceMotion	Reduce motion	Rage motsi	direct	false			true
+landing.regions.0	North America	North America	direct	true			true
+landing.regions.1	South America	South America	direct	true			true
+landing.regions.2	Europe	Europe	direct	true			true
+landing.regions.3	Africa	Africa	direct	true			true
+landing.regions.4	Middle East	Middle East	direct	true			true
+landing.regions.5	Asia Pacific	Asia Pacific	direct	true			true
+landing.regions.6	Global Oceans	Tekunan duniya	direct	false			true
+landing.regions.7	Cross-Border Corridors	Hanyoyin ƙetare iyaka	direct	false			true
+landing.regionsNote	Simulated regional signals · not live monitoring	Siginonin yanki na ƙirƙira · ba sa ido kai tsaye	direct	false			true
+landing.regionsTitle	Global Intelligence Regions	Yankunan hankalin duniya	direct	false			true
+landing.replayLink	try replay & simulation	gwada sake kunnawa da kwatance	direct	false			true
+landing.resumeScene	Resume scene	Ci gaba da fage	direct	false			true
+landing.sceneMotion	Scene motion	Motsin fage	direct	false			true
+landing.signals.0	Secure	Aminci	direct	false			true
+landing.signals.1	Intelligent	Hankali	direct	false			true
+landing.signals.2	Global	Duniya	direct	false			true
+landing.signals.3	Auditable	Ana iya bita	direct	false			true
+landing.soundLabel	Sound	Sauti	direct	false			true
+landing.stripNote	Cards open the matching live demo screen · 	Katunan suna buɗe allon nuni kai tsaye · 	direct	false			true
+landing.tagline	The Financial Crime Immune System™	The Financial Crime Immune System™	direct	true			true
+landing.volumeLabel	Volume	Ƙarfi	direct	false			true
+nav.aiIntelligence	AI Intelligence	Hankalin AI	direct	false			true
+nav.auditTrail	Audit Trail	Tarihin Bincike	direct	false			true
+nav.brand	CruiseShield AI	CruiseShield AI	direct	true			true
+nav.cases	Cases	Shari'o'i	direct	false			true
+nav.closeNav	Close navigation	Rufe kewayawa	direct	false			true
+nav.commandCenter	Command Center	Cibiyar Umurni	direct	false			true
+nav.demoRole	demo role	rawar nunawa	direct	false			true
+nav.evidence	Evidence	Shaida	direct	false			true
+nav.exploreNetwork	Explore Network	Bincika hanyar sadarwa	direct	false			true
+nav.home	CruiseShield AI home	Gidan CruiseShield AI	direct	false			true
+nav.investigations	Investigations	Bincike	direct	false			true
+nav.investigator	Investigator	Mai bincike	direct	false			true
+nav.networkExplorer	Network Explorer	Binciken Cibiyar Sadarwa	direct	false			true
+nav.primary	Primary	Babba	direct	false			true
+nav.quickActions	Quick Actions	Ayyuka masu sauri	direct	false			true
+nav.replaySimulation	Replay & Simulation	Sake kunnawa & Gwaji	direct	false			true
+nav.roleDemo	{role} · demo	{role} · nunawa	direct	false	role	role	true
+nav.runSimulation	Run Simulation	Gudanar da gwaji	direct	false			true
+nav.signOut	Sign out	Fita	direct	false			true
+nav.signOutEverywhere	Sign out everywhere	Fita a ko'ina	direct	false			true
+nav.signOutEverywhereTitle	End this session on every device and browser	Ƙare wannan zaman a duk na'urori da masu bincike	direct	false			true
+nav.skipToContent	Skip to main content	Tsallake zuwa ga ainihin abun ciki	direct	false			true
+nav.synthetic	Synthetic demo data	Bayanan nunin roƙa	direct	false			true
+nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
+nav.toggleNav	Toggle navigation	Canja kewayawa	direct	false			true
+nav.viewAuditTrail	View Audit Trail	Duba tarihin bincike	direct	false			true
+network.countsLine	{nodes} nodes, {edges} edges · provenance errors: {n}	ƙulli {nodes}, gefuna {edges} · kurakuran asali: {n}	direct	false	edges,n,nodes	edges,n,nodes	true
+network.crumb	Network {id}	Hanyar sadarwa {id}	direct	false	id	id	true
+network.emptyGraph	This transaction has no network graph in the backend.	Wannan mu'amala ba ta da taswirar hanyar sadarwa a uwar garke.	direct	false			true
+network.flat	Flat (fallback)	Fasali (madadin)	direct	false			true
+network.headTitle	Network explorer — {id}	Binciken hanyar sadarwa — {id}	direct	false	id	id	true
+network.loading	Loading network graph…	Ana loda taswirar hanyar sadarwa…	direct	false			true
+network.notFoundPost	 exists in the backend.	 a uwar garke.	direct	false			true
+network.notFoundPre	No transaction 	Babu mu'amala 	direct	false			true
+network.notFoundTitle	Transaction not found	Ba a sami mu'amala ba	direct	false			true
+network.orbital	Orbital	Zagaye	direct	false			true
+network.overlayDown	Intelligence overlay unavailable.	Rufin hankali ba ya nan.	direct	false			true
+network.overlayLine	Intelligence overlay (derived, synthetic): {nodes} nodes, {edges} edges	Rufin hankali (wanda aka samo, ƙirƙira): ƙulli {nodes}, gefuna {edges}	direct	false	edges,nodes	edges,nodes	true
+network.overlayMissing	· unavailable: {list}	· ba ya nan: {list}	direct	false	list	list	true
+network.provErrors	Provenance errors: {list}	Kurakuran asali: {list}	direct	false	list	list	true
+network.title	Network {id}	Hanyar sadarwa {id}	direct	false	id	id	true
+network.viewLabel	Graph view	Duban taswira	direct	false			true
+notify.bellLoading	Notifications, loading	Sanarwa, ana lodawa	direct	false			true
+notify.bellOpen	Notifications, {n} open	Sanarwa, {n} a buɗe	direct	false	n	n	true
+notify.closeNotif	Close notifications	Rufe sanarwa	direct	false			true
+notify.loadingAlerts	Loading alerts…	Ana loda faɗakarwa…	direct	false			true
+notify.networkLink	Network	Hanyar sadarwa	direct	false			true
+notify.noAlerts	No alerts.	Babu faɗakarwa.	direct	false			true
+notify.openInv	Open investigation	Buɗe bincike	direct	false			true
+notify.panelLabel	Notifications	Sanarwa	direct	false			true
+notify.panelTitle	Notifications	Sanarwa	direct	false			true
+replay.cancel	Cancel	Soke	direct	false			true
+replay.confirmReset	Confirm: this clears decisions, simulations, AI runs, and audit history for {id}.	Tabbatar: wannan yana share shawarwari, gwaje-gwaje, gudanarwar AI, da tarihin bita na {id}.	direct	false	id	id	true
+replay.confirmResetBtn	Confirm reset	Tabbatar da sake saitawa	direct	false			true
+replay.controlsLabel	Replay controls	Abubuwan sarrafa sake kunnawa	direct	false			true
+replay.controlsTitle	Deterministic replay	Sake kunnawa tabbatacciya	direct	false			true
+replay.crumb	Replay {id}	Sake kunnawa {id}	direct	false	id	id	true
+replay.currentTxnPre	Transaction 	Mu'amala 	direct	false			true
+replay.headTitle	Replay & simulation — {title}	Sake kunnawa da gwaji — {title}	direct	false	title	title	true
+replay.loading	Loading scenario…	Ana loda yanayi…	direct	false			true
+replay.notFoundPost	 exists in the backend.	 a uwar garke.	direct	false			true
+replay.notFoundPre	No scenario 	Babu yanayi 	direct	false			true
+replay.notFoundTitle	Scenario not found	Ba a sami yanayi ba	direct	false			true
+replay.pause	Pause	Dakata	direct	false			true
+replay.play	Play	Kunna	direct	false			true
+replay.positionLine	Step {c} of {t} · {e} events · {x} transactions · {g} edges	Mataki {c} daga {t} · abubuwa {e} · mu'amaloli {x} · gefuna {g}	direct	false	c,e,g,t,x	c,e,g,t,x	true
+replay.reducedMotionPlay	Auto-play disabled: reduced-motion preference detected. Use Step forward.	An kashe kunna kai tsaye: an gano zaɓin rage motsi. Yi amfani da Mataki gaba.	direct	false			true
+replay.resetBlurb	Reset restores the seeded scenario exactly and clears all live state: human decisions, simulations, AI runs, and audit events beyond the reset itself.	Sake saitawa yana dawo da yanayin farko daidai kuma yana share duk yanayin kai tsaye: shawarwarin ɗan adam, gwaje-gwaje, gudanarwar AI, da abubuwan bita bayan sake saitawar kanta.	direct	false			true
+replay.resetDemo	Reset demo	Sake saita nuni	direct	false			true
+replay.resetDoneMid	, seed 	, iri 	direct	false			true
+replay.resetDonePost	. Reload the page to replay from the restored state.	. Sake loda shafin don sake kunnawa daga yanayin da aka dawo.	direct	false			true
+replay.resetDonePre	Reset complete: run 	Sake saitawa ta kammala: gudu 	direct	false			true
+replay.resetLabel	Scenario reset	Sake saita yanayi	direct	false			true
+replay.resetTitle	Scenario reset	Sake saita yanayi	direct	false			true
+replay.resetting	Resetting…	Ana sake saitawa…	direct	false			true
+replay.restart	Restart	Sake farawa	direct	false			true
+replay.scenarioPre	Scenario 	Yanayi 	direct	false			true
+replay.startHint	At the start: no events applied yet. Step forward to begin.	A farko: ba a yi amfani da wani abu ba tukuna. Yi mataki gaba don farawa.	direct	false			true
+replay.stepBack	Step back	Mataki baya	direct	false			true
+replay.stepControls	Replay step controls	Abubuwan sarrafa matakan sake kunnawa	direct	false			true
+replay.stepFwd	Step forward	Mataki gaba	direct	false			true
+replay.title	Replay {id}	Sake kunnawa {id}	direct	false	id	id	true
+selector.buttonLabel	Select language	Zaɓi harshe	direct	false			true
+selector.fallbackNote	English shown — translation unavailable	Ana nuna Turanci — babu fassara	direct	false			true
+selector.label	Language	Harshe	direct	false			true
+selector.panelTitle	Select language	Zaɓi harshe	direct	false			true
+selector.partialTag	Partial	Sashe	direct	false			true
+selector.resultsEmpty	No languages match your search.	Babu harshen da ya dace da bincikenka.	direct	false			true
+selector.searchLabel	Search languages	Nemi harsuna	direct	false			true
+selector.searchPlaceholder	Search languages…	Nemi harsuna…	direct	false			true
+selector.translatedTag	Translated	An fassara	direct	false			true
+selector.unavailableTag	English fallback	Turanci na madadin	direct	false			true
+sim.assumptionLabel	Assumption (recorded with the run)	Zato (an yi rikodi da gudu)	direct	false			true
+sim.assumptionLine	Assumption: {a}	Zato: {a}	direct	false	a	a	true
+sim.assumptionPh	e.g. Shared devices are coincidental, not shared control.	misali. Na'urorin da aka raba daidaituwa ne, ba ikon raba ba.	direct	false			true
+sim.baselineLine	Authoritative baseline (network): {s}/100 {b}. This value never changes.	Tushen iko (hanyar sadarwa): {s}/100 {b}. Wannan ƙima ba ya canzawa.	direct	false	b,s	b,s	true
+sim.ignoredPre	Ignored: 	An yi watsi da: 	direct	false			true
+sim.legendLine	Relationships to ignore ({a} of {b} selected)	Alaƙar da za a yi watsi da su ({a} daga {b} da aka zaɓa)	direct	false	a,b	a,b	true
+sim.loadEdges	Load edges	Loda gefuna	direct	false			true
+sim.loadingTarget	Loading target…	Ana loda abin nufi…	direct	false			true
+sim.readOnlySim	Your role is read-only: simulations are disabled.	Matsayinka karatu kaɗai ne: an kashe gwaje-gwaje.	direct	false			true
+sim.runSim	Run simulation	Gudanar da gwaji	direct	false			true
+sim.running	Running…	Ana gudana…	direct	false			true
+sim.simBanner	SIMULATED — hypothetical, not a real-world prediction.	AN YI KWATANCE — hasashe, ba hasashen duniyar gaske ba.	direct	false			true
+sim.simLabel	What-if simulation	Gwajin hasashe	direct	false			true
+sim.simRunPost	: baseline {a}/100 {b} → simulated {c}/100 {d}	: tushe {a}/100 {b} → kwatance {c}/100 {d}	direct	false	a,b,c,d	a,b,c,d	true
+sim.simRunPre	Run 	Gudu 	direct	false			true
+sim.simTitle	What-if simulation	Gwajin hasashe	direct	false			true
+sim.targetDown	Target unavailable: {err}	Abin nufi ba ya nan: {err}	direct	false	err	err	true
+sim.targetLabel	Target transaction	Mu'amalar da aka nufa	direct	false			true
+system.allOk	All systems operational	Duk tsaruka suna aiki	direct	false			true
+system.checkedPre	Checked	An duba	direct	false			true
+system.rowAi	AI Engine (Muse Spark)	Injin AI (Muse Spark)	direct	false			true
+system.rowApi	API Services	Ayyukan API	direct	false			true
+system.rowGraph	Graph Provenance	Asalin taswira	direct	false			true
+system.rowSeed	Seed Integrity	Mutuncin iri	direct	false			true
+system.scenarioPre	Scenario {s} · Run 	Yanayi {s} · Gudu 	direct	false	s	s	true
+system.stDegraded	Degraded	Ya ragu	direct	false			true
+system.stNotConfigured	Not configured	Ba a saita ba	direct	false			true
+system.stNotReported	Not reported	Ba a bayar da rahoto ba	direct	false			true
+system.stOperational	Operational	Yana aiki	direct	false			true
+system.sysTitle	System Status	Matsayin Tsarin	direct	false			true
+theme.appearance	Appearance	Kamanni	direct	false			true
+theme.dark	Dark	Duhu	direct	false			true
+theme.light	Light	Haske	direct	false			true
+theme.system	System	Tsarin	direct	false			true
+workflow.audit	Audit	Bincike	direct	false			true
+workflow.connect	Connect	Haɗa	direct	false			true
+workflow.detect	Detect	Gano	direct	false			true
+workflow.explain	Explain	Bayyana	direct	false			true
+workflow.humanDecision	Human Decision	Shawarar ɗan adam	direct	false			true
+workflow.investigate	Investigate	Bincika	direct	false			true
+workflow.navLabel	Investigation workflow	Tsarin bincike	direct	false			true
+workflow.onThisPage	On this page	A wannan shafin	direct	false			true
+workflow.simulate	Simulate	Gwada	direct	false			true

@@ -7,6 +7,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslation } from "../../../lib/i18n/context";
 import { AuditList } from "../../../components/audit-list";
 import { Breadcrumbs } from "../../../components/breadcrumbs";
 import { DecisionForm } from "../../../components/decision-form";
@@ -17,6 +18,7 @@ import {
   getCase,
   getCaseAudit,
   getInvestigation,
+  userErrorMessage,
   type AiAssessment,
   type AuditEntry,
   type CaseDetail,
@@ -34,6 +36,8 @@ type State =
  * exists; every field access is guarded. API errors still surface via
  * the page-level error state, never as this empty state. */
 function AiAssessmentSection({ detail }: { detail: CaseDetail }) {
+  const { t } = useTranslation("case");
+  const { t: tCommon } = useTranslation("common");
   const assessment: AiAssessment | null | undefined =
     detail?.latest_ai_run ?? null;
   const findings = Array.isArray(assessment?.key_findings)
@@ -43,29 +47,30 @@ function AiAssessmentSection({ detail }: { detail: CaseDetail }) {
     ? (assessment?.missing_information as string[])
     : [];
   return (
-    <section className="card" aria-label="AI Investigation Assessment">
-      <h2 id="ai-assessment-h">AI Investigation Assessment</h2>
-      <p className="muted">
-        Advisory only: Muse Spark analysis explains evidence and never
-        constitutes a human decision, nor changes risk scores or case
-        status.
-      </p>
+    <section className="card" aria-label={t("assessLabel")}>
+      <h2 id="ai-assessment-h">{t("assessTitle")}</h2>
+      <p className="muted">{t("advisory")}</p>
       {assessment === null || assessment === undefined ? (
         <p className="muted" data-testid="ai-assessment-empty">
-          No AI investigation assessment is available yet.
+          {t("assessEmpty")}
         </p>
       ) : (
         <div data-testid="ai-assessment">
           <p>
             <strong>
-              Conclusion: {assessment.conclusion || "—"}
+              {t("conclusionPre")}
+              {assessment.conclusion || "—"}
             </strong>{" "}
             <span className="muted">
-              ({assessment.model_id || "unknown model"} · run{" "}
-              <code>{assessment.agent_run_id || "—"}</code> ·{" "}
-              {assessment.latency_ms ?? "—"} ms · schema{" "}
-              {assessment.schema_validation_status || "—"} · refs{" "}
-              {assessment.evidence_reference_validation_status || "—"})
+              {t("runMetaPre", {
+                model: assessment.model_id || tCommon("unknownModel"),
+              })}
+              <code>{assessment.agent_run_id || "—"}</code>{" "}
+              {t("runMetaPost", {
+                ms: assessment.latency_ms ?? "—",
+                s: assessment.schema_validation_status || "—",
+                r: assessment.evidence_reference_validation_status || "—",
+              })}
             </span>
           </p>
           <ul className="stack">
@@ -73,7 +78,8 @@ function AiAssessmentSection({ detail }: { detail: CaseDetail }) {
               <li key={index} className="finding">
                 <div>{finding?.finding || "—"}</div>
                 <p className="muted">
-                  Confidence: {finding?.confidence_label || "—"} ·{" "}
+                  {t("confidencePre")}
+                  {finding?.confidence_label || "—"} ·{" "}
                   {(finding?.evidence_ids ?? []).join(", ")}
                 </p>
               </li>
@@ -81,7 +87,7 @@ function AiAssessmentSection({ detail }: { detail: CaseDetail }) {
           </ul>
           {missing.length > 0 && (
             <p className="muted">
-              Missing information: {missing.join("; ")}
+              {t("missingInfo", { list: missing.join("; ") })}
             </p>
           )}
         </div>
@@ -93,6 +99,10 @@ function AiAssessmentSection({ detail }: { detail: CaseDetail }) {
 export default function CasePage() {
   const params = useParams<{ caseId: string }>();
   const caseId = params.caseId;
+  const { t } = useTranslation("case");
+  const { t: tCommon } = useTranslation("common");
+  const { t: tInv } = useTranslation("investigation");
+  const { t: tNav } = useTranslation("nav");
   const [state, setState] = useState<State>({ kind: "loading" });
   // Best-effort risk summary (Phase 4): the investigation behind this
   // case carries the authoritative scores. A failure here never breaks
@@ -145,12 +155,7 @@ export default function CasePage() {
         }
         setState({
           kind: "error",
-          message:
-            err instanceof ApiError
-              ? `${err.code}: ${err.message}`
-              : err instanceof Error
-                ? err.message
-                : "request failed",
+          message: userErrorMessage(err, tCommon),
         });
       });
     return () => controller.abort();
@@ -190,33 +195,35 @@ export default function CasePage() {
     <main className="main">
       <Breadcrumbs
         items={[
-          { label: "Command Center", href: "/demo" },
-          { label: `Case ${caseId}` },
+          { label: tNav("commandCenter"), href: "/demo" },
+          { label: t("crumb", { id: caseId }) },
         ]}
       />
       {state.kind === "loading" && (
         <section className="card" aria-live="polite">
-          <h1>Case {caseId}</h1>
-          <p className="muted">Loading case…</p>
+          <h1>{t("title", { id: caseId })}</h1>
+          <p className="muted">{t("loading")}</p>
         </section>
       )}
       {state.kind === "not-found" && (
         <section className="card" aria-live="assertive">
-          <h1>Case not found</h1>
+          <h1>{t("notFoundTitle")}</h1>
           <p className="muted">
-            No case <code>{caseId}</code> exists in the backend.
+            {t("notFoundPre")}
+            <code>{caseId}</code>
+            {t("notFoundPost")}
           </p>
         </section>
       )}
       {state.kind === "error" && (
         <section className="card" aria-live="assertive">
-          <h1>Case {caseId}</h1>
+          <h1>{t("title", { id: caseId })}</h1>
           <div className="alert error" role="alert">
             {state.message}
           </div>
           <p>
             <button type="button" onClick={() => window.location.reload()}>
-              Retry
+              {tCommon("retry")}
             </button>
           </p>
         </section>
@@ -225,32 +232,34 @@ export default function CasePage() {
         <>
           <SectionNav
             items={[
-              { id: "overview-h", label: "Overview" },
-              { id: "ai-assessment-h", label: "AI assessment" },
-              { id: "decision-history-h", label: "Decision history" },
-              { id: "human-decision-h", label: "Human decision" },
-              { id: "audit-h", label: "Audit trail" },
+              { id: "overview-h", label: t("overview") },
+              { id: "ai-assessment-h", label: t("aiAssessment") },
+              { id: "decision-history-h", label: t("decisionHistory") },
+              { id: "human-decision-h", label: t("humanDecision") },
+              { id: "audit-h", label: t("auditTrail") },
             ]}
           />
           <div className="page-head">
             <h1 id="overview-h">
-              Case <code>{state.detail.case.case_id}</code> —{" "}
+              {t("caseTitlePre")}
+              <code>{state.detail.case.case_id}</code> {t("caseTitleDash")}
               <span data-testid="case-status">{state.detail.case.status}</span>
             </h1>
             <p className="muted">
-              Investigation{" "}
+              {t("invPre")}
               <Link
                 href={`/investigations/${state.detail.case.investigation_id}`}
                 className="back-link"
               >
                 {state.detail.case.investigation_id}
               </Link>{" "}
-              · updated {state.detail.case.updated_at}
+              {t("updatedPre")}{" "}
+              <bdi>{state.detail.case.updated_at}</bdi>
             </p>
             <p className="muted" data-testid="case-transitions">
-              Allowed transitions:{" "}
+              {t("transitionsPre")}
               {state.detail.allowed_transitions.length === 0
-                ? "none (terminal state, or refreshing…)"
+                ? t("transitionsEmpty")
                 : state.detail.allowed_transitions.join(", ")}
             </p>
             {risk.kind === "ready" && (
@@ -260,24 +269,28 @@ export default function CasePage() {
                   band={risk.networkBand}
                 />{" "}
                 <span className="muted">
-                  network risk · transaction-only {risk.txnScore}/100{" "}
-                  {risk.txnBand} · {risk.version}
+                  {tInv("riskLine", {
+                    score: risk.txnScore,
+                    band: risk.txnBand,
+                    version: risk.version,
+                  })}
                 </span>
               </p>
             )}
           </div>
           <AiAssessmentSection detail={state.detail} />
-          <section className="card" aria-label="Decision history">
-            <h2 id="decision-history-h">Decision history</h2>
+          <section className="card" aria-label={t("histLabel")}>
+            <h2 id="decision-history-h">{t("histTitle")}</h2>
             {state.detail.decisions.length === 0 ? (
-              <p className="muted">No human decisions recorded yet.</p>
+              <p className="muted">{t("histEmpty")}</p>
             ) : (
               <ul className="stack" data-testid="decision-history">
                 {state.detail.decisions.map((d) => (
                   <li key={d.decision_id} className="finding">
                     <p>
-                      <strong>{d.decision}</strong> by {d.actor_id} ·{" "}
-                      {d.created_at}
+                      <strong>{d.decision}</strong>{" "}
+                      {t("decidedByPre", { actor: d.actor_id })}{" "}
+                      <bdi>{d.created_at}</bdi>
                     </p>
                     <p className="muted">{d.reason}</p>
                   </li>
@@ -295,7 +308,7 @@ export default function CasePage() {
               href={`/cases/${caseId}/audit`}
               className="back-link"
             >
-              Open full audit trail
+              {t("openAudit")}
             </Link>
           </p>
           <AuditList audits={state.audits} />

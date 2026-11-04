@@ -12,7 +12,7 @@ Owner must supply: (a) exact archive path/URL, (b) encryption method + key refer
 - Docs: all `docs/` (Phases 1–15, closeout, SUBMIT A–J, demo script/storyboard).
 - Manifests: `requirements.txt`, `requirements.lock`, `frontend/package.json`.
 - Evidence copies (volatile %TEMP% → archive with hashes): smoke48/smoke11/smoke12 shots + matrix JSONs, `live_run.json` (agentrun_0003), `l2_decision.png`, `webgl_fallback*.png`, `fx2_*.png`, final suite logs.
-- Logos: original `cruiseshield-logo-original.png` 1273370 B SHA-256 1A0CC66B…C32A623 (+ duplicate `.png.png`, identical, disposition pending).
+- Logos: original `cruiseshield-logo-original.png` 1273370 B SHA-256 1A0CC66B…C32A623 (+ duplicate `.png.png`, identical, RETIRED per owner Q4 2026-11-03 — no restore).
 
 ## Exclusions
 `node_modules/`, `.next/`, `__pycache__/`, `.pytest_cache/`, `*.pyc`, `.venv/`, OS thumbnails. Rebuild/run instructions included.

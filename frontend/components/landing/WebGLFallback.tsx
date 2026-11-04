@@ -1,8 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { useTranslation } from "../../lib/i18n/context";
 
 /* Graceful fallback when WebGL is unavailable: full brand, headline,
  * and demo entry remain usable with no 3D required. */
 export function WebGLFallback() {
+  const { t } = useTranslation("landing");
   return (
     <div className="hero-fallback" data-testid="webgl-fallback">
       <div className="hero-fallback-core" aria-hidden="true">
@@ -10,13 +14,10 @@ export function WebGLFallback() {
         <span className="hero-fallback-ring small" />
         <span className="hero-fallback-dot" />
       </div>
-      <p className="muted">
-        Interactive 3D is unavailable in this browser. The full demo
-        experience remains open.
-      </p>
+      <p className="muted">{t("fallbackNote")}</p>
       <p>
         <Link className="landing-cta" href="/demo">
-          Explore CruiseShield AI™ <span aria-hidden="true">→</span>
+          {t("cta")} <span aria-hidden="true">→</span>
         </Link>
       </p>
     </div>

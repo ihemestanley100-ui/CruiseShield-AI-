@@ -1,0 +1,10 @@
+[
+  "LOG: Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://127.0.0.1:8010/api/v1/alerts",
+  "LOG: Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://127.0.0.1:8010/api/v1/investigations/inv_84721",
+  "LOG: Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://127.0.0.1:8010/api/v1/graph/txn_84721",
+  "LOG: Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://127.0.0.1:8010/api/v1/cases/case_84721",
+  "LOG: Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://127.0.0.1:8010/api/v1/cases/case_84721/audit",
+  "LOG: Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://127.0.0.1:8010/api/v1/auth/me",
+  "LOG: Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://127.0.0.1:8010/api/v1/replay/scn_primary?cursor=0",
+  "LOG: Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://127.0.0.1:8010/api/v1/auth/me"
+]

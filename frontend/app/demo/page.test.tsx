@@ -408,7 +408,7 @@ describe("CommandPage", () => {
     // owns the alert role plus recovery.
     await waitFor(() =>
       expect(screen.getByRole("alert").textContent).toContain(
-        "BACKEND_UNREACHABLE: Failed to fetch"
+        "Backend unreachable. Check the demo server and retry."
       )
     );
     expect(screen.getByRole("button", { name: "Retry" })).toBeTruthy();

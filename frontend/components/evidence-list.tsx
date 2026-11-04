@@ -2,15 +2,17 @@
 
 import { useState } from "react";
 import type { EvidenceItem } from "../lib/api";
+import { useTranslation } from "../lib/i18n/context";
 
 const ALL = "all";
 
 function Provenance({ label, ids }: { label: string; ids: string[] }) {
+  const { t: tCommon } = useTranslation("common");
   return (
     <div>
       <span className="muted">{label}: </span>
       {ids.length === 0 ? (
-        <span className="muted">none</span>
+        <span className="muted">{tCommon("none")}</span>
       ) : (
         ids.map((id, index) => (
           <span key={id}>
@@ -24,6 +26,7 @@ function Provenance({ label, ids }: { label: string; ids: string[] }) {
 }
 
 export function EvidenceList({ items }: { items: EvidenceItem[] }) {
+  const { t } = useTranslation("evidence");
   const types = Array.from(new Set(items.map((i) => i.evidence_type))).sort();
   const [filter, setFilter] = useState<string>(ALL);
   const [query, setQuery] = useState("");
@@ -52,16 +55,16 @@ export function EvidenceList({ items }: { items: EvidenceItem[] }) {
   return (
     <section className="card" aria-labelledby="evidence-h">
       <h2 id="evidence-h">
-        Evidence package ({shown.length} of {items.length})
+        {t("pkgTitle", { a: shown.length, b: items.length })}
       </h2>
       <p className="evidence-search">
-        <label htmlFor="evidence-search">Search evidence</label>{" "}
+        <label htmlFor="evidence-search">{t("searchLabel")}</label>{" "}
         <input
           id="evidence-search"
           type="search"
           value={query}
           onChange={(ev) => setQuery(ev.target.value)}
-          placeholder="Filter by ID, type, title, or description"
+          placeholder={t("searchPh")}
           className="text-input"
         />{" "}
         {query !== "" && (
@@ -73,11 +76,11 @@ export function EvidenceList({ items }: { items: EvidenceItem[] }) {
               setFilter(ALL);
             }}
           >
-            Clear search
+            {t("clearSearch")}
           </button>
         )}
       </p>
-      <div className="chip-row" role="group" aria-label="Filter by type">
+      <div className="chip-row" role="group" aria-label={t("filterByType")}>
         {[ALL, ...types].map((type) => (
           <button
             key={type}
@@ -86,7 +89,7 @@ export function EvidenceList({ items }: { items: EvidenceItem[] }) {
             aria-pressed={filter === type}
             onClick={() => setFilter(type)}
           >
-            {type} (
+            {type === ALL ? t("filterAll") : type} (
             {type === ALL
               ? items.length
               : items.filter((i) => i.evidence_type === type).length}
@@ -96,9 +99,7 @@ export function EvidenceList({ items }: { items: EvidenceItem[] }) {
       </div>
       {shown.length === 0 ? (
         <p className="muted">
-          {query.trim() === ""
-            ? "No evidence items match this filter."
-            : "No evidence items match this search."}
+          {query.trim() === "" ? t("emptyFilter") : t("emptySearch")}
         </p>
       ) : (
         <ul className="stack">
@@ -119,20 +120,20 @@ export function EvidenceList({ items }: { items: EvidenceItem[] }) {
                   aria-controls={`prov-${item.evidence_id}`}
                   onClick={() => toggle(item.evidence_id)}
                 >
-                  {expanded ? "Hide provenance" : "Show provenance"}
+                  {expanded ? t("hideProv") : t("showProv")}
                 </button>
                 {expanded && (
                   <div
                     id={`prov-${item.evidence_id}`}
                     className="stack"
                   >
-                    <Provenance label="Events" ids={item.event_ids} />
+                    <Provenance label={t("provEvents")} ids={item.event_ids} />
                     <Provenance
-                      label="Graph edges"
+                      label={t("provEdges")}
                       ids={item.graph_edge_ids}
                     />
                     <Provenance
-                      label="Rule results"
+                      label={t("provRules")}
                       ids={item.rule_result_ids}
                     />
                   </div>

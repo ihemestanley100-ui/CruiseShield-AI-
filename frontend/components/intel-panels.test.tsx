@@ -135,7 +135,7 @@ describe("IntelSection", () => {
       />
     );
     expect(screen.getByTestId("intel-status")).toHaveTextContent(
-      "1 finding(s)"
+      "1 finding"
     );
     expect(screen.getAllByText(/dev_04/).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText("ip_02")).toBeTruthy();

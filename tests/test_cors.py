@@ -45,18 +45,24 @@ def _run(method, origin, extra_headers=None):
                              for k, v in start["headers"]}
 
 
-def test_config_has_no_wildcard_or_credentials():
+def test_config_has_no_wildcard_but_allows_credentials():
+    # UGLS-02: allow_credentials must be True even in open-demo mode —
+    # the frontend always fetches with credentials:"include", and
+    # browsers reject a credentialed response without ACA-C, so False
+    # broke every open-demo browser fetch (BACKEND_UNREACHABLE in Edge).
+    # Explicit origins (never "*") keep this safe.
     assert FRONTEND_ORIGINS == ["http://localhost:3000", "http://127.0.0.1:3000"]
     options = cors_options()
     assert "*" not in options["allow_origins"]
-    assert options["allow_credentials"] is False
+    assert options["allow_credentials"] is True
     assert set(options["allow_methods"]) <= {"GET", "POST", "OPTIONS"}
     assert set(options["allow_headers"]) <= {"Content-Type", "X-Request-ID"}
 
 
 def test_staging_arms_credentialed_cors_without_wildcard(monkeypatch):
     """SESSION_SECRET set (login armed): cookies + XRW allowed, no '*'."""
-    monkeypatch.setattr(config_mod, "SESSION_SECRET", "staging-secret")
+    monkeypatch.setattr(config_mod, "SESSION_SECRET",
+                        "staging-secret-not-a-real-credential")
     options = cors_options()
     assert options["allow_credentials"] is True
     assert "*" not in options["allow_origins"]
@@ -67,7 +73,9 @@ def test_staging_arms_credentialed_cors_without_wildcard(monkeypatch):
 def test_open_demo_keeps_legacy_policy(monkeypatch):
     monkeypatch.setattr(config_mod, "SESSION_SECRET", "")
     options = cors_options()
-    assert options["allow_credentials"] is False
+    # UGLS-02: legacy non-credentialed policy rejected every browser
+    # fetch; open demo now allows credentials (safe: explicit origins).
+    assert options["allow_credentials"] is True
     assert "X-Requested-With" not in options["allow_headers"]
 
 
@@ -83,6 +91,9 @@ def test_allowed_origin_gets_header(origin):
     status, headers = _run("GET", origin)
     assert status == 200
     assert headers["access-control-allow-origin"] == origin
+    # UGLS-02 regression: without ACA-C the browser rejects the
+    # frontend's credentials:"include" fetch as BACKEND_UNREACHABLE.
+    assert headers["access-control-allow-credentials"] == "true"
 
 
 def test_rejected_origin_gets_no_header():
@@ -102,7 +113,8 @@ def test_preflight_allows_post_with_json():
 
 
 def test_staging_preflight_allows_xrw_header(monkeypatch):
-    monkeypatch.setattr(config_mod, "SESSION_SECRET", "staging-secret")
+    monkeypatch.setattr(config_mod, "SESSION_SECRET",
+                        "staging-secret-not-a-real-credential")
     status, headers = _run("OPTIONS", "http://localhost:3000", [
         (b"access-control-request-method", b"POST"),
         (b"access-control-request-headers", b"x-requested-with"),
@@ -117,6 +129,45 @@ def test_preflight_rejects_disallowed_method():
         (b"access-control-request-method", b"DELETE"),
     ])
     assert status == 400
+
+
+def test_armed_guard_401_carries_cors_headers(client, monkeypatch):
+    """Armed-mode 401s must be browser-readable (ACAO + credentials).
+
+    Socket-free: TestClient is in-process ASGI. Regression: CORSMiddleware
+    sat inside session_guard, so guard short-circuits bypassed it and the
+    browser reported BACKEND_UNREACHABLE instead of a login gate.
+    """
+    monkeypatch.setattr(config_mod, "SESSION_SECRET",
+                        "staging-secret-not-a-real-credential")
+    monkeypatch.setattr(config_mod, "DEMO_USERS", "")
+    response = client.get("/api/v1/alerts",
+                          headers={"Origin": "http://127.0.0.1:3000"})
+    assert response.status_code == 401
+    assert (response.headers["access-control-allow-origin"]
+            == "http://127.0.0.1:3000")
+    assert response.headers["access-control-allow-credentials"] == "true"
+
+
+def test_armed_preflight_answered_before_guard(client, monkeypatch):
+    """Preflight to a guarded path must reach CORS, not the 401 guard.
+
+    Socket-free (see above). Request headers stay within the open-demo
+    allowlist: the app's middleware is built at import, so XRW admission
+    under staging options is covered by
+    test_staging_preflight_allows_xrw_header.
+    """
+    monkeypatch.setattr(config_mod, "SESSION_SECRET",
+                        "staging-secret-not-a-real-credential")
+    monkeypatch.setattr(config_mod, "DEMO_USERS", "")
+    response = client.options(
+        "/api/v1/cases/case_84721/decision",
+        headers={"Origin": "http://127.0.0.1:3000",
+                 "Access-Control-Request-Method": "POST",
+                 "Access-Control-Request-Headers": "content-type"})
+    assert response.status_code == 200
+    assert (response.headers["access-control-allow-origin"]
+            == "http://127.0.0.1:3000")
 
 
 @pytest.mark.skipif(

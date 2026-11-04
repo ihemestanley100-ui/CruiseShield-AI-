@@ -5,14 +5,14 @@ import { AppShell } from "./app-shell";
 
 const {
   usePathnameMock,
-  listAlertsMock,
+  listNotificationsMock,
   modeMock,
   meMock,
   loginMock,
   logoutMock,
 } = vi.hoisted(() => ({
   usePathnameMock: vi.fn(() => "/demo"),
-  listAlertsMock: vi.fn(),
+  listNotificationsMock: vi.fn(),
   modeMock: vi.fn(),
   meMock: vi.fn(),
   loginMock: vi.fn(),
@@ -41,7 +41,7 @@ vi.mock("next/navigation", () => ({
 
 vi.mock("../lib/api", async (importOriginal) => ({
   ...((await importOriginal()) as object),
-  listAlerts: listAlertsMock,
+  listNotifications: listNotificationsMock,
   getAuthMode: modeMock,
   getAuthMe: meMock,
   postLogin: loginMock,
@@ -51,8 +51,12 @@ vi.mock("../lib/api", async (importOriginal) => ({
 beforeEach(() => {
   usePathnameMock.mockReset();
   usePathnameMock.mockReturnValue("/demo");
-  listAlertsMock.mockReset();
-  listAlertsMock.mockResolvedValue({ alerts: [] });
+  listNotificationsMock.mockReset();
+  listNotificationsMock.mockResolvedValue({
+    notifications: [],
+    unread_count: 0,
+    synthetic_notice: "Synthetic demo data.",
+  });
   modeMock.mockReset();
   meMock.mockReset();
   loginMock.mockReset();
@@ -63,22 +67,22 @@ beforeEach(() => {
 });
 
 describe("AppShell", () => {
-  it("keeps headings out of the shell chrome (page h1 stays first)", () => {
-    const { container } = render(
-      <AppShell>
-        <p>child</p>
-      </AppShell>
-    );
+  /* Checking-first gate: full-shell tests await resolution (fail-open
+   * demo resolves on the mocked mode rejection). */
+  async function renderResolved(children: React.ReactNode) {
+    const result = render(<AppShell>{children}</AppShell>);
+    await screen.findByText("child");
+    return result;
+  }
+
+  it("keeps headings out of the shell chrome (page h1 stays first)", async () => {
+    const { container } = await renderResolved(<p>child</p>);
     expect(container.querySelectorAll("h1,h2,h3,h4,h5,h6")).toHaveLength(0);
     expect(screen.getByText("Quick Actions").tagName).toBe("P");
   });
 
-  it("renders brand, theme, disclosure, and demo profile", () => {
-    render(
-      <AppShell>
-        <p>child</p>
-      </AppShell>
-    );
+  it("renders brand, theme, disclosure, and demo profile", async () => {
+    await renderResolved(<p>child</p>);
     expect(screen.getByText("CruiseShield AI")).toBeTruthy();
     expect(
       screen.getByRole("radiogroup", { name: "Appearance" })
@@ -116,12 +120,8 @@ describe("AppShell", () => {
     expect(home.textContent).toContain("Financial Crime Immune System™");
   });
 
-  it("links only real destinations and marks the active page", () => {
-    render(
-      <AppShell>
-        <p>child</p>
-      </AppShell>
-    );
+  it("links only real destinations and marks the active page", async () => {
+    await renderResolved(<p>child</p>);
     const nav = screen.getByRole("navigation", { name: "Primary" });
     const hrefs = [...nav.querySelectorAll("a")].map((a) =>
       a.getAttribute("href")
@@ -176,12 +176,8 @@ describe("AppShell", () => {
     ).toBeTruthy();
   });
 
-  it("toggles the drawer and closes on Escape", () => {
-    render(
-      <AppShell>
-        <p>child</p>
-      </AppShell>
-    );
+  it("toggles the drawer and closes on Escape", async () => {
+    await renderResolved(<p>child</p>);
     const toggle = screen.getByRole("button", { name: "Toggle navigation" });
     expect(toggle.getAttribute("aria-expanded")).toBe("false");
     fireEvent.click(toggle);
@@ -190,12 +186,8 @@ describe("AppShell", () => {
     expect(toggle.getAttribute("aria-expanded")).toBe("false");
   });
 
-  it("moves focus into the drawer and back to the toggle", () => {
-    const { container } = render(
-      <AppShell>
-        <p>child</p>
-      </AppShell>
-    );
+  it("moves focus into the drawer and back to the toggle", async () => {
+    const { container } = await renderResolved(<p>child</p>);
     const toggle = screen.getByRole("button", { name: "Toggle navigation" });
     const drawer = container.querySelector("#app-sidebar") as HTMLElement;
     fireEvent.click(toggle);
@@ -204,12 +196,8 @@ describe("AppShell", () => {
     expect(document.activeElement).toBe(toggle);
   });
 
-  it("locks background scroll while the drawer is open", () => {
-    render(
-      <AppShell>
-        <p>child</p>
-      </AppShell>
-    );
+  it("locks background scroll while the drawer is open", async () => {
+    await renderResolved(<p>child</p>);
     const toggle = screen.getByRole("button", { name: "Toggle navigation" });
     fireEvent.click(toggle);
     expect(document.body.style.overflow).toBe("hidden");
@@ -217,12 +205,8 @@ describe("AppShell", () => {
     expect(document.body.style.overflow).toBe("");
   });
 
-  it("closes the drawer from the overlay and on route change", () => {
-    const { rerender } = render(
-      <AppShell>
-        <p>child</p>
-      </AppShell>
-    );
+  it("closes the drawer from the overlay and on route change", async () => {
+    const { rerender } = await renderResolved(<p>child</p>);
     const toggle = screen.getByRole("button", { name: "Toggle navigation" });
     fireEvent.click(toggle);
     fireEvent.click(screen.getByRole("button", { name: "Close navigation" }));
@@ -236,6 +220,32 @@ describe("AppShell", () => {
       </AppShell>
     );
     expect(toggle.getAttribute("aria-expanded")).toBe("false");
+  });
+
+  it("offers a skip link to the main landmark", async () => {
+    const { container } = await renderResolved(<p>child</p>);
+    const link = screen.getByRole("link", { name: "Skip to main content" });
+    expect(link.getAttribute("href")).toBe("#main-content");
+    expect(container.querySelector(".app-shell > :first-child")).toBe(link);
+    const main = container.querySelector("main#main-content");
+    expect(main?.getAttribute("tabindex")).toBe("-1");
+  });
+
+  it("withholds routes and fetches while checking the session", () => {
+    modeMock.mockReturnValue(new Promise(() => {}));
+    render(
+      <AppShell>
+        <p>child</p>
+      </AppShell>
+    );
+    expect(screen.getByText("Loading…").getAttribute("role")).toBe(
+      "status"
+    );
+    expect(screen.queryByText("child")).toBeNull();
+    expect(screen.queryByRole("navigation")).toBeNull();
+    expect(
+      screen.queryByRole("heading", { name: "Demo sign in" })
+    ).toBeNull();
   });
 
   it("shows the sign-in gate when login is armed and logged out", async () => {
@@ -259,8 +269,16 @@ describe("AppShell", () => {
 
   it("shows the session user and signs out from the profile", async () => {
     modeMock.mockResolvedValue({ auth_enabled: true });
-    meMock.mockResolvedValue({ user: "judge", role: "investigator" });
-    loginMock.mockResolvedValue({ user: "judge", role: "investigator" });
+    meMock.mockResolvedValue({
+      user: "judge",
+      role: "investigator",
+      permissions: ["read", "audit_read", "ai_run", "write"],
+    });
+    loginMock.mockResolvedValue({
+      user: "judge",
+      role: "investigator",
+      permissions: ["read", "audit_read", "ai_run", "write"],
+    });
     render(
       <AppShell>
         <p>child</p>
@@ -292,19 +310,20 @@ describe("AppShell", () => {
     ).toBeNull();
   });
 
-  it("badges the bell with the real open-alert count", async () => {
-    listAlertsMock.mockResolvedValue({
-      alerts: [
+  it("badges the bell with the real unread count", async () => {
+    listNotificationsMock.mockResolvedValue({
+      notifications: [
         {
-          alert_id: "alert_84721",
+          notification_id: "alert_84721",
           transaction_id: "txn_84721",
           title: "t",
           status: "OPEN",
-          risk_assessment_id: "r",
           created_at: "2026-10-29T20:32:15Z",
-          trace_id: "t",
+          read: false,
         },
       ],
+      unread_count: 1,
+      synthetic_notice: "Synthetic demo data.",
     });
     render(
       <AppShell>

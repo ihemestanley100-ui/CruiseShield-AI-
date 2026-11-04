@@ -64,6 +64,9 @@ body {
 .topbar {
   display: flex;
   align-items: center;
+  /* UGLS-D: wrap at every width. Desktop rows still fit on one line
+   * (no visual change); tablet widths wrap instead of overflowing. */
+  flex-wrap: wrap;
   gap: 0.9rem;
   padding: 0.7rem 1.2rem;
   background: var(--navy);
@@ -231,7 +234,7 @@ button {
   --panel: #ffffff;
   --ink: #14213a;
   --muted: #4a5a75;
-  --accent: #0e7c9e;
+  --accent: #0b6e8d;
   --on-accent: #ffffff;
   --line: #d7e0ee;
   --ok: #0f766e;
@@ -950,6 +953,13 @@ button:active:not(:disabled) {
   margin: 0.4rem 0;
 }
 
+/* WCAG 2.5.8: a link alone in its paragraph is a standalone pointer
+ * target, not inline text — guarantee the 24px minimum height. */
+.card p > a:only-child {
+  display: inline-block;
+  min-height: 24px;
+}
+
 .kpi-value {
   font-size: 1.6rem;
   font-weight: 700;
@@ -1653,6 +1663,31 @@ button:active:not(:disabled) {
 
 /* Phase 3 notifications. New classes only; no existing rule above
  * is modified. */
+.notif-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem;
+}
+
+.btn-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--link, #7cb8ff);
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
+
+.btn-link:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.badge-unread {
+  background: var(--bad);
+  color: #fff;
+}
 
 .notif-wrap {
   position: relative;
@@ -1778,4 +1813,195 @@ code {
     display: flex;
     align-items: center;
   }
+}
+
+/* Universal Global Language Selector (reference: globe + native
+ * name + chevron, rounded orange border). Complex-script fallback
+ * stack: system fonts first (offline-safe, zero-cost), Noto Sans
+ * family when installed by the OS. */
+:root {
+  --lang-orange: #f97316;
+  --lang-orange-ink: #7c2d12;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Skip link: hidden until keyboard focus, then a plain readable bar.
+ * No animation (safe under prefers-reduced-motion by construction). */
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.5rem 0.9rem;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0 0 0.5rem 0.5rem;
+  text-decoration: none;
+}
+
+.skip-link:focus-visible {
+  top: 0;
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.lang-selector {
+  position: relative;
+  display: inline-flex;
+}
+
+.lang-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.45rem 0.9rem;
+  border: 2px solid var(--lang-orange);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  /* Same multi-script stack as the panel: the current-language
+   * endonym must render in Arabic, Devanagari, CJK, and beyond. */
+  font-family: "Segoe UI", system-ui, "Noto Sans", "Noto Sans Arabic",
+    "Noto Sans Devanagari", "Noto Sans CJK SC", "Noto Sans Ethiopic",
+    "Noto Sans Thai", "Noto Sans Hebrew", sans-serif;
+  cursor: pointer;
+}
+
+.lang-button:hover {
+  background: rgba(249, 115, 22, 0.12);
+}
+
+.lang-button:focus-visible {
+  outline: 3px solid var(--lang-orange);
+  outline-offset: 2px;
+}
+
+.lang-globe {
+  flex: none;
+  color: var(--lang-orange);
+}
+
+.lang-current {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.lang-chevron {
+  flex: none;
+  transition: transform var(--motion-fast) var(--ease-out);
+}
+
+.lang-chevron.open {
+  transform: rotate(180deg);
+}
+
+.lang-panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  inset-inline-end: 0;
+  z-index: 60;
+  width: min(22rem, calc(100vw - 2rem));
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow-2);
+  font-family: "Segoe UI", system-ui, "Noto Sans", "Noto Sans Arabic",
+    "Noto Sans Devanagari", "Noto Sans CJK SC", "Noto Sans Ethiopic",
+    "Noto Sans Thai", "Noto Sans Hebrew", sans-serif;
+}
+
+.lang-search {
+  width: 100%;
+}
+
+.lang-list {
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  max-height: 18rem;
+  overflow-y: auto;
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.lang-option[data-active] {
+  background: rgba(249, 115, 22, 0.16);
+}
+
+.lang-option-native {
+  font-weight: 600;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.lang-option-meta {
+  font-size: 0.8rem;
+  margin-inline-start: auto;
+}
+
+.lang-status {
+  font-size: 0.72rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.lang-status-translated {
+  color: var(--ok);
+  border-color: var(--ok);
+}
+
+.lang-status-partial {
+  color: var(--warn-ink);
+  border-color: var(--warn-ink);
+}
+
+.lang-status-unavailable {
+  color: var(--muted);
+}
+
+.lang-empty,
+.lang-fallback-note {
+  margin: 0.6rem 0.2rem 0.2rem;
+}
+
+.lang-selector.compact .lang-button {
+  min-height: 40px;
+  padding: 0.3rem 0.7rem;
+}
+
+/* RTL: shell chrome follows the document direction. Physical
+ * offsets that must mirror are overridden here; component internals
+ * already use logical properties or symmetric layouts. */
+[dir="rtl"] .shell-body {
+  direction: rtl;
+}
+
+[dir="rtl"] .side-nav a,
+[dir="rtl"] .workflow-strip {
+  letter-spacing: 0;
 }

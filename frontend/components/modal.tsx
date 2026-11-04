@@ -5,6 +5,7 @@
  * while open. Rendered inline (position: fixed), no portal needed. */
 
 import { useEffect, useRef } from "react";
+import { useTranslation } from "../lib/i18n/context";
 
 interface Props {
   title: string;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 export function Modal({ title, onClose, children }: Props) {
+  const { t } = useTranslation("common");
   const dialog = useRef<HTMLDivElement | null>(null);
   const opener = useRef<Element | null>(null);
 
@@ -48,7 +50,7 @@ export function Modal({ title, onClose, children }: Props) {
           <button
             type="button"
             className="btn-secondary btn-icon"
-            aria-label="Close dialog"
+            aria-label={t("closeDialog")}
             onClick={onClose}
           >
             ×

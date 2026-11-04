@@ -11,7 +11,6 @@ import { FeatureCards } from "../../components/feature-cards";
 import { SystemStatus } from "../../components/system-status";
 import { WorkflowStrip } from "../../components/workflow-strip";
 import {
-  ApiError,
   apiBaseUrl,
   getCase,
   getCaseAudit,
@@ -19,12 +18,15 @@ import {
   getHealth,
   getInvestigation,
   getReplay,
+  userErrorMessage,
   type AuditEntry,
   type CaseDetail,
   type GraphResponse,
   type HealthCheck,
   type InvestigationDetail,
 } from "../../lib/api";
+import { useTranslation } from "../../lib/i18n/context";
+import { formatDate } from "../../lib/i18n/format";
 
 /* Signature demo identifiers. These select which seeded records to fetch;
  * every value rendered comes from the backend responses, never from
@@ -63,17 +65,12 @@ const INITIAL: Dashboard = {
   replay: { kind: "loading" },
 };
 
-function toMessage(err: unknown): string {
-  if (err instanceof ApiError) return `${err.code}: ${err.message}`;
-  if (err instanceof Error) return err.message;
-  return "request failed";
-}
-
 function SectionSkeleton({ label }: { label: string }) {
+  const { t: tCommon } = useTranslation("common");
   return (
     <section className="card command-section" aria-live="polite">
       <h2>{label}</h2>
-      <p className="muted">Loading…</p>
+      <p className="muted">{tCommon("loading")}</p>
       <div
         className="skeleton"
         style={{ height: "4.5rem" }}
@@ -92,6 +89,7 @@ function SectionError({
   message: string;
   onRetry?: () => void;
 }) {
+  const { t } = useTranslation("demo");
   return (
     <section className="card command-section" aria-live="polite">
       <h2>{title}</h2>
@@ -99,7 +97,7 @@ function SectionError({
       {onRetry && (
         <p>
           <button type="button" onClick={onRetry}>
-            Retry {title}
+            {t("retryTitle", { title })}
           </button>
         </p>
       )}
@@ -118,6 +116,11 @@ const LOADERS: Record<FetchKey, (signal: AbortSignal) => Promise<unknown>> = {
 };
 
 export default function CommandPage() {
+  const { t } = useTranslation("demo");
+  const { t: tCommon, locale } = useTranslation("common");
+  const { t: tLanding } = useTranslation("landing");
+  const toMessage = (err: unknown): string =>
+    userErrorMessage(err, tCommon);
   const [state, setState] = useState<Dashboard>(INITIAL);
   const [checkedAt, setCheckedAt] = useState<string | null>(null);
   /* Sections queued for (re)load. Initial mount queues all five; each
@@ -163,7 +166,13 @@ export default function CommandPage() {
             setQueued((prev) => (prev.includes(key) ? [...prev] : prev));
             return;
           }
-          if (key === "health") setCheckedAt(new Date().toLocaleString());
+          if (key === "health")
+            setCheckedAt(
+              formatDate(locale, new Date(), {
+                dateStyle: "medium",
+                timeStyle: "medium",
+              })
+            );
           patch(key, { kind: "ready", data } as Dashboard[FetchKey]);
           setQueued((prev) => prev.filter((k) => k !== key));
         },
@@ -191,7 +200,7 @@ export default function CommandPage() {
       setState(
         (prev): Dashboard => ({
           ...prev,
-          replay: { kind: "error", message: "Replay unavailable." },
+          replay: { kind: "error", message: t("replayDown") },
         })
       );
       return;
@@ -262,20 +271,10 @@ export default function CommandPage() {
       <div className="hero glass">
         <div className="hero-grid">
           <div>
-            <h1>CruiseShield AI™</h1>
-            <p className="hero-tag">The Financial Crime Immune System™</p>
-            <p>
-              Financial crime rarely appears in one transaction. CruiseShield
-              AI connects suspicious transactions, accounts, devices,
-              beneficiaries and merchants into an explainable intelligence
-              network.
-            </p>
-            <p className="muted">
-              Its deterministic risk engine identifies signals, Meta AI helps
-              investigators interpret evidence, replay and simulation explore
-              hypothetical scenarios, and human decisions remain accountable
-              and auditable.
-            </p>
+            <h1>{tLanding("brandName")}</h1>
+            <p className="hero-tag">{tLanding("tagline")}</p>
+            <p>{t("heroP1")}</p>
+            <p className="muted">{t("heroP2")}</p>
             <WorkflowStrip
               invId={invId}
               txnId={txnId}
@@ -285,11 +284,11 @@ export default function CommandPage() {
           </div>
           <div className="hero-side">
             {health.kind === "loading" && (
-              <SectionSkeleton label="System Status" />
+              <SectionSkeleton label={t("systemStatus")} />
             )}
             {health.kind === "error" && (
               <SectionError
-                title="System status unavailable"
+                title={t("systemStatusDown")}
                 message={health.message}
                 onRetry={() => retry(["health"])}
               />
@@ -306,38 +305,40 @@ export default function CommandPage() {
 
       {allFailed ? (
         <section className="card" aria-live="assertive">
-          <h2>Backend status</h2>
+          <h2>{t("backendStatus")}</h2>
           <div className="alert error" role="alert">
-            {health.kind === "error" ? health.message : "request failed"}
+            {health.kind === "error"
+              ? health.message
+              : tCommon("requestFailed")}
           </div>
           <p className="muted">
-            Start the backend (
-            <code>.venv/Scripts/python -m uvicorn app.main:app</code>) and
-            press retry.
+            {t("startBackendPre")}
+            <code>.venv/Scripts/python -m uvicorn app.main:app</code>
+            {t("startBackendPost")}
           </p>
           <p>
             <button type="button" onClick={() => window.location.reload()}>
-              Retry
+              {tCommon("retry")}
             </button>
           </p>
-          <p className="muted">Checked {apiBaseUrl()}…</p>
+          <p className="muted">{t("checkedAt", { url: apiBaseUrl() })}</p>
         </section>
       ) : (
         <>
           {(investigation.kind === "loading" ||
             caseDetail.kind === "loading") && (
-            <SectionSkeleton label="Executive overview" />
+            <SectionSkeleton label={t("execOverview")} />
           )}
           {(investigation.kind === "error" ||
             caseDetail.kind === "error") && (
             <SectionError
-              title="Executive overview unavailable"
+              title={t("execOverviewDown")}
               message={
                 investigation.kind === "error"
                   ? investigation.message
                   : caseDetail.kind === "error"
                     ? caseDetail.message
-                    : "request failed"
+                    : tCommon("requestFailed")
               }
               onRetry={() =>
                 retry([
@@ -371,11 +372,11 @@ export default function CommandPage() {
           <div className="dash-grid">
             <div className="dash-col">
               {investigation.kind === "loading" && (
-                <SectionSkeleton label="Risk intelligence" />
+                <SectionSkeleton label={t("riskIntel")} />
               )}
               {investigation.kind === "error" && (
                 <SectionError
-                  title="Risk intelligence unavailable"
+                  title={t("riskIntelDown")}
                   message={investigation.message}
                   onRetry={() => retry(["investigation"])}
                 />
@@ -397,11 +398,11 @@ export default function CommandPage() {
 
             <div className="dash-col">
               {graph.kind === "loading" && (
-                <SectionSkeleton label="Network preview" />
+                <SectionSkeleton label={t("networkPreview")} />
               )}
               {graph.kind === "error" && (
                 <SectionError
-                  title="Network preview unavailable"
+                  title={t("networkPreviewDown")}
                   message={graph.message}
                   onRetry={() => retry(["graph"])}
                 />
@@ -413,11 +414,11 @@ export default function CommandPage() {
 
             <div className="dash-col">
               {caseDetail.kind === "loading" && (
-                <SectionSkeleton label="Muse Spark brief" />
+                <SectionSkeleton label={t("museBrief")} />
               )}
               {caseDetail.kind === "error" && (
                 <SectionError
-                  title="AI brief unavailable"
+                  title={t("aiBriefDown")}
                   message={caseDetail.message}
                   onRetry={() => retry(["caseDetail"])}
                 />
@@ -429,11 +430,11 @@ export default function CommandPage() {
                 />
               )}
               {audits.kind === "loading" && (
-                <SectionSkeleton label="Recent activity" />
+                <SectionSkeleton label={t("recentActivity")} />
               )}
               {audits.kind === "error" && (
                 <SectionError
-                  title="Activity unavailable"
+                  title={t("activityDown")}
                   message={audits.message}
                   onRetry={() => retry(["audits"])}
                 />

@@ -136,7 +136,7 @@ describe("SimulationPanel", () => {
     );
     fireEvent.click(screen.getByRole("button", { name: "Run simulation" }));
     await waitFor(() =>
-      expect(screen.getByText("UNKNOWN_EDGE: unknown edge")).toBeTruthy()
+      expect(screen.getByText("Couldn't load this section.")).toBeTruthy()
     );
     expect(screen.queryByTestId("sim-result")).toBeNull();
   });
@@ -148,7 +148,7 @@ describe("SimulationPanel", () => {
     render(<SimulationPanel defaultTxnId="txn_nope" />);
     await waitFor(() =>
       expect(screen.getByTestId("sim-baseline")).toHaveTextContent(
-        "Target unavailable: UNKNOWN_TRANSACTION: no txn"
+        "Target unavailable: Couldn't load this section."
       )
     );
     expect(

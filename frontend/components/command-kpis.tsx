@@ -10,6 +10,8 @@ import Link from "next/link";
 import type { GraphResponse, InvestigationDetail } from "../lib/api";
 import { formatKobo } from "../lib/format";
 import { useCountUp } from "../lib/use-count-up";
+import { useLocale, useTranslation } from "../lib/i18n/context";
+import { formatNumber } from "../lib/i18n/format";
 import { RiskBadge } from "./risk-badge";
 
 interface Props {
@@ -19,15 +21,21 @@ interface Props {
 }
 
 function KpiValue({ value, label }: { value: number; label: string }) {
+  const { locale } = useLocale();
   const display = useCountUp(value);
   return (
-    <span className="kpi-value" aria-label={`${value} ${label}`}>
-      <span aria-hidden="true">{display}</span>
+    <span
+      className="kpi-value"
+      aria-label={`${formatNumber(locale, value)} ${label}`}
+    >
+      <span aria-hidden="true">{formatNumber(locale, display)}</span>
     </span>
   );
 }
 
 export function CommandKpis({ detail, graph, graphPending }: Props) {
+  const { t, locale } = useTranslation("command");
+  const { t: tInv } = useTranslation("investigation");
   const txn = detail.transaction;
   const txnNumber = txn.transaction_id.split("_")[1] ?? txn.transaction_id;
   const invId = detail.investigation.investigation_id;
@@ -36,17 +44,17 @@ export function CommandKpis({ detail, graph, graphPending }: Props) {
 
   return (
     <section aria-labelledby="risk-intel-h" className="command-section">
-      <h2 id="risk-intel-h">Risk intelligence</h2>
+      <h2 id="risk-intel-h">{t("kpiRiskTitle")}</h2>
       <div className="spot-grid">
         <article
           className="card glass kpi-card risk-spotlight"
           aria-labelledby="net-risk-h"
         >
-          <h3 id="net-risk-h">Network risk</h3>
+          <h3 id="net-risk-h">{t("netRiskH")}</h3>
           <p>
-            <strong>Transaction #{txnNumber}</strong>{" "}
+            <strong>{t("txnTitleLine", { n: txnNumber })}</strong>{" "}
             <span className="muted">
-              {formatKobo(txn.amount_minor, txn.currency)} ·{" "}
+              {formatKobo(txn.amount_minor, txn.currency, locale)} ·{" "}
               {txn.sender_account_id} → {txn.receiver_account_id} ·{" "}
               {txn.channel}
             </span>
@@ -56,72 +64,75 @@ export function CommandKpis({ detail, graph, graphPending }: Props) {
             band={detail.risk_network.band}
           />
           <p className="muted">
-            {detail.risk_network.score_version} · network scope ·{" "}
-            {uplift >= 0 ? "+" : ""}
-            {uplift} vs transaction-only (derived difference)
+            {t("upliftLine", {
+              v: detail.risk_network.score_version,
+              sign: uplift >= 0 ? "+" : "",
+              u: uplift,
+            })}
           </p>
           <p className="muted">{detail.risk_network.limitations}</p>
         </article>
         <article className="card kpi-card" aria-labelledby="txn-risk-h">
-          <h3 id="txn-risk-h">Transaction-only risk</h3>
+          <h3 id="txn-risk-h">{t("txnOnlyH")}</h3>
           <RiskBadge
             score={detail.risk_transaction.score}
             band={detail.risk_transaction.band}
           />
           <p className="muted">
-            {detail.risk_transaction.score_version} · single-transfer scope
+            {t("txnOnlyScope", { v: detail.risk_transaction.score_version })}
           </p>
-          <p className="muted">
-            This transfer on its own, before network context. The network
-            score above is authoritative for the investigation.
-          </p>
+          <p className="muted">{t("txnOnlyNote")}</p>
         </article>
       </div>
       <div className="kpi-grid">
         <article className="card kpi-card" aria-labelledby="ev-kpi-h">
-          <h3 id="ev-kpi-h">Evidence package</h3>
-          <KpiValue value={detail.evidence_count} label="evidence records" />
+          <h3 id="ev-kpi-h">{t("evPackH")}</h3>
+          <KpiValue value={detail.evidence_count} label={t("evRecords")} />
           <p className="muted">
-            Package <code>{detail.evidence_package_id}</code>
+            {t("packagePre")}
+            <code>{detail.evidence_package_id}</code>
           </p>
           <p>
-            <Link href={`/investigations/${invId}`}>Open evidence</Link>
+            <Link href={`/investigations/${invId}`}>{t("openEvidence")}</Link>
           </p>
         </article>
         <article className="card kpi-card" aria-labelledby="net-kpi-h">
-          <h3 id="net-kpi-h">Investigation network</h3>
+          <h3 id="net-kpi-h">{t("netH")}</h3>
           {graph === null ? (
             <p className="muted">
-              {graphPending ? "Loading network…" : "Network data unavailable."}
+              {graphPending ? t("loadingNet") : t("netDown")}
             </p>
           ) : (
             <>
               <p>
-                <KpiValue value={graph.counts.nodes} label="nodes" /> ·{" "}
-                <KpiValue value={graph.counts.edges} label="edges" />
+                <KpiValue value={graph.counts.nodes} label={t("nodesLabel")} /> ·{" "}
+                <KpiValue value={graph.counts.edges} label={t("edgesLabel")} />
               </p>
               <p className="muted">
-                Provenance errors: {graph.provenance_errors.length}
+                {t("provErrors", { n: graph.provenance_errors.length })}
               </p>
               <p>
                 <Link href={`/network/${graph.transaction_id}`}>
-                  Open network explorer
+                  {t("openNetExplorer")}
                 </Link>
               </p>
             </>
           )}
         </article>
         <article className="card kpi-card" aria-labelledby="rule-kpi-h">
-          <h3 id="rule-kpi-h">Rules triggered</h3>
+          <h3 id="rule-kpi-h">{t("rulesH")}</h3>
           <span
             className="kpi-value"
-            aria-label={`${triggered} of ${detail.rule_results.length} rules triggered`}
+            aria-label={t("rulesAria", {
+              a: triggered,
+              b: detail.rule_results.length,
+            })}
           >
-            {triggered} of {detail.rule_results.length}
+            {t("rulesOf", { a: triggered, b: detail.rule_results.length })}
           </span>
-          <p className="muted">Versioned deterministic rules</p>
+          <p className="muted">{t("versionedRules")}</p>
           <p>
-            <Link href={`/investigations/${invId}`}>Why this risk</Link>
+            <Link href={`/investigations/${invId}`}>{tInv("whyRiskLink")}</Link>
           </p>
         </article>
       </div>

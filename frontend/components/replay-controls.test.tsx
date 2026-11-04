@@ -110,7 +110,7 @@ describe("ReplayControls", () => {
     render(<ReplayControls scenarioId="scn_primary" />);
     await waitFor(() =>
       expect(
-        screen.getByText("BACKEND_UNREACHABLE: Failed to fetch")
+        screen.getByText("Backend unreachable. Check the demo server and retry.")
       ).toBeTruthy()
     );
     getReplayMock.mockImplementation(async () => stateFixture(0));

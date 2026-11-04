@@ -1,8 +1,11 @@
+"use client";
+
 /* Executive KPI row. Every card renders resolved backend values from
  * props; unavailable metrics show "Not available" or "None yet" — never
  * invented counts. Built on the shared Stat primitive. */
 
 import type { AiAssessment } from "../lib/api";
+import { useTranslation } from "../lib/i18n/context";
 import { Stat } from "./stat";
 
 interface Props {
@@ -31,59 +34,68 @@ export function ExecKpis(props: Props) {
     txnCount,
     txnPending,
   } = props;
+  const { t } = useTranslation("command");
+  const { t: tCommon } = useTranslation("common");
+  const { t: tNav } = useTranslation("nav");
   const highRisk =
     networkBand === "HIGH" || networkBand === "CRITICAL" ? 1 : 0;
   return (
     <section aria-labelledby="exec-h" className="command-section">
-      <h2 id="exec-h">Executive overview</h2>
+      <h2 id="exec-h">{t("execTitle")}</h2>
       <div className="exec-grid">
-        <article className="card kpi-card" aria-label="Active investigations">
+        <article className="card kpi-card" aria-label={t("kpiActive")}>
           <Stat
-            label="Active investigations"
+            label={t("kpiActive")}
             value={1}
-            caption={`${invId} · ${invStatus}`}
+            caption={t("caseStatusLine", { case: invId, status: invStatus })}
           />
         </article>
-        <article className="card kpi-card" aria-label="Transactions monitored">
+        <article className="card kpi-card" aria-label={t("kpiTxn")}>
           <Stat
-            label="Transactions monitored"
-            value={txnCount ?? (txnPending ? "Loading…" : "Not available")}
-            caption="Synthetic demo data"
+            label={t("kpiTxn")}
+            value={
+              txnCount ??
+              (txnPending ? tCommon("loading") : tCommon("notAvailable"))
+            }
+            caption={tNav("synthetic")}
           />
         </article>
-        <article className="card kpi-card" aria-label="High-risk investigations">
+        <article className="card kpi-card" aria-label={t("kpiHigh")}>
           <Stat
-            label="High-risk investigations"
+            label={t("kpiHigh")}
             value={highRisk}
-            caption={`Network band ${networkBand}`}
+            caption={t("netBandLine", { b: networkBand })}
           />
         </article>
-        <article className="card kpi-card" aria-label="Evidence records">
+        <article className="card kpi-card" aria-label={t("kpiEvidence")}>
           <Stat
-            label="Evidence records"
+            label={t("kpiEvidence")}
             value={evidenceCount}
-            caption={`Linked to ${invId}`}
+            caption={t("linkedTo", { id: invId })}
           />
         </article>
-        <article className="card kpi-card" aria-label="AI analysis runs">
+        <article className="card kpi-card" aria-label={t("kpiAi")}>
           <Stat
-            label="AI analysis runs"
-            value={latestRun ? latestRun.agent_run_id : "None yet"}
+            label={t("kpiAi")}
+            value={latestRun ? latestRun.agent_run_id : tCommon("noneYet")}
             caption={
               latestRun
-                ? `${latestRun.model_id} · ${latestRun.status}`
-                : "No runs recorded"
+                ? t("caseStatusLine", {
+                    case: latestRun.model_id,
+                    status: latestRun.status,
+                  })
+                : t("noRuns")
             }
           />
         </article>
-        <article className="card kpi-card" aria-label="Human decisions">
+        <article className="card kpi-card" aria-label={t("kpiDecisions")}>
           <Stat
-            label="Human decisions"
+            label={t("kpiDecisions")}
             value={decisionsCount}
             caption={
               decisionsCount === 0
-                ? `${caseId} · ${caseStatus} — requires analyst action`
-                : `${caseId} · ${caseStatus}`
+                ? t("needsAction", { case: caseId, status: caseStatus })
+                : t("caseStatusLine", { case: caseId, status: caseStatus })
             }
           />
         </article>

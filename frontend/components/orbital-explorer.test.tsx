@@ -127,7 +127,7 @@ describe("OrbitalExplorer", () => {
     };
     render(<OrbitalExplorer nodes={NODES} edges={[...EDGES, bad]} />);
     expect(screen.getByTestId("orbital-counts")).toHaveTextContent(
-      "1 edge(s) hidden: endpoint unknown (edge_bad)."
+      "1 edge hidden: endpoint unknown (edge_bad)."
     );
   });
 

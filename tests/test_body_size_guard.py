@@ -68,3 +68,36 @@ def test_secure_headers_stamped():
         "strict-origin-when-cross-origin"
     assert resp.headers["permissions-policy"] == \
         "camera=(), microphone=(), geolocation=()"
+
+
+def _run_scheme(scheme, x_forwarded_proto=None):
+    headers = []
+    if x_forwarded_proto is not None:
+        headers.append((b"x-forwarded-proto",
+                        x_forwarded_proto.encode()))
+    scope = {"type": "http", "method": "GET", "scheme": scheme,
+             "server": ("t", 443 if scheme == "https" else 80),
+             "path": "/api/v1/health", "headers": headers}
+    return _drive(main.body_size_guard(Request(scope), _downstream_ok))
+
+
+def test_hsts_on_direct_https():
+    """R09-F4: HSTS stamped over direct TLS."""
+    resp = _run_scheme("https")
+    assert resp.headers["strict-transport-security"] == "max-age=31536000"
+
+
+def test_hsts_behind_tls_proxy():
+    """R09-F4: first X-Forwarded-Proto hop drives HSTS (proxy TLS)."""
+    resp = _run_scheme("http", "https")
+    assert resp.headers["strict-transport-security"] == "max-age=31536000"
+    resp = _run_scheme("http", "https, http")
+    assert resp.headers["strict-transport-security"] == "max-age=31536000"
+
+
+def test_no_hsts_on_plain_local_http():
+    """R09-F4: local plain-HTTP dev gets no HSTS header."""
+    resp = _run_scheme("http")
+    assert "strict-transport-security" not in resp.headers
+    resp = _run_scheme("http", "http")
+    assert "strict-transport-security" not in resp.headers

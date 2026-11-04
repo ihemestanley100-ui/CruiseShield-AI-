@@ -7,13 +7,15 @@
 
 import { useCallback, useEffect, useState } from "react";
 import {
-  ApiError,
   getGraph,
   getRisk,
   postSimulation,
+  userErrorMessage,
   type GraphEdge,
   type SimulationResult,
 } from "../lib/api";
+import { useTranslation } from "../lib/i18n/context";
+import { useCan } from "../lib/session";
 
 interface Props {
   defaultTxnId: string;
@@ -26,6 +28,10 @@ type RunState =
   | { kind: "error"; message: string };
 
 export function SimulationPanel({ defaultTxnId }: Props) {
+  // J4: read-only roles see the run disabled (backend enforces too).
+  const writable = useCan("write");
+  const { t } = useTranslation("sim");
+  const { t: tCommon } = useTranslation("common");
   const [txnId, setTxnId] = useState(defaultTxnId);
   const [edges, setEdges] = useState<GraphEdge[] | null>(null);
   const [baseline, setBaseline] = useState<{
@@ -53,13 +59,7 @@ export function SimulationPanel({ defaultTxnId }: Props) {
     } catch (err: unknown) {
       setEdges(null);
       setBaseline(null);
-      setLoadError(
-        err instanceof ApiError
-          ? `${err.code}: ${err.message}`
-          : err instanceof Error
-            ? err.message
-            : "request failed"
-      );
+      setLoadError(userErrorMessage(err, tCommon));
     } finally {
       setLoading(false);
     }
@@ -87,21 +87,16 @@ export function SimulationPanel({ defaultTxnId }: Props) {
     } catch (err: unknown) {
       setRun({
         kind: "error",
-        message:
-          err instanceof ApiError
-            ? `${err.code}: ${err.message}`
-            : err instanceof Error
-              ? err.message
-              : "request failed",
+        message: userErrorMessage(err, tCommon),
       });
     }
   }
 
   return (
-    <section className="card" aria-label="What-if simulation">
-      <h2>What-if simulation</h2>
+    <section className="card" aria-label={t("simLabel")}>
+      <h2>{t("simTitle")}</h2>
       <p>
-        <label htmlFor="sim-txn">Target transaction</label>{" "}
+        <label htmlFor="sim-txn">{t("targetLabel")}</label>{" "}
         <input
           id="sim-txn"
           type="text"
@@ -110,19 +105,25 @@ export function SimulationPanel({ defaultTxnId }: Props) {
           className="text-input"
         />{" "}
         <button type="button" className="chip" onClick={() => load(txnId)}>
-          Load edges
+          {t("loadEdges")}
         </button>
       </p>
       <p className="muted" data-testid="sim-baseline" aria-live="polite">
-        {loading && "Loading target…"}
-        {!loading && baseline !== null &&
-          `Authoritative baseline (network): ${baseline.score}/100 ${baseline.band}. This value never changes.`}
-        {!loading && loadError !== "" && `Target unavailable: ${loadError}`}
+        {loading && t("loadingTarget")}
+        {!loading &&
+          baseline !== null &&
+          t("baselineLine", {
+            s: baseline.score,
+            b: baseline.band,
+          })}
+        {!loading &&
+          loadError !== "" &&
+          t("targetDown", { err: loadError })}
       </p>
       {edges !== null && (
         <fieldset>
           <legend>
-            Relationships to ignore ({ignored.size} of {edges.length} selected)
+            {t("legendLine", { a: ignored.size, b: edges.length })}
           </legend>
           <div className="chip-row" data-testid="sim-edges">
             {edges.map((e) => (
@@ -139,26 +140,29 @@ export function SimulationPanel({ defaultTxnId }: Props) {
         </fieldset>
       )}
       <p>
-        <label htmlFor="sim-assumption">
-          Assumption (recorded with the run)
-        </label>
+        <label htmlFor="sim-assumption">{t("assumptionLabel")}</label>
         <br />
         <input
           id="sim-assumption"
           type="text"
           value={assumption}
           onChange={(ev) => setAssumption(ev.target.value)}
-          placeholder="e.g. Shared devices are coincidental, not shared control."
+          placeholder={t("assumptionPh")}
           className="text-input"
         />
       </p>
+      {!writable && (
+        <p className="muted" role="note">
+          {t("readOnlySim")}
+        </p>
+      )}
       <p>
         <button
           type="button"
-          disabled={baseline === null || run.kind === "running"}
+          disabled={baseline === null || run.kind === "running" || !writable}
           onClick={onRun}
         >
-          {run.kind === "running" ? "Running…" : "Run simulation"}
+          {run.kind === "running" ? t("running") : t("runSim")}
         </button>
       </p>
       {run.kind === "error" && (
@@ -168,21 +172,23 @@ export function SimulationPanel({ defaultTxnId }: Props) {
       )}
       {run.kind === "done" && (
         <div className="alert warn" role="status" data-testid="sim-result">
-          <strong>
-            SIMULATED — hypothetical, not a real-world prediction.
-          </strong>
+          <strong>{t("simBanner")}</strong>
           <br />
-          Run <code>{run.result.simulation_id}</code>: baseline{" "}
-          {run.result.baseline_score}/100 {run.result.baseline_band} →
-          simulated {run.result.simulated_score}/100{" "}
-          {run.result.simulated_band}
+          {t("simRunPre")}
+          <code>{run.result.simulation_id}</code>
+          {t("simRunPost", {
+            a: run.result.baseline_score,
+            b: run.result.baseline_band,
+            c: run.result.simulated_score,
+            d: run.result.simulated_band,
+          })}
           <br />
-          Ignored:{" "}
+          {t("ignoredPre")}
           {run.result.ignored_edge_ids.length === 0
-            ? "none"
+            ? tCommon("none")
             : run.result.ignored_edge_ids.join(", ")}
           <br />
-          Assumption: {run.result.assumption}
+          {t("assumptionLine", { a: run.result.assumption })}
           <br />
           <span className="muted">{run.result.limitations}</span>
         </div>

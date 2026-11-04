@@ -63,7 +63,12 @@ def _now() -> str:
 
 def evaluate(txn_id: str, transactions: list[dict], edges: list[dict],
              trace_id: str) -> list[RuleResult]:
-    txn = next(t for t in transactions if t["transaction_id"] == txn_id)
+    # J3-P3: fail closed with a named error instead of leaking StopIteration
+    # (all API callers pre-404, so this is unreachable defense-in-depth).
+    txn = next((t for t in transactions if t["transaction_id"] == txn_id),
+               None)
+    if txn is None:
+        raise ValueError(f"UNKNOWN_TXN: {txn_id}")
     num = txn_id.split("_")[-1]
     feats = features_for_transaction(txn, transactions, edges)
     checks = {

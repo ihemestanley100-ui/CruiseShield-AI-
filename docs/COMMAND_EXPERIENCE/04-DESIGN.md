@@ -43,3 +43,11 @@ keyboard/touch equivalents for every pointer interaction.
 `npm ci` → typecheck → lint → unit/a11y tests → `next build` → critical
 flows vs local backend → secret scan → backend `pytest` regression. No
 metric is claimed until its command output exists.
+
+## Supersession pointer (2026-11-01, J3 closeout P12)
+
+Frozen 10-28 proposed design; preserved as history. The frontend has
+since been implemented (see `frontend/` and
+`docs/CRUISESHIELD_AI_FRONTEND_ACCEPTANCE_REPORT.md`); the Phase E
+validation plan above is the routine now executed per release
+(typecheck + vitest + build + secret scan + pytest).

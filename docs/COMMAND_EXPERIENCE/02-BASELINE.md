@@ -31,3 +31,10 @@ reference named by the brief is MISSING from the repository. If it exists
 elsewhere, supply it before visual implementation; otherwise the 04-DESIGN
 tokens derive from the brief's textual description and stay clearly
 marked as interpretation, not replica.
+
+## Supersession pointer (2026-11-01, J3 closeout P12)
+
+Frozen 10-28 baseline; preserved as history. The "no frontend
+toolchain / no frontend directory" findings are superseded: `frontend/`
+exists with lockfile, 254 vitest green, `tsc` clean, production build
+exit 0 (see `docs/CRUISESHIELD_AI_FRONTEND_ACCEPTANCE_REPORT.md`).

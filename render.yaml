@@ -41,6 +41,18 @@ services:
       # deploy. Empty = open demo; set = POSTs require the credential.
       - key: DEMO_WRITE_TOKEN
         sync: false
+      # J3 closeout: protected-demo login secrets (see RENDER_6). Render
+      # prompts at deploy. Empty SESSION_SECRET = login disabled
+      # (open demo, honest 503 on /auth/login) — set both for staging.
+      - key: SESSION_SECRET
+        sync: false
+      - key: DEMO_USERS
+        sync: false
+      # J3 closeout: AI cost controls (defaults match app/config.py).
+      - key: AI_DAILY_CALL_LIMIT
+        value: 100
+      - key: AI_TIMEOUT_SECONDS
+        value: 30
 
   - type: web
     name: cruiseshield-ai-frontend
@@ -50,8 +62,8 @@ services:
     plan: starter
     rootDir: frontend
     # Gate review 11-01: npm ci REQUIRES frontend/package-lock.json IN GIT
-    # (currently untracked locally — the approved commit MUST include it,
-    # else the Render clone has no lockfile and this build fails loudly).
+    # (J1-committed 2026-11-01 — present in the clone; if ever removed,
+    # this build fails loudly).
     buildCommand: npm ci && npm run build
     # Next reads $PORT at start (verified locally on :3110).
     startCommand: npm start -- --port $PORT
@@ -70,3 +82,7 @@ services:
       # client chunks — demo-staging use only. Empty = header omitted.
       - key: NEXT_PUBLIC_DEMO_WRITE_TOKEN
         sync: false
+      # J3 closeout: deployed frontend origin for absolute metadata URLs.
+      # NOT a secret. Empty = relative URLs kept (safe default).
+      - key: NEXT_PUBLIC_SITE_URL
+        value: https://cruiseshield-ai-frontend.onrender.com

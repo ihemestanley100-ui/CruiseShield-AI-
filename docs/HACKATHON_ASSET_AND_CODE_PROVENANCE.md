@@ -67,6 +67,15 @@ READ-ONLY audit evidence. Origin of every material asset in the submission.
   (see `PHASE_2B_REMAINING_GAPS.md`: "original `.png.png` file
   untouched"; control audit 11-01: identical SHA-256) — do not delete,
   rename, overwrite, or replace it.
+  - J3 addendum 2026-11-01: owner decision D1 EXCLUDED the duplicate
+    from the J1 commit; at J1 reconciliation the file was absent from
+    disk (cause unknown, not by agent action). Canonical
+    `cruiseshield-logo-original.png` verified intact by hash
+    (`1A0CC66B…C32A623`). No bytes of value at stake (proven identical,
+    zero references).
+  - Q4 erratum 2026-11-03 (owner RETIRE): the `.png.png`
+    reference is retired; no restore performed. Canonical logo
+    re-verified intact by hash 11-03.
 - Favicon set derived from the logo (11-01): `frontend/app/favicon.ico`,
   `frontend/app/icon.png`, `frontend/public/icons/` (16/32/48 px,
   apple-touch-icon, 192/512 px) — all served 200, verified live.

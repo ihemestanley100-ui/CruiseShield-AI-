@@ -26,4 +26,4 @@ PROGRAMME: CSAI-MASTER-RELEASE-001 | PHASE: 12 | DATE: 2026-11-01 | HEAD: 0eaaaf
 | SEC-005 | Dead CI push trigger | Phase 10 | Branch fixed main→master |
 | PERF-001 | Concurrent-write 500s | Phase 11 | Lock + failing-first test + 10/10 live re-race |
 | L5 | 67-vs-84 discrepancy | Phase 3.2A/9 | Animation-frame proof, coherence re-verified |
-| A1/A2 | Report errata (23 count, .png.png) | Control audit/9 | Verified in place |
+| A1/A2 | Report errata (23 count, .png.png) | Control audit/9 | A1 verified in place; A2 SUPERSEDED by Q4 RETIRE 2026-11-03 |

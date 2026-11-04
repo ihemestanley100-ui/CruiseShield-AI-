@@ -48,3 +48,11 @@ additive endpoints these gaps imply (proposed, not built).
   sync:false). Image never built (engine denied from sandbox).
 - Tests: 41 passed, 7 socket-gated skips. Live state: 1 decision
   (NEW→TRIAGED, audit_0006), 1 sim, audit chain 0001–0006, seed hash match.
+
+## Supersession pointer (2026-11-01, J3 closeout P12)
+
+Frozen 10-28 planning snapshot; preserved as history. Current state:
+`docs/ARCHITECTURE.md`, `docs/CRUISESHIELD_AI_PHASE_9_TO_15_MASTER_COMPLETION_REPORT.md`,
+and the `docs/J3_*` closeout set. The Next.js frontend has since been
+built (135 files, J1-committed), with auth, AI follow-up, and 254
+vitest green.

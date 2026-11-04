@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { GlobalHeroScene } from "./GlobalHeroScene";
+import { GlobeController } from "./scene/controls";
 
 vi.mock("./scene/webgl", () => ({
   isWebGLAvailable: () => false,
@@ -20,7 +21,13 @@ vi.mock("next/link", () => ({
 
 describe("GlobalHeroScene", () => {
   it("renders an accessible fallback when WebGL is unavailable", () => {
-    render(<GlobalHeroScene motion="full" paused={false} />);
+    render(
+      <GlobalHeroScene
+        motion="full"
+        paused={false}
+        controller={new GlobeController()}
+      />
+    );
     expect(screen.getByTestId("webgl-fallback")).toBeTruthy();
     const cta = screen.getByRole("link", { name: /Explore CruiseShield AI/ });
     expect(cta.getAttribute("href")).toBe("/demo");

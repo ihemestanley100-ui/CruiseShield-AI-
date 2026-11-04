@@ -1,9 +1,12 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { ApiError, type AlertItem } from "../lib/api";
+import { ApiError, type NotificationItem } from "../lib/api";
 import { Notifications } from "./notifications";
 
-const { listAlertsMock } = vi.hoisted(() => ({ listAlertsMock: vi.fn() }));
+const { listMock, markMock } = vi.hoisted(() => ({
+  listMock: vi.fn(),
+  markMock: vi.fn(),
+}));
 
 vi.mock("next/link", () => ({
   default: ({
@@ -23,34 +26,48 @@ vi.mock("next/link", () => ({
 
 vi.mock("../lib/api", async (importOriginal) => ({
   ...((await importOriginal()) as object),
-  listAlerts: listAlertsMock,
+  listNotifications: listMock,
+  markNotificationsRead: markMock,
 }));
 
-function alertFixture(
-  alert_id: string,
+function itemFixture(
+  notification_id: string,
   status = "OPEN",
-  transaction_id = "txn_84721"
-): AlertItem {
+  read = false,
+  transaction_id: string | null = "txn_84721"
+): NotificationItem {
   return {
-    alert_id,
+    notification_id,
     transaction_id,
-    title: `HIGH network risk: transaction #${alert_id.split("_")[1]}`,
+    title: `HIGH network risk: transaction #${notification_id.split("_")[1]}`,
     status,
-    risk_assessment_id: "risk_network_84721",
     created_at: "2026-10-29T20:32:15Z",
-    trace_id: "trace_run_test",
+    read,
+  };
+}
+
+function listFixture(items: NotificationItem[]) {
+  const unread = items.filter((n) => !n.read && n.status === "OPEN").length;
+  return {
+    notifications: items,
+    unread_count: unread,
+    synthetic_notice: "Synthetic demo data.",
   };
 }
 
 beforeEach(() => {
-  listAlertsMock.mockReset();
+  listMock.mockReset();
+  markMock.mockReset();
 });
 
 describe("Notifications", () => {
-  it("badges the real open-alert count and lists genuine alerts", async () => {
-    listAlertsMock.mockResolvedValue({
-      alerts: [alertFixture("alert_84721"), alertFixture("alert_84730", "TRIAGED", "txn_84730")],
-    });
+  it("badges the backend unread count and lists genuine items", async () => {
+    listMock.mockResolvedValue(
+      listFixture([
+        itemFixture("alert_84721"),
+        itemFixture("alert_84730", "TRIAGED", false, "txn_84730"),
+      ])
+    );
     render(<Notifications />);
     const bell = await screen.findByRole("button", {
       name: "Notifications, 1 open",
@@ -73,7 +90,7 @@ describe("Notifications", () => {
   });
 
   it("shows loading, empty, and error states honestly", async () => {
-    listAlertsMock.mockReturnValue(new Promise(() => {}));
+    listMock.mockReturnValue(new Promise(() => {}));
     const { unmount } = render(<Notifications />);
     fireEvent.click(screen.getByRole("button", { name: "Notifications, loading" }));
     expect(screen.getByText("Loading alerts…")).toBeTruthy();
@@ -82,7 +99,7 @@ describe("Notifications", () => {
     ).toBeTruthy();
     unmount();
 
-    listAlertsMock.mockResolvedValue({ alerts: [] });
+    listMock.mockResolvedValue(listFixture([]));
     render(<Notifications />);
     fireEvent.click(
       await screen.findByRole("button", { name: "Notifications, 0 open" })
@@ -90,8 +107,8 @@ describe("Notifications", () => {
     expect(screen.getByText("No alerts.")).toBeTruthy();
   });
 
-  it("shows backend errors without inventing alerts", async () => {
-    listAlertsMock.mockRejectedValue(
+  it("shows backend errors without inventing items", async () => {
+    listMock.mockRejectedValue(
       new ApiError("BACKEND_UNREACHABLE", "Failed to fetch", 0, "")
     );
     render(<Notifications />);
@@ -99,13 +116,71 @@ describe("Notifications", () => {
       await screen.findByRole("button", { name: "Notifications, 0 open" })
     );
     expect(screen.getByRole("alert").textContent).toContain(
-      "BACKEND_UNREACHABLE: Failed to fetch"
+      "Backend unreachable. Check the demo server and retry."
     );
     expect(screen.queryByRole("link")).toBeNull();
   });
 
+  it("marks one item read and updates the badge from the server count", async () => {
+    listMock.mockResolvedValue(listFixture([itemFixture("alert_84721")]));
+    markMock.mockResolvedValue({ marked: ["alert_84721"], unread_count: 0 });
+    render(<Notifications />);
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Notifications, 1 open" })
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Mark read" }));
+    await waitFor(() =>
+      expect(markMock).toHaveBeenCalledWith({
+        notification_ids: ["alert_84721"],
+      })
+    );
+    await screen.findByRole("button", { name: "Notifications, 0 open" });
+    expect(
+      screen.queryByRole("button", { name: "Mark read" })
+    ).toBeNull();
+  });
+
+  it("marks all read and refreshes from the backend", async () => {
+    listMock.mockResolvedValue(
+      listFixture([itemFixture("alert_84721"), itemFixture("alert_84730")])
+    );
+    markMock.mockResolvedValue({
+      marked: ["alert_84721", "alert_84730"],
+      unread_count: 0,
+    });
+    render(<Notifications />);
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Notifications, 2 open" })
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Mark all read" }));
+    await waitFor(() => expect(markMock).toHaveBeenCalledWith({ all: true }));
+    await screen.findByRole("button", { name: "Notifications, 0 open" });
+    const calls = listMock.mock.calls.length;
+    fireEvent.click(screen.getByRole("button", { name: "Retry" }));
+    await waitFor(() =>
+      expect(listMock.mock.calls.length).toBeGreaterThan(calls)
+    );
+  });
+
+  it("surfaces mark-read failures without losing the list", async () => {
+    listMock.mockResolvedValue(listFixture([itemFixture("alert_84721")]));
+    markMock.mockRejectedValue(
+      new ApiError("WRITE_TOKEN_REQUIRED", "denied", 401, "")
+    );
+    render(<Notifications />);
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Notifications, 1 open" })
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Mark read" }));
+    await waitFor(() =>
+      expect(screen.getByRole("alert").textContent).toContain(
+        "Not available for your role."
+      )
+    );
+  });
+
   it("closes on Escape and returns focus to the bell", async () => {
-    listAlertsMock.mockResolvedValue({ alerts: [alertFixture("alert_84721")] });
+    listMock.mockResolvedValue(listFixture([itemFixture("alert_84721")]));
     render(<Notifications />);
     const bell = await screen.findByRole("button", {
       name: "Notifications, 1 open",
@@ -121,10 +196,10 @@ describe("Notifications", () => {
     expect(document.activeElement).toBe(bell);
   });
 
-  it("links unknown alert shapes to the network only, never a guess", async () => {
-    listAlertsMock.mockResolvedValue({
-      alerts: [alertFixture("weird-id", "OPEN", "txn_84721")],
-    });
+  it("links unknown shapes to the network only, never a guess", async () => {
+    listMock.mockResolvedValue(
+      listFixture([itemFixture("weird-id", "OPEN", false, "txn_84721")])
+    );
     render(<Notifications />);
     fireEvent.click(
       await screen.findByRole("button", { name: "Notifications, 1 open" })

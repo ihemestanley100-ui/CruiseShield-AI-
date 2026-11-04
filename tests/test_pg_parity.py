@@ -390,3 +390,54 @@ def test_live_source_untouched():
     assert len(raw) == 101417
     assert hashlib.sha256(raw).hexdigest().upper() == (
         "BA1D4DB4BB4DBC6FC3ACA346664A539610CCC6460CCD530F523C8043453790FE")
+
+
+@needs_scratch_pg
+def test_j7_sqli_probe_returns_none_without_error(pair):
+    """J7: quote-escape input through PG reads finds nothing, raises nothing."""
+    _, pg_store = pair
+    assert pg_store.get_case("case_84721' OR '1'='1") is None
+    assert pg_store.get_case("case_84721'; DROP TABLE cases;--") is None
+    assert pg_store.get_investigation("inv_84721' OR '1'='1") is None
+    assert pg_store.get_case("case_84721") is not None
+
+
+@needs_scratch_pg
+def test_j4_revocation_epoch_parity(pair):
+    """J4: revoke/bump/epoch behave identically on JSON and PG."""
+    from app import db as db_mod
+
+    json_store, pg_store = pair
+    # Runtime auth tables are reset-proof by design, so this test
+    # cleans its own rows (no cross-test/cross-run leakage).
+    conn = db_mod.connect(SCRATCH_URL)
+    try:
+        with conn.cursor() as cur:
+            cur.execute("DELETE FROM session_revocations WHERE nonce='n-j4'")
+            cur.execute("DELETE FROM user_epochs WHERE username='judge'")
+        conn.commit()
+        try:
+            for backend in (json_store, pg_store):
+                assert backend.epoch_of("judge") == 0
+                assert not backend.is_revoked("n-j4")
+            json_store.revoke_session("n-j4", 9_999_999_999)
+            pg_store.revoke_session("n-j4", 9_999_999_999)
+            json_store.bump_epoch("judge", now=7000.0)
+            pg_store.bump_epoch("judge", now=7000.0)
+            for backend in (json_store, pg_store):
+                assert backend.is_revoked("n-j4")
+                assert backend.epoch_of("judge") == 7000
+            assert pg_store.state["revoked_sessions"] == [
+                {"nonce": "n-j4", "exp": 9999999999}]
+            assert pg_store.state["user_epochs"] == {"judge": 7000}
+            assert "revoked_sessions" in json_store.state
+            assert "user_epochs" in json_store.state
+        finally:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "DELETE FROM session_revocations WHERE nonce='n-j4'")
+                cur.execute(
+                    "DELETE FROM user_epochs WHERE username='judge'")
+            conn.commit()
+    finally:
+        conn.close()

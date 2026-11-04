@@ -29,28 +29,110 @@ export class ApiError extends Error {
   }
 }
 
+/* User-worded failure text. Raw API codes and English server detail
+ * never reach the UI: every failure maps to a translated `common`
+ * string by class (permission / unreachable / load / unknown).
+ * Pass the common-namespace translator from the rendering component.
+ * Server detail stays in the console/network log for debugging. */
+export function userErrorMessage(
+  err: unknown,
+  t: (key: string) => string
+): string {
+  if (err instanceof ApiError) {
+    if (err.status === 401 || err.status === 403) return t("notPermitted");
+    if (err.code === "REQUEST_TIMEOUT") return t("timedOut");
+    if (err.status === 503) return t("unavailable");
+    if (err.code === "BACKEND_UNREACHABLE" || err.status === 0)
+      return t("unreachable");
+    return t("loadFailed");
+  }
+  if (err instanceof Error) return t("loadFailed");
+  return t("requestFailed");
+}
+
+/* J3-P6: session-expiry signal. Any 401/403 from a data endpoint means
+ * the session is gone (or never existed): the login gate listens and
+ * re-checks /me, flipping the whole app back to sign-in so an expired
+ * session can never strand a page on a bare error card. The whole auth
+ * namespace is excluded: the gate consumes auth outcomes directly, and
+ * signalling /me re-triggers recheck() forever (observed /me storm).
+ * SSR-safe: no window on the server, no dispatch. */
+export const UNAUTHORIZED_EVENT = "csai:unauthorized";
+
+function notifyUnauthorized(path: string, status: number) {
+  if (typeof window === "undefined") return;
+  if (path.startsWith("/api/v1/auth/")) return;
+  if (status !== 401 && status !== 403) return;
+  window.dispatchEvent(new CustomEvent(UNAUTHORIZED_EVENT));
+}
+
 export function apiBaseUrl(): string {
   return process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000";
 }
 
+/** Client-side request deadline: a hung backend surfaces as a timeout
+ * state with retry, never an eternal spinner. */
+export const REQUEST_TIMEOUT_MS = 15000;
+
+/* Combine the caller's cancellation signal with the request deadline.
+ * Hand-rolled (no AbortSignal.any) so older browsers behave the same;
+ * the timer is always cleared once the request settles. */
+function deadline(signal?: AbortSignal): {
+  signal: AbortSignal;
+  clear: () => void;
+} {
+  const controller = new AbortController();
+  const timer = setTimeout(() => {
+    controller.abort(new DOMException("Request timed out", "TimeoutError"));
+  }, REQUEST_TIMEOUT_MS);
+  if (signal) {
+    if (signal.aborted) {
+      controller.abort(signal.reason);
+    } else {
+      signal.addEventListener(
+        "abort",
+        () => controller.abort(signal.reason),
+        { once: true }
+      );
+    }
+  }
+  return { signal: controller.signal, clear: () => clearTimeout(timer) };
+}
+
+function toNetworkError(err: unknown): ApiError {
+  // AbortError (caller cancelled) and TimeoutError (deadline fired)
+  // both mean "no answer in time", distinct from offline/unreachable.
+  // Match by name: real fetch rejections are DOMExceptions, which do
+  // not inherit from Error.
+  const shape = err as { name?: unknown; message?: unknown } | null;
+  const timedOut = shape?.name === "AbortError" || shape?.name === "TimeoutError";
+  const message =
+    typeof shape?.message === "string" ? shape.message : "backend unreachable";
+  return new ApiError(
+    timedOut ? "REQUEST_TIMEOUT" : "BACKEND_UNREACHABLE",
+    message,
+    0,
+    ""
+  );
+}
+
 async function requestJson<T>(path: string, signal?: AbortSignal): Promise<T> {
+  const gate = deadline(signal);
   let res: Response;
   try {
     res = await fetch(`${apiBaseUrl()}${path}`, {
-      signal,
+      signal: gate.signal,
       cache: "no-store",
       credentials: "include",
     });
   } catch (err: unknown) {
-    throw new ApiError(
-      "BACKEND_UNREACHABLE",
-      err instanceof Error ? err.message : "backend unreachable",
-      0,
-      ""
-    );
+    throw toNetworkError(err);
+  } finally {
+    gate.clear();
   }
   const data = (await res.json().catch(() => ({}))) as ApiErrorBody;
   if (!res.ok) {
+    notifyUnauthorized(path, res.status);
     throw new ApiError(
       data.error?.code ?? `HTTP_${res.status}`,
       data.error?.message ?? "request failed",
@@ -184,10 +266,10 @@ async function postJson<T>(
     };
     init.body = JSON.stringify(body);
   }
-  // Gap-closure (D-002): shared demo write token for hosted backends.
-  // Unset locally → header omitted, behavior unchanged. When set it is a
-  // PUBLIC shared-demo credential (baked into client chunks by Next.js) —
-  // appropriate for staging demos, never user authentication.
+  // R6: the public frontend ships WITHOUT the demo write token
+  // (header omitted, writes use login sessions). If the variable is
+  // ever set, the value bakes PUBLIC into client chunks — never user
+  // authentication, never a copy of the backend secret.
   const writeToken = process.env.NEXT_PUBLIC_DEMO_WRITE_TOKEN ?? "";
   if (writeToken !== "") {
     init.headers = {
@@ -195,19 +277,19 @@ async function postJson<T>(
       Authorization: `Bearer ${writeToken}`,
     };
   }
+  const gate = deadline(signal);
+  init.signal = gate.signal;
   let res: Response;
   try {
     res = await fetch(`${apiBaseUrl()}${path}`, init);
   } catch (err: unknown) {
-    throw new ApiError(
-      "BACKEND_UNREACHABLE",
-      err instanceof Error ? err.message : "backend unreachable",
-      0,
-      ""
-    );
+    throw toNetworkError(err);
+  } finally {
+    gate.clear();
   }
   const data = (await res.json().catch(() => ({}))) as ApiErrorBody;
   if (!res.ok) {
+    notifyUnauthorized(path, res.status);
     throw new ApiError(
       data.error?.code ?? `HTTP_${res.status}`,
       data.error?.message ?? "request failed",
@@ -816,6 +898,41 @@ export function listAlerts(signal?: AbortSignal): Promise<{
   return requestJson<{ alerts: AlertItem[] }>("/api/v1/alerts", signal);
 }
 
+/* Notification center (per-caller read state over alerts). Field
+ * names mirror the /api/v1/notifications contract. */
+
+export interface NotificationItem {
+  notification_id: string;
+  title: string;
+  status: string;
+  transaction_id: string | null;
+  created_at: string;
+  read: boolean;
+}
+
+export interface NotificationList {
+  notifications: NotificationItem[];
+  unread_count: number;
+  synthetic_notice: string;
+}
+
+export function listNotifications(
+  signal?: AbortSignal
+): Promise<NotificationList> {
+  return requestJson<NotificationList>("/api/v1/notifications", signal);
+}
+
+export function markNotificationsRead(
+  body: { notification_ids?: string[]; all?: boolean },
+  signal?: AbortSignal
+): Promise<{ marked: string[]; unread_count: number }> {
+  return postJson<{ marked: string[]; unread_count: number }>(
+    "/api/v1/notifications/read",
+    body,
+    signal
+  );
+}
+
 export function listScenarios(signal?: AbortSignal): Promise<DemoScenarioList> {
   return requestJson<DemoScenarioList>("/api/v1/demo/scenarios", signal);
 }
@@ -842,6 +959,7 @@ export interface AuthMode {
 export interface AuthSession {
   user: string;
   role: string;
+  permissions: string[];
 }
 
 export function getAuthMode(signal?: AbortSignal): Promise<AuthMode> {
@@ -866,4 +984,14 @@ export function postLogin(
 
 export function postLogout(signal?: AbortSignal): Promise<{ ok: boolean }> {
   return postJson<{ ok: boolean }>("/api/v1/auth/logout", undefined, signal);
+}
+
+export function postLogoutAll(
+  signal?: AbortSignal
+): Promise<{ ok: boolean }> {
+  return postJson<{ ok: boolean }>(
+    "/api/v1/auth/logout-all",
+    undefined,
+    signal
+  );
 }
