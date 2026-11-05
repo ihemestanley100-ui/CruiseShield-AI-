@@ -1,5 +1,5 @@
 # locale: ig (MACHINE-DRAFTED — human review pending)
-# version: 1.2.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
+# version: 1.3.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
 # columns: key | en_source | draft | origin(direct=translated,fallback=English shown) | same_as_source | en_vars | draft_vars | vars_ok
 key	en_source	draft	origin	same_as_source	en_vars	draft_vars	vars_ok
 ai.altTitle	Alternative explanations:	Nkọwa ndị ọzọ:	direct	false			true
@@ -30,14 +30,14 @@ audit.thEvent	Event	Ihe omume	direct	false			true
 audit.thReason	Reason	Ihe kpatara	direct	false			true
 audit.thState	State change	Mgbanwe ọnọdụ	direct	false			true
 audit.thTime	Time	Oge	direct	false			true
-auth.blurb	This hosted demo is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	E chebere ngosi a. Jiri aha onye nyocha e nyere gị banye. Data arụpụtara naanị.	direct	false			true
+auth.blurb	This hosted platform is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	E chebere ngosi a. Jiri aha onye nyocha e nyere gị banye. Data arụpụtara naanị.	direct	false			true
 auth.invalid	Invalid username or password.	Aha njirimara ma ọ bụ okwuntughe ezighi ezi.	direct	false			true
 auth.password	Password	Okwuntughe	direct	false			true
 auth.rateLimited	Too many login attempts. Wait a minute and try again.	Mgbalị ịbanye karịrị. Chere otu nkeji wee nwaa ọzọ.	direct	false			true
 auth.signIn	Sign in	Banye	direct	false			true
 auth.signingIn	Signing in…	Na-abanye…	direct	false			true
-auth.title	Demo sign in	Banye ngosi	direct	false			true
-auth.unreachable	Backend unreachable. Check the demo server and retry.	Enweghị ike iru sava. Lelee sava ngosi wee nwaa ọzọ.	direct	false			true
+auth.title	Secure sign in	Banye ngosi	direct	false			true
+auth.unreachable	Backend unreachable. Check the platform server and retry.	Enweghị ike iru sava. Lelee sava ngosi wee nwaa ọzọ.	direct	false			true
 auth.username	Username	Aha njirimara	direct	false			true
 case.advisory	Advisory only: Muse Spark analysis explains evidence and never constitutes a human decision, nor changes risk scores or case status.	Ndụmọdụ naanị: nyocha Muse Spark na-akọwa ihe àmà, ọ bụghị mkpebi mmadụ, ọ dịghị agbanwe akara ihe egwu ma ọ bụ ọnọdụ okwu.	direct	false			true
 case.aiAssessment	AI assessment	Ntule AI	direct	false			true
@@ -165,11 +165,13 @@ common.notPermitted	Not available for your role.	Adịghị maka ọrụ gị.	d
 common.present	present	dị ugbu a	direct	false			true
 common.requestFailed	request failed	Arịrịọ dara	direct	false			true
 common.retry	Retry	Nwaa ọzọ	direct	false			true
+common.timedOut	Request timed out. Retry.	Arịrịọ agwụla oge. Nwaa ọzọ.	direct	false			true
 common.timelineEmpty	No events.	Ọ dịghị ihe omume.	direct	false			true
+common.unavailable	Service temporarily unavailable. Retry shortly.	Ọrụ adịghị maka ugbu a. Nwaa ọzọ n'oge adịghị anya.	direct	false			true
 common.unknown	unknown	Amaghị	direct	false			true
 common.unknownModel	unknown model	ụdị amaghị	direct	false			true
 common.unknownTime	unknown time	oge amaghị	direct	false			true
-common.unreachable	Backend unreachable. Check the demo server and retry.	Enweghị ike iru sava. Lelee sava ngosi wee nwaa ọzọ.	direct	false			true
+common.unreachable	Backend unreachable. Check the platform server and retry.	Enweghị ike iru sava. Lelee sava ngosi wee nwaa ọzọ.	direct	false			true
 decision.actorLabel	Analyst ID	ID onye nyocha	direct	false			true
 decision.decisionLabel	Decision	Mkpebi	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	Ọrụ gị bụ ịgụ naanị: mkpebi adịghị.	direct	false			true
@@ -182,26 +184,17 @@ decision.selectPlaceholder	Select a decision…	Họrọ mkpebi…	direct	false	
 decision.targetLabel	Move case to	Bugharịa okwu na	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	Okwu a nọ n'ọnọdụ ikpeazụ; anaghị ekwe mgbanwe ọzọ.	direct	false			true
 decision.title	Human decision	Mkpebi mmadụ	direct	false			true
-demo.activityDown	Activity unavailable	Omume adịghị	direct	false			true
-demo.aiBriefDown	AI brief unavailable	Akụkọ AI adịghị	direct	false			true
-demo.backendStatus	Backend status	Ọnọdụ sava	direct	false			true
-demo.checkedAt	Checked {url}…	A lechara {url}…	direct	false	url	url	true
-demo.execOverview	Executive overview	Nchịkọta onye isi	direct	false			true
-demo.execOverviewDown	Executive overview unavailable	Nchịkọta onye isi adịghị	direct	false			true
-demo.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	Mpụ ego anaghị apụtakarị n'otu azụmahịa. CruiseShield AI na-ejikọ azụmahịa, akaụntụ, ngwa, ndị nnata na ndị ahịa enyo enyo n'ime netwọk ọgụgụ isi enwere ike ịkọwa.	direct	false			true
-demo.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	Injin ihe egwu ya doro anya na-achọpụta mgbama, Meta AI na-enyere ndị nchọpụta aka ịkọwa ihe àmà, ntụgharị na nnwale na-enyocha ọnọdụ echiche, mkpebi mmadụ na-anọgide na-aza ajụjụ ma nwee ike inyocha.	direct	false			true
-demo.museBrief	Muse Spark brief	Akụkọ Muse Spark	direct	false			true
-demo.networkPreview	Network preview	Nhụchalụ netwọk	direct	false			true
-demo.networkPreviewDown	Network preview unavailable	Nhụchalụ netwọk adịghị	direct	false			true
-demo.recentActivity	Recent activity	Omume na-adịbeghị anya	direct	false			true
-demo.replayDown	Replay unavailable.	Ntụgharị adịghị.	direct	false			true
-demo.retryTitle	Retry {title}	Nwaa {title} ọzọ	direct	false	title	title	true
-demo.riskIntel	Risk intelligence	Ọgụgụ isi ihe egwu	direct	false			true
-demo.riskIntelDown	Risk intelligence unavailable	Ọgụgụ isi ihe egwu adịghị	direct	false			true
-demo.startBackendPost	) and press retry.	) wee pịa nwaa ọzọ.	direct	false			true
-demo.startBackendPre	Start the backend (	Malite sava (	direct	false			true
-demo.systemStatus	System Status	Ọnọdụ Sistemụ	direct	false			true
-demo.systemStatusDown	System status unavailable	Ọnọdụ sistemụ adịghị	direct	false			true
+detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
+detection.detectorsTitle	Detector families	Detector families	fallback	true			true
+detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
+detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
+detection.measuredAt	Measured at	Measured at	fallback	true			true
+detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
+detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
+detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
+detection.title	Detection intelligence	Detection intelligence	fallback	true			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
+detection.zeroNote	Zero means measured none, not missing data.	Zero means measured none, not missing data.	fallback	true			true
 evidence.clearSearch	Clear search	Kpochapụ nchọ	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	Ọ dịghị ihe àmà dabara.	direct	false			true
 evidence.emptySearch	No evidence items match this search.	Ọ dịghị ihe àmà dabara na nchọ a.	direct	false			true
@@ -237,7 +230,7 @@ graph.nodeFocusSuffix	, orbit focus	, elekwasị anya gburugburu	direct	false			
 graph.orbitFocusBadge	· orbit focus	· elekwasị anya gburugburu	direct	false			true
 graph.orbitalCounts	Focus: {focus} · Showing {a} of {b} nodes, {c} of {d} edges.	Elekwasị anya: {focus} · Na-egosi ọnụ {a} n'ime {b}, njikọ {c} n'ime {d}.	direct	false	a,b,c,d,focus	a,b,c,d,focus	true
 graph.orbitalLabel	Orbital graph	Eserese gburugburu	direct	false			true
-graph.orbitalNote	Synthetic demo data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	Data ngosi arụpụtara. Mgbaaka na ntugharị bụ nhazi naanị — ha anaghị egosi ihe egwu, ikpe, ma ọ bụ mkpa.	direct	false			true
+graph.orbitalNote	Synthetic data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	Data ngosi arụpụtara. Mgbaaka na ntugharị bụ nhazi naanị — ha anaghị egosi ihe egwu, ikpe, ma ọ bụ mkpa.	direct	false			true
 graph.orbitalSvg	Orbital graph focused on {focus}: {a} nodes, {b} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.	Eserese gburugburu lekwasịrị {focus} anya: ọnụ {a}, njikọ {b}. Tab iru ọnụ na njikọ, Enter ịhọrọ, igodo akụ ka ịkwaga.	direct	false	a,b,focus	a,b,focus	true
 graph.orbitalTitle	Orbital explorer	Nyocha gburugburu	direct	false			true
 graph.orbitalViewControls	Orbital view controls	Njikwa nlele gburugburu	direct	false			true
@@ -283,7 +276,7 @@ intel.evidencePre	Evidence: 	Ihe àmà: 	direct	false			true
 intel.findingsCount.one	{count} finding	{count} nchọpụta	direct	false	count	count	true
 intel.findingsCount.other	{count} findings	{count} nchọpụta	direct	false	count	count	true
 intel.findingsH	Intelligence findings	Nchọpụta ọgụgụ isi	direct	false			true
-intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic demo values only.	Ntụaka edoziri, ọ bụghị akara mkpịsị aka enyochara. Àgwà: ụkpụrụ ngosi arụpụtara ekwupụtara naanị.	direct	false			true
+intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic values only.	Ntụaka edoziri, ọ bụghị akara mkpịsị aka enyochara. Àgwà: ụkpụrụ ngosi arụpụtara ekwupụtara naanị.	direct	false			true
 intel.geoDisclaimer	IP-derived locations are approximate and never proof of physical presence. No GPS collection exists (permission: unavailable).	Ọnọdụ e nwetara site na IP bụ atụmatụ, ọ bụghịkwa ihe àmà nke ịnọ n'anụ ahụ. Ọ dịghị nchịkọta GPS (ikike: adịghị).	direct	false			true
 intel.geoH	Geolocation	Ọnọdụ ala	direct	false			true
 intel.intelDown	Intelligence unavailable for this investigation.	Ọgụgụ isi adịghị maka nyocha a.	direct	false			true
@@ -306,8 +299,8 @@ intel.repLabel	Reputation	Aha ọma	direct	false			true
 intel.reviewLine	Human review: {r}	Nyocha mmadụ: {r}	direct	false	r	r	true
 intel.seeBackend	see backend	lee sava	direct	false			true
 intel.sharedDevice	— shared device	— ngwa ekerịta	direct	false			true
-intel.statusLine	{findings} · {iso} · synthetic demo data.	{findings} · {iso} · data ngosi arụpụtara.	direct	false	findings,iso	findings,iso	true
-intel.syntheticTag	· synthetic demo	· ngosi arụpụtara	direct	false			true
+intel.statusLine	{findings} · {iso} · synthetic data.	{findings} · {iso} · data ngosi arụpụtara.	direct	false	findings,iso	findings,iso	true
+intel.syntheticTag	· synthetic	· ngosi arụpụtara	direct	false			true
 intel.unknownShort	(unknown)	(amaghị)	direct	false			true
 intel.vpnLabel	VPN/proxy/Tor	VPN/proxy/Tor	direct	true			true
 investigation.aiAnalysis	AI analysis	Nyocha AI	direct	false			true
@@ -354,16 +347,22 @@ landing.capTitles.6	Investigations	Nyocha	direct	false			true
 landing.capTitles.7	AI Intelligence	Ọgụgụ isi AI	direct	false			true
 landing.capTitles.8	Risk Engine	Injin ihe egwu	direct	false			true
 landing.capTitles.9	Evidence & Audit	Ihe àmà na nyocha akwụkwọ	direct	false			true
+landing.closeRegion	Clear region selection	Kpochapụ nhọrọ mpaghara	direct	false			true
+landing.collapsePanel	Collapse panel	Kpọchie panel	direct	false			true
 landing.controlsAmbient	Ambient sound	Ụda gburugburu	direct	false			true
 landing.cta	Explore CruiseShield AI™	Nyochaa CruiseShield AI™	direct	false			true
-landing.ctaSub	Enter the Interactive Demo Experience	Banye n'ahụmahụ ngosi mmekọrịta	direct	false			true
-landing.enterDemo	Enter Demo	Banye na ngosi	direct	false			true
+landing.ctaSub	Explore the interactive investigation platform	Banye n'ahụmahụ ngosi mmekọrịta	direct	false			true
+landing.enterPlatform	Access Platform	Banye na ngosi	direct	false			true
+landing.expandPanel	Expand panel	Gbasaa panel	direct	false			true
 landing.eyebrow	Global Financial Intelligence	Ọgụgụ isi ego zuru ụwa ọnụ	direct	false			true
-landing.fallbackNote	Interactive 3D is unavailable in this browser. The full demo experience remains open.	3D mmekọrịta adịghị n'ihe nchọgharị a. Ahụmahụ ngosi zuru oke ka meghere.	direct	false			true
-landing.footerDemo	Demonstration experience · synthetic data · illustrative network visuals · 	Ahụmahụ ngosi · data emepụtara · ihe ngosi netwọk ihe atụ · 	direct	false			true
+landing.fallbackNote	Interactive 3D is unavailable in this browser. The full platform remains open.	3D mmekọrịta adịghị n'ihe nchọgharị a. Ahụmahụ ngosi zuru oke ka meghere.	direct	false			true
 landing.footerLine	One Platform. A Safer Financial Future. For Everyone.	Otu ikpo okwu. Ọdịnihu ego dị nchebe karị. Maka mmadụ niile.	direct	false			true
-landing.footerLink	Enter the interactive demo	Banye na ngosi mmekọrịta	direct	false			true
+landing.footerLink	Open the interactive platform	Banye na ngosi mmekọrịta	direct	false			true
+landing.footerNote	Investigation platform · synthetic data · illustrative network visuals · 	Ahụmahụ ngosi · data emepụtara · ihe ngosi netwọk ihe atụ · 	direct	false			true
 landing.fullMotion	Full motion	Ntugharị zuru oke	direct	false			true
+landing.globeContextLost	3D context lost — illustration paused.	E funahụrụ ọnọdụ 3D — ihe atụ akwụsịla.	direct	false			true
+landing.globeControls	World Atlas controls	Njikwa atlas ụwa	direct	false			true
+landing.globeHint	Drag to rotate. Arrow keys rotate, plus and minus zoom, 0 resets the view.	Dọrọ ka ịtụgharị. Akụ na-atụgharị, mgbakwunye na mwepụ na-ebuwanye, 0 na-atọgharị.	direct	false			true
 landing.h1	A Safer Financial World	Ụwa ego dị nchebe karị	direct	false			true
 landing.home	CruiseShield AI home	Ụlọ CruiseShield AI	direct	false			true
 landing.illustrative	Illustrative Network View	Nlele netwọk ihe atụ	direct	false			true
@@ -376,8 +375,8 @@ landing.intelItems.5	Network Graph	Eserese netwọk	direct	false			true
 landing.intelItems.6	AI Investigation	Nyocha AI	direct	false			true
 landing.intelItems.7	Risk Analysis	Nyocha ihe egwu	direct	false			true
 landing.intelItems.8	Evidence and Audit	Ihe àmà na nyocha akwụkwọ	direct	false			true
-landing.intelNote	Demonstration capabilities · synthetic data	Ike ngosi · data emepụtara	direct	false			true
-landing.intelStatus	Demo	Ngosi	direct	false			true
+landing.intelNote	Investigation capabilities · synthetic data	Ike ngosi · data emepụtara	direct	false			true
+landing.intelStatus	Pilot	Ngosi	direct	false			true
 landing.intelTitle	Global Intelligence	Ọgụgụ isi zuru ụwa ọnụ	direct	false			true
 landing.intelligenceModules	Intelligence modules	Modul ọgụgụ isi	direct	false			true
 landing.journey.0	DETECT	CHỌPỤTA	direct	false			true
@@ -414,6 +413,7 @@ landing.moduleTitles.2	Global Network	Netwọk zuru ụwa ọnụ	direct	false		
 landing.moduleTitles.3	Cyber Defense	Nchebe cyber	direct	false			true
 landing.moduleTitles.4	Secure Infrastructure	Akụrụngwa nchebe	direct	false			true
 landing.modulesNote	Illustrative module concepts · capabilities vary by deployment	Echiche modul ihe atụ · ike dịgasị iche	direct	false			true
+landing.mute	Mute	Mechie ụda	direct	false			true
 landing.offWord	Off	Gbanyụọ	direct	false			true
 landing.onWord	On	Gbanye	direct	false			true
 landing.pauseScene	Pause scene	Kwụsị ihe nkiri	direct	false			true
@@ -421,6 +421,7 @@ landing.platformPrinciples	Platform principles	Ụkpụrụ ikpo okwu	direct	fal
 landing.platformQualities	Platform qualities	Àgwà ikpo okwu	direct	false			true
 landing.problem	Financial crime hides in disconnected transactions. CruiseShield AI connects them — deterministic risk scoring, relationship graphs, and evidence-grounded AI explanations, with a human investigator deciding.	Mpụ ego na-ezo n'azụmahịa ndị na-ejikọtaghị ọnụ. CruiseShield AI na-ejikọ ha — akara ihe egwu doro anya, eserese mmekọrịta na nkọwa AI dabere n'ihe àmà, ebe onye nchọpụta mmadụ na-ekpebi.	direct	false			true
 landing.reduceMotion	Reduce motion	Belata ntugharị	direct	false			true
+landing.regionSignal	Illustrative signal	Mgbama atụ	direct	false			true
 landing.regions.0	North America	North America	direct	true			true
 landing.regions.1	South America	South America	direct	true			true
 landing.regions.2	Europe	Europe	direct	true			true
@@ -432,6 +433,7 @@ landing.regions.7	Cross-Border Corridors	Ụzọ gafere oke	direct	false			true
 landing.regionsNote	Simulated regional signals · not live monitoring	Mgbama mpaghara emepụtara · enweghị nleba anya dị ndụ	direct	false			true
 landing.regionsTitle	Global Intelligence Regions	Mpaghara ọgụgụ isi zuru ụwa ọnụ	direct	false			true
 landing.replayLink	try replay & simulation	nwale nlọghachi na nnwale	direct	false			true
+landing.resetView	Reset view	Tọgharịa nlele	direct	false			true
 landing.resumeScene	Resume scene	Gaa n'ihu ihe nkiri	direct	false			true
 landing.sceneMotion	Scene motion	Ntugharị ihe nkiri	direct	false			true
 landing.signals.0	Secure	Nchebe	direct	false			true
@@ -439,16 +441,18 @@ landing.signals.1	Intelligent	Amamihe	direct	false			true
 landing.signals.2	Global	Zuru ụwa ọnụ	direct	false			true
 landing.signals.3	Auditable	Enwere ike inyocha	direct	false			true
 landing.soundLabel	Sound	Ụda	direct	false			true
-landing.stripNote	Cards open the matching live demo screen · 	Kaadị na-emepe ihuenyo ngosi dị ndụ · 	direct	false			true
+landing.stripNote	Cards open the matching screen · 	Kaadị na-emepe ihuenyo ngosi dị ndụ · 	direct	false			true
 landing.tagline	The Financial Crime Immune System™	The Financial Crime Immune System™	direct	true			true
+landing.unmute	Unmute	Mepee ụda	direct	false			true
 landing.volumeLabel	Volume	Olu	direct	false			true
+landing.zoomIn	Zoom in	Bubawanye	direct	false			true
+landing.zoomOut	Zoom out	Belata	direct	false			true
 nav.aiIntelligence	AI Intelligence	Amamihe AI	direct	false			true
 nav.auditTrail	Audit Trail	Ndekọ Nyocha	direct	false			true
 nav.brand	CruiseShield AI	CruiseShield AI	direct	true			true
 nav.cases	Cases	Okwu	direct	false			true
 nav.closeNav	Close navigation	Mechie nsoroụzọ	direct	false			true
 nav.commandCenter	Command Center	Ebe Iwu	direct	false			true
-nav.demoRole	demo role	ọrụ ngosi	direct	false			true
 nav.evidence	Evidence	Ihe àmà	direct	false			true
 nav.exploreNetwork	Explore Network	Nyochaa netwọk	direct	false			true
 nav.home	CruiseShield AI home	Ụlọ CruiseShield AI	direct	false			true
@@ -458,13 +462,14 @@ nav.networkExplorer	Network Explorer	Nyocha Netwọk	direct	false			true
 nav.primary	Primary	Isi	direct	false			true
 nav.quickActions	Quick Actions	Omume ngwa ngwa	direct	false			true
 nav.replaySimulation	Replay & Simulation	Ntụgharị & Nnwale	direct	false			true
-nav.roleDemo	{role} · demo	{role} · ngosi	direct	false	role	role	true
+nav.roleContext	{role} · active	{role} · ngosi	direct	false	role	role	true
 nav.runSimulation	Run Simulation	Gbaa nnwale	direct	false			true
+nav.sessionRole	session role	ọrụ ngosi	direct	false			true
 nav.signOut	Sign out	Pụọ	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	Pụọ ebe niile	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	Kwụsị nnọkọ a na ngwa na ihe nchọgharị niile	direct	false			true
 nav.skipToContent	Skip to main content	Mafere gaa na isi ọdịnaya	direct	false			true
-nav.synthetic	Synthetic demo data	Data ngosi arụpụtara	direct	false			true
+nav.synthetic	Synthetic data	Data ngosi arụpụtara	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	Gbanwee nsoroụzọ	direct	false			true
 nav.viewAuditTrail	View Audit Trail	Lee ndekọ nyocha	direct	false			true
@@ -488,11 +493,33 @@ notify.bellLoading	Notifications, loading	Ọkwa, na-ebu	direct	false			true
 notify.bellOpen	Notifications, {n} open	Ọkwa, {n} meghere	direct	false	n	n	true
 notify.closeNotif	Close notifications	Mechie ọkwa	direct	false			true
 notify.loadingAlerts	Loading alerts…	Na-ebu ịdọ aka ná ntị…	direct	false			true
+notify.markAllRead	Mark all read	Kaa akara niile dị ka agụọla	direct	false			true
+notify.markRead	Mark read	Kaa akara dị ka agụọla	direct	false			true
 notify.networkLink	Network	Netwọk	direct	false			true
 notify.noAlerts	No alerts.	Ọ dịghị ịdọ aka ná ntị.	direct	false			true
 notify.openInv	Open investigation	Mepee nyocha	direct	false			true
 notify.panelLabel	Notifications	Ọkwa	direct	false			true
 notify.panelTitle	Notifications	Ọkwa	direct	false			true
+platform.activityDown	Activity unavailable	Omume adịghị	direct	false			true
+platform.aiBriefDown	AI brief unavailable	Akụkọ AI adịghị	direct	false			true
+platform.backendStatus	Backend status	Ọnọdụ sava	direct	false			true
+platform.checkedAt	Checked {url}…	A lechara {url}…	direct	false	url	url	true
+platform.execOverview	Executive overview	Nchịkọta onye isi	direct	false			true
+platform.execOverviewDown	Executive overview unavailable	Nchịkọta onye isi adịghị	direct	false			true
+platform.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	Mpụ ego anaghị apụtakarị n'otu azụmahịa. CruiseShield AI na-ejikọ azụmahịa, akaụntụ, ngwa, ndị nnata na ndị ahịa enyo enyo n'ime netwọk ọgụgụ isi enwere ike ịkọwa.	direct	false			true
+platform.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	Injin ihe egwu ya doro anya na-achọpụta mgbama, Meta AI na-enyere ndị nchọpụta aka ịkọwa ihe àmà, ntụgharị na nnwale na-enyocha ọnọdụ echiche, mkpebi mmadụ na-anọgide na-aza ajụjụ ma nwee ike inyocha.	direct	false			true
+platform.museBrief	Muse Spark brief	Akụkọ Muse Spark	direct	false			true
+platform.networkPreview	Network preview	Nhụchalụ netwọk	direct	false			true
+platform.networkPreviewDown	Network preview unavailable	Nhụchalụ netwọk adịghị	direct	false			true
+platform.recentActivity	Recent activity	Omume na-adịbeghị anya	direct	false			true
+platform.replayDown	Replay unavailable.	Ntụgharị adịghị.	direct	false			true
+platform.retryTitle	Retry {title}	Nwaa {title} ọzọ	direct	false	title	title	true
+platform.riskIntel	Risk intelligence	Ọgụgụ isi ihe egwu	direct	false			true
+platform.riskIntelDown	Risk intelligence unavailable	Ọgụgụ isi ihe egwu adịghị	direct	false			true
+platform.startBackendPost	) and press retry.	) wee pịa nwaa ọzọ.	direct	false			true
+platform.startBackendPre	Start the backend (	Malite sava (	direct	false			true
+platform.systemStatus	System Status	Ọnọdụ Sistemụ	direct	false			true
+platform.systemStatusDown	System status unavailable	Ọnọdụ sistemụ adịghị	direct	false			true
 replay.cancel	Cancel	Kagbuo	direct	false			true
 replay.confirmReset	Confirm: this clears decisions, simulations, AI runs, and audit history for {id}.	Kwenye: nke a na-ehichapụ mkpebi, nnwale, ọsọ AI, na akụkọ nyocha maka {id}.	direct	false	id	id	true
 replay.confirmResetBtn	Confirm reset	Kwenye ntọgharị	direct	false			true
@@ -510,12 +537,12 @@ replay.play	Play	Kpọọ	direct	false			true
 replay.positionLine	Step {c} of {t} · {e} events · {x} transactions · {g} edges	Nzọụkwụ {c} n'ime {t} · ihe omume {e} · azụmahịa {x} · njikọ {g}	direct	false	c,e,g,t,x	c,e,g,t,x	true
 replay.reducedMotionPlay	Auto-play disabled: reduced-motion preference detected. Use Step forward.	Agbanwụọ ịkpọ akpaaka: a chọpụtara mmasị ntugharị belatara. Jiri Gaa n'ihu.	direct	false			true
 replay.resetBlurb	Reset restores the seeded scenario exactly and clears all live state: human decisions, simulations, AI runs, and audit events beyond the reset itself.	Ntọgharị na-eweghachi ọnọdụ mbụ kpọmkwem ma kpochapụ ọnọdụ dị ndụ niile: mkpebi mmadụ, nnwale, ọsọ AI, na ihe omume nyocha karịa ntọgharị ahụ.	direct	false			true
-replay.resetDemo	Reset demo	Tọgharịa ngosi	direct	false			true
 replay.resetDoneMid	, seed 	, mkpụrụ 	direct	false			true
 replay.resetDonePost	. Reload the page to replay from the restored state.	. Bugharịa ibe ka ị tụgharịa site na ọnọdụ e weghachiri.	direct	false			true
 replay.resetDonePre	Reset complete: run 	Ntọgharị ezuola: ọsọ 	direct	false			true
 replay.resetLabel	Scenario reset	Ntọgharị ọnọdụ	direct	false			true
 replay.resetTitle	Scenario reset	Ntọgharị ọnọdụ	direct	false			true
+replay.resetWorkspace	Reset workspace	Tọgharịa ngosi	direct	false			true
 replay.resetting	Resetting…	Na-atọgharị…	direct	false			true
 replay.restart	Restart	Malite ọzọ	direct	false			true
 replay.scenarioPre	Scenario 	Ọnọdụ 	direct	false			true

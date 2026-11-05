@@ -266,7 +266,7 @@ async function postJson<T>(
     };
     init.body = JSON.stringify(body);
   }
-  // R6: the public frontend ships WITHOUT the demo write token
+  // R6: the public frontend ships WITHOUT the platform write token
   // (header omitted, writes use login sessions). If the variable is
   // ever set, the value bakes PUBLIC into client chunks — never user
   // authentication, never a copy of the backend secret.
@@ -339,6 +339,19 @@ export function postAiFollowup(
   return postJson<AgentRun>(
     `/api/v1/investigations/${encodeURIComponent(invId)}/ai-followup`,
     { question },
+    signal
+  );
+}
+
+/* GAP-012: persisted AI run receipt. Shape mirrors the stored ai_runs
+ * record (GET /api/v1/ai-runs/{id} returns it verbatim). */
+
+export function getAiRun(
+  runId: string,
+  signal?: AbortSignal
+): Promise<AgentRun> {
+  return requestJson<AgentRun>(
+    `/api/v1/ai-runs/${encodeURIComponent(runId)}`,
     signal
   );
 }
@@ -577,6 +590,56 @@ export function getInvestigationIntel(
   );
 }
 
+/* GAP-012: per-account intel summary. Shape mirrors
+ * app/intel_link.py account_intel exactly. */
+
+export interface SharedDeviceEntry {
+  device_id: string;
+  account_ids: string[];
+  txn_ids: string[];
+  graph_edge_ids: string[];
+  event_ids: string[];
+  identity_status: string;
+  synthetic: boolean;
+}
+
+export interface SharedIpEntry {
+  ip_label: string;
+  address_status: string;
+  account_ids: string[];
+  txn_ids: string[];
+  event_ids: string[];
+  synthetic: boolean;
+}
+
+export interface AcctIntel {
+  account_id: string;
+  known_devices: string[];
+  known_ip_labels: string[];
+  known_geo_labels: string[];
+  first_seen: string;
+  last_seen: string;
+  shared_devices: SharedDeviceEntry[];
+  shared_ips: SharedIpEntry[];
+  transaction_count: number;
+  transaction_ids: string[];
+  investigation_count: number;
+  investigation_ids: string[];
+  provenance: { event_ids: string[] };
+  synthetic: boolean;
+  limitations: string[];
+}
+
+export function getAccountIntel(
+  accountId: string,
+  signal?: AbortSignal
+): Promise<AcctIntel> {
+  return requestJson<AcctIntel>(
+    `/api/v1/accounts/${encodeURIComponent(accountId)}/intel`,
+    signal
+  );
+}
+
 export interface IntelFinding {
   finding_id: string;
   category: string;
@@ -658,7 +721,7 @@ export function getRiskIntel(
   );
 }
 
-/* Batch 4: replay, simulation, cases, audit, demo. Shapes mirror
+/* Batch 4: replay, simulation, cases, audit, platform. Shapes mirror
  * app/replay.py, app/simulate.py, app/cases.py, app/store.py. */
 
 export interface ReplayEvent {
@@ -782,17 +845,17 @@ export interface AuditEntry {
   request_id: string;
 }
 
-export interface DemoScenario {
+export interface PlatformScenario {
   scenario_id: string;
   title: string;
 }
 
-export interface DemoScenarioList {
-  scenarios: DemoScenario[];
+export interface PlatformScenarioList {
+  scenarios: PlatformScenario[];
   active_scenario_id: string;
 }
 
-export interface DemoResetResult {
+export interface PlatformResetResult {
   scenario_id: string;
   run_id: string;
   trace_id: string;
@@ -818,6 +881,25 @@ export function getRisk(
 ): Promise<RiskResponse> {
   return requestJson<RiskResponse>(
     `/api/v1/risk/${encodeURIComponent(txnId)}?scope=${encodeURIComponent(scope)}`,
+    signal
+  );
+}
+
+/* GAP-012: base transaction record plus both scored scopes.
+ * Shape mirrors GET /api/v1/transactions/{id} exactly. */
+
+export interface TransactionResponse {
+  transaction: Transaction;
+  risk_transaction: RiskAssessment;
+  risk_network: RiskAssessment;
+}
+
+export function getTransaction(
+  txnId: string,
+  signal?: AbortSignal
+): Promise<TransactionResponse> {
+  return requestJson<TransactionResponse>(
+    `/api/v1/transactions/${encodeURIComponent(txnId)}`,
     signal
   );
 }
@@ -933,22 +1015,22 @@ export function markNotificationsRead(
   );
 }
 
-export function listScenarios(signal?: AbortSignal): Promise<DemoScenarioList> {
-  return requestJson<DemoScenarioList>("/api/v1/demo/scenarios", signal);
+export function listScenarios(signal?: AbortSignal): Promise<PlatformScenarioList> {
+  return requestJson<PlatformScenarioList>("/api/v1/platform/scenarios", signal);
 }
 
-export function resetDemo(
+export function resetWorkspace(
   scenarioId: string,
   signal?: AbortSignal
-): Promise<DemoResetResult> {
-  return postJson<DemoResetResult>(
-    "/api/v1/demo/reset",
+): Promise<PlatformResetResult> {
+  return postJson<PlatformResetResult>(
+    "/api/v1/platform/reset",
     { scenario_id: scenarioId },
     signal
   );
 }
 
-/* Phase 5: protected-demo login. Open demo (auth_enabled false) behaves
+/* Phase 5: protected login. Open mode (auth_enabled false) behaves
  * exactly as before; staging gates every data endpoint behind the
  * HttpOnly session cookie set by postLogin. */
 
@@ -968,6 +1050,100 @@ export function getAuthMode(signal?: AbortSignal): Promise<AuthMode> {
 
 export function getAuthMe(signal?: AbortSignal): Promise<AuthSession> {
   return requestJson<AuthSession>("/api/v1/auth/me", signal);
+}
+
+export interface DetectorInfo {
+  family: string;
+  version: string;
+  status: string;
+  description: string;
+  rules: string[];
+}
+
+export interface DetectorList {
+  detectors: DetectorInfo[];
+}
+
+export interface SignalsSummary {
+  total_signals: number;
+  unique_transactions_flagged: number;
+  unique_entities_flagged: number;
+  by_family: Record<string, number>;
+  by_severity: Record<string, number>;
+  measurement_period: { start: string; end: string };
+  generated_at: string;
+  tenant_scope: string;
+  evaluation: {
+    transactions_evaluated: number;
+    detector_version: string;
+    latency_ms: number;
+    unknown_location_txns: number;
+    note: string;
+  };
+  note: string;
+}
+
+export interface ChannelRow {
+  channel: string;
+  transactions: number;
+  unique_transactions: number;
+  signals: number;
+  unique_flagged: number;
+  last_seen: string;
+  integration: string;
+  note: string;
+}
+
+export interface ChannelsSummary {
+  channels: ChannelRow[];
+  unmapped_raw_codes: string[];
+  unmapped_alert: boolean;
+  generated_at: string;
+  tenant_scope: string;
+}
+
+export interface MatrixCell {
+  family: string;
+  channel: string;
+  status: string;
+  signals: number;
+  transactions: number;
+  evidence_signal_id: string;
+}
+
+export interface DetectionMatrix {
+  cells: MatrixCell[];
+  generated_at: string;
+  tenant_scope: string;
+}
+
+export interface DetectionBundle {
+  summary: SignalsSummary;
+  channels: ChannelsSummary;
+  detectors: DetectorList;
+  matrix: DetectionMatrix;
+}
+
+export function getDetectors(signal?: AbortSignal): Promise<DetectorList> {
+  return requestJson<DetectorList>("/api/v1/detectors", signal);
+}
+
+export function getSignalsSummary(
+  signal?: AbortSignal
+): Promise<SignalsSummary> {
+  return requestJson<SignalsSummary>("/api/v1/signals/summary", signal);
+}
+
+export function getChannelsSummary(
+  signal?: AbortSignal
+): Promise<ChannelsSummary> {
+  return requestJson<ChannelsSummary>("/api/v1/channels/summary", signal);
+}
+
+export function getDetectionMatrix(
+  signal?: AbortSignal
+): Promise<DetectionMatrix> {
+  return requestJson<DetectionMatrix>("/api/v1/detection/matrix", signal);
 }
 
 export function postLogin(

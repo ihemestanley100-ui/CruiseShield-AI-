@@ -1,5 +1,5 @@
 # locale: ar (MACHINE-DRAFTED — human review pending)
-# version: 1.2.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
+# version: 1.3.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
 # columns: key | en_source | draft | origin(direct=translated,fallback=English shown) | same_as_source | en_vars | draft_vars | vars_ok
 key	en_source	draft	origin	same_as_source	en_vars	draft_vars	vars_ok
 ai.altTitle	Alternative explanations:	تفسيرات بديلة:	direct	false			true
@@ -30,14 +30,14 @@ audit.thEvent	Event	الحدث	direct	false			true
 audit.thReason	Reason	السبب	direct	false			true
 audit.thState	State change	تغيّر الحالة	direct	false			true
 audit.thTime	Time	الوقت	direct	false			true
-auth.blurb	This hosted demo is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	هذا العرض المستضاف محمي. سجّل الدخول باستخدام بيانات المحقق المقدَّمة لهذا التقييم. بيانات اصطناعية فقط.	direct	false			true
+auth.blurb	This hosted platform is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	هذا العرض المستضاف محمي. سجّل الدخول باستخدام بيانات المحقق المقدَّمة لهذا التقييم. بيانات اصطناعية فقط.	direct	false			true
 auth.invalid	Invalid username or password.	اسم المستخدم أو كلمة المرور غير صالحة.	direct	false			true
 auth.password	Password	كلمة المرور	direct	false			true
 auth.rateLimited	Too many login attempts. Wait a minute and try again.	محاولات تسجيل دخول كثيرة جدًا. انتظر دقيقة وحاول مرة أخرى.	direct	false			true
 auth.signIn	Sign in	تسجيل الدخول	direct	false			true
 auth.signingIn	Signing in…	جارٍ تسجيل الدخول…	direct	false			true
-auth.title	Demo sign in	تسجيل الدخول إلى العرض	direct	false			true
-auth.unreachable	Backend unreachable. Check the demo server and retry.	تعذّر الوصول إلى الخادم. تحقق من خادم العرض وأعد المحاولة.	direct	false			true
+auth.title	Secure sign in	تسجيل الدخول إلى العرض	direct	false			true
+auth.unreachable	Backend unreachable. Check the platform server and retry.	تعذّر الوصول إلى الخادم. تحقق من خادم العرض وأعد المحاولة.	direct	false			true
 auth.username	Username	اسم المستخدم	direct	false			true
 case.advisory	Advisory only: Muse Spark analysis explains evidence and never constitutes a human decision, nor changes risk scores or case status.	للاستشارة فقط: يشرح تحليل Muse Spark الأدلة ولا يشكّل أبدًا قرارًا بشريًا، ولا يغيّر درجات المخاطر أو حالة القضية.	direct	false			true
 case.aiAssessment	AI assessment	تقييم الذكاء الاصطناعي	direct	false			true
@@ -165,11 +165,13 @@ common.notPermitted	Not available for your role.	غير متاح لدورك.	dir
 common.present	present	الحاضر	direct	false			true
 common.requestFailed	request failed	فشل الطلب	direct	false			true
 common.retry	Retry	إعادة المحاولة	direct	false			true
+common.timedOut	Request timed out. Retry.	انتهت مهلة الطلب. حاول مجددًا.	direct	false			true
 common.timelineEmpty	No events.	لا توجد أحداث.	direct	false			true
+common.unavailable	Service temporarily unavailable. Retry shortly.	الخدمة غير متاحة مؤقتًا. حاول بعد قليل.	direct	false			true
 common.unknown	unknown	غير معروف	direct	false			true
 common.unknownModel	unknown model	نموذج غير معروف	direct	false			true
 common.unknownTime	unknown time	وقت غير معروف	direct	false			true
-common.unreachable	Backend unreachable. Check the demo server and retry.	تعذّر الوصول إلى الخادم. تحقق من خادم العرض التجريبي وأعد المحاولة.	direct	false			true
+common.unreachable	Backend unreachable. Check the platform server and retry.	تعذّر الوصول إلى الخادم. تحقق من خادم العرض التجريبي وأعد المحاولة.	direct	false			true
 decision.actorLabel	Analyst ID	معرّف المحلل	direct	false			true
 decision.decisionLabel	Decision	القرار	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	دورك للقراءة فقط: القرارات معطّلة.	direct	false			true
@@ -182,26 +184,17 @@ decision.selectPlaceholder	Select a decision…	اختر قرارًا…	direct	
 decision.targetLabel	Move case to	نقل القضية إلى	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	هذه القضية في حالة نهائية؛ لا يُسمح بأي انتقالات أخرى.	direct	false			true
 decision.title	Human decision	قرار بشري	direct	false			true
-demo.activityDown	Activity unavailable	النشاط غير متوفر	direct	false			true
-demo.aiBriefDown	AI brief unavailable	الموجز الذكي غير متوفر	direct	false			true
-demo.backendStatus	Backend status	حالة الخادم	direct	false			true
-demo.checkedAt	Checked {url}…	تم الفحص {url}…	direct	false	url	url	true
-demo.execOverview	Executive overview	نظرة تنفيذية	direct	false			true
-demo.execOverviewDown	Executive overview unavailable	النظرة التنفيذية غير متوفرة	direct	false			true
-demo.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	نادرًا ما تظهر الجريمة المالية في معاملة واحدة. يربط CruiseShield AI المعاملات المشبوهة والحسابات والأجهزة والمستفيدين والتجار في شبكة استخبارات قابلة للتفسير.	direct	false			true
-demo.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	يحدد محرك المخاطر الحتمي الإشارات، ويساعد Meta AI المحققين على تفسير الأدلة، وتستكشف إعادة التشغيل والمحاكاة سيناريوهات افتراضية، وتبقى القرارات البشرية خاضعة للمساءلة والتدقيق.	direct	false			true
-demo.museBrief	Muse Spark brief	موجز Muse Spark	direct	false			true
-demo.networkPreview	Network preview	معاينة الشبكة	direct	false			true
-demo.networkPreviewDown	Network preview unavailable	معاينة الشبكة غير متوفرة	direct	false			true
-demo.recentActivity	Recent activity	النشاط الأخير	direct	false			true
-demo.replayDown	Replay unavailable.	إعادة التشغيل غير متوفرة.	direct	false			true
-demo.retryTitle	Retry {title}	إعادة {title}	direct	false	title	title	true
-demo.riskIntel	Risk intelligence	استخبارات المخاطر	direct	false			true
-demo.riskIntelDown	Risk intelligence unavailable	استخبارات المخاطر غير متوفرة	direct	false			true
-demo.startBackendPost	) and press retry.	) ثم أعد المحاولة.	direct	false			true
-demo.startBackendPre	Start the backend (	شغّل الخادم (	direct	false			true
-demo.systemStatus	System Status	حالة النظام	direct	false			true
-demo.systemStatusDown	System status unavailable	حالة النظام غير متوفرة	direct	false			true
+detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
+detection.detectorsTitle	Detector families	Detector families	fallback	true			true
+detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
+detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
+detection.measuredAt	Measured at	Measured at	fallback	true			true
+detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
+detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
+detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
+detection.title	Detection intelligence	Detection intelligence	fallback	true			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
+detection.zeroNote	Zero means measured none, not missing data.	Zero means measured none, not missing data.	fallback	true			true
 evidence.clearSearch	Clear search	مسح البحث	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	لا توجد أدلة مطابقة لهذا المرشح.	direct	false			true
 evidence.emptySearch	No evidence items match this search.	لا توجد أدلة مطابقة لهذا البحث.	direct	false			true
@@ -237,7 +230,7 @@ graph.nodeFocusSuffix	, orbit focus	، التركيز المداري	direct	fals
 graph.orbitFocusBadge	· orbit focus	· التركيز المداري	direct	false			true
 graph.orbitalCounts	Focus: {focus} · Showing {a} of {b} nodes, {c} of {d} edges.	التركيز: {focus} · عرض {a} من {b} عقدة، {c} من {d} حافة.	direct	false	a,b,c,d,focus	a,b,c,d,focus	true
 graph.orbitalLabel	Orbital graph	الرسم المداري	direct	false			true
-graph.orbitalNote	Synthetic demo data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	بيانات تجريبية اصطناعية. الحلقات والحركة للتخطيط فقط — لا تشير إلى مخاطر أو ذنب أو أولوية.	direct	false			true
+graph.orbitalNote	Synthetic data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	بيانات تجريبية اصطناعية. الحلقات والحركة للتخطيط فقط — لا تشير إلى مخاطر أو ذنب أو أولوية.	direct	false			true
 graph.orbitalSvg	Orbital graph focused on {focus}: {a} nodes, {b} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.	رسم مداري مركّز على {focus}: {a} عقدة، {b} حافة. Tab للوصول إلى العقد والحواف، وEnter للاختيار، والأسهم للتحريك.	direct	false	a,b,focus	a,b,focus	true
 graph.orbitalTitle	Orbital explorer	المستكشف المداري	direct	false			true
 graph.orbitalViewControls	Orbital view controls	عناصر التحكم في العرض المداري	direct	false			true
@@ -283,7 +276,7 @@ intel.evidencePre	Evidence: 	الدليل: 	direct	false			true
 intel.findingsCount.one	{count} finding	نتيجة واحدة	direct	false	count		false
 intel.findingsCount.other	{count} findings	{count} نتيجة	direct	false	count	count	true
 intel.findingsH	Intelligence findings	نتائج الاستخبارات	direct	false			true
-intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic demo values only.	مرجع اختباري وليس بصمة مؤكدة. السمات: قيم تجريبية اصطناعية معلنة فقط.	direct	false			true
+intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic values only.	مرجع اختباري وليس بصمة مؤكدة. السمات: قيم تجريبية اصطناعية معلنة فقط.	direct	false			true
 intel.geoDisclaimer	IP-derived locations are approximate and never proof of physical presence. No GPS collection exists (permission: unavailable).	المواقع المشتقة من IP تقريبية ولا تثبت أبدًا الحضور الفعلي. لا يوجد جمع GPS (الإذن: غير متوفر).	direct	false			true
 intel.geoH	Geolocation	الموقع الجغرافي	direct	false			true
 intel.intelDown	Intelligence unavailable for this investigation.	الاستخبارات غير متوفرة لهذا التحقيق.	direct	false			true
@@ -306,8 +299,8 @@ intel.repLabel	Reputation	السمعة	direct	false			true
 intel.reviewLine	Human review: {r}	المراجعة البشرية: {r}	direct	false	r	r	true
 intel.seeBackend	see backend	راجع الخادم	direct	false			true
 intel.sharedDevice	— shared device	— جهاز مشترك	direct	false			true
-intel.statusLine	{findings} · {iso} · synthetic demo data.	{findings} · {iso} · بيانات تجريبية اصطناعية.	direct	false	findings,iso	findings,iso	true
-intel.syntheticTag	· synthetic demo	· عرض اصطناعي	direct	false			true
+intel.statusLine	{findings} · {iso} · synthetic data.	{findings} · {iso} · بيانات تجريبية اصطناعية.	direct	false	findings,iso	findings,iso	true
+intel.syntheticTag	· synthetic	· عرض اصطناعي	direct	false			true
 intel.unknownShort	(unknown)	(غير معروف)	direct	false			true
 intel.vpnLabel	VPN/proxy/Tor	VPN/بروكسي/Tor	direct	false			true
 investigation.aiAnalysis	AI analysis	تحليل الذكاء الاصطناعي	direct	false			true
@@ -354,16 +347,22 @@ landing.capTitles.6	Investigations	التحقيقات	direct	false			true
 landing.capTitles.7	AI Intelligence	استخبارات الذكاء الاصطناعي	direct	false			true
 landing.capTitles.8	Risk Engine	محرك المخاطر	direct	false			true
 landing.capTitles.9	Evidence & Audit	الأدلة والتدقيق	direct	false			true
+landing.closeRegion	Clear region selection	مسح تحديد المنطقة	direct	false			true
+landing.collapsePanel	Collapse panel	طي اللوحة	direct	false			true
 landing.controlsAmbient	Ambient sound	صوت محيطي	direct	false			true
 landing.cta	Explore CruiseShield AI™	استكشف CruiseShield AI™	direct	false			true
-landing.ctaSub	Enter the Interactive Demo Experience	ادخل إلى تجربة العرض التفاعلية	direct	false			true
-landing.enterDemo	Enter Demo	ادخل العرض	direct	false			true
+landing.ctaSub	Explore the interactive investigation platform	ادخل إلى تجربة العرض التفاعلية	direct	false			true
+landing.enterPlatform	Access Platform	ادخل العرض	direct	false			true
+landing.expandPanel	Expand panel	توسيع اللوحة	direct	false			true
 landing.eyebrow	Global Financial Intelligence	استخبارات مالية عالمية	direct	false			true
-landing.fallbackNote	Interactive 3D is unavailable in this browser. The full demo experience remains open.	الرسوميات ثلاثية الأبعاد التفاعلية غير متوفرة في هذا المتصفح. تبقى تجربة العرض الكاملة مفتوحة.	direct	false			true
-landing.footerDemo	Demonstration experience · synthetic data · illustrative network visuals · 	تجربة العرض · بيانات اصطناعية · مرئيات شبكية توضيحية · 	direct	false			true
+landing.fallbackNote	Interactive 3D is unavailable in this browser. The full platform remains open.	الرسوميات ثلاثية الأبعاد التفاعلية غير متوفرة في هذا المتصفح. تبقى تجربة العرض الكاملة مفتوحة.	direct	false			true
 landing.footerLine	One Platform. A Safer Financial Future. For Everyone.	منصة واحدة. مستقبل مالي أكثر أمانًا. للجميع.	direct	false			true
-landing.footerLink	Enter the interactive demo	ادخل العرض التفاعلي	direct	false			true
+landing.footerLink	Open the interactive platform	ادخل العرض التفاعلي	direct	false			true
+landing.footerNote	Investigation platform · synthetic data · illustrative network visuals · 	تجربة العرض · بيانات اصطناعية · مرئيات شبكية توضيحية · 	direct	false			true
 landing.fullMotion	Full motion	حركة كاملة	direct	false			true
+landing.globeContextLost	3D context lost — illustration paused.	فقد سياق العرض ثلاثي الأبعاد — الرسم التوضيحي متوقف.	direct	false			true
+landing.globeControls	World Atlas controls	عناصر التحكم في أطلس العالم	direct	false			true
+landing.globeHint	Drag to rotate. Arrow keys rotate, plus and minus zoom, 0 resets the view.	اسحب للتدوير. الأسهم تدور، وعلامتا الجمع والطرح للتكبير، و0 لإعادة التعيين.	direct	false			true
 landing.h1	A Safer Financial World	عالم مالي أكثر أمانًا	direct	false			true
 landing.home	CruiseShield AI home	الصفحة الرئيسية لـ CruiseShield AI	direct	false			true
 landing.illustrative	Illustrative Network View	عرض توضيحي للشبكة	direct	false			true
@@ -376,8 +375,8 @@ landing.intelItems.5	Network Graph	رسم الشبكة	direct	false			true
 landing.intelItems.6	AI Investigation	تحقيقات الذكاء الاصطناعي	direct	false			true
 landing.intelItems.7	Risk Analysis	تحليل المخاطر	direct	false			true
 landing.intelItems.8	Evidence and Audit	الأدلة والتدقيق	direct	false			true
-landing.intelNote	Demonstration capabilities · synthetic data	قدرات العرض · بيانات اصطناعية	direct	false			true
-landing.intelStatus	Demo	عرض	direct	false			true
+landing.intelNote	Investigation capabilities · synthetic data	قدرات العرض · بيانات اصطناعية	direct	false			true
+landing.intelStatus	Pilot	عرض	direct	false			true
 landing.intelTitle	Global Intelligence	استخبارات عالمية	direct	false			true
 landing.intelligenceModules	Intelligence modules	وحدات الاستخبارات	direct	false			true
 landing.journey.0	DETECT	اكتشاف	direct	false			true
@@ -414,6 +413,7 @@ landing.moduleTitles.2	Global Network	شبكة عالمية	direct	false			true
 landing.moduleTitles.3	Cyber Defense	دفاع سيبراني	direct	false			true
 landing.moduleTitles.4	Secure Infrastructure	بنية تحتية آمنة	direct	false			true
 landing.modulesNote	Illustrative module concepts · capabilities vary by deployment	مفاهيم توضيحية للوحدات · تختلف القدرات حسب النشر	direct	false			true
+landing.mute	Mute	كتم	direct	false			true
 landing.offWord	Off	إيقاف	direct	false			true
 landing.onWord	On	تشغيل	direct	false			true
 landing.pauseScene	Pause scene	إيقاف المشهد مؤقتًا	direct	false			true
@@ -421,6 +421,7 @@ landing.platformPrinciples	Platform principles	مبادئ المنصة	direct	fa
 landing.platformQualities	Platform qualities	صفات المنصة	direct	false			true
 landing.problem	Financial crime hides in disconnected transactions. CruiseShield AI connects them — deterministic risk scoring, relationship graphs, and evidence-grounded AI explanations, with a human investigator deciding.	تختبئ الجريمة المالية في معاملات غير مترابطة. يربطها CruiseShield AI — تقييم حتمي للمخاطر، ورسوم بيانية للعلاقات، وشروحات ذكاء اصطناعي مؤسَّسة على الأدلة، مع محقق بشري يتخذ القرار.	direct	false			true
 landing.reduceMotion	Reduce motion	تقليل الحركة	direct	false			true
+landing.regionSignal	Illustrative signal	إشارة توضيحية	direct	false			true
 landing.regions.0	North America	أمريكا الشمالية	direct	false			true
 landing.regions.1	South America	أمريكا الجنوبية	direct	false			true
 landing.regions.2	Europe	أوروبا	direct	false			true
@@ -432,6 +433,7 @@ landing.regions.7	Cross-Border Corridors	ممرات عابرة للحدود	dire
 landing.regionsNote	Simulated regional signals · not live monitoring	إشارات إقليمية محاكاة · ليست مراقبة حية	direct	false			true
 landing.regionsTitle	Global Intelligence Regions	مناطق الاستخبارات العالمية	direct	false			true
 landing.replayLink	try replay & simulation	جرّب إعادة التشغيل والمحاكاة	direct	false			true
+landing.resetView	Reset view	إعادة تعيين العرض	direct	false			true
 landing.resumeScene	Resume scene	استئناف المشهد	direct	false			true
 landing.sceneMotion	Scene motion	حركة المشهد	direct	false			true
 landing.signals.0	Secure	آمن	direct	false			true
@@ -439,16 +441,18 @@ landing.signals.1	Intelligent	ذكي	direct	false			true
 landing.signals.2	Global	عالمي	direct	false			true
 landing.signals.3	Auditable	قابل للتدقيق	direct	false			true
 landing.soundLabel	Sound	الصوت	direct	false			true
-landing.stripNote	Cards open the matching live demo screen · 	تفتح البطاقات شاشة العرض المطابقة · 	direct	false			true
+landing.stripNote	Cards open the matching screen · 	تفتح البطاقات شاشة العرض المطابقة · 	direct	false			true
 landing.tagline	The Financial Crime Immune System™	The Financial Crime Immune System™	direct	true			true
+landing.unmute	Unmute	إلغاء الكتم	direct	false			true
 landing.volumeLabel	Volume	مستوى الصوت	direct	false			true
+landing.zoomIn	Zoom in	تكبير	direct	false			true
+landing.zoomOut	Zoom out	تصغير	direct	false			true
 nav.aiIntelligence	AI Intelligence	استخبارات الذكاء الاصطناعي	direct	false			true
 nav.auditTrail	Audit Trail	سجل التدقيق	direct	false			true
 nav.brand	CruiseShield AI	CruiseShield AI	direct	true			true
 nav.cases	Cases	القضايا	direct	false			true
 nav.closeNav	Close navigation	إغلاق التنقل	direct	false			true
 nav.commandCenter	Command Center	مركز القيادة	direct	false			true
-nav.demoRole	demo role	دور تجريبي	direct	false			true
 nav.evidence	Evidence	الأدلة	direct	false			true
 nav.exploreNetwork	Explore Network	استكشاف الشبكة	direct	false			true
 nav.home	CruiseShield AI home	الصفحة الرئيسية لـ CruiseShield AI	direct	false			true
@@ -458,13 +462,14 @@ nav.networkExplorer	Network Explorer	مستكشف الشبكة	direct	false			tr
 nav.primary	Primary	التنقل الرئيسي	direct	false			true
 nav.quickActions	Quick Actions	إجراءات سريعة	direct	false			true
 nav.replaySimulation	Replay & Simulation	إعادة التشغيل والمحاكاة	direct	false			true
-nav.roleDemo	{role} · demo	{role} · تجريبي	direct	false	role	role	true
+nav.roleContext	{role} · active	{role} · تجريبي	direct	false	role	role	true
 nav.runSimulation	Run Simulation	تشغيل المحاكاة	direct	false			true
+nav.sessionRole	session role	دور تجريبي	direct	false			true
 nav.signOut	Sign out	تسجيل الخروج	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	تسجيل الخروج من كل مكان	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	إنهاء هذه الجلسة على جميع الأجهزة والمتصفحات	direct	false			true
 nav.skipToContent	Skip to main content	تخطَّ إلى المحتوى الرئيسي	direct	false			true
-nav.synthetic	Synthetic demo data	بيانات تجريبية اصطناعية	direct	false			true
+nav.synthetic	Synthetic data	بيانات تجريبية اصطناعية	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	تبديل التنقل	direct	false			true
 nav.viewAuditTrail	View Audit Trail	عرض سجل التدقيق	direct	false			true
@@ -488,11 +493,33 @@ notify.bellLoading	Notifications, loading	التنبيهات، جارٍ التح
 notify.bellOpen	Notifications, {n} open	التنبيهات، {n} مفتوحة	direct	false	n	n	true
 notify.closeNotif	Close notifications	إغلاق التنبيهات	direct	false			true
 notify.loadingAlerts	Loading alerts…	جارٍ تحميل التنبيهات…	direct	false			true
+notify.markAllRead	Mark all read	تعليم الكل كمقروء	direct	false			true
+notify.markRead	Mark read	تعليم كمقروء	direct	false			true
 notify.networkLink	Network	الشبكة	direct	false			true
 notify.noAlerts	No alerts.	لا توجد تنبيهات.	direct	false			true
 notify.openInv	Open investigation	فتح التحقيق	direct	false			true
 notify.panelLabel	Notifications	التنبيهات	direct	false			true
 notify.panelTitle	Notifications	التنبيهات	direct	false			true
+platform.activityDown	Activity unavailable	النشاط غير متوفر	direct	false			true
+platform.aiBriefDown	AI brief unavailable	الموجز الذكي غير متوفر	direct	false			true
+platform.backendStatus	Backend status	حالة الخادم	direct	false			true
+platform.checkedAt	Checked {url}…	تم الفحص {url}…	direct	false	url	url	true
+platform.execOverview	Executive overview	نظرة تنفيذية	direct	false			true
+platform.execOverviewDown	Executive overview unavailable	النظرة التنفيذية غير متوفرة	direct	false			true
+platform.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	نادرًا ما تظهر الجريمة المالية في معاملة واحدة. يربط CruiseShield AI المعاملات المشبوهة والحسابات والأجهزة والمستفيدين والتجار في شبكة استخبارات قابلة للتفسير.	direct	false			true
+platform.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	يحدد محرك المخاطر الحتمي الإشارات، ويساعد Meta AI المحققين على تفسير الأدلة، وتستكشف إعادة التشغيل والمحاكاة سيناريوهات افتراضية، وتبقى القرارات البشرية خاضعة للمساءلة والتدقيق.	direct	false			true
+platform.museBrief	Muse Spark brief	موجز Muse Spark	direct	false			true
+platform.networkPreview	Network preview	معاينة الشبكة	direct	false			true
+platform.networkPreviewDown	Network preview unavailable	معاينة الشبكة غير متوفرة	direct	false			true
+platform.recentActivity	Recent activity	النشاط الأخير	direct	false			true
+platform.replayDown	Replay unavailable.	إعادة التشغيل غير متوفرة.	direct	false			true
+platform.retryTitle	Retry {title}	إعادة {title}	direct	false	title	title	true
+platform.riskIntel	Risk intelligence	استخبارات المخاطر	direct	false			true
+platform.riskIntelDown	Risk intelligence unavailable	استخبارات المخاطر غير متوفرة	direct	false			true
+platform.startBackendPost	) and press retry.	) ثم أعد المحاولة.	direct	false			true
+platform.startBackendPre	Start the backend (	شغّل الخادم (	direct	false			true
+platform.systemStatus	System Status	حالة النظام	direct	false			true
+platform.systemStatusDown	System status unavailable	حالة النظام غير متوفرة	direct	false			true
 replay.cancel	Cancel	إلغاء	direct	false			true
 replay.confirmReset	Confirm: this clears decisions, simulations, AI runs, and audit history for {id}.	أكّد: سيؤدي هذا إلى مسح القرارات والمحاكاة وتشغيلات الذكاء الاصطناعي وسجل التدقيق لـ {id}.	direct	false	id	id	true
 replay.confirmResetBtn	Confirm reset	تأكيد إعادة الضبط	direct	false			true
@@ -510,12 +537,12 @@ replay.play	Play	تشغيل	direct	false			true
 replay.positionLine	Step {c} of {t} · {e} events · {x} transactions · {g} edges	الخطوة {c} من {t} · {e} أحداث · {x} معاملات · {g} حواف	direct	false	c,e,g,t,x	c,e,g,t,x	true
 replay.reducedMotionPlay	Auto-play disabled: reduced-motion preference detected. Use Step forward.	التشغيل التلقائي معطّل: تم اكتشاف تفضيل تقليل الحركة. استخدم «خطوة للأمام».	direct	false			true
 replay.resetBlurb	Reset restores the seeded scenario exactly and clears all live state: human decisions, simulations, AI runs, and audit events beyond the reset itself.	تستعيد إعادة الضبط السيناريو المبدئي بدقة وتمسح كل الحالة الحية: القرارات البشرية والمحاكاة وتشغيلات الذكاء الاصطناعي وأحداث التدقيق ما عدا إعادة الضبط نفسها.	direct	false			true
-replay.resetDemo	Reset demo	إعادة ضبط العرض	direct	false			true
 replay.resetDoneMid	, seed 	، بذرة 	direct	false			true
 replay.resetDonePost	. Reload the page to replay from the restored state.	. أعد تحميل الصفحة لإعادة التشغيل من الحالة المستعادة.	direct	false			true
 replay.resetDonePre	Reset complete: run 	اكتملت إعادة الضبط: تشغيل 	direct	false			true
 replay.resetLabel	Scenario reset	إعادة ضبط السيناريو	direct	false			true
 replay.resetTitle	Scenario reset	إعادة ضبط السيناريو	direct	false			true
+replay.resetWorkspace	Reset workspace	إعادة ضبط العرض	direct	false			true
 replay.resetting	Resetting…	جارٍ إعادة الضبط…	direct	false			true
 replay.restart	Restart	إعادة البدء	direct	false			true
 replay.scenarioPre	Scenario 	السيناريو 	direct	false			true

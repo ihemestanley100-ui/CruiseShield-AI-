@@ -1,5 +1,5 @@
 # locale: zh (MACHINE-DRAFTED — human review pending)
-# version: 1.2.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
+# version: 1.3.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
 # columns: key | en_source | draft | origin(direct=translated,fallback=English shown) | same_as_source | en_vars | draft_vars | vars_ok
 key	en_source	draft	origin	same_as_source	en_vars	draft_vars	vars_ok
 ai.altTitle	Alternative explanations:	其他解释：	direct	false			true
@@ -30,14 +30,14 @@ audit.thEvent	Event	事件	direct	false			true
 audit.thReason	Reason	原因	direct	false			true
 audit.thState	State change	状态变更	direct	false			true
 audit.thTime	Time	时间	direct	false			true
-auth.blurb	This hosted demo is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	此演示受保护。请使用为本次评估提供的调查员凭据登录。仅限合成数据。	direct	false			true
+auth.blurb	This hosted platform is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	此演示受保护。请使用为本次评估提供的调查员凭据登录。仅限合成数据。	direct	false			true
 auth.invalid	Invalid username or password.	用户名或密码无效。	direct	false			true
 auth.password	Password	密码	direct	false			true
 auth.rateLimited	Too many login attempts. Wait a minute and try again.	登录尝试次数过多。请等待一分钟后重试。	direct	false			true
 auth.signIn	Sign in	登录	direct	false			true
 auth.signingIn	Signing in…	正在登录…	direct	false			true
-auth.title	Demo sign in	演示登录	direct	false			true
-auth.unreachable	Backend unreachable. Check the demo server and retry.	无法连接后端。请检查演示服务器后重试。	direct	false			true
+auth.title	Secure sign in	演示登录	direct	false			true
+auth.unreachable	Backend unreachable. Check the platform server and retry.	无法连接后端。请检查演示服务器后重试。	direct	false			true
 auth.username	Username	用户名	direct	false			true
 case.advisory	Advisory only: Muse Spark analysis explains evidence and never constitutes a human decision, nor changes risk scores or case status.	仅供参考：Muse Spark 分析解释证据，不构成人工决策，也不更改风险评分或案件状态。	direct	false			true
 case.aiAssessment	AI assessment	AI 评估	direct	false			true
@@ -165,11 +165,13 @@ common.notPermitted	Not available for your role.	您的角色不可用。	direct
 common.present	present	当前	direct	false			true
 common.requestFailed	request failed	请求失败	direct	false			true
 common.retry	Retry	重试	direct	false			true
+common.timedOut	Request timed out. Retry.	请求超时。请重试。	direct	false			true
 common.timelineEmpty	No events.	暂无事件。	direct	false			true
+common.unavailable	Service temporarily unavailable. Retry shortly.	服务暂时不可用。请稍后重试。	direct	false			true
 common.unknown	unknown	未知	direct	false			true
 common.unknownModel	unknown model	未知模型	direct	false			true
 common.unknownTime	unknown time	未知时间	direct	false			true
-common.unreachable	Backend unreachable. Check the demo server and retry.	无法访问后端。请检查演示服务器并重试。	direct	false			true
+common.unreachable	Backend unreachable. Check the platform server and retry.	无法访问后端。请检查演示服务器并重试。	direct	false			true
 decision.actorLabel	Analyst ID	分析员 ID	direct	false			true
 decision.decisionLabel	Decision	决策	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	您的角色为只读：决策已禁用。	direct	false			true
@@ -182,26 +184,17 @@ decision.selectPlaceholder	Select a decision…	选择一项决策…	direct	fal
 decision.targetLabel	Move case to	将案件移至	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	此案件处于终态；不允许进一步转换。	direct	false			true
 decision.title	Human decision	人工决策	direct	false			true
-demo.activityDown	Activity unavailable	动态不可用	direct	false			true
-demo.aiBriefDown	AI brief unavailable	AI 简报不可用	direct	false			true
-demo.backendStatus	Backend status	后端状态	direct	false			true
-demo.checkedAt	Checked {url}…	已检查 {url}…	direct	false	url	url	true
-demo.execOverview	Executive overview	执行概览	direct	false			true
-demo.execOverviewDown	Executive overview unavailable	执行概览不可用	direct	false			true
-demo.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	金融犯罪很少出现在单笔交易中。CruiseShield AI 将可疑交易、账户、设备、受益人和商户连接成可解释的智能网络。	direct	false			true
-demo.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	其确定性风险引擎识别信号，Meta AI 帮助调查员解读证据，重放与模拟探索假设场景，人类决策始终可问责、可审计。	direct	false			true
-demo.museBrief	Muse Spark brief	Muse Spark 简报	direct	false			true
-demo.networkPreview	Network preview	网络预览	direct	false			true
-demo.networkPreviewDown	Network preview unavailable	网络预览不可用	direct	false			true
-demo.recentActivity	Recent activity	近期动态	direct	false			true
-demo.replayDown	Replay unavailable.	重放不可用。	direct	false			true
-demo.retryTitle	Retry {title}	重试{title}	direct	false	title	title	true
-demo.riskIntel	Risk intelligence	风险智能	direct	false			true
-demo.riskIntelDown	Risk intelligence unavailable	风险智能不可用	direct	false			true
-demo.startBackendPost	) and press retry.	）后按重试。	direct	false			true
-demo.startBackendPre	Start the backend (	启动后端（	direct	false			true
-demo.systemStatus	System Status	系统状态	direct	false			true
-demo.systemStatusDown	System status unavailable	系统状态不可用	direct	false			true
+detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
+detection.detectorsTitle	Detector families	Detector families	fallback	true			true
+detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
+detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
+detection.measuredAt	Measured at	Measured at	fallback	true			true
+detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
+detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
+detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
+detection.title	Detection intelligence	Detection intelligence	fallback	true			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
+detection.zeroNote	Zero means measured none, not missing data.	Zero means measured none, not missing data.	fallback	true			true
 evidence.clearSearch	Clear search	清除搜索	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	没有匹配的证据。	direct	false			true
 evidence.emptySearch	No evidence items match this search.	没有与此搜索匹配的证据。	direct	false			true
@@ -237,7 +230,7 @@ graph.nodeFocusSuffix	, orbit focus	，轨道焦点	direct	false			true
 graph.orbitFocusBadge	· orbit focus	· 轨道焦点	direct	false			true
 graph.orbitalCounts	Focus: {focus} · Showing {a} of {b} nodes, {c} of {d} edges.	焦点：{focus} · 显示 {b} 个节点中的 {a} 个，{d} 条边中的 {c} 条。	direct	false	a,b,c,d,focus	a,b,c,d,focus	true
 graph.orbitalLabel	Orbital graph	轨道图谱	direct	false			true
-graph.orbitalNote	Synthetic demo data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	合成演示数据。圆环与动态仅为布局——不表示风险、有罪或优先级。	direct	false			true
+graph.orbitalNote	Synthetic data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	合成演示数据。圆环与动态仅为布局——不表示风险、有罪或优先级。	direct	false			true
 graph.orbitalSvg	Orbital graph focused on {focus}: {a} nodes, {b} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.	以 {focus} 为焦点的轨道图谱：{a} 个节点，{b} 条边。Tab 定位节点和边，回车选择，方向键平移。	direct	false	a,b,focus	a,b,focus	true
 graph.orbitalTitle	Orbital explorer	轨道浏览器	direct	false			true
 graph.orbitalViewControls	Orbital view controls	轨道视图控制	direct	false			true
@@ -283,7 +276,7 @@ intel.evidencePre	Evidence: 	证据：	direct	false			true
 intel.findingsCount.one	{count} finding	{count} 项发现	direct	false	count	count	true
 intel.findingsCount.other	{count} findings	{count} 项发现	direct	false	count	count	true
 intel.findingsH	Intelligence findings	智能发现	direct	false			true
-intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic demo values only.	固定参照，非经验指纹。属性：仅声明的合成演示值。	direct	false			true
+intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic values only.	固定参照，非经验指纹。属性：仅声明的合成演示值。	direct	false			true
 intel.geoDisclaimer	IP-derived locations are approximate and never proof of physical presence. No GPS collection exists (permission: unavailable).	IP 派生位置为近似值，绝不能证明实际身处。不存在 GPS 采集（权限：不可用）。	direct	false			true
 intel.geoH	Geolocation	地理位置	direct	false			true
 intel.intelDown	Intelligence unavailable for this investigation.	本次调查暂无智能数据。	direct	false			true
@@ -306,8 +299,8 @@ intel.repLabel	Reputation	声誉	direct	false			true
 intel.reviewLine	Human review: {r}	人工审核：{r}	direct	false	r	r	true
 intel.seeBackend	see backend	查看后端	direct	false			true
 intel.sharedDevice	— shared device	——共享设备	direct	false			true
-intel.statusLine	{findings} · {iso} · synthetic demo data.	{findings} · {iso} · 合成演示数据。	direct	false	findings,iso	findings,iso	true
-intel.syntheticTag	· synthetic demo	· 合成演示	direct	false			true
+intel.statusLine	{findings} · {iso} · synthetic data.	{findings} · {iso} · 合成演示数据。	direct	false	findings,iso	findings,iso	true
+intel.syntheticTag	· synthetic	· 合成演示	direct	false			true
 intel.unknownShort	(unknown)	（未知）	direct	false			true
 intel.vpnLabel	VPN/proxy/Tor	VPN/代理/Tor	direct	false			true
 investigation.aiAnalysis	AI analysis	AI 分析	direct	false			true
@@ -354,16 +347,22 @@ landing.capTitles.6	Investigations	调查	direct	false			true
 landing.capTitles.7	AI Intelligence	AI 智能	direct	false			true
 landing.capTitles.8	Risk Engine	风险引擎	direct	false			true
 landing.capTitles.9	Evidence & Audit	证据与审计	direct	false			true
+landing.closeRegion	Clear region selection	清除区域选择	direct	false			true
+landing.collapsePanel	Collapse panel	折叠面板	direct	false			true
 landing.controlsAmbient	Ambient sound	环境音	direct	false			true
 landing.cta	Explore CruiseShield AI™	探索 CruiseShield AI™	direct	false			true
-landing.ctaSub	Enter the Interactive Demo Experience	进入交互式演示体验	direct	false			true
-landing.enterDemo	Enter Demo	进入演示	direct	false			true
+landing.ctaSub	Explore the interactive investigation platform	进入交互式演示体验	direct	false			true
+landing.enterPlatform	Access Platform	进入演示	direct	false			true
+landing.expandPanel	Expand panel	展开面板	direct	false			true
 landing.eyebrow	Global Financial Intelligence	全球金融智能	direct	false			true
-landing.fallbackNote	Interactive 3D is unavailable in this browser. The full demo experience remains open.	此浏览器不支持交互式 3D。完整演示体验仍然可用。	direct	false			true
-landing.footerDemo	Demonstration experience · synthetic data · illustrative network visuals · 	演示体验 · 合成数据 · 示意网络视觉 · 	direct	false			true
+landing.fallbackNote	Interactive 3D is unavailable in this browser. The full platform remains open.	此浏览器不支持交互式 3D。完整演示体验仍然可用。	direct	false			true
 landing.footerLine	One Platform. A Safer Financial Future. For Everyone.	一个平台。更安全的金融未来。为了每一个人。	direct	false			true
-landing.footerLink	Enter the interactive demo	进入交互式演示	direct	false			true
+landing.footerLink	Open the interactive platform	进入交互式演示	direct	false			true
+landing.footerNote	Investigation platform · synthetic data · illustrative network visuals · 	演示体验 · 合成数据 · 示意网络视觉 · 	direct	false			true
 landing.fullMotion	Full motion	完整动态	direct	false			true
+landing.globeContextLost	3D context lost — illustration paused.	3D上下文丢失 — 插图已暂停。	direct	false			true
+landing.globeControls	World Atlas controls	世界地图集控件	direct	false			true
+landing.globeHint	Drag to rotate. Arrow keys rotate, plus and minus zoom, 0 resets the view.	拖动旋转。方向键旋转，加号减号缩放，0重置。	direct	false			true
 landing.h1	A Safer Financial World	更安全的金融世界	direct	false			true
 landing.home	CruiseShield AI home	CruiseShield AI 首页	direct	false			true
 landing.illustrative	Illustrative Network View	示意网络视图	direct	false			true
@@ -376,8 +375,8 @@ landing.intelItems.5	Network Graph	网络图谱	direct	false			true
 landing.intelItems.6	AI Investigation	AI 调查	direct	false			true
 landing.intelItems.7	Risk Analysis	风险分析	direct	false			true
 landing.intelItems.8	Evidence and Audit	证据与审计	direct	false			true
-landing.intelNote	Demonstration capabilities · synthetic data	演示功能 · 合成数据	direct	false			true
-landing.intelStatus	Demo	演示	direct	false			true
+landing.intelNote	Investigation capabilities · synthetic data	演示功能 · 合成数据	direct	false			true
+landing.intelStatus	Pilot	演示	direct	false			true
 landing.intelTitle	Global Intelligence	全球智能	direct	false			true
 landing.intelligenceModules	Intelligence modules	智能模块	direct	false			true
 landing.journey.0	DETECT	检测	direct	false			true
@@ -414,6 +413,7 @@ landing.moduleTitles.2	Global Network	全球网络	direct	false			true
 landing.moduleTitles.3	Cyber Defense	网络防御	direct	false			true
 landing.moduleTitles.4	Secure Infrastructure	安全基础设施	direct	false			true
 landing.modulesNote	Illustrative module concepts · capabilities vary by deployment	模块概念为示意 · 功能因部署而异	direct	false			true
+landing.mute	Mute	静音	direct	false			true
 landing.offWord	Off	关	direct	false			true
 landing.onWord	On	开	direct	false			true
 landing.pauseScene	Pause scene	暂停场景	direct	false			true
@@ -421,6 +421,7 @@ landing.platformPrinciples	Platform principles	平台原则	direct	false			true
 landing.platformQualities	Platform qualities	平台特性	direct	false			true
 landing.problem	Financial crime hides in disconnected transactions. CruiseShield AI connects them — deterministic risk scoring, relationship graphs, and evidence-grounded AI explanations, with a human investigator deciding.	金融犯罪隐藏在互不关联的交易中。CruiseShield AI 将它们连接起来——确定性风险评分、关系图谱和基于证据的 AI 解释，由人类调查员作出决策。	direct	false			true
 landing.reduceMotion	Reduce motion	减少动态	direct	false			true
+landing.regionSignal	Illustrative signal	示意信号	direct	false			true
 landing.regions.0	North America	北美	direct	false			true
 landing.regions.1	South America	南美	direct	false			true
 landing.regions.2	Europe	欧洲	direct	false			true
@@ -432,6 +433,7 @@ landing.regions.7	Cross-Border Corridors	跨境通道	direct	false			true
 landing.regionsNote	Simulated regional signals · not live monitoring	模拟区域信号 · 非实时监控	direct	false			true
 landing.regionsTitle	Global Intelligence Regions	全球智能区域	direct	false			true
 landing.replayLink	try replay & simulation	试用重放与模拟	direct	false			true
+landing.resetView	Reset view	重置视图	direct	false			true
 landing.resumeScene	Resume scene	恢复场景	direct	false			true
 landing.sceneMotion	Scene motion	场景动态	direct	false			true
 landing.signals.0	Secure	安全	direct	false			true
@@ -439,16 +441,18 @@ landing.signals.1	Intelligent	智能	direct	false			true
 landing.signals.2	Global	全球	direct	false			true
 landing.signals.3	Auditable	可审计	direct	false			true
 landing.soundLabel	Sound	声音	direct	false			true
-landing.stripNote	Cards open the matching live demo screen · 	卡片将打开对应的实时演示界面 · 	direct	false			true
+landing.stripNote	Cards open the matching screen · 	卡片将打开对应的实时演示界面 · 	direct	false			true
 landing.tagline	The Financial Crime Immune System™	The Financial Crime Immune System™	direct	true			true
+landing.unmute	Unmute	取消静音	direct	false			true
 landing.volumeLabel	Volume	音量	direct	false			true
+landing.zoomIn	Zoom in	放大	direct	false			true
+landing.zoomOut	Zoom out	缩小	direct	false			true
 nav.aiIntelligence	AI Intelligence	AI 智能	direct	false			true
 nav.auditTrail	Audit Trail	审计追踪	direct	false			true
 nav.brand	CruiseShield AI	CruiseShield AI	direct	true			true
 nav.cases	Cases	案件	direct	false			true
 nav.closeNav	Close navigation	关闭导航	direct	false			true
 nav.commandCenter	Command Center	指挥中心	direct	false			true
-nav.demoRole	demo role	演示角色	direct	false			true
 nav.evidence	Evidence	证据	direct	false			true
 nav.exploreNetwork	Explore Network	探索网络	direct	false			true
 nav.home	CruiseShield AI home	CruiseShield AI 首页	direct	false			true
@@ -458,13 +462,14 @@ nav.networkExplorer	Network Explorer	网络浏览器	direct	false			true
 nav.primary	Primary	主要	direct	false			true
 nav.quickActions	Quick Actions	快捷操作	direct	false			true
 nav.replaySimulation	Replay & Simulation	重放与模拟	direct	false			true
-nav.roleDemo	{role} · demo	{role} · 演示	direct	false	role	role	true
+nav.roleContext	{role} · active	{role} · 演示	direct	false	role	role	true
 nav.runSimulation	Run Simulation	运行模拟	direct	false			true
+nav.sessionRole	session role	演示角色	direct	false			true
 nav.signOut	Sign out	退出登录	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	在所有位置退出	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	在所有设备和浏览器上结束此会话	direct	false			true
 nav.skipToContent	Skip to main content	跳到主要内容	direct	false			true
-nav.synthetic	Synthetic demo data	合成演示数据	direct	false			true
+nav.synthetic	Synthetic data	合成演示数据	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	切换导航	direct	false			true
 nav.viewAuditTrail	View Audit Trail	查看审计追踪	direct	false			true
@@ -488,11 +493,33 @@ notify.bellLoading	Notifications, loading	通知，正在加载	direct	false			t
 notify.bellOpen	Notifications, {n} open	通知，{n} 条未读	direct	false	n	n	true
 notify.closeNotif	Close notifications	关闭通知	direct	false			true
 notify.loadingAlerts	Loading alerts…	正在加载告警…	direct	false			true
+notify.markAllRead	Mark all read	全部标记为已读	direct	false			true
+notify.markRead	Mark read	标记为已读	direct	false			true
 notify.networkLink	Network	网络	direct	false			true
 notify.noAlerts	No alerts.	暂无告警。	direct	false			true
 notify.openInv	Open investigation	打开调查	direct	false			true
 notify.panelLabel	Notifications	通知	direct	false			true
 notify.panelTitle	Notifications	通知	direct	false			true
+platform.activityDown	Activity unavailable	动态不可用	direct	false			true
+platform.aiBriefDown	AI brief unavailable	AI 简报不可用	direct	false			true
+platform.backendStatus	Backend status	后端状态	direct	false			true
+platform.checkedAt	Checked {url}…	已检查 {url}…	direct	false	url	url	true
+platform.execOverview	Executive overview	执行概览	direct	false			true
+platform.execOverviewDown	Executive overview unavailable	执行概览不可用	direct	false			true
+platform.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	金融犯罪很少出现在单笔交易中。CruiseShield AI 将可疑交易、账户、设备、受益人和商户连接成可解释的智能网络。	direct	false			true
+platform.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	其确定性风险引擎识别信号，Meta AI 帮助调查员解读证据，重放与模拟探索假设场景，人类决策始终可问责、可审计。	direct	false			true
+platform.museBrief	Muse Spark brief	Muse Spark 简报	direct	false			true
+platform.networkPreview	Network preview	网络预览	direct	false			true
+platform.networkPreviewDown	Network preview unavailable	网络预览不可用	direct	false			true
+platform.recentActivity	Recent activity	近期动态	direct	false			true
+platform.replayDown	Replay unavailable.	重放不可用。	direct	false			true
+platform.retryTitle	Retry {title}	重试{title}	direct	false	title	title	true
+platform.riskIntel	Risk intelligence	风险智能	direct	false			true
+platform.riskIntelDown	Risk intelligence unavailable	风险智能不可用	direct	false			true
+platform.startBackendPost	) and press retry.	）后按重试。	direct	false			true
+platform.startBackendPre	Start the backend (	启动后端（	direct	false			true
+platform.systemStatus	System Status	系统状态	direct	false			true
+platform.systemStatusDown	System status unavailable	系统状态不可用	direct	false			true
 replay.cancel	Cancel	取消	direct	false			true
 replay.confirmReset	Confirm: this clears decisions, simulations, AI runs, and audit history for {id}.	确认：这将清除 {id} 的决策、模拟、AI 运行和审计历史。	direct	false	id	id	true
 replay.confirmResetBtn	Confirm reset	确认重置	direct	false			true
@@ -510,12 +537,12 @@ replay.play	Play	播放	direct	false			true
 replay.positionLine	Step {c} of {t} · {e} events · {x} transactions · {g} edges	第 {c} 步，共 {t} 步 · {e} 个事件 · {x} 笔交易 · {g} 条边	direct	false	c,e,g,t,x	c,e,g,t,x	true
 replay.reducedMotionPlay	Auto-play disabled: reduced-motion preference detected. Use Step forward.	已禁用自动播放：检测到减少动态偏好。请使用“前进一步”。	direct	false			true
 replay.resetBlurb	Reset restores the seeded scenario exactly and clears all live state: human decisions, simulations, AI runs, and audit events beyond the reset itself.	重置将精确恢复初始场景并清除所有实时状态：人工决策、模拟、AI 运行，以及除重置本身之外的审计事件。	direct	false			true
-replay.resetDemo	Reset demo	重置演示	direct	false			true
 replay.resetDoneMid	, seed 	，种子 	direct	false			true
 replay.resetDonePost	. Reload the page to replay from the restored state.	。重新加载页面以从恢复的状态重放。	direct	false			true
 replay.resetDonePre	Reset complete: run 	重置完成：运行 	direct	false			true
 replay.resetLabel	Scenario reset	场景重置	direct	false			true
 replay.resetTitle	Scenario reset	场景重置	direct	false			true
+replay.resetWorkspace	Reset workspace	重置演示	direct	false			true
 replay.resetting	Resetting…	正在重置…	direct	false			true
 replay.restart	Restart	重新开始	direct	false			true
 replay.scenarioPre	Scenario 	场景 	direct	false			true

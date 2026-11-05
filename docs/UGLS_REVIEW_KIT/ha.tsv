@@ -1,5 +1,5 @@
 # locale: ha (MACHINE-DRAFTED — human review pending)
-# version: 1.2.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
+# version: 1.3.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
 # columns: key | en_source | draft | origin(direct=translated,fallback=English shown) | same_as_source | en_vars | draft_vars | vars_ok
 key	en_source	draft	origin	same_as_source	en_vars	draft_vars	vars_ok
 ai.altTitle	Alternative explanations:	Madadin bayani:	direct	false			true
@@ -30,14 +30,14 @@ audit.thEvent	Event	Abu	direct	false			true
 audit.thReason	Reason	Dalili	direct	false			true
 audit.thState	State change	Canjin matsayi	direct	false			true
 audit.thTime	Time	Lokaci	direct	false			true
-auth.blurb	This hosted demo is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	An kare wannan nunin. Shiga da sunan mai binciken da aka ba ka. Bayanan roƙa kaɗai.	direct	false			true
+auth.blurb	This hosted platform is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	An kare wannan nunin. Shiga da sunan mai binciken da aka ba ka. Bayanan roƙa kaɗai.	direct	false			true
 auth.invalid	Invalid username or password.	Sunan mai amfani ko kalmar sirri ba daidai ba.	direct	false			true
 auth.password	Password	Kalmar sirri	direct	false			true
 auth.rateLimited	Too many login attempts. Wait a minute and try again.	Yunkurin shiga sun yi yawa. Jira minti ɗaya ka sake gwadawa.	direct	false			true
 auth.signIn	Sign in	Shiga	direct	false			true
 auth.signingIn	Signing in…	Ana shiga…	direct	false			true
-auth.title	Demo sign in	Shigar nunawa	direct	false			true
-auth.unreachable	Backend unreachable. Check the demo server and retry.	Ba a iya isa ga uwar garken ba. Duba uwar garken nunawa ka sake gwadawa.	direct	false			true
+auth.title	Secure sign in	Shigar nunawa	direct	false			true
+auth.unreachable	Backend unreachable. Check the platform server and retry.	Ba a iya isa ga uwar garken ba. Duba uwar garken nunawa ka sake gwadawa.	direct	false			true
 auth.username	Username	Sunan mai amfani	direct	false			true
 case.advisory	Advisory only: Muse Spark analysis explains evidence and never constitutes a human decision, nor changes risk scores or case status.	Shawara kaɗai: binciken Muse Spark yana bayyana shaida kuma ba shawarar ɗan adam ba ce, ba ya canza makin haɗari ko matsayin shari'a.	direct	false			true
 case.aiAssessment	AI assessment	Ƙimar AI	direct	false			true
@@ -165,11 +165,13 @@ common.notPermitted	Not available for your role.	Babu shi don rawar da kake taka
 common.present	present	yana nan	direct	false			true
 common.requestFailed	request failed	Buƙatar ta gaza	direct	false			true
 common.retry	Retry	Sake gwadawa	direct	false			true
+common.timedOut	Request timed out. Retry.	Buƙatar ta ƙare lokaci. Sake gwadawa.	direct	false			true
 common.timelineEmpty	No events.	Babu abubuwan da suka faru.	direct	false			true
+common.unavailable	Service temporarily unavailable. Retry shortly.	Sabis ɗin ba ya samuwa a halin yanzu. Sake gwadawa nan ba da jimawa ba.	direct	false			true
 common.unknown	unknown	Ba a sani ba	direct	false			true
 common.unknownModel	unknown model	samfurin da ba a sani ba	direct	false			true
 common.unknownTime	unknown time	lokacin da ba a sani ba	direct	false			true
-common.unreachable	Backend unreachable. Check the demo server and retry.	Ba a iya isa ga uwar garken ba. Duba uwar garken nunawa kuma a sake gwadawa.	direct	false			true
+common.unreachable	Backend unreachable. Check the platform server and retry.	Ba a iya isa ga uwar garken ba. Duba uwar garken nunawa kuma a sake gwadawa.	direct	false			true
 decision.actorLabel	Analyst ID	ID manazarci	direct	false			true
 decision.decisionLabel	Decision	Shawara	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	Matsayinka karatu kaɗai ne: an kashe shawarwari.	direct	false			true
@@ -182,26 +184,17 @@ decision.selectPlaceholder	Select a decision…	Zaɓi shawara…	direct	false			
 decision.targetLabel	Move case to	Matsar da shari'a zuwa	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	Wannan shari'a tana cikin matsayi na ƙarshe; ba a yarda da ƙarin canji ba.	direct	false			true
 decision.title	Human decision	Shawarar ɗan adam	direct	false			true
-demo.activityDown	Activity unavailable	Ayyuka ba su nan	direct	false			true
-demo.aiBriefDown	AI brief unavailable	Taƙaitaccen bayanin AI ba ya nan	direct	false			true
-demo.backendStatus	Backend status	Matsayin uwar garke	direct	false			true
-demo.checkedAt	Checked {url}…	An duba {url}…	direct	false	url	url	true
-demo.execOverview	Executive overview	Taƙaitaccen bayani na zartarwa	direct	false			true
-demo.execOverviewDown	Executive overview unavailable	Taƙaitaccen bayanin zartarwa ba ya nan	direct	false			true
-demo.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	Laifukan kuɗi ba safai suke bayyana a mu'amala ɗaya ba. CruiseShield AI na haɗa mu'amaloli, asusu, na'urori, masu amfana da 'yan kasuwa masu tuhuma cikin hanyar hankali mai bayani.	direct	false			true
-demo.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	Injinta na ƙididdigar haɗari tabbatacciya na gano siginoni, Meta AI na taimaka wa masu bincike wajen fassara shaida, sake kunnawa da gwaji suna binciko yanayi na hasashe, shawarwarin ɗan adam kuma suna nan masu alhaki da bita.	direct	false			true
-demo.museBrief	Muse Spark brief	Taƙaitaccen bayanin Muse Spark	direct	false			true
-demo.networkPreview	Network preview	Dubawa ta hanyar sadarwa	direct	false			true
-demo.networkPreviewDown	Network preview unavailable	Dubawar hanyar sadarwa ba ta nan	direct	false			true
-demo.recentActivity	Recent activity	Ayyukan kwanan nan	direct	false			true
-demo.replayDown	Replay unavailable.	Sake kunnawa ba ya nan.	direct	false			true
-demo.retryTitle	Retry {title}	Sake gwada {title}	direct	false	title	title	true
-demo.riskIntel	Risk intelligence	Hankalin haɗari	direct	false			true
-demo.riskIntelDown	Risk intelligence unavailable	Hankalin haɗari ba ya nan	direct	false			true
-demo.startBackendPost	) and press retry.	) sannan ka danna sake gwadawa.	direct	false			true
-demo.startBackendPre	Start the backend (	Fara uwar garke (	direct	false			true
-demo.systemStatus	System Status	Matsayin Tsarin	direct	false			true
-demo.systemStatusDown	System status unavailable	Matsayin tsarin ba ya nan	direct	false			true
+detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
+detection.detectorsTitle	Detector families	Detector families	fallback	true			true
+detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
+detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
+detection.measuredAt	Measured at	Measured at	fallback	true			true
+detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
+detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
+detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
+detection.title	Detection intelligence	Detection intelligence	fallback	true			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
+detection.zeroNote	Zero means measured none, not missing data.	Zero means measured none, not missing data.	fallback	true			true
 evidence.clearSearch	Clear search	Share bincike	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	Babu shaidar da ta dace.	direct	false			true
 evidence.emptySearch	No evidence items match this search.	Babu shaidar da ta dace da wannan bincike.	direct	false			true
@@ -237,7 +230,7 @@ graph.nodeFocusSuffix	, orbit focus	, mayar da hankalin zagaye	direct	false			tr
 graph.orbitFocusBadge	· orbit focus	· mayar da hankalin zagaye	direct	false			true
 graph.orbitalCounts	Focus: {focus} · Showing {a} of {b} nodes, {c} of {d} edges.	Mayar da hankali: {focus} · Ana nuna ƙulli {a} daga {b}, gefuna {c} daga {d}.	direct	false	a,b,c,d,focus	a,b,c,d,focus	true
 graph.orbitalLabel	Orbital graph	Taswirar zagaye	direct	false			true
-graph.orbitalNote	Synthetic demo data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	Bayanan nunin ƙirƙira. Zobba da motsi shimfiɗa ne kaɗai — ba sa nuna haɗari, laifi, ko fifiko.	direct	false			true
+graph.orbitalNote	Synthetic data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	Bayanan nunin ƙirƙira. Zobba da motsi shimfiɗa ne kaɗai — ba sa nuna haɗari, laifi, ko fifiko.	direct	false			true
 graph.orbitalSvg	Orbital graph focused on {focus}: {a} nodes, {b} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.	Taswirar zagaye da aka mayar da hankali kan {focus}: ƙulli {a}, gefuna {b}. Tab don isa ƙulli da gefuna, Shiga don zaɓa, maɓallan kibiya don motsawa.	direct	false	a,b,focus	a,b,focus	true
 graph.orbitalTitle	Orbital explorer	Binciken zagaye	direct	false			true
 graph.orbitalViewControls	Orbital view controls	Abubuwan sarrafa duban zagaye	direct	false			true
@@ -283,7 +276,7 @@ intel.evidencePre	Evidence: 	Shaida: 	direct	false			true
 intel.findingsCount.one	{count} finding	{count} sakamako	direct	false	count	count	true
 intel.findingsCount.other	{count} findings	{count} sakamako	direct	false	count	count	true
 intel.findingsH	Intelligence findings	Sakamakon hankali	direct	false			true
-intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic demo values only.	Nassin tabbatacce, ba hoton yatsa da aka tabbatar ba. Halaye: ƙimar nunin ƙirƙira da aka bayyana kaɗai.	direct	false			true
+intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic values only.	Nassin tabbatacce, ba hoton yatsa da aka tabbatar ba. Halaye: ƙimar nunin ƙirƙira da aka bayyana kaɗai.	direct	false			true
 intel.geoDisclaimer	IP-derived locations are approximate and never proof of physical presence. No GPS collection exists (permission: unavailable).	Wuraren da aka samo daga IP ƙididdiga ne kuma ba su taɓa tabbatar da kasancewar jiki ba. Babu tattara GPS (izini: ba ya nan).	direct	false			true
 intel.geoH	Geolocation	Wurin ƙasa	direct	false			true
 intel.intelDown	Intelligence unavailable for this investigation.	Hankali ba ya nan don wannan bincike.	direct	false			true
@@ -306,8 +299,8 @@ intel.repLabel	Reputation	Suna	direct	false			true
 intel.reviewLine	Human review: {r}	Bitan ɗan adam: {r}	direct	false	r	r	true
 intel.seeBackend	see backend	duba uwar garke	direct	false			true
 intel.sharedDevice	— shared device	— na'urar raba	direct	false			true
-intel.statusLine	{findings} · {iso} · synthetic demo data.	{findings} · {iso} · bayanan nunin ƙirƙira.	direct	false	findings,iso	findings,iso	true
-intel.syntheticTag	· synthetic demo	· nunin ƙirƙira	direct	false			true
+intel.statusLine	{findings} · {iso} · synthetic data.	{findings} · {iso} · bayanan nunin ƙirƙira.	direct	false	findings,iso	findings,iso	true
+intel.syntheticTag	· synthetic	· nunin ƙirƙira	direct	false			true
 intel.unknownShort	(unknown)	(ba a sani ba)	direct	false			true
 intel.vpnLabel	VPN/proxy/Tor	VPN/proxy/Tor	direct	true			true
 investigation.aiAnalysis	AI analysis	Binciken AI	direct	false			true
@@ -354,16 +347,22 @@ landing.capTitles.6	Investigations	Bincike	direct	false			true
 landing.capTitles.7	AI Intelligence	Hankalin AI	direct	false			true
 landing.capTitles.8	Risk Engine	Injin haɗari	direct	false			true
 landing.capTitles.9	Evidence & Audit	Shaida da bita	direct	false			true
+landing.closeRegion	Clear region selection	Share zaɓin yanki	direct	false			true
+landing.collapsePanel	Collapse panel	Naɗe panel	direct	false			true
 landing.controlsAmbient	Ambient sound	Sautin yanayi	direct	false			true
 landing.cta	Explore CruiseShield AI™	Binciko CruiseShield AI™	direct	false			true
-landing.ctaSub	Enter the Interactive Demo Experience	Shiga ƙwarewar nunin mu'amala	direct	false			true
-landing.enterDemo	Enter Demo	Shiga nuni	direct	false			true
+landing.ctaSub	Explore the interactive investigation platform	Shiga ƙwarewar nunin mu'amala	direct	false			true
+landing.enterPlatform	Access Platform	Shiga nuni	direct	false			true
+landing.expandPanel	Expand panel	Faɗaɗa panel	direct	false			true
 landing.eyebrow	Global Financial Intelligence	Hankalin kuɗi na duniya	direct	false			true
-landing.fallbackNote	Interactive 3D is unavailable in this browser. The full demo experience remains open.	3D na mu'amala ba ya nan a wannan burauza. Cikakkiyar ƙwarewar nuni a buɗe take.	direct	false			true
-landing.footerDemo	Demonstration experience · synthetic data · illustrative network visuals · 	Ƙwarewar nuni · bayanan ƙirƙira · hotunan hanyar sadarwa misalai · 	direct	false			true
+landing.fallbackNote	Interactive 3D is unavailable in this browser. The full platform remains open.	3D na mu'amala ba ya nan a wannan burauza. Cikakkiyar ƙwarewar nuni a buɗe take.	direct	false			true
 landing.footerLine	One Platform. A Safer Financial Future. For Everyone.	Dandamali ɗaya. Makomar kuɗi mai aminci. Ga kowa.	direct	false			true
-landing.footerLink	Enter the interactive demo	Shiga nunin mu'amala	direct	false			true
+landing.footerLink	Open the interactive platform	Shiga nunin mu'amala	direct	false			true
+landing.footerNote	Investigation platform · synthetic data · illustrative network visuals · 	Ƙwarewar nuni · bayanan ƙirƙira · hotunan hanyar sadarwa misalai · 	direct	false			true
 landing.fullMotion	Full motion	Cikakken motsi	direct	false			true
+landing.globeContextLost	3D context lost — illustration paused.	An rasa mahallin 3D — misali ya tsaya.	direct	false			true
+landing.globeControls	World Atlas controls	Sarrafan atlas na duniya	direct	false			true
+landing.globeHint	Drag to rotate. Arrow keys rotate, plus and minus zoom, 0 resets the view.	Ja don juyawa. Kibiyoyi suna juyawa, alamar ƙari da ragi suna zuƙowa, 0 yana sake saitawa.	direct	false			true
 landing.h1	A Safer Financial World	Duniyar kuɗi mai aminci	direct	false			true
 landing.home	CruiseShield AI home	Gidan CruiseShield AI	direct	false			true
 landing.illustrative	Illustrative Network View	Duban hanyar sadarwa misali	direct	false			true
@@ -376,8 +375,8 @@ landing.intelItems.5	Network Graph	Taswirar hanyar sadarwa	direct	false			true
 landing.intelItems.6	AI Investigation	Binciken AI	direct	false			true
 landing.intelItems.7	Risk Analysis	Nazarin haɗari	direct	false			true
 landing.intelItems.8	Evidence and Audit	Shaida da bita	direct	false			true
-landing.intelNote	Demonstration capabilities · synthetic data	Ƙarfin nuni · bayanan ƙirƙira	direct	false			true
-landing.intelStatus	Demo	Nuni	direct	false			true
+landing.intelNote	Investigation capabilities · synthetic data	Ƙarfin nuni · bayanan ƙirƙira	direct	false			true
+landing.intelStatus	Pilot	Nuni	direct	false			true
 landing.intelTitle	Global Intelligence	Hankalin duniya	direct	false			true
 landing.intelligenceModules	Intelligence modules	Kayayyakin hankali	direct	false			true
 landing.journey.0	DETECT	GANO	direct	false			true
@@ -414,6 +413,7 @@ landing.moduleTitles.2	Global Network	Hanyar duniya	direct	false			true
 landing.moduleTitles.3	Cyber Defense	Tsaron yanar gizo	direct	false			true
 landing.moduleTitles.4	Secure Infrastructure	Kayayyakin more rayuwa masu aminci	direct	false			true
 landing.modulesNote	Illustrative module concepts · capabilities vary by deployment	Ra'ayoyin kayayyaki misalai · ƙarfi ya bambanta	direct	false			true
+landing.mute	Mute	Rufe sauti	direct	false			true
 landing.offWord	Off	A kashe	direct	false			true
 landing.onWord	On	A kunne	direct	false			true
 landing.pauseScene	Pause scene	Dakata da fage	direct	false			true
@@ -421,6 +421,7 @@ landing.platformPrinciples	Platform principles	Ƙa'idodin dandamali	direct	false
 landing.platformQualities	Platform qualities	Halayen dandamali	direct	false			true
 landing.problem	Financial crime hides in disconnected transactions. CruiseShield AI connects them — deterministic risk scoring, relationship graphs, and evidence-grounded AI explanations, with a human investigator deciding.	Laifukan kuɗi suna ɓoye a cikin mu'amaloli marasa alaƙa. CruiseShield AI na haɗa su — ƙididdigar haɗari tabbatacciya, taswirorin alaƙa da bayanan AI bisa shaida, tare da mai bincike ɗan adam mai yanke hukunci.	direct	false			true
 landing.reduceMotion	Reduce motion	Rage motsi	direct	false			true
+landing.regionSignal	Illustrative signal	Alamar misali	direct	false			true
 landing.regions.0	North America	North America	direct	true			true
 landing.regions.1	South America	South America	direct	true			true
 landing.regions.2	Europe	Europe	direct	true			true
@@ -432,6 +433,7 @@ landing.regions.7	Cross-Border Corridors	Hanyoyin ƙetare iyaka	direct	false			t
 landing.regionsNote	Simulated regional signals · not live monitoring	Siginonin yanki na ƙirƙira · ba sa ido kai tsaye	direct	false			true
 landing.regionsTitle	Global Intelligence Regions	Yankunan hankalin duniya	direct	false			true
 landing.replayLink	try replay & simulation	gwada sake kunnawa da kwatance	direct	false			true
+landing.resetView	Reset view	Sake saita kallo	direct	false			true
 landing.resumeScene	Resume scene	Ci gaba da fage	direct	false			true
 landing.sceneMotion	Scene motion	Motsin fage	direct	false			true
 landing.signals.0	Secure	Aminci	direct	false			true
@@ -439,16 +441,18 @@ landing.signals.1	Intelligent	Hankali	direct	false			true
 landing.signals.2	Global	Duniya	direct	false			true
 landing.signals.3	Auditable	Ana iya bita	direct	false			true
 landing.soundLabel	Sound	Sauti	direct	false			true
-landing.stripNote	Cards open the matching live demo screen · 	Katunan suna buɗe allon nuni kai tsaye · 	direct	false			true
+landing.stripNote	Cards open the matching screen · 	Katunan suna buɗe allon nuni kai tsaye · 	direct	false			true
 landing.tagline	The Financial Crime Immune System™	The Financial Crime Immune System™	direct	true			true
+landing.unmute	Unmute	Buɗe sauti	direct	false			true
 landing.volumeLabel	Volume	Ƙarfi	direct	false			true
+landing.zoomIn	Zoom in	Ƙara girma	direct	false			true
+landing.zoomOut	Zoom out	Rage girma	direct	false			true
 nav.aiIntelligence	AI Intelligence	Hankalin AI	direct	false			true
 nav.auditTrail	Audit Trail	Tarihin Bincike	direct	false			true
 nav.brand	CruiseShield AI	CruiseShield AI	direct	true			true
 nav.cases	Cases	Shari'o'i	direct	false			true
 nav.closeNav	Close navigation	Rufe kewayawa	direct	false			true
 nav.commandCenter	Command Center	Cibiyar Umurni	direct	false			true
-nav.demoRole	demo role	rawar nunawa	direct	false			true
 nav.evidence	Evidence	Shaida	direct	false			true
 nav.exploreNetwork	Explore Network	Bincika hanyar sadarwa	direct	false			true
 nav.home	CruiseShield AI home	Gidan CruiseShield AI	direct	false			true
@@ -458,13 +462,14 @@ nav.networkExplorer	Network Explorer	Binciken Cibiyar Sadarwa	direct	false			tru
 nav.primary	Primary	Babba	direct	false			true
 nav.quickActions	Quick Actions	Ayyuka masu sauri	direct	false			true
 nav.replaySimulation	Replay & Simulation	Sake kunnawa & Gwaji	direct	false			true
-nav.roleDemo	{role} · demo	{role} · nunawa	direct	false	role	role	true
+nav.roleContext	{role} · active	{role} · nunawa	direct	false	role	role	true
 nav.runSimulation	Run Simulation	Gudanar da gwaji	direct	false			true
+nav.sessionRole	session role	rawar nunawa	direct	false			true
 nav.signOut	Sign out	Fita	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	Fita a ko'ina	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	Ƙare wannan zaman a duk na'urori da masu bincike	direct	false			true
 nav.skipToContent	Skip to main content	Tsallake zuwa ga ainihin abun ciki	direct	false			true
-nav.synthetic	Synthetic demo data	Bayanan nunin roƙa	direct	false			true
+nav.synthetic	Synthetic data	Bayanan nunin roƙa	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	Canja kewayawa	direct	false			true
 nav.viewAuditTrail	View Audit Trail	Duba tarihin bincike	direct	false			true
@@ -488,11 +493,33 @@ notify.bellLoading	Notifications, loading	Sanarwa, ana lodawa	direct	false			tru
 notify.bellOpen	Notifications, {n} open	Sanarwa, {n} a buɗe	direct	false	n	n	true
 notify.closeNotif	Close notifications	Rufe sanarwa	direct	false			true
 notify.loadingAlerts	Loading alerts…	Ana loda faɗakarwa…	direct	false			true
+notify.markAllRead	Mark all read	Alama duka a matsayin an karanta	direct	false			true
+notify.markRead	Mark read	Alama a matsayin an karanta	direct	false			true
 notify.networkLink	Network	Hanyar sadarwa	direct	false			true
 notify.noAlerts	No alerts.	Babu faɗakarwa.	direct	false			true
 notify.openInv	Open investigation	Buɗe bincike	direct	false			true
 notify.panelLabel	Notifications	Sanarwa	direct	false			true
 notify.panelTitle	Notifications	Sanarwa	direct	false			true
+platform.activityDown	Activity unavailable	Ayyuka ba su nan	direct	false			true
+platform.aiBriefDown	AI brief unavailable	Taƙaitaccen bayanin AI ba ya nan	direct	false			true
+platform.backendStatus	Backend status	Matsayin uwar garke	direct	false			true
+platform.checkedAt	Checked {url}…	An duba {url}…	direct	false	url	url	true
+platform.execOverview	Executive overview	Taƙaitaccen bayani na zartarwa	direct	false			true
+platform.execOverviewDown	Executive overview unavailable	Taƙaitaccen bayanin zartarwa ba ya nan	direct	false			true
+platform.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	Laifukan kuɗi ba safai suke bayyana a mu'amala ɗaya ba. CruiseShield AI na haɗa mu'amaloli, asusu, na'urori, masu amfana da 'yan kasuwa masu tuhuma cikin hanyar hankali mai bayani.	direct	false			true
+platform.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	Injinta na ƙididdigar haɗari tabbatacciya na gano siginoni, Meta AI na taimaka wa masu bincike wajen fassara shaida, sake kunnawa da gwaji suna binciko yanayi na hasashe, shawarwarin ɗan adam kuma suna nan masu alhaki da bita.	direct	false			true
+platform.museBrief	Muse Spark brief	Taƙaitaccen bayanin Muse Spark	direct	false			true
+platform.networkPreview	Network preview	Dubawa ta hanyar sadarwa	direct	false			true
+platform.networkPreviewDown	Network preview unavailable	Dubawar hanyar sadarwa ba ta nan	direct	false			true
+platform.recentActivity	Recent activity	Ayyukan kwanan nan	direct	false			true
+platform.replayDown	Replay unavailable.	Sake kunnawa ba ya nan.	direct	false			true
+platform.retryTitle	Retry {title}	Sake gwada {title}	direct	false	title	title	true
+platform.riskIntel	Risk intelligence	Hankalin haɗari	direct	false			true
+platform.riskIntelDown	Risk intelligence unavailable	Hankalin haɗari ba ya nan	direct	false			true
+platform.startBackendPost	) and press retry.	) sannan ka danna sake gwadawa.	direct	false			true
+platform.startBackendPre	Start the backend (	Fara uwar garke (	direct	false			true
+platform.systemStatus	System Status	Matsayin Tsarin	direct	false			true
+platform.systemStatusDown	System status unavailable	Matsayin tsarin ba ya nan	direct	false			true
 replay.cancel	Cancel	Soke	direct	false			true
 replay.confirmReset	Confirm: this clears decisions, simulations, AI runs, and audit history for {id}.	Tabbatar: wannan yana share shawarwari, gwaje-gwaje, gudanarwar AI, da tarihin bita na {id}.	direct	false	id	id	true
 replay.confirmResetBtn	Confirm reset	Tabbatar da sake saitawa	direct	false			true
@@ -510,12 +537,12 @@ replay.play	Play	Kunna	direct	false			true
 replay.positionLine	Step {c} of {t} · {e} events · {x} transactions · {g} edges	Mataki {c} daga {t} · abubuwa {e} · mu'amaloli {x} · gefuna {g}	direct	false	c,e,g,t,x	c,e,g,t,x	true
 replay.reducedMotionPlay	Auto-play disabled: reduced-motion preference detected. Use Step forward.	An kashe kunna kai tsaye: an gano zaɓin rage motsi. Yi amfani da Mataki gaba.	direct	false			true
 replay.resetBlurb	Reset restores the seeded scenario exactly and clears all live state: human decisions, simulations, AI runs, and audit events beyond the reset itself.	Sake saitawa yana dawo da yanayin farko daidai kuma yana share duk yanayin kai tsaye: shawarwarin ɗan adam, gwaje-gwaje, gudanarwar AI, da abubuwan bita bayan sake saitawar kanta.	direct	false			true
-replay.resetDemo	Reset demo	Sake saita nuni	direct	false			true
 replay.resetDoneMid	, seed 	, iri 	direct	false			true
 replay.resetDonePost	. Reload the page to replay from the restored state.	. Sake loda shafin don sake kunnawa daga yanayin da aka dawo.	direct	false			true
 replay.resetDonePre	Reset complete: run 	Sake saitawa ta kammala: gudu 	direct	false			true
 replay.resetLabel	Scenario reset	Sake saita yanayi	direct	false			true
 replay.resetTitle	Scenario reset	Sake saita yanayi	direct	false			true
+replay.resetWorkspace	Reset workspace	Sake saita nuni	direct	false			true
 replay.resetting	Resetting…	Ana sake saitawa…	direct	false			true
 replay.restart	Restart	Sake farawa	direct	false			true
 replay.scenarioPre	Scenario 	Yanayi 	direct	false			true
