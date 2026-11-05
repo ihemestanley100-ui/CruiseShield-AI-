@@ -137,6 +137,13 @@ silence is not approval.
   MIGRATION_5_2_TENANCY additive prep in app/models_pg.py (scratch
   execution pending GAP-015). API-boundary wiring awaits D-014
   approval; no existing behavior changed.
+- Evidence (slice-5): domain + handler enforcement wired
+  (cases.record_decision ctx, 7 handler gates, TENANT_DENIED→403
+  contract) + 10 adversarial API tests green; all current users
+  resolve to the default tenant so behavior is unchanged.
+  User→tenant map still needs D-014. Banking pilot: profile +
+  status machine + 7 mapping tests green → module TESTING, other 44
+  NOT_STARTED.
 
 ## Pending decisions (BLOCKED until answered)
 

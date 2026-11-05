@@ -8,6 +8,7 @@ import warnings
 from datetime import datetime, timezone
 from pathlib import Path
 
+from app import audit_chain as chain_mod
 from app import evidence as evidence_mod
 from app import rules as rules_mod
 from app import seed as seed_mod
@@ -52,14 +53,19 @@ class Store:
         # one fixed tmp path and collided (WinError 32 → HTTP 500).
         self._save_lock = threading.Lock()
         self.state: dict = {}
+        # GAP-002 chain wiring: None = legacy plaintext entries
+        # (production until D-018 records the key ceremony).
+        self.audit_chain_key: bytes | None = None
+        self.audit_chain_key_id = "k1"
+        self._audit_head: str | None = None
         if self.path.exists():
             self.state = json.loads(self.path.read_text(encoding="utf-8"))
         else:
             # Phase 10 (SEC-002): a missing state file silently reseeds a
-            # fresh demo. Warn loudly so data loss is never mistaken for
+            # fresh seed. Warn loudly so data loss is never mistaken for
             # a healthy start (surfaces on uvicorn stderr).
             warnings.warn(
-                f"state file {self.path} missing; seeding fresh demo state",
+                f"state file {self.path} missing; seeding fresh state",
                 RuntimeWarning, stacklevel=2)
             self.reset("scn_primary")
 
@@ -116,7 +122,7 @@ class Store:
                 "scenario_version": seed_mod.SCENARIO_VERSION,
                 "title": scenario["title"], "purpose": scenario["purpose"],
                 "seed_hash": seed_mod.seed_hash(scenario),
-                "synthetic_notice": "Synthetic demo data.",
+                "synthetic_notice": "Synthetic data.",
                 "event_sequence": [e["event_id"] for e in scenario["events"]],
                 "expected_rule_results": {
                     r["rule_id"]: r["triggered"] for r in rule_results},
@@ -149,11 +155,11 @@ class Store:
             "audit_counter": 0, "replay": {"cursor": 0}, "created_at": created,
             "revoked_sessions": keep_revoked, "user_epochs": keep_epochs,
         }
-        self.append_audit("system", "demo-reset", "scenario.reset", "scenario",
+        self.append_audit("system", "platform-reset", "scenario.reset", "scenario",
                           scenario_id, "", run_id,
                           f"Reset to {scenario_id} v{seed_mod.SCENARIO_VERSION}",
                           trace_id, trace_id)
-        self.append_audit("system", "demo-reset", "case.opened", "case", case_id,
+        self.append_audit("system", "platform-reset", "case.opened", "case", case_id,
                           "", "NEW", "Case opened for primary investigation",
                           trace_id, trace_id)
         self._save()
@@ -201,9 +207,26 @@ class Store:
             "reason": reason, "timestamp": _now(), "trace_id": trace_id,
             "request_id": request_id,
         }
+        if self.audit_chain_key is not None:
+            sealed = [a for a in self.state["audits"]
+                      if "audit_digest" in a]
+            prev = (sealed[-1]["audit_digest"] if sealed
+                    else chain_mod.GENESIS_HASH)
+            entry = chain_mod.seal(entry, prev, self.audit_chain_key_id,
+                                   self.audit_chain_key, len(sealed))
+            self._audit_head = entry["audit_digest"]
         self.state["audits"].append(entry)
         self._save()
         return entry
+
+    def verify_audit_chain(self, keyring: dict[str, bytes]) -> dict:
+        """Verify sealed audit entries; legacy entries are skipped.
+
+        Raises ValueError on any tamper/link/signature failure.
+        Returns {"events": n, "head": digest}.
+        """
+        sealed = [a for a in self.state["audits"] if "audit_digest" in a]
+        return chain_mod.verify_chain(sealed, keyring)
 
     def ingest_event(self, raw: dict) -> tuple[str, dict, list[str]]:
         event, warnings = validate_and_normalize(raw)
@@ -228,6 +251,29 @@ class Store:
     def save_simulation(self, sim: dict) -> None:
         self.state["simulations"].append(sim)
         self._save()
+
+    # -- notification read state (per-caller identity, bounded) ------
+    def mark_notifications_read(self, identity: str,
+                                notification_ids: list[str]) -> list[str]:
+        """Record read timestamps for known ids; prune stale (bounded)."""
+        from datetime import datetime, timezone
+
+        known = {a.get("alert_id") for a in self.state.get("alerts", [])}
+        reads = self.state.setdefault("notification_reads", {})
+        mine = reads.setdefault(identity, {})
+        now = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+        marked = []
+        for nid in notification_ids:
+            if nid in known:
+                mine[nid] = now
+                marked.append(nid)
+        for stale in [k for k in mine if k not in known]:
+            del mine[stale]
+        self._save()
+        return marked
+
+    def notification_reads_for(self, identity: str) -> dict[str, str]:
+        return dict(self.state.get("notification_reads", {}).get(identity, {}))
 
     # -- J4 session revocation / epochs ---------------------------------
     def revoke_session(self, nonce: str, exp: int,

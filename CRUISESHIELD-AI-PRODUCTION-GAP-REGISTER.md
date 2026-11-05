@@ -37,6 +37,9 @@ Every gap between current implementation and a production-grade system.
   (app/audit_chain.py) with 9 tamper/rotation/export tests green;
   store-wiring + loader gate + production key ceremony still pending
   (D-018).
+- Slice-5: Store.append_audit seals entries when an ephemeral/prod key
+  is set (None = legacy path, zero behavior change) + 6 store-level
+  tests green; loader gate + D-018 ceremony still pending.
 
 ### GAP-003 — Backup execution + restore load-into-scratch
 - Affected: backups/*, .github/workflows/backup-*.yml.

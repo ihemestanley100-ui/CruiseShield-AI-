@@ -16,6 +16,7 @@ from app import cases as cases_mod, evidence as evidence_mod
 from app import device_intel as device_mod
 from app import geo_intel as geo_mod
 from app import graph as graph_mod, graph_intel as gintel_mod
+from app import industries as ind_mod
 from app import intel_evidence as iev_mod
 from app import intel_link as link_mod
 from app import ip_intel as ip_mod
@@ -23,6 +24,7 @@ from app import ratelimit as ratelimit_mod
 from app import replay as replay_mod, risk_intel as rintel_mod
 from app import rules as rules_mod
 from app import seed as seed_mod, simulate as simulate_mod
+from app import tenancy as tenancy_mod
 from app import config as config_mod
 from app.config import META_MODEL_ID, ROOT, cors_options
 from app.models import EvidencePackage, RuleResult
@@ -61,7 +63,7 @@ async def body_size_guard(request: Request, call_next):
     # R09-F4: HSTS only when the request arrived over TLS — direct
     # https or first X-Forwarded-Proto hop (TLS-terminating proxy,
     # same rule as the Secure cookie flag). Local plain-HTTP dev
-    # gets no header. No includeSubDomains: the demo shares parent
+    # gets no header. No includeSubDomains: the app shares parent
     # domains on managed hosting; no preload (one-way decision).
     first_proto = request.headers.get(
         "x-forwarded-proto", "").split(",")[0].strip().lower()
@@ -83,7 +85,8 @@ AUTH_MODE_PATH = "/api/v1/auth/mode"
 AUTH_OPEN_PATHS = frozenset({"/", "/api/v1/health", "/api/v1/ready",
                               "/system-health", AUTH_LOGIN_PATH,
                               AUTH_MODE_PATH})
-AUTH_ADMIN_PREFIXES = ("/api/v1/demo/",)
+# Canonical + deprecated alias (alias removal needs owner confirm).
+AUTH_ADMIN_PREFIXES = ("/api/v1/platform/", "/api/v1/demo/")
 
 
 @app.middleware("http")
@@ -111,13 +114,13 @@ async def session_guard(request: Request, call_next):
                     status_code=401,
                     content={"error": {
                         "code": "LOGIN_REQUIRED",
-                        "message": "demo login required",
+                        "message": "login required",
                         "trace_id": _trace(request)}})
             # R1: admin prefixes need a genuine admin SESSION. The
-            # public demo token (kind "token") must never satisfy an
+            # shared write token (kind "token") must never satisfy an
             # admin gate — it previously skipped this check entirely
             # (F-PRIV-1: anonymous browsers outranked non-admin logins
-            # on /api/v1/demo/*).
+            # on /api/v1/platform/* (and the deprecated /api/v1/demo/* alias).
             if path.startswith(AUTH_ADMIN_PREFIXES) and not (
                     kind == "session" and role == "admin"):
                 return JSONResponse(
@@ -222,6 +225,17 @@ def _session_claims(request: Request | None) -> dict | None:
         store, users)
 
 
+def _request_ctx(request: Request | None) -> tenancy_mod.TenantContext:
+    """Tenant context for a request. All current users resolve to the
+    default tenant; the user→tenant map lands with D-014. Single seam:
+    tests monkeypatch this to drive cross-tenant paths through the
+    real handlers."""
+    claims = _session_claims(request)
+    actor = claims["user"] if claims else "anonymous"
+    return tenancy_mod.TenantContext(
+        tenant_id=tenancy_mod.DEFAULT_TENANT, actor=actor)
+
+
 def _required_perm(method: str, path: str) -> str:
     """J4: permission a guarded request needs (token creds exempt)."""
     if path in ("/api/v1/auth/logout", "/api/v1/auth/logout-all",
@@ -281,19 +295,32 @@ def _credential(request: Request) -> tuple[str, str | None]:
 def _decision_actor(request: Request | None, claimed: str) -> str:
     """R2: token creds cannot self-assert an audit identity (F-AUDIT-1).
 
-    Token-authenticated decisions are attributed to "demo-token";
+    Token-authenticated decisions are attributed to "platform-token";
     anything else is taken from the (authenticated or local) caller.
     """
     kind, _ = _credential(request)  # type: ignore[arg-type]
     if kind == "token":
-        return "demo-token"
+        return "platform-token"
     return claimed
+
+
+def _decision_actor_role(request):
+    """GAP-017: session role for decision attribution (server-side only).
+
+    Token/anonymous callers keep the legacy INVESTIGATOR default; a live
+    session contributes its validated role, uppercased to the audit
+    vocabulary. Client input never reaches this value.
+    """
+    kind, role = _credential(request)  # type: ignore[arg-type]
+    if kind == "session" and role in auth_mod.ROLES:
+        return role.upper()
+    return cases_mod.DEFAULT_ACTOR_ROLE
 
 
 def _require_login(request: Request | None) -> None:
     """R3: AI endpoints need an authenticated login session (F-QUOTA-1).
 
-    Armed mode only — the unarmed local demo has no sessions and
+    Armed mode only — the unarmed local mode has no sessions and
     keeps working unchanged.
     """
     if config_mod.session_auth_armed() and _session_of(request) is None:
@@ -317,6 +344,8 @@ def _domain_error(exc: ValueError, default_status: int = 400) -> AppError:
     if code in ("CASE_NOT_FOUND", "UNKNOWN_SCENARIO", "UNKNOWN_TRANSACTION",
                 "UNKNOWN_EDGE"):
         status = 404
+    if code == "TENANT_DENIED":
+        status = 403
     return AppError(code, message.strip() or text, status)
 
 
@@ -363,13 +392,13 @@ def command_center(request: Request):
 
 @app.get("/investigations/{inv_id}", response_class=HTMLResponse)
 def investigation_page(request: Request, inv_id: str):
-    inv = store.get_investigation(inv_id)
+    inv = tenancy_mod.enforce_read(store.get_investigation(inv_id), _request_ctx(request))
     if inv is None:
         raise AppError("UNKNOWN_INVESTIGATION", inv_id, 404)
     txn = store.get_transaction(inv["transaction_id"])
     risk_txn, risk_net, rule_results = _ensure_assessment(inv["transaction_id"])
-    case = next((c for c in store.state["cases"]
-                 if c["investigation_id"] == inv_id), None)
+    case = tenancy_mod.enforce_read(next((c for c in store.state["cases"]
+                 if c["investigation_id"] == inv_id), None), _request_ctx(request))
     package = store.state["evidence_packages"][inv_id]
     audits = [a for a in store.state["audits"]
               if a["target_id"] in (inv_id, case["case_id"] if case else "",
@@ -395,7 +424,7 @@ def system_health_page(request: Request):
     return templates.TemplateResponse(request, "system_health.html", ctx)
 
 
-# -- health / demo --------------------------------------------------------
+# -- health / platform --------------------------------------------------------
 def _counts_now() -> dict[str, int]:
     by_type: dict[str, int] = {}
     for node in store.state["nodes"]:
@@ -487,13 +516,13 @@ def _session_cookie_attrs(request: Request) -> dict[str, Any]:
 
 @app.post(AUTH_LOGIN_PATH)
 def auth_login(body: dict[str, Any], request: Request) -> JSONResponse:
-    """Phase 5: demo login. 503 when auth is not configured."""
+    """Phase 5: login. 503 when auth is not configured."""
     if config_mod.session_secret_misconfigured():
         raise AppError("AUTH_MISCONFIGURED",
                        "session secret too weak to arm auth", 503)
     secret = config_mod.SESSION_SECRET or ""
     if not secret:
-        raise AppError("AUTH_DISABLED", "demo login is not configured", 503)
+        raise AppError("AUTH_DISABLED", "login is not configured", 503)
     peer = request.client.host if request.client else None
     login_key = "login:" + ratelimit_mod.client_key(
         request.headers.get("x-forwarded-for"), peer)
@@ -525,7 +554,7 @@ def auth_login(body: dict[str, Any], request: Request) -> JSONResponse:
                        "invalid username or password", 401)
     token = auth_mod.create_session(username, role, secret)
     store.append_audit("user", username, "auth.login", "session", username,
-                       "", role, "demo login",
+                       "", role, "login",
                        store.state["trace_id"], _trace(request))
     response = JSONResponse({"user": username, "role": role})
     attrs = _session_cookie_attrs(request)
@@ -544,7 +573,7 @@ def auth_logout(request: Request) -> JSONResponse:
         store.revoke_session(claims["nonce"], claims["exp"])
         store.append_audit("user", claims["user"], "auth.logout",
                            "session", claims["user"], claims["role"], "",
-                           "demo logout", store.state["trace_id"],
+                           "logout", store.state["trace_id"],
                            _trace(request))
     response = JSONResponse({"ok": True})
     attrs = _session_cookie_attrs(request)
@@ -559,11 +588,11 @@ def auth_logout_all(request: Request) -> JSONResponse:
     """J4: invalidate every session for the calling user (epoch bump)."""
     claims = _session_claims(request)
     if claims is None:
-        raise AppError("LOGIN_REQUIRED", "demo login required", 401)
+        raise AppError("LOGIN_REQUIRED", "login required", 401)
     store.bump_epoch(claims["user"])
     store.append_audit("user", claims["user"], "auth.logout_all",
                        "session", claims["user"], claims["role"], "",
-                       "demo logout-all", store.state["trace_id"],
+                       "logout-all", store.state["trace_id"],
                        _trace(request))
     response = JSONResponse({"ok": True})
     attrs = _session_cookie_attrs(request)
@@ -577,7 +606,7 @@ def auth_logout_all(request: Request) -> JSONResponse:
 def auth_me(request: Request) -> dict[str, Any]:
     session = _session_of(request)
     if session is None:
-        raise AppError("LOGIN_REQUIRED", "demo login required", 401)
+        raise AppError("LOGIN_REQUIRED", "login required", 401)
     username, role = session
     return {"user": username, "role": role,
             "permissions": sorted(auth_mod.PERMISSIONS.get(role, ()))}
@@ -588,14 +617,18 @@ def auth_mode() -> dict[str, Any]:
     return {"auth_enabled": config_mod.session_auth_armed()}
 
 
-@app.get("/api/v1/demo/scenarios")
-def demo_scenarios() -> dict[str, Any]:
+# Deprecated compat alias (D-019: removal needs owner confirm).
+@app.get("/api/v1/demo/scenarios", deprecated=True)
+@app.get("/api/v1/platform/scenarios")
+def platform_scenarios() -> dict[str, Any]:
     return {"scenarios": seed_mod.available_scenarios(),
             "active_scenario_id": store.state["scenario_id"]}
 
 
-@app.post("/api/v1/demo/reset")
-def demo_reset(request: Request,
+# Deprecated compat alias (D-019: removal needs owner confirm).
+@app.post("/api/v1/demo/reset", deprecated=True)
+@app.post("/api/v1/platform/reset")
+def platform_reset(request: Request,
                body: dict[str, Any] | None = None) -> dict[str, Any]:
     _require_write_token(request)
     scenario_id = (body or {}).get("scenario_id", "scn_primary")
@@ -605,8 +638,10 @@ def demo_reset(request: Request,
         raise _domain_error(exc)
 
 
-@app.post("/api/v1/demo/scenarios/{scenario_id}/start")
-def demo_start(scenario_id: str, request: Request) -> dict[str, Any]:
+# Deprecated compat alias (D-019: removal needs owner confirm).
+@app.post("/api/v1/demo/scenarios/{scenario_id}/start", deprecated=True)
+@app.post("/api/v1/platform/scenarios/{scenario_id}/start")
+def platform_start(scenario_id: str, request: Request) -> dict[str, Any]:
     _require_write_token(request)
     try:
         result = store.reset(scenario_id)
@@ -618,7 +653,9 @@ def demo_start(scenario_id: str, request: Request) -> dict[str, Any]:
     return result
 
 
-@app.post("/api/v1/demo/judge-start")
+# Deprecated compat alias (D-019: removal needs owner confirm).
+@app.post("/api/v1/demo/judge-start", deprecated=True)
+@app.post("/api/v1/platform/judge-start")
 def judge_start(request: Request) -> dict[str, Any]:
     _require_write_token(request)
     result = store.reset("scn_primary")
@@ -626,6 +663,13 @@ def judge_start(request: Request) -> dict[str, Any]:
     result["investigation_id"] = inv["investigation_id"]
     result["url"] = f"/investigations/{inv['investigation_id']}"
     return result
+
+
+@app.get("/api/v1/industries")
+def industries_catalog() -> dict[str, Any]:
+    """Public industry-module catalogue (Level 14 §6 registry)."""
+    items = ind_mod.registry()
+    return {"industries": items, "count": len(items)}
 
 
 # -- investigation data ---------------------------------------------------
@@ -770,7 +814,7 @@ def get_graph(txn_id: str) -> dict[str, Any]:
     if txn is None:
         raise AppError("UNKNOWN_TRANSACTION", txn_id, 404)
     # The seeded network is small (22 nodes / 30 edges); Reveal Network
-    # returns the full real graph so the demo matches the seed manifest.
+    # returns the full real graph so the response matches the seed manifest.
     nodes, edges = store.state["nodes"], store.state["edges"]
     return {"transaction_id": txn_id, "nodes": nodes, "edges": edges,
             "provenance_errors": graph_mod.validate_provenance(edges),
@@ -793,15 +837,83 @@ def list_alerts() -> dict[str, Any]:
     return {"alerts": store.state["alerts"]}
 
 
+def _caller_identity(request: Request | None) -> str:
+    """Stable per-caller key for notification read state.
+
+    Session username when armed, "platform-token" for token creds,
+    "local-default" for the unarmed local default. One caller's
+    reads are never visible to another identity.
+    """
+    session = _session_of(request)
+    if session is not None:
+        return "user:" + session[0]
+    if _token_ok(request):
+        return "platform-token"
+    return "local-default"
+
+
+@app.get("/api/v1/notifications")
+def list_notifications(request: Request) -> dict[str, Any]:
+    reads = store.notification_reads_for(_caller_identity(request))
+    items = [{
+        "notification_id": a.get("alert_id"),
+        "title": a.get("title", ""),
+        "status": a.get("status", ""),
+        "transaction_id": a.get("transaction_id"),
+        "created_at": a.get("created_at", ""),
+        "read": a.get("alert_id") in reads,
+    } for a in store.state.get("alerts", [])]
+    items.sort(key=lambda n: n["created_at"] or "", reverse=True)
+    items = items[:200]
+    unread = sum(1 for n in items
+                 if not n["read"] and n["status"] == "OPEN")
+    return {"notifications": items, "unread_count": unread,
+            "synthetic_notice": "Synthetic data."}
+
+
+@app.post("/api/v1/notifications/read")
+def mark_notifications_read(body: dict[str, Any],
+                            request: Request) -> dict[str, Any]:
+    # Read-state writes use the standard write gate; per-identity
+    # isolation is enforced via _caller_identity. Mark-read is not
+    # security-relevant, so no audit event (auth failures elsewhere
+    # are audited centrally).
+    _require_write_token(request)
+    if not isinstance(body, dict):
+        raise AppError("INVALID_BODY",
+                       "request body must be a JSON object", 400)
+    if body.get("all", False):
+        ids = [a.get("alert_id") for a in store.state.get("alerts", [])]
+    else:
+        ids = body.get("notification_ids", [])
+    if not isinstance(ids, list) or len(ids) > 500:
+        raise AppError("INVALID_NOTIFICATION_IDS",
+                       "notification_ids must be a list of at most 500",
+                       400)
+    clean: list[str] = []
+    for nid in ids:
+        if not isinstance(nid, str) or not nid or len(nid) > 128:
+            raise AppError("INVALID_NOTIFICATION_ID",
+                           "each id must be a 1..128 char string", 400)
+        clean.append(nid)
+    identity = _caller_identity(request)
+    marked = store.mark_notifications_read(identity, clean)
+    reads = store.notification_reads_for(identity)
+    unread = sum(1 for a in store.state.get("alerts", [])
+                 if a.get("alert_id") not in reads
+                 and a.get("status") == "OPEN")
+    return {"marked": marked, "unread_count": unread}
+
+
 @app.get("/api/v1/investigations/{inv_id}")
-def get_investigation(inv_id: str) -> dict[str, Any]:
-    inv = store.get_investigation(inv_id)
+def get_investigation(inv_id: str, request: Request = None) -> dict[str, Any]:
+    inv = tenancy_mod.enforce_read(store.get_investigation(inv_id), _request_ctx(request))
     if inv is None:
         raise AppError("UNKNOWN_INVESTIGATION", inv_id, 404)
     alert = next(a for a in store.state["alerts"]
                  if a["alert_id"] == inv["alert_id"])
-    case = next((c for c in store.state["cases"]
-                 if c["investigation_id"] == inv_id), None)
+    case = tenancy_mod.enforce_read(next((c for c in store.state["cases"]
+                 if c["investigation_id"] == inv_id), None), _request_ctx(request))
     risk_txn, risk_net, rule_results = _ensure_assessment(inv["transaction_id"])
     package = store.state["evidence_packages"][inv_id]
     return {"investigation": inv, "alert": alert,
@@ -983,8 +1095,9 @@ def post_simulation(body: dict[str, Any], request: Request) -> dict[str, Any]:
 
 
 @app.get("/api/v1/cases")
-def list_cases() -> dict[str, Any]:
-    return {"cases": store.state["cases"]}
+def list_cases(request: Request = None) -> dict[str, Any]:
+    return {"cases": tenancy_mod.filter_visible(
+        store.state["cases"], _request_ctx(request))}
 
 
 def latest_ai_run_for_case(case: dict[str, Any]) -> dict[str, Any] | None:
@@ -1030,11 +1143,13 @@ def latest_ai_run_for_case(case: dict[str, Any]) -> dict[str, Any] | None:
 
 
 @app.get("/api/v1/cases/{case_id}")
-def get_case(case_id: str) -> dict[str, Any]:
-    case = store.get_case(case_id)
+def get_case(case_id: str, request: Request = None) -> dict[str, Any]:
+    case = tenancy_mod.enforce_read(store.get_case(case_id), _request_ctx(request))
     if case is None:
         raise AppError("CASE_NOT_FOUND", case_id, 404)
-    decisions = [d for d in store.state["decisions"] if d["case_id"] == case_id]
+    decisions = tenancy_mod.filter_visible(
+        [d for d in store.state["decisions"] if d["case_id"] == case_id],
+        _request_ctx(request))
     return {"case": case, "decisions": decisions,
             "allowed_transitions": cases_mod.allowed_transitions(case["status"]),
             "latest_ai_run": latest_ai_run_for_case(case)}
@@ -1051,7 +1166,9 @@ def post_decision(case_id: str, body: dict[str, Any],
             _decision_actor(request,
                             body.get("actor_id", "investigator")),
             body.get("evidence_viewed", []),
-            body.get("recommendation", ""), _trace(request))
+            body.get("recommendation", ""), _trace(request),
+            actor_role=_decision_actor_role(request),
+            tenant=_request_ctx(request))
     except ValueError as exc:
         raise _domain_error(exc)
     return {"decision": record, "audit": audit,
@@ -1059,8 +1176,8 @@ def post_decision(case_id: str, body: dict[str, Any],
 
 
 @app.get("/api/v1/cases/{case_id}/audit")
-def case_audit(case_id: str) -> dict[str, Any]:
-    if store.get_case(case_id) is None:
+def case_audit(case_id: str, request: Request = None) -> dict[str, Any]:
+    if tenancy_mod.enforce_read(store.get_case(case_id), _request_ctx(request)) is None:
         raise AppError("CASE_NOT_FOUND", case_id, 404)
     return {"audits": [a for a in store.state["audits"]
                        if a["target_id"] == case_id]}
