@@ -40,6 +40,9 @@ Every gap between current implementation and a production-grade system.
 - Slice-5: Store.append_audit seals entries when an ephemeral/prod key
   is set (None = legacy path, zero behavior change) + 6 store-level
   tests green; loader gate + D-018 ceremony still pending.
+- Slice-6: loader gate implemented (migrate_state/run_migration accept
+  audit_keyring; tamper fails closed pre-write) + 3 hermetic tests
+  green; D-018 ceremony still pending.
 
 ### GAP-003 — Backup execution + restore load-into-scratch
 - Affected: backups/*, .github/workflows/backup-*.yml.
@@ -57,6 +60,9 @@ Every gap between current implementation and a production-grade system.
   LocalDirTarget + scripts/backup_drill.py execute produce→verify→
   restore→parity green with ephemeral test keys (75,242 B, parity
   true); scratch-load path + ceremony keys still outstanding.
+- Slice-6: scratch-load path implemented (backups/load_scratch.py:
+  live-path refusal, no-overwrite, count verification) + 5 tests
+  green; ceremony keys + workflow enablement still pending.
 
 ### GAP-004 — Model eval / golden AI harness
 - Affected: app/ai_adapter.py, tests/.
@@ -215,6 +221,9 @@ Every gap between current implementation and a production-grade system.
 - Importance: Medium. Dependencies: scratch DB provisioning.
 - Acceptance: scratch-PG green log on HEAD.
 - Status: NOT_VERIFIED.
+- Slice-6: local execution impossible (no psql/pg_config/pgserver;
+  docker pipe denied); suites remain CI-gated via the postgres
+  service job. Loader-gate logic covered hermetically instead.
 
 ### GAP-016 — Manifests untested + no digest pin
 - Affected: Dockerfile, render.yaml, requirements files.

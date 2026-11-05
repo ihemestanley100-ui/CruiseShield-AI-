@@ -67,7 +67,10 @@ def test_no_compliance_certification_claimed():
                for c in PROFILE["compliance"])
 
 
-def test_other_44_modules_still_not_started():
-    rest = [m for m in ind_mod.registry() if m["id"] != "banking"]
-    assert len(rest) == 44
-    assert {m["status"] for m in rest} == {"NOT_STARTED"}
+def test_registry_conserves_45_modules():
+    assert len(ind_mod.registry()) == 45
+    for module in ind_mod.registry():
+        assert module["status"] in ind_mod.STATUSES
+    untouched = [m for m in ind_mod.registry()
+                 if m["id"] in ("oil-gas", "legal", "maritime")]
+    assert {m["status"] for m in untouched} == {"NOT_STARTED"}

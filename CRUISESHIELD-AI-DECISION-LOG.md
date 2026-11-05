@@ -144,6 +144,8 @@ silence is not approval.
   User→tenant map still needs D-014. Banking pilot: profile +
   status machine + 7 mapping tests green → module TESTING, other 44
   NOT_STARTED.
+- Evidence (slice-6): fintech-payments pilot registered + walked to
+  TESTING (+7 tests); industry matrix now 2 TESTING / 43 NOT_STARTED.
 
 ## Pending decisions (BLOCKED until answered)
 

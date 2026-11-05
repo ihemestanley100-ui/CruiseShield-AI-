@@ -21,6 +21,7 @@ from typing import Any
 import psycopg
 from psycopg.types.json import Jsonb
 
+from app import audit_chain as chain_mod
 from app import config as config_mod
 from app import db as db_mod
 
@@ -80,12 +81,23 @@ def _doc(value: Any) -> Jsonb:
     return Jsonb(value)
 
 
-def migrate_state(state: dict, conn: psycopg.Connection) -> dict[str, Any]:
+def migrate_state(state: dict, conn: psycopg.Connection,
+                  audit_keyring: dict[str, bytes] | None = None
+                  ) -> dict[str, Any]:
     """Upsert one state dict into PG inside the caller's transaction.
 
     Raises MigrationError (caller rolls back) on any integrity failure.
-    Returns the reconciliation report (counts + checks).
+    Returns the reconciliation report (counts + checks). When
+    ``audit_keyring`` is supplied, sealed audit entries are
+    chain-verified BEFORE any write; tamper fails the migration closed.
     """
+    if audit_keyring is not None:
+        sealed = [a for a in state.get("audits", [])
+                  if "audit_digest" in a]
+        try:
+            chain_mod.verify_chain(sealed, audit_keyring)
+        except ValueError as exc:
+            raise MigrationError("AUDIT_CHAIN_INVALID", str(exc)) from None
     cur = conn.cursor()
     expected: dict[str, int] = {}
     try:
@@ -403,7 +415,9 @@ def reconcile(cur: psycopg.Cursor, state: dict,
 
 def run_migration(source_path: str | Path, database_url: str,
                   expected_hash: str | None = None,
-                  init_schema: bool = True) -> dict[str, Any]:
+                  init_schema: bool = True,
+                  audit_keyring: dict[str, bytes] | None = None
+                  ) -> dict[str, Any]:
     """Load a source COPY into PG atomically. Returns the report.
 
     Any failure rolls the transaction back (database left unchanged) and
@@ -416,7 +430,7 @@ def run_migration(source_path: str | Path, database_url: str,
             # Phase 5.3 L4: DDL joins this transaction, so a failed load
             # rolls the schema back too — the database is truly unchanged.
             db_mod.init_schema(conn, commit=False)
-        report = migrate_state(state, conn)
+        report = migrate_state(state, conn, audit_keyring=audit_keyring)
         conn.commit()
     except MigrationError:
         conn.rollback()
