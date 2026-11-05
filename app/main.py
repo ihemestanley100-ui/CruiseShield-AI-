@@ -25,6 +25,8 @@ from app import replay as replay_mod, risk_intel as rintel_mod
 from app import rules as rules_mod
 from app import seed as seed_mod, simulate as simulate_mod
 from app import tenancy as tenancy_mod
+from app import detection as det_mod
+from app import channels as chan_mod
 from app import config as config_mod
 from app.config import META_MODEL_ID, ROOT, cors_options
 from app.models import EvidencePackage, RuleResult
@@ -835,6 +837,104 @@ def get_risk(txn_id: str, scope: str = "network") -> dict[str, Any]:
 @app.get("/api/v1/alerts")
 def list_alerts() -> dict[str, Any]:
     return {"alerts": store.state["alerts"]}
+
+
+@app.get("/api/v1/detectors")
+def list_detectors() -> dict[str, Any]:
+    """Detector registry with honest operational status."""
+    return {"detectors": [
+        {"family": fam, "version": det_mod.VERSION,
+         "status": ("NOT_IMPLEMENTED" if fam == "ML_ANOMALY"
+                    else "OPERATIONAL"),
+         "description": det_mod.DESCRIPTIONS[fam],
+         "rules": list(det_mod.RULE_MAPPED.get(fam, ()))}
+        for fam in det_mod.FAMILIES]}
+
+
+def _tenant_signals(request: Request | None) -> tuple[list[dict], dict]:
+    ctx = _request_ctx(request)
+    txns = tenancy_mod.filter_visible(store.state["transactions"], ctx)
+    result = det_mod.evaluate_all(txns, store.state["edges"])
+    return txns, result
+
+
+@app.get("/api/v1/signals/summary")
+def signals_summary(request: Request = None) -> dict[str, Any]:
+    """Measured signal frequency over tenant-visible transactions."""
+    txns, result = _tenant_signals(request)
+    signals = result["signals"]
+    by_family: dict[str, int] = {}
+    by_severity: dict[str, int] = {}
+    for sig in signals:
+        by_family[sig["detector_family"]] = by_family.get(
+            sig["detector_family"], 0) + 1
+        by_severity[sig["severity"]] = by_severity.get(
+            sig["severity"], 0) + 1
+    stamps = sorted(t.get("occurred_at", "") for t in txns if t.get(
+        "occurred_at"))
+    return {
+        "total_signals": len(signals),
+        "unique_transactions_flagged": len({s["transaction_id"]
+                                            for s in signals}),
+        "unique_entities_flagged": len(
+            {e for s in signals for e in s["entities"].values() if e}),
+        "by_family": by_family, "by_severity": by_severity,
+        "measurement_period": {"start": stamps[0] if stamps else "",
+                               "end": stamps[-1] if stamps else ""},
+        "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ",
+                                      time.gmtime()),
+        "tenant_scope": _request_ctx(request).tenant_id,
+        "evaluation": result["meta"],
+        "note": ("Zero means no qualifying events recorded, not "
+                 "missing instrumentation.")}
+
+
+@app.get("/api/v1/channels/summary")
+def channels_summary(request: Request = None) -> dict[str, Any]:
+    """Per-channel volume + signal counts with mapping alerts."""
+    txns, result = _tenant_signals(request)
+    summary = chan_mod.summarize(txns, result["signals"])
+    summary["generated_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ",
+                                            time.gmtime())
+    summary["tenant_scope"] = _request_ctx(request).tenant_id
+    return summary
+
+
+@app.get("/api/v1/detection/matrix")
+def detection_matrix(request: Request = None) -> dict[str, Any]:
+    """Detector × channel support matrix with per-cell evidence."""
+    txns, result = _tenant_signals(request)
+    signals = result["signals"]
+    txn_channels = {t.get("transaction_id"): chan_mod.classify(
+        t.get("channel")) for t in txns}
+    chan_txn_count: dict[str, int] = {}
+    for txn_id, canonical in txn_channels.items():
+        if canonical in chan_mod.CANONICAL:
+            chan_txn_count[canonical] = chan_txn_count.get(
+                canonical, 0) + 1
+    cells = []
+    for fam in det_mod.FAMILIES:
+        fam_sigs = [s for s in signals if s["detector_family"] == fam]
+        for channel in chan_mod.CANONICAL:
+            cell_sigs = [s for s in fam_sigs
+                         if txn_channels.get(s["transaction_id"]) ==
+                         channel]
+            if fam == "ML_ANOMALY":
+                status = "NOT_YET_IMPLEMENTED"
+            elif chan_txn_count.get(channel, 0) == 0:
+                status = "AWAITING_DATA_SOURCE"
+            else:
+                status = "SUPPORTED_AND_ACTIVE"
+            cells.append({
+                "family": fam, "channel": channel, "status": status,
+                "signals": len(cell_sigs),
+                "transactions": chan_txn_count.get(channel, 0),
+                "evidence_signal_id": (cell_sigs[0]["signal_id"]
+                                       if cell_sigs else "")})
+    return {"cells": cells,
+            "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ",
+                                          time.gmtime()),
+            "tenant_scope": _request_ctx(request).tenant_id}
 
 
 def _caller_identity(request: Request | None) -> str:

@@ -147,6 +147,19 @@ silence is not approval.
 - Evidence (slice-6): fintech-payments pilot registered + walked to
   TESTING (+7 tests); industry matrix now 2 TESTING / 43 NOT_STARTED.
 
+### D-021 — Detection signals derived, not persisted (IMPLEMENTED)
+- Date: 2026-11-05. Owner: engineering (reversible; no prod impact).
+- Decision: signal events compute deterministically from stored
+  transactions + edges on every read (idempotent IDs, version-pinned,
+  history immutable by construction). No new canonical state keys,
+  so data/state.json shape + hash are preserved; no second source
+  of truth. Persisted signal store with outcomes/audit is deferred
+  to the PostgreSQL cutover (GAP-001), which can hold signal_events
+  properly.
+- Evidence: app/detection.py + app/channels.py + 4 APIs
+  (/detectors, /signals/summary, /channels/summary,
+  /detection/matrix) + 14 tests green; suite 483 passed.
+
 ## Pending decisions (BLOCKED until answered)
 
 | ID | Question | Needed from | Blocks |
