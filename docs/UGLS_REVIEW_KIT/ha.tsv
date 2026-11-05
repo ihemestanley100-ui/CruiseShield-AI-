@@ -189,11 +189,14 @@ detection.detectorsTitle	Detector families	Detector families	fallback	true			tru
 detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
 detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
 detection.measuredAt	Measured at	Measured at	fallback	true			true
+detection.noLinkedInvestigation	No linked investigation.	No linked investigation.	fallback	true			true
 detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
 detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
 detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
 detection.title	Detection intelligence	Detection intelligence	fallback	true			true
+detection.txnSignalsTitle	Transaction signals	Transaction signals	fallback	true			true
 detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
+detection.viewInvestigation	Open investigation	Open investigation	fallback	true			true
 detection.zeroNote	Zero means measured none, not missing data.	Zero means measured none, not missing data.	fallback	true			true
 evidence.clearSearch	Clear search	Share bincike	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	Babu shaidar da ta dace.	direct	false			true

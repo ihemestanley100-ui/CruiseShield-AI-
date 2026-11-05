@@ -6,6 +6,7 @@
  * are labeled, never hidden. Counts use tabular figures for
  * scanability; the matrix is a real table with a caption. */
 
+import Link from "next/link";
 import type {
   ChannelRow,
   ChannelsSummary,
@@ -13,6 +14,7 @@ import type {
   DetectionMatrix,
   DetectorInfo,
   SignalsSummary,
+  TxnSignals,
 } from "../lib/api";
 import { useTranslation } from "../lib/i18n/context";
 
@@ -184,6 +186,45 @@ export function DetectorChannelMatrix({
           </tbody>
         </table>
       </div>
+      <p className="muted">{t("zeroNote")}</p>
+    </section>
+  );
+}
+
+export function TxnSignalsPanel({ data }: { data: TxnSignals }) {
+  const { t } = useTranslation("detection");
+  return (
+    <section className="card" aria-labelledby="txn-signals-h">
+      <h2 id="txn-signals-h">{t("txnSignalsTitle")}</h2>
+      {data.signal_count === 0 ? (
+        <p className="muted">{t("noSignals")}</p>
+      ) : (
+        <ul className="stack">
+          {data.signals.map((sig) => (
+            <li key={sig.signal_id} className="rule-row">
+              <strong>{sig.detector_family}</strong>{" "}
+              <span className="muted">
+                {sig.severity}
+                {sig.rule_id ? ` · ${sig.rule_id} v${sig.rule_version}` : ""}
+              </span>
+              <p className="muted">{sig.reason}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+      {data.investigation ? (
+        <p>
+          <Link
+            href={`/investigations/${encodeURIComponent(
+              data.investigation.investigation_id
+            )}`}
+          >
+            {t("viewInvestigation")}: {data.investigation.investigation_id}
+          </Link>
+        </p>
+      ) : (
+        <p className="muted">{t("noLinkedInvestigation")}</p>
+      )}
       <p className="muted">{t("zeroNote")}</p>
     </section>
   );

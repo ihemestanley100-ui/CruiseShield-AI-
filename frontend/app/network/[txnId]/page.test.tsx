@@ -1,12 +1,27 @@
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ApiError } from "../../../lib/api";
-import type { GraphResponse, OverlayResponse } from "../../../lib/api";
+import type {
+  GraphResponse,
+  OverlayResponse,
+  TransactionResponse,
+  TxnIntel,
+  TxnSignals,
+} from "../../../lib/api";
 import NetworkPage from "./page";
 
-const { getGraphMock, getOverlayMock } = vi.hoisted(() => ({
+const {
+  getGraphMock,
+  getOverlayMock,
+  getTransactionMock,
+  getTransactionIntelMock,
+  getTxnSignalsMock,
+} = vi.hoisted(() => ({
   getGraphMock: vi.fn(),
   getOverlayMock: vi.fn(),
+  getTransactionMock: vi.fn(),
+  getTransactionIntelMock: vi.fn(),
+  getTxnSignalsMock: vi.fn(),
 }));
 
 vi.mock("next/navigation", () => ({
@@ -27,6 +42,9 @@ vi.mock("../../../lib/api", async (importOriginal) => ({
   ...((await importOriginal()) as object),
   getGraph: getGraphMock,
   getGraphOverlay: getOverlayMock,
+  getTransaction: getTransactionMock,
+  getTransactionIntel: getTransactionIntelMock,
+  getTxnSignals: getTxnSignalsMock,
 }));
 
 function graphFixture(): GraphResponse {
@@ -54,12 +72,12 @@ function graphFixture(): GraphResponse {
         source_node_id: "acct_A",
         target_node_id: "acct_B",
         relationship_type: "SENT_TO",
-        source_event_ids: ["evt_demo_84721"],
+        source_event_ids: ["evt_84721"],
         evidence_ids: ["evidence_edge_0001"],
         valid_from: "2026-10-27T10:00:00Z",
         valid_to: null,
         synthetic_flag: true,
-        trace_id: "trace_demo_84721",
+        trace_id: "trace_84721",
       },
     ],
     provenance_errors: [],
@@ -108,10 +126,107 @@ function emptyOverlay(): OverlayResponse {
   };
 }
 
+function txnFixture(): TransactionResponse {
+  return {
+    transaction: {
+      transaction_id: "txn_84721",
+      amount_minor: 48000000,
+      currency: "NGN",
+      channel: "MOBILE_APP",
+      sender_account_id: "acct_A",
+      receiver_account_id: "acct_B",
+      occurred_at: "2026-10-27T10:00:00Z",
+    },
+    risk_transaction: {
+      risk_assessment_id: "risk_transaction_84721",
+      target_id: "txn_84721",
+      target_type: "transaction",
+      score: 35,
+      band: "MODERATE",
+      score_version: "risk-score-v1",
+      computed_at: "2026-10-28T00:00:00Z",
+      limitations: "Risk score.",
+    },
+    risk_network: {
+      risk_assessment_id: "risk_network_84721",
+      target_id: "txn_84721",
+      target_type: "network",
+      score: 84,
+      band: "HIGH",
+      score_version: "risk-score-v1",
+      computed_at: "2026-10-28T00:00:00Z",
+      limitations: "Risk score.",
+    },
+  };
+}
+
+function txnIntelFixture(): TxnIntel {
+  return {
+    transaction_id: "txn_84721",
+    source_account_id: "acct_A",
+    destination_account_id: "acct_B",
+    transaction_time: "2026-10-27T10:00:00Z",
+    device_observations: [
+      {
+        obs_id: "o1",
+        device_id: "dev_04",
+        account_id: "acct_A",
+        txn_id: "txn_84721",
+        observed_at: "2026-10-27T10:00:00Z",
+        source: "seed_event",
+        source_ref: "evt_1",
+        synthetic: true,
+      },
+      {
+        obs_id: "o2",
+        device_id: "dev_04",
+        account_id: "acct_B",
+        txn_id: "txn_84721",
+        observed_at: "2026-10-27T11:00:00Z",
+        source: "seed_event",
+        source_ref: "evt_2",
+        synthetic: true,
+      },
+    ],
+    ip_observations: [],
+    geolocation_observations: [],
+    device_graph_refs: { dev_04: ["edge_1"] },
+    observation_first_seen: "2026-10-27T10:00:00Z",
+    observation_last_seen: "2026-10-27T11:00:00Z",
+    provenance: { event_ids: ["evt_1"] },
+    synthetic: true,
+    limitations: ["fixture-derived"],
+  };
+}
+
 beforeEach(() => {
   getGraphMock.mockReset();
   getOverlayMock.mockReset();
+  getTransactionMock.mockReset();
+  getTransactionIntelMock.mockReset();
+  getTxnSignalsMock.mockReset();
   getOverlayMock.mockResolvedValue(emptyOverlay());
+  getTransactionMock.mockResolvedValue(txnFixture());
+  // DI-06 intel is best-effort: default to unavailable so existing tests
+  // assert the page without it; intel tests override per case.
+  getTransactionIntelMock.mockRejectedValue(new Error("intel down"));
+  // Detection drill-down is best-effort too: hidden unless provided.
+  getTxnSignalsMock.mockRejectedValue(new Error("signals down"));
+  // Same reduced-motion stub as the investigation page tests: the
+  // header badge renders its authoritative final value immediately.
+  vi.stubGlobal(
+    "matchMedia",
+    vi.fn().mockImplementation((query: string) => ({
+      matches: query === "(prefers-reduced-motion: reduce)",
+      media: query,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    }))
+  );
+});
+
+afterEach(() => {
+  vi.unstubAllGlobals();
 });
 
 describe("NetworkPage", () => {
@@ -164,7 +279,7 @@ describe("NetworkPage", () => {
     render(<NetworkPage />);
     await waitFor(() =>
       expect(
-        screen.getByText("Backend unreachable. Check the demo server and retry.")
+        screen.getByText("Backend unreachable. Check the platform server and retry.")
       ).toBeTruthy()
     );
     expect(screen.getByRole("button", { name: "Retry" })).toBeTruthy();
@@ -205,7 +320,7 @@ describe("NetworkPage", () => {
     getGraphMock.mockRejectedValue(new ApiError("E", "m", 0, ""));
     render(<NetworkPage />);
     const nav = await screen.findByRole("navigation", { name: "Breadcrumb" });
-    expect(nav.querySelector("a")?.getAttribute("href")).toBe("/demo");
+    expect(nav.querySelector("a")?.getAttribute("href")).toBe("/platform");
     expect(
       within(nav).getByText("Network txn_84721").getAttribute("aria-current")
     ).toBe("page");
@@ -239,5 +354,104 @@ describe("NetworkPage", () => {
       )
     );
     expect(container.querySelectorAll("[data-node]")).toHaveLength(2);
+  });
+
+  it("renders the transaction header from the base record (GAP-012)", async () => {
+    getGraphMock.mockResolvedValue(graphFixture());
+    render(<NetworkPage />);
+    await waitFor(() =>
+      expect(screen.getByText(/Transaction #84721/)).toBeTruthy()
+    );
+    expect(screen.getByText(/₦480,000/)).toBeTruthy();
+    expect(screen.getByText(/acct_A → acct_B/)).toBeTruthy();
+    expect(
+      screen.getByText(/transaction-only 35\/100 MODERATE/)
+    ).toBeTruthy();
+    expect(screen.getByText(/84\/100 HIGH/)).toBeTruthy();
+    expect(getTransactionMock).toHaveBeenCalledWith(
+      "txn_84721",
+      expect.any(AbortSignal)
+    );
+  });
+
+  it("renders device intel when the best-effort fetch succeeds (GAP-013)", async () => {
+    getGraphMock.mockResolvedValue(graphFixture());
+    getTransactionIntelMock.mockResolvedValue(txnIntelFixture());
+    render(<NetworkPage />);
+    await waitFor(() =>
+      expect(
+        screen.getByText("Device, IP & location intelligence")
+      ).toBeTruthy()
+    );
+    expect(screen.getByText(/dev_04/)).toBeTruthy();
+    expect(screen.getByText(/shared device/)).toBeTruthy();
+    expect(screen.getByText(/2 accounts/)).toBeTruthy();
+  });
+
+  it("hides the intel section when the best-effort fetch fails", async () => {
+    getGraphMock.mockResolvedValue(graphFixture());
+    render(<NetworkPage />);
+    await waitFor(() =>
+      expect(screen.getByTestId("network-counts")).toHaveTextContent(
+        "2 nodes, 1 edges"
+      )
+    );
+    expect(
+      screen.queryByText("Device, IP & location intelligence")
+    ).toBeNull();
+  });
+
+  it("renders transaction signals with an investigation link", async () => {
+    getGraphMock.mockResolvedValue(graphFixture());
+    const fixture: TxnSignals = {
+      transaction_id: "txn_84721",
+      signals: [
+        {
+          signal_id: "sig001",
+          detector_family: "VELOCITY",
+          detector_version: "1.0",
+          rule_id: "R-002",
+          rule_version: "1.0",
+          transaction_id: "txn_84721",
+          channel: "POS",
+          severity: "medium",
+          occurred_at: "2026-10-27T10:00:00Z",
+          tenant_id: "org_primary",
+          entities: { sender: "acct_A", receiver: "acct_B" },
+          reason: "R-002 fired",
+          evidence: {},
+          outcome: "PENDING",
+        },
+      ],
+      signal_count: 1,
+      investigation: {
+        investigation_id: "inv_84721",
+        alert_id: "alert_84721",
+        transaction_id: "txn_84721",
+        status: "OPEN",
+      },
+      case: { case_id: "case_84721", status: "NEW" },
+      audits: [],
+      tenant_scope: "org_primary",
+    };
+    getTxnSignalsMock.mockResolvedValue(fixture);
+    render(<NetworkPage />);
+    await waitFor(() =>
+      expect(screen.getByText("Transaction signals")).toBeTruthy()
+    );
+    expect(screen.getByText("VELOCITY")).toBeTruthy();
+    const link = screen.getByRole("link", { name: /Open investigation/ });
+    expect(link.getAttribute("href")).toBe("/investigations/inv_84721");
+  });
+
+  it("hides the signals section when the best-effort fetch fails", async () => {
+    getGraphMock.mockResolvedValue(graphFixture());
+    render(<NetworkPage />);
+    await waitFor(() =>
+      expect(screen.getByTestId("network-counts")).toHaveTextContent(
+        "2 nodes, 1 edges"
+      )
+    );
+    expect(screen.queryByText("Transaction signals")).toBeNull();
   });
 });

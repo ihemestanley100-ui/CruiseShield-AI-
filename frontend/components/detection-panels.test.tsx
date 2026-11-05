@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import type {
   ChannelsSummary,
   DetectionMatrix,
   DetectorList,
   SignalsSummary,
+  TxnSignals,
 } from "../lib/api";
 import {
   ChannelActivityPanel,
@@ -12,7 +13,18 @@ import {
   DetectorChannelMatrix,
   DetectorHealthPanel,
   SignalFrequencyPanel,
+  TxnSignalsPanel,
 } from "./detection-panels";
+
+vi.mock("next/link", () => ({
+  default: ({
+    href,
+    children,
+  }: {
+    href: string;
+    children: React.ReactNode;
+  }) => <a href={href}>{children}</a>,
+}));
 
 function summaryFixture(): SignalsSummary {
   return {
@@ -196,6 +208,62 @@ describe("DetectorChannelMatrix", () => {
     expect(
       screen.getAllByRole("rowheader").map((h) => h.textContent)
     ).toContain("ML_ANOMALY");
+  });
+});
+
+describe("TxnSignalsPanel", () => {
+  function txnFixture(): TxnSignals {
+    return {
+      transaction_id: "txn_84721",
+      signals: [
+        {
+          signal_id: "sig001",
+          detector_family: "VELOCITY",
+          detector_version: "1.0",
+          rule_id: "R-002",
+          rule_version: "1.0",
+          transaction_id: "txn_84721",
+          channel: "POS",
+          severity: "medium",
+          occurred_at: "2026-10-27T10:00:00Z",
+          tenant_id: "org_primary",
+          entities: { sender: "acct_A", receiver: "acct_B" },
+          reason: "R-002 fired",
+          evidence: {},
+          outcome: "PENDING",
+        },
+      ],
+      signal_count: 1,
+      investigation: {
+        investigation_id: "inv_84721",
+        alert_id: "alert_84721",
+        transaction_id: "txn_84721",
+        status: "OPEN",
+      },
+      case: null,
+      audits: [],
+      tenant_scope: "org_primary",
+    };
+  }
+
+  it("lists signals and links the investigation", () => {
+    render(<TxnSignalsPanel data={txnFixture()} />);
+    expect(screen.getByText("Transaction signals")).toBeTruthy();
+    expect(screen.getByText("VELOCITY")).toBeTruthy();
+    const link = screen.getByRole("link", { name: /Open investigation/ });
+    expect(link.getAttribute("href")).toBe("/investigations/inv_84721");
+  });
+
+  it("handles zero signals and no linked investigation", () => {
+    render(
+      <TxnSignalsPanel
+        data={{ ...txnFixture(), signals: [], signal_count: 0, investigation: null }}
+      />
+    );
+    expect(
+      screen.getByText("No qualifying signals recorded in this period.")
+    ).toBeTruthy();
+    expect(screen.getByText("No linked investigation.")).toBeTruthy();
   });
 });
 

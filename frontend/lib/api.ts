@@ -1146,6 +1146,43 @@ export function getDetectionMatrix(
   return requestJson<DetectionMatrix>("/api/v1/detection/matrix", signal);
 }
 
+export interface SignalEvent {
+  signal_id: string;
+  detector_family: string;
+  detector_version: string;
+  rule_id: string;
+  rule_version: string;
+  transaction_id: string;
+  channel: string;
+  severity: string;
+  occurred_at: string;
+  tenant_id: string;
+  entities: { sender: string; receiver: string };
+  reason: string;
+  evidence: Record<string, unknown>;
+  outcome: string;
+}
+
+export interface TxnSignals {
+  transaction_id: string;
+  signals: SignalEvent[];
+  signal_count: number;
+  investigation: InvestigationSummary | null;
+  case: { case_id: string; status: string } | null;
+  audits: AuditEntry[];
+  tenant_scope: string;
+}
+
+export function getTxnSignals(
+  txnId: string,
+  signal?: AbortSignal
+): Promise<TxnSignals> {
+  return requestJson<TxnSignals>(
+    `/api/v1/signals/by-transaction/${encodeURIComponent(txnId)}`,
+    signal
+  );
+}
+
 export function postLogin(
   username: string,
   password: string,

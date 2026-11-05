@@ -25,8 +25,8 @@ Cell escaping: tabs → space, newlines → literal `\n`.
 
 ## Current integrity snapshot (2026-11-05)
 
-- Rows per locale: 602 (591 prior + 11 `detection.*` fallback).
-  Fallback rows: 11 (detection namespace, machine drafts pending).
+- Rows per locale: 605 (591 prior + 14 `detection.*` fallback).
+  Fallback rows: 14 (detection namespace, machine drafts pending).
 - `same_as_source`: prior counts + 11 detection fallback rows per
   locale — brand/data terms plus untranslated English, reviewer to
   confirm each.

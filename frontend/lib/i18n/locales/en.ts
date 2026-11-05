@@ -488,6 +488,9 @@ export const en = {
     zeroNote: "Zero means measured none, not missing data.",
     notImplemented: "Not implemented: no model deployed.",
     measuredAt: "Measured at",
+    txnSignalsTitle: "Transaction signals",
+    viewInvestigation: "Open investigation",
+    noLinkedInvestigation: "No linked investigation.",
   },
   intel: {
     intelTitle: "Device, IP & location intelligence",

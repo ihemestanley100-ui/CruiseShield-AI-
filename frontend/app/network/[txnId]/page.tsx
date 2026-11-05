@@ -7,24 +7,46 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Breadcrumbs } from "../../../components/breadcrumbs";
+import {
+  DeviceBlock,
+  GeoBlock,
+  IpBlock,
+} from "../../../components/intel-panels";
+import { TxnSignalsPanel } from "../../../components/detection-panels";
 import { GraphExplorer } from "../../../components/graph-explorer";
 import { GraphTable } from "../../../components/graph-table";
 import { OrbitalExplorer } from "../../../components/orbital-explorer";
+import { RiskBadge } from "../../../components/risk-badge";
 import {
   ApiError,
   getGraph,
   getGraphOverlay,
+  getTransaction,
+  getTransactionIntel,
+  getTxnSignals,
   userErrorMessage,
   type GraphEdge,
   type GraphNode,
   type GraphResponse,
   type OverlayResponse,
+  type TransactionResponse,
+  type TxnIntel,
+  type TxnSignals,
 } from "../../../lib/api";
+import { formatKobo } from "../../../lib/format";
 import { useTranslation } from "../../../lib/i18n/context";
+import { formatDate } from "../../../lib/i18n/format";
 
 type State =
   | { kind: "loading" }
-  | { kind: "ready"; graph: GraphResponse; overlay: OverlayResponse | null }
+  | {
+      kind: "ready";
+      graph: GraphResponse;
+      overlay: OverlayResponse | null;
+      txn: TransactionResponse;
+      intel: TxnIntel | null;
+      signals: TxnSignals | null;
+    }
   | { kind: "not-found" }
   | { kind: "error"; message: string };
 
@@ -79,6 +101,8 @@ export default function NetworkPage() {
   const { t } = useTranslation("network");
   const { t: tCommon } = useTranslation("common");
   const { t: tNav } = useTranslation("nav");
+  const { t: tInv, locale } = useTranslation("investigation");
+  const { t: tIntel } = useTranslation("intel");
   const [state, setState] = useState<State>({ kind: "loading" });
   const [view, setView] = useState<"orbital" | "flat">("orbital");
 
@@ -90,8 +114,16 @@ export default function NetworkPage() {
       /* DI-07 overlay is best-effort: the base graph renders even if
        * the overlay is missing or fails. */
       getGraphOverlay(txnId, controller.signal).catch(() => null),
+      /* GAP-012: base record for the header (same UNKNOWN_TRANSACTION
+       * contract as the graph); DI-06 intel is best-effort. */
+      getTransaction(txnId, controller.signal),
+      getTransactionIntel(txnId, controller.signal).catch(() => null),
+      /* Detection drill-down is best-effort like intel. */
+      getTxnSignals(txnId, controller.signal).catch(() => null),
     ])
-      .then(([graph, overlay]) => setState({ kind: "ready", graph, overlay }))
+      .then(([graph, overlay, txn, intel, signals]) =>
+        setState({ kind: "ready", graph, overlay, txn, intel, signals })
+      )
       .catch((err: unknown) => {
         if (controller.signal.aborted) return;
         if (err instanceof ApiError && err.code === "UNKNOWN_TRANSACTION") {
@@ -110,7 +142,7 @@ export default function NetworkPage() {
     <main className="main">
       <Breadcrumbs
         items={[
-          { label: tNav("commandCenter"), href: "/demo" },
+          { label: tNav("commandCenter"), href: "/platform" },
           { label: t("crumb", { id: txnId }) },
         ]}
       />
@@ -147,6 +179,46 @@ export default function NetworkPage() {
         <>
           <div className="page-head">
             <h1>{t("headTitle", { id: state.graph.transaction_id })}</h1>
+            <p>
+              {tInv("txnTitle", {
+                n: state.txn.transaction.transaction_id.split("_")[1],
+              })}{" "}
+              —{" "}
+              {formatKobo(
+                state.txn.transaction.amount_minor,
+                state.txn.transaction.currency,
+                locale
+              )}
+            </p>
+            <p>
+              {tInv("overviewLinePre", {
+                sender: state.txn.transaction.sender_account_id,
+                receiver: state.txn.transaction.receiver_account_id,
+                channel: state.txn.transaction.channel,
+              })}{" "}
+              <bdi>
+                {formatDate(locale, state.txn.transaction.occurred_at, {
+                  dateStyle: "medium",
+                  timeStyle: "short",
+                })}
+              </bdi>
+            </p>
+            <p>
+              <RiskBadge
+                score={state.txn.risk_network.score}
+                band={state.txn.risk_network.band}
+              />{" "}
+              <span className="muted">
+                {tInv("riskLine", {
+                  score: state.txn.risk_transaction.score,
+                  band: state.txn.risk_transaction.band,
+                  version: state.txn.risk_network.score_version,
+                })}
+              </span>
+            </p>
+            <p className="muted">
+              {state.txn.risk_network.limitations}
+            </p>
             <p className="muted" data-testid="network-counts">
               {t("countsLine", {
                 nodes: state.graph.counts.nodes,
@@ -163,6 +235,18 @@ export default function NetworkPage() {
               </div>
             )}
           </div>
+          {state.intel && (
+            <section className="card" aria-labelledby="net-intel-h">
+              <h2 id="net-intel-h">{tIntel("intelTitle")}</h2>
+              <h3>{tIntel("deviceH")}</h3>
+              <DeviceBlock intel={state.intel} />
+              <h3>{tIntel("ipH")}</h3>
+              <IpBlock intel={state.intel} />
+              <h3>{tIntel("geoH")}</h3>
+              <GeoBlock intel={state.intel} />
+            </section>
+          )}
+          {state.signals && <TxnSignalsPanel data={state.signals} />}
           {state.graph.counts.nodes === 0 ? (
             <section className="card" aria-live="polite">
               <p className="muted">{t("emptyGraph")}</p>
