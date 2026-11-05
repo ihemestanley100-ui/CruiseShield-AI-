@@ -263,3 +263,32 @@ Every gap between current implementation and a production-grade system.
   already documented in app/ratelimit.py:1-12 and the flag provider in
   app/risk_intel.py:28-54; added the missing RISK_INTELLIGENCE_V2_ENABLED
   entry to .env.example (names-only).
+
+### DETECTION ACCEPTANCE — Live detection intelligence directive §14
+- Scope: app/detection.py, app/channels.py, 5 APIs
+  (/detectors, /signals/summary, /channels/summary,
+  /detection/matrix, /signals/by-transaction/{txn_id}),
+  Command Center DetectionSection + kit rows.
+- Evidence: tests/test_detection.py (18 green), offline kit-format
+  checks 40/40, suite 487 passed / 137 skipped / same sandbox-only
+  1F+2E, state hash BA1D4DB4…3790FE intact.
+- AC-01 detector statuses: PASS (10 OPERATIONAL + ML_ANOMALY
+  NOT_IMPLEMENTED, registry-tested).
+- AC-02 channel taxonomy: PASS (8 canonical + UNMAPPED alert).
+- AC-03 signal persistence: PARTIAL (derived-on-read per D-021;
+  persisted signal_events awaits GAP-001 PG cutover).
+- AC-04 frequency reconciliation: PASS.
+- AC-05 channel reconciliation: PASS.
+- AC-06 matrix verification: PASS (88 cells + evidence refs).
+- AC-07 tenant isolation: PASS (summary + drill-down tests).
+- AC-08 drill-down: PASS (API + consistency tests).
+- AC-09 investigation linkage: PASS (chain test).
+- AC-10 audit provenance: PASS (audits-target-case + sealing).
+- AC-11 backend tests: PASS (modulo sandbox-only 1F+2E).
+- AC-12 frontend tests: BLOCKED (node EPERM: realpathSync must
+  lstat C:\\Users\\HP; 4 workarounds failed; needs hosted CI).
+- AC-13 hosted CI: BLOCKED (D-017 push authorization).
+- AC-14 deployment: BLOCKED (D-017 / GAP-009).
+- AC-15 no fabricated stats: PASS (measured zeros, SEED_FEED,
+  NOT_IMPLEMENTED labels, all asserted).
+- Follow-up: txn-page signal panel (frontend deep-link) unbuilt.

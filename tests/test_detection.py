@@ -175,3 +175,49 @@ def test_matrix_88_cells_with_honest_statuses():
     active = [c for c in body["cells"]
               if c["status"] == "SUPPORTED_AND_ACTIVE" and c["signals"]]
     assert active, "seed must yield at least one evidenced active cell"
+
+
+def test_drill_down_resolves_full_provenance_chain(tmp_store):
+    body = main.signals_by_transaction("txn_84721")
+    assert body["transaction_id"] == "txn_84721"
+    assert body["signal_count"] == len(body["signals"])
+    inv = body["investigation"]
+    assert inv is not None
+    assert inv["transaction_id"] == "txn_84721"
+    case = body["case"]
+    assert case is not None
+    assert case["investigation_id"] == inv["investigation_id"]
+    for audit in body["audits"]:
+        assert audit["target_id"] == case["case_id"]
+    for sig in body["signals"]:
+        assert tmp_store.get_transaction(sig["transaction_id"]) is not None
+
+
+def test_drill_down_unknown_txn_is_404():
+    with pytest.raises(main.AppError) as exc:
+        main.signals_by_transaction("txn_nope")
+    assert (exc.value.code, exc.value.status) == ("UNKNOWN_TRANSACTION",
+                                                  404)
+
+
+def test_drill_down_foreign_txn_is_404(tmp_store, monkeypatch):
+    register_tenant("org_beta")
+    monkeypatch.setattr(
+        main, "_request_ctx",
+        lambda request=None: TenantContext(tenant_id="org_beta",
+                                           actor="bob"))
+    with pytest.raises(main.AppError) as exc:
+        main.signals_by_transaction("txn_84721")
+    assert exc.value.status == 404
+
+
+def test_drill_down_consistent_with_summary():
+    summary = main.signals_summary()
+    txns = main.store.state["transactions"]
+    seen: set[str] = set()
+    for txn in txns:
+        body = main.signals_by_transaction(txn["transaction_id"])
+        for sig in body["signals"]:
+            assert sig["transaction_id"] == txn["transaction_id"]
+            seen.add(sig["signal_id"])
+    assert len(seen) == summary["total_signals"]

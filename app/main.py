@@ -937,6 +937,42 @@ def detection_matrix(request: Request = None) -> dict[str, Any]:
             "tenant_scope": _request_ctx(request).tenant_id}
 
 
+@app.get("/api/v1/signals/by-transaction/{txn_id}")
+def signals_by_transaction(txn_id: str,
+                           request: Request = None) -> dict[str, Any]:
+    """Signal-to-investigation drill-down for one transaction.
+
+    Derived signals plus the linked investigation, case, and case
+    audits (provenance chain). Tenant-gated at every hop; foreign or
+    missing records read as NOT FOUND.
+    """
+    ctx = _request_ctx(request)
+    txn = tenancy_mod.enforce_read(store.get_transaction(txn_id), ctx)
+    if txn is None:
+        raise AppError("UNKNOWN_TRANSACTION", txn_id, 404)
+    txns = tenancy_mod.filter_visible(store.state["transactions"], ctx)
+    result = det_mod.evaluate_all(txns, store.state["edges"])
+    txn_signals = [s for s in result["signals"]
+                   if s["transaction_id"] == txn_id]
+    inv = tenancy_mod.enforce_read(next(
+        (i for i in store.state["investigations"]
+         if i.get("transaction_id") == txn_id), None), ctx)
+    case = None
+    audits: list[dict] = []
+    if inv is not None:
+        case = tenancy_mod.enforce_read(next(
+            (c for c in store.state["cases"]
+             if c.get("investigation_id") == inv["investigation_id"]),
+            None), ctx)
+        if case is not None:
+            audits = [a for a in store.state["audits"]
+                      if a.get("target_id") == case["case_id"]]
+    return {"transaction_id": txn_id, "signals": txn_signals,
+            "signal_count": len(txn_signals),
+            "investigation": inv, "case": case, "audits": audits,
+            "tenant_scope": ctx.tenant_id}
+
+
 def _caller_identity(request: Request | None) -> str:
     """Stable per-caller key for notification read state.
 
