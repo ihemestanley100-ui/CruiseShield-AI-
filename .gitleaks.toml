@@ -14,9 +14,3 @@ regexes = [
   '''test-secret-[a-z]+-032-chars-ok''',
   '''credential codes, validation/refusal fail-fast''',
 ]
-paths = [
-  '''tests/test_billing\.py''',
-  '''tests/test_geointel_api\.py''',
-  '''tests/test_telecom_contract\.py''',
-  '''docs/PROJECT_EXECUTION_STATE\.md''',
-]
