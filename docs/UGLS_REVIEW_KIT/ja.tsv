@@ -184,23 +184,23 @@ decision.selectPlaceholder	Select a decision…	判断を選択…	direct	false	
 decision.targetLabel	Move case to	案件の移動先	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	この案件は終了状態です。これ以上の遷移はできません。	direct	false			true
 decision.title	Human decision	人間の判断	direct	false			true
-detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
-detection.detectorsTitle	Detector families	Detector families	fallback	true			true
-detection.fpRate	False-positive rate	False-positive rate	fallback	true			true
-detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
-detection.investigationsWord	investigations	investigations	fallback	true			true
-detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
-detection.measuredAt	Measured at	Measured at	fallback	true			true
-detection.noLinkedInvestigation	No linked investigation.	No linked investigation.	fallback	true			true
-detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
-detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
-detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
-detection.timeSeriesTitle	Signal time series	Signal time series	fallback	true			true
-detection.title	Detection intelligence	Detection intelligence	fallback	true			true
-detection.txnSignalsTitle	Transaction signals	Transaction signals	fallback	true			true
-detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
-detection.viewInvestigation	Open investigation	Open investigation	fallback	true			true
-detection.zeroNote	Zero means measured none, not missing data.	Zero means measured none, not missing data.	fallback	true			true
+detection.channelsTitle	Channel activity	チャネル活動	direct	false			true
+detection.detectorsTitle	Detector families	検出器ファミリー	direct	false			true
+detection.fpRate	False-positive rate	誤検出率	direct	false			true
+detection.frequencyTitle	Signal frequency	シグナル頻度	direct	false			true
+detection.investigationsWord	investigations	調査	direct	false			true
+detection.matrixTitle	Detector by channel	チャネル別検出器	direct	false			true
+detection.measuredAt	Measured at	測定日時	direct	false			true
+detection.noLinkedInvestigation	No linked investigation.	リンクされた調査はありません。	direct	false			true
+detection.noSignals	No qualifying signals recorded in this period.	この期間に記録された有効なシグナルはありません。	direct	false			true
+detection.notImplemented	Not implemented: no model deployed.	未実装: デプロイされたモデルがありません。	direct	false			true
+detection.seedFeedNote	Seed feed: no live channel integration.	シードフィード: ライブのチャネル統合はありません。	direct	false			true
+detection.timeSeriesTitle	Signal time series	シグナル時系列	direct	false			true
+detection.title	Detection intelligence	検出インテリジェンス	direct	false			true
+detection.txnSignalsTitle	Transaction signals	トランザクションシグナル	direct	false			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	未マッピングのチャネルコードは分類の見直しが必要です。	direct	false			true
+detection.viewInvestigation	Open investigation	調査を開く	direct	false			true
+detection.zeroNote	Zero means measured none, not missing data.	ゼロは測定値なしを意味し、データ欠落ではありません。	direct	false			true
 evidence.clearSearch	Clear search	検索をクリア	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	一致する証拠がありません。	direct	false			true
 evidence.emptySearch	No evidence items match this search.	この検索に一致する証拠がありません。	direct	false			true

@@ -58,8 +58,10 @@ describe("GeointelMap", () => {
     await waitFor(() => expect(mapMock).toHaveBeenCalledTimes(1));
     expect(await screen.findByLabelText("Evidence markers schematic"))
       .toBeTruthy();
-    expect(screen.getAllByRole("button", { expanded: false }).length)
-      .toBeGreaterThan(0);
+    // Markers are role=button without aria-expanded; match by status name.
+    expect(
+      screen.getAllByRole("button", { name: /VERIFIED|ESTIMATED/ }).length
+    ).toBeGreaterThan(0);
   });
 
   it("uses distinct shapes per evidence class", async () => {

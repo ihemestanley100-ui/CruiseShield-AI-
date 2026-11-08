@@ -184,23 +184,23 @@ decision.selectPlaceholder	Select a decision…	Yan ìpinnu…	direct	false			tr
 decision.targetLabel	Move case to	Gbé ọ̀ràn lọ sí	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	Ọ̀ràn yìí wà ní ipò ìparí; a kò gbà ìyípadà mìíràn.	direct	false			true
 decision.title	Human decision	Ìpinnu ènìyàn	direct	false			true
-detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
-detection.detectorsTitle	Detector families	Detector families	fallback	true			true
-detection.fpRate	False-positive rate	False-positive rate	fallback	true			true
-detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
-detection.investigationsWord	investigations	investigations	fallback	true			true
-detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
-detection.measuredAt	Measured at	Measured at	fallback	true			true
-detection.noLinkedInvestigation	No linked investigation.	No linked investigation.	fallback	true			true
-detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
-detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
-detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
-detection.timeSeriesTitle	Signal time series	Signal time series	fallback	true			true
-detection.title	Detection intelligence	Detection intelligence	fallback	true			true
-detection.txnSignalsTitle	Transaction signals	Transaction signals	fallback	true			true
-detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
-detection.viewInvestigation	Open investigation	Open investigation	fallback	true			true
-detection.zeroNote	Zero means measured none, not missing data.	Zero means measured none, not missing data.	fallback	true			true
+detection.channelsTitle	Channel activity	Ìṣiṣẹ́ ikanni	direct	false			true
+detection.detectorsTitle	Detector families	Àwọn ìdílé aṣàwárí	direct	false			true
+detection.fpRate	False-positive rate	Ìwọ̀n àṣìṣe rere	direct	false			true
+detection.frequencyTitle	Signal frequency	Ìgbà àwọn àmì	direct	false			true
+detection.investigationsWord	investigations	ìwádìí	direct	false			true
+detection.matrixTitle	Detector by channel	Aṣàwárí ní ikanni	direct	false			true
+detection.measuredAt	Measured at	A díwọ̀n ní	direct	false			true
+detection.noLinkedInvestigation	No linked investigation.	Kò sí ìwádìí tó jẹ mọ́.	direct	false			true
+detection.noSignals	No qualifying signals recorded in this period.	Kò sí àmì tó yẹ tí a gbà sílẹ̀ ní àkókò yìí.	direct	false			true
+detection.notImplemented	Not implemented: no model deployed.	Kò tíì ṣe: kò sí àwòṣe tí a gbé kalẹ̀.	direct	false			true
+detection.seedFeedNote	Seed feed: no live channel integration.	Ìfúnni ìbẹ̀rẹ̀: kò sí ìsopọ̀ ikanni lọ́wọ́lọ́wọ́.	direct	false			true
+detection.timeSeriesTitle	Signal time series	Àkójọ àmì àkókò	direct	false			true
+detection.title	Detection intelligence	Òye ìwádìí	direct	false			true
+detection.txnSignalsTitle	Transaction signals	Àwọn àmì ìṣòwò	direct	false			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Àwọn kóòdù ikanni tí kò ní àwòrán nílò àtúnyẹ̀wò ìsọ̀rí.	direct	false			true
+detection.viewInvestigation	Open investigation	Ṣí ìwádìí	direct	false			true
+detection.zeroNote	Zero means measured none, not missing data.	Òdo mó léwu pé kò sí nǹkan tí a díwọ̀n, kì í ṣe dátà tó sọnù.	direct	false			true
 evidence.clearSearch	Clear search	Nu ìwá	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	Kò sí ẹ̀rí tó bá àlẹ̀mọ́ yìí mu.	direct	false			true
 evidence.emptySearch	No evidence items match this search.	Kò sí ẹ̀rí tó bá ìwá yìí mu.	direct	false			true

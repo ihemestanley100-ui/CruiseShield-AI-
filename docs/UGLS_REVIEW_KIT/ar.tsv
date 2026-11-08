@@ -184,23 +184,23 @@ decision.selectPlaceholder	Select a decision…	اختر قرارًا…	direct	
 decision.targetLabel	Move case to	نقل القضية إلى	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	هذه القضية في حالة نهائية؛ لا يُسمح بأي انتقالات أخرى.	direct	false			true
 decision.title	Human decision	قرار بشري	direct	false			true
-detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
-detection.detectorsTitle	Detector families	Detector families	fallback	true			true
-detection.fpRate	False-positive rate	False-positive rate	fallback	true			true
-detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
-detection.investigationsWord	investigations	investigations	fallback	true			true
-detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
-detection.measuredAt	Measured at	Measured at	fallback	true			true
-detection.noLinkedInvestigation	No linked investigation.	No linked investigation.	fallback	true			true
-detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
-detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
-detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
-detection.timeSeriesTitle	Signal time series	Signal time series	fallback	true			true
-detection.title	Detection intelligence	Detection intelligence	fallback	true			true
-detection.txnSignalsTitle	Transaction signals	Transaction signals	fallback	true			true
-detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
-detection.viewInvestigation	Open investigation	Open investigation	fallback	true			true
-detection.zeroNote	Zero means measured none, not missing data.	Zero means measured none, not missing data.	fallback	true			true
+detection.channelsTitle	Channel activity	نشاط القنوات	direct	false			true
+detection.detectorsTitle	Detector families	عائلات الكاشفات	direct	false			true
+detection.fpRate	False-positive rate	معدل الإيجابيات الكاذبة	direct	false			true
+detection.frequencyTitle	Signal frequency	تكرار الإشارات	direct	false			true
+detection.investigationsWord	investigations	تحقيقات	direct	false			true
+detection.matrixTitle	Detector by channel	الكاشف حسب القناة	direct	false			true
+detection.measuredAt	Measured at	تم القياس في	direct	false			true
+detection.noLinkedInvestigation	No linked investigation.	لا يوجد تحقيق مرتبط.	direct	false			true
+detection.noSignals	No qualifying signals recorded in this period.	لم يتم تسجيل إشارات مؤهلة في هذه الفترة.	direct	false			true
+detection.notImplemented	Not implemented: no model deployed.	غير منفذ: لم يتم نشر أي نموذج.	direct	false			true
+detection.seedFeedNote	Seed feed: no live channel integration.	تغذية أولية: لا يوجد تكامل مباشر للقنوات.	direct	false			true
+detection.timeSeriesTitle	Signal time series	السلسلة الزمنية للإشارات	direct	false			true
+detection.title	Detection intelligence	استخبارات الكشف	direct	false			true
+detection.txnSignalsTitle	Transaction signals	إشارات المعاملات	direct	false			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	رموز القنوات غير المعينة تحتاج إلى مراجعة التصنيف.	direct	false			true
+detection.viewInvestigation	Open investigation	فتح التحقيق	direct	false			true
+detection.zeroNote	Zero means measured none, not missing data.	الصفر يعني أنه لم يتم قياس شيء، وليس بيانات مفقودة.	direct	false			true
 evidence.clearSearch	Clear search	مسح البحث	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	لا توجد أدلة مطابقة لهذا المرشح.	direct	false			true
 evidence.emptySearch	No evidence items match this search.	لا توجد أدلة مطابقة لهذا البحث.	direct	false			true

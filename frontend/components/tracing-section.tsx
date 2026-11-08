@@ -46,7 +46,7 @@ export function TracingSection({ txnId }: { txnId: string }) {
       return;
     }
     setTrace({ kind: "building" });
-    postTrace(txnId)
+    postTrace(txnId, 4)
       .then((data) => getTrace(data.trace_id).then(() => data))
       .then((data) => setTrace({ kind: "ready", data }))
       .catch((err: unknown) =>

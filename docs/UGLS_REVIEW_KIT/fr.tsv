@@ -184,23 +184,23 @@ decision.selectPlaceholder	Select a decision…	Choisir une décision…	direct	
 decision.targetLabel	Move case to	Déplacer le dossier vers	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	Ce dossier est dans un état final ; aucune autre transition n'est autorisée.	direct	false			true
 decision.title	Human decision	Décision humaine	direct	false			true
-detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
-detection.detectorsTitle	Detector families	Detector families	fallback	true			true
-detection.fpRate	False-positive rate	False-positive rate	fallback	true			true
-detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
-detection.investigationsWord	investigations	investigations	fallback	true			true
-detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
-detection.measuredAt	Measured at	Measured at	fallback	true			true
-detection.noLinkedInvestigation	No linked investigation.	No linked investigation.	fallback	true			true
-detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
-detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
-detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
-detection.timeSeriesTitle	Signal time series	Signal time series	fallback	true			true
-detection.title	Detection intelligence	Detection intelligence	fallback	true			true
-detection.txnSignalsTitle	Transaction signals	Transaction signals	fallback	true			true
-detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
-detection.viewInvestigation	Open investigation	Open investigation	fallback	true			true
-detection.zeroNote	Zero means measured none, not missing data.	Zero means measured none, not missing data.	fallback	true			true
+detection.channelsTitle	Channel activity	Activité des canaux	direct	false			true
+detection.detectorsTitle	Detector families	Familles de détecteurs	direct	false			true
+detection.fpRate	False-positive rate	Taux de faux positifs	direct	false			true
+detection.frequencyTitle	Signal frequency	Fréquence des signaux	direct	false			true
+detection.investigationsWord	investigations	enquêtes	direct	false			true
+detection.matrixTitle	Detector by channel	Détecteur par canal	direct	false			true
+detection.measuredAt	Measured at	Mesuré le	direct	false			true
+detection.noLinkedInvestigation	No linked investigation.	Aucune enquête liée.	direct	false			true
+detection.noSignals	No qualifying signals recorded in this period.	Aucun signal retenu enregistré sur cette période.	direct	false			true
+detection.notImplemented	Not implemented: no model deployed.	Non implémenté : aucun modèle déployé.	direct	false			true
+detection.seedFeedNote	Seed feed: no live channel integration.	Flux initial : aucune intégration de canal en direct.	direct	false			true
+detection.timeSeriesTitle	Signal time series	Série temporelle des signaux	direct	false			true
+detection.title	Detection intelligence	Renseignement détection	direct	false			true
+detection.txnSignalsTitle	Transaction signals	Signaux de transaction	direct	false			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Des codes de canal non mappés nécessitent une révision de la taxonomie.	direct	false			true
+detection.viewInvestigation	Open investigation	Ouvrir l'enquête	direct	false			true
+detection.zeroNote	Zero means measured none, not missing data.	Zéro signifie aucun mesuré, pas des données manquantes.	direct	false			true
 evidence.clearSearch	Clear search	Effacer la recherche	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	Aucune preuve ne correspond à ce filtre.	direct	false			true
 evidence.emptySearch	No evidence items match this search.	Aucune preuve ne correspond à cette recherche.	direct	false			true

@@ -184,23 +184,23 @@ decision.selectPlaceholder	Select a decision…	选择一项决策…	direct	fal
 decision.targetLabel	Move case to	将案件移至	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	此案件处于终态；不允许进一步转换。	direct	false			true
 decision.title	Human decision	人工决策	direct	false			true
-detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
-detection.detectorsTitle	Detector families	Detector families	fallback	true			true
-detection.fpRate	False-positive rate	False-positive rate	fallback	true			true
-detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
-detection.investigationsWord	investigations	investigations	fallback	true			true
-detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
-detection.measuredAt	Measured at	Measured at	fallback	true			true
-detection.noLinkedInvestigation	No linked investigation.	No linked investigation.	fallback	true			true
-detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
-detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
-detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
-detection.timeSeriesTitle	Signal time series	Signal time series	fallback	true			true
-detection.title	Detection intelligence	Detection intelligence	fallback	true			true
-detection.txnSignalsTitle	Transaction signals	Transaction signals	fallback	true			true
-detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
-detection.viewInvestigation	Open investigation	Open investigation	fallback	true			true
-detection.zeroNote	Zero means measured none, not missing data.	Zero means measured none, not missing data.	fallback	true			true
+detection.channelsTitle	Channel activity	渠道活动	direct	false			true
+detection.detectorsTitle	Detector families	检测器系列	direct	false			true
+detection.fpRate	False-positive rate	误报率	direct	false			true
+detection.frequencyTitle	Signal frequency	信号频率	direct	false			true
+detection.investigationsWord	investigations	调查	direct	false			true
+detection.matrixTitle	Detector by channel	按渠道划分的检测器	direct	false			true
+detection.measuredAt	Measured at	测量于	direct	false			true
+detection.noLinkedInvestigation	No linked investigation.	无关联调查。	direct	false			true
+detection.noSignals	No qualifying signals recorded in this period.	本周期内未记录到合格信号。	direct	false			true
+detection.notImplemented	Not implemented: no model deployed.	未实现：未部署模型。	direct	false			true
+detection.seedFeedNote	Seed feed: no live channel integration.	种子源：无实时渠道集成。	direct	false			true
+detection.timeSeriesTitle	Signal time series	信号时间序列	direct	false			true
+detection.title	Detection intelligence	检测智能	direct	false			true
+detection.txnSignalsTitle	Transaction signals	交易信号	direct	false			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	未映射的渠道代码需要分类复查。	direct	false			true
+detection.viewInvestigation	Open investigation	打开调查	direct	false			true
+detection.zeroNote	Zero means measured none, not missing data.	零表示实测为零，而非数据缺失。	direct	false			true
 evidence.clearSearch	Clear search	清除搜索	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	没有匹配的证据。	direct	false			true
 evidence.emptySearch	No evidence items match this search.	没有与此搜索匹配的证据。	direct	false			true

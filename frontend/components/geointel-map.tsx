@@ -196,7 +196,7 @@ export function GeointelMap({
                   key={`${name}-${i}`}
                   onClick={() => setSelected({ ...item, layer: name })}
                   role="button"
-                  aria-label={`${name} ${statusOf(item)}`}
+                  aria-label={`${kindOf(item)} ${statusOf(item)}`}
                   tabIndex={0}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ")

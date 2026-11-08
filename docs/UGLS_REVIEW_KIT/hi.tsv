@@ -184,23 +184,23 @@ decision.selectPlaceholder	Select a decision…	निर्णय चुने�
 decision.targetLabel	Move case to	मामला यहां ले जाएं	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	यह मामला अंतिम स्थिति में है; आगे कोई परिवर्तन अनुमत नहीं है।	direct	false			true
 decision.title	Human decision	मानव निर्णय	direct	false			true
-detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
-detection.detectorsTitle	Detector families	Detector families	fallback	true			true
-detection.fpRate	False-positive rate	False-positive rate	fallback	true			true
-detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
-detection.investigationsWord	investigations	investigations	fallback	true			true
-detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
-detection.measuredAt	Measured at	Measured at	fallback	true			true
-detection.noLinkedInvestigation	No linked investigation.	No linked investigation.	fallback	true			true
-detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
-detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
-detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
-detection.timeSeriesTitle	Signal time series	Signal time series	fallback	true			true
-detection.title	Detection intelligence	Detection intelligence	fallback	true			true
-detection.txnSignalsTitle	Transaction signals	Transaction signals	fallback	true			true
-detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
-detection.viewInvestigation	Open investigation	Open investigation	fallback	true			true
-detection.zeroNote	Zero means measured none, not missing data.	Zero means measured none, not missing data.	fallback	true			true
+detection.channelsTitle	Channel activity	चैनल गतिविधि	direct	false			true
+detection.detectorsTitle	Detector families	डिटेक्टर परिवार	direct	false			true
+detection.fpRate	False-positive rate	मिथ्या सकारात्मक दर	direct	false			true
+detection.frequencyTitle	Signal frequency	सिग्नल आवृत्ति	direct	false			true
+detection.investigationsWord	investigations	जांच	direct	false			true
+detection.matrixTitle	Detector by channel	चैनल के अनुसार डिटेक्टर	direct	false			true
+detection.measuredAt	Measured at	मापन समय	direct	false			true
+detection.noLinkedInvestigation	No linked investigation.	कोई जुड़ी जांच नहीं।	direct	false			true
+detection.noSignals	No qualifying signals recorded in this period.	इस अवधि में कोई योग्य सिग्नल दर्ज नहीं हुआ।	direct	false			true
+detection.notImplemented	Not implemented: no model deployed.	लागू नहीं: कोई मॉडल तैनात नहीं।	direct	false			true
+detection.seedFeedNote	Seed feed: no live channel integration.	सीड फ़ीड: कोई लाइव चैनल एकीकरण नहीं।	direct	false			true
+detection.timeSeriesTitle	Signal time series	सिग्नल समय श्रृंखला	direct	false			true
+detection.title	Detection intelligence	पता लगाने की इंटेलिजेंस	direct	false			true
+detection.txnSignalsTitle	Transaction signals	लेनदेन सिग्नल	direct	false			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	अमैप्ड चैनल कोडों को वर्गीकरण समीक्षा चाहिए।	direct	false			true
+detection.viewInvestigation	Open investigation	जांच खोलें	direct	false			true
+detection.zeroNote	Zero means measured none, not missing data.	शून्य का अर्थ है मापा गया कुछ नहीं, डेटा गायब नहीं।	direct	false			true
 evidence.clearSearch	Clear search	खोज साफ़ करें	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	कोई मेल खाता साक्ष्य नहीं।	direct	false			true
 evidence.emptySearch	No evidence items match this search.	इस खोज से कोई साक्ष्य मेल नहीं खाता।	direct	false			true

@@ -398,8 +398,11 @@ describe("CasePage", () => {
     expect(
       screen.queryByText("Two accounts share device dev_04.")
     ).toBeNull();
+    // The run-receipt toggle inside the assessment card; the telecom
+    // section below has its own closed toggle with the same label.
+    const assessment = within(screen.getByTestId("ai-assessment"));
     fireEvent.click(
-      screen.getByRole("button", { name: "Show provenance" })
+      assessment.getByRole("button", { name: "Show provenance" })
     );
     await waitFor(() =>
       expect(
@@ -410,7 +413,7 @@ describe("CasePage", () => {
     expect(screen.getByText("Shared household device.")).toBeTruthy();
     expect(screen.getByText("Advisory only.")).toBeTruthy();
     fireEvent.click(
-      screen.getByRole("button", { name: "Hide provenance" })
+      assessment.getByRole("button", { name: "Hide provenance" })
     );
     await waitFor(() =>
       expect(

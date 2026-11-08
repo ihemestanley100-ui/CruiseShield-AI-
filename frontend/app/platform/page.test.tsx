@@ -11,6 +11,7 @@ import {
   type DetectionMatrix,
   type DetectorList,
   type SignalsSummary,
+  type SignalsTimeSeries,
 } from "../../lib/api";
 import CommandPage from "./page";
 
@@ -25,6 +26,7 @@ const {
   getChannelsSummaryMock,
   getDetectorsMock,
   getDetectionMatrixMock,
+  getSignalsTimeSeriesMock,
 } = vi.hoisted(() => ({
   getHealthMock: vi.fn(),
   getInvestigationMock: vi.fn(),
@@ -36,6 +38,7 @@ const {
   getChannelsSummaryMock: vi.fn(),
   getDetectorsMock: vi.fn(),
   getDetectionMatrixMock: vi.fn(),
+  getSignalsTimeSeriesMock: vi.fn(),
 }));
 
 vi.mock("next/link", () => ({
@@ -66,6 +69,7 @@ vi.mock("../../lib/api", async (importOriginal) => ({
   getChannelsSummary: getChannelsSummaryMock,
   getDetectors: getDetectorsMock,
   getDetectionMatrix: getDetectionMatrixMock,
+  getSignalsTimeSeries: getSignalsTimeSeriesMock,
 }));
 
 function healthFixture(): HealthCheck {
@@ -352,6 +356,23 @@ function matrixFixture(): DetectionMatrix {
   };
 }
 
+function seriesFixture(): SignalsTimeSeries {
+  return {
+    granularity: "day",
+    buckets: [
+      { bucket: "2026-10-27", signals: 3, unique_txns: 2 },
+      { bucket: "2026-10-28", signals: 0, unique_txns: 0 },
+    ],
+    total_signals: 3,
+    measurement_period: {
+      start: "2026-10-27T10:00:00Z",
+      end: "2026-10-27T12:00:00Z",
+    },
+    generated_at: "2026-11-05T20:00:00Z",
+    tenant_scope: "org_primary",
+  };
+}
+
 function mockAllReady() {
   getHealthMock.mockResolvedValue(healthFixture());
   getInvestigationMock.mockResolvedValue(investigationFixture());
@@ -362,6 +383,7 @@ function mockAllReady() {
   getChannelsSummaryMock.mockResolvedValue(channelsFixture());
   getDetectorsMock.mockResolvedValue(detectorsFixture());
   getDetectionMatrixMock.mockResolvedValue(matrixFixture());
+  getSignalsTimeSeriesMock.mockResolvedValue(seriesFixture());
   getReplayMock.mockImplementation((_id: string, cursor: number) =>
     Promise.resolve(cursor === 0 ? replayFirst() : replayFull())
   );
@@ -378,6 +400,7 @@ beforeEach(() => {
   getChannelsSummaryMock.mockReset();
   getDetectorsMock.mockReset();
   getDetectionMatrixMock.mockReset();
+  getSignalsTimeSeriesMock.mockReset();
 });
 
 describe("CommandPage", () => {
@@ -503,6 +526,11 @@ describe("CommandPage", () => {
     getCaseMock.mockRejectedValue(failure);
     getCaseAuditMock.mockRejectedValue(failure);
     getReplayMock.mockRejectedValue(failure);
+    getSignalsSummaryMock.mockRejectedValue(failure);
+    getChannelsSummaryMock.mockRejectedValue(failure);
+    getDetectorsMock.mockRejectedValue(failure);
+    getDetectionMatrixMock.mockRejectedValue(failure);
+    getSignalsTimeSeriesMock.mockRejectedValue(failure);
     render(<CommandPage />);
     // The message also appears in the hero status slot; the global card
     // owns the alert role plus recovery.

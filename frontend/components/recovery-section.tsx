@@ -107,8 +107,9 @@ export function RecoverySection({ txnId }: { txnId: string }) {
       {panel.kind === "error" && <p role="alert">{panel.message}</p>}
       {panel.kind === "ready" && (
         <div>
+          <p>{panel.metrics.total} case(s) recorded.</p>
           <p>
-            {panel.metrics.total} case(s) recorded. States:{" "}
+            States:{" "}
             {Object.entries(panel.metrics.by_state)
               .map(([state, count]) => `${state}: ${count}`)
               .join(", ") || "none"}

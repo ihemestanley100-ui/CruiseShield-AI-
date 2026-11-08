@@ -434,7 +434,7 @@ describe("api client", () => {
       string,
       string
     >;
-    expect(headers["Authorization"]).toBe("Bearer demo-token-1");
+    expect(headers["Authorization"]).toBe("Bearer platform-token-1");
     // Only the documented public platform credential plus the Phase 5 CSRF
     // header — never anything else.
     expect(Object.keys(headers).sort()).toEqual([

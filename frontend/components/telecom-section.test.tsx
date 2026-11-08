@@ -109,10 +109,10 @@ describe("TelecomSection", () => {
     });
     render(<TelecomSection phoneLabel="phn_01" />);
     fireEvent.click(screen.getByRole("button", { expanded: false }));
-    const toggles = await screen.findAllByRole("button", {
-      expanded: false,
-    });
-    fireEvent.click(toggles[toggles.length - 1]);
+    // The history detail toggle, not the request-form toggle below it.
+    fireEvent.click(
+      await screen.findByRole("button", { name: "Show provenance" })
+    );
     await waitFor(() =>
       expect(verificationMock).toHaveBeenCalledWith("tvrf_000001")
     );

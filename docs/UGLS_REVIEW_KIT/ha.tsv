@@ -184,23 +184,23 @@ decision.selectPlaceholder	Select a decision…	Zaɓi shawara…	direct	false			
 decision.targetLabel	Move case to	Matsar da shari'a zuwa	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	Wannan shari'a tana cikin matsayi na ƙarshe; ba a yarda da ƙarin canji ba.	direct	false			true
 decision.title	Human decision	Shawarar ɗan adam	direct	false			true
-detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
-detection.detectorsTitle	Detector families	Detector families	fallback	true			true
-detection.fpRate	False-positive rate	False-positive rate	fallback	true			true
-detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
-detection.investigationsWord	investigations	investigations	fallback	true			true
-detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
-detection.measuredAt	Measured at	Measured at	fallback	true			true
-detection.noLinkedInvestigation	No linked investigation.	No linked investigation.	fallback	true			true
-detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
-detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
-detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
-detection.timeSeriesTitle	Signal time series	Signal time series	fallback	true			true
-detection.title	Detection intelligence	Detection intelligence	fallback	true			true
-detection.txnSignalsTitle	Transaction signals	Transaction signals	fallback	true			true
-detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
-detection.viewInvestigation	Open investigation	Open investigation	fallback	true			true
-detection.zeroNote	Zero means measured none, not missing data.	Zero means measured none, not missing data.	fallback	true			true
+detection.channelsTitle	Channel activity	Ayyukan tasha	direct	false			true
+detection.detectorsTitle	Detector families	Iyalai masu ganowa	direct	false			true
+detection.fpRate	False-positive rate	Yawan ƙarya mai kyau	direct	false			true
+detection.frequencyTitle	Signal frequency	Mitar sigina	direct	false			true
+detection.investigationsWord	investigations	bincike	direct	false			true
+detection.matrixTitle	Detector by channel	Mai ganowa ta tashar	direct	false			true
+detection.measuredAt	Measured at	An auna a	direct	false			true
+detection.noLinkedInvestigation	No linked investigation.	Babu binciken da ke da alaƙa.	direct	false			true
+detection.noSignals	No qualifying signals recorded in this period.	Ba a rubuta sahihan sigina a wannan lokacin ba.	direct	false			true
+detection.notImplemented	Not implemented: no model deployed.	Ba a aiwatar ba: ba a tura wani ƙira ba.	direct	false			true
+detection.seedFeedNote	Seed feed: no live channel integration.	Ciyarwar iri: babu haɗin tasha kai tsaye.	direct	false			true
+detection.timeSeriesTitle	Signal time series	Jerin lokutan sigina	direct	false			true
+detection.title	Detection intelligence	Bayanan ganowa	direct	false			true
+detection.txnSignalsTitle	Transaction signals	Siginonin mu'amala	direct	false			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Lambobin tasha marasa taswira suna bukatar bitar rarrabawa.	direct	false			true
+detection.viewInvestigation	Open investigation	Buɗe bincike	direct	false			true
+detection.zeroNote	Zero means measured none, not missing data.	Sifili na nufin an auna babu, ba bayanan da suka ɓace ba.	direct	false			true
 evidence.clearSearch	Clear search	Share bincike	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	Babu shaidar da ta dace.	direct	false			true
 evidence.emptySearch	No evidence items match this search.	Babu shaidar da ta dace da wannan bincike.	direct	false			true

@@ -184,23 +184,23 @@ decision.selectPlaceholder	Select a decision…	Seleccione una decisión…	dire
 decision.targetLabel	Move case to	Mover el caso a	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	Este caso está en estado terminal; no se permiten más transiciones.	direct	false			true
 decision.title	Human decision	Decisión humana	direct	false			true
-detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
-detection.detectorsTitle	Detector families	Detector families	fallback	true			true
-detection.fpRate	False-positive rate	False-positive rate	fallback	true			true
-detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
-detection.investigationsWord	investigations	investigations	fallback	true			true
-detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
-detection.measuredAt	Measured at	Measured at	fallback	true			true
-detection.noLinkedInvestigation	No linked investigation.	No linked investigation.	fallback	true			true
-detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
-detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
-detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
-detection.timeSeriesTitle	Signal time series	Signal time series	fallback	true			true
-detection.title	Detection intelligence	Detection intelligence	fallback	true			true
-detection.txnSignalsTitle	Transaction signals	Transaction signals	fallback	true			true
-detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
-detection.viewInvestigation	Open investigation	Open investigation	fallback	true			true
-detection.zeroNote	Zero means measured none, not missing data.	Zero means measured none, not missing data.	fallback	true			true
+detection.channelsTitle	Channel activity	Actividad de canales	direct	false			true
+detection.detectorsTitle	Detector families	Familias de detectores	direct	false			true
+detection.fpRate	False-positive rate	Tasa de falsos positivos	direct	false			true
+detection.frequencyTitle	Signal frequency	Frecuencia de señales	direct	false			true
+detection.investigationsWord	investigations	investigaciones	direct	false			true
+detection.matrixTitle	Detector by channel	Detector por canal	direct	false			true
+detection.measuredAt	Measured at	Medido el	direct	false			true
+detection.noLinkedInvestigation	No linked investigation.	Ninguna investigación vinculada.	direct	false			true
+detection.noSignals	No qualifying signals recorded in this period.	Ninguna señal válida registrada en este período.	direct	false			true
+detection.notImplemented	Not implemented: no model deployed.	No implementado: ningún modelo desplegado.	direct	false			true
+detection.seedFeedNote	Seed feed: no live channel integration.	Fuente inicial: sin integración de canal en vivo.	direct	false			true
+detection.timeSeriesTitle	Signal time series	Serie temporal de señales	direct	false			true
+detection.title	Detection intelligence	Inteligencia de detección	direct	false			true
+detection.txnSignalsTitle	Transaction signals	Señales de transacción	direct	false			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Los códigos de canal sin asignar necesitan revisión de taxonomía.	direct	false			true
+detection.viewInvestigation	Open investigation	Abrir investigación	direct	false			true
+detection.zeroNote	Zero means measured none, not missing data.	Cero significa ninguno medido, no datos faltantes.	direct	false			true
 evidence.clearSearch	Clear search	Borrar búsqueda	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	Sin pruebas coincidentes.	direct	false			true
 evidence.emptySearch	No evidence items match this search.	Ninguna prueba coincide con esta búsqueda.	direct	false			true

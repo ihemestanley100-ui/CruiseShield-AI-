@@ -24,7 +24,7 @@ export default function SupportPage() {
         {
           heading: "What is not offered here",
           paragraphs: [
-            "This page does not list a public helpdesk, email address, phone number, or response-time commitment. Any such channel will be named here only after the owner confirms it.",
+            "This page does not list a public support desk, email address, phone number, or response-time commitment. Any such channel will be named here only after the owner confirms it.",
           ],
         },
       ]}
