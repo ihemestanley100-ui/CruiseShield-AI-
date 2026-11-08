@@ -40,8 +40,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # Rollback rehearsal verifies a previous-commit target exists.
-          fetch-depth: 2
+          # Full history: rollback rehearsal needs a previous-commit
+          # target and gitleaks scans the whole PR base..head range.
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
