@@ -56,7 +56,7 @@ relationship filters, zoom/pan/fit controls (arrow-key pan on the focused
 graph), and a complete relationship table as the accessible alternative.
 Filters only hide; nothing invents relationships or changes risk. Verify
 with the backend up: open `/network/txn_84721` — expect 22 nodes /
-30 edges, selecting `edge_0002` shows provenance `evt_demo_84721`, the
+30 edges, selecting `edge_0002` shows provenance `evt_84721`, the
 table lists all 30 edges, unknown IDs show not-found, and a stopped
 backend shows the error card + Retry.
 
@@ -72,7 +72,7 @@ a validated decision form, and the audit trail. Verify with the backend
 up: step replay 0→11; run a simulation ignoring `edge_0002`,
 `edge_0004`, `edge_0005`, `edge_0011`, `edge_0012` (the pinned backend
 case — expect baseline 84 HIGH vs simulated 72); record one decision on
-`case_84721` and confirm the new audit entry, then reset the demo to
+`case_84721` and confirm the new audit entry, then reset the workspace to
 restore the seeded state.
 
 ## Batch B — Orbital explorer

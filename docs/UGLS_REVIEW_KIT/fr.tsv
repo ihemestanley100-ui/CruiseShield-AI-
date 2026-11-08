@@ -186,13 +186,16 @@ decision.terminal	This case is in a terminal state; no further transitions are a
 decision.title	Human decision	Décision humaine	direct	false			true
 detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
 detection.detectorsTitle	Detector families	Detector families	fallback	true			true
+detection.fpRate	False-positive rate	False-positive rate	fallback	true			true
 detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
+detection.investigationsWord	investigations	investigations	fallback	true			true
 detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
 detection.measuredAt	Measured at	Measured at	fallback	true			true
 detection.noLinkedInvestigation	No linked investigation.	No linked investigation.	fallback	true			true
 detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
 detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
 detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
+detection.timeSeriesTitle	Signal time series	Signal time series	fallback	true			true
 detection.title	Detection intelligence	Detection intelligence	fallback	true			true
 detection.txnSignalsTitle	Transaction signals	Transaction signals	fallback	true			true
 detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true

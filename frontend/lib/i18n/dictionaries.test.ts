@@ -49,9 +49,9 @@ describe("dictionaries", () => {
   });
 
   it("interpolates {vars} and preserves unknown placeholders", () => {
-    expect(interpolate("{role} · demo", { role: "admin" })).toBe("admin · demo");
-    expect(lookup("en", "nav.roleDemo", { role: "auditor" }).text).toBe(
-      "auditor · demo"
+    expect(interpolate("{role} · active", { role: "admin" })).toBe("admin · active");
+    expect(lookup("en", "nav.roleContext", { role: "auditor" }).text).toBe(
+      "auditor · active"
     );
     expect(interpolate("{missing}", {})).toBe("{missing}");
   });

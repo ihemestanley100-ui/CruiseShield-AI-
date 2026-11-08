@@ -3,12 +3,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ApiError } from "../../../lib/api";
 import CasePage from "./page";
 
-const { getCaseMock, getCaseAuditMock, postDecisionMock, getInvestigationMock } =
+const { getCaseMock, getCaseAuditMock, postDecisionMock, getInvestigationMock, getAiRunMock } =
   vi.hoisted(() => ({
     getCaseMock: vi.fn(),
     getCaseAuditMock: vi.fn(),
     postDecisionMock: vi.fn(),
     getInvestigationMock: vi.fn(),
+    getAiRunMock: vi.fn(),
   }));
 
 vi.mock("next/navigation", () => ({
@@ -31,6 +32,7 @@ vi.mock("../../../lib/api", async (importOriginal) => ({
   getCaseAudit: getCaseAuditMock,
   postDecision: postDecisionMock,
   getInvestigation: getInvestigationMock,
+  getAiRun: getAiRunMock,
 }));
 
 function caseFixture() {
@@ -54,7 +56,7 @@ function caseFixture() {
         evidence_viewed: [],
         recommendation_at_decision: "",
         created_at: "2026-10-28T01:00:00Z",
-        authorization_scope: "demo",
+        authorization_scope: "synthetic",
         trace_id: "t",
       },
     ],
@@ -111,6 +113,7 @@ beforeEach(() => {
   getCaseAuditMock.mockReset();
   postDecisionMock.mockReset();
   getInvestigationMock.mockReset();
+  getAiRunMock.mockReset();
   getCaseMock.mockResolvedValue(caseFixture());
   getCaseAuditMock.mockResolvedValue(auditFixture());
   // Risk strip is best-effort: default to unavailable so existing tests
@@ -132,6 +135,28 @@ beforeEach(() => {
 afterEach(() => {
   vi.unstubAllGlobals();
 });
+
+function runFixture() {
+  return {
+    agent_run_id: "agentrun_4",
+    model_id: "muse-spark-1.3",
+    prompt_version: "cs-prompt-v2",
+    request_id: "req_4",
+    latency_ms: 16733,
+    status: "SUCCEEDED",
+    schema_validation_status: "VALIDATED",
+    evidence_reference_validation_status: "VALIDATED",
+    error_code: "",
+    result: {
+      summary: "Two accounts share device dev_04.",
+      key_findings: [],
+      alternative_explanations: ["Shared household device."],
+      missing_information: [],
+      conclusion: "requires_review",
+      disclaimer: "Advisory only.",
+    },
+  };
+}
 
 describe("CasePage", () => {
   it("renders section navigation matching real section anchors", async () => {
@@ -232,7 +257,7 @@ describe("CasePage", () => {
         evidence_viewed: [],
         recommendation_at_decision: "",
         created_at: "2026-10-29T00:00:00Z",
-        authorization_scope: "demo",
+        authorization_scope: "synthetic",
         trace_id: "t",
       },
       audit: {
@@ -358,6 +383,42 @@ describe("CasePage", () => {
     expect(screen.getByTestId("case-status")).toHaveTextContent("TRIAGED");
   });
 
+  it("expands the persisted run receipt on demand (GAP-012)", async () => {
+    getCaseMock.mockResolvedValue({
+      ...caseFixture(),
+      latest_ai_run: assessmentFixture(),
+    });
+    getAiRunMock.mockResolvedValue(runFixture());
+    render(<CasePage />);
+    await waitFor(() =>
+      expect(screen.getByTestId("ai-assessment")).toHaveTextContent(
+        "Conclusion: requires_review"
+      )
+    );
+    expect(
+      screen.queryByText("Two accounts share device dev_04.")
+    ).toBeNull();
+    fireEvent.click(
+      screen.getByRole("button", { name: "Show provenance" })
+    );
+    await waitFor(() =>
+      expect(
+        screen.getByText("Two accounts share device dev_04.")
+      ).toBeTruthy()
+    );
+    expect(getAiRunMock).toHaveBeenCalledWith("agentrun_4");
+    expect(screen.getByText("Shared household device.")).toBeTruthy();
+    expect(screen.getByText("Advisory only.")).toBeTruthy();
+    fireEvent.click(
+      screen.getByRole("button", { name: "Hide provenance" })
+    );
+    await waitFor(() =>
+      expect(
+        screen.queryByText("Two accounts share device dev_04.")
+      ).toBeNull()
+    );
+  });
+
   it("shows a not-found state for an unknown case", async () => {
     getCaseMock.mockRejectedValue(
       new ApiError("CASE_NOT_FOUND", "no case", 404, "t")
@@ -375,7 +436,7 @@ describe("CasePage", () => {
     render(<CasePage />);
     await waitFor(() =>
       expect(
-        screen.getByText("Backend unreachable. Check the demo server and retry.")
+        screen.getByText("Backend unreachable. Check the platform server and retry.")
       ).toBeTruthy()
     );
     expect(screen.getByRole("button", { name: "Retry" })).toBeTruthy();
@@ -386,7 +447,7 @@ describe("CasePage", () => {
     getCaseAuditMock.mockRejectedValue(new ApiError("E", "m", 0, ""));
     render(<CasePage />);
     const nav = await screen.findByRole("navigation", { name: "Breadcrumb" });
-    expect(nav.querySelector("a")?.getAttribute("href")).toBe("/demo");
+    expect(nav.querySelector("a")?.getAttribute("href")).toBe("/platform");
     expect(
       within(nav).getByText("Case case_84721").getAttribute("aria-current")
     ).toBe("page");

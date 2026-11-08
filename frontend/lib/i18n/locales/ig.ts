@@ -28,8 +28,8 @@ export const ig = {
     signOutEverywhere: "Pụọ ebe niile",
     signOutEverywhereTitle: "Kwụsị nnọkọ a na ngwa na ihe nchọgharị niile",
     investigator: "Onye nyocha",
-    demoRole: "ọrụ ngosi",
-    roleDemo: "{role} · ngosi",
+    sessionRole: "ọrụ ngosi",
+    roleContext: "{role} · ngosi",
   },
   auth: {
     title: "Banye ngosi",
@@ -88,7 +88,7 @@ export const ig = {
     ],
     cta: "Nyochaa CruiseShield AI™",
     ctaSub: "Banye n'ahụmahụ ngosi mmekọrịta",
-    enterDemo: "Banye na ngosi",
+    enterPlatform: "Banye na ngosi",
     brandName: "CruiseShield AI™",
     tagline: "The Financial Crime Immune System™",
     home: "Ụlọ CruiseShield AI",
@@ -178,7 +178,7 @@ export const ig = {
     ],
     platformPrinciples: "Ụkpụrụ ikpo okwu",
     footerLine: "Otu ikpo okwu. Ọdịnihu ego dị nchebe karị. Maka mmadụ niile.",
-    footerDemo:
+    footerNote:
       "Ahụmahụ ngosi · data emepụtara · ihe ngosi netwọk ihe atụ · ",
     footerLink: "Banye na ngosi mmekọrịta",
     controlsAmbient: "Ụda gburugburu",
@@ -244,7 +244,7 @@ export const ig = {
     light: "Ìhè",
     system: "Sistemụ",
   },
-  demo: {
+  platform: {
     execOverview: "Nchịkọta onye isi",
     execOverviewDown: "Nchịkọta onye isi adịghị",
     riskIntel: "Ọgụgụ isi ihe egwu",
@@ -324,7 +324,7 @@ export const ig = {
     resetTitle: "Ntọgharị ọnọdụ",
     resetBlurb:
       "Ntọgharị na-eweghachi ọnọdụ mbụ kpọmkwem ma kpochapụ ọnọdụ dị ndụ niile: mkpebi mmadụ, nnwale, ọsọ AI, na ihe omume nyocha karịa ntọgharị ahụ.",
-    resetDemo: "Tọgharịa ngosi",
+    resetWorkspace: "Tọgharịa ngosi",
     confirmReset:
       "Kwenye: nke a na-ehichapụ mkpebi, nnwale, ọsọ AI, na akụkọ nyocha maka {id}.",
     resetting: "Na-atọgharị…",

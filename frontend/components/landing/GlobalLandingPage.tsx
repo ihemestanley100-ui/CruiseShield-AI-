@@ -96,8 +96,8 @@ export function GlobalLandingPage() {
       </main>
       <footer className="landing-footer">
         <p className="muted">
-          {t("footerDemo")}
-          <a href="/demo">{t("footerLink")}</a>
+          {t("footerNote")}
+          <a href="/platform">{t("footerLink")}</a>
         </p>
       </footer>
     </div>

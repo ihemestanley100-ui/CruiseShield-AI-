@@ -42,3 +42,12 @@ def test_put_idempotent_divergent_rejected(tmp_path):
     produce_mod.put_idempotent(target, "g/manifest.json", b"m")
     with pytest.raises(produce_mod.ProduceError, match="UPLOAD_DIVERGENT"):
         produce_mod.put_idempotent(target, "g/manifest.json", b"other")
+
+
+def test_relative_root_does_not_self_escape(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    target = local_mod.LocalDirTarget("rel-bk")
+    target.put("csbk-1/dump.csbk1", b"bytes-123")
+    assert target.get("csbk-1/dump.csbk1") == b"bytes-123"
+    with pytest.raises(targets_mod.TargetError):
+        target.put("../escape", b"x")

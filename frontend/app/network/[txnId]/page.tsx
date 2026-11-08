@@ -12,6 +12,8 @@ import {
   GeoBlock,
   IpBlock,
 } from "../../../components/intel-panels";
+import { TelecomSection } from "../../../components/telecom-section";
+import { MonitoringSection } from "../../../components/monitoring-section";
 import { TxnSignalsPanel } from "../../../components/detection-panels";
 import { GraphExplorer } from "../../../components/graph-explorer";
 import { GraphTable } from "../../../components/graph-table";
@@ -244,9 +246,15 @@ export default function NetworkPage() {
               <IpBlock intel={state.intel} />
               <h3>{tIntel("geoH")}</h3>
               <GeoBlock intel={state.intel} />
+              <TelecomSection
+                phoneLabel={state.txn.transaction.phone_id ?? undefined}
+              />
             </section>
           )}
           {state.signals && <TxnSignalsPanel data={state.signals} />}
+          <section className="card" aria-live="polite">
+            <MonitoringSection />
+          </section>
           {state.graph.counts.nodes === 0 ? (
             <section className="card" aria-live="polite">
               <p className="muted">{t("emptyGraph")}</p>

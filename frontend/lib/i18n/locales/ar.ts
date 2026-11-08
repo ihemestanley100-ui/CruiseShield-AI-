@@ -28,8 +28,8 @@ export const ar = {
     signOutEverywhere: "تسجيل الخروج من كل مكان",
     signOutEverywhereTitle: "إنهاء هذه الجلسة على جميع الأجهزة والمتصفحات",
     investigator: "محقق",
-    demoRole: "دور تجريبي",
-    roleDemo: "{role} · تجريبي",
+    sessionRole: "دور تجريبي",
+    roleContext: "{role} · تجريبي",
   },
   auth: {
     title: "تسجيل الدخول إلى العرض",
@@ -88,7 +88,7 @@ export const ar = {
     ],
     cta: "استكشف CruiseShield AI™",
     ctaSub: "ادخل إلى تجربة العرض التفاعلية",
-    enterDemo: "ادخل العرض",
+    enterPlatform: "ادخل العرض",
     brandName: "CruiseShield AI™",
     tagline: "The Financial Crime Immune System™",
     home: "الصفحة الرئيسية لـ CruiseShield AI",
@@ -178,7 +178,7 @@ export const ar = {
     ],
     platformPrinciples: "مبادئ المنصة",
     footerLine: "منصة واحدة. مستقبل مالي أكثر أمانًا. للجميع.",
-    footerDemo: "تجربة العرض · بيانات اصطناعية · مرئيات شبكية توضيحية · ",
+    footerNote: "تجربة العرض · بيانات اصطناعية · مرئيات شبكية توضيحية · ",
     footerLink: "ادخل العرض التفاعلي",
     controlsAmbient: "صوت محيطي",
     soundLabel: "الصوت",
@@ -243,7 +243,7 @@ export const ar = {
     light: "فاتح",
     system: "النظام",
   },
-  demo: {
+  platform: {
     execOverview: "نظرة تنفيذية",
     execOverviewDown: "النظرة التنفيذية غير متوفرة",
     riskIntel: "استخبارات المخاطر",
@@ -322,7 +322,7 @@ export const ar = {
     resetTitle: "إعادة ضبط السيناريو",
     resetBlurb:
       "تستعيد إعادة الضبط السيناريو المبدئي بدقة وتمسح كل الحالة الحية: القرارات البشرية والمحاكاة وتشغيلات الذكاء الاصطناعي وأحداث التدقيق ما عدا إعادة الضبط نفسها.",
-    resetDemo: "إعادة ضبط العرض",
+    resetWorkspace: "إعادة ضبط العرض",
     confirmReset:
       "أكّد: سيؤدي هذا إلى مسح القرارات والمحاكاة وتشغيلات الذكاء الاصطناعي وسجل التدقيق لـ {id}.",
     resetting: "جارٍ إعادة الضبط…",

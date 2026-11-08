@@ -14,6 +14,7 @@ import type {
   DetectionMatrix,
   DetectorInfo,
   SignalsSummary,
+  SignalsTimeSeries,
   TxnSignals,
 } from "../lib/api";
 import { useTranslation } from "../lib/i18n/context";
@@ -56,8 +57,22 @@ export function SignalFrequencyPanel({
             <span className="muted">
               {summary.unique_transactions_flagged} txns ·{" "}
               {summary.unique_entities_flagged} entities
+              {summary.unique_investigations_created !== undefined &&
+                ` · ${summary.unique_investigations_created} ${t(
+                  "investigationsWord"
+                )}`}
             </span>
           </p>
+          {summary.false_positive_basis !== undefined && (
+            <p className="muted">
+              {t("fpRate")}:{" "}
+              {summary.false_positive_rate === null ||
+              summary.false_positive_rate === undefined
+                ? "—"
+                : summary.false_positive_rate}{" "}
+              ({summary.false_positive_basis})
+            </p>
+          )}
           <CountList entries={families} />
           <CountList entries={severities} />
         </>
@@ -230,6 +245,72 @@ export function TxnSignalsPanel({ data }: { data: TxnSignals }) {
   );
 }
 
+export function TimeSeriesPanel({
+  series,
+}: {
+  series: SignalsTimeSeries;
+}) {
+  const { t } = useTranslation("detection");
+  const max = Math.max(1, ...series.buckets.map((b) => b.signals));
+  return (
+    <section className="card" aria-labelledby="sig-ts-h">
+      <h3 id="sig-ts-h">
+        {t("timeSeriesTitle")} ({series.granularity})
+      </h3>
+      {series.buckets.length === 0 ? (
+        <p className="muted">{t("noSignals")}</p>
+      ) : (
+        <>
+          <svg
+            role="img"
+            aria-label={`${t("timeSeriesTitle")}: ${
+              series.total_signals
+            } signals in ${series.buckets.length} buckets`}
+            viewBox={`0 0 ${series.buckets.length * 24} 100`}
+            preserveAspectRatio="none"
+            className="ts-chart"
+          >
+            {series.buckets.map((bucket, index) => {
+              const height = Math.max(
+                2,
+                Math.round((bucket.signals / max) * 96)
+              );
+              return (
+                <rect
+                  key={bucket.bucket}
+                  x={index * 24 + 4}
+                  y={100 - height}
+                  width={16}
+                  height={height}
+                  className="ts-bar"
+                >
+                  <title>
+                    {bucket.bucket}: {bucket.signals} signals,{" "}
+                    {bucket.unique_txns} txns
+                  </title>
+                </rect>
+              );
+            })}
+          </svg>
+          <ul className="stack">
+            {series.buckets.map((bucket) => (
+              <li key={bucket.bucket} className="rule-row">
+                <strong>{bucket.bucket}</strong>{" "}
+                <span className="tabular">
+                  {bucket.signals} signals · {bucket.unique_txns} txns
+                </span>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      <p className="muted">
+        {t("measuredAt")}: {series.generated_at || "—"}
+      </p>
+    </section>
+  );
+}
+
 export function DetectionSection({ bundle }: { bundle: DetectionBundle }) {
   const { t } = useTranslation("detection");
   return (
@@ -240,6 +321,7 @@ export function DetectionSection({ bundle }: { bundle: DetectionBundle }) {
         <DetectorHealthPanel detectors={bundle.detectors.detectors} />
         <ChannelActivityPanel summary={bundle.channels} />
       </div>
+      {bundle.timeSeries && <TimeSeriesPanel series={bundle.timeSeries} />}
       <DetectorChannelMatrix matrix={bundle.matrix} />
     </section>
   );

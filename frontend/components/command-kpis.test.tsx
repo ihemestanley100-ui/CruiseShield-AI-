@@ -39,7 +39,7 @@ function detailFixture(): InvestigationDetail {
       band: "MODERATE",
       score_version: "risk-score-v1",
       computed_at: "2026-10-27T10:00:00Z",
-      limitations: "Demo limitations.",
+      limitations: "Risk limitations.",
     },
     risk_network: {
       risk_assessment_id: "risk_network_84721",
@@ -49,7 +49,7 @@ function detailFixture(): InvestigationDetail {
       band: "HIGH",
       score_version: "risk-score-v1",
       computed_at: "2026-10-27T10:00:00Z",
-      limitations: "Demo limitations.",
+      limitations: "Risk limitations.",
     },
     rule_results: ["R-001", "R-002"].map((rule_id) => ({
       rule_result_id: `rr_${rule_id}_84721`,
@@ -60,7 +60,7 @@ function detailFixture(): InvestigationDetail {
       explanation: "seeded",
       source_record_ids: ["txn_84721"],
       evidence_ids: [`evidence_rr_${rule_id}_84721`],
-      trace_id: "trace_demo_84721",
+      trace_id: "trace_84721",
     })),
     case: { case_id: "case_84721", status: "OPEN" },
     evidence_package_id: "evidence_pkg_scn_primary_1.0.0",

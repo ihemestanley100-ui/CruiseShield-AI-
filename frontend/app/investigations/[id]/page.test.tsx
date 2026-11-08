@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor, within } from "@testing-library/rea
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ApiError } from "../../../lib/api";
 import type {
+  AcctIntel,
   AgentRun,
   EvidencePackage,
   InvestigationDetail,
@@ -15,6 +16,7 @@ const {
   getInvestigationIntelMock,
   getIntelEvidenceMock,
   getRiskIntelMock,
+  getAccountIntelMock,
 } = vi.hoisted(() => ({
   getInvestigationMock: vi.fn(),
   getEvidencePackageMock: vi.fn(),
@@ -22,6 +24,7 @@ const {
   getInvestigationIntelMock: vi.fn(),
   getIntelEvidenceMock: vi.fn(),
   getRiskIntelMock: vi.fn(),
+  getAccountIntelMock: vi.fn(),
 }));
 
 vi.mock("next/navigation", () => ({
@@ -46,6 +49,7 @@ vi.mock("../../../lib/api", async (importOriginal) => ({
   getInvestigationIntel: getInvestigationIntelMock,
   getIntelEvidence: getIntelEvidenceMock,
   getRiskIntel: getRiskIntelMock,
+  getAccountIntel: getAccountIntelMock,
 }));
 
 function detailFixture(): InvestigationDetail {
@@ -74,7 +78,7 @@ function detailFixture(): InvestigationDetail {
       band: "MODERATE",
       score_version: "risk-score-v1",
       computed_at: "2026-10-28T00:00:00Z",
-      limitations: "Demo score.",
+      limitations: "Risk score.",
     },
     risk_network: {
       risk_assessment_id: "risk_network_84721",
@@ -84,7 +88,7 @@ function detailFixture(): InvestigationDetail {
       band: "HIGH",
       score_version: "risk-score-v1",
       computed_at: "2026-10-28T00:00:00Z",
-      limitations: "Demo score.",
+      limitations: "Risk score.",
     },
     rule_results: [
       {
@@ -115,8 +119,8 @@ function packageFixture(): EvidencePackage {
         evidence_id: "evidence_txn_84721",
         evidence_type: "transaction",
         title: "Transaction #84721",
-        description: "Synthetic demo record.",
-        event_ids: ["evt_demo_84721"],
+        description: "Synthetic record.",
+        event_ids: ["evt_84721"],
         graph_edge_ids: [],
         rule_result_ids: [],
       },
@@ -131,9 +135,11 @@ beforeEach(() => {
   getInvestigationIntelMock.mockReset();
   getIntelEvidenceMock.mockReset();
   getRiskIntelMock.mockReset();
+  getAccountIntelMock.mockReset();
   getInvestigationIntelMock.mockRejectedValue(new Error("intel down"));
   getIntelEvidenceMock.mockRejectedValue(new Error("intel down"));
   getRiskIntelMock.mockRejectedValue(new Error("intel down"));
+  getAccountIntelMock.mockRejectedValue(new Error("intel down"));
   // Deterministic badge values: reduced motion renders the authoritative
   // final score immediately instead of converging to it on the wall clock
   // via rAF. Animation timing itself is covered by use-count-up.test.tsx
@@ -153,6 +159,36 @@ beforeEach(() => {
 afterEach(() => {
   vi.unstubAllGlobals();
 });
+
+function acctFixture(id: string): AcctIntel {
+  return {
+    account_id: id,
+    known_devices: ["dev_04"],
+    known_ip_labels: ["ip_02"],
+    known_geo_labels: ["loc_01"],
+    first_seen: "2026-10-27T10:00:00Z",
+    last_seen: "2026-10-27T12:00:00Z",
+    shared_devices: [
+      {
+        device_id: "dev_04",
+        account_ids: ["acct_A", "acct_B"],
+        txn_ids: ["txn_84721"],
+        graph_edge_ids: [],
+        event_ids: [],
+        identity_status: "observed_only",
+        synthetic: true,
+      },
+    ],
+    shared_ips: [],
+    transaction_count: 1,
+    transaction_ids: ["txn_84721"],
+    investigation_count: 1,
+    investigation_ids: ["inv_84721"],
+    provenance: { event_ids: ["evt_84721"] },
+    synthetic: true,
+    limitations: ["Synthetic fixture."],
+  };
+}
 
 describe("InvestigationPage", () => {
   it("renders loading then live data", async () => {
@@ -223,7 +259,7 @@ describe("InvestigationPage", () => {
     render(<InvestigationPage />);
     await waitFor(() => {
       expect(
-        screen.getByText("Backend unreachable. Check the demo server and retry.")
+        screen.getByText("Backend unreachable. Check the platform server and retry.")
       ).toBeTruthy();
     });
   });
@@ -305,7 +341,7 @@ describe("InvestigationPage", () => {
     getEvidencePackageMock.mockRejectedValue(new ApiError("E", "m", 0, ""));
     render(<InvestigationPage />);
     const nav = await screen.findByRole("navigation", { name: "Breadcrumb" });
-    expect(nav.querySelector("a")?.getAttribute("href")).toBe("/demo");
+    expect(nav.querySelector("a")?.getAttribute("href")).toBe("/platform");
     expect(
       within(nav).getByText("Investigation inv_84721").getAttribute("aria-current")
     ).toBe("page");
@@ -346,6 +382,61 @@ describe("InvestigationPage", () => {
     expect(
       screen.getByText(/candidate engine.*is OFF \(default\)/i)
     ).toBeTruthy();
+  });
+
+  it("renders sender/receiver account intel when available (GAP-012)", async () => {
+    getInvestigationMock.mockResolvedValue(detailFixture());
+    getEvidencePackageMock.mockResolvedValue(packageFixture());
+    getInvestigationIntelMock.mockResolvedValue({
+      investigation_id: "inv_84721",
+      transaction_id: "txn_84721",
+      transaction_intel: {
+        transaction_id: "txn_84721",
+        device_observations: [],
+        ip_observations: [],
+        geolocation_observations: [],
+      },
+      isolation: "own-transaction only",
+      synthetic: true,
+      limitations: [],
+    });
+    getIntelEvidenceMock.mockResolvedValue({
+      investigation_id: "inv_84721",
+      findings: [],
+      trace: null,
+      synthetic: true,
+    });
+    getAccountIntelMock
+      .mockResolvedValueOnce(acctFixture("acct_A"))
+      .mockResolvedValueOnce(acctFixture("acct_B"));
+    render(<InvestigationPage />);
+    await waitFor(() => {
+      expect(
+        screen.getByRole("heading", { name: "acct_A" })
+      ).toBeTruthy();
+    });
+    expect(getAccountIntelMock).toHaveBeenCalledWith(
+      "acct_A",
+      expect.any(AbortSignal)
+    );
+    expect(getAccountIntelMock).toHaveBeenCalledWith(
+      "acct_B",
+      expect.any(AbortSignal)
+    );
+    expect(screen.getAllByText("Synthetic fixture.")).toHaveLength(2);
+    expect(screen.getAllByText(/shared device/).length).toBeGreaterThanOrEqual(
+      2
+    );
+  });
+
+  it("hides account blocks when the best-effort fetch fails (GAP-012)", async () => {
+    getInvestigationMock.mockResolvedValue(detailFixture());
+    getEvidencePackageMock.mockResolvedValue(packageFixture());
+    render(<InvestigationPage />);
+    await waitFor(() => {
+      expect(screen.getByText(/₦480,000/)).toBeTruthy();
+    });
+    expect(screen.queryByText("Synthetic fixture.")).toBeNull();
   });
 
   it("renders the page when DI fetches fail (DI-10)", async () => {

@@ -1,12 +1,12 @@
-"""Protected-demo authentication (stdlib only, no new dependencies).
+"""Protected-platform authentication (stdlib only, no new dependencies).
 
 Design (zero-cost staging):
 - Stateless signed-cookie sessions (HMAC-SHA256, 12 h expiry). No server
   storage, so Render Free (no disk) and Neon-backed deployments all work.
-- Demo users from env: DEMO_USERS="name:role:hash,name:role:hash" with
+- Users from env: DEMO_USERS="name:role:hash,name:role:hash" with
   PBKDF2-HMAC-SHA256 password records. Roles: investigator, admin,
   auditor, demo_viewer (see PERMISSIONS; least privilege by default).
-- When SESSION_SECRET is UNSET (local demo default) auth is DISABLED and
+- When SESSION_SECRET is UNSET (local default) auth is DISABLED and
   every endpoint behaves exactly as before (open). Setting the secret
   arms login enforcement. The write token (SEC-012) remains as a
   non-browser fallback credential when both are configured.
@@ -88,20 +88,28 @@ def parse_users(env_value: str) -> dict[str, tuple[str, str]]:
     return users
 
 
-def _b64e(raw: bytes) -> str:
+def b64e(raw: bytes) -> str:
+    """URL-safe base64 without padding (sessions, tickets)."""
     return base64.urlsafe_b64encode(raw).decode().rstrip("=")
 
 
-def _b64d(text: str) -> bytes:
+def b64d(text: str) -> bytes:
+    """Inverse of b64e (tolerates missing padding)."""
     return base64.urlsafe_b64decode(text + "=" * (-len(text) % 4))
 
 
+_b64e = b64e
+_b64d = b64d
+
+
 def create_session(username: str, role: str, secret: str,
-                   now: float | None = None) -> str:
+                   now: float | None = None,
+                   mfa_pending: bool = False) -> str:
     moment = time.time() if now is None else now
     payload = _b64e(json.dumps(
         {"u": username, "r": role, "exp": int(moment) + SESSION_TTL_SECONDS,
-         "iat": int(moment), "n": secrets.token_hex(8)},
+         "iat": int(moment), "n": secrets.token_hex(8),
+         "mp": 1 if mfa_pending else 0},
         separators=(",", ":")).encode())
     sig = _b64e(hmac.new(secret.encode(), payload.encode(),
                          hashlib.sha256).digest())
@@ -130,30 +138,40 @@ def parse_session(token: str, secret: str,
             return None
         return {"user": user, "role": role, "nonce": str(data.get("n", "")),
                 "iat": int(data.get("iat", 0)),
-                "exp": int(data.get("exp", 0))}
+                "exp": int(data.get("exp", 0)),
+                "mfa_pending": bool(data.get("mp", 0))}
     except (ValueError, TypeError, KeyError):
         return None
 
 
-def verify_session(token: str, secret: str,
-                   now: float | None = None) -> tuple[str, str] | None:
-    """Return (username, role) or None. Never raises on bad input."""
-    claims = parse_session(token, secret, now)
-    if claims is None:
-        return None
-    return claims["user"], claims["role"]
+def parse_session_any(token: str, secrets: list[str],
+                      now: float | None = None) -> dict | None:
+    """SEC-ROT: try each keyring secret in order; first hit wins.
+
+    Backward compatible: a single-secret list behaves exactly like
+    parse_session. Never raises on bad input.
+    """
+    for candidate in secrets:
+        if not candidate:
+            continue
+        claims = parse_session(token, candidate, now)
+        if claims is not None:
+            return claims
+    return None
 
 
 def verify_session_live(token: str, secret: str, store,
                         users: dict[str, tuple[str, str]],
-                        now: float | None = None) -> dict | None:
+                        now: float | None = None,
+                        secrets: list[str] | None = None) -> dict | None:
     """Full J4 validation: signature, expiry, revocation, epoch, status.
 
     `store` supplies is_revoked(nonce, now) + epoch_of(user) (both
     backends). `users` is parse_users(). Rejects: revoked nonce,
     pre-epoch token (logout-all), deprovisioned user, changed role.
     """
-    claims = parse_session(token, secret, now)
+    ring = secrets if secrets is not None else [secret]
+    claims = parse_session_any(token, ring, now)
     if claims is None:
         return None
     moment = time.time() if now is None else now

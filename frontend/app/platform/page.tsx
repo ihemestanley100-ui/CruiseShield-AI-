@@ -10,6 +10,13 @@ import { DetectionSection } from "../../components/detection-panels";
 import { ExecKpis } from "../../components/exec-kpis";
 import { FeatureCards } from "../../components/feature-cards";
 import { SystemStatus } from "../../components/system-status";
+import { TelecomConfigPanel } from "../../components/telecom-section";
+import { IndustrySection } from "../../components/industry-section";
+import {
+  IntelCoveragePanel,
+  IntelMetricsPanel,
+  IntelProviderPanel,
+} from "../../components/intel-admin-panels";
 import { WorkflowStrip } from "../../components/workflow-strip";
 import {
   apiBaseUrl,
@@ -18,6 +25,7 @@ import {
   getChannelsSummary,
   getDetectionMatrix,
   getDetectors,
+  getSignalsTimeSeries,
   getGraph,
   getSignalsSummary,
   getHealth,
@@ -133,11 +141,13 @@ const LOADERS: Record<FetchKey, (signal: AbortSignal) => Promise<unknown>> = {
       getChannelsSummary(signal),
       getDetectors(signal),
       getDetectionMatrix(signal),
-    ]).then(([summary, channels, detectors, matrix]) => ({
+      getSignalsTimeSeries("day", signal),
+    ]).then(([summary, channels, detectors, matrix, timeSeries]) => ({
       summary,
       channels,
       detectors,
       matrix,
+      timeSeries,
     })),
 };
 
@@ -487,6 +497,26 @@ export default function CommandPage() {
           {detection.kind === "ready" && (
             <DetectionSection bundle={detection.data} />
           )}
+
+          <section className="card" aria-live="polite">
+            <h2>Telecom provider status</h2>
+            <TelecomConfigPanel />
+          </section>
+
+          <section className="card" aria-live="polite">
+            <h2>Intelligence providers</h2>
+            <IntelProviderPanel />
+          </section>
+
+          <section className="card" aria-live="polite">
+            <h2>Coverage and activity</h2>
+            <IntelCoveragePanel />
+            <IntelMetricsPanel />
+          </section>
+
+          <section className="card" aria-live="polite">
+            <IndustrySection />
+          </section>
 
           <FeatureCards
             invId={invId}

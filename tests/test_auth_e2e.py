@@ -62,7 +62,7 @@ def test_j4_full_login_journey(client, tmp_store, monkeypatch):
                      headers=XRW)
     assert ai.status_code == 503  # perm passed; no provider key here
     assert ai.json()["error"]["code"] == "MODEL_NOT_CONFIGURED"
-    reset = client.post("/api/v1/demo/reset",
+    reset = client.post("/api/v1/platform/reset",
                         json={"scenario_id": "scn_primary"}, headers=XRW)
     assert reset.status_code == 403
     assert reset.json()["error"]["code"] == "ADMIN_REQUIRED"
@@ -90,7 +90,7 @@ def test_j4_full_login_journey(client, tmp_store, monkeypatch):
         "/api/v1/cases/case_84721/audit").status_code == 403
 
     _login(client, "boss")
-    reset = client.post("/api/v1/demo/reset",
+    reset = client.post("/api/v1/platform/reset",
                         json={"scenario_id": "scn_primary"}, headers=XRW)
     assert reset.status_code == 200
 

@@ -3,13 +3,13 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ApiError } from "../../../lib/api";
 import ReplayPage from "./page";
 
-const { listScenariosMock, getReplayMock, getGraphMock, getRiskMock, resetDemoMock } =
+const { listScenariosMock, getReplayMock, getGraphMock, getRiskMock, resetWorkspaceMock } =
   vi.hoisted(() => ({
     listScenariosMock: vi.fn(),
     getReplayMock: vi.fn(),
     getGraphMock: vi.fn(),
     getRiskMock: vi.fn(),
-    resetDemoMock: vi.fn(),
+    resetWorkspaceMock: vi.fn(),
   }));
 
 vi.mock("next/navigation", () => ({
@@ -32,7 +32,7 @@ vi.mock("../../../lib/api", async (importOriginal) => ({
   getReplay: getReplayMock,
   getGraph: getGraphMock,
   getRisk: getRiskMock,
-  resetDemo: resetDemoMock,
+  resetWorkspace: resetWorkspaceMock,
 }));
 
 function replayFixture(cursor: number) {
@@ -44,11 +44,11 @@ function replayFixture(cursor: number) {
       cursor === 0
         ? null
         : {
-            event_id: "evt_demo_84721",
+            event_id: "evt_84721",
             event_type: "financial.transaction.created",
             occurred_at: "2026-10-27T10:00:00Z",
-            source: "synthetic_demo",
-            trace_id: "trace_demo_84721",
+            source: "synthetic",
+            trace_id: "trace_84721",
             transaction: {
               transaction_id: "txn_84721",
               amount_minor: 48000000,
@@ -72,7 +72,7 @@ beforeEach(() => {
   getReplayMock.mockReset();
   getGraphMock.mockReset();
   getRiskMock.mockReset();
-  resetDemoMock.mockReset();
+  resetWorkspaceMock.mockReset();
   listScenariosMock.mockResolvedValue({
     scenarios: [
       { scenario_id: "scn_primary", title: "Seeded suspicious network" },
@@ -98,7 +98,7 @@ beforeEach(() => {
       band: "HIGH",
       score_version: "risk-score-v1",
       computed_at: "t",
-      limitations: "Demo.",
+      limitations: "Scored.",
     },
     rule_results: [],
   });
@@ -130,7 +130,7 @@ describe("ReplayPage", () => {
   });
 
   it("requires confirmation before reset and reports the result", async () => {
-    resetDemoMock.mockResolvedValue({
+    resetWorkspaceMock.mockResolvedValue({
       scenario_id: "scn_primary",
       run_id: "run_2",
       trace_id: "t",
@@ -139,26 +139,26 @@ describe("ReplayPage", () => {
     });
     render(<ReplayPage />);
     await waitFor(() =>
-      expect(screen.getByRole("button", { name: "Reset demo" })).toBeTruthy()
+      expect(screen.getByRole("button", { name: "Reset workspace" })).toBeTruthy()
     );
-    fireEvent.click(screen.getByRole("button", { name: "Reset demo" }));
-    expect(resetDemoMock).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole("button", { name: "Reset workspace" }));
+    expect(resetWorkspaceMock).not.toHaveBeenCalled();
     expect(screen.getByText(/Confirm: this clears/)).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Confirm reset" }));
     await waitFor(() =>
       expect(screen.getByTestId("reset-result")).toHaveTextContent("run_2")
     );
-    expect(resetDemoMock).toHaveBeenCalledWith("scn_primary");
+    expect(resetWorkspaceMock).toHaveBeenCalledWith("scn_primary");
   });
 
   it("cancel leaves state untouched", async () => {
     render(<ReplayPage />);
     await waitFor(() =>
-      expect(screen.getByRole("button", { name: "Reset demo" })).toBeTruthy()
+      expect(screen.getByRole("button", { name: "Reset workspace" })).toBeTruthy()
     );
-    fireEvent.click(screen.getByRole("button", { name: "Reset demo" }));
+    fireEvent.click(screen.getByRole("button", { name: "Reset workspace" }));
     fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
-    expect(resetDemoMock).not.toHaveBeenCalled();
+    expect(resetWorkspaceMock).not.toHaveBeenCalled();
     expect(screen.queryByText(/Confirm: this clears/)).toBeNull();
   });
 
@@ -167,7 +167,7 @@ describe("ReplayPage", () => {
     getReplayMock.mockRejectedValue(new ApiError("E", "m", 0, ""));
     render(<ReplayPage />);
     const nav = await screen.findByRole("navigation", { name: "Breadcrumb" });
-    expect(nav.querySelector("a")?.getAttribute("href")).toBe("/demo");
+    expect(nav.querySelector("a")?.getAttribute("href")).toBe("/platform");
     expect(
       within(nav).getByText("Replay scn_primary").getAttribute("aria-current")
     ).toBe("page");

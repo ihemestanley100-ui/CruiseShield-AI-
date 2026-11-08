@@ -23,26 +23,26 @@ export const pt = {
     home: "Início do CruiseShield AI",
     brand: "CruiseShield AI",
     tagline: "Financial Crime Immune System™",
-    synthetic: "Dados sintéticos de demonstração",
+    synthetic: "Dados sintéticos",
     signOut: "Sair",
     signOutEverywhere: "Sair em todo o lado",
     signOutEverywhereTitle:
       "Terminar esta sessão em todos os dispositivos e navegadores",
     investigator: "Investigador",
-    demoRole: "função de demonstração",
-    roleDemo: "{role} · demo",
+    sessionRole: "função de sessão",
+    roleContext: "{role} · ativo",
   },
   auth: {
-    title: "Entrar na demonstração",
+    title: "Acesso seguro",
     blurb:
-      "Esta demonstração está protegida. Entre com as credenciais de investigador fornecidas para esta avaliação. Apenas dados sintéticos.",
+      "Esta plataforma hospedada está protegida. Entre com as credenciais de investigador fornecidas para esta avaliação. Apenas dados sintéticos.",
     username: "Nome de utilizador",
     password: "Palavra-passe",
     signIn: "Entrar",
     signingIn: "A entrar…",
     rateLimited: "Demasiadas tentativas. Aguarde um minuto e tente novamente.",
     unreachable:
-      "Servidor inacessível. Verifique o servidor de demonstração e tente novamente.",
+      "Servidor inacessível. Verifique o servidor da plataforma e tente novamente.",
     invalid: "Nome de utilizador ou palavra-passe inválidos.",
   },
   workflow: {
@@ -90,8 +90,8 @@ export const pt = {
       "AUDITAR",
     ],
     cta: "Explorar o CruiseShield AI™",
-    ctaSub: "Entre na experiência de demonstração interativa",
-    enterDemo: "Entrar na demo",
+    ctaSub: "Explore a plataforma de investigação interativa",
+    enterPlatform: "Acessar a plataforma",
     brandName: "CruiseShield AI™",
     tagline: "The Financial Crime Immune System™",
     home: "Início do CruiseShield AI",
@@ -110,8 +110,8 @@ export const pt = {
       "Análise de risco",
       "Provas e auditoria",
     ],
-    intelStatus: "Demo",
-    intelNote: "Capacidades de demonstração · dados sintéticos",
+    intelStatus: "Piloto",
+    intelNote: "Capacidades de investigação · dados sintéticos",
     moduleTitles: [
       "Inteligência de risco",
       "Análise com IA",
@@ -166,7 +166,7 @@ export const pt = {
       "Pontuação determinística",
       "Rastreabilidade total",
     ],
-    stripNote: "Os cartões abrem o ecrã demo em direto · ",
+    stripNote: "Os cartões abrem a tela correspondente · ",
     replayLink: "experimentar reprodução e simulação",
     metricTitles: [
       "Alcance global",
@@ -182,9 +182,9 @@ export const pt = {
     ],
     platformPrinciples: "Princípios da plataforma",
     footerLine: "Uma plataforma. Um futuro financeiro mais seguro. Para todos.",
-    footerDemo:
-      "Experiência de demonstração · dados sintéticos · visuais de rede ilustrativos · ",
-    footerLink: "Entrar na demo interativa",
+    footerNote:
+      "Plataforma de investigação · dados sintéticos · visuais de rede ilustrativos · ",
+    footerLink: "Abrir a plataforma interativa",
     controlsAmbient: "Som ambiente",
     soundLabel: "Som",
     onWord: "Ligado",
@@ -196,7 +196,7 @@ export const pt = {
     resumeScene: "Retomar cena",
     pauseScene: "Pausar cena",
     fallbackNote:
-      "O 3D interativo não está disponível neste navegador. A experiência demo completa continua aberta.",
+      "O 3D interativo não está disponível neste navegador. A plataforma completa continua aberta.",
     collapsePanel: "Recolher o painel",
     expandPanel: "Expandir o painel",
     globeControls: "Controlos do atlas mundial",
@@ -228,7 +228,7 @@ export const pt = {
     requestFailed: "Pedido falhou",
     loadFailed: "Não foi possível carregar esta seção.",
     notPermitted: "Indisponível para a sua função.",
-    unreachable: "Servidor inacessível. Verifique o servidor de demonstração e tente novamente.",
+    unreachable: "Servidor inacessível. Verifique o servidor da plataforma e tente novamente.",
     timedOut: "A solicitação expirou. Tente novamente.",
     unavailable: "Serviço temporariamente indisponível. Tente em instantes.",
     closeDialog: "Fechar diálogo",
@@ -248,7 +248,7 @@ export const pt = {
     light: "Claro",
     system: "Sistema",
   },
-  demo: {
+  platform: {
     execOverview: "Resumo executivo",
     execOverviewDown: "Resumo executivo indisponível",
     riskIntel: "Inteligência de risco",
@@ -327,7 +327,7 @@ export const pt = {
     resetTitle: "Reposição do cenário",
     resetBlurb:
       "A reposição restaura o cenário inicial exatamente e limpa todo o estado ativo: decisões humanas, simulações, execuções de IA e eventos de auditoria além da própria reposição.",
-    resetDemo: "Repor demo",
+    resetWorkspace: "Redefinir espaço de trabalho",
     confirmReset:
       "Confirmar: isto limpa decisões, simulações, execuções de IA e histórico de auditoria de {id}.",
     resetting: "A repor…",
@@ -483,7 +483,7 @@ export const pt = {
       one: "{count} achado",
       other: "{count} achados",
     },
-    statusLine: "{findings} · {iso} · dados sintéticos de demonstração.",
+    statusLine: "{findings} · {iso} · dados sintéticos.",
     deviceH: "Dispositivo",
     ipH: "IP e rede",
     geoH: "Geolocalização",
@@ -501,7 +501,7 @@ export const pt = {
       other: "{count} contas",
     },
     fixtureNote:
-      "Referência fixa, não uma impressão digital verificada. Atributos: apenas valores sintéticos de demonstração declarados.",
+      "Referência fixa, não uma impressão digital verificada. Atributos: apenas valores sintéticos declarados.",
     ispLabel: "ISP/ASN",
     vpnLabel: "VPN/proxy/Tor",
     repLabel: "Reputação",
@@ -517,7 +517,7 @@ export const pt = {
     noFindings: "Sem achados. (evidência insuficiente)",
     evidencePre: "Evidências: ",
     provMeta: "· proveniência {p} · confiança {c} · atualidade {f}",
-    syntheticTag: "· demonstração sintética",
+    syntheticTag: "⚠ sintético",
     limitsLine: "Limites: {list}",
     reviewLine: "Revisão humana: {r}",
     candidateOff:
@@ -657,7 +657,7 @@ export const pt = {
     orbitalLabel: "Grafo orbital",
     orbitalTitle: "Explorador orbital",
     orbitalNote:
-      "Dados sintéticos de demonstração. Anéis e movimento são só disposição — não indicam risco, culpa ou prioridade.",
+      "Dados sintéticos. Anéis e movimento são só disposição - não indicam risco, culpa ou prioridade.",
     orbitalCounts:
       "Foco: {focus} · A mostrar {a} de {b} nós, {c} de {d} arestas.",
     droppedEdges: {

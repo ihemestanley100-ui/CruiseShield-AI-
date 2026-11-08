@@ -7,13 +7,13 @@ Date: 2026-11-03 · Auth-armed mode. "Token" = valid
 
 | Route | Token | Anon (no creds) | Session non-admin | Session admin | Effect |
 |---|---|---|---|---|---|
-| `/api/v1/demo/reset` | 403 ADMIN (R1) | 401 | 403 (admin-only) | ALLOW | Wipe interactive state → reseed |
-| `/api/v1/demo/scenarios/{id}/start` | 403 ADMIN (R1) | 401 | 403 | ALLOW | Reset + return entry URL |
-| `/api/v1/demo/judge-start` | 403 ADMIN (R1) | 401 | 403 | ALLOW | Reset to primary + entry URL |
+| `/api/v1/platform/reset` | 403 ADMIN (R1) | 401 | 403 (admin-only) | ALLOW | Wipe interactive state → reseed |
+| `/api/v1/platform/scenarios/{id}/start` | 403 ADMIN (R1) | 401 | 403 | ALLOW | Reset + return entry URL |
+| `/api/v1/platform/judge-start` | 403 ADMIN (R1) | 401 | 403 | ALLOW | Reset to primary + entry URL |
 | `/api/v1/investigations/{id}/ai-analysis` | 403 AI_LOGIN (R3) | 401 | ALLOW (ai_run perm*) | ALLOW | Spends 1 AI call (cap 100/d) |
 | `/api/v1/investigations/{id}/ai-followup` | 403 AI_LOGIN (R3) | 401 | ALLOW* | ALLOW | Spends 1 AI call |
 | `/api/v1/simulations` | ALLOW | 401 | ALLOW (write) | ALLOW | Persist simulation |
-| `/api/v1/cases/{id}/decisions` | ALLOW as demo-token (R2) | 401 | ALLOW (write) | ALLOW | Transition case + audit (actor bound) |
+| `/api/v1/cases/{id}/decisions` | ALLOW as platform-token (R2) | 401 | ALLOW (write) | ALLOW | Transition case + audit (actor bound) |
 | `/api/v1/events` | ALLOW | 401 | ALLOW (write) | ALLOW | Validated ingest, deduped |
 | `/api/v1/investigations/{id}/evidence-package` | ALLOW (gated, R4) | 401 | ALLOW (write) | ALLOW | READ-ONLY alias — no mutation |
 | `/api/v1/auth/logout*` | n/a (session ops) | — | own session | own session | No token role |
@@ -33,7 +33,7 @@ handler returns config; error bodies are codes only).
 Token now exceeds NO session anywhere: demo/* admin-only,
 AI login-only, decisions attributed. Residual token power:
 synthetic reads + validated/rate-limited/attributed writes
-(simulations, events, decisions-as-demo-token). Anomaly 3
+(simulations, events, decisions-as-platform-token). Anomaly 3
 (unset ⇒ open) stands BY DOCUMENTED DESIGN — deploy
 checklist must-set item (R5).
 

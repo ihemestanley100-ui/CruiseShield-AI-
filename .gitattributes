@@ -1,0 +1,8 @@
+# UGLS review kit: freshness tests byte-compare these generated files, so
+# they must keep LF endings on every platform (a Windows CRLF checkout
+# would fail review-kit.test.ts and inventory-dump.test.ts).
+docs/UGLS_REVIEW_KIT/*.tsv text eol=lf
+docs/UGLS_KEY_INVENTORY_GENERATED.txt text eol=lf
+# F-CI-01: the canonical migration fixture is byte-anchored; git must
+# never normalize its line endings on any platform.
+tests/fixtures/canonical-state.json binary

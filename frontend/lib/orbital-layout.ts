@@ -3,7 +3,7 @@
  * VISUAL METAPHOR ONLY: ring depth, angle, node size, and animation carry
  * NO meaning about risk, guilt, ownership, timing, causation, or
  * investigative priority. Rings are BFS depth from the focus node (a
- * layout convenience for a readable demo); angles are alphabetical.
+ * layout convenience for a readable graph); angles are alphabetical.
  *
  * Pure functions, no DOM. Positions derive only from node/edge IDs. */
 

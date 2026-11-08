@@ -72,3 +72,29 @@ def verify_chain(records: list[dict[str, Any]],
 def export_chain(records: list[dict[str, Any]]) -> bytes:
     """Canonical export bytes for portability + report hashing."""
     return _canon({"audit_chain": records, "version": 1})
+
+
+def verification_report(records: list[dict[str, Any]],
+                        keyring: dict[str, bytes],
+                        legacy_skipped: int = 0) -> dict[str, Any]:
+    """Structured verification outcome; never raises, never leaks keys.
+
+    Returns {"ok", "sealed", "legacy_skipped", "head", "key_ids",
+    "error"}. On failure "error" is {"code", "detail"} naming the
+    check and position only. ``legacy_skipped`` counts unsealed
+    entries the caller set aside (pre-ceremony records).
+    """
+    key_ids = sorted({str(r.get("audit_key_id"))
+                      for r in records
+                      if isinstance(r.get("audit_key_id"), str)})
+    try:
+        result = verify_chain(records, keyring)
+    except ValueError as exc:
+        return {"ok": False, "sealed": len(records),
+                "legacy_skipped": legacy_skipped, "head": None,
+                "key_ids": key_ids,
+                "error": {"code": "AUDIT_CHAIN_INVALID",
+                          "detail": str(exc)}}
+    return {"ok": True, "sealed": result["events"],
+            "legacy_skipped": legacy_skipped, "head": result["head"],
+            "key_ids": key_ids, "error": None}

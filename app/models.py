@@ -58,7 +58,7 @@ class Event(BaseModel):
     event_type: str = "financial.transaction.created"
     schema_version: str = "1.0"
     occurred_at: str
-    source: str = "synthetic_demo"
+    source: str = "synthetic"
     trace_id: str
     privacy_classification: str = "synthetic"
     transaction: Transaction
@@ -215,7 +215,7 @@ class HumanDecision(BaseModel):
     evidence_viewed: list[str] = Field(default_factory=list)
     recommendation_at_decision: str = ""
     created_at: str = ""
-    authorization_scope: str = "demo"
+    authorization_scope: str = "synthetic"
     trace_id: str = ""
 
 
@@ -255,7 +255,7 @@ class ScenarioManifest(BaseModel):
     title: str
     purpose: str
     seed_hash: str
-    synthetic_notice: str = "Synthetic demo data."
+    synthetic_notice: str = "Synthetic data."
     event_sequence: list[str] = Field(default_factory=list)
     expected_rule_results: dict[str, bool] = Field(default_factory=dict)
     expected_graph_counts: dict[str, int] = Field(default_factory=dict)

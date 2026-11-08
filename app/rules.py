@@ -46,7 +46,7 @@ NETWORK_RULES = {rule.rule_id for rule in RULES}
 
 BANDS = [(29, "LOW"), (59, "MODERATE"), (84, "HIGH"), (100, "CRITICAL")]
 
-LIMITATIONS = ("Deterministic demo risk score from versioned rules over "
+LIMITATIONS = ("Deterministic risk score from versioned rules over "
                "synthetic data. A risk signal is not proof of criminal intent.")
 
 

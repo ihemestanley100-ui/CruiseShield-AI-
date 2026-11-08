@@ -14,7 +14,7 @@ export default function Error({
     <div className="card command-section" role="alert">
       <h2>Something failed to load</h2>
       <p className="muted">
-        The demo state is intact — this page hit a rendering error
+        Saved state is intact — this page hit a rendering error
         {error?.digest ? ` (ref ${error.digest})` : ""}.
       </p>
       <button type="button" className="btn-secondary" onClick={() => reset()}>

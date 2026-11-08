@@ -46,11 +46,11 @@ function runFixture(): AgentRun {
           finding: "Device sharing observed.",
           evidence_ids: ["evidence_rr_R-003_84721"],
           confidence_label: "high",
-          caveat: "Demo data.",
+          caveat: "Sample data.",
         },
       ],
       alternative_explanations: ["Shared household device."],
-      missing_information: ["None for demo."],
+      missing_information: ["None for platform."],
       conclusion: "requires_review",
       disclaimer: "Advisory only.",
     },
@@ -87,7 +87,7 @@ describe("AiPanel", () => {
     await waitFor(() => {
       expect(screen.getByText("Missing information:")).toBeTruthy();
     });
-    expect(screen.getByText("None for demo.")).toBeTruthy();
+    expect(screen.getByText("None for platform.")).toBeTruthy();
     expect(screen.getByText("Alternative explanations:")).toBeTruthy();
     expect(screen.getByText("Shared household device.")).toBeTruthy();
   });

@@ -13,14 +13,14 @@ const INV = "inv_84721";
 const CASE = "case_84721";
 
 const INTEL_HREFS = [
-  "/demo",
+  "/platform",
   `/network/${TXN}`,
   `/network/${TXN}`,
   `/investigations/${INV}`,
   `/investigations/${INV}`,
   `/network/${TXN}`,
   `/investigations/${INV}#ai-h`,
-  "/demo",
+  "/platform",
   `/cases/${CASE}`,
 ];
 
@@ -71,7 +71,7 @@ export function IntelligencePanel() {
               /* Index key: hrefs repeat across items, labels localize. */
               <li key={index}>
                 <Link
-                  href={INTEL_HREFS[index] ?? "/demo"}
+                  href={INTEL_HREFS[index] ?? "/platform"}
                   className="landing-panel-link"
                 >
                   <span className="landing-panel-icon">

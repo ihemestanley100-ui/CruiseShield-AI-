@@ -11,7 +11,7 @@ const CASE = "case_84721";
 const SCENARIO = "scn_primary";
 
 const CAP_HREFS = [
-  "/demo",
+  "/platform",
   `/network/${TXN}`,
   `/network/${TXN}`,
   `/investigations/${INV}`,
@@ -19,7 +19,7 @@ const CAP_HREFS = [
   `/network/${TXN}`,
   `/investigations/${INV}`,
   `/investigations/${INV}#ai-h`,
-  "/demo",
+  "/platform",
   `/cases/${CASE}`,
 ];
 
@@ -34,7 +34,7 @@ export function CapabilityStrip() {
         {titles.map((title, index) => (
           /* Index key: titles localize, hrefs repeat. */
           <li key={index}>
-            <Link href={CAP_HREFS[index] ?? "/demo"} className="landing-cap-card">
+            <Link href={CAP_HREFS[index] ?? "/platform"} className="landing-cap-card">
               <span className="landing-cap-index" aria-hidden="true">
                 {String(index + 1).padStart(2, "0")}
               </span>

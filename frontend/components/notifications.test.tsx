@@ -51,7 +51,7 @@ function listFixture(items: NotificationItem[]) {
   return {
     notifications: items,
     unread_count: unread,
-    synthetic_notice: "Synthetic demo data.",
+    synthetic_notice: "Synthetic data.",
   };
 }
 
@@ -116,7 +116,7 @@ describe("Notifications", () => {
       await screen.findByRole("button", { name: "Notifications, 0 open" })
     );
     expect(screen.getByRole("alert").textContent).toContain(
-      "Backend unreachable. Check the demo server and retry."
+      "Backend unreachable. Check the platform server and retry."
     );
     expect(screen.queryByRole("link")).toBeNull();
   });

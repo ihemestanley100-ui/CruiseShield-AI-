@@ -28,8 +28,8 @@ export const fr = {
     signOutEverywhere: "Se déconnecter partout",
     signOutEverywhereTitle: "Terminer cette session sur tous les appareils et navigateurs",
     investigator: "Enquêteur",
-    demoRole: "rôle de démonstration",
-    roleDemo: "{role} · démo",
+    sessionRole: "rôle de démonstration",
+    roleContext: "{role} · démo",
   },
   auth: {
     title: "Connexion à la démonstration",
@@ -89,7 +89,7 @@ export const fr = {
     ],
     cta: "Explorer CruiseShield AI™",
     ctaSub: "Entrez dans la démonstration interactive",
-    enterDemo: "Entrer dans la démo",
+    enterPlatform: "Entrer dans la démo",
     brandName: "CruiseShield AI™",
     tagline: "The Financial Crime Immune System™",
     home: "Accueil CruiseShield AI",
@@ -179,7 +179,7 @@ export const fr = {
     ],
     platformPrinciples: "Principes de la plateforme",
     footerLine: "Une plateforme. Un avenir financier plus sûr. Pour tous.",
-    footerDemo: "Expérience de démonstration · données synthétiques · visuels réseau illustratifs · ",
+    footerNote: "Expérience de démonstration · données synthétiques · visuels réseau illustratifs · ",
     footerLink: "Entrez dans la démonstration interactive",
     controlsAmbient: "Son d'ambiance",
     soundLabel: "Son",
@@ -244,7 +244,7 @@ export const fr = {
     light: "Clair",
     system: "Système",
   },
-  demo: {
+  platform: {
     execOverview: "Vue d'ensemble",
     execOverviewDown: "Vue d'ensemble indisponible",
     riskIntel: "Renseignement sur les risques",
@@ -323,7 +323,7 @@ export const fr = {
     resetTitle: "Réinitialisation du scénario",
     resetBlurb:
       "La réinitialisation restaure exactement le scénario de départ et efface tout l'état en direct : décisions humaines, simulations, exécutions IA et événements d'audit au-delà de la réinitialisation elle-même.",
-    resetDemo: "Réinitialiser la démo",
+    resetWorkspace: "Réinitialiser la démo",
     confirmReset:
       "Confirmez : cela efface les décisions, simulations, exécutions IA et l'historique d'audit pour {id}.",
     resetting: "Réinitialisation…",

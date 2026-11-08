@@ -55,7 +55,7 @@ export default function CaseAuditPage() {
     <main className="main">
       <Breadcrumbs
         items={[
-          { label: tNav("commandCenter"), href: "/demo" },
+          { label: tNav("commandCenter"), href: "/platform" },
           { label: t("crumb", { id: caseId }), href: `/cases/${caseId}` },
           { label: t("auditCrumb") },
         ]}

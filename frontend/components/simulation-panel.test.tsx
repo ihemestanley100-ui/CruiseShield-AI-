@@ -23,12 +23,12 @@ function graphFixture() {
     source_node_id: "acct_A",
     target_node_id: "acct_B",
     relationship_type: rel,
-    source_event_ids: ["evt_demo_84721"],
+    source_event_ids: ["evt_84721"],
     evidence_ids: [`evidence_${id}`],
     valid_from: "2026-10-27T10:00:00Z",
     valid_to: null,
     synthetic_flag: true,
-    trace_id: "trace_demo_84721",
+    trace_id: "trace_84721",
   });
   return {
     transaction_id: "txn_84721",
@@ -49,7 +49,7 @@ function riskFixture() {
       band: "HIGH",
       score_version: "risk-score-v1",
       computed_at: "2026-10-28T00:00:00Z",
-      limitations: "Demo score.",
+      limitations: "Risk score.",
     },
     rule_results: [],
   };

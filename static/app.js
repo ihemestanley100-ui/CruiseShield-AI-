@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.disabled = true;
       setHTML("judge-msg", "Starting…");
       try {
-        const data = await postJSON("/api/v1/demo/judge-start", {});
+        const data = await postJSON("/api/v1/platform/judge-start", {});
         window.location.href = data.url;
       } catch (e) {
         setHTML("judge-msg", `<div class="alert error">${esc(e.message)}</div>`);
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = document.getElementById("scenario").value;
       setHTML("scenario-msg", "Resetting…");
       try {
-        await postJSON(`/api/v1/demo/scenarios/${id}/start`, {});
+        await postJSON(`/api/v1/platform/scenarios/${id}/start`, {});
         window.location.reload();
       } catch (e) {
         setHTML("scenario-msg", `<div class="alert error">${esc(e.message)}</div>`);

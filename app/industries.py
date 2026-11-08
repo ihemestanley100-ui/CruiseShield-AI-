@@ -150,3 +150,76 @@ def set_status(ident: str, status: str, evidence: str) -> None:
             entry["status_evidence"] = _STATUS[ident][1]
             return entry
     return None
+
+
+# -- directive §12 group mapping (canonical registry preserved) --------
+# The master directive numbers 45 industry GROUPS; the registry holds 45
+# module IDs. Groups share one ID where the directive splits a sector
+# (fintech/payments, insurance/pensions, fx/remittance, FIU/law
+# enforcement) and split where the registry is finer (maritime vs
+# transport; ngo/charities/hospitality/environmental). Every registry ID
+# appears in at least one group; no coverage is dropped.
+DIRECTIVE_GROUPS: tuple[tuple[str, str, tuple[str, ...]], ...] = (
+    ("01", "Banking", ("banking",)),
+    ("02", "Fintech", ("fintech-payments",)),
+    ("03", "Digital payments", ("fintech-payments",)),
+    ("04", "Capital markets", ("capital-markets",)),
+    ("05", "Insurance", ("insurance-pensions",)),
+    ("06", "Pensions", ("insurance-pensions",)),
+    ("07", "Foreign exchange", ("fx-remittance",)),
+    ("08", "Remittance", ("fx-remittance",)),
+    ("09", "Cryptocurrency and digital assets", ("crypto-assets",)),
+    ("10", "Government and public administration", ("government",)),
+    ("11", "Taxation and revenue", ("tax-revenue",)),
+    ("12", "Financial intelligence", ("law-enforcement",)),
+    ("13", "Law enforcement", ("law-enforcement",)),
+    ("14", "Customs and border services", ("customs-border",)),
+    ("15", "Defence and national security", ("defence-security",)),
+    ("16", "Public procurement and infrastructure",
+     ("procurement-infra",)),
+    ("17", "Retail", ("retail",)),
+    ("18", "E-commerce", ("ecommerce",)),
+    ("19", "Wholesale and distribution", ("wholesale",)),
+    ("20", "Manufacturing", ("manufacturing",)),
+    ("21", "Supply chain and logistics", ("supply-chain",)),
+    ("22", "Import and export", ("import-export",)),
+    ("23", "Real estate", ("real-estate",)),
+    ("24", "Construction and engineering", ("construction",)),
+    ("25", "Mining and natural resources", ("mining-resources",)),
+    ("26", "Oil and gas", ("oil-gas",)),
+    ("27", "Automotive and vehicle trade", ("automotive",)),
+    ("28", "Luxury goods and precious metals", ("luxury-goods",)),
+    ("29", "Healthcare", ("healthcare",)),
+    ("30", "Pharmaceuticals and biotechnology", ("pharma-biotech",)),
+    ("31", "Education", ("education",)),
+    ("32", "Legal services", ("legal",)),
+    ("33", "Accounting and auditing", ("accounting",)),
+    ("34", "Consulting and professional services", ("consulting",)),
+    ("35", "Telecommunications", ("telecom",)),
+    ("36", "Technology and software", ("technology",)),
+    ("37", "Gaming and esports", ("gaming-esports",)),
+    ("38", "Gambling and casinos", ("gambling",)),
+    ("39", "Media, advertising and entertainment", ("media",)),
+    ("40", "Social media and digital platforms", ("social-platforms",)),
+    ("41", "Agriculture and agribusiness", ("agriculture",)),
+    ("42", "Energy and utilities", ("energy-utilities",)),
+    ("43", "Aviation and aerospace", ("aviation",)),
+    ("44", "Maritime and transportation", ("maritime", "transport")),
+    ("45", "NGOs, charities, hospitality, environment",
+     ("ngo", "charities", "hospitality", "environmental")),
+)
+
+
+def directive_groups() -> list[dict[str, Any]]:
+    """Directive §12 groups mapped to canonical registry IDs."""
+    return [{"group": num, "name": name, "modules": list(ids)}
+            for num, name, ids in DIRECTIVE_GROUPS]
+
+
+def group_coverage() -> dict[str, Any]:
+    """Coverage proof: every registry ID in >=1 group, 45 distinct."""
+    covered = sorted({i for _, _, ids in DIRECTIVE_GROUPS for i in ids})
+    universe = sorted(e["id"] for e in registry())
+    return {"groups": len(DIRECTIVE_GROUPS), "distinct_ids": len(covered),
+            "missing": [i for i in universe if i not in covered],
+            "unknown": [i for i in covered if i not in universe]}

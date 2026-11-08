@@ -1,4 +1,4 @@
-"""R1-R4 demo-token remediation (DEMO_TOKEN_SECURITY_AUDIT.md).
+"""R1-R4 token remediation (DEMO_TOKEN_SECURITY_AUDIT.md).
 
 4-way access matrix over the real middleware stack (socket-gated
 TestClient) plus socket-free unit tests for the new helpers.
@@ -19,7 +19,7 @@ needs_sockets = pytest.mark.skipif(
     reason="socket creation forbidden in this sandbox; runs in CI/user envs")
 
 SECRET = "test-secret-r1r4-remediation-32ch!!"
-TOKEN = "test-demo-token-r1r4-not-a-secret"
+TOKEN = "test-platform-token-r1r4-not-a-secret"
 RECORD = auth_mod.hash_password("pw-r1r4")
 XRW = {"X-Requested-With": "XMLHttpRequest"}
 DECISION = {"decision": "Escalate", "target_status": "TRIAGED",
@@ -52,46 +52,46 @@ def _tok():
 # -- R1: token must not reach admin-only demo paths ----------------------
 
 @needs_sockets
-def test_r1_token_denied_demo_reset(client, tmp_store, armed):
-    resp = client.post("/api/v1/demo/reset", headers=_tok())
+def test_r1_token_denied_platform_reset(client, tmp_store, armed):
+    resp = client.post("/api/v1/platform/reset", headers=_tok())
     assert resp.status_code == 403
     assert resp.json()["error"]["code"] == "ADMIN_REQUIRED"
 
 
 @needs_sockets
 def test_r1_token_denied_judge_start(client, tmp_store, armed):
-    resp = client.post("/api/v1/demo/judge-start", headers=_tok())
+    resp = client.post("/api/v1/platform/judge-start", headers=_tok())
     assert resp.status_code == 403
     assert resp.json()["error"]["code"] == "ADMIN_REQUIRED"
 
 
 @needs_sockets
-def test_r1_token_denied_demo_scenarios_get(client, tmp_store, armed):
-    resp = client.get("/api/v1/demo/scenarios", headers=_tok())
+def test_r1_token_denied_platform_scenarios_get(client, tmp_store, armed):
+    resp = client.get("/api/v1/platform/scenarios", headers=_tok())
     assert resp.status_code == 403
 
 
 @needs_sockets
-def test_r1_admin_session_allowed_demo_reset(client, tmp_store, armed):
+def test_r1_admin_session_allowed_platform_reset(client, tmp_store, armed):
     cookies = _login(client, "boss")
-    resp = client.post("/api/v1/demo/reset", headers=XRW, cookies=cookies)
+    resp = client.post("/api/v1/platform/reset", headers=XRW, cookies=cookies)
     assert resp.status_code == 200
 
 
 @needs_sockets
 def test_r1_nonadmin_session_still_denied(client, tmp_store, armed):
     cookies = _login(client, "judge")
-    resp = client.post("/api/v1/demo/reset", headers=XRW, cookies=cookies)
+    resp = client.post("/api/v1/platform/reset", headers=XRW, cookies=cookies)
     assert resp.status_code == 403
 
 
 @needs_sockets
-def test_r1_anonymous_denied_demo_reset(client, tmp_store, armed):
-    resp = client.post("/api/v1/demo/reset")
+def test_r1_anonymous_denied_platform_reset(client, tmp_store, armed):
+    resp = client.post("/api/v1/platform/reset")
     assert resp.status_code == 401
 
 
-# -- R2: token actor forced to demo-token --------------------------------
+# -- R2: token actor forced to platform-token --------------------------------
 
 @needs_sockets
 def test_r2_token_actor_forced(client, tmp_store, armed):
@@ -100,8 +100,8 @@ def test_r2_token_actor_forced(client, tmp_store, armed):
                        json=DECISION, headers=_tok())
     assert resp.status_code == 200
     body = resp.json()
-    assert body["decision"]["actor_id"] == "demo-token"
-    assert "demo-token" in json.dumps(body["audit"])
+    assert body["decision"]["actor_id"] == "platform-token"
+    assert "platform-token" in json.dumps(body["audit"])
     assert "judge" not in json.dumps(body["audit"])
 
 
@@ -121,7 +121,7 @@ def test_r2_helper_token_forced(monkeypatch):
                    "headers": [(b"host", b"t"),
                                (b"authorization",
                                 ("Bearer " + TOKEN).encode())]})
-    assert main._decision_actor(req, "judge") == "demo-token"
+    assert main._decision_actor(req, "judge") == "platform-token"
 
 
 def test_r2_helper_no_credential_passthrough(monkeypatch):

@@ -13,7 +13,8 @@ from datetime import datetime, timezone
 
 import httpx
 
-from app.config import META_BASE_URL, META_MODEL_ID, MODEL_API_KEY
+from app.config import (AI_MAX_OUTPUT_TOKENS, META_BASE_URL, META_MODEL_ID,
+                        MODEL_API_KEY)
 from app.intel_ai import BANNED_SCORE_FIELDS, ENFORCEMENT_PHRASES
 from app.models import EvidencePackage
 
@@ -231,6 +232,7 @@ REQUEST_TEMPERATURE = 0
 def build_request_body(package: EvidencePackage, summary: str,
                        use_structured_output: bool = True) -> dict:
     body: dict = {"model": META_MODEL_ID, "temperature": REQUEST_TEMPERATURE,
+                  "max_tokens": AI_MAX_OUTPUT_TOKENS,
                   "messages": build_messages(package, summary)}
     if use_structured_output:
         body["response_format"] = dict(STRUCTURED_OUTPUT_BODY)
@@ -304,7 +306,7 @@ def should_retry_without_structured(status_code: int, body_text: str) -> bool:
 
 # Bounded retries for transient provider failures only. Timeouts and
 # connection errors fail fast (a model call already takes ~15s; blind
-# retries would stall the demo). Delays injectable for fast tests.
+# retries would stall the request). Delays injectable for fast tests.
 RETRYABLE_STATUSES = frozenset({429, 502, 503, 504})
 MAX_ATTEMPTS = 3
 RETRY_DELAYS: tuple[float, ...] = (1.0, 2.0)
@@ -423,6 +425,7 @@ async def analyze(package: EvidencePackage, summary: str, trace_id: str,
         if is_followup:
             body: dict = {"model": META_MODEL_ID,
                           "temperature": REQUEST_TEMPERATURE,
+                          "max_tokens": AI_MAX_OUTPUT_TOKENS,
                           "messages": build_followup_messages(
                               package, summary, question.strip(),
                               prior_context)}

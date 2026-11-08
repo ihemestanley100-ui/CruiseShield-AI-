@@ -1,0 +1,11 @@
+[
+  "t=915ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/investigations/inv_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=915ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/cases/case_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=915ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/network/txn_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=955ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/graph/txn_84721",
+  "t=956ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721/audit",
+  "t=4577ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/investigations/inv_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=4577ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/cases/case_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=4577ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/network/txn_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=4578ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/replay/scn_primary?_rsc=yrUa8X5BJbbbszh9"
+]

@@ -29,8 +29,8 @@ export const ha = {
     signOutEverywhereTitle:
       "Ƙare wannan zaman a duk na'urori da masu bincike",
     investigator: "Mai bincike",
-    demoRole: "rawar nunawa",
-    roleDemo: "{role} · nunawa",
+    sessionRole: "rawar nunawa",
+    roleContext: "{role} · nunawa",
   },
   auth: {
     title: "Shigar nunawa",
@@ -91,7 +91,7 @@ export const ha = {
     ],
     cta: "Binciko CruiseShield AI™",
     ctaSub: "Shiga ƙwarewar nunin mu'amala",
-    enterDemo: "Shiga nuni",
+    enterPlatform: "Shiga nuni",
     brandName: "CruiseShield AI™",
     tagline: "The Financial Crime Immune System™",
     home: "Gidan CruiseShield AI",
@@ -181,7 +181,7 @@ export const ha = {
     ],
     platformPrinciples: "Ƙa'idodin dandamali",
     footerLine: "Dandamali ɗaya. Makomar kuɗi mai aminci. Ga kowa.",
-    footerDemo:
+    footerNote:
       "Ƙwarewar nuni · bayanan ƙirƙira · hotunan hanyar sadarwa misalai · ",
     footerLink: "Shiga nunin mu'amala",
     controlsAmbient: "Sautin yanayi",
@@ -247,7 +247,7 @@ export const ha = {
     light: "Haske",
     system: "Tsarin",
   },
-  demo: {
+  platform: {
     execOverview: "Taƙaitaccen bayani na zartarwa",
     execOverviewDown: "Taƙaitaccen bayanin zartarwa ba ya nan",
     riskIntel: "Hankalin haɗari",
@@ -327,7 +327,7 @@ export const ha = {
     resetTitle: "Sake saita yanayi",
     resetBlurb:
       "Sake saitawa yana dawo da yanayin farko daidai kuma yana share duk yanayin kai tsaye: shawarwarin ɗan adam, gwaje-gwaje, gudanarwar AI, da abubuwan bita bayan sake saitawar kanta.",
-    resetDemo: "Sake saita nuni",
+    resetWorkspace: "Sake saita nuni",
     confirmReset:
       "Tabbatar: wannan yana share shawarwari, gwaje-gwaje, gudanarwar AI, da tarihin bita na {id}.",
     resetting: "Ana sake saitawa…",

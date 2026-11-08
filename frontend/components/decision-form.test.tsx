@@ -23,7 +23,7 @@ function decisionFixture() {
       evidence_viewed: [],
       recommendation_at_decision: "",
       created_at: "2026-10-29T00:00:00Z",
-      authorization_scope: "demo",
+      authorization_scope: "synthetic",
       trace_id: "t",
     },
     audit: {
@@ -181,7 +181,7 @@ describe("DecisionForm role gating (J4)", () => {
     expect(screen.getByRole("note")).toHaveTextContent("read-only");
   });
 
-  it("enables submit in open-demo mode", () => {
+  it("enables submit in open mode", () => {
     render(
       <DecisionForm
         caseId="case_84721"

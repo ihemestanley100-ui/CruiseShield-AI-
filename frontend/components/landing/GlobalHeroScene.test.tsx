@@ -30,7 +30,7 @@ describe("GlobalHeroScene", () => {
     );
     expect(screen.getByTestId("webgl-fallback")).toBeTruthy();
     const cta = screen.getByRole("link", { name: /Explore CruiseShield AI/ });
-    expect(cta.getAttribute("href")).toBe("/demo");
+    expect(cta.getAttribute("href")).toBe("/platform");
   });
 
   it("reserves the bottom stage so the fallback clears the modules row (D-013)", () => {

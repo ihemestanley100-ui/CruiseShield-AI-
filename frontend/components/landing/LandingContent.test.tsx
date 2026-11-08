@@ -45,7 +45,7 @@ beforeEach(() => {
 });
 
 describe("GlobalLandingPage", () => {
-  it("renders brand, hero copy, journey, and demo CTAs", () => {
+  it("renders brand, hero copy, journey, and platform CTAs", () => {
     render(<GlobalLandingPage />);
     expect(screen.getAllByText("CruiseShield AI™").length).toBeGreaterThan(0);
     expect(
@@ -69,13 +69,13 @@ describe("GlobalLandingPage", () => {
     ).toBeTruthy();
     expect(screen.getByText(/fraud investigators, compliance teams/)).toBeTruthy();
     expect(screen.getByText("Auditable")).toBeTruthy();
-    // Hero CTA + WebGL-fallback CTA both target /demo (jsdom has no WebGL).
+    // Hero CTA + WebGL-fallback CTA both target /platform (jsdom has no WebGL).
     const ctas = screen.getAllByRole("link", { name: /Explore CruiseShield AI/ });
     expect(ctas.length).toBeGreaterThanOrEqual(1);
     for (const cta of ctas) {
-      expect(cta.getAttribute("href")).toBe("/demo");
+      expect(cta.getAttribute("href")).toBe("/platform");
     }
-    expect(screen.getByRole("link", { name: "Enter Demo" })).toHaveProperty(
+    expect(screen.getByRole("link", { name: "Access Platform" })).toHaveProperty(
       "href"
     );
   });
@@ -111,7 +111,7 @@ describe("GlobalLandingPage", () => {
     ).toBeTruthy();
   });
 
-  it("routes capability cards only to real demo screens", () => {
+  it("routes capability cards only to real platform screens", () => {
     render(<GlobalLandingPage />);
     const strip = screen
       .getByRole("heading", { name: "One platform, ten intelligence layers" })
@@ -120,7 +120,7 @@ describe("GlobalLandingPage", () => {
       .getAllByRole("link")
       .map((a) => a.getAttribute("href"));
     const allowed = new Set([
-      "/demo",
+      "/platform",
       "/network/txn_84721",
       "/investigations/inv_84721",
       "/investigations/inv_84721#ai-h",

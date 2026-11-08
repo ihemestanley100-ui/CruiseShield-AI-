@@ -5,7 +5,7 @@ export default function Loading() {
   return (
     <div className="card command-section" aria-busy="true" aria-live="polite">
       <h2>Loading</h2>
-      <p className="muted">Fetching the latest demo state.</p>
+      <p className="muted">Fetching the latest workspace state.</p>
     </div>
   );
 }

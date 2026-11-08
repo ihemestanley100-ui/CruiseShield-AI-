@@ -1,6 +1,6 @@
 "use client";
 
-/* Global application shell: top bar (brand, theme, disclosure, demo
+/* Global application shell: top bar (brand, theme, disclosure, session
  * profile) plus sidebar navigation with mobile drawer. Every link
  * targets a real route or a real on-page anchor; destinations without
  * backend support (Transactions, Reports, Settings, New Investigation)
@@ -11,7 +11,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { LanguageSelector } from "./language-selector";
-import { LoginCard, useDemoSession } from "./login-gate";
+import { LoginCard, usePlatformSession } from "./login-gate";
 import { Notifications } from "./notifications";
 import { SkipLink } from "./skip-link";
 import { ThemeSelector } from "./theme-selector";
@@ -28,7 +28,7 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { key: "commandCenter", href: "/demo" },
+  { key: "commandCenter", href: "/platform" },
   { key: "investigations", href: `/investigations/${INV_ID}` },
   { key: "cases", href: `/cases/${CASE_ID}` },
   { key: "networkExplorer", href: `/network/${TXN_ID}` },
@@ -46,7 +46,7 @@ const QUICK_ACTIONS: NavItem[] = [
 
 function isActive(pathname: string, href: string): boolean {
   const path = href.split("#")[0] ?? href;
-  if (path === "/demo") return pathname === "/demo";
+  if (path === "/platform") return pathname === "/platform";
   return pathname === path || pathname.startsWith(`${path}/`);
 }
 
@@ -103,7 +103,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const { t } = useTranslation("nav");
   const { t: tCommon } = useTranslation("common");
   const pathname = usePathname();
-  const { gate, login, logout, logoutAll } = useDemoSession();
+  const { gate, login, logout, logoutAll } = usePlatformSession();
   const menu = useRef<HTMLButtonElement | null>(null);
   const drawer = useRef<HTMLElement | null>(null);
   const wasOpen = useRef(false);
@@ -145,7 +145,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   /* The cinematic landing owns its own chrome: render it full-bleed
    * with no sidebar or topbar. It is never login-gated: the page makes
-   * no data calls, matching the backend's open "/" path. All demo
+   * no data calls, matching the backend's open "/" path. All platform
    * routes keep the shell. */
   if (pathname === "/") {
     return <div className="landing-shell">{children}</div>;
@@ -163,8 +163,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     );
   }
 
-  /* Phase 5: hosted demos with login armed show the sign-in card
-   * instead of any demo route until the session cookie is set. */
+  /* Phase 5: hosted deployments with login armed show the sign-in card
+   * instead of any platform route until the session cookie is set. */
   if (gate.status === "login") {
     return (
       <GateChrome>
@@ -223,7 +223,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <span className="profile-text">
               <strong>{gate.session.user}</strong>
               <span className="muted">
-                {t("roleDemo", { role: gate.session.role })}
+                {t("roleContext", { role: gate.session.role })}
               </span>
             </span>
             <button
@@ -249,7 +249,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </span>
             <span className="profile-text">
               <strong>{t("investigator")}</strong>
-              <span className="muted">{t("demoRole")}</span>
+              <span className="muted">{t("sessionRole")}</span>
             </span>
           </div>
         )}

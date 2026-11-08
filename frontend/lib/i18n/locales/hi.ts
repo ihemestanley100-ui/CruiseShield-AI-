@@ -28,8 +28,8 @@ export const hi = {
     signOutEverywhere: "सभी जगह साइन आउट",
     signOutEverywhereTitle: "सभी डिवाइस और ब्राउज़र पर यह सत्र समाप्त करें",
     investigator: "जांचकर्ता",
-    demoRole: "डेमो भूमिका",
-    roleDemo: "{role} · डेमो",
+    sessionRole: "डेमो भूमिका",
+    roleContext: "{role} · डेमो",
   },
   auth: {
     title: "डेमो साइन इन",
@@ -88,7 +88,7 @@ export const hi = {
     ],
     cta: "CruiseShield AI™ खोजें",
     ctaSub: "इंटरैक्टिव डेमो अनुभव में प्रवेश करें",
-    enterDemo: "डेमो में प्रवेश करें",
+    enterPlatform: "डेमो में प्रवेश करें",
     brandName: "CruiseShield AI™",
     tagline: "The Financial Crime Immune System™",
     home: "CruiseShield AI होम",
@@ -178,7 +178,7 @@ export const hi = {
     ],
     platformPrinciples: "प्लेटफ़ॉर्म सिद्धांत",
     footerLine: "एक प्लेटफ़ॉर्म। एक अधिक सुरक्षित वित्तीय भविष्य। सभी के लिए।",
-    footerDemo: "डेमो अनुभव · कृत्रिम डेटा · चित्रात्मक नेटवर्क दृश्य · ",
+    footerNote: "डेमो अनुभव · कृत्रिम डेटा · चित्रात्मक नेटवर्क दृश्य · ",
     footerLink: "इंटरैक्टिव डेमो में प्रवेश करें",
     controlsAmbient: "परिवेश ध्वनि",
     soundLabel: "ध्वनि",
@@ -243,7 +243,7 @@ export const hi = {
     light: "हल्का",
     system: "सिस्टम",
   },
-  demo: {
+  platform: {
     execOverview: "कार्यकारी अवलोकन",
     execOverviewDown: "कार्यकारी अवलोकन उपलब्ध नहीं",
     riskIntel: "जोखिम इंटेलिजेंस",
@@ -322,7 +322,7 @@ export const hi = {
     resetTitle: "परिदृश्य रीसेट",
     resetBlurb:
       "रीसेट बीज परिदृश्य को यथावत पुनर्स्थापित करता है और सभी लाइव स्थिति साफ़ करता है: मानव निर्णय, सिमुलेशन, AI रन, और रीसेट के अतिरिक्त ऑडिट ईवेंट।",
-    resetDemo: "डेमो रीसेट करें",
+    resetWorkspace: "डेमो रीसेट करें",
     confirmReset:
       "पुष्टि करें: यह {id} के निर्णय, सिमुलेशन, AI रन और ऑडिट इतिहास साफ़ करता है।",
     resetting: "रीसेट हो रहा है…",

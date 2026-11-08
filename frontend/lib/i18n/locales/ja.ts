@@ -29,8 +29,8 @@ export const ja = {
     signOutEverywhereTitle:
       "すべてのデバイスとブラウザでこのセッションを終了",
     investigator: "調査員",
-    demoRole: "デモ役割",
-    roleDemo: "{role} · デモ",
+    sessionRole: "デモ役割",
+    roleContext: "{role} · デモ",
   },
   auth: {
     title: "デモサインイン",
@@ -90,7 +90,7 @@ export const ja = {
     ],
     cta: "CruiseShield AI™ を探索",
     ctaSub: "インタラクティブなデモ体験へ",
-    enterDemo: "デモに入る",
+    enterPlatform: "デモに入る",
     brandName: "CruiseShield AI™",
     tagline: "The Financial Crime Immune System™",
     home: "CruiseShield AI ホーム",
@@ -180,7 +180,7 @@ export const ja = {
     ],
     platformPrinciples: "プラットフォームの原則",
     footerLine: "一つのプラットフォーム。より安全な金融の未来。すべての人のために。",
-    footerDemo: "デモ体験 · 合成データ · イメージのネットワークビジュアル · ",
+    footerNote: "デモ体験 · 合成データ · イメージのネットワークビジュアル · ",
     footerLink: "インタラクティブなデモに入る",
     controlsAmbient: "環境音",
     soundLabel: "音",
@@ -245,7 +245,7 @@ export const ja = {
     light: "ライト",
     system: "システム",
   },
-  demo: {
+  platform: {
     execOverview: "エグゼクティブ概要",
     execOverviewDown: "エグゼクティブ概要は利用できません",
     riskIntel: "リスクインテリジェンス",
@@ -324,7 +324,7 @@ export const ja = {
     resetTitle: "シナリオのリセット",
     resetBlurb:
       "リセットはシードシナリオを正確に復元し、すべてのライブ状態（人間の判断、シミュレーション、AI 実行、リセット自体を超える監査イベント）をクリアします。",
-    resetDemo: "デモをリセット",
+    resetWorkspace: "デモをリセット",
     confirmReset:
       "確認：{id} の判断、シミュレーション、AI 実行、監査履歴をクリアします。",
     resetting: "リセット中…",

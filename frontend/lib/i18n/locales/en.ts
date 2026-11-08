@@ -491,6 +491,9 @@ export const en = {
     txnSignalsTitle: "Transaction signals",
     viewInvestigation: "Open investigation",
     noLinkedInvestigation: "No linked investigation.",
+    investigationsWord: "investigations",
+    fpRate: "False-positive rate",
+    timeSeriesTitle: "Signal time series",
   },
   intel: {
     intelTitle: "Device, IP & location intelligence",

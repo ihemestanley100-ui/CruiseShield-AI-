@@ -71,7 +71,11 @@ def test_foreign_case_audit_is_404(tmp_store, monkeypatch):
 
 
 def test_foreign_investigation_is_404(tmp_store, monkeypatch):
-    tmp_store.state["investigations"][0]["tenant_id"] = BETA
+    inv = tmp_store.state["investigations"][0]
+    inv["tenant_id"] = BETA
+    # The investigation response embeds its transaction, so the
+    # consistent beta fixture owns that transaction too.
+    tmp_store.get_transaction(inv["transaction_id"])["tenant_id"] = BETA
     with pytest.raises(main.AppError) as exc:
         main.get_investigation("inv_84721")
     assert exc.value.code == "UNKNOWN_INVESTIGATION"

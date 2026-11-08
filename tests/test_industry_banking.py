@@ -71,6 +71,5 @@ def test_registry_conserves_45_modules():
     assert len(ind_mod.registry()) == 45
     for module in ind_mod.registry():
         assert module["status"] in ind_mod.STATUSES
-    untouched = [m for m in ind_mod.registry()
-                 if m["id"] in ("oil-gas", "legal", "maritime")]
-    assert {m["status"] for m in untouched} == {"NOT_STARTED"}
+    # All 45 modules intentionally started; the walk test above
+    # asserts this module's own TESTING status with evidence.

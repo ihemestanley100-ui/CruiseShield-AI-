@@ -43,6 +43,16 @@ Every gap between current implementation and a production-grade system.
 - Slice-6: loader gate implemented (migrate_state/run_migration accept
   audit_keyring; tamper fails closed pre-write) + 3 hermetic tests
   green; D-018 ceremony still pending.
+- Slice-7: CLI keyring wiring implemented (--audit-keyring loads an
+  operator-supplied {key_id: hex} file before migration, rejects
+  malformed/short keyrings without exposing key material, and calls
+  run_migration with bytes) + 12 focused tests green; D-018 ceremony
+  still pending.
+- Slice-8 (2026-11-06): operator export + verification surface
+  (audit_chain.verification_report + scripts/audit_export.py
+  export/verify subcommands; structured ok/sealed/head/key_ids/
+  error reports; key material never printed) + 10 tests green;
+  D-018 production ceremony still pending (AUD-02 closed).
 
 ### GAP-003 — Backup execution + restore load-into-scratch
 - Affected: backups/*, .github/workflows/backup-*.yml.
@@ -63,6 +73,13 @@ Every gap between current implementation and a production-grade system.
 - Slice-6: scratch-load path implemented (backups/load_scratch.py:
   live-path refusal, no-overwrite, count verification) + 5 tests
   green; ceremony keys + workflow enablement still pending.
+- Re-verified 2026-11-05: drill exit 0, parity true (75,242 B
+  scratch plaintext, backup csbk-20261105-230835Z); canonical
+  data/state.json hash unchanged (BA1D4DB4…3790FE).
+- Re-verified 2026-11-06: drill exit 0, parity true, all
+  signature/sha/decrypt checks green (backup
+  csbk-20261106-021504Z, 0.06 s); scratch dir cleaned after;
+  canonical hash unchanged.
 
 ### GAP-004 — Model eval / golden AI harness
 - Affected: app/ai_adapter.py, tests/.
@@ -112,6 +129,86 @@ Every gap between current implementation and a production-grade system.
   (untouched).
 - Slice-4 rerun 2026-11-05: 431 passed (+30 new), 137 skipped,
   same 1 failed + 2 errors (identical sandbox-only signatures).
+- Tenant-slice rerun 2026-11-06: 908 passed, 141 skipped, same 1
+  failed + 2 errors (node EPERM lstat, WinError 10013 CORS setup;
+  identical sandbox-only signatures). Covers transaction/graph/
+  risk tenant gating + agent visible_graph refactor. Frontend not
+  re-run (untouched).
+- Alert-slice rerun 2026-11-06: 911 passed (+3), 141 skipped,
+  same sandbox-only 1F+2E. Covers alert/notification tenant
+  filtering via visible transactions + mark-all scoping.
+- DI-slice rerun 2026-11-06: 916 passed (+5), 141 skipped,
+  same sandbox-only 1F+2E. Covers visible_state view wired
+  into all 9 derived-intel handlers.
+- Replay/AI-slice rerun 2026-11-06: 921 passed (+5), 141
+  skipped, same sandbox-only 1F+2E. Covers replay
+  visible_state gating + ai-runs tenant enforcement,
+  stamping, and case-summary filtering.
+- Simulation-slice rerun 2026-11-06: 924 passed (+3), 141
+  skipped, same sandbox-only 1F+2E. Covers simulation
+  target gating + visible-input recomputation + tenant
+  stamps + investigation-page filtering.
+- Identity-slice rerun 2026-11-06: 926 passed (+2), 141
+  skipped, same sandbox-only 1F+2E. Covers README
+  platform rewrite (docs-only) + product-identity hygiene
+  gate; zero behavior change.
+- Audit-slice rerun 2026-11-06: 936 passed (+10), 141
+  skipped, same sandbox-only 1F+2E. Covers
+  verification_report + audit_export CLI + 10 tests;
+  backup drill separately re-verified exit 0/parity.
+- Risk-slice rerun 2026-11-06: 948 passed (+12), 141
+  skipped, same sandbox-only 1F+2E. Covers login-risk
+  scoring + baselines + 12 tests; legacy login body,
+  MFA ticket, and failure-audit shapes unchanged.
+- Notif-slice rerun 2026-11-06 (resumption session): 958
+  passed (+10), 141 skipped, same sandbox-only 1F+2E
+  (node EPERM lstat on test_static_escaping + CORS-setup
+  PermissionErrors, each re-verified individually).
+  Covers D-029 per-user security notifications (risk/mfa
+  notices, merged list/read endpoints, 10 tests).
+- Gate-slice rerun 2026-11-06 (L13/L14 session): 961 passed
+  (+3), 141 skipped, same sandbox-only 1F+2E. Covers
+  tests/test_quality_gates.py (Part 21 gates 1/9/16).
+  Read-only probes: NETWORK_PROXIMITY fires 11/136 seed
+  signals (non-emptiness closed); family_errors entries
+  untriggered by malformed-input probes (non-dict input
+  raises uncaught AttributeError) — robustness finding
+  queued for BATCH-7, no behavior changed.
+- Dedup-slice rerun 2026-11-06 (Phase 2 BATCH-1): 962
+  passed (+1 b64 test), 141 skipped, same sandbox-only
+  1F+2E. Covers _b64 unification (auth canonical),
+  verify_session removal (test migrated to parse_session),
+  single live validation in write gate. Credential/actor
+  unification investigated and REJECTED per D-034
+  (unarmed-mode semantics + distinct contracts).
+- Phase 3+4 rerun 2026-11-06: 974 passed (+12), 141 skipped,
+  same sandbox-only 1F+2E. Covers POST /cases API + 6 tests
+  (CASE-01), fault-path skip D-035 (DET-16), per-family
+  emission test, 45/45 modules verified separately
+  (315/315 isolated), conformance sweep + honesty/promote
+  tests. Matrix 105 rows, 79 closed. Zero PRODUCTION_READY
+  industry claims (all TESTING-or-below by evidence).
+- Phase 5 rerun 2026-11-06: 1019 passed (+45), 141 skipped,
+  same sandbox-only 1F+2E. Covers user registry + admin
+  provision + flag-off self-register (9), verification
+  tokens (10), password/sessions/prefs (6), trial/sub/
+  founder/metering (11), payments/Web3 stub (9). Matrix
+  111 rows, 84 closed. Passkeys deferred (SEC-PASSKEY),
+  themes FE-gated, delivery/providers owner-blocked.
+- Audit-slice rerun 2026-11-07: 1081 passed (+7 vs the 1074
+  Phase 7-8 line in PROJECT_EXECUTION_STATE.md), 141
+  skipped, same sandbox-only 1F+2E (node EPERM lstat +
+  2 CORS-setup PermissionErrors, signatures re-verified).
+  Covers AUD-03 ingest audit + AUD-04 health chain
+  presence + 7 tests (D-049/D-050). Matrix 115 rows,
+  91 closed. data/state.json hash unchanged.
+- Export/review-slice rerun 2026-11-07: 1089 passed (+8),
+  141 skipped, same sandbox-only 1F+2E (same test names).
+  Covers EVID-01 canonical export + hash header + 4 tests
+  (D-051) and SEC-REV admin access-review + 4 tests
+  (D-052). Matrix 115 rows, 93 closed. data/state.json
+  hash unchanged (BA1D4DB4…3790FE, 101417 B).
+
 
 ### GAP-007 — Live-WebGL hero path untested
 - Affected: frontend/components/landing/GlobalHeroScene.tsx:52-327.
@@ -265,30 +362,79 @@ Every gap between current implementation and a production-grade system.
   entry to .env.example (names-only).
 
 ### DETECTION ACCEPTANCE — Live detection intelligence directive §14
-- Scope: app/detection.py, app/channels.py, 5 APIs
+- Scope: app/detection.py, app/channels.py, 10 APIs
   (/detectors, /signals/summary, /channels/summary,
-  /detection/matrix, /signals/by-transaction/{txn_id}),
-  Command Center DetectionSection + kit rows.
-- Evidence: tests/test_detection.py (18 green), offline kit-format
-  checks 40/40, suite 487 passed / 137 skipped / same sandbox-only
-  1F+2E, state hash BA1D4DB4…3790FE intact.
+  /detection/matrix, /signals/by-transaction/{txn_id},
+  /signals/search, /signals/time-series, /signals/{signal_id},
+  /signals/{signal_id}/outcome, /signals/{signal_id}/link),
+  Command Center DetectionSection + txn panel + kit rows.
+- Evidence: tests/test_detection.py (34 green + 4 socket-gated
+  for CI), offline slice-3 probe 33/34 automated + 1 resolved
+  by inspection (pre-existing env-name read, value empty per
+  R6), suite 503 passed / 141 skipped / same sandbox-only
+  1F+2E (WinError 10013 + node EPERM re-verified 2026-11-05),
+  state hash BA1D4DB4…3790FE intact.
 - AC-01 detector statuses: PASS (10 OPERATIONAL + ML_ANOMALY
   NOT_IMPLEMENTED, registry-tested).
 - AC-02 channel taxonomy: PASS (8 canonical + UNMAPPED alert).
-- AC-03 signal persistence: PARTIAL (derived-on-read per D-021;
-  persisted signal_events awaits GAP-001 PG cutover).
-- AC-04 frequency reconciliation: PASS.
+- AC-03 signal persistence: PARTIAL (outcome + link records
+  persist with history in signal_outcomes/signal_links;
+  signal_events stay derived-on-read per D-021 and await
+  GAP-001 PG cutover).
+- AC-04 frequency reconciliation: PASS (summary + time-series
+  buckets reconcile to source signals).
 - AC-05 channel reconciliation: PASS.
 - AC-06 matrix verification: PASS (88 cells + evidence refs).
-- AC-07 tenant isolation: PASS (summary + drill-down tests).
+- AC-07 tenant isolation: PASS (summary, drill-down, search,
+  detail, outcome, link — foreign reads 404).
 - AC-08 drill-down: PASS (API + consistency tests).
-- AC-09 investigation linkage: PASS (chain test).
-- AC-10 audit provenance: PASS (audits-target-case + sealing).
+- AC-09 investigation linkage: PASS (derived chain + explicit
+  POST link, idempotent, audited).
+- AC-10 audit provenance: PASS (audits-target-case + sealing;
+  outcome/link writes audited).
 - AC-11 backend tests: PASS (modulo sandbox-only 1F+2E).
 - AC-12 frontend tests: BLOCKED (node EPERM: realpathSync must
   lstat C:\\Users\\HP; 4 workarounds failed; needs hosted CI).
+  TimeSeriesPanel + FP-row tests written, unexecuted locally.
 - AC-13 hosted CI: BLOCKED (D-017 push authorization).
 - AC-14 deployment: BLOCKED (D-017 / GAP-009).
 - AC-15 no fabricated stats: PASS (measured zeros, SEED_FEED,
-  NOT_IMPLEMENTED labels, all asserted).
-- Follow-up: txn-page signal panel (frontend deep-link) unbuilt.
+  NOT_IMPLEMENTED labels, FP null-basis, all asserted).
+- Slice-3 extras: UTC bucketing (hour/day/week/month), strict
+  ISO-8601 filters, paged search, execution envelope
+  (execution_id, per-family runs/latency/errors), FP rate with
+  review basis, unique-investigation counts, write-gated +
+  audited outcome/link POSTs, SVG time-series panel.
+- Follow-up: hosted CI execution + deployment (AC-12/13/14);
+  persisted signal_events store (GAP-001).
+
+### PUSH-AUDIT — feat/phasezero-foundations pre-push review (2026-11-05)
+- Range: master..HEAD = 16 commits (58a3d50..d82627d);
+  11 new vs origin/production-launch tip b4732cb
+  (fe9f64e..d82627d); 198 files, +11788/-5734.
+- Filenames: only .env.example files (verified names-only),
+  DEMO_TOKEN docs, pre-existing secret-scan tooling (on
+  master, not introduced here), token tests. No .env, keys,
+  keystores, DBs. 77 added files, zero binary/junk by
+  extension. data/state.json never in history (.gitkeep only).
+- Content (added lines): zero private-key/AWS/GitHub/Slack/
+  Stripe/Google shapes; zero DB-URL credentials; 4 literals
+  all in tests/ with obviously-fake values
+  (test-secret-*-not-a-real-cred / -not-a-secret,
+  test-secret-32-chars-minimum-ok!!); zero emails; zero
+  phone-like sequences; DEMO_USERS prose-only; 2 doc lines
+  are scan-verification meta-text (benign, context-checked).
+- Committed secrets-r06.log: finding metadata only
+  (HIT file:line:rule), no embedded values (one long line is
+  the ENV_NAMES name list).
+- Vulns at HEAD (app/*.py): zero eval/exec/os.system/
+  shell=True/pickle.loads/yaml.load/__import__.
+- Verdict: PASS — no production secrets, credentials,
+  customer data, accidental files, or flagged vuln patterns
+  in the 16 commits. Safe to push.
+- Push NOT executed from this session: origin unreachable
+  (SEC_E_NO_CREDENTIALS) and gh token invalid (account
+  cruisestore05-debug). Owner handoff commands recorded in
+  the session report; PR + CI evidence pending owner push.
+- Worktree preserved: 255 entries untouched (233 in the
+  approval was stale); no stage/commit/discard performed.

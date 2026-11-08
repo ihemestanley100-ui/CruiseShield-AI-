@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useTranslation } from "../../lib/i18n/context";
 
 /* Graceful fallback when WebGL is unavailable: full brand, headline,
- * and demo entry remain usable with no 3D required. */
+ * and platform entry remain usable with no 3D required. */
 export function WebGLFallback() {
   const { t } = useTranslation("landing");
   return (
@@ -16,7 +16,7 @@ export function WebGLFallback() {
       </div>
       <p className="muted">{t("fallbackNote")}</p>
       <p>
-        <Link className="landing-cta" href="/demo">
+        <Link className="landing-cta" href="/platform">
           {t("cta")} <span aria-hidden="true">→</span>
         </Link>
       </p>

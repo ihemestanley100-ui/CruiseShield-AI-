@@ -1,6 +1,8 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   ApiError,
+  getAccountIntel,
+  getAiRun,
   getAuthMe,
   getAuthMode,
   getCase,
@@ -17,6 +19,7 @@ import {
   getReplay,
   getRisk,
   getRiskIntel,
+  getTransaction,
   getTransactionIntel,
   listAlerts,
   listScenarios,
@@ -27,7 +30,7 @@ import {
   postLogout,
   postSimulation,
   REQUEST_TIMEOUT_MS,
-  resetDemo,
+  resetWorkspace,
   userErrorMessage,
 } from "./api";
 
@@ -57,7 +60,7 @@ describe("api client", () => {
     ).toBe("<notPermitted>");
     expect(
       userErrorMessage(
-        new ApiError("LOGIN_REQUIRED", "demo login required", 401, ""),
+        new ApiError("LOGIN_REQUIRED", "login required", 401, ""),
         t
       )
     ).toBe("<notPermitted>");
@@ -273,6 +276,10 @@ describe("api client", () => {
         "/api/v1/investigations/inv_84721/intel",
       ],
       [
+        () => getAccountIntel("acct_11"),
+        "/api/v1/accounts/acct_11/intel",
+      ],
+      [
         () => getIntelEvidence("inv_84721"),
         "/api/v1/investigations/inv_84721/intel-evidence",
       ],
@@ -296,6 +303,24 @@ describe("api client", () => {
     await getReplay("scn_primary", 3);
     expect(fetchMock).toHaveBeenCalledWith(
       "http://127.0.0.1:8000/api/v1/replay/scn_primary?cursor=3",
+      expect.objectContaining({ cache: "no-store" })
+    );
+  });
+
+  it("calls the transaction endpoint with an encoded id", async () => {
+    const fetchMock = mockFetchOnce({ transaction: {} });
+    await getTransaction("txn_84721");
+    expect(fetchMock).toHaveBeenCalledWith(
+      "http://127.0.0.1:8000/api/v1/transactions/txn_84721",
+      expect.objectContaining({ cache: "no-store" })
+    );
+  });
+
+  it("calls the ai-run endpoint with an encoded id", async () => {
+    const fetchMock = mockFetchOnce({ agent_run_id: "agentrun_1" });
+    await getAiRun("agentrun_1");
+    expect(fetchMock).toHaveBeenCalledWith(
+      "http://127.0.0.1:8000/api/v1/ai-runs/agentrun_1",
       expect.objectContaining({ cache: "no-store" })
     );
   });
@@ -363,16 +388,16 @@ describe("api client", () => {
     expect(body.reason).toBe("Network review.");
   });
 
-  it("lists scenarios and posts demo reset", async () => {
+  it("lists scenarios and posts platform reset", async () => {
     const fetchMock = mockFetchOnce({ scenarios: [] });
     await listScenarios();
     expect(fetchMock).toHaveBeenLastCalledWith(
-      "http://127.0.0.1:8000/api/v1/demo/scenarios",
+      "http://127.0.0.1:8000/api/v1/platform/scenarios",
       expect.objectContaining({ cache: "no-store" })
     );
-    await resetDemo("scn_primary");
+    await resetWorkspace("scn_primary");
     expect(fetchMock).toHaveBeenLastCalledWith(
-      "http://127.0.0.1:8000/api/v1/demo/reset",
+      "http://127.0.0.1:8000/api/v1/platform/reset",
       expect.objectContaining({ method: "POST" })
     );
     const body = JSON.parse(
@@ -395,7 +420,7 @@ describe("api client", () => {
   });
 
   it("sends the write token on POSTs only when configured (D-002)", async () => {
-    vi.stubEnv("NEXT_PUBLIC_DEMO_WRITE_TOKEN", "demo-token-1");
+    vi.stubEnv("NEXT_PUBLIC_DEMO_WRITE_TOKEN", "platform-token-1");
     const fetchMock = mockFetchOnce({ decision: {} });
     await postDecision("case_84721", {
       decision: "Monitor",
@@ -410,7 +435,7 @@ describe("api client", () => {
       string
     >;
     expect(headers["Authorization"]).toBe("Bearer demo-token-1");
-    // Only the documented public demo credential plus the Phase 5 CSRF
+    // Only the documented public platform credential plus the Phase 5 CSRF
     // header — never anything else.
     expect(Object.keys(headers).sort()).toEqual([
       "Authorization",

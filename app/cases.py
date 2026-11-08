@@ -96,3 +96,70 @@ def record_decision(store, case_id: str, decision: str, target_status: str,
         target_status, f"{decision}: {reason.strip()}", record["trace_id"],
         record["trace_id"])
     return record, audit
+
+
+CASE_PRIORITIES = ("LOW", "MEDIUM", "HIGH", "CRITICAL")
+MAX_TITLE_CHARS = 200
+MAX_NOTES_CHARS = 10000
+
+
+def _valid_due_date(value: str) -> bool:
+    try:
+        datetime.strptime(value, "%Y-%m-%d")
+        return True
+    except (ValueError, TypeError):
+        return False
+
+
+def create_case(store, title: str, description: str = "",
+                priority: str = "MEDIUM", assignee: str = "",
+                due_date: str = "", notes: str = "",
+                investigation_id: str = "", actor_id: str = "anonymous",
+                trace_id: str = "", tenant=None) -> tuple[dict, dict]:
+    """D-036: open a case (was seed-only). Validates, stamps, audits.
+
+    ``tenant`` (TenantContext) stamps the record; a linked
+    investigation must be tenant-visible (else NOT_FOUND, no
+    oracle). Persists via the audit write.
+    """
+    title = (title or "").strip()
+    if not title:
+        raise ValueError("TITLE_REQUIRED: a title is required")
+    if len(title) > MAX_TITLE_CHARS:
+        raise ValueError(
+            f"TITLE_TOO_LONG: {len(title)} > {MAX_TITLE_CHARS}")
+    if priority not in CASE_PRIORITIES:
+        raise ValueError(f"PRIORITY_UNKNOWN: {priority}")
+    if len(assignee or "") > MAX_ACTOR_ID_CHARS:
+        raise ValueError("ASSIGNEE_TOO_LONG: assignee exceeds 256 chars")
+    if len(description or "") > MAX_REASON_CHARS:
+        raise ValueError("DESCRIPTION_TOO_LONG: description too long")
+    if len(notes or "") > MAX_NOTES_CHARS:
+        raise ValueError("NOTES_TOO_LONG: notes too long")
+    if due_date and not _valid_due_date(due_date):
+        raise ValueError("DUE_DATE_INVALID: use YYYY-MM-DD")
+    ctx = tenant or tenancy_mod.TenantContext()
+    if investigation_id:
+        inv = tenancy_mod.enforce_read(
+            store.get_investigation(investigation_id), ctx)
+        if inv is None:
+            raise ValueError(
+                f"INVESTIGATION_NOT_FOUND: {investigation_id}")
+    store.state["case_seq"] = int(store.state.get("case_seq", 0)) + 1
+    case_id = "case_%04d" % store.state["case_seq"]
+    now = _now()
+    case = {
+        "case_id": case_id, "investigation_id": investigation_id or "",
+        "title": title, "description": description or "",
+        "priority": priority, "assignee": (assignee or "").strip(),
+        "due_date": due_date or "", "notes": notes or "",
+        "status": "NEW", "created_at": now, "updated_at": now,
+        "trace_id": trace_id or store.state["trace_id"],
+    }
+    tenancy_mod.stamp(case, ctx)
+    store.state["cases"].append(case)
+    audit = store.append_audit(
+        "human", actor_id, "case.opened", "case", case_id, "", "NEW",
+        "Case created: %s" % title[:200], case["trace_id"],
+        case["trace_id"])
+    return case, audit

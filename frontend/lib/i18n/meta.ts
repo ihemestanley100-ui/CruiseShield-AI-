@@ -20,7 +20,7 @@ export const SOURCE_REV = "2026-11-02-ugls02";
 export const LOCALE_META: Record<string, LocaleMeta> = {
   en: {
     tag: "en",
-    version: "1.2.0",
+    version: "1.3.0",
     sourceRev: SOURCE_REV,
     review: "source",
     reviewers: [],
@@ -28,7 +28,7 @@ export const LOCALE_META: Record<string, LocaleMeta> = {
   },
   fr: {
     tag: "fr",
-    version: "1.2.0",
+    version: "1.3.0",
     sourceRev: SOURCE_REV,
     review: "machine-drafted",
     reviewers: [],
@@ -36,7 +36,7 @@ export const LOCALE_META: Record<string, LocaleMeta> = {
   },
   ar: {
     tag: "ar",
-    version: "1.2.0",
+    version: "1.3.0",
     sourceRev: SOURCE_REV,
     review: "machine-drafted",
     reviewers: [],
@@ -44,7 +44,7 @@ export const LOCALE_META: Record<string, LocaleMeta> = {
   },
   ig: {
     tag: "ig",
-    version: "1.2.0",
+    version: "1.3.0",
     sourceRev: SOURCE_REV,
     review: "machine-drafted",
     reviewers: [],
@@ -52,7 +52,7 @@ export const LOCALE_META: Record<string, LocaleMeta> = {
   },
   yo: {
     tag: "yo",
-    version: "1.2.0",
+    version: "1.3.0",
     sourceRev: SOURCE_REV,
     review: "machine-drafted",
     reviewers: [],
@@ -60,7 +60,7 @@ export const LOCALE_META: Record<string, LocaleMeta> = {
   },
   ha: {
     tag: "ha",
-    version: "1.2.0",
+    version: "1.3.0",
     sourceRev: SOURCE_REV,
     review: "machine-drafted",
     reviewers: [],
@@ -68,7 +68,7 @@ export const LOCALE_META: Record<string, LocaleMeta> = {
   },
   pt: {
     tag: "pt",
-    version: "1.2.0",
+    version: "1.3.0",
     sourceRev: SOURCE_REV,
     review: "machine-drafted",
     reviewers: [],
@@ -76,7 +76,7 @@ export const LOCALE_META: Record<string, LocaleMeta> = {
   },
   es: {
     tag: "es",
-    version: "1.2.0",
+    version: "1.3.0",
     sourceRev: SOURCE_REV,
     review: "machine-drafted",
     reviewers: [],
@@ -84,7 +84,7 @@ export const LOCALE_META: Record<string, LocaleMeta> = {
   },
   zh: {
     tag: "zh",
-    version: "1.2.0",
+    version: "1.3.0",
     sourceRev: SOURCE_REV,
     review: "machine-drafted",
     reviewers: [],
@@ -92,7 +92,7 @@ export const LOCALE_META: Record<string, LocaleMeta> = {
   },
   hi: {
     tag: "hi",
-    version: "1.2.0",
+    version: "1.3.0",
     sourceRev: SOURCE_REV,
     review: "machine-drafted",
     reviewers: [],
@@ -100,7 +100,7 @@ export const LOCALE_META: Record<string, LocaleMeta> = {
   },
   sw: {
     tag: "sw",
-    version: "1.2.0",
+    version: "1.3.0",
     sourceRev: SOURCE_REV,
     review: "machine-drafted",
     reviewers: [],
@@ -108,7 +108,7 @@ export const LOCALE_META: Record<string, LocaleMeta> = {
   },
   ja: {
     tag: "ja",
-    version: "1.2.0",
+    version: "1.3.0",
     sourceRev: SOURCE_REV,
     review: "machine-drafted",
     reviewers: [],

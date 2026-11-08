@@ -5,7 +5,8 @@ identical API requests and operations against both and compare. Reads must
 be byte-identical; mutations must match modulo wall-clock fields only.
 
 Live PG tests require SCRATCH_DATABASE_URL, else they skip (reported, never
-green). The live data/state.json is never touched; seeds use tmp files.
+green). Seeds use tmp files; the live data/state.json gets a read-only
+session-snapshot comparison and is never written.
 """
 import copy
 import os
@@ -384,12 +385,9 @@ def test_pg_selected_unreachable_never_reports_healthy(client, monkeypatch):
 
 
 def test_live_source_untouched():
-    import hashlib
+    from _integrity import assert_source_unmutated
 
-    raw = config_mod.STATE_PATH.read_bytes()
-    assert len(raw) == 101417
-    assert hashlib.sha256(raw).hexdigest().upper() == (
-        "BA1D4DB4BB4DBC6FC3ACA346664A539610CCC6460CCD530F523C8043453790FE")
+    assert_source_unmutated()
 
 
 @needs_scratch_pg

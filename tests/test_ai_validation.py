@@ -500,6 +500,39 @@ def test_request_body_structured_flag(tmp_path):
     assert "response_format" not in plain
 
 
+def test_request_bodies_carry_max_output_tokens(tmp_path, monkeypatch):
+    package = _package(tmp_path)
+    for body in (ai_adapter.build_request_body(package, "s", True),
+                 ai_adapter.build_request_body(package, "s", False)):
+        assert body["max_tokens"] == ai_adapter.AI_MAX_OUTPUT_TOKENS
+    # Configured value is enforced, not just the default.
+    monkeypatch.setattr(ai_adapter, "AI_MAX_OUTPUT_TOKENS", 1234)
+    for body in (ai_adapter.build_request_body(package, "s", True),
+                 ai_adapter.build_request_body(package, "s", False)):
+        assert body["max_tokens"] == 1234
+
+
+@pytest.mark.skipif(
+    not CAN_LOOP,
+    reason="no event loop in this sandbox; runs in CI/user envs")
+def test_followup_request_carries_max_output_tokens(tmp_path, monkeypatch):
+    package = _package(tmp_path)
+    monkeypatch.setattr(ai_adapter, "MODEL_API_KEY", "test-key")
+    monkeypatch.setattr(ai_adapter, "AI_MAX_OUTPUT_TOKENS", 1234)
+    seen = {}
+
+    def handler(request):
+        seen.update(json.loads(request.content.decode("utf-8")))
+        return httpx.Response(200, json=_body(
+            json.dumps(_valid_output(package)), request_id="req_followup"))
+
+    run = asyncio.run(ai_adapter.analyze(
+        package, "summary", "trace_f", "agentrun_78", question="Why?",
+        transport=httpx.MockTransport(handler), retry_delays=(0, 0)))
+    assert run["status"] == "SUCCEEDED"
+    assert seen["max_tokens"] == 1234
+
+
 def test_retry_predicate():
     predicate = ai_adapter.should_retry_without_structured
     assert predicate(400, '{"error": "unsupported response_format"}') is True

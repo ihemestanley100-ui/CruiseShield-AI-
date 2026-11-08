@@ -1,11 +1,14 @@
 """Phase 5.1: backend selection, health/readiness, scratch PG migration.
 
 Live-PostgreSQL tests require SCRATCH_DATABASE_URL (isolated scratch only,
-e.g. a local throwaway container); otherwise they skip with an explicit
-reason. A skip is reported as a skip, never as green.
+e.g. a local throwaway container or the CI postgres service); otherwise
+they skip with an explicit reason. A skip is reported as a skip, never
+as green.
 
-The live source data/state.json is NEVER read or written by these tests.
-Migration tests copy its bytes to tmp_path first and verify the copy hash.
+F-CI-01: migration tests use the committed canonical fixture
+(tests/fixtures/canonical-state.json), never the live gitignored
+data/state.json (absent in CI). The live file gets a read-only
+session-snapshot comparison only; it is never written.
 """
 import hashlib
 import json
@@ -24,22 +27,27 @@ SCRATCH_URL = os.environ.get("SCRATCH_DATABASE_URL", "")
 needs_scratch_pg = pytest.mark.skipif(
     not SCRATCH_URL, reason="SCRATCH_DATABASE_URL not set (no scratch PG)")
 
-# Live-source integrity anchor (Phase 4.4-4.6 verified, re-checked per run).
-LIVE_SIZE = 101417
-LIVE_HASH = ("BA1D4DB4BB4DBC6FC3ACA346664A539610CCC6460CCD530F523C8043453790FE")
+# Canonical-fixture integrity anchor (F-CI-01). The historical live
+# anchor (101417 / BA1D...3790FE) is preserved in
+# fixtures/canonical_seed.py with the recorded CI discrepancy.
+from fixtures.canonical_seed import (  # noqa: E402
+    FIXTURE_HASH,
+    FIXTURE_SIZE,
+    fixture_bytes,
+)
 
 
 @pytest.fixture()
 def source_copy(tmp_path):
-    """Byte-copy of the live state (read-only source) with hash receipt."""
-    live = config_mod.STATE_PATH
-    raw = live.read_bytes()
-    assert len(raw) == LIVE_SIZE, "live source size changed - STOP"
-    assert hashlib.sha256(raw).hexdigest().upper() == LIVE_HASH, \
-        "live source hash changed - STOP"
+    """Byte-copy of the canonical fixture (read-only) with hash receipt."""
+    raw = fixture_bytes()
+    assert len(raw) == FIXTURE_SIZE, "canonical fixture size changed - STOP"
+    assert hashlib.sha256(raw).hexdigest().upper() == FIXTURE_HASH, \
+        "canonical fixture hash changed - STOP"
     dest = tmp_path / "state-copy.json"
     dest.write_bytes(raw)
-    assert hashlib.sha256(dest.read_bytes()).hexdigest().upper() == LIVE_HASH
+    assert hashlib.sha256(dest.read_bytes()).hexdigest().upper() \
+        == FIXTURE_HASH
     return dest
 
 
@@ -160,10 +168,10 @@ def test_migrate_reconciles_exactly(source_copy, scratch_db):
     from migrations.loader import run_migration
 
     report = run_migration(source_copy, scratch_db,
-                           expected_hash=LIVE_HASH)
+                           expected_hash=FIXTURE_HASH)
     assert report["passed"] is True
-    assert report["source_size"] == LIVE_SIZE
-    assert report["source_hash"].upper() == LIVE_HASH
+    assert report["source_size"] == FIXTURE_SIZE
+    assert report["source_hash"].upper() == FIXTURE_HASH
     expected = report["tables_expected"]
     assert report["tables_actual"] == expected
     # mandated record counts
@@ -268,6 +276,6 @@ def test_health_pg_selected_reports_schema(client, source_copy, scratch_db,
 
 
 def test_live_source_untouched_after_suite():
-    raw = config_mod.STATE_PATH.read_bytes()
-    assert len(raw) == LIVE_SIZE
-    assert hashlib.sha256(raw).hexdigest().upper() == LIVE_HASH
+    from _integrity import assert_source_unmutated
+
+    assert_source_unmutated()

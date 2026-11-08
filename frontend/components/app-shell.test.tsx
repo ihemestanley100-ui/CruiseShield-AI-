@@ -11,7 +11,7 @@ const {
   loginMock,
   logoutMock,
 } = vi.hoisted(() => ({
-  usePathnameMock: vi.fn(() => "/demo"),
+  usePathnameMock: vi.fn(() => "/platform"),
   listNotificationsMock: vi.fn(),
   modeMock: vi.fn(),
   meMock: vi.fn(),
@@ -50,25 +50,25 @@ vi.mock("../lib/api", async (importOriginal) => ({
 
 beforeEach(() => {
   usePathnameMock.mockReset();
-  usePathnameMock.mockReturnValue("/demo");
+  usePathnameMock.mockReturnValue("/platform");
   listNotificationsMock.mockReset();
   listNotificationsMock.mockResolvedValue({
     notifications: [],
     unread_count: 0,
-    synthetic_notice: "Synthetic demo data.",
+    synthetic_notice: "Synthetic data.",
   });
   modeMock.mockReset();
   meMock.mockReset();
   loginMock.mockReset();
   logoutMock.mockReset();
-  // No backend in shell tests: fail open exactly like production local demo.
+  // No backend in shell tests: fail open exactly like production local mode.
   modeMock.mockRejectedValue(new ApiError("BACKEND_UNREACHABLE", "down", 0, ""));
   logoutMock.mockResolvedValue({ ok: true });
 });
 
 describe("AppShell", () => {
   /* Checking-first gate: full-shell tests await resolution (fail-open
-   * demo resolves on the mocked mode rejection). */
+   * platform resolves on the mocked mode rejection). */
   async function renderResolved(children: React.ReactNode) {
     const result = render(<AppShell>{children}</AppShell>);
     await screen.findByText("child");
@@ -81,15 +81,15 @@ describe("AppShell", () => {
     expect(screen.getByText("Quick Actions").tagName).toBe("P");
   });
 
-  it("renders brand, theme, disclosure, and demo profile", async () => {
+  it("renders brand, theme, disclosure, and session profile", async () => {
     await renderResolved(<p>child</p>);
     expect(screen.getByText("CruiseShield AI")).toBeTruthy();
     expect(
       screen.getByRole("radiogroup", { name: "Appearance" })
     ).toBeTruthy();
-    expect(screen.getByText("Synthetic demo data")).toBeTruthy();
+    expect(screen.getByText("Synthetic data")).toBeTruthy();
     expect(screen.getByText("Investigator")).toBeTruthy();
-    expect(screen.getByText("demo role")).toBeTruthy();
+    expect(screen.getByText("session role")).toBeTruthy();
     expect(screen.getByText("child")).toBeTruthy();
   });
 
@@ -127,7 +127,7 @@ describe("AppShell", () => {
       a.getAttribute("href")
     );
     expect(hrefs).toEqual([
-      "/demo",
+      "/platform",
       "/investigations/inv_84721",
       "/cases/case_84721",
       "/network/txn_84721",
@@ -244,21 +244,21 @@ describe("AppShell", () => {
     expect(screen.queryByText("child")).toBeNull();
     expect(screen.queryByRole("navigation")).toBeNull();
     expect(
-      screen.queryByRole("heading", { name: "Demo sign in" })
+      screen.queryByRole("heading", { name: "Secure sign in" })
     ).toBeNull();
   });
 
   it("shows the sign-in gate when login is armed and logged out", async () => {
     modeMock.mockResolvedValue({ auth_enabled: true });
     meMock.mockRejectedValue(
-      new ApiError("LOGIN_REQUIRED", "demo login required", 401, "")
+      new ApiError("LOGIN_REQUIRED", "login required", 401, "")
     );
     render(
       <AppShell>
         <p>child</p>
       </AppShell>
     );
-    await screen.findByRole("heading", { name: "Demo sign in" });
+    await screen.findByRole("heading", { name: "Secure sign in" });
     expect(screen.queryByText("child")).toBeNull();
     expect(screen.queryByRole("navigation")).toBeNull();
     // Brand home link still works from the gate.
@@ -286,9 +286,9 @@ describe("AppShell", () => {
     );
     await screen.findByRole("button", { name: "Sign out" });
     expect(screen.getByText("judge")).toBeTruthy();
-    expect(screen.getByText("investigator · demo")).toBeTruthy();
+    expect(screen.getByText("investigator · active")).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Sign out" }));
-    await screen.findByRole("heading", { name: "Demo sign in" });
+    await screen.findByRole("heading", { name: "Secure sign in" });
     expect(logoutMock).toHaveBeenCalled();
   });
 
@@ -296,7 +296,7 @@ describe("AppShell", () => {
     usePathnameMock.mockReturnValue("/");
     modeMock.mockResolvedValue({ auth_enabled: true });
     meMock.mockRejectedValue(
-      new ApiError("LOGIN_REQUIRED", "demo login required", 401, "")
+      new ApiError("LOGIN_REQUIRED", "login required", 401, "")
     );
     render(
       <AppShell>
@@ -306,7 +306,7 @@ describe("AppShell", () => {
     expect(screen.getByText("landing")).toBeTruthy();
     await vi.waitFor(() => expect(modeMock).toHaveBeenCalled());
     expect(
-      screen.queryByRole("heading", { name: "Demo sign in" })
+      screen.queryByRole("heading", { name: "Secure sign in" })
     ).toBeNull();
   });
 
@@ -323,7 +323,7 @@ describe("AppShell", () => {
         },
       ],
       unread_count: 1,
-      synthetic_notice: "Synthetic demo data.",
+      synthetic_notice: "Synthetic data.",
     });
     render(
       <AppShell>

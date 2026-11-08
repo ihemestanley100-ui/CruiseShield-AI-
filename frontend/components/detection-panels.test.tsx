@@ -5,6 +5,7 @@ import type {
   DetectionMatrix,
   DetectorList,
   SignalsSummary,
+  SignalsTimeSeries,
   TxnSignals,
 } from "../lib/api";
 import {
@@ -13,6 +14,7 @@ import {
   DetectorChannelMatrix,
   DetectorHealthPanel,
   SignalFrequencyPanel,
+  TimeSeriesPanel,
   TxnSignalsPanel,
 } from "./detection-panels";
 
@@ -156,6 +158,67 @@ describe("SignalFrequencyPanel", () => {
     render(
       <SignalFrequencyPanel
         summary={{ ...summaryFixture(), total_signals: 0, by_family: {} }}
+      />
+    );
+    expect(
+      screen.getByText("No qualifying signals recorded in this period.")
+    ).toBeTruthy();
+  });
+
+  it("renders investigations and the false-positive basis when present", () => {
+    render(
+      <SignalFrequencyPanel
+        summary={{
+          ...summaryFixture(),
+          unique_investigations_created: 2,
+          false_positive_rate: 0.25,
+          false_positive_basis: "1 dismissed of 4 reviewed",
+        }}
+      />
+    );
+    expect(screen.getByText(/2 investigations/)).toBeTruthy();
+    expect(screen.getByText(/False-positive rate/)).toBeTruthy();
+    expect(screen.getByText(/1 dismissed of 4 reviewed/)).toBeTruthy();
+  });
+
+  it("omits the false-positive row when no basis is recorded", () => {
+    render(<SignalFrequencyPanel summary={summaryFixture()} />);
+    expect(screen.queryByText(/False-positive rate/)).toBeNull();
+  });
+});
+
+describe("TimeSeriesPanel", () => {
+  function seriesFixture(): SignalsTimeSeries {
+    return {
+      granularity: "day",
+      buckets: [
+        { bucket: "2026-10-27", signals: 3, unique_txns: 2 },
+        { bucket: "2026-10-28", signals: 0, unique_txns: 0 },
+      ],
+      total_signals: 3,
+      measurement_period: {
+        start: "2026-10-27T10:00:00Z",
+        end: "2026-10-27T12:00:00Z",
+      },
+      generated_at: "2026-11-05T20:00:00Z",
+      tenant_scope: "org_primary",
+    };
+  }
+
+  it("renders buckets as an accessible chart plus a text list", () => {
+    render(<TimeSeriesPanel series={seriesFixture()} />);
+    expect(screen.getByText(/Signal time series/)).toBeTruthy();
+    expect(
+      screen.getByRole("img", { name: /3 signals in 2 buckets/ })
+    ).toBeTruthy();
+    expect(screen.getByText("2026-10-27")).toBeTruthy();
+    expect(screen.getByText("2026-10-28")).toBeTruthy();
+  });
+
+  it("renders the measured-zero state", () => {
+    render(
+      <TimeSeriesPanel
+        series={{ ...seriesFixture(), buckets: [], total_signals: 0 }}
       />
     );
     expect(

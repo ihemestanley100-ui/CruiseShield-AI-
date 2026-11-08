@@ -110,9 +110,9 @@ def build_primary() -> dict:
             "merchant_id": None,
         })
         events.append({
-            "event_id": f"evt_demo_{num}", "event_type": "financial.transaction.created",
+            "event_id": f"evt_{num}", "event_type": "financial.transaction.created",
             "schema_version": "1.0", "occurred_at": _ts(mins),
-            "source": "synthetic_demo", "trace_id": f"trace_demo_{num}",
+            "source": "synthetic", "trace_id": f"trace_{num}",
             "privacy_classification": "synthetic",
             "transaction": txns[-1], "entities": entities,
         })
@@ -134,10 +134,10 @@ def build_primary() -> dict:
         edges.append({
             "edge_id": f"edge_{i:04d}", "source_node_id": src,
             "target_node_id": tgt, "relationship_type": rel,
-            "source_event_ids": [f"evt_demo_{num}"],
+            "source_event_ids": [f"evt_{num}"],
             "evidence_ids": [f"evidence_edge_{i:04d}"],
             "valid_from": SEED_DATETIME, "valid_to": None,
-            "synthetic_flag": True, "trace_id": f"trace_demo_{num}",
+            "synthetic_flag": True, "trace_id": f"trace_{num}",
         })
 
     return {
@@ -158,9 +158,9 @@ def build_false_positive() -> dict:
         "location_id": None, "merchant_id": None,
     }
     event = {
-        "event_id": "evt_demo_84730", "event_type": "financial.transaction.created",
+        "event_id": "evt_84730", "event_type": "financial.transaction.created",
         "schema_version": "1.0", "occurred_at": _ts(5),
-        "source": "synthetic_demo", "trace_id": "trace_demo_84730",
+        "source": "synthetic", "trace_id": "trace_84730",
         "privacy_classification": "synthetic", "transaction": txn, "entities": {},
     }
     nodes = [
@@ -174,10 +174,10 @@ def build_false_positive() -> dict:
     edges = [{
         "edge_id": "edge_fp_0001", "source_node_id": "fp_acct_1",
         "target_node_id": "fp_acct_2", "relationship_type": "SENT_TO",
-        "source_event_ids": ["evt_demo_84730"],
+        "source_event_ids": ["evt_84730"],
         "evidence_ids": ["evidence_edge_fp_0001"],
         "valid_from": SEED_DATETIME, "valid_to": None,
-        "synthetic_flag": True, "trace_id": "trace_demo_84730",
+        "synthetic_flag": True, "trace_id": "trace_84730",
     }]
     return {
         "scenario_id": "scn_false_positive", "transactions": [txn],
@@ -212,10 +212,10 @@ def build_ambiguous() -> dict:
         }
         txns.append(txn)
         events.append({
-            "event_id": f"evt_demo_{num}",
+            "event_id": f"evt_{num}",
             "event_type": "financial.transaction.created",
             "schema_version": "1.0", "occurred_at": _ts(mins),
-            "source": "synthetic_demo", "trace_id": f"trace_demo_{num}",
+            "source": "synthetic", "trace_id": f"trace_{num}",
             "privacy_classification": "synthetic",
             "transaction": txn, "entities": {"device_id": "dev_09"},
         })
@@ -235,10 +235,10 @@ def build_ambiguous() -> dict:
         edges.append({
             "edge_id": f"edge_amb_{i:04d}", "source_node_id": src,
             "target_node_id": tgt, "relationship_type": rel,
-            "source_event_ids": [f"evt_demo_{num}"],
+            "source_event_ids": [f"evt_{num}"],
             "evidence_ids": [f"evidence_edge_amb_{i:04d}"],
             "valid_from": SEED_DATETIME, "valid_to": None,
-            "synthetic_flag": True, "trace_id": f"trace_demo_{num}",
+            "synthetic_flag": True, "trace_id": f"trace_{num}",
         })
     return {
         "scenario_id": "scn_ambiguous", "transactions": txns, "events": events,

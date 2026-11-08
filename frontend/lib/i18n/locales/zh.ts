@@ -28,8 +28,8 @@ export const zh = {
     signOutEverywhere: "在所有位置退出",
     signOutEverywhereTitle: "在所有设备和浏览器上结束此会话",
     investigator: "调查员",
-    demoRole: "演示角色",
-    roleDemo: "{role} · 演示",
+    sessionRole: "演示角色",
+    roleContext: "{role} · 演示",
   },
   auth: {
     title: "演示登录",
@@ -78,7 +78,7 @@ export const zh = {
     journey: ["检测", "关联", "调查", "解释", "验证", "模拟", "决策", "审计"],
     cta: "探索 CruiseShield AI™",
     ctaSub: "进入交互式演示体验",
-    enterDemo: "进入演示",
+    enterPlatform: "进入演示",
     brandName: "CruiseShield AI™",
     tagline: "The Financial Crime Immune System™",
     home: "CruiseShield AI 首页",
@@ -152,7 +152,7 @@ export const zh = {
     metricSubs: ["示意全球覆盖", "国家与区域智能", "智能关联", "可解释调查"],
     platformPrinciples: "平台原则",
     footerLine: "一个平台。更安全的金融未来。为了每一个人。",
-    footerDemo: "演示体验 · 合成数据 · 示意网络视觉 · ",
+    footerNote: "演示体验 · 合成数据 · 示意网络视觉 · ",
     footerLink: "进入交互式演示",
     controlsAmbient: "环境音",
     soundLabel: "声音",
@@ -216,7 +216,7 @@ export const zh = {
     light: "浅色",
     system: "系统",
   },
-  demo: {
+  platform: {
     execOverview: "执行概览",
     execOverviewDown: "执行概览不可用",
     riskIntel: "风险智能",
@@ -295,7 +295,7 @@ export const zh = {
     resetTitle: "场景重置",
     resetBlurb:
       "重置将精确恢复初始场景并清除所有实时状态：人工决策、模拟、AI 运行，以及除重置本身之外的审计事件。",
-    resetDemo: "重置演示",
+    resetWorkspace: "重置演示",
     confirmReset: "确认：这将清除 {id} 的决策、模拟、AI 运行和审计历史。",
     resetting: "正在重置…",
     confirmResetBtn: "确认重置",

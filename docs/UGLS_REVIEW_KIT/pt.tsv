@@ -30,14 +30,14 @@ audit.thEvent	Event	Evento	direct	false			true
 audit.thReason	Reason	Motivo	direct	false			true
 audit.thState	State change	Mudança de estado	direct	false			true
 audit.thTime	Time	Hora	direct	false			true
-auth.blurb	This hosted platform is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	Esta demonstração está protegida. Entre com as credenciais de investigador fornecidas para esta avaliação. Apenas dados sintéticos.	direct	false			true
+auth.blurb	This hosted platform is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	Esta plataforma hospedada está protegida. Entre com as credenciais de investigador fornecidas para esta avaliação. Apenas dados sintéticos.	direct	false			true
 auth.invalid	Invalid username or password.	Nome de utilizador ou palavra-passe inválidos.	direct	false			true
 auth.password	Password	Palavra-passe	direct	false			true
 auth.rateLimited	Too many login attempts. Wait a minute and try again.	Demasiadas tentativas. Aguarde um minuto e tente novamente.	direct	false			true
 auth.signIn	Sign in	Entrar	direct	false			true
 auth.signingIn	Signing in…	A entrar…	direct	false			true
-auth.title	Secure sign in	Entrar na demonstração	direct	false			true
-auth.unreachable	Backend unreachable. Check the platform server and retry.	Servidor inacessível. Verifique o servidor de demonstração e tente novamente.	direct	false			true
+auth.title	Secure sign in	Acesso seguro	direct	false			true
+auth.unreachable	Backend unreachable. Check the platform server and retry.	Servidor inacessível. Verifique o servidor da plataforma e tente novamente.	direct	false			true
 auth.username	Username	Nome de utilizador	direct	false			true
 case.advisory	Advisory only: Muse Spark analysis explains evidence and never constitutes a human decision, nor changes risk scores or case status.	Apenas consultivo: a análise Muse Spark explica evidências e nunca constitui uma decisão humana, nem altera pontuações de risco ou o estado do caso.	direct	false			true
 case.aiAssessment	AI assessment	Avaliação de IA	direct	false			true
@@ -171,7 +171,7 @@ common.unavailable	Service temporarily unavailable. Retry shortly.	Serviço temp
 common.unknown	unknown	Desconhecido	direct	false			true
 common.unknownModel	unknown model	modelo desconhecido	direct	false			true
 common.unknownTime	unknown time	hora desconhecida	direct	false			true
-common.unreachable	Backend unreachable. Check the platform server and retry.	Servidor inacessível. Verifique o servidor de demonstração e tente novamente.	direct	false			true
+common.unreachable	Backend unreachable. Check the platform server and retry.	Servidor inacessível. Verifique o servidor da plataforma e tente novamente.	direct	false			true
 decision.actorLabel	Analyst ID	ID do analista	direct	false			true
 decision.decisionLabel	Decision	Decisão	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	A sua função é só de leitura: decisões desativadas.	direct	false			true
@@ -186,13 +186,16 @@ decision.terminal	This case is in a terminal state; no further transitions are a
 decision.title	Human decision	Decisão humana	direct	false			true
 detection.channelsTitle	Channel activity	Channel activity	fallback	true			true
 detection.detectorsTitle	Detector families	Detector families	fallback	true			true
+detection.fpRate	False-positive rate	False-positive rate	fallback	true			true
 detection.frequencyTitle	Signal frequency	Signal frequency	fallback	true			true
+detection.investigationsWord	investigations	investigations	fallback	true			true
 detection.matrixTitle	Detector by channel	Detector by channel	fallback	true			true
 detection.measuredAt	Measured at	Measured at	fallback	true			true
 detection.noLinkedInvestigation	No linked investigation.	No linked investigation.	fallback	true			true
 detection.noSignals	No qualifying signals recorded in this period.	No qualifying signals recorded in this period.	fallback	true			true
 detection.notImplemented	Not implemented: no model deployed.	Not implemented: no model deployed.	fallback	true			true
 detection.seedFeedNote	Seed feed: no live channel integration.	Seed feed: no live channel integration.	fallback	true			true
+detection.timeSeriesTitle	Signal time series	Signal time series	fallback	true			true
 detection.title	Detection intelligence	Detection intelligence	fallback	true			true
 detection.txnSignalsTitle	Transaction signals	Transaction signals	fallback	true			true
 detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Unmapped channel codes need taxonomy review.	fallback	true			true
@@ -233,7 +236,7 @@ graph.nodeFocusSuffix	, orbit focus	, foco orbital	direct	false			true
 graph.orbitFocusBadge	· orbit focus	· foco orbital	direct	false			true
 graph.orbitalCounts	Focus: {focus} · Showing {a} of {b} nodes, {c} of {d} edges.	Foco: {focus} · A mostrar {a} de {b} nós, {c} de {d} arestas.	direct	false	a,b,c,d,focus	a,b,c,d,focus	true
 graph.orbitalLabel	Orbital graph	Grafo orbital	direct	false			true
-graph.orbitalNote	Synthetic data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	Dados sintéticos de demonstração. Anéis e movimento são só disposição — não indicam risco, culpa ou prioridade.	direct	false			true
+graph.orbitalNote	Synthetic data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	Dados sintéticos. Anéis e movimento são só disposição - não indicam risco, culpa ou prioridade.	direct	false			true
 graph.orbitalSvg	Orbital graph focused on {focus}: {a} nodes, {b} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.	Grafo orbital focado em {focus}: {a} nós, {b} arestas. Tab para alcançar nós e arestas, Enter para selecionar, setas para deslocar.	direct	false	a,b,focus	a,b,focus	true
 graph.orbitalTitle	Orbital explorer	Explorador orbital	direct	false			true
 graph.orbitalViewControls	Orbital view controls	Controlos de vista orbital	direct	false			true
@@ -279,7 +282,7 @@ intel.evidencePre	Evidence: 	Evidências: 	direct	false			true
 intel.findingsCount.one	{count} finding	{count} achado	direct	false	count	count	true
 intel.findingsCount.other	{count} findings	{count} achados	direct	false	count	count	true
 intel.findingsH	Intelligence findings	Achados de inteligência	direct	false			true
-intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic values only.	Referência fixa, não uma impressão digital verificada. Atributos: apenas valores sintéticos de demonstração declarados.	direct	false			true
+intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic values only.	Referência fixa, não uma impressão digital verificada. Atributos: apenas valores sintéticos declarados.	direct	false			true
 intel.geoDisclaimer	IP-derived locations are approximate and never proof of physical presence. No GPS collection exists (permission: unavailable).	Localizações derivadas de IP são aproximadas e nunca provam presença física. Não existe recolha de GPS (permissão: indisponível).	direct	false			true
 intel.geoH	Geolocation	Geolocalização	direct	false			true
 intel.intelDown	Intelligence unavailable for this investigation.	Inteligência indisponível para esta investigação.	direct	false			true
@@ -302,8 +305,8 @@ intel.repLabel	Reputation	Reputação	direct	false			true
 intel.reviewLine	Human review: {r}	Revisão humana: {r}	direct	false	r	r	true
 intel.seeBackend	see backend	ver servidor	direct	false			true
 intel.sharedDevice	— shared device	— dispositivo partilhado	direct	false			true
-intel.statusLine	{findings} · {iso} · synthetic data.	{findings} · {iso} · dados sintéticos de demonstração.	direct	false	findings,iso	findings,iso	true
-intel.syntheticTag	· synthetic	· demonstração sintética	direct	false			true
+intel.statusLine	{findings} · {iso} · synthetic data.	{findings} · {iso} · dados sintéticos.	direct	false	findings,iso	findings,iso	true
+intel.syntheticTag	· synthetic	⚠ sintético	direct	false			true
 intel.unknownShort	(unknown)	(desconhecido)	direct	false			true
 intel.vpnLabel	VPN/proxy/Tor	VPN/proxy/Tor	direct	true			true
 investigation.aiAnalysis	AI analysis	Análise de IA	direct	false			true
@@ -354,14 +357,14 @@ landing.closeRegion	Clear region selection	Limpar a seleção de região	direct	
 landing.collapsePanel	Collapse panel	Recolher o painel	direct	false			true
 landing.controlsAmbient	Ambient sound	Som ambiente	direct	false			true
 landing.cta	Explore CruiseShield AI™	Explorar o CruiseShield AI™	direct	false			true
-landing.ctaSub	Explore the interactive investigation platform	Entre na experiência de demonstração interativa	direct	false			true
-landing.enterPlatform	Access Platform	Entrar na demo	direct	false			true
+landing.ctaSub	Explore the interactive investigation platform	Explore a plataforma de investigação interativa	direct	false			true
+landing.enterPlatform	Access Platform	Acessar a plataforma	direct	false			true
 landing.expandPanel	Expand panel	Expandir o painel	direct	false			true
 landing.eyebrow	Global Financial Intelligence	Inteligência financeira global	direct	false			true
-landing.fallbackNote	Interactive 3D is unavailable in this browser. The full platform remains open.	O 3D interativo não está disponível neste navegador. A experiência demo completa continua aberta.	direct	false			true
+landing.fallbackNote	Interactive 3D is unavailable in this browser. The full platform remains open.	O 3D interativo não está disponível neste navegador. A plataforma completa continua aberta.	direct	false			true
 landing.footerLine	One Platform. A Safer Financial Future. For Everyone.	Uma plataforma. Um futuro financeiro mais seguro. Para todos.	direct	false			true
-landing.footerLink	Open the interactive platform	Entrar na demo interativa	direct	false			true
-landing.footerNote	Investigation platform · synthetic data · illustrative network visuals · 	Experiência de demonstração · dados sintéticos · visuais de rede ilustrativos · 	direct	false			true
+landing.footerLink	Open the interactive platform	Abrir a plataforma interativa	direct	false			true
+landing.footerNote	Investigation platform · synthetic data · illustrative network visuals · 	Plataforma de investigação · dados sintéticos · visuais de rede ilustrativos · 	direct	false			true
 landing.fullMotion	Full motion	Movimento total	direct	false			true
 landing.globeContextLost	3D context lost — illustration paused.	Contexto 3D perdido — ilustração em pausa.	direct	false			true
 landing.globeControls	World Atlas controls	Controlos do atlas mundial	direct	false			true
@@ -378,8 +381,8 @@ landing.intelItems.5	Network Graph	Grafo de rede	direct	false			true
 landing.intelItems.6	AI Investigation	Investigação com IA	direct	false			true
 landing.intelItems.7	Risk Analysis	Análise de risco	direct	false			true
 landing.intelItems.8	Evidence and Audit	Provas e auditoria	direct	false			true
-landing.intelNote	Investigation capabilities · synthetic data	Capacidades de demonstração · dados sintéticos	direct	false			true
-landing.intelStatus	Pilot	Demo	direct	false			true
+landing.intelNote	Investigation capabilities · synthetic data	Capacidades de investigação · dados sintéticos	direct	false			true
+landing.intelStatus	Pilot	Piloto	direct	false			true
 landing.intelTitle	Global Intelligence	Inteligência global	direct	false			true
 landing.intelligenceModules	Intelligence modules	Módulos de inteligência	direct	false			true
 landing.journey.0	DETECT	DETETAR	direct	false			true
@@ -444,7 +447,7 @@ landing.signals.1	Intelligent	Inteligente	direct	false			true
 landing.signals.2	Global	Global	direct	true			true
 landing.signals.3	Auditable	Auditável	direct	false			true
 landing.soundLabel	Sound	Som	direct	false			true
-landing.stripNote	Cards open the matching screen · 	Os cartões abrem o ecrã demo em direto · 	direct	false			true
+landing.stripNote	Cards open the matching screen · 	Os cartões abrem a tela correspondente · 	direct	false			true
 landing.tagline	The Financial Crime Immune System™	The Financial Crime Immune System™	direct	true			true
 landing.unmute	Unmute	Ativar o som	direct	false			true
 landing.volumeLabel	Volume	Volume	direct	true			true
@@ -465,14 +468,14 @@ nav.networkExplorer	Network Explorer	Explorador de Rede	direct	false			true
 nav.primary	Primary	Principal	direct	false			true
 nav.quickActions	Quick Actions	Ações Rápidas	direct	false			true
 nav.replaySimulation	Replay & Simulation	Reprodução e Simulação	direct	false			true
-nav.roleContext	{role} · active	{role} · demo	direct	false	role	role	true
+nav.roleContext	{role} · active	{role} · ativo	direct	false	role	role	true
 nav.runSimulation	Run Simulation	Executar Simulação	direct	false			true
-nav.sessionRole	session role	função de demonstração	direct	false			true
+nav.sessionRole	session role	função de sessão	direct	false			true
 nav.signOut	Sign out	Sair	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	Sair em todo o lado	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	Terminar esta sessão em todos os dispositivos e navegadores	direct	false			true
 nav.skipToContent	Skip to main content	Saltar para o conteúdo principal	direct	false			true
-nav.synthetic	Synthetic data	Dados sintéticos de demonstração	direct	false			true
+nav.synthetic	Synthetic data	Dados sintéticos	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	Alternar navegação	direct	false			true
 nav.viewAuditTrail	View Audit Trail	Ver Trilha de Auditoria	direct	false			true
@@ -545,7 +548,7 @@ replay.resetDonePost	. Reload the page to replay from the restored state.	. Reca
 replay.resetDonePre	Reset complete: run 	Reposição concluída: execução 	direct	false			true
 replay.resetLabel	Scenario reset	Reposição do cenário	direct	false			true
 replay.resetTitle	Scenario reset	Reposição do cenário	direct	false			true
-replay.resetWorkspace	Reset workspace	Repor demo	direct	false			true
+replay.resetWorkspace	Reset workspace	Redefinir espaço de trabalho	direct	false			true
 replay.resetting	Resetting…	A repor…	direct	false			true
 replay.restart	Restart	Reiniciar	direct	false			true
 replay.scenarioPre	Scenario 	Cenário 	direct	false			true

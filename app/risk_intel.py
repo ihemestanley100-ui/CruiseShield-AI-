@@ -109,7 +109,7 @@ def _device_findings(state: dict[str, Any], txn_ids: set[str],
                            + profile.evidence_refs.get("event_ids", []))
             if profile else [],
             limitations=["Label only; no measured fingerprint.",
-                         "Attributes are declared synthetic demo values."],
+                         "Attributes are declared synthetic values."],
             human_review="required_before_any_action"))
         if profile is not None and profile.shared:
             out.append(_finding(

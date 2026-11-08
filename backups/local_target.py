@@ -18,7 +18,10 @@ class LocalDirTarget(targets_mod.BackupTarget):
     """BackupTarget backed by a local directory."""
 
     def __init__(self, root: str | os.PathLike[str]) -> None:
-        self._root = Path(root)
+        # Resolve once: _resolve() compares resolved candidates
+        # against this root, so a relative root would "escape"
+        # itself on every call.
+        self._root = Path(root).resolve()
         self._root.mkdir(parents=True, exist_ok=True)
 
     def _resolve(self, path: str) -> Path:

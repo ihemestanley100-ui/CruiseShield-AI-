@@ -6,17 +6,28 @@ import { AiPanel } from "../../../components/ai-panel";
 import { Breadcrumbs } from "../../../components/breadcrumbs";
 import { EvidenceList } from "../../../components/evidence-list";
 import { IntelSection } from "../../../components/intel-panels";
+import { TelecomSection } from "../../../components/telecom-section";
+import { TracingSection } from "../../../components/tracing-section";
+import { AssistantShell } from "../../../components/assistant-shell";
+import { RecoverySection } from "../../../components/recovery-section";
+import { GeointelMap } from "../../../components/geointel-map";
+import {
+  AddressSection,
+  IdentitySection,
+} from "../../../components/intel-verify-sections";
 import { RiskBadge } from "../../../components/risk-badge";
 import { SectionNav } from "../../../components/section-nav";
 import { WhyRiskPanel } from "../../../components/why-risk-panel";
 import {
   ApiError,
+  getAccountIntel,
   getEvidencePackage,
   getIntelEvidence,
   getInvestigation,
   getInvestigationIntel,
   getRiskIntel,
   userErrorMessage,
+  type AcctIntel,
   type EvidencePackage,
   type IntelEvidence,
   type InvIntel,
@@ -36,6 +47,10 @@ type State =
       intel: InvIntel | null;
       diEvidence: IntelEvidence | null;
       risk: RiskIntelResult | null;
+      accounts: {
+        sender: AcctIntel | null;
+        receiver: AcctIntel | null;
+      } | null;
     }
   | { kind: "not-found" }
   | { kind: "error"; message: string };
@@ -59,9 +74,28 @@ export default function InvestigationPage() {
       getIntelEvidence(invId, controller.signal).catch(() => null),
       getRiskIntel(invId, controller.signal).catch(() => null),
     ])
-      .then(([detail, pkg, intel, diEvidence, risk]) =>
-        setState({ kind: "ready", detail, pkg, intel, diEvidence, risk })
-      )
+      .then(([detail, pkg, intel, diEvidence, risk]) => {
+        /* GAP-012: per-account intel is best-effort (DI-10 pattern):
+         * the sender/receiver ids come from the resolved detail, and a
+         * failure hides the account blocks instead of the page. */
+        const { sender_account_id: sender, receiver_account_id: receiver } =
+          detail.transaction;
+        return Promise.all([
+          getAccountIntel(sender, controller.signal).catch(() => null),
+          getAccountIntel(receiver, controller.signal).catch(() => null),
+        ]).then(([senderIntel, receiverIntel]) => {
+          if (controller.signal.aborted) return;
+          setState({
+            kind: "ready",
+            detail,
+            pkg,
+            intel,
+            diEvidence,
+            risk,
+            accounts: { sender: senderIntel, receiver: receiverIntel },
+          });
+        });
+      })
       .catch((err: unknown) => {
         if (controller.signal.aborted) return;
         if (
@@ -83,7 +117,7 @@ export default function InvestigationPage() {
     <main className="main">
       <Breadcrumbs
         items={[
-          { label: tNav("commandCenter"), href: "/demo" },
+          { label: tNav("commandCenter"), href: "/platform" },
           { label: t("crumb", { id: invId }) },
         ]}
       />
@@ -180,7 +214,39 @@ export default function InvestigationPage() {
             intel={state.intel}
             evidence={state.diEvidence}
             risk={state.risk}
+            accounts={state.accounts}
           />
+          <section className="card" aria-live="polite">
+            <TelecomSection
+              phoneLabel={
+                state.detail.transaction.phone_id ?? undefined
+              }
+            />
+          </section>
+          <section className="card" aria-live="polite">
+            <GeointelMap investigationId={invId} />
+          </section>
+          <section className="card" aria-live="polite">
+            <IdentitySection investigationId={invId} />
+          </section>
+          <section className="card" aria-live="polite">
+            <AddressSection investigationId={invId} />
+          </section>
+          <section className="card" aria-live="polite">
+            <TracingSection txnId={state.detail.transaction.transaction_id} />
+          </section>
+          <section className="card" aria-live="polite">
+            <AssistantShell
+              title="Investigation copilot"
+              context={{
+                investigation_id: invId,
+                transaction_id: state.detail.transaction.transaction_id,
+              }}
+            />
+          </section>
+          <section className="card" aria-live="polite">
+            <RecoverySection txnId={state.detail.transaction.transaction_id} />
+          </section>
           <AiPanel invId={invId} />
         </>
       )}

@@ -1,6 +1,6 @@
 """Per-IP fixed-window rate limiting (in-memory, single-instance).
 
-Render staging (D-001): closes the no-throttling gap for the demo/hosting
+Render staging (D-001): closes the no-throttling gap for staging/hosting
 scale this product actually serves. Honest limits, stated up front:
 - In-memory: correct for ONE instance (the supported staging topology);
   multi-instance needs a shared store (documented, not built).
@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import time
 
-# Generous for demos (matrix + assets burst well under this), tight enough
+# Generous for clients (matrix + assets burst well under this), tight enough
 # to blunt floods: 600 req/min/IP ≈ 10 rps sustained per client.
 LIMIT_PER_MINUTE = 600
 WINDOW_SECONDS = 60
@@ -81,5 +81,5 @@ def check_and_consume(key: str, now: float | None = None,
 
 
 def reset() -> None:
-    """Test/demo helper: clear all buckets."""
+    """Test helper: clear all buckets."""
     _buckets.clear()

@@ -20,7 +20,7 @@ DATE: 2026-11-01 | NAMES ONLY — no values. († = set in render.yaml; ‡ = Re
 ## Frontend
 - NEXT_PUBLIC_API_BASE_URL †§ — deployed backend URL; BAKED AT BUILD; rebuild required after any change.
 - NODE_VERSION † (20.19.6) — build image pin.
-- NEXT_PUBLIC_DEMO_WRITE_TOKEN †§ — same value as backend token; PUBLIC once baked; empty = header omitted. Demo-staging only.
+- NEXT_PUBLIC_DEMO_WRITE_TOKEN †§ — R6 (owner-approved): LEAVE EMPTY for public deploys. No frontend/backend token matching is required or wanted — any value here bakes PUBLIC into browser JS. Protected writes use the login-session flow. Empty = header omitted.
 - NEXT_DIST_DIR — REMOVED 2026-11-01 (J3-P10): the Phase 2B temporary `distDir` override is deleted from `next.config.ts`; builds use default `.next`. This variable no longer exists.
 - PORT (Render-provided) — consumed by `npm start -- --port $PORT`.
 

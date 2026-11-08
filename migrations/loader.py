@@ -8,6 +8,8 @@ Safety rules:
 - Upserts (ON CONFLICT DO UPDATE) make re-runs idempotent; the loader only
   ever adds/refreshes rows, never deletes.
 - Nothing here touches the active JSON backend or any production resource.
+- ``--audit-keyring`` accepts an operator-supplied keyring file only;
+  key material is never logged and malformed keyrings fail closed.
 """
 from __future__ import annotations
 
@@ -30,6 +32,46 @@ class MigrationError(Exception):
     def __init__(self, code: str, detail: str = "") -> None:
         super().__init__(f"{code}: {detail}" if detail else code)
         self.code = code
+
+
+AUDIT_KEY_MIN_BYTES = 16
+
+
+def load_audit_keyring(path: str | Path) -> dict[str, bytes]:
+    """Load an operator-supplied audit keyring: {key_id: hex_key}.
+
+    The keyring file stays outside the repository and evidence bundle.
+    Errors name the path, key id, or decoded length only; key material
+    never appears in exceptions, logs, or reports.
+    """
+    try:
+        raw = Path(path).read_bytes()
+    except OSError:
+        raise MigrationError("KEYRING_NOT_FOUND", str(path)) from None
+    try:
+        doc = json.loads(raw.decode("utf-8"))
+    except ValueError:
+        raise MigrationError("KEYRING_NOT_JSON", str(path)) from None
+    if not isinstance(doc, dict) or not doc:
+        raise MigrationError("KEYRING_BAD_SHAPE", str(path))
+    keyring: dict[str, bytes] = {}
+    for key_id, value in doc.items():
+        if (not isinstance(key_id, str) or not key_id.strip()
+                or len(key_id) > 64):
+            raise MigrationError("KEYRING_BAD_KEY_ID", str(path))
+        if not isinstance(value, str):
+            raise MigrationError("KEYRING_BAD_KEY",
+                                 f"key_id={key_id}")
+        try:
+            key = bytes.fromhex(value.strip())
+        except ValueError:
+            raise MigrationError("KEYRING_BAD_KEY",
+                                 f"key_id={key_id}") from None
+        if len(key) < AUDIT_KEY_MIN_BYTES:
+            raise MigrationError("KEYRING_KEY_TOO_SHORT",
+                                 f"key_id={key_id} bytes={len(key)}")
+        keyring[key_id] = key
+    return keyring
 
 
 def _sha256_bytes(data: bytes) -> str:
@@ -453,11 +495,21 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--database-url", required=True)
     parser.add_argument("--expected-hash", default=None)
     parser.add_argument("--no-init-schema", action="store_true")
+    parser.add_argument("--audit-keyring", default=None,
+                        help="operator-supplied audit keyring JSON; "
+                             "enables the pre-write chain gate")
     args = parser.parse_args(argv)
+    try:
+        keyring = (load_audit_keyring(args.audit_keyring)
+                   if args.audit_keyring else None)
+    except MigrationError as exc:
+        print(f"MIGRATION_FAILED {exc}", file=sys.stderr)
+        return 1
     try:
         report = run_migration(args.source, args.database_url,
                                args.expected_hash,
-                               init_schema=not args.no_init_schema)
+                               init_schema=not args.no_init_schema,
+                               audit_keyring=keyring)
     except (MigrationError, db_mod.PGError) as exc:
         print(f"MIGRATION_FAILED {exc}", file=sys.stderr)
         return 1

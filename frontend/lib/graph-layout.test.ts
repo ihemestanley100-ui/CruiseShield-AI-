@@ -23,12 +23,12 @@ function edge(
     source_node_id: src,
     target_node_id: tgt,
     relationship_type: rel,
-    source_event_ids: ["evt_demo_84721"],
+    source_event_ids: ["evt_84721"],
     evidence_ids: [`evidence_${id}`],
     valid_from: "2026-10-27T10:00:00Z",
     valid_to: null,
     synthetic_flag: true,
-    trace_id: "trace_demo_84721",
+    trace_id: "trace_84721",
   };
 }
 

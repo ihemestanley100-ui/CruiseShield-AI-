@@ -28,8 +28,8 @@ export const yo = {
     signOutEverywhere: "Jáde níbikibi",
     signOutEverywhereTitle: "Parí ìgbà yìí lórí gbogbo ẹ̀rọ àti aṣàwákiri",
     investigator: "Aláṣẹ ìwádìí",
-    demoRole: "ipa ìfihàn",
-    roleDemo: "{role} · ìfihàn",
+    sessionRole: "ipa ìfihàn",
+    roleContext: "{role} · ìfihàn",
   },
   auth: {
     title: "Wọlé ìfihàn",
@@ -90,7 +90,7 @@ export const yo = {
     ],
     cta: "Ṣàwárí CruiseShield AI™",
     ctaSub: "Wọ inú ìrírí àfihàn ìbáṣepọ̀",
-    enterDemo: "Wọ àfihàn",
+    enterPlatform: "Wọ àfihàn",
     brandName: "CruiseShield AI™",
     tagline: "The Financial Crime Immune System™",
     home: "Ilé CruiseShield AI",
@@ -180,7 +180,7 @@ export const yo = {
     ],
     platformPrinciples: "Àwọn ìlànà pẹpẹ",
     footerLine: "Pẹpẹ kan. Ọjọ́ ọ̀la owó tó ní ààbò síi. Fún gbogbo ènìyàn.",
-    footerDemo:
+    footerNote:
       "Ìrírí àfihàn · dátà àtọwọ́dá · àwọn àwòrán nẹ́tíwọ́kì àpẹẹrẹ · ",
     footerLink: "Wọ àfihàn ìbáṣepọ̀",
     controlsAmbient: "Ohùn àyíká",
@@ -246,7 +246,7 @@ export const yo = {
     light: "Ìmọ́lẹ̀",
     system: "Ètò",
   },
-  demo: {
+  platform: {
     execOverview: "Àkójọ alákóso",
     execOverviewDown: "Àkójọ alákóso kò sí",
     riskIntel: "Òye ewu",
@@ -325,7 +325,7 @@ export const yo = {
     resetTitle: "Àtúntò ojú-ìwòye",
     resetBlurb:
       "Àtúntò ń mú ojú-ìwòye ìbẹ̀rẹ̀ padà gẹ́gẹ́ bí ó ṣe wà ó sì ń nu gbogbo ipò lọ́wọ́lọ́wọ́: ìpinnu ènìyàn, ìdánwò, ìṣiṣẹ́ AI, àti àwọn ìṣẹ̀lẹ̀ àyẹ̀wò ju àtúntò náà lọ.",
-    resetDemo: "Tún ìfihàn ṣe",
+    resetWorkspace: "Tún ìfihàn ṣe",
     confirmReset:
       "Jẹ́rìí: èyí ń nu ìpinnu, ìdánwò, ìṣiṣẹ́ AI, àti ìtàn àyẹ̀wò fún {id}.",
     resetting: "Ń tún ṣe…",

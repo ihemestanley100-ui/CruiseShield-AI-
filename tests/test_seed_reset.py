@@ -7,7 +7,7 @@ from app.store import Store
 
 
 def test_missing_state_file_warns_before_reseed(tmp_path):
-    with pytest.warns(RuntimeWarning, match="seeding fresh demo state"):
+    with pytest.warns(RuntimeWarning, match="seeding fresh state"):
         Store(tmp_path / "missing.json")
 
 

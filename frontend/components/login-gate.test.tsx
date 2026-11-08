@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ApiError } from "../lib/api";
-import { LoginCard, useDemoSession } from "./login-gate";
+import { LoginCard, usePlatformSession } from "./login-gate";
 
 const { modeMock, meMock, loginMock, logoutMock } = vi.hoisted(() => ({
   modeMock: vi.fn(),
@@ -21,7 +21,7 @@ vi.mock("../lib/api", async (importOriginal) => ({
 /* Same usage shape as AppShell: checking withholds children, the gate
  * swaps children for the card. */
 function Harness({ children }: { children: React.ReactNode }) {
-  const { gate, login, logout } = useDemoSession();
+  const { gate, login, logout } = usePlatformSession();
   if (gate.status === "checking")
     return <p role="status">Loading…</p>;
   if (gate.status === "login") return <LoginCard onLogin={login} />;
@@ -38,7 +38,7 @@ function Harness({ children }: { children: React.ReactNode }) {
 }
 
 function auth401() {
-  return new ApiError("LOGIN_REQUIRED", "demo login required", 401, "");
+  return new ApiError("LOGIN_REQUIRED", "login required", 401, "");
 }
 
 beforeEach(() => {
@@ -49,7 +49,7 @@ beforeEach(() => {
   logoutMock.mockResolvedValue({ ok: true });
 });
 
-describe("useDemoSession", () => {
+describe("usePlatformSession", () => {
   it("withholds children while the mode check is pending", () => {
     modeMock.mockReturnValue(new Promise(() => {}));
     render(
@@ -60,7 +60,7 @@ describe("useDemoSession", () => {
     expect(screen.getByRole("status")).toBeTruthy();
     expect(screen.queryByText("child")).toBeNull();
     expect(
-      screen.queryByRole("heading", { name: "Demo sign in" })
+      screen.queryByRole("heading", { name: "Secure sign in" })
     ).toBeNull();
   });
 
@@ -75,7 +75,7 @@ describe("useDemoSession", () => {
     expect(screen.queryByText("child")).toBeNull();
     expect(await screen.findByText("child")).toBeTruthy();
     expect(
-      screen.queryByRole("heading", { name: "Demo sign in" })
+      screen.queryByRole("heading", { name: "Secure sign in" })
     ).toBeNull();
     expect(meMock).not.toHaveBeenCalled();
   });
@@ -93,7 +93,7 @@ describe("useDemoSession", () => {
     await vi.waitFor(() => expect(modeMock).toHaveBeenCalled());
     expect(await screen.findByText("child")).toBeTruthy();
     expect(
-      screen.queryByRole("heading", { name: "Demo sign in" })
+      screen.queryByRole("heading", { name: "Secure sign in" })
     ).toBeNull();
   });
 
@@ -105,7 +105,7 @@ describe("useDemoSession", () => {
         <p>child</p>
       </Harness>
     );
-    await screen.findByRole("heading", { name: "Demo sign in" });
+    await screen.findByRole("heading", { name: "Secure sign in" });
     expect(screen.queryByText("child")).toBeNull();
   });
 
@@ -123,7 +123,7 @@ describe("useDemoSession", () => {
     );
     await screen.findByText("child");
     expect(
-      screen.queryByRole("heading", { name: "Demo sign in" })
+      screen.queryByRole("heading", { name: "Secure sign in" })
     ).toBeNull();
     expect(await screen.findByRole("button", { name: "out" })).toBeTruthy();
   });
@@ -146,12 +146,12 @@ describe("useDemoSession", () => {
     await vi.waitFor(() => expect(meMock.mock.calls.length).toBeGreaterThan(1));
     expect(screen.getByText("child")).toBeTruthy();
     expect(
-      screen.queryByRole("heading", { name: "Demo sign in" })
+      screen.queryByRole("heading", { name: "Secure sign in" })
     ).toBeNull();
     // Expired session: the same event flips the shell to sign-in.
     meMock.mockRejectedValue(auth401());
     window.dispatchEvent(new CustomEvent("csai:unauthorized"));
-    await screen.findByRole("heading", { name: "Demo sign in" });
+    await screen.findByRole("heading", { name: "Secure sign in" });
     expect(screen.queryByText("child")).toBeNull();
   });
 
@@ -168,7 +168,7 @@ describe("useDemoSession", () => {
         <p>child</p>
       </Harness>
     );
-    await screen.findByRole("heading", { name: "Demo sign in" });
+    await screen.findByRole("heading", { name: "Secure sign in" });
     fireEvent.change(screen.getByLabelText("Username"), {
       target: { value: "  judge " },
     });
@@ -179,7 +179,7 @@ describe("useDemoSession", () => {
     await screen.findByText("child");
     expect(loginMock).toHaveBeenCalledWith("judge", "s3cret");
     fireEvent.click(screen.getByRole("button", { name: "out" }));
-    await screen.findByRole("heading", { name: "Demo sign in" });
+    await screen.findByRole("heading", { name: "Secure sign in" });
     expect(logoutMock).toHaveBeenCalled();
   });
 });
@@ -215,7 +215,7 @@ describe("LoginCard", () => {
         <p>child</p>
       </Harness>
     );
-    await screen.findByRole("heading", { name: "Demo sign in" });
+    await screen.findByRole("heading", { name: "Secure sign in" });
     const user = screen.getByLabelText("Username");
     const pass = screen.getByLabelText("Password");
     const submit = screen.getByRole("button", { name: "Sign in" });

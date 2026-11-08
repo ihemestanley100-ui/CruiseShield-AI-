@@ -1,10 +1,10 @@
-# CruiseShield AI™ — Hackathon Vertical Slice
+# CruiseShield AI™ — Universal Financial Crime Intelligence Platform
 
 The Financial Crime Immune System™: network-level, evidence-linked financial-crime
 investigation. *"The transaction is only the beginning. The network is the signal."*
 
-> All data is deterministic synthetic demo fixtures, labelled in the UI. No real
-> financial data is used anywhere.
+> All data in this evaluation build is deterministic synthetic fixtures, labelled
+> in the UI. No real financial data is used anywhere.
 
 ## Hackathon provenance (Meta Global AI Developer Hackathon, Oct 26 – Nov 4, 2026)
 
@@ -40,16 +40,17 @@ Investigation → Replay/Simulation → Human Decision → Case → Audit`
 - Deterministic replay, one bounded what-if simulation, reasoned human decision
   gate, case lifecycle, append-only audit trail.
 
-Live demo URL: none yet — runs locally (see below). Screenshots/video: not captured
-in this headless sandbox; capture from the local run before submission.
+Public deployment: none yet — runs locally (see below). Screenshots/video: not
+captured in this headless sandbox; capture from the local run for review.
 
 ## Architecture
 
 Single FastAPI process: JSON API + server-rendered pages (Jinja2 + vanilla JS,
 dependency-free SVG graph, no CDN/build step). JSON file store with atomic writes.
-Primary UI is the Next.js 15 frontend (`frontend/`, 254 vitest suite,
-production build verified); the Jinja pages (`/`, `/investigations/*`,
-`/system-health`) remain as a legacy surface.
+Primary UI is the Next.js 15 frontend (`frontend/`; vitest suite, typecheck,
+and production build last verified green on approved unsandboxed runs —
+local reruns are sandbox-blocked, see GAP-010); the Jinja pages (`/`,
+`/investigations/*`, `/system-health`) remain as a legacy surface.
 Details: `docs/ARCHITECTURE.md`. Stack decision: `docs/ADR/ADR-001-stack.md`.
 
 Meta integration: OpenAI-compatible `POST {META_BASE_URL}/chat/completions`,
@@ -68,12 +69,24 @@ Prerequisites: Python 3.13 (a project `.venv` already exists in this checkout).
 Copy-Item .env.example .env
 # then set MODEL_API_KEY in .env
 
-# Run:
+# Terminal 1 — backend API (FastAPI, port 8000):
 .venv/Scripts/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+
+# Terminal 2 — primary UI (Next.js, port 3000):
+cd frontend
+npm ci        # first time only
+npm run dev   # reads frontend/.env.local for the backend origin
 ```
 
-Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in a browser, then press
-**Start Signature Investigation**.
+Primary interface (new Three.js World Atlas experience):
+[http://localhost:3000](http://localhost:3000)
+
+Backend API + deliberate legacy pages:
+[http://127.0.0.1:8000/api/v1/health](http://127.0.0.1:8000/api/v1/health)
+(`/` on :8000 intentionally still serves the legacy Command Center;
+production serves the same backend on Render with the frontend on
+Netlify. Press **Start Signature Investigation** there for the legacy
+evaluation flow.)
 
 ## Synthetic scenario
 
@@ -84,7 +97,7 @@ Three versioned scenarios (`app/seed.py`, manifest `seed_hash` pinned in tests):
 - `scn_ambiguous` — borderline device-sharing pair, txn 20 LOW /
   network 38 MODERATE (one device shared by exactly two accounts).
 
-Reset reproducibly: `POST /api/v1/demo/reset {"scenario_id": "scn_primary"}`,
+Reset reproducibly: `POST /api/v1/platform/reset {"scenario_id": "scn_primary"}`,
 or use the scenario form on the Command Center.
 
 ## Tests
@@ -93,15 +106,18 @@ or use the scenario form on the Command Center.
 .venv/Scripts/python -m pytest tests/ -q
 ```
 
-Result in this sandbox (2026-11-01 J3 closeout): backend **341 passed,
-103 skipped** (skips are socket/loop-gated, verified socket-free by
-direct-handler twins; 1 node-dependent test is sandbox-blocked here and
-re-proven green on an approved unsandboxed rerun); frontend **261/261
-vitest + typecheck + production build green** (approved unsandboxed
-runs). Skips are never counted as passed.
-Evidence: `docs/J3_FULL_REGRESSION_EVIDENCE.md`.
+Result in this sandbox (2026-11-06): backend **924 passed, 141
+skipped** (skips are socket/loop-gated with socket-free direct-handler
+twins; 1 failed + 2 errors are proven sandbox-only environment
+signatures — node EPERM lstat and WinError 10013 socket denial —
+awaiting hosted Linux CI confirmation). Frontend reruns are
+sandbox-blocked by the same node EPERM (see GAP-010); the last green
+frontend evidence stands in the cited report. Skips are never counted
+as passed.
+Evidence: `docs/J3_FULL_REGRESSION_EVIDENCE.md`;
+`CRUISESHIELD-AI-PRODUCTION-GAP-REGISTER.md` (GAP-006).
 
-## Demo steps (3 minutes)
+## Guided evaluation walkthrough
 
 1. Command Center → Start Signature Investigation (clean reset).
 2. Open txn #84721; press Reveal Network; select an edge; read its provenance.
@@ -118,8 +134,10 @@ P1/P2 and the full V5 enterprise layers are explicitly deferred, not claimed.
 
 - `MODEL_API_KEY` lives only in server env/`.env` (gitignored); never in code,
   logs, responses, or screenshots. `tests/test_secret_safety.py` guards this.
-- Demo mutations are restricted to seeded records; the UI discloses demo mode.
-- Protected-demo login is implemented (HMAC sessions, investigator/admin
-  roles, CSRF header, login throttle) but remains demo-grade: shared
-  credentials, manual rotation, no tenant isolation. Do not expose it as
+- Write operations in this evaluation build are restricted to seeded records;
+  the UI discloses synthetic-data mode.
+- Protected session login is implemented (HMAC sessions, investigator/admin
+  roles, CSRF header, login throttle, MFA module) with current limits:
+  file-based user provisioning, manual rotation, single-organization
+  operation until the D-014 tenancy decision lands. Do not expose it as
   a production service.

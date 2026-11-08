@@ -1,7 +1,7 @@
 """J6 disposable backup/restore drill (live-DB-gated, no owner backup).
 
-Snapshots the scratch PG (seeded from live-shape bytes by the J5
-rehearsal path), seals with EPHEMERAL keys into in-memory fake
+Snapshots the scratch PG (seeded from canonical fixture bytes by the
+J5 rehearsal path), seals with EPHEMERAL keys into in-memory fake
 targets, then restores: manifest chain, signature, cross-copy,
 decrypt, snapshot equality. Nothing leaves the test process.
 """
@@ -24,7 +24,9 @@ def test_j6_disposable_roundtrip_drill(tmp_path):
     from backups import signing as signing_mod
     from migrations.loader import run_migration
 
-    raw = open("data/state.json", "rb").read()  # read-only source bytes
+    from fixtures.canonical_seed import fixture_bytes
+
+    raw = fixture_bytes()  # canonical bytes; the live file is never read
     copy = tmp_path / "state-copy.json"
     copy.write_bytes(raw)
     conn = db_mod.connect(SCRATCH_URL)

@@ -1,9 +1,9 @@
-/* J4: shared demo-session snapshot for role-aware UI.
+/* J4: shared platform-session snapshot for role-aware UI.
  *
  * The login gate publishes here; write controls (decision form, AI
  * panel, simulation panel) disable themselves for read-only roles.
  * This is UX only — the backend session guard enforces permissions.
- * Open-demo mode (backend auth disabled) enables everything, exactly
+ * Open mode (backend auth disabled) enables everything, exactly
  * as before.
  */
 "use client";

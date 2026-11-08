@@ -5,7 +5,7 @@ import Loading from "./loading";
 describe("route loading state", () => {
   it("announces loading without fake progress", () => {
     render(<Loading />);
-    const region = screen.getByText("Fetching the latest demo state.");
+    const region = screen.getByText("Fetching the latest workspace state.");
     expect(region.closest("[aria-busy='true']")).toBeTruthy();
   });
 });
