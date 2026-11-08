@@ -1,0 +1,26 @@
+# Gitleaks allowlist: verified false positives only (gate run 42495344343).
+# Each entry was inspected in the committed tree and proven non-secret:
+# synthetic test constants and documentation prose. Never add real
+# credential shapes here; rotate any genuine secret instead.
+title = "CruiseShield AI gitleaks config"
+
+[extend]
+useDefault = true
+
+# Synthetic test-harness constants (literal "test-secret-*" markers).
+[[allowlist]]
+description = "test fixture secrets, verified synthetic 2026-11-08"
+regexTarget = "line"
+regexes = ['''test-secret-[a-z]+-032-chars-ok''']
+paths = [
+  '''tests/test_billing\.py''',
+  '''tests/test_geointel_api\.py''',
+  '''tests/test_telecom_contract\.py''',
+]
+
+# Documentation prose mentioning credential handling (no secret present).
+[[allowlist]]
+description = "docs prose, verified no secret 2026-11-08"
+regexTarget = "line"
+regexes = ['''credential codes, validation/refusal fail-fast''']
+paths = ['''docs/PROJECT_EXECUTION_STATE\.md''']
