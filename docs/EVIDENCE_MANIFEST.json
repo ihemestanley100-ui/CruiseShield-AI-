@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-11-08T15:24:19Z",
-  "head": "d0afd7a",
+  "generated_at": "2026-11-08T15:29:15Z",
+  "head": "f92bd1f",
   "files": {
     "docs/ZERO_GAP_MATRIX.json": {
-      "sha256": "613003cfe8ed588be6ee77386c2428b94fec1bfae54ed25d22fead38a06c885d",
-      "bytes": 141174
+      "sha256": "5cbbee027cb3cf462cd588c737059c85115aa1ea03b4f127c6080e05618efea5",
+      "bytes": 137267
     },
     "scripts/zero_gap_matrix.py": {
-      "sha256": "8dab8281694ef37fcac71077941a88e6f85213ebdfa2851b299a7c052a9c24f7",
-      "bytes": 70506
+      "sha256": "bfd9c7b52543e482dd94f60233044aa6af70e29427e8986a3c4df52f0b1da3ee",
+      "bytes": 69154
     },
     "docs/PRODUCTION_CLOSURE_REGISTER.md": {
       "sha256": "45ddfbc5c457dd08ab4e63f831f89019de93c8d466dc669b2c0987247a949af4",
@@ -23,24 +23,24 @@
       "bytes": 8124
     },
     "docs/LIVE_EVIDENCE_INDEX.md": {
-      "sha256": "6dfc1e72635afaf7ac9a4b31a040331084894c05b9ddf549f174f4363bb04265",
-      "bytes": 5914
+      "sha256": "d83496707a31a5b97292181a19db8c5234554d8e4467053e4337fd14281aa206",
+      "bytes": 5796
     },
     "docs/LEVEL14_OWNER_APPROVAL_PACKAGES.md": {
-      "sha256": "6db9a392e09443ed08ec8fa1c10675baad3189a70e0b8d62b2de13d7aec677e2",
-      "bytes": 19576
+      "sha256": "32a9f6155060017991409f1c036d54a51d1d3062f070996bd6fa3c3e0457e73b",
+      "bytes": 19245
     },
     "docs/LEAFLET_TILE_POLICY_REVIEW.md": {
       "sha256": "26f1dbf182a64e1c1fe7dc38f7a36f0770fa69b2885e79655a70e00c214510b0",
       "bytes": 2295
     },
     "CRUISESHIELD-AI-DECISION-LOG.md": {
-      "sha256": "e678841d69fc3b37b870063c992b331860101a9bb5dbdb7e492a2795252ee152",
-      "bytes": 33928
+      "sha256": "a77fc0cbc2d828fdd6fc6a2c6eafccf76c11a196bae28b6a2d9efa12e1258bf1",
+      "bytes": 33363
     },
     "docs/PROJECT_EXECUTION_STATE.md": {
-      "sha256": "9752344bce86bf35873e8abe2a2286c1fa16694d69413f5a3ae8784a26adfe68",
-      "bytes": 47368
+      "sha256": "8db4889f6576c68872530ff38f8c45fa2af0d0d86bb55424e7633314d291297f",
+      "bytes": 46701
     },
     "requirements.lock": {
       "sha256": "37838090f57ccc461af97b8e382f3350fb811fb2cf460794e55286c8e0578c19",

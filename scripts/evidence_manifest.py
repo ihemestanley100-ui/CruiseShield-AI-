@@ -36,6 +36,9 @@ COVERED = [
 
 def digest(path: Path) -> dict:
     data = path.read_bytes()
+    # Normalize line endings so the tripwire is stable across
+    # Windows (CRLF worktree) and Linux CI (LF checkout) bytes.
+    data = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
     return {"sha256": hashlib.sha256(data).hexdigest(),
             "bytes": len(data)}
 
