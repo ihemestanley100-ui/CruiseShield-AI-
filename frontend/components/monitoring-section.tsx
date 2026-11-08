@@ -19,6 +19,7 @@ import {
   userErrorMessage,
 } from "../lib/api";
 import { useState } from "react";
+import { useTranslation } from "../lib/i18n/context";
 
 type PanelState =
   | { kind: "closed" }
@@ -45,6 +46,7 @@ const NEXT: Record<string, string[]> = {
 
 export function MonitoringSection({ signalId }: { signalId?: string }) {
   const [panel, setPanel] = useState<PanelState>({ kind: "closed" });
+  const { t: tCommon } = useTranslation("common");
 
   function open() {
     if (panel.kind !== "closed") {
@@ -63,7 +65,7 @@ export function MonitoringSection({ signalId }: { signalId?: string }) {
         })
       )
       .catch((err: unknown) =>
-        setPanel({ kind: "error", message: userErrorMessage(err) })
+        setPanel({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 
@@ -73,7 +75,7 @@ export function MonitoringSection({ signalId }: { signalId?: string }) {
         setPanel({ kind: "ready", status, alerts: queue.alerts, run, notice })
       )
       .catch((err: unknown) =>
-        setPanel({ kind: "error", message: userErrorMessage(err) })
+        setPanel({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 
@@ -87,7 +89,7 @@ export function MonitoringSection({ signalId }: { signalId?: string }) {
         )
       )
       .catch((err: unknown) =>
-        setPanel({ kind: "error", message: userErrorMessage(err) })
+        setPanel({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 
@@ -96,7 +98,7 @@ export function MonitoringSection({ signalId }: { signalId?: string }) {
     postFraudAlert(signalId)
       .then((out) => refresh(`Alert ${out.alert.id}: ${out.status}.`, null))
       .catch((err: unknown) =>
-        setPanel({ kind: "error", message: userErrorMessage(err) })
+        setPanel({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 
@@ -104,7 +106,7 @@ export function MonitoringSection({ signalId }: { signalId?: string }) {
     patchFraudAlert(alertId, to)
       .then((alert) => refresh(`Alert ${alert.id} moved to ${alert.status}.`, null))
       .catch((err: unknown) =>
-        setPanel({ kind: "error", message: userErrorMessage(err) })
+        setPanel({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 

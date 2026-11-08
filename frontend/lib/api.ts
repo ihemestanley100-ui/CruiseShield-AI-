@@ -1161,7 +1161,7 @@ export interface SignalSearchPage {
   tenant_scope: string;
 }
 
-export interface SignalDetail extends SignalEvent {
+export interface SignalDetail extends Omit<SignalEvent, "outcome"> {
   outcome: {
     current: string;
     history: {
@@ -1965,9 +1965,10 @@ async function patchJson<T>(
   if (!res.ok) {
     notifyUnauthorized(path, res.status);
     throw new ApiError(
-      data.error ?? `request failed (${res.status})`,
+      data.error?.code ?? `HTTP_${res.status}`,
+      data.error?.message ?? `request failed (${res.status})`,
       res.status,
-      data
+      data.error?.trace_id ?? ""
     );
   }
   return data as T;

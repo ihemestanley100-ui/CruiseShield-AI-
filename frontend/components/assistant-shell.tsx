@@ -14,6 +14,7 @@ import {
   userErrorMessage,
 } from "../lib/api";
 import { useState } from "react";
+import { useTranslation } from "../lib/i18n/context";
 
 type ShellState =
   | { kind: "closed" }
@@ -30,6 +31,7 @@ export function AssistantShell({
 }) {
   const [shell, setShell] = useState<ShellState>({ kind: "closed" });
   const [draft, setDraft] = useState("");
+  const { t: tCommon } = useTranslation("common");
 
   function open() {
     if (shell.kind !== "closed") {
@@ -42,7 +44,7 @@ export function AssistantShell({
         setShell({ kind: "ready", conversation, busy: false })
       )
       .catch((err: unknown) =>
-        setShell({ kind: "error", message: userErrorMessage(err) })
+        setShell({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 
@@ -59,7 +61,7 @@ export function AssistantShell({
         setDraft("");
       })
       .catch((err: unknown) =>
-        setShell({ kind: "error", message: userErrorMessage(err) })
+        setShell({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 

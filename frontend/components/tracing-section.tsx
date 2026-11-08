@@ -50,7 +50,7 @@ export function TracingSection({ txnId }: { txnId: string }) {
       .then((data) => getTrace(data.trace_id).then(() => data))
       .then((data) => setTrace({ kind: "ready", data }))
       .catch((err: unknown) =>
-        setTrace({ kind: "error", message: userErrorMessage(err) })
+        setTrace({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 
@@ -63,7 +63,7 @@ export function TracingSection({ txnId }: { txnId: string }) {
     getTxnParties(txnId)
       .then((data) => setParties({ kind: "ready", data }))
       .catch((err: unknown) =>
-        setParties({ kind: "error", message: userErrorMessage(err) })
+        setParties({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 
@@ -76,7 +76,7 @@ export function TracingSection({ txnId }: { txnId: string }) {
     getTypologies()
       .then((data) => setTypos({ kind: "ready", data: data.typologies }))
       .catch((err: unknown) =>
-        setTypos({ kind: "error", message: userErrorMessage(err) })
+        setTypos({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 

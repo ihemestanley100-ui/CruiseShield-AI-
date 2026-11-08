@@ -17,6 +17,7 @@ import {
   userErrorMessage,
 } from "../lib/api";
 import { useState } from "react";
+import { useTranslation } from "../lib/i18n/context";
 
 type ListState =
   | { kind: "closed" }
@@ -33,6 +34,7 @@ type DetailState =
 export function IndustrySection() {
   const [list, setList] = useState<ListState>({ kind: "closed" });
   const [detail, setDetail] = useState<DetailState>({ kind: "closed" });
+  const { t: tCommon } = useTranslation("common");
 
   function toggleList() {
     if (list.kind !== "closed") {
@@ -44,7 +46,7 @@ export function IndustrySection() {
     getIndustries()
       .then((data) => setList({ kind: "ready", data: data.industries }))
       .catch((err: unknown) =>
-        setList({ kind: "error", message: userErrorMessage(err) })
+        setList({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 
@@ -55,7 +57,7 @@ export function IndustrySection() {
         setDetail({ kind: "ready", coverage, readiness })
       )
       .catch((err: unknown) =>
-        setDetail({ kind: "error", message: userErrorMessage(err) })
+        setDetail({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 

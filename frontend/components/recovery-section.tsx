@@ -19,6 +19,7 @@ import {
   userErrorMessage,
 } from "../lib/api";
 import { useState } from "react";
+import { useTranslation } from "../lib/i18n/context";
 
 type PanelState =
   | { kind: "closed" }
@@ -37,6 +38,7 @@ const REASONS = ["unauthorized", "erroneous", "fraud", "duplicate"];
 export function RecoverySection({ txnId }: { txnId: string }) {
   const [panel, setPanel] = useState<PanelState>({ kind: "closed" });
   const [reason, setReason] = useState("fraud");
+  const { t: tCommon } = useTranslation("common");
 
   function open() {
     if (panel.kind !== "closed") {
@@ -55,7 +57,7 @@ export function RecoverySection({ txnId }: { txnId: string }) {
         })
       )
       .catch((err: unknown) =>
-        setPanel({ kind: "error", message: userErrorMessage(err) })
+        setPanel({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 
@@ -67,7 +69,7 @@ export function RecoverySection({ txnId }: { txnId: string }) {
         setPanel({ ...snapshot, eligibility, notice: null })
       )
       .catch((err: unknown) =>
-        setPanel({ kind: "error", message: userErrorMessage(err) })
+        setPanel({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 
@@ -87,7 +89,7 @@ export function RecoverySection({ txnId }: { txnId: string }) {
         )
       )
       .catch((err: unknown) =>
-        setPanel({ kind: "error", message: userErrorMessage(err) })
+        setPanel({ kind: "error", message: userErrorMessage(err, tCommon) })
       );
   }
 
