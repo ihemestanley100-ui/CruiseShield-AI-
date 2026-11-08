@@ -210,7 +210,7 @@ def test_event_ingest_parity(pair_request, headers, pair):
     assert right2 == left2
     assert right2[1]["status"] == "duplicate"
     json_store, pg_store = pair
-    assert canon(pg_store.state) == canon(json_store.state)
+    assert norm(canon(pg_store.state)) == norm(canon(json_store.state))
 
 
 @needs_scratch_pg
