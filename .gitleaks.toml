@@ -7,20 +7,16 @@ title = "CruiseShield AI gitleaks config"
 [extend]
 useDefault = true
 
-# Synthetic test-harness constants (literal "test-secret-*" markers).
-[[allowlist]]
-description = "test fixture secrets, verified synthetic 2026-11-08"
+[allowlist]
+description = "verified false positives 2026-11-08 (single-map form)"
 regexTarget = "line"
-regexes = ['''test-secret-[a-z]+-032-chars-ok''']
+regexes = [
+  '''test-secret-[a-z]+-032-chars-ok''',
+  '''credential codes, validation/refusal fail-fast''',
+]
 paths = [
   '''tests/test_billing\.py''',
   '''tests/test_geointel_api\.py''',
   '''tests/test_telecom_contract\.py''',
+  '''docs/PROJECT_EXECUTION_STATE\.md''',
 ]
-
-# Documentation prose mentioning credential handling (no secret present).
-[[allowlist]]
-description = "docs prose, verified no secret 2026-11-08"
-regexTarget = "line"
-regexes = ['''credential codes, validation/refusal fail-fast''']
-paths = ['''docs/PROJECT_EXECUTION_STATE\.md''']
