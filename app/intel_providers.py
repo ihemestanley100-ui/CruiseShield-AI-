@@ -24,6 +24,23 @@ LIFECYCLE = {
     "REVOKED": "RETIRED",
 }
 
+# Best-connection preference (M3: lexicographic max() let SUSPENDED
+# outrank CONNECTED). Unknown statuses rank below every known one.
+_STATUS_RANK = {
+    "CONNECTED": 6,
+    "VERIFYING": 5,
+    "CONFIGURED": 4,
+    "AWAITING_CREDENTIALS": 3,
+    "DRAFT": 2,
+    "FAILED": 1,
+    "SUSPENDED": 0,
+    "REVOKED": -1,
+}
+
+
+def _rank(status: str) -> int:
+    return _STATUS_RANK.get(status, -2)
+
 INTEL_ADAPTERS = (
     "identity-document",
     "identity-kyc",
@@ -71,7 +88,8 @@ def unified_registry(store, tenant_id: str) -> list[dict[str, Any]]:
                  and (c.get("tenant_id") or c.get("tenant")) == tenant_id]
         live = [c for c in conns if c.get("status") == "CONNECTED"
                 and not c.get("synthetic")]
-        best = max([c.get("status", "") for c in conns], default="")
+        best = max([c.get("status", "") for c in conns], default="",
+                     key=_rank)
         observed = any(c.get("last_success_at") for c in live)
         lifecycle = (LIFECYCLE.get(best, "DISCOVERED") if best
                      else "DISCOVERED")
@@ -126,7 +144,7 @@ def provider_health(store, tenant_id: str,
     if not conns:
         return {"provider_id": provider_id, "status": "NO_CONNECTION",
                 "integration_status": "DISCOVERED", "live": False}
-    best = max(conns, key=lambda c: str(c.get("status", "")))
+    best = max(conns, key=lambda c: _rank(str(c.get("status", ""))))
     return {"provider_id": provider_id,
             "status": best.get("status", ""),
             "integration_status": LIFECYCLE.get(
