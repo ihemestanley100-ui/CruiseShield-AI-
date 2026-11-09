@@ -15,7 +15,8 @@ from __future__ import annotations
 import json
 import threading
 from datetime import datetime, timezone
-from typing import Any, Callable
+from typing import Any
+from collections.abc import Callable
 
 import psycopg
 from psycopg.types.json import Jsonb

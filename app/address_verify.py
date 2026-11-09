@@ -9,7 +9,8 @@ Full-address disclosure is role-tiered at the API layer.
 from __future__ import annotations
 
 import time
-from typing import Any, Callable
+from typing import Any
+from collections.abc import Callable
 
 from app import intel_common as common
 

@@ -68,7 +68,7 @@ def record_decision(store, case_id: str, decision: str, target_status: str,
             f"REASON_TOO_LONG: {len(reason.strip())} > {MAX_REASON_CHARS}")
     if len((actor_id or "").strip()) > MAX_ACTOR_ID_CHARS:
         raise ValueError("ACTOR_ID_TOO_LONG: actor_id exceeds 256 chars")
-    if len((recommendation or "")) > MAX_RECOMMENDATION_CHARS:
+    if len(recommendation or "") > MAX_RECOMMENDATION_CHARS:
         raise ValueError("RECOMMENDATION_TOO_LONG: recommendation too long")
     ctx = tenant or tenancy_mod.TenantContext()
     case = tenancy_mod.enforce_read(store.get_case(case_id), ctx)

@@ -60,6 +60,13 @@ jobs:
       - name: Backend security gate (pins, hashes, audit, secrets)
         run: python scripts/security_gate.py
 
+      - name: Python lint gate (ruff)
+        # Pinned audit tool (same pattern as pip-audit below the lockfile);
+        # fails the gate on any new ruff finding per pyproject.toml.
+        run: |
+          python -m pip install "ruff==0.14.13"
+          ruff check .
+
       - name: Backend regression
         env:
           STORE_BACKEND: json

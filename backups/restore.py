@@ -16,7 +16,8 @@ and is never logged; tests assert its absence from every record.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Mapping
+from typing import Any
+from collections.abc import Mapping
 
 from backups import crypto as crypto_mod
 from backups import integrity as integrity_mod

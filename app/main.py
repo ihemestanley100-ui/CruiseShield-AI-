@@ -5002,7 +5002,7 @@ def agent_os_search(body: dict, request: Request) -> dict[str, Any]:
 @app.post("/api/v1/agent-os/retrieve")
 def agent_os_retrieve(body: dict, request: Request) -> dict[str, Any]:
     """Permission-checked hybrid retrieval (login required)."""
-    subject = _os_subject(request)
+    _os_subject(request)  # enforce login; subject unused beyond the gate
     if not isinstance(body, dict) or not (body.get("query") or ""):
         raise AppError("INVALID_BODY", "query is required", 400)
     ctx = _request_ctx(request)

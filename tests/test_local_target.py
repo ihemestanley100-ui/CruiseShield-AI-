@@ -31,7 +31,7 @@ def test_path_escape_rejected(tmp_path):
 
 def test_put_idempotent_same_bytes(tmp_path):
     target = local_mod.LocalDirTarget(tmp_path)
-    first = produce_mod.put_idempotent(target, "g/manifest.json", b"m")
+    produce_mod.put_idempotent(target, "g/manifest.json", b"m")
     second = produce_mod.put_idempotent(target, "g/manifest.json", b"m")
     assert second.startswith("present:")
     assert target.get("g/manifest.json") == b"m"

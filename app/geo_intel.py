@@ -215,7 +215,7 @@ def resolve_ip(ip: str,
                                 f"{classification['category']}", ip=ip)
     try:
         record = active.lookup(classification["compressed"])
-    except Exception as exc:  # provider failure is unavailable, not fatal
+    except Exception:  # provider failure is unavailable, not fatal
         return GeoResult(status="unavailable", reason="provider_error",
                          ip=ip, provider=active.name)
     if not record:

@@ -76,7 +76,6 @@ def build_manifest(source: Path) -> str:
     lines.append(f"- audits: {_sha(state.get('audits', []))}")
     lines += ["", "## Referential checks", ""]
     checks = []
-    txn_ids = {t["transaction_id"] for t in txns}
     bad_edge = [e["edge_id"] for e in edges
                 if e.get("source_node_id") not in nodes
                 or e.get("target_node_id") not in nodes]
