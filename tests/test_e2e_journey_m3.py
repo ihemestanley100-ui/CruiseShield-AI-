@@ -18,7 +18,7 @@ pytestmark = pytest.mark.skipif(
     not CAN_SOCKETS,
     reason="socket creation forbidden in this sandbox; runs hosted")
 
-SECRET = "test-secret-e2e-journey-032-chars-ok"
+SECRET = "test-secret-journey-032-chars-ok"
 RECORD = auth_mod.hash_password("demo-pass-1")
 W = {"X-Requested-With": "TestClient"}
 
