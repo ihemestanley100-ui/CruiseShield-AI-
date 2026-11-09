@@ -47,7 +47,7 @@ def test_full_investigation_journey(client, monkeypatch):
     txns = client.get("/api/v1/transactions").json()
     rows = txns["transactions"] if isinstance(txns, dict) else txns
     assert len(rows) >= 1
-    txn_id = rows[0]["transaction_id"]
+    txn_id = rows[0]["transaction"]["transaction_id"]
 
     found = client.get("/api/v1/signals/search").json()
     assert found["total"] >= 1
@@ -61,7 +61,7 @@ def test_full_investigation_journey(client, monkeypatch):
                        headers=W).json()["case"]
     assert case["status"] == "NEW"
     reread = client.get("/api/v1/cases/%s" % case["case_id"]).json()
-    assert reread["title"] == "e2e probe"
+    assert reread["case"]["title"] == "e2e probe"
 
     out = client.post("/api/v1/signals/%s/outcome" % signal_id,
                       json={"outcome": "DISMISSED",
@@ -81,7 +81,7 @@ def test_full_investigation_journey(client, monkeypatch):
     trail = client.get("/api/v1/cases/%s/audit"
                        % case["case_id"]).json()["audits"]
     actions = {a["action"] for a in trail}
-    assert {"case.created", "case.decision"} <= actions
+    assert {"case.opened", "case.decision"} <= actions
     assert client.get("/api/v1/transactions/%s" % txn_id).status_code == 200
 
 
