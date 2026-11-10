@@ -12,6 +12,8 @@ import {
   type ScenePart,
   type SceneQuality,
 } from "./shared";
+import { CORRIDOR_ROUTES, OCEAN_MARKER } from "./categories";
+import { buildCorridorGroup } from "./corridors";
 
 export const EARTH_RADIUS = 1.6;
 
@@ -219,10 +221,10 @@ export function buildEarth(
   // Regional hubs: glowing markers + labels.
   const glow = makeGlowTexture();
   const hubHalos: THREE.Sprite[] = [];
-  const hubCount = Math.max(
-    4, Math.round(REGION_HUBS.length * quality.particleScale)
-  );
-  REGION_HUBS.slice(0, hubCount).forEach((hub, hubIndex) => {
+  // CS-GAT-008: every region hub renders at every quality. Hubs are a
+  // handful of cheap meshes (particles carry the density cost elsewhere);
+  // slicing here dropped Middle East and Asia Pacific on reduced quality.
+  REGION_HUBS.forEach((hub, hubIndex) => {
     const pos = latLongToVec3(hub.lat, hub.lon, EARTH_RADIUS * 1.01);
     const marker = new THREE.Mesh(
       new THREE.SphereGeometry(0.028, 12, 12),
@@ -267,6 +269,25 @@ export function buildEarth(
     label.userData.hubIndex = hubIndex;
     spin.add(label);
   });
+
+  // CS-GAT-008: Global Oceans annotation (mid-Pacific, clear of hubs).
+  const oceanPos = latLongToVec3(
+    OCEAN_MARKER.lat, OCEAN_MARKER.lon, EARTH_RADIUS * 1.01
+  );
+  const oceanMarker = new THREE.Mesh(
+    new THREE.SphereGeometry(0.028, 12, 12),
+    new THREE.MeshBasicMaterial({ color: COLORS.cyan })
+  );
+  oceanMarker.position.copy(oceanPos);
+  oceanMarker.userData.categoryId = "global-oceans";
+  spin.add(oceanMarker);
+  const oceanLabel = makeLabelSprite(OCEAN_MARKER.name, "#8beaff");
+  oceanLabel.position.copy(oceanPos.clone().multiplyScalar(1.22));
+  oceanLabel.userData.categoryId = "global-oceans";
+  spin.add(oceanLabel);
+
+  // CS-GAT-008: illustrative cross-border corridor arcs (synthetic).
+  spin.add(buildCorridorGroup(REGION_HUBS, EARTH_RADIUS * 1.01, CORRIDOR_ROUTES, quality));
 
   // Tilted orbital guide rings.
   const ringMaterial = new THREE.MeshBasicMaterial({

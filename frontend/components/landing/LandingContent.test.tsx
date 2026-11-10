@@ -95,7 +95,8 @@ describe("GlobalLandingPage", () => {
       screen.getByRole("heading", { name: "Global Intelligence Regions" })
     ).toBeTruthy();
     expect(screen.getByText("Illustrative Network View")).toBeTruthy();
-    expect(screen.getByText("Cross-Border Corridors")).toBeTruthy();
+    // Visible strip copy + the GlobeControls accessible atlas equivalent.
+    expect(screen.getAllByText("Cross-Border Corridors")).toHaveLength(2);
     expect(
       screen.getByRole("heading", { name: "One platform, ten intelligence layers" })
     ).toBeTruthy();
@@ -197,7 +198,8 @@ describe("GlobalLandingPage", () => {
     // card reads "Device Analytics"), so its absence proves collapse.
     expect(screen.queryByText("Device Intelligence")).toBeNull();
     // The regions panel stays open: collapse is per-panel.
-    expect(screen.getByText("Cross-Border Corridors")).toBeTruthy();
+    // (plus the GlobeControls accessible atlas equivalent).
+    expect(screen.getAllByText("Cross-Border Corridors")).toHaveLength(2);
     fireEvent.click(screen.getByRole("button", { name: "Expand panel" }));
     expect(screen.getByText("Device Intelligence")).toBeTruthy();
   });

@@ -11,6 +11,7 @@ import {
   type GlobeController,
 } from "./scene/controls";
 import { REGION_HUBS } from "./scene/earth";
+import { ATLAS_CATEGORIES } from "./scene/categories";
 
 interface Props {
   controller: GlobeController;
@@ -35,6 +36,16 @@ export function GlobeControls({ controller }: Props) {
       <p className="visually-hidden" id="globe-hint">
         {t("globeHint")}
       </p>
+      {/* CS-GAT-008: textual equivalent of all eight atlas categories. */}
+      <ul data-testid="atlas-categories" className="visually-hidden">
+        {ATLAS_CATEGORIES.map((category) => (
+          <li key={category.id}>
+            <span lang="en">{category.name}</span>
+            {" — "}
+            <span lang="en">{category.blurb}</span>
+          </li>
+        ))}
+      </ul>
       <button
         type="button"
         className="landing-control-btn"
