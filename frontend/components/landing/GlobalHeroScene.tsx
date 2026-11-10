@@ -103,23 +103,39 @@ export function GlobalHeroScene({ motion, paused, controller }: Props) {
     scene.add(rim);
 
     // Composition: brain floats above the globe, network links them.
-    const stars = buildStars(quality);
-    const earth = buildEarth(quality, view);
-    earth.group.position.y = EARTH_Y;
-    const brain = buildBrain(quality);
-    brain.group.position.y = BRAIN_Y;
-    const hubs = REGION_HUBS.map((hub) =>
-      latLongToVec3(hub.lat, hub.lon, EARTH_RADIUS * 1.02).add(
-        new THREE.Vector3(0, EARTH_Y, 0)
-      )
-    );
-    const network = buildNetwork(
-      new THREE.Vector3(0, BRAIN_Y - 0.7, 0), hubs, quality
-    );
-    const orbital = buildOrbital(quality);
-    orbital.group.position.y = EARTH_Y;
-    parts.push(stars, earth, brain, network, orbital);
-    parts.forEach((part) => scene.add(part.group));
+    // L-01: assembly runs guarded. No listeners, observers, or frames
+    // exist yet at this point (all attach below), so a setup throw can
+    // only leak the renderer + canvas, both released here before the
+    // branded fallback takes over.
+    let stars: ReturnType<typeof buildStars>;
+    let earth: ReturnType<typeof buildEarth>;
+    let brain: ReturnType<typeof buildBrain>;
+    let network: ReturnType<typeof buildNetwork>;
+    let orbital: ReturnType<typeof buildOrbital>;
+    try {
+      stars = buildStars(quality);
+      earth = buildEarth(quality, view);
+      earth.group.position.y = EARTH_Y;
+      brain = buildBrain(quality);
+      brain.group.position.y = BRAIN_Y;
+      const hubs = REGION_HUBS.map((hub) =>
+        latLongToVec3(hub.lat, hub.lon, EARTH_RADIUS * 1.02).add(
+          new THREE.Vector3(0, EARTH_Y, 0)
+        )
+      );
+      network = buildNetwork(
+        new THREE.Vector3(0, BRAIN_Y - 0.7, 0), hubs, quality
+      );
+      orbital = buildOrbital(quality);
+      orbital.group.position.y = EARTH_Y;
+      parts.push(stars, earth, brain, network, orbital);
+      parts.forEach((part) => scene.add(part.group));
+    } catch {
+      renderer.dispose();
+      canvas.remove();
+      setFailed(true);
+      return;
+    }
 
     const layout = () => {
       const width = Math.max(1, host.clientWidth);
