@@ -21,7 +21,7 @@ import {
 } from "./LandingPanels";
 import { CapabilityStrip, GlobalMetrics } from "./LandingStrips";
 import { GlobeControls } from "./GlobeControls";
-import { HackathonRecognitionPanel } from "./HackathonRecognitionPanel";
+import { IntelligenceFrameworkPanel } from "./IntelligenceFrameworkPanel";
 import { GlobeController } from "./scene/controls";
 import { WebGLFallback } from "./WebGLFallback";
 import { SkipLink } from "../skip-link";
@@ -86,7 +86,7 @@ export function GlobalLandingPage() {
             />
             <AudioControl onBlipRef={blipRef} />
           </div>
-          <HackathonRecognitionPanel />
+          <IntelligenceFrameworkPanel />
         </section>
         <div className="landing-modules-section">
           <ModuleCards />

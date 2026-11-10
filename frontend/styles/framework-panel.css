@@ -1,8 +1,8 @@
-/* Hackathon recognition panel: isolated Meta Global AI Developer
- * Hackathon (October 2026) participation marker. Rendered as an
- * HTML overlay inside the landing hero — never inside the WebGL
- * canvas. All selectors are hack- prefixed; nothing here reaches
- * outside the panel except the hero positioning anchor at the top. */
+/* CruiseShield Intelligence Framework card: permanent product
+ * identity panel. Rendered as an HTML overlay inside the landing
+ * hero — never inside the WebGL canvas. All selectors are fw-
+ * prefixed; nothing here reaches outside the panel except the hero
+ * positioning anchor at the top. */
 
 /* Anchor: the hero becomes the positioning context. No other visual
  * change to the existing layout. */
@@ -10,14 +10,14 @@
   position: relative;
 }
 
-.hack-panel {
-  --hack-bg: rgba(4, 12, 28, 0.78);
-  --hack-cyan: #00d9ff;
-  --hack-ice: #8beaff;
-  --hack-ink: #f7fbff;
-  --hack-muted: #a9bdd4;
-  --hack-violet: #7c6cff;
-  --hack-gold: #ffc66d;
+.fw-panel {
+  --fw-bg: rgba(4, 12, 28, 0.78);
+  --fw-cyan: #00d9ff;
+  --fw-ice: #8beaff;
+  --fw-ink: #f7fbff;
+  --fw-muted: #a9bdd4;
+  --fw-violet: #7c6cff;
+  --fw-gold: #ffc66d;
   position: absolute;
   left: 2rem;
   bottom: 1.5rem;
@@ -26,21 +26,21 @@
   max-width: calc(100% - 4rem);
   padding: 1rem 1.15rem 0.9rem;
   border-radius: 0.9rem;
-  background: var(--hack-bg);
+  background: var(--fw-bg);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(0, 217, 255, 0.4);
   box-shadow:
     0 0 0 1px rgba(124, 108, 255, 0.14),
     0 0 28px rgba(0, 217, 255, 0.14),
     0 12px 40px rgba(0, 0, 0, 0.45);
-  color: var(--hack-ink);
+  color: var(--fw-ink);
   overflow: hidden;
   transition: transform 0.25s ease, box-shadow 0.25s ease,
     border-color 0.25s ease;
 }
 
 /* Slow diagonal light sweep, clipped to the panel. */
-.hack-panel::before {
+.fw-panel::before {
   content: "";
   position: absolute;
   inset: -40%;
@@ -52,11 +52,11 @@
     transparent 58%
   );
   transform: translateX(-55%);
-  animation: hack-sweep 11s ease-in-out infinite alternate;
+  animation: fw-sweep 11s ease-in-out infinite alternate;
   pointer-events: none;
 }
 
-@keyframes hack-sweep {
+@keyframes fw-sweep {
   from {
     transform: translateX(-55%);
   }
@@ -65,7 +65,7 @@
   }
 }
 
-.hack-panel:hover {
+.fw-panel:hover {
   transform: translateY(-3px);
   border-color: rgba(0, 217, 255, 0.65);
   box-shadow:
@@ -74,14 +74,14 @@
     0 16px 44px rgba(0, 0, 0, 0.5);
 }
 
-.hack-panel-head {
+.fw-panel-head {
   position: relative;
   display: flex;
   align-items: center;
   gap: 0.7rem;
 }
 
-.hack-meta-mark {
+.fw-mark {
   flex: none;
   display: inline-flex;
   align-items: center;
@@ -89,9 +89,8 @@
   width: 2.4rem;
   height: 2.4rem;
   border-radius: 0.7rem;
-  font-size: 1.5rem;
   line-height: 1;
-  color: var(--hack-ice);
+  color: var(--fw-ice);
   background: linear-gradient(
     140deg,
     rgba(0, 217, 255, 0.18),
@@ -101,94 +100,56 @@
   box-shadow: 0 0 14px rgba(0, 217, 255, 0.25);
 }
 
-.hack-eyebrow {
+.fw-eyebrow {
   margin: 0;
   font-size: 0.68rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--hack-cyan);
+  color: var(--fw-cyan);
 }
 
-.hack-title {
+.fw-title {
   margin: 0.15rem 0 0;
   font-size: 0.98rem;
   line-height: 1.3;
   letter-spacing: 0.01em;
-  color: var(--hack-ink);
+  color: var(--fw-ink);
 }
 
-.hack-sub {
+.fw-headline {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0.45rem 0 0;
-  font-size: 0.8rem;
-  color: var(--hack-muted);
+  margin: 0.55rem 0 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--fw-ink);
 }
 
-.hack-trophy {
-  flex: none;
-  color: var(--hack-gold);
-}
-
-.hack-tag {
-  margin-left: auto;
-  font-size: 0.66rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--hack-ice);
-  border: 1px solid rgba(139, 234, 255, 0.4);
-  border-radius: 999px;
-  padding: 0.12rem 0.6rem;
-  white-space: nowrap;
-}
-
-.hack-source {
+.fw-desc {
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin-top: 0.7rem;
+  margin: 0.4rem 0 0;
+  font-size: 0.83rem;
+  line-height: 1.55;
+  color: var(--fw-muted);
+}
+
+.fw-statement {
+  position: relative;
+  margin: 0.7rem 0 0;
   padding-top: 0.7rem;
   border-top: 1px solid rgba(0, 217, 255, 0.18);
-  color: var(--hack-ice);
-  text-decoration: none;
-  font-size: 0.86rem;
-  font-weight: 600;
-  border-radius: 0.4rem;
-  cursor: pointer;
-}
-
-.hack-source:hover {
-  color: #fff;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.hack-source:focus-visible {
-  outline: 2px solid var(--hack-cyan);
-  outline-offset: 3px;
-}
-
-.hack-source svg {
-  flex: none;
-}
-
-.hack-source-label {
-  letter-spacing: 0.02em;
-}
-
-.hack-external {
-  margin-left: auto;
-  color: var(--hack-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fw-cyan);
 }
 
 /* Below 1500px the centered hero controls reach the bottom-left
  * corner, so the panel joins the normal flow as a compact footer
  * bar instead of floating. */
 @media (max-width: 1499px) {
-  .hack-panel {
+  .fw-panel {
     position: static;
     width: 100%;
     max-width: 60rem;
@@ -197,23 +158,26 @@
 }
 
 @media (max-width: 640px) {
-  .hack-panel {
+  .fw-panel {
     padding: 0.85rem 1rem 0.8rem;
   }
-  .hack-title {
+  .fw-title {
     font-size: 0.9rem;
   }
-  .hack-eyebrow {
+  .fw-eyebrow {
     letter-spacing: 0.16em;
+  }
+  .fw-statement {
+    letter-spacing: 0.1em;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hack-panel::before {
+  .fw-panel::before {
     animation: none;
   }
-  .hack-panel,
-  .hack-panel:hover {
+  .fw-panel,
+  .fw-panel:hover {
     transition: none;
     transform: none;
   }
