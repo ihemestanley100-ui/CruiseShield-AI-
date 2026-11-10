@@ -158,7 +158,7 @@ def cors_options() -> dict:
     UGLS-02 Edge RTL QA). Origins stay an explicit allowlist in both
     modes — never "*" — so ACA-C:true is safe. X-Requested-With is
     allowlisted in BOTH modes (required CSRF header for
-    cookie-authed POSTs; preflight allow is not validation).
+    cookie-authed unsafe methods; preflight allow is not validation).
     """
     # AI-REPAIR: X-Requested-With allowlisted in BOTH modes.
     headers = ["Content-Type", "X-Request-ID", "X-Requested-With"]
@@ -168,7 +168,7 @@ def cors_options() -> dict:
         "allow_origins": list(FRONTEND_ORIGINS),
         # Always True: see docstring. Explicit origins only, never "*".
         "allow_credentials": True,
-        "allow_methods": ["GET", "POST", "OPTIONS"],
+        "allow_methods": ["GET", "POST", "PUT", "PATCH", "OPTIONS"],
         "allow_headers": headers,
         "max_age": 600,
     }

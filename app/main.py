@@ -121,6 +121,11 @@ AUTH_OPEN_PATHS = frozenset({"/", "/api/v1/health", "/api/v1/ready",
 AUTH_ADMIN_PREFIXES = ("/api/v1/platform/", "/api/v1/demo/")
 # D-022: pending (mfa_pending) sessions may only reach these paths;
 # everything else returns 403 MFA_REQUIRED until enrollment confirms.
+# F-D1: methods that mutate state. The CSRF header check and the
+# permission layer share this set (DELETE has no routes yet).
+_UNSAFE_METHODS = ("POST", "PUT", "PATCH", "DELETE")
+
+
 MFA_SESSION_PATHS = frozenset({
     "/api/v1/auth/mfa/enroll", "/api/v1/auth/mfa/confirm",
     "/api/v1/auth/mfa/status", "/api/v1/auth/mfa/disable",
@@ -181,7 +186,7 @@ async def session_guard(request: Request, call_next):
                             "message": "complete MFA enrollment",
                             "trace_id": _trace(request)}})
             if kind == "session":
-                if request.method == "POST" and not request.headers.get(
+                if request.method in _UNSAFE_METHODS and not request.headers.get(
                         "x-requested-with"):
                     return JSONResponse(
                         status_code=403,
@@ -362,7 +367,7 @@ def _required_perm(method: str, path: str) -> str:
         return "audit_read" if method == "GET" else "write"
     if path.endswith("/ai-analysis") or path.endswith("/ai-followup"):
         return "ai_run"
-    if method in ("POST", "PUT", "PATCH", "DELETE"):
+    if method in _UNSAFE_METHODS:
         return "write"
     return "read"
 

@@ -23,6 +23,7 @@ import {
   getTransactionIntel,
   listAlerts,
   listScenarios,
+  patchFraudAlert,
   postAiAnalysis,
   postAiFollowup,
   postDecision,
@@ -471,6 +472,17 @@ describe("api client", () => {
       const headers = (call[1]?.headers ?? {}) as Record<string, string>;
       expect(headers["X-Requested-With"]).toBe("XMLHttpRequest");
     }
+  });
+
+  it("sends X-Requested-With on PATCH (F-D CSRF)", async () => {
+    const fetchMock = mockFetchOnce({ id: "alert_1", status: "ACKED" });
+    await patchFraudAlert("alert_1", "ACKED");
+    expect(fetchMock.mock.calls[0][1]?.method).toBe("PATCH");
+    const headers = (fetchMock.mock.calls[0][1]?.headers ?? {}) as Record<
+      string,
+      string
+    >;
+    expect(headers["X-Requested-With"]).toBe("XMLHttpRequest");
   });
 
   it("sends cookies on GET and POST (Phase 5 session)", async () => {
