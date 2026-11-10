@@ -5,7 +5,12 @@ No secrets in this file — names and verdicts only.
 
 ## Last update
 
-- Date: 2026-11-07 · Session: resumption, audit/export/
+- Date: 2026-11-09 · Session: resumption from 9da42c8
+  (verified unpushed gitleaks-fix commit; M3 focused
+  17P/2S, full 1418P/144S/same 1F+2E, ruff green,
+  matrix 192 valid, state hash unchanged; push needs
+  approval). Verdict NOT PRODUCTION READY.
+- Prior: 2026-11-07 · Session: resumption, audit/export/
   review batch (D-049…D-052): AUD-03, AUD-04, EVID-01,
   SEC-REV implemented + closed. Matrix 115 rows
   (93 closed, validator exit 0). Full suite 1089/141/
@@ -714,3 +719,42 @@ Post-Q1 readiness (2026-11-08, read-only): Q1 preserved (5697e03 file + 86f0978 
 
 Final pre-execution verification (2026-11-08, read-only): B10 0/7 still outstanding; push list SELF-entry resolved (literal SELF token, reproducible); independent sha + uniqueness + exclusion + full rehash-compare battery run; env-failure root causes confirmed hosted-immune (remediation = hosted clean install under B1, no separate approval); B7 73 IDs + isolation reconfirmed. No approvals granted or executed. Verdict NOT PRODUCTION READY.
 PKG-01 fixup (2026-11-08, owner-authorized): 3 backend failures fixed (manifest regen, pg parity norm, rehearsal fetch-depth); gitleaks depth/config + tsc errors fixed; 11 vitest failures fixed (support copy, D-002 token, tracing depth arg, recovery split-p, geointel kind-label, telecom/geointel/platform/case test selectors+mock, 17 detection keys x 11 machine-drafted locales + kit/dump regen). No matrix edits. Gate re-run pending. Verdict NOT PRODUCTION READY.
+
+## Resumption 2026-11-09 (HEAD 9da42c8, 1 unpushed)
+
+- Recovery: checkpoint was stale at d82627d-era text. Live
+  line advanced 13 commits: d0afd7a B1 publication, f92bd1f…
+  ef3a793 CI/gitleaks fixes, 4ff1b0b tsc, 152df0e vitest,
+  e8058e5 allowlist narrowing, f8bb430 M3A+campaign (26
+  paths), 0f45a16 intel ranking + M3 suites, 4059c4e +
+  9da42c8 journey fixes. Remote origin/feat @ 9da42c8
+  (pushed). Tree otherwise clean
+  (9 untracked scratch/excluded paths preserved).
+- Last completed op: 9da42c8 gitleaks-fixture alignment
+  (commit 12:34) PUSHED to feat/phasezero-foundations
+  as 9da42c858efb1183bd56181423d38a544994e974
+  (local == remote). PR #2 remains open and unmerged;
+  Gitleaks SARIF investigation complete (1 historical
+  synthetic finding); .gitleaksignore remediation local
+  and uncommitted.
+- Verification this session: M3 focused 17 passed / 2
+  socket-skipped; full pytest 1418P/144S/same sandbox-only
+  1F+2E (node EPERM + 2x WinError 10013, signatures
+  re-confirmed); ruff repo-wide green; secret scan 0 M3
+  hits; allowlist regex matches new fixture; matrix
+  --check 192 valid; data/state.json 97786028…/101417 B
+  unchanged; frontend delta since 152df0e = 0 (hosted
+  SUCCESS evidence stands); node EPERM still blocks local
+  vitest/tsc; render.yaml still starter x2 + disk ($0
+  conflict open); MODEL_API_KEY presence-only True in
+  gitignored .env, NO-LIVE stands.
+- Milestones: R-09 DONE (F1-F4, F5 prepared); R-10
+  inspection done, NO-LIVE (owner-gated); R-11 NOT READY;
+  R-12 partial (branch published, 1 commit unpushed, PR
+  review pending); R-13 NOT READY (plan conflict); R-14/R-15
+  blocked (nothing deployed).
+- Exact next action: final owner review, then separate
+  authorization for the three-file commit + push
+  (.gitleaksignore, EVIDENCE_MANIFEST.json,
+  PROJECT_EXECUTION_STATE.md). Verdict NOT
+  PRODUCTION READY.
