@@ -14,7 +14,9 @@ from datetime import datetime, timezone
 from typing import Any
 
 from app import channels as chan_mod
+from app import config as config_mod
 from app import graph as graph_mod
+from app import payment_methods as paymethod_mod
 from app import rules as rules_mod
 
 VERSION = "1.0"
@@ -31,7 +33,8 @@ RULE_MAPPED: dict[str, tuple[str, ...]] = {
 }
 
 CUSTOM = ("NETWORK_PROXIMITY", "CROSS_CHANNEL_PATTERN",
-          "GEOGRAPHIC_ANOMALY")
+          "GEOGRAPHIC_ANOMALY", "STRUCTURING_PATTERN",
+          "DECLINE_REPETITION")
 
 # ML_ANOMALY has no deployed model: listed, never firing, honestly
 # flagged NOT_IMPLEMENTED in the registry and matrix.
@@ -49,10 +52,34 @@ DESCRIPTIONS = {
                           "merchant, or beneficiary link.",
     "CROSS_CHANNEL_PATTERN": "Sender transacts on 2+ channels.",
     "GEOGRAPHIC_ANOMALY": "Sender seen in 2+ known locations.",
+    "STRUCTURING_PATTERN": "3+ sub-threshold sender transfers in "
+                           "24h totalling 40,000,000+ kobo.",
+    "DECLINE_REPETITION": "3+ DECLINED authorizations from one "
+                          "sender in 24h.",
     "ML_ANOMALY": "No model deployed; awaiting validated model.",
 }
 
 _SEVERITY = {r.rule_id: r.severity for r in rules_mod.RULES}
+
+# MS-DETECT-001 aggregate-detector rule versions. These rules fire at
+# the detector layer (multi-transaction windows), not in the
+# per-transaction engine, so the engine score contracts stay stable.
+RULE_VERSIONS = {"R-009": "1.0", "R-010": "1.0"}
+
+# Family -> config kill-switch variable. Unmapped families (including
+# the RULE_FAMILIES group) have no switch and always run.
+_KILL_SWITCHES = {
+    "STRUCTURING_PATTERN": "DETECTOR_STRUCTURING_ENABLED",
+    "DECLINE_REPETITION": "DETECTOR_DECLINE_REPETITION_ENABLED",
+}
+
+
+def family_enabled(family: str) -> bool:
+    """True unless the family's kill switch is explicitly "0"."""
+    var = _KILL_SWITCHES.get(family)
+    if var is None:
+        return True
+    return (getattr(config_mod, var, "1") or "1").strip() != "0"
 
 
 def _signal_id(*parts: str) -> str:
@@ -139,6 +166,72 @@ def _geo_signals(txn: dict, by_sender: dict[str, set[str]]) -> list[dict]:
                   f"Sender seen in {len(locs)} locations: " +
                   ", ".join(locs),
                   {"locations": locs})]
+
+
+def _structuring_signals(txn: dict, transactions: list[dict],
+                         edges: list[dict]) -> list[dict]:
+    """R-009: 3+ sub-threshold transfers in 24h totalling 40M+ kobo.
+
+    Fires on the target only when the target itself is part of the
+    pattern. Grouping (tenant, sender, window, dedupe) is owned by
+    graph.sender_window_peers.
+    """
+    peers = graph_mod.sender_window_peers(
+        txn, transactions, graph_mod.STRUCTURING_WINDOW_MINUTES)
+    qualifying = [p for p in peers
+                  if isinstance(p.get("amount_minor"), int)
+                  and p["amount_minor"] < graph_mod.STRUCTURING_AMOUNT_LINE]
+    ids = sorted(p["transaction_id"] for p in qualifying)
+    total = sum(p["amount_minor"] for p in qualifying)
+    if (txn.get("transaction_id") not in ids
+            or len(ids) < graph_mod.STRUCTURING_MIN_COUNT
+            or total < graph_mod.STRUCTURING_MIN_TOTAL):
+        return []
+    return [_base(txn, "STRUCTURING_PATTERN", "R-009", "high",
+                  f"{len(ids)} sub-threshold transfers totalling "
+                  f"{total} kobo in "
+                  f"{graph_mod.STRUCTURING_WINDOW_MINUTES}m window "
+                  f"(line {graph_mod.STRUCTURING_AMOUNT_LINE}, "
+                  f"threshold {graph_mod.STRUCTURING_MIN_COUNT})",
+                  {"rule_id": "R-009",
+                   "rule_version": RULE_VERSIONS["R-009"],
+                   "count": len(ids), "total_minor": total,
+                   "window_minutes":
+                       graph_mod.STRUCTURING_WINDOW_MINUTES,
+                   "amount_line_minor":
+                       graph_mod.STRUCTURING_AMOUNT_LINE,
+                   "transaction_ids": ids})]
+
+
+def _decline_signals(txn: dict, transactions: list[dict],
+                     edges: list[dict]) -> list[dict]:
+    """R-010: 3+ DECLINED authorizations from one sender in 24h.
+
+    Canonical lifecycle comes from payment_methods.map_lifecycle;
+    original provider statuses are preserved in evidence. Fires on
+    the target only when the target itself is a DECLINED event.
+    """
+    peers = graph_mod.sender_window_peers(
+        txn, transactions, graph_mod.DECLINE_WINDOW_MINUTES)
+    declined = [p for p in peers
+                if paymethod_mod.map_lifecycle(
+                    p.get("provider"), p.get("provider_status")
+                )["canonical"] == "DECLINED"]
+    ids = sorted(p["transaction_id"] for p in declined)
+    if (txn.get("transaction_id") not in ids
+            or len(ids) < graph_mod.DECLINE_MIN_COUNT):
+        return []
+    statuses = sorted({str(p.get("provider_status")) for p in declined})
+    return [_base(txn, "DECLINE_REPETITION", "R-010", "medium",
+                  f"{len(ids)} DECLINED authorizations in "
+                  f"{graph_mod.DECLINE_WINDOW_MINUTES}m window "
+                  f"(threshold {graph_mod.DECLINE_MIN_COUNT})",
+                  {"rule_id": "R-010",
+                   "rule_version": RULE_VERSIONS["R-010"],
+                   "count": len(ids),
+                   "window_minutes": graph_mod.DECLINE_WINDOW_MINUTES,
+                   "transaction_ids": ids,
+                   "provider_statuses": statuses})]
 
 
 def parse_ts(value: str) -> datetime:
@@ -243,9 +336,15 @@ def evaluate_all(transactions: list[dict],
     groups = [("RULE_FAMILIES", _rule_signals, True),
               ("NETWORK_PROXIMITY", _proximity_signals, True),
               ("CROSS_CHANNEL_PATTERN", _cross_channel_signals, False),
-              ("GEOGRAPHIC_ANOMALY", _geo_signals, False)]
+              ("GEOGRAPHIC_ANOMALY", _geo_signals, False),
+              ("STRUCTURING_PATTERN", _structuring_signals, True),
+              ("DECLINE_REPETITION", _decline_signals, True)]
     for name, func, needs_edges in groups:
         group_started = time.perf_counter()
+        if not family_enabled(name):
+            family_runs[name] = 0
+            family_latency_ms[name] = 0.0
+            continue
         try:
             for txn in transactions:
                 if needs_edges:

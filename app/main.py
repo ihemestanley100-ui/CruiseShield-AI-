@@ -3581,7 +3581,8 @@ def list_detectors() -> dict[str, Any]:
     return {"detectors": [
         {"family": fam, "version": det_mod.VERSION,
          "status": ("NOT_IMPLEMENTED" if fam == "ML_ANOMALY"
-                    else "OPERATIONAL"),
+                    else ("DISABLED" if not det_mod.family_enabled(fam)
+                            else "OPERATIONAL")),
          "description": det_mod.DESCRIPTIONS[fam],
          "rules": list(det_mod.RULE_MAPPED.get(fam, ()))}
         for fam in det_mod.FAMILIES]}
@@ -3677,6 +3678,8 @@ def detection_matrix(request: Request = None) -> dict[str, Any]:
                          channel]
             if fam == "ML_ANOMALY":
                 status = "NOT_YET_IMPLEMENTED"
+            elif not det_mod.family_enabled(fam):
+                status = "SUPPORTED_BUT_DISABLED"
             elif chan_txn_count.get(channel, 0) == 0:
                 status = "AWAITING_DATA_SOURCE"
             else:
