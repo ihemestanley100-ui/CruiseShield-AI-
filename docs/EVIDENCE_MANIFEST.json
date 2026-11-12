@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-10T06:00:33Z",
-  "head": "844a546",
+  "generated_at": "2026-11-12T01:27:32Z",
+  "head": "9089099",
   "files": {
     "docs/ZERO_GAP_MATRIX.json": {
       "sha256": "0b9e64cd06c12028e8c1bca40896d047f392db81d6b088e0665f527dbdb45878",
@@ -35,12 +35,12 @@
       "bytes": 2295
     },
     "CRUISESHIELD-AI-DECISION-LOG.md": {
-      "sha256": "a77fc0cbc2d828fdd6fc6a2c6eafccf76c11a196bae28b6a2d9efa12e1258bf1",
-      "bytes": 33363
+      "sha256": "dae553600ccd0ffa53d381d9462f49892e8b32534b14873b3944f9583f4734d4",
+      "bytes": 35343
     },
     "docs/PROJECT_EXECUTION_STATE.md": {
-      "sha256": "4e8f46135b9e12f9af5c44b218b39e3a5a4f13530bd68fdd8345c56d84fef309",
-      "bytes": 49296
+      "sha256": "d7d3789b0e91dc46a0eb92daaf2596923d89435c1c64f00c521baa8132c180ae",
+      "bytes": 52922
     },
     "requirements.lock": {
       "sha256": "37838090f57ccc461af97b8e382f3350fb811fb2cf460794e55286c8e0578c19",

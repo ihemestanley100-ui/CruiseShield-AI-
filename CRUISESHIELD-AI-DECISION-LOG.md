@@ -644,3 +644,46 @@ silence is not approval.
   service activation, database provisioning/migration, or any
   other deferred/restricted action approved. Canonical 192-row
   matrix unchanged by this record.
+
+### ERD-D-1 — Audit-chain integrity remediation (CS-ERD-001 unit 1)
+- Date: 2026-11-12. Owner: project owner (explicit GO,
+  local implementation only).
+- Decision: env-sourced AUDIT_CHAIN_KEY (32-byte minimum,
+  hex/base64/raw), key ids + previous-epoch rotation,
+  Store arming before seed, fail-closed construction on
+  invalid config, `audit_chain_verified` health check;
+  legacy entries counted, never retro-sealed.
+- Alternatives rejected: KMS/paid key service ($0
+  violation); silent legacy boot on bad key (fails open).
+- Evidence: commit ef44ec3, tests/test_audit_arming.py
+  (16), docs/release/CSG-ERD-001/UNIT_D1_EVIDENCE.md.
+
+### ERD-A-1 — Truthful health reporting (CS-ERD-001 unit 2)
+- Date: 2026-11-12. Owner: project owner (explicit GO,
+  local implementation only).
+- Decision: qualified backend statuses (healthy /
+  operational_with_gaps / degraded / unavailable) +
+  status-keyed frontend headlines (allOk / new gapsOk /
+  none); unselected pg is N/A, never a gap.
+- Evidence: commit 8d5bcf7, tests/test_health_qualified.py
+  (6), docs/release/CSG-ERD-001/UNIT_A1_EVIDENCE.md.
+
+### ERD-C-1 — Storage operations runbook (CS-ERD-001 unit 3)
+- Date: 2026-11-12. Owner: project owner (explicit GO,
+  local implementation only).
+- Decision: docs-only JSON operations runbook (owner
+  review, O-05 approval NOT claimed); no PG, no paid
+  storage; executable claims re-proven by drill + slice.
+- Evidence: commit 0b57b59,
+  docs/JSON_STORAGE_OPERATIONS_RUNBOOK.md,
+  docs/release/CSG-ERD-001/UNIT_C1_EVIDENCE.md.
+
+### ERD-E-1 — QR canonical channel (CS-ERD-001 unit 4)
+- Date: 2026-11-12. Owner: project owner (explicit GO,
+  local implementation only).
+- Decision: QR as 9th canonical channel + qr_checkout
+  payment default + NL "qr" word; zero seed UNMAPPED;
+  matrix 88 → 99 cells; ML_ANOMALY stays NOT_IMPLEMENTED.
+- Evidence: commit 9089099, tests/test_detection.py +
+  tests/test_universal_core.py,
+  docs/release/CSG-ERD-001/UNIT_E1_EVIDENCE.md.

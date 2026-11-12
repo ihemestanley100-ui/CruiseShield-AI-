@@ -758,3 +758,79 @@ PKG-01 fixup (2026-11-08, owner-authorized): 3 backend failures fixed (manifest 
   (.gitleaksignore, EVIDENCE_MANIFEST.json,
   PROJECT_EXECUTION_STATE.md). Verdict NOT
   PRODUCTION READY.
+
+## Resumption 2026-11-12 (HEAD 7b83c7a, clean + 12 untracked)
+
+- Recovery: checkpoint was stale at 9da42c8-era text. Live
+  line advanced 12 commits 11-10 (dcafba1 gitleaksignore,
+  844a546 CSRF/CORS, 7f34a0a FCA-013 213 rows, e099b7a
+  L-01 guard, 46ac806 Atlas, c875044 Framework card,
+  84a357c StrictMode test, 939917d/d6d9913/f527b8f
+  CSG-RELEASE-001, 482b9bd/7b83c7a CSG-100 69/100
+  PARTIAL). Tracked tree clean; 12 untracked paths
+  preserved untouched (STAGE1-FINAL + O05-RECRUITMENT
+  docs from 11-10/11-11, honest-503 test, tmp scratch,
+  a11y/webgl artifacts). data/state.json 97786028…
+  e95b7a / 101417 B unchanged since 11-07.
+- Last completed op (pre-interruption): O-05 recruitment
+  package (9 docs, 11-11 19:08) + Stage 1 readiness
+  review + independent reviewer handoff (SG-01…SG-16,
+  verdict NOT READY FOR STAGE 1 ACCEPTANCE — external
+  items outstanding). Final verdict stands.
+- Interrupted op: honest-503 contract task — test file
+  written 11-10 18:40, never run or recorded. VERIFIED
+  + RECORDED this session (not committed, no approval
+  sought): 2 passed / 1 socket-skipped; code claims
+  confirmed in source (auth_login 503 AUTH_DISABLED/
+  AUTH_MISCONFIGURED, session_guard 503 fail-closed,
+  list_notifications has no 503 path).
+- Verification this session: full pytest 1433P/145S/
+  same sandbox-only 1F+2E (node EPERM lstat +
+  CORS PermissionErrors, signatures re-confirmed);
+  delta vs 11-09 (+15P/+1S) = post-9da42c8
+  CSRF/CORS tests + honest-503 file. Matrix --check
+  213 valid; manifest --check 11 ok; ruff green.
+  Frontend delta f527b8f..HEAD = 0 files, so the
+  11-10 evidence (vitest 473/473, tsc, build, hosted
+  gate SUCCESS on this SHA) carries for identical
+  content; local node script run still EPERM-blocked
+  in sandbox (proven again by test_static_escaping).
+  MODEL_API_KEY presence-only True in gitignored
+  .env (value never read); NO-LIVE held, zero live
+  calls, $0 spend. Remote sync unverifiable in
+  sandbox (no creds); 11-10 record local==remote==
+  PR #2 head cited, not re-proven.
+- Milestones: R-09 DONE; R-10 inspection done,
+  NO-LIVE (owner-gated); R-11 NOT READY; R-12
+  partial (PR #2 open, unmerged); R-13 NOT READY
+  (render.yaml starter×2+disk $0 conflict open);
+  R-14/R-15 blocked (nothing deployed).
+- Exact next action: owner decisions only — appoint
+  O-05 reviewer (recruitment pack ready), run the
+  §2 backend + 20-row preview procedure, rule on
+  D-1/A-1/C-1/E-1, sign F-CSG-002/003 + dual
+  acceptance. No git/push/deploy/merge by agent
+  without explicit approval. Verdict NOT
+  PRODUCTION READY.
+
+## CS-ERD-001 implementation (2026-11-12, owner GO, local only)
+
+- D-1 ef44ec3: AUDIT_CHAIN_KEY* config (32B min,
+  hex/b64/raw), key ids + rotation, fail-closed arming,
+  audit_chain_verified health check; 16 tests.
+- A-1 8d5bcf7: qualified statuses (healthy /
+  operational_with_gaps / degraded / unavailable) +
+  status-keyed headlines (allOk/gapsOk/none, 12
+  locales); 6 backend tests + frontend tests (hosted
+  execution pending, sandbox node EPERM).
+- C-1 0b57b59: docs-only JSON storage runbook; drill
+  exit 0 + parity; durability slice 34 passed.
+- E-1 9089099: QR 9th canonical channel + qr_checkout
+  default + NL word; matrix 88→99; ML_ANOMALY stayed
+  NOT_IMPLEMENTED; slice 75 passed.
+- Regression: full suite 1456P/145S/same sandbox-only
+  1F+2E after closeout (2 line-stops fixed in-tree:
+  decision-code log entry for D-1, manifest regen).
+  Frontend + hosted gate pending owner-authorized push.
+- NO push/merge/deploy. O-05 still OPEN (release gate).
+  Verdict NOT PRODUCTION READY (acceptance external).
