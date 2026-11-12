@@ -95,12 +95,16 @@ def tenant_of(record: dict[str, Any] | None) -> str | None:
 
     Connection records predate the canonical ``tenant_id`` key and use
     ``tenant``; recognize that legacy key so old records stay owned.
+    Records with NO tenant key keep DEFAULT_TENANT (back-compat).
+    F-B: a PRESENT-but-unknown slug is returned verbatim so the
+    record stays isolated (visible to no legit context) instead of
+    collapsing into DEFAULT_TENANT visibility (fail open).
     """
     if record is None:
         return None
     claimed = record.get("tenant_id") or record.get("tenant",
                                                   DEFAULT_TENANT)
-    return claimed if claimed in _TENANTS else DEFAULT_TENANT
+    return claimed
 
 
 def enforce_read(record: dict[str, Any] | None,

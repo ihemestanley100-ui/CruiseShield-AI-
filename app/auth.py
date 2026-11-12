@@ -130,6 +130,11 @@ def parse_session(token: str, secret: str,
         if not hmac.compare_digest(expect, sig):
             return None
         data = json.loads(_b64d(payload).decode())
+        # F-A: non-dict JSON (list/str/null) has no .get — deny
+        # explicitly instead of leaking AttributeError (the "never
+        # raises" contract holds only for forged/expired input).
+        if not isinstance(data, dict):
+            return None
         moment = time.time() if now is None else now
         if int(data.get("exp", 0)) < int(moment):
             return None

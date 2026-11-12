@@ -58,8 +58,18 @@ def test_stamp_tags_new_records():
     assert record["tenant_id"] == "org_beta"
 
 
-def test_unknown_tenant_id_falls_back_to_default():
-    assert tenant_of(_case("org_nope")) == DEFAULT_TENANT
+def test_unknown_tenant_id_stays_isolated():
+    # F-B: a present-but-unknown slug must NOT collapse into
+    # DEFAULT_TENANT visibility (fail open). It stays owned by
+    # its own slug, visible to no legitimately-scoped context.
+    assert tenant_of(_case("org_nope")) == "org_nope"
+    assert enforce_read(_case("org_nope"), ALPHA) is None
+    assert enforce_read(_case("org_nope"), BETA) is None
+    with pytest.raises(TenantDeniedError):
+        enforce_write(_case("org_nope"), ALPHA)
+    assert filter_visible([_case("org_nope")], ALPHA) == []
+    # Back-compat preserved: records with NO tenant key stay default.
+    assert tenant_of(_case(None)) == DEFAULT_TENANT
 
 
 def test_register_rejects_bad_ids():

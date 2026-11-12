@@ -15,6 +15,26 @@ SECRET = "test-secret-not-a-real-credential"
 RECORD = auth_mod.hash_password("demo-pass-1")
 
 
+def _signed_non_dict(payload_obj):
+    """F-A: a validly-signed token whose JSON is not an object."""
+    import base64
+    import hashlib
+    import hmac
+
+    payload = base64.urlsafe_b64encode(
+        json.dumps(payload_obj).encode()).decode().rstrip("=")
+    sig = base64.urlsafe_b64encode(
+        hmac.new(SECRET.encode(), payload.encode(),
+                 hashlib.sha256).digest()).decode().rstrip("=")
+    return payload + "." + sig
+
+
+def test_parse_session_nondict_json_denies_without_raising():
+    for bad in (["u", "r"], "just-a-string", None, 42, True):
+        assert auth_mod.parse_session(_signed_non_dict(bad),
+                                      SECRET) is None
+
+
 def _drive(coro):
     try:
         coro.send(None)

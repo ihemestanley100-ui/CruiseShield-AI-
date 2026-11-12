@@ -126,6 +126,27 @@ def test_subject_from_request_shapes(monkeypatch, tmp_store):
     assert abac_mod.subject_from_request(anon)["kind"] == "none"
 
 
+def test_subject_resolves_tenant_via_d014(monkeypatch, tmp_store):
+    # F-C: a mapped foreign-tenant session must not present a
+    # default-tenant subject (previously pinned, fail open).
+    _users(monkeypatch)
+    monkeypatch.setattr(config_mod, "USER_TENANTS", "judge:org_beta")
+    tenancy_mod.register_tenant("org_beta")
+    full = Request(_scope("/x", cookie=_sess("judge", "investigator")))
+    subject = abac_mod.subject_from_request(full)
+    assert subject["tenant"] == "org_beta"
+    assert not abac_mod.decide(
+        subject, "read",
+        {"kind": "case",
+         "tenant": tenancy_mod.DEFAULT_TENANT})[0]
+    assert abac_mod.decide(
+        subject, "read", {"kind": "case", "tenant": "org_beta"})[0]
+    # Unmapped users keep default-tenant subjects (single-org unchanged).
+    monkeypatch.setattr(config_mod, "USER_TENANTS", "")
+    assert abac_mod.subject_from_request(full)["tenant"] == (
+        tenancy_mod.DEFAULT_TENANT)
+
+
 def test_policy_check_endpoint(monkeypatch, tmp_store):
     _users(monkeypatch, token="tok-1")
     with pytest.raises(main.AppError) as exc:

@@ -4,8 +4,9 @@ Central server-side policy, deny-by-default. Every decision returns
 (allowed, reason) so denials are explainable and auditable. Layers:
 
 1. Authentication required (anonymous is denied everything).
-2. Tenant match (fail closed; all subjects resolve to the default
-   tenant until the D-014 user→tenant map lands).
+2. Tenant match (fail closed; session subjects resolve through
+   the D-014 user→tenant map, defaulting to the default tenant
+   only when unmapped, per tenancy.tenant_for_user).
 3. Role permission (reuses the canonical auth.PERMISSIONS matrix).
 4. Session strength: SENSITIVE kinds need a full login session —
    mfa-pending sessions and the shared service token are denied.
@@ -69,8 +70,15 @@ def subject_from_request(request: Any) -> dict[str, Any]:
         request.cookies.get(auth_mod.SESSION_COOKIE, ""), secret,
         live_store, users, secrets=ring)
     if claims is not None:
+        # F-C: resolve the session user's real tenant via D-014.
+        # Pinning DEFAULT_TENANT here let a foreign-tenant session
+        # satisfy default-tenant resource checks (fail open).
+        mapping = tenancy_mod.parse_user_tenants(
+            config_mod.USER_TENANTS or "")
         subject.update({"user": claims["user"], "role": claims["role"],
                         "kind": "session",
+                        "tenant": tenancy_mod.tenant_for_user(
+                            claims["user"], mapping),
                         "mfa_full": not claims.get("mfa_pending",
                                                   False)})
         return subject
