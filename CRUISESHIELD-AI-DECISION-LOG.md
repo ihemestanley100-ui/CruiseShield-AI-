@@ -687,3 +687,18 @@ silence is not approval.
 - Evidence: commit 9089099, tests/test_detection.py +
   tests/test_universal_core.py,
   docs/release/CSG-ERD-001/UNIT_E1_EVIDENCE.md.
+
+### STAGE1-COMPLETE-001 — Coordinated completion programme
+- Date: 2026-11-12. Owner: project owner (master directive,
+  local-only; no push/merge/deploy/commit authorized).
+- Decision: close F-A (session non-dict fail-closed), F-B
+  (unknown-slug isolation), F-C (ABAC D-014 subject tenant)
+  with regression tests; verify F-D1/F-D2 + F-E; add QR
+  fraud-scenario tests; prepare D-018/PKG-07/incident/O-05/
+  pentest/F-CSG/hosting/acceptance/Stage-2 evidence pack.
+- Alternatives rejected: leaving fail-open tenancy paths to
+  single-org assumptions (directive forbids dismissal).
+- Evidence: worktree changes under
+  docs/release/CS-STAGE1-COMPLETE/ + app/auth.py,
+  app/tenancy.py, app/abac.py + 4 test files; full suite
+  1460P/sandbox-only 1F+2E. Proposed commits pending owner.
