@@ -1,6 +1,6 @@
 """Canonical channel taxonomy (detection-intelligence §5).
 
-Raw seed/connector channel codes map to 8 canonical channels. Unknown
+Raw seed/connector channel codes map to 9 canonical channels. Unknown
 codes map to UNMAPPED (never guessed) and surface an operational
 alert. Integration status is honest: the only feed is the
 deterministic seed — no live NIP/ATM/POS/banking connection exists.
@@ -10,7 +10,7 @@ from __future__ import annotations
 from typing import Any
 
 CANONICAL = ("POS", "MOBILE_APP", "USSD", "NIP", "WEB", "ATM",
-             "TRANSFER", "AGENT")
+             "TRANSFER", "AGENT", "QR")
 
 UNMAPPED = "UNMAPPED"
 
@@ -25,6 +25,7 @@ _RAW_MAP = {
     "TRANSFER": "TRANSFER",
     "AGENT_AGENCY": "AGENT",
     "AGENT": "AGENT",
+    "QR": "QR",
 }
 
 

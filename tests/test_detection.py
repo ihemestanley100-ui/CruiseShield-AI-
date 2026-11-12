@@ -121,22 +121,36 @@ def test_channel_taxonomy_mapping():
     assert chan_mod.classify("TRANSFER_NIP") == "NIP"
     assert chan_mod.classify("AGENT_AGENCY") == "AGENT"
     assert chan_mod.classify("POS") == "POS"
-    assert chan_mod.classify("QR") == "UNMAPPED"
+    # E-1: QR is the ninth canonical channel (owner-approved).
+    assert chan_mod.classify("QR") == "QR"
+    assert chan_mod.classify("qr") == "QR"
+    assert len(chan_mod.CANONICAL) == 9
     assert chan_mod.classify("") == "UNMAPPED"
     assert chan_mod.classify(None) == "UNMAPPED"
+    assert chan_mod.classify("BOGUS_RAIL") == "UNMAPPED"
 
 
-def test_channels_summary_flags_unmapped_and_zero_transfer(tmp_store):
+def test_channels_summary_qr_canonical_zero_unmapped(tmp_store):
+    # E-1 regression: the seed classifies with zero UNMAPPED now
+    # that QR is canonical (txn_84731); the alert path stays live
+    # for genuinely unknown codes (see bogus-rail case below).
     txns = tmp_store.state["transactions"]
     result = det_mod.evaluate_all(txns, tmp_store.state["edges"])
     summary = chan_mod.summarize(txns, result["signals"])
     by_ch = {c["channel"]: c for c in summary["channels"]}
-    assert summary["unmapped_alert"] is True  # QR present in seed
-    assert "QR" in summary["unmapped_raw_codes"]
+    assert summary["unmapped_alert"] is False
+    assert summary["unmapped_raw_codes"] == []
+    assert "UNMAPPED" not in by_ch
+    assert by_ch["QR"]["transactions"] >= 1
     assert by_ch["TRANSFER"]["transactions"] == 0
     assert "No qualifying" in by_ch["TRANSFER"]["note"]
     total = sum(c["transactions"] for c in summary["channels"])
     assert total == len(txns)
+    bogus = [dict(t, transaction_id="txn_bogus", channel="BOGUS_RAIL")
+             for t in txns[:1]]
+    flagged = chan_mod.summarize(bogus, [])
+    assert flagged["unmapped_alert"] is True
+    assert flagged["unmapped_raw_codes"] == ["BOGUS_RAIL"]
 
 
 def test_summary_reconciles_against_source(tmp_store):
@@ -168,9 +182,16 @@ def test_summary_respects_tenant_isolation(tmp_store, monkeypatch):
     assert beta["evaluation"]["transactions_evaluated"] == 1
 
 
-def test_matrix_88_cells_with_honest_statuses():
+def test_matrix_99_cells_with_honest_statuses():
+    # E-1: 11 families x 9 canonical channels (QR approved).
     body = main.detection_matrix()
-    assert len(body["cells"]) == 88
+    assert len(body["cells"]) == 99
+    qr = [c for c in body["cells"] if c["channel"] == "QR"]
+    assert len(qr) == 11
+    assert {c["status"] for c in qr if c["family"] != "ML_ANOMALY"} == \
+        {"SUPPORTED_AND_ACTIVE"}
+    assert [c["status"] for c in qr if c["family"] == "ML_ANOMALY"] == \
+        ["NOT_YET_IMPLEMENTED"]
     vocab = {"SUPPORTED_AND_ACTIVE", "SUPPORTED_BUT_DISABLED",
              "UNSUPPORTED", "AWAITING_DATA_SOURCE",
              "NOT_YET_IMPLEMENTED", "ERROR"}

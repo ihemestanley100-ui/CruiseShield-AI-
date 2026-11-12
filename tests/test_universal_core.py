@@ -47,6 +47,13 @@ def test_classify_no_evidence_unknown():
     assert out["method_id"] == "UNKNOWN"
 
 
+def test_classify_qr_channel_hint():
+    # E-1: QR channel infers the registered qr_checkout method.
+    out = pm.classify(_txn(channel="QR"))
+    assert out["method_id"] == "qr_checkout"
+    assert out["confidence"] == "inferred-from-channel"
+
+
 def test_lifecycle_mapping_preserves_original():
     mapped = pm.map_lifecycle("nip", "successful")
     assert mapped["canonical"] == "SETTLED" and mapped["mapped"] is True

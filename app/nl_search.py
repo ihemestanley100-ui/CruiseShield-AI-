@@ -18,6 +18,7 @@ from app import channels as _channels
 _CURRENCY_SYMBOLS = {"\u20a6": "NGN", "$": "USD", "\u20ac": "EUR",
                      "\u00a3": "GBP"}
 _CHANNEL_WORDS = {"pos": "POS", "atm": "ATM", "ussd": "USSD",
+                  "qr": "QR",
                   "nip": "NIP", "web": "WEB", "online": "WEB",
                   "mobile": "MOBILE_APP", "app": "MOBILE_APP",
                   "transfer": "TRANSFER", "agent": "AGENT"}

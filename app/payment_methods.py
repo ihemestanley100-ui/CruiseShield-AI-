@@ -110,7 +110,7 @@ METHODS: tuple[dict[str, Any], ...] = (
             channels=("USSD", "MOBILE_APP", "AGENT"),
             history="operator ledger where authorized"),
     _method("qr_checkout", "QR / payment-link checkout", "H", "merchant",
-            channels=("POS", "WEB"),
+            channels=("POS", "WEB", "QR"),
             history="gateway/merchant records where authorized"),
     _method("cash", "Cash event", "I", "cash",
             channels=("ATM", "AGENT"),
@@ -127,6 +127,7 @@ _CHANNEL_DEFAULT = {
     "POS": "card_present", "ATM": "card_present", "NIP": "nip_instant",
     "TRANSFER": "bank_transfer", "WEB": "card_not_present",
     "MOBILE_APP": "mobile_wallet", "USSD": "mobile_money",
+    "QR": "qr_checkout",
     "AGENT": "mobile_money",
 }
 

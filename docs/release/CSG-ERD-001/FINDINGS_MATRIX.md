@@ -48,10 +48,14 @@ not a development blocker; it remains a release gate.
 - Evidence: `UNIT_C1_EVIDENCE.md`. Full-regression proof
   lands in the final battery.
 
-## E-1 — Detection completeness (OPEN)
+## E-1 — Detection completeness (IMPLEMENTED, green)
 
-- Severity: Low. Seed `txn_84731` uses channel `QR`, which
-  classifies UNMAPPED. ML_ANOMALY honestly NOT_IMPLEMENTED
-  (must stay so).
-- Correction (specified): QR as 9th canonical channel +
-  regression tests proving zero seed UNMAPPED.
+- Severity: Low. Seed `txn_84731` used channel `QR`, which
+  classified UNMAPPED.
+- Correction: QR 9th canonical channel + `qr_checkout`
+  payment default + NL "qr" word; zero seed UNMAPPED;
+  matrix 88 → 99 cells; UNMAPPED fallback preserved.
+- ML_ANOMALY still honestly NOT_IMPLEMENTED (untouched).
+- Tests: E-1 slice 75 passed / 4 skipped.
+- Evidence: `UNIT_E1_EVIDENCE.md`. Full-regression proof
+  lands in the final battery.
