@@ -3,7 +3,7 @@
   "rows": [
     {
       "id": "DET-01",
-      "statement": "11 detector families with honest operational status",
+      "statement": "13 detector families with honest operational status",
       "source": "directive \u00a71/\u00a714 AC-01",
       "priority": "P0",
       "owner": "engineering",
@@ -13,10 +13,10 @@
       "database": "",
       "ui": "",
       "test": "tests/test_detection.py",
-      "evidence": "registry test 11 families",
-      "commit": "a265424",
+      "evidence": "registry test 13 families",
+      "commit": "WORKTREE",
       "reviewer": "owner",
-      "acceptance": "10 OPERATIONAL + ML_ANOMALY NOT_IMPLEMENTED asserted",
+      "acceptance": "12 OPERATIONAL + ML_ANOMALY NOT_IMPLEMENTED asserted",
       "status": "CLOSED_VERIFIED",
       "blocker": "",
       "next": ""
