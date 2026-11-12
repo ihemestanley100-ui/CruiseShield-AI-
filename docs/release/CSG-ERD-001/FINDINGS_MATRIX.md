@@ -36,13 +36,17 @@ not a development blocker; it remains a release gate.
 - Evidence: `UNIT_A1_EVIDENCE.md`. Full-regression proof
   lands in the final battery.
 
-## C-1 — Storage reliability (OPEN)
+## C-1 — Storage reliability (IMPLEMENTED, docs-only)
 
-- Severity: Medium. JSON bounds uncontracted (tmp+replace
-  under a thread lock, no fsync, single-process; missing
-  file reseeds with a warning; no exhaustion path).
-- Correction (specified): docs-only operations runbook,
-  owner-reviewed; no PG, no paid storage.
+- Severity: Medium. JSON bounds were uncontracted.
+- Correction: `docs/JSON_STORAGE_OPERATIONS_RUNBOOK.md`
+  (atomicity, concurrency, recovery, integrity, backup/
+  export/restore, exhaustion, $0 notes, PG criteria).
+  Owner review pending; O-05 approval NOT claimed.
+- Executable proof: backup drill exit 0 + parity true;
+  durability slice 34 passed; matrix 213 valid.
+- Evidence: `UNIT_C1_EVIDENCE.md`. Full-regression proof
+  lands in the final battery.
 
 ## E-1 — Detection completeness (OPEN)
 
