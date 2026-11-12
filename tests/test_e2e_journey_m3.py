@@ -35,7 +35,9 @@ def _arm(monkeypatch):
 
 def test_full_investigation_journey(client, monkeypatch):
     _arm(monkeypatch)
-    assert client.get("/api/v1/health").json()["status"] == "healthy"
+    # A-1: armed auth but unconfigured AI + legacy audit → gaps.
+    assert client.get("/api/v1/health").json()["status"] == (
+        "operational_with_gaps")
     anon = client.get("/api/v1/cases")
     assert anon.status_code == 401
     login = client.post("/api/v1/auth/login",

@@ -550,6 +550,7 @@ export const ja = {
   system: {
     sysTitle: "システムステータス",
     allOk: "すべてのシステムは正常です",
+    gapsOk: "ギャップありで稼働中: 一部のサービスが未設定です",
     rowApi: "API サービス",
     rowSeed: "シード整合性",
     rowGraph: "グラフ出所",

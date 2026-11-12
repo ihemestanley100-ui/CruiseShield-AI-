@@ -98,7 +98,9 @@ def test_health_reports_legacy_chain(tmp_store):
     value = body["checks"]["audit_chain"]
     assert value.startswith("NOT_CONFIGURED")
     assert "sealed=" not in value
-    assert body["status"] in ("healthy", "degraded")
+    # A-1: legacy audit + unconfigured AI is operational_with_gaps —
+    # available but incomplete, never an unconditional "healthy".
+    assert body["status"] == "operational_with_gaps"
 
 
 def test_health_reports_sealed_chain(tmp_store, monkeypatch):

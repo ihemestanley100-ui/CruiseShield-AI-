@@ -555,6 +555,7 @@ export const ha = {
   system: {
     sysTitle: "Matsayin Tsarin",
     allOk: "Duk tsaruka suna aiki",
+    gapsOk: "Yana aiki da gibobi: wasu ayyuka ba a saita su ba",
     rowApi: "Ayyukan API",
     rowSeed: "Mutuncin iri",
     rowGraph: "Asalin taswira",

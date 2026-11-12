@@ -550,6 +550,7 @@ export const ig = {
   system: {
     sysTitle: "Ọnọdụ Sistemụ",
     allOk: "Sistemụ niile na-arụ ọrụ",
+    gapsOk: "Na-arụ ọrụ na oghere: ụfọdụ ọrụ ahazibeghị",
     rowApi: "Ọrụ API",
     rowSeed: "Iguzosi ike mkpụrụ",
     rowGraph: "Mmalite eserese",

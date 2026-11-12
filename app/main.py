@@ -636,8 +636,7 @@ def health() -> dict[str, Any]:
               "audit_chain_verified"} | ({"pg"} if selected != "pg"
                                          else set())
     blocking = [k for k in checks if k not in exempt]
-    status = ("healthy" if all(str(checks[k]).startswith("PASS")
-                               for k in blocking) else "degraded")
+    status = _qualified_status(checks, blocking, exempt, selected)
     return {"status": status, "version": APP_VERSION,
             "scenario_id": store.state["scenario_id"],
             "run_id": store.state["run_id"], "checks": checks}
@@ -677,6 +676,33 @@ def _audit_chain_check() -> str:
     if audits:
         return f"NOT_CONFIGURED legacy={len(audits)}"
     return "NOT_CONFIGURED no audit events"
+
+
+def _qualified_status(checks: dict[str, Any], blocking: list[str],
+                      exempt: set[str], selected: str) -> str:
+    """A-1: availability vs completeness are distinct states.
+
+    unavailable: the store itself failed (no data can be served).
+    degraded: a blocking check failed, or an exempt check FAILED
+      (tamper/misconfiguration is a real failure, not a gap).
+    operational_with_gaps: everything available, but an optional
+      service is unconfigured (AI, audit chain). An unselected pg
+      is not applicable, never a gap.
+    healthy: every applicable check passes.
+    """
+    if not str(checks.get("store", "")).startswith("PASS"):
+        return "unavailable"
+    if any(not str(checks[k]).startswith("PASS") for k in blocking):
+        return "degraded"
+    if any(str(checks[k]).startswith("FAIL") for k in exempt):
+        return "degraded"
+    gap_relevant = set(exempt)
+    if selected != "pg":
+        gap_relevant.discard("pg")
+    if any(str(checks[k]).startswith("NOT_CONFIGURED")
+           for k in gap_relevant):
+        return "operational_with_gaps"
+    return "healthy"
 
 
 def _audit_chain_verified_check() -> str:

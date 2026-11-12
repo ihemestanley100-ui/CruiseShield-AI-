@@ -552,6 +552,7 @@ export const en = {
   system: {
     sysTitle: "System Status",
     allOk: "All systems operational",
+    gapsOk: "Operational with gaps: some services unconfigured",
     rowApi: "API Services",
     rowSeed: "Seed Integrity",
     rowGraph: "Graph Provenance",

@@ -551,6 +551,7 @@ export const yo = {
   system: {
     sysTitle: "Ipò Ètò",
     allOk: "Gbogbo ètò ń ṣiṣẹ́",
+    gapsOk: "Ń ṣiṣẹ́ pẹ̀lú àwọn àlàfo: àwọn iṣẹ́ kan kò tíì ṣètò",
     rowApi: "Àwọn Iṣẹ́ API",
     rowSeed: "Ìdúróṣinṣin irúgbìn",
     rowGraph: "Ìpilẹ̀ṣẹ̀ àwòrán",

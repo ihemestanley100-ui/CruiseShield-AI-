@@ -552,6 +552,7 @@ export const pt = {
   system: {
     sysTitle: "Estado do Sistema",
     allOk: "Todos os sistemas operacionais",
+    gapsOk: "Operacional com lacunas: alguns serviços não configurados",
     rowApi: "Serviços API",
     rowSeed: "Integridade da semente",
     rowGraph: "Proveniência do grafo",

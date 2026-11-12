@@ -149,7 +149,10 @@ def test_pages_render_with_live_state(tmp_store):
         assert response.status_code == 200
         assert "Synthetic data" in html
     health = main.health()
-    assert health["status"] == "healthy"
+    # A-1: the default store has unconfigured AI + legacy audit, which
+    # is operational_with_gaps by design — the old "healthy" was the
+    # defect (unconditional headline over unconfigured services).
+    assert health["status"] == "operational_with_gaps"
     assert health["checks"]["graph_provenance"] == "PASS"
 
 

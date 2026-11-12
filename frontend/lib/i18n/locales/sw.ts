@@ -557,6 +557,7 @@ export const sw = {
   system: {
     sysTitle: "Hali ya Mfumo",
     allOk: "Mifumo yote inafanya kazi",
+    gapsOk: "Inafanya kazi na mapengo: huduma zingine hazijasanidiwa",
     rowApi: "Huduma za API",
     rowSeed: "Uadilifu wa mbegu",
     rowGraph: "Asili ya grafu",

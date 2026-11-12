@@ -30,7 +30,9 @@ def test_backend_root_serves_legacy_command_center(client):
 @needs_sockets
 def test_frontend_dependency_endpoints_healthy(client):
     body = client.get("/api/v1/health").json()
-    assert body["status"] == "healthy"
+    # A-1: default store reports operational_with_gaps (available
+    # but incomplete) — the dependency contract is availability.
+    assert body["status"] == "operational_with_gaps"
     assert client.get("/api/v1/ready").status_code == 200
     mode = client.get("/api/v1/auth/mode").json()
     assert "auth_enabled" in mode

@@ -49,7 +49,11 @@ function humanize(key: string): string {
 
 export function SystemStatus({ health, checkedAt }: Props) {
   const { t } = useTranslation("system");
-  const operational = health.status === "healthy";
+  // A-1: the headline keys off the backend's qualified status. Only a
+  // fully-configured "healthy" earns "All systems operational"; gaps
+  // get their own honest headline; degraded/unavailable get none.
+  const fullyOk = health.status === "healthy";
+  const gapsOk = health.status === "operational_with_gaps";
   const known = new Set(ROWS.map((row) => row.check));
   const extra = Object.keys(health.checks).filter((key) => !known.has(key));
   return (
@@ -59,12 +63,11 @@ export function SystemStatus({ health, checkedAt }: Props) {
     >
       <h2 id="sys-status-h">{t("sysTitle")}</h2>
       <p>
-        <span className={`badge ${operational ? "ok" : "bad"}`}>
+        <span className={`badge ${fullyOk || gapsOk ? "ok" : "bad"}`}>
           {health.status}
         </span>{" "}
-        {operational && (
-          <span className="muted">{t("allOk")}</span>
-        )}
+        {fullyOk && <span className="muted">{t("allOk")}</span>}
+        {gapsOk && <span className="muted">{t("gapsOk")}</span>}
       </p>
       <ul className="status-list">
         {ROWS.map((row) => {

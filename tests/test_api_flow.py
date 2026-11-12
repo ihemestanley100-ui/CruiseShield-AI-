@@ -78,7 +78,9 @@ def test_pages_and_health_render(client):
         assert response.status_code == 200, path
         assert "Synthetic data" in response.text
     health = client.get("/api/v1/health").json()
-    assert health["status"] == "healthy"
+    # A-1: default store (unconfigured AI + legacy audit) reports
+    # operational_with_gaps, never an unconditional "healthy".
+    assert health["status"] == "operational_with_gaps"
     assert health["checks"]["graph_provenance"] == "PASS"
 
 
@@ -97,7 +99,9 @@ def test_health_and_ready_envelopes(client):
     health = client.get("/api/v1/health")
     assert health.status_code == 200
     body = health.json()
-    assert body["status"] in ("healthy", "degraded")
+    # A-1: qualified states (healthy only when fully configured).
+    assert body["status"] in ("healthy", "operational_with_gaps",
+                              "degraded", "unavailable")
     assert body["scenario_id"] == "scn_primary"
     ready = client.get("/api/v1/ready")
     assert ready.status_code == 200

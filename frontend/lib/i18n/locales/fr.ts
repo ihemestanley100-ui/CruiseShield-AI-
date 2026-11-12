@@ -547,6 +547,7 @@ export const fr = {
   system: {
     sysTitle: "État du système",
     allOk: "Tous les systèmes sont opérationnels",
+    gapsOk: "Opérationnel avec lacunes : certains services non configurés",
     rowApi: "Services API",
     rowSeed: "Intégrité de la graine",
     rowGraph: "Provenance du graphe",

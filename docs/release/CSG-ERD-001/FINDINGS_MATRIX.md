@@ -16,19 +16,25 @@ not a development blocker; it remains a release gate.
   retro-sealed.
 - Tests: `tests/test_audit_arming.py` 16/16 (predicates,
   rotation, arming, tamper, legacy, leak, health surfacing).
-- Interim risk (carried to A-1): a verification FAIL is
-  visible in checks but does not yet flip `status`.
+- Interim risk CLOSED by A-1: verification FAIL now
+  degrades the headline (proven by tamper/misconfigured
+  tests).
 - Evidence: `UNIT_D1_EVIDENCE.md`. Full-regression proof
   lands in the final battery.
 
-## A-1 — Truthful system health (OPEN)
+## A-1 — Truthful system health (IMPLEMENTED, backend green)
 
-- Severity: Medium. `health()` exempts AI/audit/PG yet
-  returns `healthy`; frontend prints "All systems
+- Severity: Medium. `health()` exempted AI/audit/PG yet
+  returned `healthy`; frontend printed "All systems
   operational" on any `healthy`.
-- Correction (specified): qualified backend statuses
-  (`healthy` / `operational_with_gaps` / `degraded` /
-  `unavailable`) + headline logic both sides.
+- Correction: `_qualified_status()` backend (unavailable
+  / degraded / operational_with_gaps / healthy) +
+  status-keyed frontend headlines (allOk / gapsOk / none).
+- Tests: `tests/test_health_qualified.py` 6/6 backend;
+  frontend tests authored, execution pending hosted CI
+  (sandbox node EPERM; static verification recorded).
+- Evidence: `UNIT_A1_EVIDENCE.md`. Full-regression proof
+  lands in the final battery.
 
 ## C-1 — Storage reliability (OPEN)
 

@@ -105,7 +105,8 @@ def test_open_store_pg_requires_url(monkeypatch):
     reason="socket creation forbidden in this sandbox; runs in CI/user envs")
 def test_health_json_default_reports_backend(client):
     body = client.get("/api/v1/health").json()
-    assert body["status"] == "healthy"
+    # A-1: default store (unconfigured AI + legacy audit) is gaps.
+    assert body["status"] == "operational_with_gaps"
     assert body["checks"]["storage_backend"] == \
         "PASS active=json selected=json"
     assert body["checks"]["pg"] == "NOT_CONFIGURED"
@@ -270,7 +271,8 @@ def test_health_pg_selected_reports_schema(client, source_copy, scratch_db,
     monkeypatch.setattr(config_mod, "STORE_BACKEND", "pg")
     monkeypatch.setattr(config_mod, "DATABASE_URL", scratch_db)
     body = client.get("/api/v1/health").json()
-    assert body["status"] == "healthy"
+    # A-1: pg PASS but AI unconfigured + legacy audit → gaps.
+    assert body["status"] == "operational_with_gaps"
     assert body["checks"]["pg"].startswith("PASS schema=5.1.0")
     assert client.get("/api/v1/ready").status_code == 200
 

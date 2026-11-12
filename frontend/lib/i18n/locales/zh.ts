@@ -518,6 +518,7 @@ export const zh = {
   system: {
     sysTitle: "系统状态",
     allOk: "所有系统运行正常",
+    gapsOk: "运行中但有缺口：部分服务未配置",
     rowApi: "API 服务",
     rowSeed: "种子完整性",
     rowGraph: "图谱来源",

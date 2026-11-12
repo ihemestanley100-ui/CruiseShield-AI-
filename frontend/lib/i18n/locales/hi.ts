@@ -545,6 +545,7 @@ export const hi = {
   system: {
     sysTitle: "सिस्टम स्थिति",
     allOk: "सभी सिस्टम चालू",
+    gapsOk: "अंतराल के साथ चालू: कुछ सेवाएँ कॉन्फ़िगर नहीं हैं",
     rowApi: "API सेवाएं",
     rowSeed: "बीज अखंडता",
     rowGraph: "ग्राफ़ उत्पत्ति",

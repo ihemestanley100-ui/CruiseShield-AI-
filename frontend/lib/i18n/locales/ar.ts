@@ -566,6 +566,7 @@ export const ar = {
   system: {
     sysTitle: "حالة النظام",
     allOk: "جميع الأنظمة تعمل",
+    gapsOk: "يعمل مع فجوات: بعض الخدمات غير مُعدّة",
     rowApi: "خدمات API",
     rowSeed: "سلامة البذرة",
     rowGraph: "مصدر الرسم",
