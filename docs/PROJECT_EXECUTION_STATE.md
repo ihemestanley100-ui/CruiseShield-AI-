@@ -834,3 +834,16 @@ PKG-01 fixup (2026-11-08, owner-authorized): 3 backend failures fixed (manifest 
   Frontend + hosted gate pending owner-authorized push.
 - NO push/merge/deploy. O-05 still OPEN (release gate).
   Verdict NOT PRODUCTION READY (acceptance external).
+
+## MS-DETECT-001 tranche S09-S12 (2026-11-12, owner GO, local only)
+
+- Branch feat/detect-tranche-s09-s12 from frozen 4028a57.
+- R-009 STRUCTURING_PATTERN + R-010 DECLINE_REPETITION as
+  detector-layer families (13 families, 117 matrix cells);
+  engine RULES/score contracts untouched (see threshold
+  register for the layer decision).
+- Independent kill switches DETECTOR_STRUCTURING_ENABLED /
+  DETECTOR_DECLINE_REPETITION_ENABLED (default ON).
+- 25 new tests; full suite 1485P/145S/same sandbox-only
+  1F+2E; ruff + matrix + manifest validators exit 0.
+- NO commit/push/merge/deploy. Awaiting owner review.

@@ -318,6 +318,13 @@ def trial_enforcement_enabled() -> bool:
 
 
 # Phase 5J (D-045): passkeys default OFF; RP identity for ceremony.
+# MS-DETECT-001: independent family-level kill switches, default ON.
+# Each family stays enabled unless its flag is explicitly "0", so a
+# missing or malformed value never silently disables detection.
+DETECTOR_STRUCTURING_ENABLED = os.environ.get(
+    "DETECTOR_STRUCTURING_ENABLED", "1")
+DETECTOR_DECLINE_REPETITION_ENABLED = os.environ.get(
+    "DETECTOR_DECLINE_REPETITION_ENABLED", "1")
 PASSKEYS_ENABLED = os.environ.get("PASSKEYS_ENABLED", "0")
 RP_ID = os.environ.get("RP_ID", "")
 RP_ORIGIN = os.environ.get("RP_ORIGIN", "")
