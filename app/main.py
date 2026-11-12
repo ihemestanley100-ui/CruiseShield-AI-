@@ -630,8 +630,11 @@ def health() -> dict[str, Any]:
         "storage_backend": f"PASS active={store.backend} selected={selected}",
         "pg": _pg_check(selected),
         "audit_chain": _audit_chain_check(),
+        "audit_chain_verified": _audit_chain_verified_check(),
     }
-    exempt = {"model_configured", "audit_chain"} | ({"pg"} if selected != "pg" else set())
+    exempt = {"model_configured", "audit_chain",
+              "audit_chain_verified"} | ({"pg"} if selected != "pg"
+                                         else set())
     blocking = [k for k in checks if k not in exempt]
     status = ("healthy" if all(str(checks[k]).startswith("PASS")
                                for k in blocking) else "degraded")
@@ -674,6 +677,29 @@ def _audit_chain_check() -> str:
     if audits:
         return f"NOT_CONFIGURED legacy={len(audits)}"
     return "NOT_CONFIGURED no audit events"
+
+
+def _audit_chain_verified_check() -> str:
+    """D-1: verification verdict for sealed audits (counts/codes only).
+
+    Runs the full HMAC chain verification (O(sealed)) against the
+    config keyring plus the store's live sealing key. Never emits
+    key material or digests — codes and positions only. Exempt from
+    the blocking set until A-1 wires qualified statuses (interim: a
+    FAIL here is visible in checks but does not flip status).
+    """
+    if config_mod.audit_chain_misconfigured():
+        return "FAIL misconfigured"
+    report = store.audit_verification_report()
+    sealed = report["sealed"]
+    legacy = report["legacy_skipped"]
+    if not sealed:
+        if legacy:
+            return f"NOT_CONFIGURED legacy={legacy}"
+        return "NOT_CONFIGURED no audit events"
+    if report["ok"]:
+        return f"PASS sealed={sealed} legacy_skipped={legacy}"
+    return f"FAIL {report['error']['detail']}"
 
 
 @app.get("/api/v1/ready")

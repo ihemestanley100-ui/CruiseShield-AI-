@@ -1,7 +1,9 @@
 """Project configuration. Reads environment + local .env (names only, never logged)."""
 from __future__ import annotations
 
+import base64
 import os
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -62,6 +64,103 @@ USER_TENANTS = os.environ.get("USER_TENANTS", "")
 # rather than signing sessions with weak key material. Unset/empty
 # keeps the documented open local default.
 MIN_SESSION_SECRET_LENGTH = 32
+
+# D-1: audit-chain sealing keys. Unset/empty = unarmed legacy mode
+# (documented default, byte-identical behavior: appends stay
+# plaintext and are counted, never sealed). Set = new audit appends
+# are HMAC-sealed; history stays legacy and is counted, never
+# retro-sealed. Rotation: set *_PREVIOUS alongside the new key; the
+# previous key verifies old epochs only, never seals. Generate with:
+#   python -c "import secrets;print(secrets.token_hex(32))"
+AUDIT_CHAIN_KEY = os.environ.get("AUDIT_CHAIN_KEY", "")
+AUDIT_CHAIN_KEY_ID = os.environ.get("AUDIT_CHAIN_KEY_ID", "k1")
+AUDIT_CHAIN_KEY_PREVIOUS = os.environ.get(
+    "AUDIT_CHAIN_KEY_PREVIOUS", "")
+AUDIT_CHAIN_KEY_ID_PREVIOUS = os.environ.get(
+    "AUDIT_CHAIN_KEY_ID_PREVIOUS", "")
+
+# D-1: minimum HMAC key strength. A set-but-weak/undecodable key is
+# a misconfiguration: the store refuses to construct (fail closed)
+# rather than sealing with weak material or silently staying legacy.
+MIN_AUDIT_CHAIN_KEY_BYTES = 32
+_AUDIT_KEY_ID_RE = re.compile(r"[A-Za-z0-9_-]{1,32}\Z")
+_AUDIT_HEX_RE = re.compile(r"[0-9a-fA-F]+\Z")
+
+
+def _decode_audit_key(raw: str) -> bytes | None:
+    """Decode env key material; None when absent or unusable.
+
+    Tried in order, first hit with >= 32 bytes wins: even-length
+    hex, strict base64, raw UTF-8 bytes. A value carrying 32+
+    bytes in any recognized encoding arms; anything shorter (or
+    undecodable in every encoding) is a misconfiguration.
+    """
+    text = (raw or "").strip()
+    if not text:
+        return None
+    if len(text) % 2 == 0 and _AUDIT_HEX_RE.match(text):
+        key = bytes.fromhex(text)
+        if len(key) >= MIN_AUDIT_CHAIN_KEY_BYTES:
+            return key
+    try:
+        key = base64.b64decode(text, validate=True)
+    except ValueError:
+        key = b""
+    if len(key) >= MIN_AUDIT_CHAIN_KEY_BYTES:
+        return key
+    raw_bytes = text.encode("utf-8")
+    if len(raw_bytes) >= MIN_AUDIT_CHAIN_KEY_BYTES:
+        return raw_bytes
+    return None
+
+
+def audit_key_id_valid(value: str) -> bool:
+    """Key ids are short operator labels (safe for reports/URLs)."""
+    return bool(_AUDIT_KEY_ID_RE.match(value or ""))
+
+
+def audit_chain_key_bytes() -> bytes | None:
+    """Current sealing key, or None when unarmed/misconfigured."""
+    if not AUDIT_CHAIN_KEY or audit_chain_misconfigured():
+        return None
+    return _decode_audit_key(AUDIT_CHAIN_KEY)
+
+
+def audit_chain_misconfigured() -> bool:
+    """True when key config is present but unusable (fail closed)."""
+    if AUDIT_CHAIN_KEY:
+        if _decode_audit_key(AUDIT_CHAIN_KEY) is None:
+            return True
+        if not audit_key_id_valid(AUDIT_CHAIN_KEY_ID):
+            return True
+    if AUDIT_CHAIN_KEY_PREVIOUS:
+        if _decode_audit_key(AUDIT_CHAIN_KEY_PREVIOUS) is None:
+            return True
+        prev_id = AUDIT_CHAIN_KEY_ID_PREVIOUS
+        if (not audit_key_id_valid(prev_id)
+                or prev_id == AUDIT_CHAIN_KEY_ID):
+            return True
+    return False
+
+
+def audit_chain_armed() -> bool:
+    """True only when a strong sealing key is configured."""
+    return bool(AUDIT_CHAIN_KEY) and not audit_chain_misconfigured()
+
+
+def audit_chain_keyring() -> dict[str, bytes]:
+    """Verification keyring: current + previous epoch keys.
+
+    Names and bytes stay in-process; callers must never log, persist,
+    or return the values (reports carry counts/codes/digests only).
+    """
+    ring: dict[str, bytes] = {}
+    if audit_chain_armed():
+        ring[AUDIT_CHAIN_KEY_ID] = _decode_audit_key(AUDIT_CHAIN_KEY)
+    if (AUDIT_CHAIN_KEY_PREVIOUS and not audit_chain_misconfigured()):
+        ring[AUDIT_CHAIN_KEY_ID_PREVIOUS] = _decode_audit_key(
+            AUDIT_CHAIN_KEY_PREVIOUS)
+    return ring
 
 
 # CS_ENV: development (default) | staging | production. Only

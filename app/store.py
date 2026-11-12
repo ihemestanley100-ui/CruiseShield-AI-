@@ -58,6 +58,17 @@ class Store:
         self.audit_chain_key: bytes | None = None
         self.audit_chain_key_id = "k1"
         self._audit_head: str | None = None
+        # D-1: arm BEFORE load/seed so a fresh armed boot seals from
+        # genesis. Present-but-invalid key config fails closed (loud
+        # ValueError, no key material) instead of booting unsealed.
+        from app import config as config_mod  # lazy: file convention
+        if config_mod.audit_chain_misconfigured():
+            raise ValueError(
+                "AUDIT_CHAIN_MISCONFIGURED: audit key invalid; fix "
+                "AUDIT_CHAIN_KEY* or unset to stay legacy")
+        if config_mod.audit_chain_armed():
+            self.audit_chain_key = config_mod.audit_chain_key_bytes()
+            self.audit_chain_key_id = config_mod.AUDIT_CHAIN_KEY_ID
         if self.path.exists():
             self.state = json.loads(self.path.read_text(encoding="utf-8"))
         else:
@@ -241,6 +252,38 @@ class Store:
         """
         sealed = [a for a in self.state["audits"] if "audit_digest" in a]
         return chain_mod.verify_chain(sealed, keyring)
+
+    def arm_audit_chain(self, key: bytes, key_id: str) -> None:
+        """D-1: arm sealing explicitly (tests/tools/rotation).
+
+        History stays legacy and is counted, never retro-sealed:
+        sealed sequence numbers start at the count of already-sealed
+        entries (see append_audit).
+        """
+        from app import config as config_mod  # lazy: file convention
+        if (not key or len(key) < config_mod.MIN_AUDIT_CHAIN_KEY_BYTES
+                or not config_mod.audit_key_id_valid(key_id)):
+            raise ValueError(
+                "AUDIT_CHAIN_MISCONFIGURED: explicit key needs "
+                "32+ bytes and a valid key id")
+        self.audit_chain_key = bytes(key)
+        self.audit_chain_key_id = key_id
+
+    def audit_verification_report(self) -> dict:
+        """D-1: sealed-chain verification + legacy count.
+
+        Verifies against the config keyring plus this store's live
+        sealing key (covers direct/test assignment). Never leaks key
+        material: counts, key ids, digests, and codes only.
+        """
+        sealed = [a for a in self.state["audits"]
+                  if "audit_digest" in a]
+        legacy = len(self.state["audits"]) - len(sealed)
+        from app import config as config_mod  # lazy: file convention
+        ring = config_mod.audit_chain_keyring()
+        if self.audit_chain_key is not None:
+            ring[self.audit_chain_key_id] = self.audit_chain_key
+        return chain_mod.verification_report(sealed, ring, legacy)
 
     def ingest_event(self, raw: dict) -> tuple[str, dict, list[str]]:
         event, warnings = validate_and_normalize(raw)
