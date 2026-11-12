@@ -29,10 +29,10 @@ def edges(tmp_store):
     return tmp_store.state["edges"]
 
 
-def test_registry_lists_13_families_with_honest_status():
-    # MS-DETECT-001: 11 + STRUCTURING_PATTERN + DECLINE_REPETITION.
+def test_registry_lists_14_families_with_honest_status():
+    # MS-DETECT-001 + MS-DETECT-003: 11 + STRUCT + DECLINE + MULE.
     body = main.list_detectors()
-    assert len(body["detectors"]) == 13
+    assert len(body["detectors"]) == 14
     by_fam = {d["family"]: d for d in body["detectors"]}
     assert by_fam["ML_ANOMALY"]["status"] == "NOT_IMPLEMENTED"
     for fam, row in by_fam.items():
@@ -183,12 +183,12 @@ def test_summary_respects_tenant_isolation(tmp_store, monkeypatch):
     assert beta["evaluation"]["transactions_evaluated"] == 1
 
 
-def test_matrix_117_cells_with_honest_statuses():
-    # E-1 + MS-DETECT-001: 13 families x 9 canonical channels.
+def test_matrix_126_cells_with_honest_statuses():
+    # E-1 + MS-DETECT-001 + MS-DETECT-003: 14 x 9 channels.
     body = main.detection_matrix()
-    assert len(body["cells"]) == 117
+    assert len(body["cells"]) == 126
     qr = [c for c in body["cells"] if c["channel"] == "QR"]
-    assert len(qr) == 13
+    assert len(qr) == 14
     assert {c["status"] for c in qr if c["family"] != "ML_ANOMALY"} == \
         {"SUPPORTED_AND_ACTIVE"}
     assert [c["status"] for c in qr if c["family"] == "ML_ANOMALY"] == \
@@ -276,7 +276,8 @@ def test_meta_reports_family_runs_latency_and_no_errors(txns, edges):
     assert set(meta["family_runs"]) == {
         "RULE_FAMILIES", "NETWORK_PROXIMITY",
         "CROSS_CHANNEL_PATTERN", "GEOGRAPHIC_ANOMALY",
-        "STRUCTURING_PATTERN", "DECLINE_REPETITION"}
+        "STRUCTURING_PATTERN", "DECLINE_REPETITION",
+        "MULE_PASSTHROUGH"}
     assert all(v == len(txns) for v in meta["family_runs"].values())
     assert set(meta["family_latency_ms"]) == set(meta["family_runs"])
     assert all(v >= 0 for v in meta["family_latency_ms"].values())

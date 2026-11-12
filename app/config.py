@@ -325,6 +325,8 @@ DETECTOR_STRUCTURING_ENABLED = os.environ.get(
     "DETECTOR_STRUCTURING_ENABLED", "1")
 DETECTOR_DECLINE_REPETITION_ENABLED = os.environ.get(
     "DETECTOR_DECLINE_REPETITION_ENABLED", "1")
+# MS-DETECT-003 R-011 mule pass-through kill switch, default ON.
+DETECTOR_MULE_ENABLED = os.environ.get("DETECTOR_MULE_ENABLED", "1")
 PASSKEYS_ENABLED = os.environ.get("PASSKEYS_ENABLED", "0")
 RP_ID = os.environ.get("RP_ID", "")
 RP_ORIGIN = os.environ.get("RP_ORIGIN", "")

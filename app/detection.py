@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 from app import channels as chan_mod
@@ -34,7 +34,7 @@ RULE_MAPPED: dict[str, tuple[str, ...]] = {
 
 CUSTOM = ("NETWORK_PROXIMITY", "CROSS_CHANNEL_PATTERN",
           "GEOGRAPHIC_ANOMALY", "STRUCTURING_PATTERN",
-          "DECLINE_REPETITION")
+          "DECLINE_REPETITION", "MULE_PASSTHROUGH")
 
 # ML_ANOMALY has no deployed model: listed, never firing, honestly
 # flagged NOT_IMPLEMENTED in the registry and matrix.
@@ -56,6 +56,8 @@ DESCRIPTIONS = {
                            "24h totalling 40,000,000+ kobo.",
     "DECLINE_REPETITION": "3+ DECLINED authorizations from one "
                           "sender in 24h.",
+    "MULE_PASSTHROUGH": "Account receives from 3+ senders and "
+                        "forwards 80%+ within 24h.",
     "ML_ANOMALY": "No model deployed; awaiting validated model.",
 }
 
@@ -64,13 +66,14 @@ _SEVERITY = {r.rule_id: r.severity for r in rules_mod.RULES}
 # MS-DETECT-001 aggregate-detector rule versions. These rules fire at
 # the detector layer (multi-transaction windows), not in the
 # per-transaction engine, so the engine score contracts stay stable.
-RULE_VERSIONS = {"R-009": "1.0", "R-010": "1.0"}
+RULE_VERSIONS = {"R-009": "1.0", "R-010": "1.0", "R-011": "1.0"}
 
 # Family -> config kill-switch variable. Unmapped families (including
 # the RULE_FAMILIES group) have no switch and always run.
 _KILL_SWITCHES = {
     "STRUCTURING_PATTERN": "DETECTOR_STRUCTURING_ENABLED",
     "DECLINE_REPETITION": "DETECTOR_DECLINE_REPETITION_ENABLED",
+    "MULE_PASSTHROUGH": "DETECTOR_MULE_ENABLED",
 }
 
 
@@ -234,6 +237,117 @@ def _decline_signals(txn: dict, transactions: list[dict],
                    "provider_statuses": statuses})]
 
 
+_MULE_WARNING = ("Activity consistent with pass-through "
+                 "behavior; does not establish that specific funds "
+                 "are criminal proceeds. Possible legitimate "
+                 "explanations include escrow, payroll, marketplace "
+                 "settlement and payment-processor activity. "
+                 "Investigator review required before any action; "
+                 "no automated adverse consequences.")
+
+
+def _mule_leg_status(txn: dict) -> str:
+    """R-011 leg eligibility: SETTLED, LEGACY, or '' (excluded).
+
+    LEGACY = no provider information at all (recorded transfer,
+    lifecycle unattested). Unmapped provider/status pairs and all
+    non-SETTLED canonical states are excluded.
+    """
+    provider, status = txn.get("provider"), txn.get("provider_status")
+    if provider is None and status is None:
+        return "LEGACY"
+    if paymethod_mod.map_lifecycle(provider, status)["canonical"] \
+            == "SETTLED":
+        return "SETTLED"
+    return ""
+
+
+def _mule_signals(txn: dict, transactions: list[dict],
+                  edges: list[dict]) -> list[dict]:
+    """R-011: 3+ senders in, 80%+ value out within 24h (HIGH).
+
+    Both ends of the target (sender, receiver) are evaluated as
+    candidate mule accounts. Chronological guard: OUT legs count
+    only at/after the earliest eligible IN leg (string comparison,
+    same ordering as the window sort). Ratio is uncapped; values
+    above 1.0 are flagged OVER_FORWARD / BALANCE_CONFOUNDED.
+    """
+    tenant = txn.get("tenant_id", "org_primary")
+    center = txn.get("occurred_at", "")
+    target_id = txn.get("transaction_id")
+    accounts = sorted({a for a in (txn.get("sender_account_id"),
+                                   txn.get("receiver_account_id"))
+                       if a})
+    signals = []
+    for account in accounts:
+        ins, outs = graph_mod.account_window_legs(
+            account, tenant, center, transactions,
+            graph_mod.MULE_WINDOW_MINUTES)
+        elig_in = [t for t in ins
+                   if _mule_leg_status(t)
+                   and isinstance(t.get("amount_minor"), int)]
+        if not elig_in:
+            continue
+        earliest = elig_in[0]["occurred_at"]
+        chrono_out = [t for t in outs
+                      if _mule_leg_status(t)
+                      and isinstance(t.get("amount_minor"), int)
+                      and t.get("occurred_at", "") >= earliest]
+        senders = sorted({t.get("sender_account_id")
+                          for t in elig_in
+                          if t.get("sender_account_id")})
+        total_in = sum(t["amount_minor"] for t in elig_in)
+        total_out = sum(t["amount_minor"] for t in chrono_out)
+        if total_in <= 0:
+            continue
+        ratio = total_out / total_in
+        in_ids = sorted(t["transaction_id"] for t in elig_in)
+        out_ids = sorted(t["transaction_id"] for t in chrono_out)
+        if (target_id not in in_ids + out_ids
+                or len(senders) < graph_mod.MULE_MIN_SENDERS
+                or total_in < graph_mod.MULE_MIN_INCOMING
+                or ratio < graph_mod.MULE_MIN_RATIO):
+            continue
+        over = ratio > 1.0
+        unattested = sum(1 for t in elig_in + chrono_out
+                         if _mule_leg_status(t) == "LEGACY")
+        ineligible = (len(ins) + len(outs) - len(elig_in)
+                      - len(chrono_out))
+        try:
+            midpoint = parse_ts(center)
+            delta = timedelta(minutes=graph_mod.MULE_WINDOW_MINUTES)
+            start = (midpoint - delta).strftime("%Y-%m-%dT%H:%M:%SZ")
+            end = (midpoint + delta).strftime("%Y-%m-%dT%H:%M:%SZ")
+        except ValueError:
+            start, end = "", ""
+        reason = (f"Mule pass-through: {len(senders)} senders, "
+                  f"{total_in}->{total_out} kobo "
+                  f"(ratio {ratio:.2f}) in "
+                  f"{graph_mod.MULE_WINDOW_MINUTES}m window" +
+                  (" [OVER_FORWARD / BALANCE_CONFOUNDED]"
+                   if over else "") + "; " + _MULE_WARNING)
+        signals.append(_base(
+            txn, "MULE_PASSTHROUGH", "R-011", "high", reason,
+            {"rule_id": "R-011",
+             "rule_version": RULE_VERSIONS["R-011"],
+             "account": account, "distinct_senders": len(senders),
+             "sender_ids": senders, "in_ids": in_ids,
+             "out_ids": out_ids, "total_in": total_in,
+             "total_out": total_out, "forwarded_ratio": ratio,
+             "window_start": start, "window_end": end,
+             "window_minutes": graph_mod.MULE_WINDOW_MINUTES,
+             "earliest_incoming_at": earliest,
+             "unattested_count": unattested,
+             "ineligible_excluded": ineligible,
+             "over_forward": over,
+             "thresholds": {
+                 "min_senders": graph_mod.MULE_MIN_SENDERS,
+                 "min_incoming": graph_mod.MULE_MIN_INCOMING,
+                 "min_ratio": graph_mod.MULE_MIN_RATIO},
+             "warning": _MULE_WARNING}))
+    return signals
+
+
 def parse_ts(value: str) -> datetime:
     """Strict ISO-8601 to aware UTC datetime. Raises ValueError."""
     text = (value or "").strip()
@@ -338,7 +452,8 @@ def evaluate_all(transactions: list[dict],
               ("CROSS_CHANNEL_PATTERN", _cross_channel_signals, False),
               ("GEOGRAPHIC_ANOMALY", _geo_signals, False),
               ("STRUCTURING_PATTERN", _structuring_signals, True),
-              ("DECLINE_REPETITION", _decline_signals, True)]
+              ("DECLINE_REPETITION", _decline_signals, True),
+              ("MULE_PASSTHROUGH", _mule_signals, True)]
     for name, func, needs_edges in groups:
         group_started = time.perf_counter()
         if not family_enabled(name):

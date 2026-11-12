@@ -39,7 +39,7 @@ def test_s04_qr_cells_active_in_matrix():
     """S-04: detection matrix exposes evidenced QR coverage cells."""
     body = main.detection_matrix()
     qr = [c for c in body["cells"] if c["channel"] == "QR"]
-    # MS-DETECT-001: 13 families (11 + structuring + decline).
-    assert len(qr) == 13
+    # MS-DETECT-001 + MS-DETECT-003: 14 families (+ mule).
+    assert len(qr) == 14
     assert any(c["signals"] > 0 and c["evidence_signal_id"]
                for c in qr if c["family"] != "ML_ANOMALY")

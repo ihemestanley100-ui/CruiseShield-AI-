@@ -212,7 +212,9 @@ def test_tranche_signals_deterministic():
 
 
 def test_rule_versions_registered():
-    assert det_mod.RULE_VERSIONS == {"R-009": "1.0", "R-010": "1.0"}
+    # MS-DETECT-003: R-011 joins the versioned aggregate-detector rules.
+    assert det_mod.RULE_VERSIONS == {"R-009": "1.0", "R-010": "1.0",
+                                     "R-011": "1.0"}
 
 
 def test_threshold_constants_match_register():
