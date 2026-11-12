@@ -42,7 +42,7 @@ Generated 2026-11-08 from docs/ZERO_GAP_MATRIX.json (matrix untouched). 192 rows
 | CONN-01 | CLOSED_VERIFIED | app/connectors.py | tests/test_connectors.py | 13 tests green; secrets-by-reference; honest FAILED states | - |
 | DATA-01 | AWAITING_OWNER_APPROVAL |  |  | none - tracker-only; no purge code; D-056 DEFERRED 2026-11-07 | BLOCKED_OWNER_APPROVAL |
 | DB-01 | AWAITING_OWNER_APPROVAL | app/db.py | tests/test_pg_migration.py tests/test_pg_parity.py tests/test_pg_atomi | scratch parity only; GAP-001 HOLD confirmed 2026-11-07 | BLOCKED_OWNER_APPROVAL |
-| DET-01 | CLOSED_VERIFIED | app/detection.py | tests/test_detection.py tests/test_detect_tranche_s09_s12.py | registry test 13 families | - |
+| DET-01 | CLOSED_VERIFIED | app/detection.py | tests/test_detection.py tests/test_detect_tranche_s09_s12.py tests/test_detect_r011_mule.py | registry test 14 families | - |
 | DET-02 | CLOSED_VERIFIED | app/channels.py | tests/test_detection.py | taxonomy mapping test | - |
 | DET-03 | IN_PROGRESS | app/store.py | tests/test_detection.py | outcome/link history tests; events derived per D-021; GAP-001 HOLD con | BLOCKED_OWNER_APPROVAL |
 | DET-04 | CLOSED_VERIFIED | app/detection.py | tests/test_detection.py | reconciliation + bucket tests | - |
