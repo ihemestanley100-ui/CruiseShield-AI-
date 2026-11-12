@@ -587,6 +587,7 @@ sim.targetDown	Target unavailable: {err}	Àfojúsùn kò sí: {err}	direct	false
 sim.targetLabel	Target transaction	Ìṣòwò àfojúsùn	direct	false			true
 system.allOk	All systems operational	Gbogbo ètò ń ṣiṣẹ́	direct	false			true
 system.checkedPre	Checked	Tí a ṣàyẹ̀wò	direct	false			true
+system.gapsOk	Operational with gaps: some services unconfigured	Ń ṣiṣẹ́ pẹ̀lú àwọn àlàfo: àwọn iṣẹ́ kan kò tíì ṣètò	direct	false			true
 system.rowAi	AI Engine (Muse Spark)	Ẹ́ńjìnnì AI (Muse Spark)	direct	false			true
 system.rowApi	API Services	Àwọn Iṣẹ́ API	direct	false			true
 system.rowGraph	Graph Provenance	Ìpilẹ̀ṣẹ̀ àwòrán	direct	false			true

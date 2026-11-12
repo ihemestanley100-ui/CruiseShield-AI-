@@ -587,6 +587,7 @@ sim.targetDown	Target unavailable: {err}	Ezubere adịghị: {err}	direct	false	
 sim.targetLabel	Target transaction	Azụmahịa ezubere	direct	false			true
 system.allOk	All systems operational	Sistemụ niile na-arụ ọrụ	direct	false			true
 system.checkedPre	Checked	A lechara	direct	false			true
+system.gapsOk	Operational with gaps: some services unconfigured	Na-arụ ọrụ na oghere: ụfọdụ ọrụ ahazibeghị	direct	false			true
 system.rowAi	AI Engine (Muse Spark)	Injin AI (Muse Spark)	direct	false			true
 system.rowApi	API Services	Ọrụ API	direct	false			true
 system.rowGraph	Graph Provenance	Mmalite eserese	direct	false			true

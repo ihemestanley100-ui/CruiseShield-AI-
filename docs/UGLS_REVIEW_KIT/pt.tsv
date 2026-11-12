@@ -587,6 +587,7 @@ sim.targetDown	Target unavailable: {err}	Alvo indisponível: {err}	direct	false	
 sim.targetLabel	Target transaction	Transação-alvo	direct	false			true
 system.allOk	All systems operational	Todos os sistemas operacionais	direct	false			true
 system.checkedPre	Checked	Verificado	direct	false			true
+system.gapsOk	Operational with gaps: some services unconfigured	Operacional com lacunas: alguns serviços não configurados	direct	false			true
 system.rowAi	AI Engine (Muse Spark)	Motor de IA (Muse Spark)	direct	false			true
 system.rowApi	API Services	Serviços API	direct	false			true
 system.rowGraph	Graph Provenance	Proveniência do grafo	direct	false			true

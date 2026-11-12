@@ -587,6 +587,7 @@ sim.targetDown	Target unavailable: {err}	الهدف غير متوفر: {err}	dir
 sim.targetLabel	Target transaction	المعاملة المستهدفة	direct	false			true
 system.allOk	All systems operational	جميع الأنظمة تعمل	direct	false			true
 system.checkedPre	Checked	تم الفحص	direct	false			true
+system.gapsOk	Operational with gaps: some services unconfigured	يعمل مع فجوات: بعض الخدمات غير مُعدّة	direct	false			true
 system.rowAi	AI Engine (Muse Spark)	محرك الذكاء الاصطناعي (Muse Spark)	direct	false			true
 system.rowApi	API Services	خدمات API	direct	false			true
 system.rowGraph	Graph Provenance	مصدر الرسم	direct	false			true

@@ -1,4 +1,4 @@
-EN_KEYS=608
+EN_KEYS=609
 ai.altTitle
 ai.askBtn
 ai.askLabel
@@ -584,6 +584,7 @@ sim.targetDown
 sim.targetLabel
 system.allOk
 system.checkedPre
+system.gapsOk
 system.rowAi
 system.rowApi
 system.rowGraph

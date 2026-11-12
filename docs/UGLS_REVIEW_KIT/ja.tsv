@@ -587,6 +587,7 @@ sim.targetDown	Target unavailable: {err}	対象は利用不可：{err}	direct	fa
 sim.targetLabel	Target transaction	対象取引	direct	false			true
 system.allOk	All systems operational	すべてのシステムは正常です	direct	false			true
 system.checkedPre	Checked	確認	direct	false			true
+system.gapsOk	Operational with gaps: some services unconfigured	ギャップありで稼働中: 一部のサービスが未設定です	direct	false			true
 system.rowAi	AI Engine (Muse Spark)	AI エンジン（Muse Spark）	direct	false			true
 system.rowApi	API Services	API サービス	direct	false			true
 system.rowGraph	Graph Provenance	グラフ出所	direct	false			true

@@ -587,6 +587,7 @@ sim.targetDown	Target unavailable: {err}	लक्ष्य उपलब्ध �
 sim.targetLabel	Target transaction	लक्ष्य लेन-देन	direct	false			true
 system.allOk	All systems operational	सभी सिस्टम चालू	direct	false			true
 system.checkedPre	Checked	जांचा गया	direct	false			true
+system.gapsOk	Operational with gaps: some services unconfigured	अंतराल के साथ चालू: कुछ सेवाएँ कॉन्फ़िगर नहीं हैं	direct	false			true
 system.rowAi	AI Engine (Muse Spark)	AI इंजन (Muse Spark)	direct	false			true
 system.rowApi	API Services	API सेवाएं	direct	false			true
 system.rowGraph	Graph Provenance	ग्राफ़ उत्पत्ति	direct	false			true

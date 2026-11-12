@@ -587,6 +587,7 @@ sim.targetDown	Target unavailable: {err}	目标不可用：{err}	direct	false	er
 sim.targetLabel	Target transaction	目标交易	direct	false			true
 system.allOk	All systems operational	所有系统运行正常	direct	false			true
 system.checkedPre	Checked	检查于	direct	false			true
+system.gapsOk	Operational with gaps: some services unconfigured	运行中但有缺口：部分服务未配置	direct	false			true
 system.rowAi	AI Engine (Muse Spark)	AI 引擎（Muse Spark）	direct	false			true
 system.rowApi	API Services	API 服务	direct	false			true
 system.rowGraph	Graph Provenance	图谱来源	direct	false			true
