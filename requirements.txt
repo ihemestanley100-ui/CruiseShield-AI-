@@ -32,3 +32,8 @@ shamir-mnemonic==0.3.0
 # (botocore >= 1.43.117; verified installed 2026-10-30).
 boto3==1.43.117
 botocore==1.43.117
+# Phase 5J: WebAuthn ES256/EdDSA verification (installed 50.0.1 here).
+# Regenerate requirements.lock on a networked machine before any
+# production passkey use; without the package, verification fails
+# closed (assertions rejected, D-045).
+cryptography==50.0.1

@@ -29,7 +29,8 @@ import json
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Callable, Mapping, Protocol
+from typing import Any, Protocol
+from collections.abc import Callable, Mapping
 
 from backups import crypto as crypto_mod
 from backups import integrity as integrity_mod

@@ -28,8 +28,8 @@ export const ig = {
     signOutEverywhere: "Pụọ ebe niile",
     signOutEverywhereTitle: "Kwụsị nnọkọ a na ngwa na ihe nchọgharị niile",
     investigator: "Onye nyocha",
-    demoRole: "ọrụ ngosi",
-    roleDemo: "{role} · ngosi",
+    sessionRole: "ọrụ ngosi",
+    roleContext: "{role} · ngosi",
   },
   auth: {
     title: "Banye ngosi",
@@ -88,7 +88,7 @@ export const ig = {
     ],
     cta: "Nyochaa CruiseShield AI™",
     ctaSub: "Banye n'ahụmahụ ngosi mmekọrịta",
-    enterDemo: "Banye na ngosi",
+    enterPlatform: "Banye na ngosi",
     brandName: "CruiseShield AI™",
     tagline: "The Financial Crime Immune System™",
     home: "Ụlọ CruiseShield AI",
@@ -178,7 +178,7 @@ export const ig = {
     ],
     platformPrinciples: "Ụkpụrụ ikpo okwu",
     footerLine: "Otu ikpo okwu. Ọdịnihu ego dị nchebe karị. Maka mmadụ niile.",
-    footerDemo:
+    footerNote:
       "Ahụmahụ ngosi · data emepụtara · ihe ngosi netwọk ihe atụ · ",
     footerLink: "Banye na ngosi mmekọrịta",
     controlsAmbient: "Ụda gburugburu",
@@ -244,7 +244,7 @@ export const ig = {
     light: "Ìhè",
     system: "Sistemụ",
   },
-  demo: {
+  platform: {
     execOverview: "Nchịkọta onye isi",
     execOverviewDown: "Nchịkọta onye isi adịghị",
     riskIntel: "Ọgụgụ isi ihe egwu",
@@ -324,7 +324,7 @@ export const ig = {
     resetTitle: "Ntọgharị ọnọdụ",
     resetBlurb:
       "Ntọgharị na-eweghachi ọnọdụ mbụ kpọmkwem ma kpochapụ ọnọdụ dị ndụ niile: mkpebi mmadụ, nnwale, ọsọ AI, na ihe omume nyocha karịa ntọgharị ahụ.",
-    resetDemo: "Tọgharịa ngosi",
+    resetWorkspace: "Tọgharịa ngosi",
     confirmReset:
       "Kwenye: nke a na-ehichapụ mkpebi, nnwale, ọsọ AI, na akụkọ nyocha maka {id}.",
     resetting: "Na-atọgharị…",
@@ -474,6 +474,25 @@ export const ig = {
     ignoredPre: "E leghaara: ",
     assumptionLine: "Echiche: {a}",
   },
+  detection: {
+    title: "Ọgụgụ isi nchọpụta",
+    frequencyTitle: "Ugboro mgbaàmà",
+    detectorsTitle: "Ezinụlọ ndị nchọpụta",
+    channelsTitle: "Ọrụ ọwa",
+    matrixTitle: "Onye nchọpụta site na ọwa",
+    noSignals: "Enweghị mgbaàmà ruru eru edere na oge a.",
+    unmappedAlert: "Koodu ọwa a na-akọwaghị chọrọ nyocha nhazi.",
+    seedFeedNote: "Nri mkpụrụ: enweghị njikọ ọwa dị ndụ.",
+    zeroNote: "Efuru efu pụtara enweghị nke a tụrụ, ọ bụghị data efu.",
+    notImplemented: "Emebeghị: enweghị ụdị ebugara.",
+    measuredAt: "A tụrụ na",
+    txnSignalsTitle: "Mgbaàmà azụmahịa",
+    viewInvestigation: "Mepee nnyocha",
+    noLinkedInvestigation: "Enweghị nnyocha ejikọrọ.",
+    investigationsWord: "nnyocha",
+    fpRate: "Ọnụego ezighi ezi",
+    timeSeriesTitle: "Usoro mgbaàmà oge",
+  },
   intel: {
     intelTitle: "Ọgụgụ isi ngwa, IP na ọnọdụ",
     intelDown: "Ọgụgụ isi adịghị maka nyocha a.",
@@ -531,6 +550,7 @@ export const ig = {
   system: {
     sysTitle: "Ọnọdụ Sistemụ",
     allOk: "Sistemụ niile na-arụ ọrụ",
+    gapsOk: "Na-arụ ọrụ na oghere: ụfọdụ ọrụ ahazibeghị",
     rowApi: "Ọrụ API",
     rowSeed: "Iguzosi ike mkpụrụ",
     rowGraph: "Mmalite eserese",

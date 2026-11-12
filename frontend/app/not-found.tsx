@@ -5,9 +5,9 @@ export default function NotFound() {
   return (
     <div className="card command-section">
       <h2>Page not found</h2>
-      <p className="muted">No demo screen lives at this address.</p>
+      <p className="muted">No screen lives at this address.</p>
       <p>
-        <Link href="/demo">Open the demo</Link> ·{" "}
+        <Link href="/platform">Open the platform</Link> ·{" "}
         <Link href="/">Back to start</Link>
       </p>
     </div>

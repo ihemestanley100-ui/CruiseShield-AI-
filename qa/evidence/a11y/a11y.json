@@ -1,0 +1,1424 @@
+{
+  "kAfterTab": {
+    "tag": "A",
+    "id": null,
+    "cls": "skip-link",
+    "text": "Skip to main content"
+  },
+  "kAfterEnter": {
+    "tag": "MAIN",
+    "id": "main-content",
+    "cls": "shell-main",
+    "text": "Demo sign inThis hosted demo is protected. Sign in with the "
+  },
+  "gPolls": {
+    "n": 5,
+    "loginFirstAt": 1,
+    "dataEver": false,
+    "skelEver": false,
+    "heading": "Demo sign in"
+  },
+  "gApiOrder": [
+    "/api/v1/auth/mode",
+    "/api/v1/auth/me"
+  ],
+  "eViewer": {
+    "main": "Command CenterCase case_84721Audit trailAudit trailNot available for your role.Retry",
+    "alert": "Not available for your role.",
+    "raw": false
+  },
+  "eAdmin": {
+    "main": "Command CenterCase case_84721Audit trailAudit trail — Case case_84721Every recorded action on this case, in recorded order. Back to caseAudit trail1 audit event.Every recorded action with actor, state change, and reason.EventTimeActorActionState changeReasonaudit_00022026-10-29 20:32:15 UTCsystem/demo-resetcase.opened— → NEWCase opened for primary investigation",
+    "hasAlert": false,
+    "hasEntries": 4,
+    "raw": false
+  },
+  "contrast": {
+    "dark-gate": {
+      "theme": "dark",
+      "rows": [
+        {
+          "sel": "header.topbar .shell-brand",
+          "found": true,
+          "ratio": 15.54,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "CruiseShield AIFinancial Crime Immune System™"
+        },
+        {
+          "sel": "nav a",
+          "found": false
+        },
+        {
+          "sel": ".btn-primary",
+          "found": false
+        },
+        {
+          "sel": ".btn-secondary",
+          "found": false
+        },
+        {
+          "sel": ".btn-commit",
+          "found": true,
+          "ratio": 9.16,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(4, 34, 43)",
+          "bg": "rgb(34, 211, 238)",
+          "text": "Sign in"
+        },
+        {
+          "sel": "h1",
+          "found": false
+        },
+        {
+          "sel": "h2",
+          "found": true,
+          "ratio": 14.27,
+          "size": 18.4,
+          "bold": true,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Demo sign in"
+        },
+        {
+          "sel": "main p",
+          "found": true,
+          "ratio": 7.55,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(159, 176, 201)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "This hosted demo is protected. Sign in with the in"
+        },
+        {
+          "sel": "main a",
+          "found": false
+        },
+        {
+          "sel": "input",
+          "found": true,
+          "ratio": 16.67,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgb(6, 13, 26)",
+          "text": ""
+        },
+        {
+          "sel": ".text-input",
+          "found": true,
+          "ratio": 16.67,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgb(6, 13, 26)",
+          "text": ""
+        },
+        {
+          "sel": ".synthetic-badge",
+          "found": false
+        },
+        {
+          "sel": ".fallback-badge",
+          "found": false
+        },
+        {
+          "sel": ".card",
+          "found": true,
+          "ratio": 14.27,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgb(14, 30, 56)",
+          "text": "Demo sign inThis hosted demo is protected. Sign in"
+        },
+        {
+          "sel": ".muted",
+          "found": true,
+          "ratio": 7.55,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(159, 176, 201)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "This hosted demo is protected. Sign in with the in"
+        },
+        {
+          "sel": "footer",
+          "found": false
+        },
+        {
+          "sel": ".alert",
+          "found": false
+        },
+        {
+          "sel": ".theme-selector label",
+          "found": true,
+          "ratio": 9.16,
+          "size": 12.48,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(4, 34, 43)",
+          "bg": "rgb(34, 211, 238)",
+          "text": "Dark"
+        },
+        {
+          "sel": ".login-card h2",
+          "found": true,
+          "ratio": 14.27,
+          "size": 18.4,
+          "bold": true,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Demo sign in"
+        },
+        {
+          "sel": ".login-card .muted",
+          "found": true,
+          "ratio": 7.55,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(159, 176, 201)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "This hosted demo is protected. Sign in with the in"
+        },
+        {
+          "sel": ".login-card label",
+          "found": true,
+          "ratio": 14.27,
+          "size": 14.4,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Username"
+        }
+      ]
+    },
+    "dark-landing": {
+      "theme": "dark",
+      "rows": [
+        {
+          "sel": "header.topbar .shell-brand",
+          "found": false
+        },
+        {
+          "sel": "nav a",
+          "found": false
+        },
+        {
+          "sel": ".btn-primary",
+          "found": false
+        },
+        {
+          "sel": ".btn-secondary",
+          "found": false
+        },
+        {
+          "sel": ".btn-commit",
+          "found": false
+        },
+        {
+          "sel": "h1",
+          "found": true,
+          "ratio": 19.24,
+          "size": 57.6,
+          "bold": true,
+          "large": true,
+          "disabled": false,
+          "fg": "rgb(247, 251, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "A Safer Financial World"
+        },
+        {
+          "sel": "h2",
+          "found": true,
+          "ratio": 14.59,
+          "size": 13.6,
+          "bold": true,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(139, 234, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Global Intelligence"
+        },
+        {
+          "sel": "main p",
+          "found": true,
+          "ratio": 11.78,
+          "size": 12.48,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(0, 217, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Global Financial Intelligence"
+        },
+        {
+          "sel": "main a",
+          "found": true,
+          "ratio": 19.24,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(247, 251, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Transaction MonitoringDemo"
+        },
+        {
+          "sel": "input",
+          "found": true,
+          "ratio": 11.59,
+          "size": 13.3333,
+          "bold": false,
+          "large": false,
+          "disabled": true,
+          "fg": "rgb(197, 197, 197)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": ""
+        },
+        {
+          "sel": ".text-input",
+          "found": false
+        },
+        {
+          "sel": ".synthetic-badge",
+          "found": false
+        },
+        {
+          "sel": ".fallback-badge",
+          "found": false
+        },
+        {
+          "sel": ".card",
+          "found": false
+        },
+        {
+          "sel": ".muted",
+          "found": true,
+          "ratio": 10.4,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(169, 189, 212)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Demonstration experience · synthetic data · illust"
+        },
+        {
+          "sel": "footer",
+          "found": true,
+          "ratio": 19.24,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(247, 251, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Demonstration experience · synthetic data · illust"
+        },
+        {
+          "sel": ".alert",
+          "found": false
+        },
+        {
+          "sel": ".theme-selector label",
+          "found": false
+        },
+        {
+          "sel": ".login-card h2",
+          "found": false
+        },
+        {
+          "sel": ".login-card .muted",
+          "found": false
+        },
+        {
+          "sel": ".login-card label",
+          "found": false
+        }
+      ]
+    },
+    "dark-demo": {
+      "theme": "dark",
+      "rows": [
+        {
+          "sel": "header.topbar .shell-brand",
+          "found": true,
+          "ratio": 15.54,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "CruiseShield AIFinancial Crime Immune System™"
+        },
+        {
+          "sel": "nav a",
+          "found": true,
+          "ratio": 9.16,
+          "size": 14.4,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(4, 34, 43)",
+          "bg": "rgb(34, 211, 238)",
+          "text": "Command Center"
+        },
+        {
+          "sel": ".btn-primary",
+          "found": false
+        },
+        {
+          "sel": ".btn-secondary",
+          "found": true,
+          "ratio": 15.54,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "1"
+        },
+        {
+          "sel": ".btn-commit",
+          "found": false
+        },
+        {
+          "sel": "h1",
+          "found": true,
+          "ratio": 16.67,
+          "size": 32,
+          "bold": true,
+          "large": true,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "CruiseShield AI™"
+        },
+        {
+          "sel": "h2",
+          "found": true,
+          "ratio": 16.67,
+          "size": 18.4,
+          "bold": true,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "System Status"
+        },
+        {
+          "sel": "main p",
+          "found": true,
+          "ratio": 16.67,
+          "size": 19.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "The Financial Crime Immune System™"
+        },
+        {
+          "sel": "main a",
+          "found": true,
+          "ratio": 16.67,
+          "size": 13.6,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Detect"
+        },
+        {
+          "sel": "input",
+          "found": false
+        },
+        {
+          "sel": ".text-input",
+          "found": false
+        },
+        {
+          "sel": ".synthetic-badge",
+          "found": false
+        },
+        {
+          "sel": ".fallback-badge",
+          "found": false
+        },
+        {
+          "sel": ".card",
+          "found": true,
+          "ratio": 16.67,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(14, 30, 56, 0.55)",
+          "text": "System Statushealthy All systems operationalAPI Se"
+        },
+        {
+          "sel": ".muted",
+          "found": true,
+          "ratio": 8.23,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(159, 176, 201)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "admin · demo"
+        },
+        {
+          "sel": "footer",
+          "found": false
+        },
+        {
+          "sel": ".alert",
+          "found": false
+        },
+        {
+          "sel": ".theme-selector label",
+          "found": true,
+          "ratio": 9.16,
+          "size": 12.48,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(4, 34, 43)",
+          "bg": "rgb(34, 211, 238)",
+          "text": "Dark"
+        },
+        {
+          "sel": ".login-card h2",
+          "found": false
+        },
+        {
+          "sel": ".login-card .muted",
+          "found": false
+        },
+        {
+          "sel": ".login-card label",
+          "found": false
+        }
+      ]
+    },
+    "dark-inv": {
+      "theme": "dark",
+      "rows": [
+        {
+          "sel": "header.topbar .shell-brand",
+          "found": true,
+          "ratio": 15.54,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "CruiseShield AIFinancial Crime Immune System™"
+        },
+        {
+          "sel": "nav a",
+          "found": true,
+          "ratio": 8.23,
+          "size": 14.4,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(159, 176, 201)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Command Center"
+        },
+        {
+          "sel": ".btn-primary",
+          "found": false
+        },
+        {
+          "sel": ".btn-secondary",
+          "found": true,
+          "ratio": 15.54,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "1"
+        },
+        {
+          "sel": ".btn-commit",
+          "found": false
+        },
+        {
+          "sel": "h1",
+          "found": true,
+          "ratio": 16.67,
+          "size": 32,
+          "bold": true,
+          "large": true,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Transaction #84721 — ₦480,000"
+        },
+        {
+          "sel": "h2",
+          "found": true,
+          "ratio": 14.27,
+          "size": 18.4,
+          "bold": true,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Why this risk?"
+        },
+        {
+          "sel": "main p",
+          "found": true,
+          "ratio": 16.67,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "acct_A → acct_B · channel MOBILE_APP · 2026-10-27T"
+        },
+        {
+          "sel": "main a",
+          "found": true,
+          "ratio": 10.76,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(34, 211, 238)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Command Center"
+        },
+        {
+          "sel": "input",
+          "found": true,
+          "ratio": 16.67,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgb(6, 13, 26)",
+          "text": ""
+        },
+        {
+          "sel": ".text-input",
+          "found": true,
+          "ratio": 16.67,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgb(6, 13, 26)",
+          "text": ""
+        },
+        {
+          "sel": ".synthetic-badge",
+          "found": false
+        },
+        {
+          "sel": ".fallback-badge",
+          "found": false
+        },
+        {
+          "sel": ".card",
+          "found": true,
+          "ratio": 14.27,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(232, 238, 247)",
+          "bg": "rgb(14, 30, 56)",
+          "text": "Why this risk?R-001 — triggeredObserved 48000000 k"
+        },
+        {
+          "sel": ".muted",
+          "found": true,
+          "ratio": 8.23,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(159, 176, 201)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "admin · demo"
+        },
+        {
+          "sel": "footer",
+          "found": false
+        },
+        {
+          "sel": ".alert",
+          "found": false
+        },
+        {
+          "sel": ".theme-selector label",
+          "found": true,
+          "ratio": 9.16,
+          "size": 12.48,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(4, 34, 43)",
+          "bg": "rgb(34, 211, 238)",
+          "text": "Dark"
+        },
+        {
+          "sel": ".login-card h2",
+          "found": false
+        },
+        {
+          "sel": ".login-card .muted",
+          "found": false
+        },
+        {
+          "sel": ".login-card label",
+          "found": false
+        }
+      ]
+    },
+    "light-gate": {
+      "theme": "light",
+      "rows": [
+        {
+          "sel": "header.topbar .shell-brand",
+          "found": true,
+          "ratio": 12.73,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "CruiseShield AIFinancial Crime Immune System™"
+        },
+        {
+          "sel": "nav a",
+          "found": false
+        },
+        {
+          "sel": ".btn-primary",
+          "found": false
+        },
+        {
+          "sel": ".btn-secondary",
+          "found": false
+        },
+        {
+          "sel": ".btn-commit",
+          "found": true,
+          "ratio": 5.79,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(255, 255, 255)",
+          "bg": "rgb(11, 110, 141)",
+          "text": "Sign in"
+        },
+        {
+          "sel": "h1",
+          "found": false
+        },
+        {
+          "sel": "h2",
+          "found": true,
+          "ratio": 16.05,
+          "size": 18.4,
+          "bold": true,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Demo sign in"
+        },
+        {
+          "sel": "main p",
+          "found": true,
+          "ratio": 6.98,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(74, 90, 117)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "This hosted demo is protected. Sign in with the in"
+        },
+        {
+          "sel": "main a",
+          "found": false
+        },
+        {
+          "sel": "input",
+          "found": true,
+          "ratio": 14.82,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgb(243, 246, 251)",
+          "text": ""
+        },
+        {
+          "sel": ".text-input",
+          "found": true,
+          "ratio": 14.82,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgb(243, 246, 251)",
+          "text": ""
+        },
+        {
+          "sel": ".synthetic-badge",
+          "found": false
+        },
+        {
+          "sel": ".fallback-badge",
+          "found": false
+        },
+        {
+          "sel": ".card",
+          "found": true,
+          "ratio": 16.05,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgb(255, 255, 255)",
+          "text": "Demo sign inThis hosted demo is protected. Sign in"
+        },
+        {
+          "sel": ".muted",
+          "found": true,
+          "ratio": 6.98,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(74, 90, 117)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "This hosted demo is protected. Sign in with the in"
+        },
+        {
+          "sel": "footer",
+          "found": false
+        },
+        {
+          "sel": ".alert",
+          "found": false
+        },
+        {
+          "sel": ".theme-selector label",
+          "found": true,
+          "ratio": 5.53,
+          "size": 12.48,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(74, 90, 117)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Dark"
+        },
+        {
+          "sel": ".login-card h2",
+          "found": true,
+          "ratio": 16.05,
+          "size": 18.4,
+          "bold": true,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Demo sign in"
+        },
+        {
+          "sel": ".login-card .muted",
+          "found": true,
+          "ratio": 6.98,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(74, 90, 117)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "This hosted demo is protected. Sign in with the in"
+        },
+        {
+          "sel": ".login-card label",
+          "found": true,
+          "ratio": 16.05,
+          "size": 14.4,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Username"
+        }
+      ]
+    },
+    "light-landing": {
+      "theme": "light",
+      "rows": [
+        {
+          "sel": "header.topbar .shell-brand",
+          "found": false
+        },
+        {
+          "sel": "nav a",
+          "found": false
+        },
+        {
+          "sel": ".btn-primary",
+          "found": false
+        },
+        {
+          "sel": ".btn-secondary",
+          "found": false
+        },
+        {
+          "sel": ".btn-commit",
+          "found": false
+        },
+        {
+          "sel": "h1",
+          "found": true,
+          "ratio": 19.24,
+          "size": 57.6,
+          "bold": true,
+          "large": true,
+          "disabled": false,
+          "fg": "rgb(247, 251, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "A Safer Financial World"
+        },
+        {
+          "sel": "h2",
+          "found": true,
+          "ratio": 14.59,
+          "size": 13.6,
+          "bold": true,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(139, 234, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Global Intelligence"
+        },
+        {
+          "sel": "main p",
+          "found": true,
+          "ratio": 11.78,
+          "size": 12.48,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(0, 217, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Global Financial Intelligence"
+        },
+        {
+          "sel": "main a",
+          "found": true,
+          "ratio": 19.24,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(247, 251, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Transaction MonitoringDemo"
+        },
+        {
+          "sel": "input",
+          "found": true,
+          "ratio": 11.59,
+          "size": 13.3333,
+          "bold": false,
+          "large": false,
+          "disabled": true,
+          "fg": "rgb(197, 197, 197)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": ""
+        },
+        {
+          "sel": ".text-input",
+          "found": false
+        },
+        {
+          "sel": ".synthetic-badge",
+          "found": false
+        },
+        {
+          "sel": ".fallback-badge",
+          "found": false
+        },
+        {
+          "sel": ".card",
+          "found": false
+        },
+        {
+          "sel": ".muted",
+          "found": true,
+          "ratio": 10.4,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(169, 189, 212)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Demonstration experience · synthetic data · illust"
+        },
+        {
+          "sel": "footer",
+          "found": true,
+          "ratio": 19.24,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(247, 251, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Demonstration experience · synthetic data · illust"
+        },
+        {
+          "sel": ".alert",
+          "found": false
+        },
+        {
+          "sel": ".theme-selector label",
+          "found": false
+        },
+        {
+          "sel": ".login-card h2",
+          "found": false
+        },
+        {
+          "sel": ".login-card .muted",
+          "found": false
+        },
+        {
+          "sel": ".login-card label",
+          "found": false
+        }
+      ]
+    },
+    "light-demo": {
+      "theme": "light",
+      "rows": [
+        {
+          "sel": "header.topbar .shell-brand",
+          "found": true,
+          "ratio": 12.73,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "CruiseShield AIFinancial Crime Immune System™"
+        },
+        {
+          "sel": "nav a",
+          "found": true,
+          "ratio": 5.79,
+          "size": 14.4,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(255, 255, 255)",
+          "bg": "rgb(11, 110, 141)",
+          "text": "Command Center"
+        },
+        {
+          "sel": ".btn-primary",
+          "found": false
+        },
+        {
+          "sel": ".btn-secondary",
+          "found": true,
+          "ratio": 12.73,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "1"
+        },
+        {
+          "sel": ".btn-commit",
+          "found": false
+        },
+        {
+          "sel": "h1",
+          "found": true,
+          "ratio": 14.82,
+          "size": 32,
+          "bold": true,
+          "large": true,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "CruiseShield AI™"
+        },
+        {
+          "sel": "h2",
+          "found": true,
+          "ratio": 14.82,
+          "size": 18.4,
+          "bold": true,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "System Status"
+        },
+        {
+          "sel": "main p",
+          "found": true,
+          "ratio": 14.82,
+          "size": 19.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "The Financial Crime Immune System™"
+        },
+        {
+          "sel": "main a",
+          "found": true,
+          "ratio": 14.82,
+          "size": 13.6,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Detect"
+        },
+        {
+          "sel": "input",
+          "found": false
+        },
+        {
+          "sel": ".text-input",
+          "found": false
+        },
+        {
+          "sel": ".synthetic-badge",
+          "found": false
+        },
+        {
+          "sel": ".fallback-badge",
+          "found": false
+        },
+        {
+          "sel": ".card",
+          "found": true,
+          "ratio": 14.82,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(255, 255, 255, 0.6)",
+          "text": "System Statushealthy All systems operationalAPI Se"
+        },
+        {
+          "sel": ".muted",
+          "found": true,
+          "ratio": 5.53,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(74, 90, 117)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "admin · demo"
+        },
+        {
+          "sel": "footer",
+          "found": false
+        },
+        {
+          "sel": ".alert",
+          "found": false
+        },
+        {
+          "sel": ".theme-selector label",
+          "found": true,
+          "ratio": 5.53,
+          "size": 12.48,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(74, 90, 117)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Dark"
+        },
+        {
+          "sel": ".login-card h2",
+          "found": false
+        },
+        {
+          "sel": ".login-card .muted",
+          "found": false
+        },
+        {
+          "sel": ".login-card label",
+          "found": false
+        }
+      ]
+    },
+    "light-inv": {
+      "theme": "light",
+      "rows": [
+        {
+          "sel": "header.topbar .shell-brand",
+          "found": true,
+          "ratio": 12.73,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "CruiseShield AIFinancial Crime Immune System™"
+        },
+        {
+          "sel": "nav a",
+          "found": true,
+          "ratio": 5.53,
+          "size": 14.4,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(74, 90, 117)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Command Center"
+        },
+        {
+          "sel": ".btn-primary",
+          "found": false
+        },
+        {
+          "sel": ".btn-secondary",
+          "found": true,
+          "ratio": 12.73,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "1"
+        },
+        {
+          "sel": ".btn-commit",
+          "found": false
+        },
+        {
+          "sel": "h1",
+          "found": true,
+          "ratio": 14.82,
+          "size": 32,
+          "bold": true,
+          "large": true,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Transaction #84721 — ₦480,000"
+        },
+        {
+          "sel": "h2",
+          "found": true,
+          "ratio": 16.05,
+          "size": 18.4,
+          "bold": true,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Why this risk?"
+        },
+        {
+          "sel": "main p",
+          "found": true,
+          "ratio": 14.82,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "acct_A → acct_B · channel MOBILE_APP · 2026-10-27T"
+        },
+        {
+          "sel": "main a",
+          "found": true,
+          "ratio": 5.34,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(11, 110, 141)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Command Center"
+        },
+        {
+          "sel": "input",
+          "found": true,
+          "ratio": 14.82,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgb(243, 246, 251)",
+          "text": ""
+        },
+        {
+          "sel": ".text-input",
+          "found": true,
+          "ratio": 14.82,
+          "size": 15.2,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgb(243, 246, 251)",
+          "text": ""
+        },
+        {
+          "sel": ".synthetic-badge",
+          "found": false
+        },
+        {
+          "sel": ".fallback-badge",
+          "found": false
+        },
+        {
+          "sel": ".card",
+          "found": true,
+          "ratio": 16.05,
+          "size": 16,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(20, 33, 58)",
+          "bg": "rgb(255, 255, 255)",
+          "text": "Why this risk?R-001 — triggeredObserved 48000000 k"
+        },
+        {
+          "sel": ".muted",
+          "found": true,
+          "ratio": 5.53,
+          "size": 14.08,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(74, 90, 117)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "admin · demo"
+        },
+        {
+          "sel": "footer",
+          "found": false
+        },
+        {
+          "sel": ".alert",
+          "found": false
+        },
+        {
+          "sel": ".theme-selector label",
+          "found": true,
+          "ratio": 5.53,
+          "size": 12.48,
+          "bold": false,
+          "large": false,
+          "disabled": false,
+          "fg": "rgb(74, 90, 117)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "text": "Dark"
+        },
+        {
+          "sel": ".login-card h2",
+          "found": false
+        },
+        {
+          "sel": ".login-card .muted",
+          "found": false
+        },
+        {
+          "sel": ".login-card label",
+          "found": false
+        }
+      ]
+    }
+  },
+  "touch": {
+    "/": {
+      "n": 29,
+      "small": []
+    },
+    "/demo": {
+      "n": 40,
+      "small": []
+    }
+  },
+  "motion": {
+    "matches": true,
+    "dot": "none/none",
+    "skel": "absent",
+    "ambient": "none",
+    "logo": "none"
+  },
+  "consoleErrors": []
+}

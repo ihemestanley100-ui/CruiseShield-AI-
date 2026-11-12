@@ -57,15 +57,15 @@ export function LandingNav() {
       <LanguageSelector compact />
       <Notifications />
       <ThemeSelector />
-      <Link href="/demo" className="landing-enter">
-        {t("enterDemo")}
+      <Link href="/platform" className="landing-enter">
+        {t("enterPlatform")}
       </Link>
     </header>
   );
 }
 
 export function LandingHeroCopy() {
-  /* Canonical investigation workflow; must match the demo's 8 stages. */
+  /* Canonical investigation workflow; must match the platform's 8 stages. */
   const { t, tl } = useTranslation("landing");
   const journey = tl("journey");
   return (
@@ -95,7 +95,7 @@ export function LandingCta({ onActivate }: { onActivate?: () => void }) {
   return (
     <div className="landing-cta-wrap">
       <Link
-        href="/demo"
+        href="/platform"
         className="landing-cta"
         onMouseEnter={onActivate}
         onClick={onActivate}

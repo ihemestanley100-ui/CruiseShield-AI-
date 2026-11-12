@@ -3,8 +3,8 @@ import { resolveMetadataBase } from "./site-url";
 
 describe("resolveMetadataBase", () => {
   it("resolves a deployed https origin", () => {
-    const base = resolveMetadataBase("https://cruiseshield-demo.vercel.app");
-    expect(base?.href).toBe("https://cruiseshield-demo.vercel.app/");
+    const base = resolveMetadataBase("https://cruiseshield-platform.vercel.app");
+    expect(base?.href).toBe("https://cruiseshield-platform.vercel.app/");
   });
 
   it("accepts http origins and trims whitespace", () => {

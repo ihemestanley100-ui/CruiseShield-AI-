@@ -15,6 +15,26 @@ SECRET = "test-secret-not-a-real-credential"
 RECORD = auth_mod.hash_password("demo-pass-1")
 
 
+def _signed_non_dict(payload_obj):
+    """F-A: a validly-signed token whose JSON is not an object."""
+    import base64
+    import hashlib
+    import hmac
+
+    payload = base64.urlsafe_b64encode(
+        json.dumps(payload_obj).encode()).decode().rstrip("=")
+    sig = base64.urlsafe_b64encode(
+        hmac.new(SECRET.encode(), payload.encode(),
+                 hashlib.sha256).digest()).decode().rstrip("=")
+    return payload + "." + sig
+
+
+def test_parse_session_nondict_json_denies_without_raising():
+    for bad in (["u", "r"], "just-a-string", None, 42, True):
+        assert auth_mod.parse_session(_signed_non_dict(bad),
+                                      SECRET) is None
+
+
 def _drive(coro):
     try:
         coro.send(None)
@@ -64,16 +84,29 @@ def test_password_roundtrip_and_wrong():
 def test_session_roundtrip_expiry_tamper():
     token = auth_mod.create_session("judge", "investigator", SECRET,
                                     now=1000.0)
-    assert auth_mod.verify_session(
-        token, SECRET, now=1000.0) == ("judge", "investigator")
-    assert auth_mod.verify_session(
+    claims = auth_mod.parse_session(token, SECRET, now=1000.0)
+    assert (claims["user"], claims["role"]) == ("judge", "investigator")
+    assert auth_mod.parse_session(
         token, SECRET,
         now=1000.0 + auth_mod.SESSION_TTL_SECONDS + 1) is None
-    assert auth_mod.verify_session(token[:-2] + "xx", SECRET,
-                                   now=1000.0) is None
-    assert auth_mod.verify_session(token, "other-secret",
-                                   now=1000.0) is None
-    assert auth_mod.verify_session("junk", SECRET) is None
+    assert auth_mod.parse_session(token[:-2] + "xx", SECRET,
+                                  now=1000.0) is None
+    assert auth_mod.parse_session(token, "other-secret",
+                                  now=1000.0) is None
+    assert auth_mod.parse_session("junk", SECRET) is None
+
+
+def test_b64_helpers_roundtrip_urlsafe_unpadded():
+    # BATCH-1: auth owns the helpers; mfa aliases the same objects.
+    from app import mfa as mfa_mod
+
+    raw = bytes(range(256))
+    assert auth_mod.b64d(auth_mod.b64e(raw)) == raw
+    assert "=" not in auth_mod.b64e(raw)
+    assert "+" not in auth_mod.b64e(raw)
+    assert "/" not in auth_mod.b64e(raw)
+    assert mfa_mod._b64e is auth_mod.b64e
+    assert mfa_mod._b64d is auth_mod.b64d
 
 
 def test_parse_users_skips_bad_entries():
@@ -114,10 +147,10 @@ def test_session_allows_and_roles_gate_demo(monkeypatch):
     adm = auth_mod.create_session("boss", "admin", SECRET)
     assert _guard(Request(_scope("/api/v1/risk/x",
                                  cookie=inv))).status_code == 200
-    resp = _guard(Request(_scope("/api/v1/demo/reset", method="POST",
+    resp = _guard(Request(_scope("/api/v1/platform/reset", method="POST",
                                  cookie=inv, xrw=True)))
     assert resp.status_code == 403
-    assert _guard(Request(_scope("/api/v1/demo/reset", method="POST",
+    assert _guard(Request(_scope("/api/v1/platform/reset", method="POST",
                                  cookie=adm, xrw=True))).status_code == 200
 
 
@@ -375,7 +408,7 @@ def test_full_stack_login_cookie_csrf_roles(client, monkeypatch):
     # passed and only the (absent) provider refused.
     assert with_xrw.status_code == 503
     assert with_xrw.json()["error"]["code"] == "MODEL_NOT_CONFIGURED"
-    reset = client.post("/api/v1/demo/reset",
+    reset = client.post("/api/v1/platform/reset",
                         json={"scenario_id": "scn_primary"},
                         headers={"X-Requested-With": "XMLHttpRequest"})
     assert reset.status_code == 403
@@ -466,6 +499,24 @@ def test_logout_all_invalidates_every_session(monkeypatch, tmp_store):
     assert main._session_of(Request(_scope("/x", cookie=other))) is not None
     fresh = auth_mod.create_session("judge", "investigator", SECRET)
     assert main._session_of(Request(_scope("/x", cookie=fresh))) is not None
+
+
+def test_logout_all_revokes_tracked_sessions(monkeypatch, tmp_store):
+    """Same-second safe: logout-all revokes live nonces, not epoch only."""
+    _users4(monkeypatch)
+    rl.reset()
+    resp = main.auth_login(
+        {"username": "judge", "password": "demo-pass-1"},
+        Request(_scope("/api/v1/auth/login", method="POST")))
+    cookie = resp.headers["set-cookie"].split(
+        "csai_session=", 1)[1].split(";")[0]
+    nonce = auth_mod.parse_session(cookie, SECRET)["nonce"]
+    main.auth_logout_all(Request(_scope("/api/v1/auth/logout-all",
+                                        method="POST", cookie=cookie,
+                                        xrw=True)))
+    assert tmp_store.is_revoked(nonce)
+    assert tmp_store.sessions_for("judge") == []
+    assert main._session_of(Request(_scope("/x", cookie=cookie))) is None
 
 
 def test_revocation_survives_restart(monkeypatch, tmp_path):

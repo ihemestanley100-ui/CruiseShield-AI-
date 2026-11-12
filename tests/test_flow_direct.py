@@ -20,9 +20,9 @@ def test_route_table_matches_contract():
     paths = {route.path for route in main.app.routes}
     for expected in [
         "/", "/investigations/{inv_id}", "/system-health",
-        "/api/v1/health", "/api/v1/demo/scenarios", "/api/v1/demo/reset",
-        "/api/v1/demo/scenarios/{scenario_id}/start",
-        "/api/v1/demo/judge-start", "/api/v1/transactions/{txn_id}",
+        "/api/v1/health", "/api/v1/platform/scenarios", "/api/v1/demo/scenarios", "/api/v1/platform/reset", "/api/v1/demo/reset",
+        "/api/v1/platform/scenarios/{scenario_id}/start", "/api/v1/demo/scenarios/{scenario_id}/start",
+        "/api/v1/platform/judge-start", "/api/v1/demo/judge-start", "/api/v1/transactions/{txn_id}",
         "/api/v1/graph/{txn_id}", "/api/v1/risk/{txn_id}", "/api/v1/alerts",
         "/api/v1/investigations/{inv_id}",
         "/api/v1/investigations/{inv_id}/evidence-package",
@@ -39,8 +39,8 @@ def test_route_table_matches_contract():
 
 def test_full_judge_flow_direct(tmp_store, monkeypatch):
     monkeypatch.setattr(ai_adapter, "MODEL_API_KEY", "")
-    result = main.demo_reset(_req(), {"scenario_id": "scn_primary"})
-    assert result["manifest"]["synthetic_notice"] == "Synthetic demo data."
+    result = main.platform_reset(_req(), {"scenario_id": "scn_primary"})
+    assert result["manifest"]["synthetic_notice"] == "Synthetic data."
 
     txn = main.get_transaction("txn_84721")
     assert txn["transaction"]["amount_minor"] == 48000000
@@ -147,9 +147,12 @@ def test_pages_render_with_live_state(tmp_store):
                      main.system_health_page(_req())):
         html = response.body.decode("utf-8")
         assert response.status_code == 200
-        assert "Synthetic demo data" in html
+        assert "Synthetic data" in html
     health = main.health()
-    assert health["status"] == "healthy"
+    # A-1: the default store has unconfigured AI + legacy audit, which
+    # is operational_with_gaps by design — the old "healthy" was the
+    # defect (unconditional headline over unconfigured services).
+    assert health["status"] == "operational_with_gaps"
     assert health["checks"]["graph_provenance"] == "PASS"
 
 
@@ -260,13 +263,13 @@ def test_simulation_and_decision_domain_errors_direct(tmp_store):
     assert (exc.value.code, exc.value.status) == ("INVALID_DECISION", 400)
 
 
-def test_demo_reset_unknown_scenario_404_direct(tmp_store):
+def test_platform_reset_unknown_scenario_404_direct(tmp_store):
     # J3 closeout (backend EV2): reset payload errors fail closed.
     with pytest.raises(main.AppError) as exc:
-        main.demo_reset(_req(), {"scenario_id": "scn_nope"})
+        main.platform_reset(_req(), {"scenario_id": "scn_nope"})
     assert (exc.value.code, exc.value.status) == ("UNKNOWN_SCENARIO", 404)
     with pytest.raises(main.AppError) as exc:
-        main.demo_start("scn_nope", _req())
+        main.platform_start("scn_nope", _req())
     assert (exc.value.code, exc.value.status) == ("UNKNOWN_SCENARIO", 404)
 
 

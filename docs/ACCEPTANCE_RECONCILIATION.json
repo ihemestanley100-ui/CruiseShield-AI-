@@ -1,0 +1,2920 @@
+{
+ "generated": "2026-11-07",
+ "head": "d82627d",
+ "total": 192,
+ "rows": [
+  {
+   "id": "DET-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/detection.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_detection.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "DET-02",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/channels.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_detection.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "DET-03",
+   "status": "IN_PROGRESS",
+   "evidence_class": "partial",
+   "impl_refs": [
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_detection.py"
+   ],
+   "test_missing": [],
+   "blocker": "GAP-001 PG cutover",
+   "next": "persist signal_events on PG cutover"
+  },
+  {
+   "id": "DET-04",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/detection.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_detection.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "DET-05",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/channels.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_detection.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "DET-06",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_detection.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "DET-07",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/tenancy.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_detection.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "DET-08",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_detection.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "DET-09",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_detection.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "DET-10",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_detection.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "DET-11",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_detection.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "DET-12",
+   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "evidence_class": "adapter-or-prep-only",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [
+    "frontend/components/detection-panels.test.tsx"
+   ],
+   "test_missing": [],
+   "blocker": "PKG-01 DEFERRED; GAP-010",
+   "next": "await PKG-01 re-approval; then push + observe"
+  },
+  {
+   "id": "DET-13",
+   "status": "AWAITING_OWNER_APPROVAL",
+   "evidence_class": "prep-only",
+   "impl_refs": [
+    ".github/workflows/security-gate.yml"
+   ],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "PKG-01 DEFERRED 2026-11-07",
+   "next": "await PKG-01 re-approval"
+  },
+  {
+   "id": "DET-14",
+   "status": "AWAITING_OWNER_APPROVAL",
+   "evidence_class": "prep-only",
+   "impl_refs": [
+    "render.yaml",
+    "netlify.toml"
+   ],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "GAP-009; PKG-01 DEFERRED",
+   "next": "deploy after CI green + approval"
+  },
+  {
+   "id": "DET-15",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/detection.py",
+    "app/channels.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_detection.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-R1",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_demo_token_remediation.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-R2",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_demo_token_remediation.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-R3",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_demo_token_remediation.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-R4",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_demo_token_remediation.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-R5",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/config.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_write_token.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-R6",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "frontend/.env.example"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_secret_safety.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-MFA",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/mfa.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_mfa.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-RISK",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/login_risk.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_login_risk.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-NOTIF",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/store.py",
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_security_notifications.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "TEN-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/tenancy.py",
+    "app/main.py",
+    "app/agents.py",
+    "app/governance.py",
+    "app/connectors.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_tenancy.py",
+    "tests/test_tenant_api.py",
+    "tests/test_tenant_new_surfaces.py",
+    "tests/test_tenant_map.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AUD-01",
+   "status": "IN_PROGRESS",
+   "evidence_class": "partial",
+   "impl_refs": [
+    "app/audit_chain.py",
+    "app/store.py",
+    "migrations/loader.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_audit_chain.py",
+    "tests/test_audit_store.py",
+    "tests/test_loader_gate.py"
+   ],
+   "test_missing": [],
+   "blocker": "D-018 key ceremony",
+   "next": "test-key drills only; prod ceremony needs approval"
+  },
+  {
+   "id": "AUD-02",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/audit_chain.py",
+    "scripts/audit_export.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_audit_export.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "BAK-01",
+   "status": "IN_PROGRESS",
+   "evidence_class": "partial",
+   "impl_refs": [
+    "backups/local_target.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_local_target.py",
+    "scripts/backup_drill.py"
+   ],
+   "test_missing": [],
+   "blocker": "D-018 key ceremony",
+   "next": "test-key drills only"
+  },
+  {
+   "id": "DB-01",
+   "status": "AWAITING_OWNER_APPROVAL",
+   "evidence_class": "prep-only",
+   "impl_refs": [
+    "app/db.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_pg_migration.py",
+    "tests/test_pg_parity.py",
+    "tests/test_pg_atomic_decision.py",
+    "tests/test_pg_hardening.py"
+   ],
+   "test_missing": [],
+   "blocker": "GAP-001 cutover approval",
+   "next": "approve cutover after hosted PG available"
+  },
+  {
+   "id": "AI-01",
+   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "evidence_class": "adapter-or-prep-only",
+   "impl_refs": [
+    "app/ai_adapter.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_ai_eval.py",
+    "tests/test_ai_validation.py",
+    "tests/test_ai_cost.py",
+    "tests/test_ai_gateway.py"
+   ],
+   "test_missing": [],
+   "blocker": "D-016 NO-LIVE recorded",
+   "next": "NO-LIVE settled; reopen needs new approval + key"
+  },
+  {
+   "id": "CICD-01",
+   "status": "AWAITING_OWNER_APPROVAL",
+   "evidence_class": "prep-only",
+   "impl_refs": [
+    "docs/COVERAGE_LOCK_PREP.md"
+   ],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "D-020 dependency approval",
+   "next": "approve pins, wire CI gates"
+  },
+  {
+   "id": "REL-01",
+   "status": "AWAITING_OWNER_APPROVAL",
+   "evidence_class": "prep-only",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "D-015",
+   "next": "await PKG-06 re-approval"
+  },
+  {
+   "id": "REL-02",
+   "status": "AWAITING_OWNER_APPROVAL",
+   "evidence_class": "prep-only",
+   "impl_refs": [
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "D-019b post-deploy approval",
+   "next": "remove after deploy verified"
+  },
+  {
+   "id": "PDI-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "README.md",
+    "tests/test_product_identity.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_product_identity.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "QG-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "tests/test_quality_gates.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_quality_gates.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-CRED",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/api_credentials.py",
+    "app/abac.py",
+    "app/main.py",
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_sec_cred.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-ROT",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/auth.py",
+    "app/config.py",
+    "app/main.py",
+    "app/abac.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_sec_rot.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-DEV",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/trusted_devices.py",
+    "app/main.py",
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_sec_dev.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-REV",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_access_review.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AUD-03",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_ingest_audit.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AUD-04",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_ingest_audit.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "EVID-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/evidence.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_evidence_export.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AI-02",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/ai_gateway.py",
+    "app/main.py",
+    "app/config.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_ai_gateway.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "register 2nd lane when a provider is authorized"
+  },
+  {
+   "id": "AI-03",
+   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "evidence_class": "adapter-or-prep-only",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "D-016 live model",
+   "next": "owner approves PKG-04 Option A"
+  },
+  {
+   "id": "CASE-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/cases.py",
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_cases_create.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "DET-16",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/detection.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_detection.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "FE-01",
+   "status": "AWAITING_OWNER_APPROVAL",
+   "evidence_class": "prep-only",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "PKG-01 DEFERRED 2026-11-07",
+   "next": "await PKG-01 re-approval"
+  },
+  {
+   "id": "QA-02",
+   "status": "AWAITING_OWNER_APPROVAL",
+   "evidence_class": "prep-only",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "PKG-01 DEFERRED 2026-11-07",
+   "next": "await PKG-01/D-057 re-approval"
+  },
+  {
+   "id": "INF-01",
+   "status": "AWAITING_OWNER_APPROVAL",
+   "evidence_class": "prep-only",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "GAP-009/D-017",
+   "next": "approve deploy; capture logs"
+  },
+  {
+   "id": "DATA-01",
+   "status": "AWAITING_OWNER_APPROVAL",
+   "evidence_class": "prep-only",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "owner retention authorization",
+   "next": "await D-056 re-approval; then implement"
+  },
+  {
+   "id": "AUTH-REG",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/accounts.py",
+    "app/store.py",
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_accounts.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AUTH-VERIFY",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/verify.py",
+    "app/store.py",
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_verify.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AUTH-ACCOUNT",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/store.py",
+    "app/main.py",
+    "app/login_risk.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_account_security.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AUTH-01",
+   "status": "NOT_STARTED",
+   "evidence_class": "none",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "PKG-09 owner approval",
+   "next": "owner approves PKG-09; then implement"
+  },
+  {
+   "id": "AUTH-02",
+   "status": "NOT_STARTED",
+   "evidence_class": "none",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "PKG-09 owner approval",
+   "next": "owner approves PKG-09; then implement"
+  },
+  {
+   "id": "AUTH-03",
+   "status": "NOT_STARTED",
+   "evidence_class": "none",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "PKG-09 owner approval",
+   "next": "owner approves PKG-09; then implement"
+  },
+  {
+   "id": "AUTH-04",
+   "status": "NOT_STARTED",
+   "evidence_class": "none",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "PKG-09 owner approval",
+   "next": "owner approves PKG-09; then implement"
+  },
+  {
+   "id": "AUTH-05",
+   "status": "NOT_STARTED",
+   "evidence_class": "none",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "PKG-09 owner approval",
+   "next": "implement in auth batch after go"
+  },
+  {
+   "id": "AUTH-06",
+   "status": "NOT_STARTED",
+   "evidence_class": "none",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "PKG-09 owner approval",
+   "next": "implement in auth batch after go"
+  },
+  {
+   "id": "AUTH-07",
+   "status": "NOT_STARTED",
+   "evidence_class": "none",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "PKG-09 owner approval",
+   "next": "owner approves PKG-09; then implement"
+  },
+  {
+   "id": "AUTH-08",
+   "status": "NOT_STARTED",
+   "evidence_class": "none",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "PKG-09 owner approval",
+   "next": "implement in auth batch after go"
+  },
+  {
+   "id": "AUTH-09",
+   "status": "NOT_STARTED",
+   "evidence_class": "none",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "PKG-09 owner approval",
+   "next": "implement in auth batch after go"
+  },
+  {
+   "id": "SITE-01",
+   "status": "TESTING",
+   "evidence_class": "test-written-not-executed",
+   "impl_refs": [
+    "frontend/app/help/page.tsx",
+    "frontend/app/support/page.tsx",
+    "frontend/app/legal/page.tsx",
+    "frontend/app/privacy/page.tsx",
+    "frontend/components/static-page.tsx"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "frontend/app/static-pages.test.tsx"
+   ],
+   "test_missing": [],
+   "blocker": "PKG-01 DEFERRED 2026-11-07",
+   "next": "await PKG-01 re-approval; then push + observe"
+  },
+  {
+   "id": "SUB-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/billing.py",
+    "app/store.py",
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_billing.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "PAY-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/payments.py",
+    "app/web3.py",
+    "app/store.py",
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_payments.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-PASSKEY",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/passkeys.py",
+    "app/store.py",
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_passkeys.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "authenticator interop + security review (hosted/browser)"
+  },
+  {
+   "id": "ORG-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/orgs.py",
+    "app/store.py",
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_orgs.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "NOTIFY-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/notify.py",
+    "app/store.py",
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_notify.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "wire provider when owner approves"
+  },
+  {
+   "id": "THEME-01",
+   "status": "TESTING",
+   "evidence_class": "test-written-not-executed",
+   "impl_refs": [
+    "frontend/components/theme-provider.tsx",
+    "frontend/components/theme-selector.tsx",
+    "frontend/lib/theme.ts"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "frontend/components/theme-provider.test.tsx",
+    "frontend/lib/theme.test.ts"
+   ],
+   "test_missing": [],
+   "blocker": "PKG-01 DEFERRED 2026-11-07",
+   "next": "await PKG-01 re-approval; then push + observe"
+  },
+  {
+   "id": "PAY-02",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/payments.py",
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_provider_webhooks.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "bind vendor shape on approval"
+  },
+  {
+   "id": "I18N-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "frontend/lib/i18n/locales"
+   ],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "I18N-02",
+   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "evidence_class": "adapter-or-prep-only",
+   "impl_refs": [
+    "docs/UGLS_REVIEW_KIT"
+   ],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "human translators",
+   "next": "commission translator review"
+  },
+  {
+   "id": "OPS-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "scripts/forensic_inventory.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "OPS-02",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "scripts/rollback_rehearsal.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_rollback_rehearsal.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "GOV-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/governance.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_governance.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "CAP-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/capabilities.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_capabilities.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AGENT-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/agents.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_agents.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "ABAC-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/abac.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_abac.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "CONN-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/connectors.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_connectors.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "PILOT-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/pilot.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_pilot.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "TEL-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/telecom_registry.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_telecom_registry.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "TEL-02",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/telecom_verify.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_telecom_verify.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "TEL-03",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/telecom_providers.py",
+    "app/connectors.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_telecom_providers.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "bind creds/handshake on approval"
+  },
+  {
+   "id": "TEL-04",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/telecom_verify.py",
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_telecom_contract.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "TEL-05",
+   "status": "TESTING",
+   "evidence_class": "test-written-not-executed",
+   "impl_refs": [
+    "frontend/components/telecom-section.tsx",
+    "frontend/app/network/[txnId]/page.tsx",
+    "frontend/app/investigations/[id]/page.tsx",
+    "frontend/app/cases/[caseId]/page.tsx",
+    "frontend/app/platform/page.tsx"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "frontend/components/telecom-section.test.tsx"
+   ],
+   "test_missing": [],
+   "blocker": "PKG-01 DEFERRED 2026-11-07",
+   "next": "await PKG-01 re-approval; then push + observe"
+  },
+  {
+   "id": "TEL-06",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py",
+    "app/config.py",
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_telecom_security.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "TEL-07",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/telecom_registry.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_telecom_registry.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "TEL-08",
+   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "evidence_class": "adapter-or-prep-only",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "D-053 NO-LIVE recorded",
+   "next": "NO-LIVE settled; reopen needs creds + approval"
+  },
+  {
+   "id": "TEL-09",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "docs/TELECOM_IDENTITY.md"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_telecom_contract.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "GEO-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/ip_intel.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_geointel_ip.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "GEO-02",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/location_obs.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_geointel_location.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "IDV-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/identity_verify.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_geointel_identity.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "ADR-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/address_verify.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_geointel_address.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "PRV-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/intel_providers.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_geointel_providers.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "MAP-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/investigation_map.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_geointel_map.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "MAP-02",
+   "status": "TESTING",
+   "evidence_class": "test-written-not-executed",
+   "impl_refs": [
+    "frontend/components/geointel-map.tsx",
+    "frontend/components/intel-verify-sections.tsx",
+    "frontend/components/intel-admin-panels.tsx"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "frontend/components/geointel-map.test.tsx",
+    "frontend/components/intel-verify-sections.test.tsx"
+   ],
+   "test_missing": [],
+   "blocker": "PKG-01 DEFERRED 2026-11-07",
+   "next": "await PKG-01 re-approval; then push + observe"
+  },
+  {
+   "id": "GOV-02",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/intel_auth.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_geointel_api.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-GEO",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py",
+    "app/config.py",
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_geointel_api.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AI-GEO",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/investigation_map.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_geointel_map.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "model lane needs owner PII-processing approval"
+  },
+  {
+   "id": "LIVE-GEO",
+   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "evidence_class": "adapter-or-prep-only",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "D-053 NO-LIVE recorded",
+   "next": "NO-LIVE settled; reopen needs creds + approval"
+  },
+  {
+   "id": "LEAFLET",
+   "status": "NOT_STARTED",
+   "evidence_class": "none",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "",
+   "next": "owner approves policy; then bind"
+  },
+  {
+   "id": "DOC-GEO",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "docs/GEOINTELLIGENCE_OS.md"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_geointel_api.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-TXN",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/payment_methods.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_core.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-PAY",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/payment_methods.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_core.py",
+    "tests/test_universal_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-INST",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/institutions.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_core.py",
+    "tests/test_universal_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-PARTY",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/parties.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_core.py",
+    "tests/test_universal_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-TYPO",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/typologies.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_core.py",
+    "tests/test_universal_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-ALERT",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/alerts.py",
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_core.py",
+    "tests/test_universal_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-TRACE",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/tracing.py",
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_core.py",
+    "tests/test_universal_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-ALT",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/altpayments.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_core.py",
+    "tests/test_universal_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-REP",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/reports.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_core.py",
+    "tests/test_universal_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-API",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-IND",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries.py",
+    "app/typologies.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-UI",
+   "status": "TESTING",
+   "evidence_class": "test-written-not-executed",
+   "impl_refs": [
+    "frontend/components/tracing-section.tsx",
+    "frontend/lib/api.ts",
+    "frontend/app/investigations/[id]/page.tsx"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "frontend/components/tracing-section.test.tsx"
+   ],
+   "test_missing": [],
+   "blocker": "PKG-01 DEFERRED 2026-11-07",
+   "next": "await PKG-01 re-approval; then push + observe"
+  },
+  {
+   "id": "UFI-AI",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/intel_tools.py",
+    "app/agents.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_ai.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-LIVE",
+   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "evidence_class": "adapter-or-prep-only",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "D-053 NO-LIVE recorded",
+   "next": "NO-LIVE settled; reopen needs creds + approval"
+  },
+  {
+   "id": "UFI-DOC",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "docs/UNIVERSAL_INTEL_OS.md"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_core.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-TXNAPI",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_slice2.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-MON",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/monitoring.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_slice2.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-ADAPT",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industry_adapters.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_slice2.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-SEC",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py",
+    "app/monitoring.py",
+    "app/alerts.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_security.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-UI2",
+   "status": "TESTING",
+   "evidence_class": "test-written-not-executed",
+   "impl_refs": [
+    "frontend/components/monitoring-section.tsx",
+    "frontend/components/industry-section.tsx",
+    "frontend/lib/api.ts",
+    "frontend/app/network/[txnId]/page.tsx",
+    "frontend/app/platform/page.tsx"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "frontend/components/monitoring-section.test.tsx",
+    "frontend/components/industry-section.test.tsx"
+   ],
+   "test_missing": [],
+   "blocker": "PKG-01 DEFERRED 2026-11-07",
+   "next": "await PKG-01 re-approval; then push + observe"
+  },
+  {
+   "id": "UFI-AIMODEL",
+   "status": "NOT_STARTED",
+   "evidence_class": "none",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "",
+   "next": "owner PII-processing approval"
+  },
+  {
+   "id": "UFI-FLEET",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industry_adapters.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_integration.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-INT",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/intel_tools.py",
+    "app/tracing.py",
+    "app/main.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_universal_integration.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-UI3",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "frontend/components/tracing-section.tsx",
+    "frontend/components/monitoring-section.tsx",
+    "frontend/components/industry-section.tsx",
+    "frontend/lib/api.ts"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_ufi_contract.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-E2E",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/main.py",
+    "app/tracing.py",
+    "app/industry_adapters.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_ufi_e2e.py",
+    "tests/test_tracing_scenarios.py",
+    "tests/test_industry_fleet.py",
+    "tests/test_ufi_perf.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "UFI-CLOSE",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "docs/UFI_CLOSEOUT.md"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_ufi_e2e.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AGOS-ORCH",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/orchestration.py",
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_agent_os.py",
+    "tests/test_agent_os_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AGOS-NL",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/nl_search.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_agent_os.py",
+    "tests/test_agent_os_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AGOS-RAG",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/agent_retrieval.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_agent_os.py",
+    "tests/test_agent_os_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AGOS-TOOLS",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/intel_tools.py",
+    "app/agents.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_agent_os.py",
+    "tests/test_agents.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AGOS-CONV",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/conversations.py",
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_agent_os.py",
+    "tests/test_agent_os_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AGOS-IND",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industry_adapters.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_agent_os.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "AGOS-UI",
+   "status": "TESTING",
+   "evidence_class": "test-written-not-executed",
+   "impl_refs": [
+    "frontend/components/assistant-shell.tsx",
+    "frontend/lib/api.ts",
+    "frontend/app/investigations/[id]/page.tsx"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "frontend/components/assistant-shell.test.tsx"
+   ],
+   "test_missing": [],
+   "blocker": "PKG-01 DEFERRED 2026-11-07",
+   "next": "await PKG-01 re-approval; then push + observe"
+  },
+  {
+   "id": "AGOS-DOC",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "docs/AGENT_OS.md"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_agent_os.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "REC-RULES",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/recovery_rules.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_recovery_core.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "REC-ELIG",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/recovery.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_recovery_core.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "REC-LIFE",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/recovery.py",
+    "app/store.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_recovery_core.py",
+    "tests/test_recovery_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "REC-CAPS",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/recovery_caps.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_recovery_core.py",
+    "tests/test_recovery_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "REC-AI",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/intel_tools.py",
+    "app/agents.py",
+    "app/orchestration.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_recovery_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "REC-IND",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industry_adapters.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_recovery_routes.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "REC-UI",
+   "status": "TESTING",
+   "evidence_class": "test-written-not-executed",
+   "impl_refs": [
+    "frontend/components/recovery-section.tsx",
+    "frontend/lib/api.ts",
+    "frontend/app/investigations/[id]/page.tsx"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "frontend/components/recovery-section.test.tsx"
+   ],
+   "test_missing": [],
+   "blocker": "PKG-01 DEFERRED 2026-11-07",
+   "next": "await PKG-01 re-approval; then push + observe"
+  },
+  {
+   "id": "REC-DOC",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "docs/RECOVERY_OS.md"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_recovery_core.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "SEC-PROD",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/config.py",
+    "app/store.py",
+    "app/main.py",
+    ".env.example"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_production_guard.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "EVD-01",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "scripts/evidence_manifest.py",
+    "docs/EVIDENCE_MANIFEST.json"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_evidence_manifest.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": ""
+  },
+  {
+   "id": "VIS-01",
+   "status": "BLOCKED_EXTERNAL_DEPENDENCY",
+   "evidence_class": "adapter-or-prep-only",
+   "impl_refs": [],
+   "impl_missing": [],
+   "test_refs": [],
+   "test_missing": [],
+   "blocker": "reference image absent",
+   "next": "owner supplies image; then compare"
+  },
+  {
+   "id": "IND-banking",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_banking.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_banking.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-fintech-payments",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_fintech.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_fintech.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-capital-markets",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_capital_markets.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_capital_markets.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-insurance-pensions",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_insurance.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_insurance.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-crypto-assets",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_crypto.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_crypto.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-fx-remittance",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_fx.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_fx.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-government",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_government.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_government.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-tax-revenue",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_tax.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_tax.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-law-enforcement",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_law.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_law.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-customs-border",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_customs.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_customs.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-defence-security",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_defence.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_defence.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-procurement-infra",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_procurement.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_procurement.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-retail",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_retail.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_retail.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-ecommerce",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_ecommerce.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_ecommerce.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-wholesale",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_wholesale.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_wholesale.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-manufacturing",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_manufacturing.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_manufacturing.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-supply-chain",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_supply.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_supply.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-import-export",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_trade.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_trade.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-real-estate",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_property.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_property.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-construction",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_construction.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_construction.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-mining-resources",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_mining.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_mining.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-oil-gas",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_oilgas.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_oilgas.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-automotive",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_automotive.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_automotive.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-luxury-goods",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_luxury.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_luxury.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-healthcare",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_healthcare.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_healthcare.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-pharma-biotech",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_pharma.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_pharma.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-education",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_education.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_education.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-legal",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_legal.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_legal.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-accounting",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_accounting.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_accounting.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-consulting",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_consulting.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_consulting.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-telecom",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_telecom.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_telecom.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-technology",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_technology.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_technology.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-gaming-esports",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_gaming.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_gaming.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-gambling",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_gambling.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_gambling.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-media",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_media.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_media.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-social-platforms",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_social.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_social.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-agriculture",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_agriculture.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_agriculture.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-energy-utilities",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_energy.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_energy.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-aviation",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_aviation.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_aviation.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-maritime",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_maritime.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_maritime.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-transport",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_transport.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_transport.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-ngo",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_ngo.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_ngo.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-charities",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_charities.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_charities.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-hospitality",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_hospitality.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_hospitality.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  },
+  {
+   "id": "IND-environmental",
+   "status": "CLOSED_VERIFIED",
+   "evidence_class": "test-executed",
+   "impl_refs": [
+    "app/industries_environment.py"
+   ],
+   "impl_missing": [],
+   "test_refs": [
+    "tests/test_industry_environment.py"
+   ],
+   "test_missing": [],
+   "blocker": "",
+   "next": "advance to PILOT with connector data"
+  }
+ ],
+ "summary": {
+  "by_status": {
+   "CLOSED_VERIFIED": 152,
+   "TESTING": 8,
+   "IN_PROGRESS": 3,
+   "BLOCKED_EXTERNAL_DEPENDENCY": 8,
+   "AWAITING_OWNER_APPROVAL": 10,
+   "NOT_STARTED": 11
+  },
+  "rows_with_missing_refs": []
+ }
+}

@@ -19,14 +19,14 @@ function audit(n: number): AuditEntry {
     audit_event_id: id,
     actor_type: "service",
     actor_id: "seed",
-    action: "demo.reset",
+    action: "platform.reset",
     target_type: "scenario",
     target_id: "case_84721",
     previous_state_reference: "",
     new_state_reference: "scn_primary",
     reason: "seeded scenario",
     timestamp: "2026-10-27T10:00:00Z",
-    trace_id: "trace_demo_84721",
+    trace_id: "trace_84721",
     request_id: `req_${n}`,
   };
 }

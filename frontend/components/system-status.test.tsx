@@ -17,17 +17,25 @@ describe("SystemStatus", () => {
   it("maps real checks to honest states", () => {
     render(
       <SystemStatus
-        health={healthFixture({
-          store: "PASS",
-          seed_integrity: "PASS",
-          graph_provenance: "PASS",
-          model_configured: "NOT_CONFIGURED",
-        })}
+        health={{
+          ...healthFixture({
+            store: "PASS",
+            seed_integrity: "PASS",
+            graph_provenance: "PASS",
+            model_configured: "NOT_CONFIGURED",
+          }),
+          // A-1: unconfigured AI is operational_with_gaps, never
+          // "healthy" — the old fixture encoded the defect.
+          status: "operational_with_gaps",
+        }}
         checkedAt="Oct 30, 2026"
       />
     );
-    expect(screen.getByText("healthy")).toBeTruthy();
-    expect(screen.getByText("All systems operational")).toBeTruthy();
+    expect(screen.getByText("operational_with_gaps")).toBeTruthy();
+    expect(
+      screen.getByText("Operational with gaps: some services unconfigured")
+    ).toBeTruthy();
+    expect(screen.queryByText("All systems operational")).toBeNull();
     expect(screen.getByText("API Services")).toBeTruthy();
     expect(screen.getByText("AI Engine (Muse Spark)")).toBeTruthy();
     expect(screen.getByText("Not configured")).toBeTruthy();
@@ -92,6 +100,44 @@ describe("SystemStatus", () => {
     );
     expect(screen.getByText("degraded")).toBeTruthy();
     expect(screen.queryByText("All systems operational")).toBeNull();
+    expect(
+      screen.queryByText("Operational with gaps: some services unconfigured")
+    ).toBeNull();
     expect(screen.getAllByText("Not reported").length).toBeGreaterThan(0);
+  });
+
+  it("reserves the all-operational headline for a fully healthy status", () => {
+    render(
+      <SystemStatus
+        health={healthFixture({
+          store: "PASS",
+          seed_integrity: "PASS",
+          graph_provenance: "PASS",
+          model_configured: "PASS",
+        })}
+        checkedAt="now"
+      />
+    );
+    expect(screen.getByText("All systems operational")).toBeTruthy();
+    expect(
+      screen.queryByText("Operational with gaps: some services unconfigured")
+    ).toBeNull();
+  });
+
+  it("shows no positive headline when unavailable", () => {
+    render(
+      <SystemStatus
+        health={{
+          ...healthFixture({ store: "FAIL" }),
+          status: "unavailable",
+        }}
+        checkedAt="now"
+      />
+    );
+    expect(screen.getByText("unavailable")).toBeTruthy();
+    expect(screen.queryByText("All systems operational")).toBeNull();
+    expect(
+      screen.queryByText("Operational with gaps: some services unconfigured")
+    ).toBeNull();
   });
 });

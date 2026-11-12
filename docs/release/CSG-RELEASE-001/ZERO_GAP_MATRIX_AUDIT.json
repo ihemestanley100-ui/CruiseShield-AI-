@@ -1,0 +1,193 @@
+{
+ "rows": 213,
+ "base_rows": 192,
+ "dupes": [],
+ "extension_present": [
+  "CS-FCA-013",
+  "CS-FCA-013.01",
+  "CS-FCA-013.02",
+  "CS-FCA-013.03",
+  "CS-FCA-013.04",
+  "CS-FCA-013.05",
+  "CS-FCA-013.06",
+  "CS-FCA-013.07",
+  "CS-FCA-013.08",
+  "CS-FCA-013.09",
+  "CS-FCA-013.10",
+  "CS-FCA-013.11",
+  "CS-FCA-013.12",
+  "CS-FCA-013.13",
+  "CS-FCA-013.14",
+  "CS-FCA-013.15",
+  "CS-FCA-013.16",
+  "CS-FCA-013.17",
+  "CS-FCA-013.18",
+  "CS-FCA-013.19",
+  "CS-FCA-013.20"
+ ],
+ "extension_missing": [],
+ "original_count": 192,
+ "original_changed": [],
+ "original_missing": [],
+ "unexpected_new": [],
+ "status_distribution": {
+  "CLOSED_VERIFIED": 152,
+  "IN_PROGRESS": 15,
+  "BLOCKED_EXTERNAL_DEPENDENCY": 8,
+  "AWAITING_OWNER_APPROVAL": 10,
+  "NOT_STARTED": 15,
+  "TESTING": 13
+ },
+ "unresolved_dependencies": [
+  [
+   "DET-03",
+   "GAP-001"
+  ],
+  [
+   "DET-07",
+   "D-014"
+  ],
+  [
+   "DET-10",
+   "GAP-002"
+  ],
+  [
+   "DET-12",
+   "GAP-010"
+  ],
+  [
+   "DET-13",
+   "D-017"
+  ],
+  [
+   "DET-14",
+   "GAP-009"
+  ],
+  [
+   "TEN-01",
+   "D-014"
+  ],
+  [
+   "AUD-01",
+   "D-018"
+  ],
+  [
+   "BAK-01",
+   "D-018"
+  ],
+  [
+   "DB-01",
+   "GAP-001"
+  ],
+  [
+   "AI-01",
+   "D-016"
+  ],
+  [
+   "CICD-01",
+   "D-020"
+  ],
+  [
+   "REL-01",
+   "D-015"
+  ],
+  [
+   "REL-02",
+   "D-019b"
+  ],
+  [
+   "AI-03",
+   "D-016"
+  ],
+  [
+   "FE-01",
+   "D-017"
+  ],
+  [
+   "QA-02",
+   "D-017"
+  ],
+  [
+   "INF-01",
+   "D-017"
+  ],
+  [
+   "AUTH-01",
+   "PKG-09"
+  ],
+  [
+   "AUTH-02",
+   "PKG-09"
+  ],
+  [
+   "AUTH-03",
+   "PKG-09"
+  ],
+  [
+   "AUTH-04",
+   "PKG-09"
+  ],
+  [
+   "AUTH-05",
+   "PKG-09"
+  ],
+  [
+   "AUTH-06",
+   "PKG-09"
+  ],
+  [
+   "AUTH-07",
+   "PKG-09"
+  ],
+  [
+   "AUTH-08",
+   "PKG-09"
+  ],
+  [
+   "AUTH-09",
+   "PKG-09"
+  ],
+  [
+   "SEC-PASSKEY",
+   "D-017"
+  ],
+  [
+   "TEL-08",
+   "D-016"
+  ],
+  [
+   "LIVE-GEO",
+   "D-016"
+  ],
+  [
+   "UFI-LIVE",
+   "D-016"
+  ],
+  [
+   "CS-FCA-013",
+   "GAP-001"
+  ],
+  [
+   "CS-FCA-013",
+   "PKG-09"
+  ],
+  [
+   "CS-FCA-013",
+   "O-02"
+  ],
+  [
+   "CS-FCA-013.11",
+   "D-053"
+  ],
+  [
+   "CS-FCA-013.13",
+   "D-053"
+  ],
+  [
+   "CS-FCA-013.14",
+   "D-053"
+  ]
+ ],
+ "empty_evidence": [],
+ "generator_missing_extension": []
+}

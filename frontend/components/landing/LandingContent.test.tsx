@@ -45,7 +45,7 @@ beforeEach(() => {
 });
 
 describe("GlobalLandingPage", () => {
-  it("renders brand, hero copy, journey, and demo CTAs", () => {
+  it("renders brand, hero copy, journey, and platform CTAs", () => {
     render(<GlobalLandingPage />);
     expect(screen.getAllByText("CruiseShield AI™").length).toBeGreaterThan(0);
     expect(
@@ -69,13 +69,13 @@ describe("GlobalLandingPage", () => {
     ).toBeTruthy();
     expect(screen.getByText(/fraud investigators, compliance teams/)).toBeTruthy();
     expect(screen.getByText("Auditable")).toBeTruthy();
-    // Hero CTA + WebGL-fallback CTA both target /demo (jsdom has no WebGL).
+    // Hero CTA + WebGL-fallback CTA both target /platform (jsdom has no WebGL).
     const ctas = screen.getAllByRole("link", { name: /Explore CruiseShield AI/ });
     expect(ctas.length).toBeGreaterThanOrEqual(1);
     for (const cta of ctas) {
-      expect(cta.getAttribute("href")).toBe("/demo");
+      expect(cta.getAttribute("href")).toBe("/platform");
     }
-    expect(screen.getByRole("link", { name: "Enter Demo" })).toHaveProperty(
+    expect(screen.getByRole("link", { name: "Access Platform" })).toHaveProperty(
       "href"
     );
   });
@@ -95,7 +95,8 @@ describe("GlobalLandingPage", () => {
       screen.getByRole("heading", { name: "Global Intelligence Regions" })
     ).toBeTruthy();
     expect(screen.getByText("Illustrative Network View")).toBeTruthy();
-    expect(screen.getByText("Cross-Border Corridors")).toBeTruthy();
+    // Visible strip copy + the GlobeControls accessible atlas equivalent.
+    expect(screen.getAllByText("Cross-Border Corridors")).toHaveLength(2);
     expect(
       screen.getByRole("heading", { name: "One platform, ten intelligence layers" })
     ).toBeTruthy();
@@ -111,7 +112,7 @@ describe("GlobalLandingPage", () => {
     ).toBeTruthy();
   });
 
-  it("routes capability cards only to real demo screens", () => {
+  it("routes capability cards only to real platform screens", () => {
     render(<GlobalLandingPage />);
     const strip = screen
       .getByRole("heading", { name: "One platform, ten intelligence layers" })
@@ -120,7 +121,7 @@ describe("GlobalLandingPage", () => {
       .getAllByRole("link")
       .map((a) => a.getAttribute("href"));
     const allowed = new Set([
-      "/demo",
+      "/platform",
       "/network/txn_84721",
       "/investigations/inv_84721",
       "/investigations/inv_84721#ai-h",
@@ -197,7 +198,8 @@ describe("GlobalLandingPage", () => {
     // card reads "Device Analytics"), so its absence proves collapse.
     expect(screen.queryByText("Device Intelligence")).toBeNull();
     // The regions panel stays open: collapse is per-panel.
-    expect(screen.getByText("Cross-Border Corridors")).toBeTruthy();
+    // (plus the GlobeControls accessible atlas equivalent).
+    expect(screen.getAllByText("Cross-Border Corridors")).toHaveLength(2);
     fireEvent.click(screen.getByRole("button", { name: "Expand panel" }));
     expect(screen.getByText("Device Intelligence")).toBeTruthy();
   });

@@ -23,7 +23,7 @@ function rule(rule_id: string, triggered: boolean): RuleResult {
     explanation: "seeded",
     source_record_ids: ["txn_84721"],
     evidence_ids: [`evidence_rr_${rule_id}_84721`],
-    trace_id: "trace_demo_84721",
+    trace_id: "trace_84721",
   };
 }
 

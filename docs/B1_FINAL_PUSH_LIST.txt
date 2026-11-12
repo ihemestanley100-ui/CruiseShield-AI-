@@ -1,0 +1,534 @@
+ M 85e7becdf3ca8d85b6aa00c85bc4688ee92b5f9a .env.example
+?? 5a155a042ed7be37a84af31a70752b46120f3bd6 .gitattributes
+ M 8ef7fe1c20d3d71bcb9a9bee9f3c13c0515603cd .github/workflows/security-gate.yml
+?? 17d6f271c22fc62d48fabece1328f3b09563303a CRUISESHIELD-AI-ACCEPTANCE-RECORD.md
+?? e8049f9e97a196e149373ce97743a8ecea727459 CRUISESHIELD-AI-CURRENT-STATE-MATRIX.md
+ M b47582f980ac63faa4fbfdbbab2c7948743f7df0 CRUISESHIELD-AI-DECISION-LOG.md
+?? 5513487a1fa08192fff750a970a11de4c8403a99 CRUISESHIELD-AI-DEMO-REMOVAL-MATRIX.md
+?? b134786c37e24fbf2c3f1ec309e31505f2207c6e CRUISESHIELD-AI-DEPENDENCY-AND-INTEGRATION-REGISTER.md
+?? aca2c58abb591b829089f04f2e3fc659afbcccc9 CRUISESHIELD-AI-FRAMEWORK-ALIGNMENT.md
+?? 36c7cfd701483fb0a5d0cea549fe2b374eb41218 CRUISESHIELD-AI-IMPLEMENTATION-ROADMAP.md
+?? b0d7ce12fb924d7d46928e549ba24f3295d3bdca CRUISESHIELD-AI-LEVEL14-BASELINE-AUDIT.md
+ M 62bc2701f768f836f6834bbfd2fa653a26c2023e CRUISESHIELD-AI-PRODUCTION-GAP-REGISTER.md
+?? 9e972d89ede5c9f7cdda7291e90d5d62ebb288fd CRUISESHIELD-AI-RAID-LOG.md
+?? d18a816e15d12608bd1bffdcab7445f9f9af8d33 CRUISESHIELD-AI-RELEASE-ASSESSMENT.md
+?? 9b370ed5c5cceb1fce94374f07e4042cec12f529 CRUISESHIELD-AI-RELEASE-MANIFEST.md
+?? 3bcd736ba0ff8ad3f7eee4756d5155ef611856c5 CRUISESHIELD-AI-REPOSITORY-FORENSIC-AUDIT.md
+?? ac975aa5e6ee6fbeb244d9b19704e829cfcbe107 HACKATHON_CONTRIBUTIONS.md
+ M e598eba7c1d1369fceb494449321a9d483f17802 README.md
+?? e231f0b5746809ac03f3bcb9b4ab21713ac1579a app/abac.py
+?? 8925396c71bca6328f4d1c27779bfafcb075a907 app/accounts.py
+?? b9b876d340afa42c88b7b0a2e7887cf9f9cd9d60 app/address_verify.py
+?? 194ede3c92f83717fd0498ab162089a876e979be app/agent_retrieval.py
+?? fa0d6cc03f70ec6618bf2845bb59d4efa51c9e19 app/agents.py
+ M 176464ee8e18f9e73ccf6ad7c73b8eb94ad54388 app/ai_adapter.py
+?? e85c88dbd63e0e41b5b89edb9f125706cf1e0cbf app/ai_gateway.py
+?? 48a07f54dcc66866d7a5fd38374d8d769325c8fd app/alerts.py
+?? 20e211d6bdaa0f0bb7fa6d22b65d85a646f2fe66 app/altpayments.py
+?? 15cd5675dd781ed3cc8cccf1fb95f5cdc88e5de7 app/api_credentials.py
+ M ad4b22560277db687ae4ad4b9fd027773e54f0d5 app/audit_chain.py
+ M c2919f20b1b8465452d5787d7b00b6eccfb661b0 app/auth.py
+?? 026f1e82776c46548d72db8ed99e159deb140379 app/billing.py
+?? 31b4a6626ee4fd279270a67ddb2cecda72404980 app/capabilities.py
+ M 0acd95d80fde68745fdb66c45b77e5b4c16491c4 app/cases.py
+ M 0c0bc10431d9bd773f68b36c9122429a5a817724 app/config.py
+?? 4a02dca202ce713cb0ae07abedc91c6f650ef859 app/connectors.py
+?? efdd2ba92c146022ad1d1f39d99cacd7520ac91d app/conversations.py
+ M 827fad0c2a25d2b3d4ed4c753b211edfa265ad55 app/db.py
+ M c0206f3bc525a071ddfaab34290dbc544a4e3bf8 app/detection.py
+ M be644673602113f93633b5c7aab598746581ff85 app/device_intel.py
+ M a2b236cc0b2489b3b77af11c86858754e6738d0d app/events.py
+ M 4c6fced18c714482018ffd6ca60d0ed807c4b169 app/evidence.py
+?? f117675d935b63b8ec9840229b9bb33565ea1cb3 app/governance.py
+?? 64a481c02886bfd58c064c407c5012dd754ed152 app/identity_verify.py
+ M ed973d70d547634da9c002b036e05cc1542138f4 app/industries.py
+?? 40f2dfe809fc14ad725e866551416b5bb6f62969 app/industries_accounting.py
+?? 0deb194aba7d72794e77f488c201130869c4be2f app/industries_agriculture.py
+?? 056aa66ad3a4ec2cb7656edc10df0e38478b30d2 app/industries_automotive.py
+?? ec9884be0dd4df4d522af5a13a4ded08fa93e83c app/industries_aviation.py
+?? a21a598baada79ed7483b574d98a1feb1c078f1e app/industries_capital_markets.py
+?? b5051656f9e44b728e3b651ae611afdda46fb24d app/industries_charities.py
+?? 8112aefe54554003143d94937842cd18203748e7 app/industries_construction.py
+?? a984be4044a4c004a6a4849ea32cb703f94916d4 app/industries_consulting.py
+?? 6cf600d4771a59aaa971febdedc0b8efbfc6051b app/industries_crypto.py
+?? 4e00a459a0b896006a5c372c0bd4e28e860433b7 app/industries_customs.py
+?? 23f26ea966879fd316651178ba6042a7fbf01e24 app/industries_defence.py
+?? e383a4eb3d4ffc8590e21231d3c0fc4b224f4af1 app/industries_ecommerce.py
+?? 96b72eb368f11b7c13af2cc37e1afdf4502bd551 app/industries_education.py
+?? 780432412dcaec8732b707a8adbaefb6236c4e1f app/industries_energy.py
+?? 7a9eb12e7df940f884f16f6728a68298c31d9e55 app/industries_environment.py
+?? 5ab86c8ded392f1ab7b5375eb7013b24e33df01f app/industries_fx.py
+?? fd407d347e1be9594bf101a47a2d3c63a6bc8c67 app/industries_gambling.py
+?? 37d7846efb4402192f10cbf72ccdde34c6941dca app/industries_gaming.py
+?? 15aff5bff006eb5bf9757380889085d1bbf328f8 app/industries_government.py
+?? 73fad8d6eca307d3239f417f78ac00d77b463521 app/industries_healthcare.py
+?? efbf4625c5b0c75cd62e10844f1056210d2261ee app/industries_hospitality.py
+?? f2e4feae55f98ce6e3c9f4a5436dd7ebf69f0155 app/industries_insurance.py
+?? ce912eb505ed0090d3c77e5a941384255634fdf7 app/industries_law.py
+?? 57bda40cfdb554304251da0fa193652418a718c2 app/industries_legal.py
+?? 02a18ea05e4817c06eb6cc0efa4ec8776d9f387c app/industries_luxury.py
+?? ee6e360a58b7e760f998c0abe62c009fa3b5568e app/industries_manufacturing.py
+?? 4dfb1e7b3bb208192d75599a8ae8208dc597a65b app/industries_maritime.py
+?? 46cd9f71b6e0fe4a48908d660a2ed801647e529d app/industries_media.py
+?? a50e788c567070ab4a254fb0b0a41822c6c157ae app/industries_mining.py
+?? 4866cc5c68348d8647d20d9fb9fae52be086edf8 app/industries_ngo.py
+?? cabbbf83b6313fade901a38cd25c04aa954ea898 app/industries_oilgas.py
+?? 00ea2f3955e1a1310fabb864f0561a9f31639cd6 app/industries_pharma.py
+?? 062e223b85de1c560d30425f86bfe1f5ecd07173 app/industries_procurement.py
+?? 1ddbdfb8e20b5e4966ed5f9dd9ed42ec6db50cb5 app/industries_property.py
+?? 7efb8904c16c2332ad53c4941ccf1c203694a7c9 app/industries_retail.py
+?? 493355e8fb11b2db90826fed15eebf31192433fd app/industries_social.py
+?? df9b5ee3d2d9d4a63b0aedf975be7da3facf4600 app/industries_supply.py
+?? 01e86cfb6cc78627228a3d361b373b3c5cbbd6aa app/industries_tax.py
+?? 592ef9a0d09658c3f572e603d6fac8fca2c151e6 app/industries_technology.py
+?? a6a81451c4762d4ac676a591592a41d0d4f7df4a app/industries_telecom.py
+?? 9e162114db30785d6cf2a47a90ff69a5bdd45466 app/industries_trade.py
+?? ff0fe43f019576ee8539fd272c310c67f54465d3 app/industries_transport.py
+?? d5242f70c95ce57724e9ff4cba737316932f12da app/industries_wholesale.py
+?? 22814d81aaecba3ea74ef7ddcf4073c7526b65af app/industry_adapters.py
+?? d03addf387cd906e7d61cd9be380e94382c9fc4e app/institutions.py
+?? eff9d3ca40a3aabdf92bad83714e9d981d288c05 app/intel_auth.py
+?? 5a97eab82d56b76e442db4d22481ac0ade8ab26b app/intel_common.py
+?? a1a1232dca6cd504f11ef9e83530181eece1fca6 app/intel_providers.py
+?? 78ea526097057682b7c8bd0923a43bef1b5d6314 app/intel_tools.py
+?? 565d51ecce0bc1ad095534f278243b0824848d51 app/investigation_map.py
+ M b63a5f5da67d9d9ae594e68c78ee408843b3b169 app/ip_intel.py
+?? 884b0ea158563780655537ec9b5bf4148d7ad7f3 app/location_obs.py
+?? 8ff3423f6caa7a9f30eb9d3c25adea73075b40fa app/login_risk.py
+ M 8d053f34a157a5af774699026dd9b22527ba6730 app/main.py
+?? a368bb62895563f0f24c98c8b68f2119225056fb app/mfa.py
+ M 6819ae69a3a15825a312266e4906ccc7390a6162 app/models.py
+?? 77196911ee756bde2bbc69fc0092c9e69280f360 app/monitoring.py
+?? 3451e4497893dbc2bfd0cb0410d3a5bb03b8ea5f app/nl_search.py
+?? 422336468eb353391ddc9dd5a64ea287e23baa35 app/notify.py
+?? 8c3bdcccbf61984b7ac9d1858c0b32367c339934 app/orchestration.py
+?? dd13626a2a43fde1ef5b6aae4a78f3c647cf6a7c app/orgs.py
+?? 79c7541e5d1aced8ad69e0b45b4701ad6cea0611 app/parties.py
+?? c7c6749a1b3110b150c8f3a479fb8eb1d1bc33ef app/passkeys.py
+?? 819087aeea792ac714eeedcd6b52f98ebd37ef96 app/payment_methods.py
+?? 67ddab5baf0689c802c668619d14c7d2c5fe3647 app/payments.py
+?? dae1cad9bda1c99b6747707db34172e27af5a452 app/pilot.py
+ M 1e11066f2215529fdac869a9dc176a0ae3f84848 app/ratelimit.py
+?? ddd13f9cd8e62feb9a33e81b6ee6b85b16a1a91d app/recovery.py
+?? e8e55a6d754ce8e8610d35e6ea41c3b986d64b3f app/recovery_caps.py
+?? f6f51dcdbae8a33976af9d06052939ebd23c8bd3 app/recovery_rules.py
+?? de9e12f8e875c73a5394fc7b771c1d62dce2f120 app/reports.py
+ M 532ffbca1b17ca085aea7ba0bdbfe4e8a7e5d84e app/risk_intel.py
+ M c67c63ac8c1fbe3e1a8c0f3c9b770d305b808c2d app/rules.py
+ M 49f5d0b4e394dab07eaf9c5ca8221a0a19ed7dca app/seed.py
+ M 248dd40713c6a145906fd436d6eed66f32cd4f7a app/store.py
+?? 451823bb1a9dbae251d6d05dd4610c774ba9addf app/telecom_providers.py
+?? 7a9f03be72276218b2d29dd03fc7a1a6c98fc1d8 app/telecom_registry.py
+?? 67816ce004cefea2fe37aa2a09ec397153b883d1 app/telecom_verify.py
+ M d9aa0ab8dc606019f48f8d08f6bdb4a9c295d6e0 app/tenancy.py
+?? b139d99132920c375aa1a02db4158bce0347e6cc app/tracing.py
+?? 4418fb7ffc0fd5e58700c068b26590e9ac19bdf3 app/trusted_devices.py
+?? 7f2b4ad4f0e93a0d770d076a2d497103052fe92d app/typologies.py
+?? 42ebf9ac3fc17b25ef10c21beaa800fc13232593 app/verify.py
+?? 3421359aa027d41ef3ed99acc22810bfe823b073 app/web3.py
+ M 6018dc837554d5e69cac5daf5a623ff37a4193af backups/local_target.py
+?? DIR:d3cf479cc6ee71b8 browser-evidence/cert-frc/
+?? DIR:7714832d68c0abb6 browser-evidence/cert-v3/
+?? DIR:c7017ae1417f7640 browser-evidence/cert-zg/
+?? DIR:3ea260fe71116d4a browser-evidence/cert-zgep/
+?? 1dbe4bda5d898889601af2ba2393d2d04d74ada8 docs/ACCEPTANCE_RECONCILIATION.json
+?? 9334791e0ad2e7fafb4f36bc8daf9d58bc7b1ae8 docs/AGENT_OS.md
+ M c7d7c9ae9719e7e3a2eeba3b9902970eaf95e3a5 docs/ARCHITECTURE.md
+?? 6898a25cb59f7530b44e7004a463e2a871f93975 docs/B10_READING_WORKSHEET.md
+?? 0d0989ca0051217e0eaeef7cf1bb37776e02f9a1 docs/B1_B2_B3_CONSOLIDATED_EXECUTION_REPORT.md
+?? SELF docs/B1_FINAL_PUSH_LIST.txt
+?? 60485b7652e8145e1c296ae3932f1211d98140b0 docs/B1_FRONTEND_TOKEN_WORDING_VERIFICATION.md
+?? 593de7913ab219ec360d6b7f725ca6555173e979 docs/B2_B3_OWNER_ACTION_CHECKLIST.md
+?? a1a5049d4e191ee244028ab068a0d8418ce9b21a docs/B2_B3_OWNER_EVIDENCE_REGISTER.md
+?? 073194e2e2d72082f3f8aaa5031312fdf67eee2a docs/B2_BACKEND_REDEPLOYMENT_VERIFICATION.md
+?? 383d6ed2c066772b911853badce5b0e3c020d2bb docs/B3_RENDER_ACCOUNT_AND_FREE_TIER_VERIFICATION.md
+?? 6e312c198a284e9575a1f710d7ad0c8d460f184e docs/BATCH1_FILE_INVENTORY.json
+?? a3818b8fb27da8a3391ca06749e271ee700f168b docs/BATCH1_FINAL_OWNER_RISK_REVIEW.md
+?? e1ebec71d517ece7abed63d5de284704e6b5d304 docs/BATCH1_OWNER_DECISION_SHEET.md
+?? 90ed23a0d5f7726caff258ec78e97c926bbbbe18 docs/CANONICAL_FILE_MANIFEST.md
+?? 8e549edc0e752592ff605d6670bc3d4565467da9 docs/CRUISESHIELD_COMPLETE_FEATURE_MASTER_INVENTORY.md
+?? d68c74d2aa30edde4b7036cd81755b545f1a3cc3 docs/CRUISESHIELD_DEVELOPMENT_CERTIFICATION_REPORT.md
+?? 8d6ff441a3ebf8c44c51077cef53eab676b073fb docs/CRUISESHIELD_FINAL_FEATURE_PRESERVATION_REPORT.md
+?? 75901874891f1b1c978ad3ea6330d6ad32a5d211 docs/CRUISESHIELD_FINAL_RELEASE_CERTIFICATION.md
+?? 71eec08d074d6d2f20cbc1f423a564a2bcd0d90e docs/CRUISESHIELD_FRONTEND_BACKEND_FEATURE_MAPPING.md
+?? 763769bacf67dd2dfed4bbd8c07fe38bb2b79d39 docs/CRUISESHIELD_MASTER_EVIDENCE_REGISTER.md
+?? cbfd9dbec34abfcf9e43b583e1ae3d8b13555962 docs/CRUISESHIELD_MISSING_FEATURES_AND_GAP_REGISTER.md
+?? 886e4774f2a1456db8b4a5a5ccd1b485dfb2c923 docs/CRUISESHIELD_ORIGINAL_VS_SECOND_UIUX_RECONCILIATION.md
+?? e47d9ddfb1fc1139bd7ed63a6b9182b4b0095660 docs/CRUISESHIELD_OWNER_ACTIONS.md
+?? 92b811873f75a4030a092d2ad1457a6659cdb700 docs/CRUISESHIELD_RELEASE_MANIFEST.md
+?? c9cbe0f47c4c17b6b58b81e8eba7f4c80ad664ed docs/CRUISESHIELD_REMEDIATION_REPORT.md
+?? 602db110aa79acfb59f636bdc3421029fa1b72d0 docs/CRUISESHIELD_UIUX_ACCEPTANCE_TEST_MATRIX.md
+?? 3e1fc8e5c74dbadc17dc7444e5111caa00c3715e docs/CRUISESHIELD_ZERO_GAP_MASTER_MATRIX.md
+?? 4f2e647e1c7a24d2b5ba8de79b340d2933f6ecb2 docs/CRUISE_ORBIT_BACKEND_ENDPOINTS.md
+?? 7f916876aff9169549b41ac264de7e9434f5209e docs/CRUISE_ORBIT_COST_LICENSING.md
+?? 85f68b6b495b0c07286783010e30d4e07ba45ef6 docs/CRUISE_ORBIT_DATA_ARCHITECTURE.md
+?? 0669341a642d143ac8d7592f22e2ea952031ecc6 docs/CRUISE_ORBIT_FEATURE_INVENTORY.md
+?? 330f96dc006d4a9cffcacf1f4ba44f6284f632a8 docs/CRUISE_ORBIT_FRONTEND_SPEC.md
+?? 66c3f7058e067544ed444dd22e26cf9d4eefb84c docs/CRUISE_ORBIT_GAP_MATRIX.md
+?? a487a4feb7fda426cd4ebbd9ead7064e4466725e docs/CRUISE_ORBIT_LIVE_VERIFICATION_PLAN.md
+?? 895fc2a5c14366ef16794294920f6a7de8a64e91 docs/CRUISE_ORBIT_PROVENANCE_SPEC.md
+?? 059cf046d66059c2cc6f0265ec30b9ce31f98c24 docs/CRUISE_ORBIT_PROVIDER_MATRIX.md
+?? fec7280b4e3ec82096086beba1ad9f33f87511ee docs/CRUISE_ORBIT_RELEASE_GATES.md
+?? 8739d8a8d1596867fb13c6a928e629f34b4f98a6 docs/CRUISE_ORBIT_SECURITY_GOVERNANCE.md
+?? 447b108a4ab1666cf80e57a65c5c03af77d1289e docs/CRUISE_ORBIT_TEST_ACCEPTANCE.md
+?? e45fc4f7cc21f50cf67d4814eba63f2ef1889861 docs/CS_FINAL_BACKEND_SECURITY_REPORT.md
+?? 62620dcf6887a712d605d492430fc956d65598e7 docs/CS_FINAL_COMPLETION_REPORT.md
+?? 26291fb0e35520e0534409296cc84190ec81feb9 docs/CS_FINAL_END_TO_END_TEST_REPORT.md
+?? 21bd4482d82769faa9db9ed0640f07506f6bc6a2 docs/CS_FINAL_EVIDENCE_REGISTER.md
+?? 2188241b4b15481938739da2ec2196a7acfa52b6 docs/CS_FINAL_FIVE_AREA_VERIFICATION_REPORT.md
+?? a32893d362a3adbe220aa9fbcec9362adc5fc32d docs/CS_FINAL_FRONTEND_DEPLOYMENT_REPORT.md
+?? 7fe03c0b39190befcc629744e3ce6c1b4d9b50d0 docs/CS_FINAL_IMPLEMENTATION_REPORT.md
+?? dce749a89a3ce81eacb7371053f7878d3da1a089 docs/CS_FINAL_OPERATIONS_AND_ROLLBACK_GUIDE.md
+?? 13203d160e68ec8f9b05df4ef27af8274edf86ba docs/CS_FINAL_OWNER_ACTIONS.md
+?? 326c3a839b2542438f287641afc47b70700f2894 docs/CS_FINAL_RELEASE_DECISION.md
+?? 0a0530fe466dacbbc298d54f735d52c037bcd91f docs/CS_FINAL_RELEASE_READINESS_MATRIX.md
+?? e2c1a944537c4e2d03c6b77e1ac6f4c6ff2c6fd3 docs/CS_FINAL_RENDER_COST_REPORT.md
+?? afdcc7395947816507e8af0c8c681d30ff4e95af docs/CS_FINAL_ZERO_GAP_MATRIX.md
+?? 16932551c7430a4930f342bd150df08af24b9c85 docs/DEMO_PRODUCTION_AUDIT.md
+ M e55581a7c549f9ad93f8ec96f19dd41dd5bb4564 docs/DEMO_TOKEN_ENDPOINT_AUTHORIZATION_MATRIX.md
+ M c67b830c2a0d0204baa8d2473a8d171f5053862b docs/DEMO_TOKEN_SECURITY_REMEDIATION_PLAN.md
+?? c43ead96b2a09ee08a83036e71499310743c1e5e docs/DEVELOPMENT_FINAL_CERTIFICATION.md
+?? 7e161981beb270adf19cf6d0d2913a2363711f18 docs/DEVELOPMENT_FINAL_REVERIFICATION.md
+?? 8db4f3cd9320fcc4965fe687351eaa1700112342 docs/EVIDENCE_MANIFEST.json
+?? 3f7343cdd136d839e5b12ce440d8a1d16fad26d3 docs/EVIDENCE_PROVENANCE_REGISTER.md
+?? 2d30536d8fc355e726efee4fd7ebb1594a3a1d1f docs/EXTERNAL_INPUT_COMPLETION_PLAN.md
+?? 131f537cda3f84f95e7ca9e7d3d02cbe703248c7 docs/FINAL_DEPLOYMENT_CERTIFICATION.md
+ M 12eda64f4f4e92f41443a41f59ac0001bcae0951 docs/FINAL_DEPLOYMENT_GATE_REGISTER.md
+ M feab82d32714a44acbd4f175115f4e64aab37688 docs/FINAL_DEPLOYMENT_VERIFICATION.md
+ M 4bb5424bf853834fbb3f966dd9d18fd812279366 docs/FINAL_GIT_RELEASE_MANIFEST.md
+?? 7ca4ecf6db33b5a72dff35485d904fc82b82e72d docs/FINAL_GIT_RELEASE_READINESS_REPORT.md
+?? cc1c45b28ecdf42f32238040efd2eec5a720d5a2 docs/FINAL_GPROVISION_PREFLIGHT_REPORT.md
+?? 65f8a4fe47e574c640f084e953265c02111ee320 docs/FINAL_PROJECT_AUDIT.md
+?? e00219ab3aab9ddee29b9f58c73776ae6e78aa0b docs/FINAL_RELEASE_CERTIFICATION.md
+?? 7ccf4dfb078b26d6e3d1e6e66bece650f06a460d docs/FINAL_REMEDIATION_BASELINE.md
+ M 0a10091c94a1bf4293abfd15c966d96c906dea7a docs/FINAL_ZERO_GAP_MATRIX.md
+?? c47f9cb137e62952ea365a2f8e5221279ea00fd3 docs/FORENSIC_INVENTORY.json
+?? 2a6d4f93aaca6771e89d93403756fd36ff094bab docs/FREE_TIER_FINANCIAL_AUDIT.md
+?? cbca42db68abf3e90983ac1e3340d2eab341880d docs/FREE_TIER_FINANCIAL_FINAL_CERTIFICATION.md
+?? f70423522b551405b81bc57add1360f4f7d4e043 docs/GEOINTELLIGENCE_OS.md
+?? 102e622a76757f124070509cd2039d26d35ca4c3 docs/G_PROVISION_FRONTEND_PREFLIGHT.md
+?? 07dc3ed5244c4d8953ad93e022fcbf6db992c743 docs/HACKATHON_SUBMISSION_PACKAGE.md
+?? b6f0149b9efed5442a64a4d2c24b1f0bfb62dc89 docs/I18N02_REVIEWER_HANDOFF.md
+?? 3ff8194c6db762c4d948f02d73d5f8a1ce6c3e46 docs/I18N_NATIVE_REVIEW_PACK.md
+?? c8db7243736bd59fe075ca42343223807cfa85d6 docs/L13_PHASE0_BASELINE.md
+?? d7dbcc660635ca02d682e35b08045a1a9fb0056f docs/LEAFLET_TILE_POLICY_REVIEW.md
+?? bdfc96c4c07eeb86275f01bc4bc8145926815bcf docs/LEVEL14_OWNER_APPROVAL_PACKAGES.md
+?? fab15f2bcf6b847673fd320ee674c1cb1aa1bb69 docs/LIVE_EVIDENCE_INDEX.md
+?? 61f34cb1bf2fff7dc6ab2b2b39a5bcdbc96856d9 docs/META_AI_FINAL_CERTIFICATION.md
+ M ad5ea99366d80f98a5a1fcb446cf10a07417c919 docs/META_AI_INTEGRATION_AUDIT.md
+?? a0ecc9b2e5ca67878e47a105751fe7b2cec85069 docs/META_AI_LIVE_CERTIFICATION.md
+?? 87a407bd18f306cf2a34545fe3181f1bbe69a085 docs/OPERATIONS_RUNBOOK.md
+?? b8d8fc7b0f1dc8418f14dad794a1c8a9c451cc92 docs/OWNER_DECISION_TO_23_REQUIREMENTS_MAP.md
+?? 04af36878bdb8475173990ea37ec54932742c525 docs/PHASE0_DEPLOYMENT_PROVENANCE_SECURITY_REPORT.md
+?? 3c4f7aeec32b56d521daf48a5fda1d6e08964125 docs/PHASE1_AZ_MATRIX_RECONCILIATION.md
+?? 0b6ea162144cc9b69ec34e9a68268b6035ec7bec docs/PHASES_2_17_VALIDATION_AND_GAP_RECORD.md
+?? 2444a0a45e720130e18f03d62f5fe687ce6b8415 docs/PHASE_1_APPROVAL_AND_EXECUTION_SEQUENCE.md
+?? a11b407e92344bbb1e32951ec2c9afc992477424 docs/PKG-02_READ_ONLY_VERIFICATION.md
+?? a2dffff4d328d6afe467525123bf26aff24366aa docs/PKG-05_FREE_TIER_AND_BILLING_VERIFICATION.md
+?? c8db055d079d588753666cc40ab8d2bd48a4a801 docs/PKG01_PUBLICATION_MANIFEST.md
+?? 021dd39ecadcba8beac233c7a3bfab0099d719ed docs/POST_DEPLOYMENT_HEALTH_ROUTE_DIAGNOSTIC.md
+?? 8eafc726eac420a6424d01438989c85dbad26564 docs/POST_Q1_BATCH1_FINAL_READINESS.md
+?? beebfc45e45ba7a62206e36c2f463c290ba874c6 docs/PRODUCTION_CLOSURE_REGISTER.md
+ M c7532727318a15c5267472d5a995fc97b83c15cc docs/PROJECT_EXECUTION_STATE.md
+?? 1b9bd1bc8394349171a468c057c41606b5b3a709 docs/PROPOSED_ZERO_COST_RENDER_CONFIG.md
+?? 0827896d1a4f13bf7994a401658d70d38176b630 docs/PUBLIC_REPOSITORY_AUDIT.md
+?? fb6073fe3f6cbb6710f2853c9be2aa34fa57bb80 docs/PUBLIC_REPOSITORY_FINAL_CERTIFICATION.md
+?? 70cbc2bfd27a5b77a0b445c9b704247518bb74b6 docs/PUBLIC_REPOSITORY_RELEASE_MANIFEST.md
+?? 9071d27fee53526cd6b71880e764316a9fef769b docs/RECOVERY_OS.md
+?? e1713f1efbf3e9dac9565f4f23ef5d6fa253314e docs/RELEASE_CLOSURE_PACKAGE.md
+?? 98ffa26faa04802efe5ef010c29460242afad311 docs/REMAINING_40_ACCEPTANCE_AND_EVIDENCE_PLAN.md
+?? 0aee41359678a2ee98c0b767b8266556d93bf6c2 docs/REMAINING_40_CONFIGURATION_AUDIT.md
+?? 69de96f1f176fd63ce99001e99f9d031efea0033 docs/REMAINING_40_EXECUTION_ROADMAP.md
+?? dfb1a28a634eb50042b28890cdc5365096dd4e7e docs/REMAINING_40_EXTERNAL_DEPENDENCY_REGISTER.md
+?? 418e4480f69bb1a74f9c7ea229a2a838c199278a docs/REMAINING_40_OWNER_APPROVAL_REGISTER.md
+?? edc44debf9b5c15fb82f246c46fca1ea16c9efe6 docs/REMAINING_40_REQUIREMENTS_CLOSURE_REGISTER.md
+?? f0d74d8402f9e4350ebf050a5d49683833dc786b docs/REMAINING_OWNER_ACTIONS.md
+ M 25cc09289d7fce477da830149ddfe03fceeb34da docs/RENDER_6_ENV_REGISTER.md
+?? ff39004d7933ca3e827d2cfcde52436d70f48068 docs/SECOND_UIUX_IMPLEMENTATION_GAP_MATRIX.md
+?? 509490135c2e81e375c91f022a74ed052e5d06bf docs/SECOND_UIUX_REDESIGN_FORENSIC_AUDIT.md
+?? 7c3152af7ba43314a8d8b52e1b966399eeb662ea docs/SECOND_UIUX_RENDER_DEPLOYMENT_RECOVERY_PLAN.md
+?? 4e5c625690cb7eaf7b71f04005d93d97d8f7409d docs/SECURITY_GOVERNANCE_AUDIT.md
+?? 7755d701848269d57486c8c74ffa605acaa15ddb docs/SECURITY_GOVERNANCE_FINAL_CERTIFICATION.md
+?? bfcbb873a6034880047820a8efbe233f400e60e3 docs/SKIP_TEST_REGISTER.json
+?? 3f7e8043c0387153819f347030b61fc801f4d1cf docs/TELECOM_IDENTITY.md
+?? 1da51db82d987a7a6845145a2ca8d9fd4552c2e0 docs/TEN_OWNER_DECISION_BRIEFS.md
+?? 715c1cd6691d01dcd1d1ead33969f4d708ef4cb2 docs/TEST_RESULTS.md
+?? 03729b0f9c9c0ed277cd125971f0ec022c2d3955 docs/THREE_JS_FINAL_CERTIFICATION.md
+?? c7db1d717ebe99d5727e3db97fc0d8d86d9fd123 docs/THREE_JS_VISUAL_INTERACTION_AUDIT.md
+?? f3f2ae7d03b7c7d30c8675ec4e5348cf3654947c docs/UFI_CLOSEOUT.md
+ M c7c411598afe6a943a5f699b4f7baee30b9c0a9a docs/UGLS_KEY_INVENTORY_GENERATED.txt
+ M add033635620efc89e6fe8f698e3407837ae63f0 docs/UGLS_REVIEW_KIT/README.md
+ M a7483946498132e99dd452e72dc28bba8e83a681 docs/UGLS_REVIEW_KIT/ar.tsv
+ M e457fb4176d7560fb2b5086c7428a2b16771ae0e docs/UGLS_REVIEW_KIT/es.tsv
+ M 193424924ddc2d3a7c0a5195195309f5832595a6 docs/UGLS_REVIEW_KIT/fr.tsv
+ M f427f774d2c52928e6d0b85ceee35084c82b4668 docs/UGLS_REVIEW_KIT/ha.tsv
+ M d2d9543f30f122bd4471166f1b7503f6682b5508 docs/UGLS_REVIEW_KIT/hi.tsv
+ M 2a9c62deb5994535a8a31dab3ad1a6563b9bfdf0 docs/UGLS_REVIEW_KIT/ig.tsv
+ M af7fd01d37e2fd03931efef58e8268252faf8838 docs/UGLS_REVIEW_KIT/ja.tsv
+ M 004cc1f39ed63ca5fd3f7e1beee6b3ac2cb20b47 docs/UGLS_REVIEW_KIT/pt.tsv
+ M c958e28b83c36785fc0e9e85c20ed512e96e01b6 docs/UGLS_REVIEW_KIT/sw.tsv
+ M d2b53e7cff1553ef48ba10f4665c85b5beac372a docs/UGLS_REVIEW_KIT/yo.tsv
+ M 6b7445b48da4a7a2fdb778a21bd7ed52d6612224 docs/UGLS_REVIEW_KIT/zh.tsv
+?? dde7a4c25318e14ebef886276ce67a69eafb4a45 docs/UNIVERSAL_INTEL_OS.md
+?? 28d1bdf7314cefbf2f32698838b9fcad07215cbe docs/WORLD_ATLAS_ACCEPTANCE_TEST_MATRIX.md
+?? 3e3af0f8250090aabbb459e75cfdf0d726d37fb1 docs/WORLD_ATLAS_API_SPECIFICATION.md
+?? 137abc839235d0ef178abf599b9df852a0e5b725 docs/WORLD_ATLAS_ARCHITECTURE.md
+?? 4ac1c756ec8ad56309c45feeb8ed23ff6adb6a73 docs/WORLD_ATLAS_DATA_MODEL.md
+?? a1d219aca481840281a8b17ede9e62842aa51801 docs/WORLD_ATLAS_DEPLOYMENT_AND_RELEASE_GATE.md
+?? fcced84beb87baba2f45a39b4d765fc622b81dd8 docs/WORLD_ATLAS_FEATURE_INVENTORY.md
+?? fb9fe5d40e09d0cdb645fe2262b8e4a04b43f3da docs/WORLD_ATLAS_FEATURE_PRESERVATION_AUDIT.md
+?? 0bf6b2fc4634f7911f254ac54bbbf0db5ae1f8e6 docs/WORLD_ATLAS_IMPLEMENTATION_ROADMAP.md
+?? dbcf01952a1dcc251ce6c6df6e5d180cf6323462 docs/WORLD_ATLAS_INTERACTION_DESIGN.md
+?? 355ab67ac8bb73d8c393b961faf99d9d96aab2bc docs/WORLD_ATLAS_MASTER_SPECIFICATION.md
+?? 35e735c2da0ad46521911fd8da2fb6dac13df290 docs/WORLD_ATLAS_SATELLITE_INTEGRATION_SPEC.md
+?? ebc9af2d802f7781727f751afffea4f2edebc234 docs/WORLD_ATLAS_SECURITY_PRIVACY_GOVERNANCE.md
+?? 2b79f6166a19da3e5b715d8580b7693f864bfd11 docs/WORLD_ATLAS_ZERO_GAP_REGISTER.md
+?? 23682504aa3ae29e11057718211fb18b028a40ba docs/ZERO_GAP_MATRIX.json
+ M bf6d2684862c68fed81b7e1062d570f42d6bbbd5 frontend/README.md
+ M 4e4590d00885b49aa08ec849dd32c6ab5512972a frontend/a11y.test.tsx
+ M e2a6226a5831a6e4a3a704c12590c457f4ed62ca frontend/app/cases/[caseId]/audit/page.test.tsx
+ M cb5afeae390fe72b9ba42dfbe51fc2f1a8f3272d frontend/app/cases/[caseId]/audit/page.tsx
+ M 7d404948468a49f4df15779be0246e8c24ccdf0d frontend/app/cases/[caseId]/page.test.tsx
+ M 26cea017e2e8acac18acf8aac2e8c9ba6ff5ddfd frontend/app/cases/[caseId]/page.tsx
+ D DELETED-OR-DIR frontend/app/demo/page.test.tsx
+ D DELETED-OR-DIR frontend/app/demo/page.tsx
+ M bc8ff17f4f350a48fcbc673d1dc89b0299316ef7 frontend/app/error.tsx
+ M 718f938cd8ad6c902e9e6bc73a4b207fafa53c55 frontend/app/globals.css
+?? DIR:dc2761fa68ab1a5c frontend/app/help/
+ M cc2277758abb4a06ace942ac5939d9282b15cc1d frontend/app/investigations/[id]/page.test.tsx
+ M 9a7cf2b7d3ff862cb9d43a4fa806dbb92900a94b frontend/app/investigations/[id]/page.tsx
+ M bc2314ca1a99ce59c76fb1c80433829e2e88a754 frontend/app/layout.tsx
+?? DIR:4cb4c757c915acc4 frontend/app/legal/
+ M 724465beedd9d8f776bb17ed059e97c9d89ef478 frontend/app/loading.test.tsx
+ M 4139532538329356d13be078dc1482f6232484e2 frontend/app/loading.tsx
+ M 31413b00efd6158e608a6d95914c59f9e808b44c frontend/app/network/[txnId]/page.tsx
+ M 3b880593958bbcddc92fdc61df401336b84144f2 frontend/app/not-found.test.tsx
+ M d11c1eb54c2474079fc2594c66b229ecd0aa3743 frontend/app/not-found.tsx
+?? 8cc0dfeb40c5b4627775c8f3ea7b939f2024205b frontend/app/page.test.tsx
+ M 0ca4fa8e112ce0ea3e2eaa7597c5909c1e2581bf frontend/app/platform/page.tsx
+?? DIR:efb3efcabc80b71b frontend/app/privacy/
+ M 55426fc1c4898487b871b28cbedaf6815de00e56 frontend/app/replay/[scenarioId]/page.test.tsx
+ M 3fc1f32083ff0c39c1f3214b494e9eb5823b033d frontend/app/replay/[scenarioId]/page.tsx
+?? b852a79098020115969bf884858ca688dffa3460 frontend/app/static-pages.test.tsx
+?? DIR:ae4fb34efea09075 frontend/app/support/
+ M f4e1fcfb16df02727682f2d44dee45c21279b592 frontend/components/ai-panel.test.tsx
+ M 1d5aa6fdc0aeae3bb362ed92534bf63ccd026e50 frontend/components/app-shell.test.tsx
+ M 04c078ab71472cb26e7ca3603995f862b6bd1564 frontend/components/app-shell.tsx
+?? c23e4a9c41b05fcd57e4c7fdc37e81703d8816e8 frontend/components/assistant-shell.test.tsx
+?? 046a7c2f65d4e483f364cab9902ef552adc966f5 frontend/components/assistant-shell.tsx
+ M 78806fefa3b9ac4d49e7b0b9545c00496ba2b1e8 frontend/components/audit-list.test.tsx
+ M 3b64ecc24999ae5cb8ee4e12a60187d45d19487f frontend/components/command-activity.test.tsx
+ M cc5f0c9bafd77b730a04b712d642a36391874e9f frontend/components/command-kpis.test.tsx
+ M 76a3f0b52c38f3433638d0c558f94130b968a1ae frontend/components/command-network-preview.test.tsx
+ M bf841656c62b4731cd434939a9edf662a04f17d6 frontend/components/command-rule-summary.test.tsx
+ M 5abc1900ed84dec5b3e1663a5913984c1425fe03 frontend/components/decision-form.test.tsx
+ M 324580d9e8ee715e6904d4bb2e3751681729c41f frontend/components/detection-panels.test.tsx
+ M 2e3e21f8d39e955df9f799238fb28d8757b701e5 frontend/components/detection-panels.tsx
+?? 0c4dcb8708cf794b39c081efdce0d5c0d239858b frontend/components/geointel-map.test.tsx
+?? f43b9123a22937b112507f2f19a7e0829026bfc2 frontend/components/geointel-map.tsx
+ M 92822dd98ef703129ff408cb50a6e1849f3c3b2c frontend/components/graph-explorer.test.tsx
+ M 14e81affe02076fc35884f692ab82153a4f81efd frontend/components/graph-table.test.tsx
+?? 4163ea079c61743da22d1285019c16b4d89bd244 frontend/components/industry-section.test.tsx
+?? b4276e75f3bd6d4d6cbde1a0fbaabdca106105a6 frontend/components/industry-section.tsx
+?? e73c871d5f2eaaa7c8d0a1aab5865bb0e895f9d1 frontend/components/intel-admin-panels.tsx
+ M 7052bb4be2fa48a9abeb16f3566d0082e60451bf frontend/components/intel-panels.test.tsx
+ M ab3c63f953622936078351957594bbe6a1b5357d frontend/components/intel-panels.tsx
+?? e86d15de8f936d9eb79fb203a64c05ec2bdd2dd7 frontend/components/intel-verify-sections.test.tsx
+?? 657c73458106e356b258944978a166e6a3de24a3 frontend/components/intel-verify-sections.tsx
+ M 882e3d5ff4d45b7c0c504a91c96a56d02a550e31 frontend/components/landing/GlobalHeroScene.test.tsx
+ M b7b43d9470c47030a3832cfa2a5de0c3cb620fee frontend/components/landing/GlobalLandingPage.tsx
+ M e5c79b392bc7952c82d4f7f2ca40ea85777b1434 frontend/components/landing/LandingChrome.tsx
+ M 8a025649fc14f32a83a45b6850f07c90e1254236 frontend/components/landing/LandingContent.test.tsx
+ M 2cc9d14da424fe4787d1b40e883bb3d831f40946 frontend/components/landing/LandingPanels.tsx
+ M a5d443a1aec3aae58cddd58e5bfbafe8e5542cba frontend/components/landing/LandingStrips.tsx
+ M 1c3e66a48e4ea4cc4f7d5a508bf534929d8c4d2d frontend/components/landing/WebGLFallback.tsx
+ M 465b7fdcc8f9b2ac3169745aee0d49631fdc6ced frontend/components/locale-switching.test.tsx
+ M 85171f9445e974dcad55317613a19d5614c9e89c frontend/components/login-gate.test.tsx
+ M b6b556558f66a4d4f953ea9f6a1ed7fe6f52fb40 frontend/components/login-gate.tsx
+?? b5dbd4e6d44ebb382650efde7938e87c76bfde4e frontend/components/monitoring-section.test.tsx
+?? 0d700a019a03a77e3b523acfc78a04b952968ad7 frontend/components/monitoring-section.tsx
+ M 6d3bb2e88309e969b8be3e821c9f0339f7d177db frontend/components/notifications.test.tsx
+ M 2f12a07c48b5e6ee5116a426a7c9af4f4db58ae7 frontend/components/orbital-explorer.test.tsx
+?? db2e76cd61b0990c1ac4b64898ed4f72c197b2ec frontend/components/recovery-section.test.tsx
+?? 9e4a754f06a23b9e726ff63afe65f541a9f82c00 frontend/components/recovery-section.tsx
+ M 06fa32f7748a9fd454686e277c3764f3efca75e6 frontend/components/replay-controls.test.tsx
+ M d3bac23685bdeebac2734530199f132114f920ce frontend/components/simulation-panel.test.tsx
+?? 8d0b6eac11ba75d4b3abbf9e0f196e3c0fa4b50e frontend/components/static-page.tsx
+?? 20cead9bb0f9222b7736a65b8db1597ed9f79bc4 frontend/components/telecom-section.test.tsx
+?? 89767d35ba9a66f7db4647cf088725f90003394f frontend/components/telecom-section.tsx
+?? 0a2144b0b8ac60d08d9ade7ec58ac86e54a94cd0 frontend/components/tracing-section.test.tsx
+?? 14a6dd30d80c2ae698ba3d563ce938b10e6e7cd3 frontend/components/tracing-section.tsx
+ M 4d5c21dc7889ff521fb0a985d729fe489d261f5e frontend/lib/api.test.ts
+ M 4ba32cba20aa3b8080c326754e64989274d1ba2b frontend/lib/api.ts
+ M 6f059eca8e26bc90e194ee6aec6e99d00ca5b6b1 frontend/lib/graph-layout.test.ts
+ M 61763e41f209eedcbd931383941c784c7770e1ea frontend/lib/i18n/context.tsx
+ M 84ba52f6449f6a1a2744d1e52f3be624aaa0de64 frontend/lib/i18n/dictionaries.test.ts
+ M a5327043a88b754b9e5652e168348c7910f4bc4b frontend/lib/i18n/locales/ar.ts
+ M 41782f13cf3cf430d931a05f4b4f89c0ac73ae30 frontend/lib/i18n/locales/en.ts
+ M d15187c440c546c140419fdd17888689e7f22b35 frontend/lib/i18n/locales/es.ts
+ M bd16a1382b6cfd3d6fae278a7acfd98827aeaca6 frontend/lib/i18n/locales/fr.ts
+ M 351f65682eb9b310d0fd136b8c9717e4906143b1 frontend/lib/i18n/locales/ha.ts
+ M b81c9707b0c2c3683f5e6973a6cc616690692106 frontend/lib/i18n/locales/hi.ts
+ M 8c23eb17d3d2915a18300bd321c17051f2e6963c frontend/lib/i18n/locales/ig.ts
+ M 8e68b01f5459abfc237a91715899d8eae338a60d frontend/lib/i18n/locales/ja.ts
+ M 98ae14cb90f9b0bb68dd5da285ef18d09e70ba6e frontend/lib/i18n/locales/pt.ts
+ M 5b495d879a52ebed12eaffd1359af04cc2593732 frontend/lib/i18n/locales/sw.ts
+ M bdaa5c89f0a8aec9fa5c4a59f21195fb87d8c81c frontend/lib/i18n/locales/yo.ts
+ M 80b47a640f323d0f423297f781bfeb5755729968 frontend/lib/i18n/locales/zh.ts
+ M 77a80a5347029cf0cef449cc37f94e9a8ac15a02 frontend/lib/i18n/meta.ts
+ M 16ca1756c07dc98f6fa9e1103227200790bd2122 frontend/lib/orbital-layout.test.ts
+ M cdc68c78bfe91c327926be1186688651f7484a38 frontend/lib/orbital-layout.ts
+ M 967444b115b0a1ef633288d312b8f915cea37b9c frontend/lib/session.test.tsx
+ M a14135f1f4a7a5c3698be1cd4470edac342e33e2 frontend/lib/session.ts
+ M 655a54e78fd748269ff50a379c104bdca77b8c45 frontend/lib/site-url.test.ts
+ M af9e6fdad9bc64c8e38d4d799248c98c996856cb frontend/lib/site-url.ts
+ M 1bfbbc39aec2d09835dbcb65c3f6bf1285204200 migrations/loader.py
+?? DIR:4f725866dc3f32b4 qa/
+ M 587dc0f21db61ac349dbedc7d820d4e2a1c181a9 render.yaml
+ M 67e58ad2e2d7712e142a0c139004385bae0d7b07 requirements.lock
+ M 849359a443a3879ef097aa4ca3c0cd01aa587726 requirements.txt
+?? 44581c6fc7c266ee47e875b60c32f16bc625395c scripts/audit_export.py
+?? f105a726c836896a4811874669eaee19b7b62834 scripts/evidence_manifest.py
+?? f7dc24bb64fc63f073477b22b9e2fb81871579db scripts/forensic_inventory.py
+?? 97becff662e1d872bc35f1e34dcc487dc33c7911 scripts/gen_closeout.py
+?? 744ca97933b7c460b889e4cc8beb876481c47710 scripts/rollback_rehearsal.py
+?? b3175cb31c45ea4ad531a40ea0bf7fa3a1dc7f24 scripts/zero_gap_matrix.py
+ M fffd03e80260f060854b175f2954b3ae994b10ab static/app.js
+ M 1c130f5688cf6cea00bb81172963398dd8ff38b1 templates/base.html
+?? 39732f4749a709be5406a9bd92162615eea4010b tests/_integrity.py
+ M 010f98e697db6a9a624b662f566f4a5607a786ae tests/conftest.py
+?? DIR:fcc40ac7e636263e tests/fixtures/
+?? a81d448047141688cbab7fb6553423728470fbb8 tests/test_abac.py
+?? 75f5705e8565f0dcd3b30cf5c3b5329331a7047b tests/test_access_review.py
+?? 3b0b5f406c1286ee1858bde40046f7b79cb91c30 tests/test_account_security.py
+?? 69d4b6fcb1aa294a27e3d71e12b56d5c5ae9da16 tests/test_accounts.py
+?? e92500520ee94bed16b60b4b8c94e37d603a3179 tests/test_agent_os.py
+?? 0bdce6b8e4f5faad20ccba92de4b5aecdd778ebe tests/test_agent_os_routes.py
+?? f72b5c822f04bedc9d8ae8d1374bbecd7634eb0b tests/test_agents.py
+?? 43b7542f2c6e4f5f872bbb97a3beb0b599551045 tests/test_ai_eval.py
+?? 7eedf87a665572bf746290f3e0e18a65dd7ebf8a tests/test_ai_gateway.py
+ M 6d288ed14f1597faccf21f31ff6d5dfda44c30ac tests/test_ai_validation.py
+ M 726a6f50089139aeab7da92730c5bf1597c8de1f tests/test_api_flow.py
+?? 83855517100430a85dc0e35a0fb43baf7a34ec14 tests/test_audit_export.py
+ M ee78c6da6a3472b8cefb90ae22a62f41e024fa8e tests/test_auth.py
+ M 612d72847fdd60388ab2af9774a8bbd949cdf244 tests/test_auth_e2e.py
+?? f4993ae6ae4cda8eeec1da257535685647227144 tests/test_billing.py
+?? a183577d58d79269a47009a0efa1f5e00ddbdee8 tests/test_canonical_fixture.py
+?? 77b7436b9ccf157f336afb2bc316c9254db86eff tests/test_capabilities.py
+ M 72c52b80b09f6ff34792b18860e00ea2dea7a68f tests/test_cases_audit.py
+?? c23ac8c230a3638835c9cbb769d194c6e358b68c tests/test_cases_create.py
+ M 5b7a8c416b3dedeff95d640bd9e14ee57d13fa95 tests/test_config_safety.py
+?? 7b25e60f832983acccb820293d106ed7f67dd378 tests/test_connectors.py
+ M d8d4a9f77614e6630bbc3e5168786960310d280b tests/test_cors.py
+ M 3dac5b7d30d9f028f318c62e6cda6792b2fb0fe2 tests/test_demo_token_remediation.py
+?? 8bb0dbbbd31c4ccb0dbcebfcd5090765ba3579b1 tests/test_deploy_manifests.py
+ M 7e594c8543cedd3f83c8fe2bd98f814142bd683d tests/test_detection.py
+ M da6a35bda5d4fed75986db1cc99bd43e42976fa2 tests/test_di03_device.py
+?? 83415c66161d3f8f5de58a45073bc866755ddf54 tests/test_evidence_export.py
+?? 0c200f6a12ed470fc54dd8a470d774843cff2dc0 tests/test_evidence_manifest.py
+ M 2a6dea14bec24431c957ddb97eb1d20a1ead1142 tests/test_flow_direct.py
+?? 70cccd5df41bb6260682c7ad7e67770ca8fa90f6 tests/test_geointel_address.py
+?? 366cdcf6f1cc07baa2129656ad127cfea4c870d8 tests/test_geointel_api.py
+?? 7961789c4e3a96114c880f26d778d1b3654a1e04 tests/test_geointel_identity.py
+?? 247800cf51ae824f1607bb042ae35d66e9941dc7 tests/test_geointel_ip.py
+?? 1301eeaad5bdecea5322c70f2d006def4089d6eb tests/test_geointel_location.py
+?? c4fa557d030bd8e54b625f35ef4d9295d99dfeba tests/test_geointel_map.py
+?? ee86fe342a46a1bd2ff876223c94e85148a4c2ea tests/test_geointel_providers.py
+?? 1d554fb96646d62550e7833fd70d2e902e9610e6 tests/test_governance.py
+?? 24f349a104750b210a01d1ec6e0894d042a970bd tests/test_homepage_routing.py
+?? 98a6b9322f0d6aa2f25d38c06cca03eb5ae073cc tests/test_industries.py
+?? 53ce50cc4358b273c4b1b259f83501aac13b3ba3 tests/test_industry_accounting.py
+?? ab601e0baf3cd7d831c559c4be882c0953f20016 tests/test_industry_agriculture.py
+?? 343fd86743eaa5f736a766b6912213689bf72ba6 tests/test_industry_automotive.py
+?? 346010ec87c21153ea0b7ea53c90c8206212a5b6 tests/test_industry_aviation.py
+ M a4386996fbf22d00c0c03a79504ee8a8c1349dd3 tests/test_industry_banking.py
+?? 168771beda678aeee86cf5fd758068102431ee0c tests/test_industry_capital_markets.py
+?? d6be6addf35c15725ee4fa3ae2bb101f3e97bd8d tests/test_industry_charities.py
+?? 6bde0d84051f6a55b800268fa339ed32d16a6372 tests/test_industry_conformance.py
+?? 791ea707ef8a2e365efbf26be27e41a8d083ff70 tests/test_industry_construction.py
+?? c618519188bb7a07c6d09d0606d543b425aeea9d tests/test_industry_consulting.py
+?? b3075d94fcf0f4cb28bcd26d056ba93d4ea50108 tests/test_industry_crypto.py
+?? 6c72bfce58fd9234937bee1f0574a1f5f92c7f24 tests/test_industry_customs.py
+?? c31a46647f800585b3733706ed02fe549411253a tests/test_industry_defence.py
+?? 6ecf9b8683b08fb0d72938710bd09129ba4a4f11 tests/test_industry_ecommerce.py
+?? 9fd689bfe08ee75934a97342dac450dbfdbb58e5 tests/test_industry_education.py
+?? 505355dfbfb8c6e44826004c1c5c3f2b481a3648 tests/test_industry_energy.py
+?? c82bf6ca4073544a69ff22d51f1d538a0cfb3a86 tests/test_industry_environment.py
+ M ec17ae51df37d9b3012e5dc4a5fb4ac0c0a8cb44 tests/test_industry_fintech.py
+?? ef12d8f4850dd0194786b1b1ea1d08b41555ec64 tests/test_industry_fleet.py
+?? b5201d3fede55c24f11fd89554d97be216e8439c tests/test_industry_fx.py
+?? a1347bf0daa03c2ee2aaf1b21905ee19cec25074 tests/test_industry_gambling.py
+?? e312e8ff65b252c248555d5833989f389ad1f3de tests/test_industry_gaming.py
+?? 046870a6a65daefbfc0b536a2a8e3c3c1a077e7a tests/test_industry_government.py
+?? 78b995e3d86fb26c4426857774e22961db619db4 tests/test_industry_healthcare.py
+?? 97baa95e14273002d3d1c13eb1158efac9940708 tests/test_industry_hospitality.py
+?? 1208c78642a8c1bda82b6c7fd86fd52c08309e6a tests/test_industry_insurance.py
+?? b9f8e7e7c8329d38e829cfa35d27ee6f0e283178 tests/test_industry_law.py
+?? 1c9efc8b496bb75f13a3e273ef1741757acc8571 tests/test_industry_legal.py
+?? 979c40bb74dd15f2be3c8c3a3dbbd44a0124685b tests/test_industry_luxury.py
+?? 5de3cf378a6912ae1b478f9edff3d22b204e7a7c tests/test_industry_manufacturing.py
+?? 87670132a9b2c62bfb1aa2b63457f34e3b62d6e8 tests/test_industry_maritime.py
+?? 1787a4d983f0f185ef995b909ee03f3c6cda35ff tests/test_industry_media.py
+?? c11015f4aaae2f376e43758e8864a5e679ff4482 tests/test_industry_mining.py
+?? 2538993b4c88fadb34666d1d8db5b6d8e467b422 tests/test_industry_ngo.py
+?? e5a1b0d74bd10861c96113b72b2df4d8066847a2 tests/test_industry_oilgas.py
+?? 193ebf58088d0c2cc82a04d31fed58e9882801b5 tests/test_industry_pharma.py
+?? e1bae3c7f76046b161aff8255cc87fb32484c45f tests/test_industry_procurement.py
+?? 1096b0b28080f49ccc1b527c5e5d77aa3d5a0120 tests/test_industry_property.py
+?? 05483a437ac0c6ddb17b485fff2f62485ccee0f4 tests/test_industry_retail.py
+?? 186f339eeff670dd6cd3fba3fbbc81a246f19f8d tests/test_industry_social.py
+?? cd8cf4a1c79b19a13aa9a2ef21873e0d22f49bf2 tests/test_industry_supply.py
+?? 88036d1aa06cfd17c8d074f318812924b63297ea tests/test_industry_tax.py
+?? c987d88bf4c3fbe308c92015a649178d96089c0a tests/test_industry_technology.py
+?? 543b16dc27fb6358d72bba9725bd64540415d079 tests/test_industry_telecom.py
+?? de27eccc75e7714cbbec1d3d4e390e90e0565b04 tests/test_industry_trade.py
+?? d45705401dfb128aefb8a1467823f26916c99803 tests/test_industry_transport.py
+?? 9e06ebef05b7ef3fa63743ea34badebc301b5d6e tests/test_industry_wholesale.py
+?? 2a3ba2f709a9f2d2579e8ad0cdd3bbcfa3517585 tests/test_ingest_audit.py
+ M 7af79537dd995ecb79f6404000a9efdf0f016700 tests/test_j5_rehearsal.py
+ M d3e136478419513b5055aa5d212f61cc9261171f tests/test_j6_drill.py
+ M 61cbaee3474e53b20b06c260f86ab8c8f35349bc tests/test_loader_gate.py
+ M ced655f55aec55a5ff0a0a72285f48e75707fffa tests/test_local_target.py
+?? fca1d6374cd059b24cc19d026cee01c10b4eb17a tests/test_login_risk.py
+?? 4afec6d42cf23a2ec5cecf067105de6c3109fce5 tests/test_mfa.py
+?? 67ac20a267c11853e927f0c7debbf6f1691a11d0 tests/test_notifications.py
+?? 5d15ddf849036198b538719bf8c638b35320823c tests/test_notify.py
+?? 5f6c9590f8b13538eaf762f541194db3d32fbe4b tests/test_orgs.py
+?? 1fd425ab9e239fa1d938c2097a2d2ec4e3121601 tests/test_passkeys.py
+?? d02c4500e1fe0448fb02f4315cf54fb71bca0597 tests/test_payments.py
+ M 6380ae109a543faf1687c59b890b0eb10f907f69 tests/test_pg_atomic_decision.py
+ M d3847414e52335c43fcd6380c94d771e68ecea09 tests/test_pg_hardening.py
+ M 3b468b1856c0dc83df4316a1d6ddd792efffaf4d tests/test_pg_migration.py
+ M 55cc36bd8ad7dfeb48debb5446ea3904e0b17875 tests/test_pg_parity.py
+?? 867799f2b3d4fe24db041eb2172360f2c2d5abab tests/test_pilot.py
+?? 126217e2e05cf96ee32d0d2d8e73db879ad46c60 tests/test_product_identity.py
+?? eefcc805812a88f6a11f032c9deb73d64f1b65a9 tests/test_production_guard.py
+?? 0c91f8b56ccdafcd5677f7205efed8d9da08cb2e tests/test_provider_webhooks.py
+?? b8d09cb0144cb0a89b5dd1525aee1546bdb4e670 tests/test_quality_gates.py
+?? bdfe8e067862b9db9b32be6cb2792cab10f73976 tests/test_recovery_core.py
+?? 035b999e3b08d41a47202f130916cb23fe0dc642 tests/test_recovery_routes.py
+?? bc4ad3d2b8c959ecc278a09bb286fcdb32caac5c tests/test_rollback_rehearsal.py
+?? a9c8fb86e3a749753266a1ad4ffd7f87531e9aa3 tests/test_sec_cred.py
+?? 04967ec01fed3d12d61cf02cfd95571df6a91bbc tests/test_sec_dev.py
+?? 293a3f5ec8efbd7a611f5fa6095d784ee359655d tests/test_sec_rot.py
+?? ff0d796f262f93d4580b45a03a4b63a545489773 tests/test_security_notifications.py
+ M 51cda1e5c0f616eb0b7db3eda6f03771d1045f98 tests/test_seed_reset.py
+?? 27b8824884e2e0f2c7aa6aaaa0135de2ed7e3d65 tests/test_telecom_contract.py
+?? b7d18d38950573b090bf46fd6df4b1d6ae7c5c92 tests/test_telecom_providers.py
+?? e2927f25d4f07cff0a916520f2848c0f05d158ec tests/test_telecom_registry.py
+?? 2c4a402cb07a338ce8942090e6a23702ae30baaa tests/test_telecom_security.py
+?? 4e0e686c54af9d8e5f186ccad14f659a530e6ce7 tests/test_telecom_verify.py
+ M b46158960fdf2479c0c4392d2a5e7a672b4aa9fa tests/test_tenant_api.py
+?? ec9eac1a89656ef6a179a78674e69ea394741610 tests/test_tenant_map.py
+?? 2a00286d9e670082833aff72a411b5ccc3dfcd6f tests/test_tenant_new_surfaces.py
+?? bc4c9bd66e901cf94686e0d82d96b8f171eace75 tests/test_tracing_scenarios.py
+?? df32d465d9b648964d3a9137bc72ac94a0eb9289 tests/test_ufi_contract.py
+?? 254bd4b55acb0de0e5e6ee168d59f7bcdfe6ab7d tests/test_ufi_e2e.py
+?? f62cf59a3320fcfbeb1578456ca538ebea389972 tests/test_ufi_perf.py
+?? e164b15bfb53c0491c6c54364c6d67b2a51fc59e tests/test_universal_ai.py
+?? 01330324d728cf0301f968442b39d79740a47d62 tests/test_universal_core.py
+?? feb040669f3a964db6d963ccd89bfb4c81ef8f5c tests/test_universal_integration.py
+?? b7b2a3b871d8ba13d7bb186d815ec37c5cf4cf0d tests/test_universal_routes.py
+?? d436065159f8b853067faa9cba5b473c1e75f565 tests/test_universal_security.py
+?? b65fa7f91bc53238b7a890b38e4d78a5f90837e1 tests/test_universal_slice2.py
+?? e7bfec377fa59e5b74f983badd83b2fd55ea926e tests/test_verify.py

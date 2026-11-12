@@ -5,10 +5,10 @@ attribution purely from existing state (events + USES_DEVICE graph
 edges). Nothing here persists: no store writes, no migrations, no
 risk-rule changes, no evidence-package changes. Observations are
 explicitly distinguished from verified identity: a `device_id` seen in
-demo fixtures is an observed label, never proof of identity.
+seed fixtures is an observed label, never proof of identity.
 
 Synthetic fixture attributes (type/OS/browser) are seed-gated declared
-demo values for known `dev_*` ids, always labelled synthetic. Unknown
+seeded values for known `dev_*` ids, always labelled synthetic. Unknown
 ids carry no attributes (unknown, never a negative signal).
 """
 from __future__ import annotations
@@ -21,12 +21,12 @@ from pydantic import BaseModel, Field
 DEVICE_ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$")
 
 IDENTITY_DISCLAIMER = (
-    "Observed device label from demo fixtures; not verified device "
-    "identity. Attributes below are declared synthetic demo values, "
+    "Observed device label from seed fixtures; not verified device "
+    "identity. Attributes below are declared synthetic values, "
     "not measured fingerprints."
 )
 
-# Seed-gated synthetic attributes for known demo device ids (DI-03).
+# Seed-gated synthetic attributes for known seeded device ids (DI-03).
 # Declared values for investigator-UX demonstration only.
 SYNTHETIC_DEVICE_ATTRS: dict[str, dict[str, str]] = {
     "dev_01": {"device_type": "mobile", "os_family": "Android",
@@ -136,7 +136,7 @@ def get_profile(state: dict[str, Any],
         account_ids=accounts, txn_ids=txns,
         observation_count=len(mine), shared=len(accounts) >= 2,
         attributes=dict(attrs) if attrs else None,
-        attributes_source=("synthetic_demo_fixture" if attrs else "unknown"),
+        attributes_source=("synthetic_fixture" if attrs else "unknown"),
         observations=mine,
         evidence_refs={"graph_edge_ids": edge_refs,
                        "event_ids": event_refs})

@@ -1,13 +1,52 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import type {
+  AcctIntel,
+  DeviceProfile,
+  GeoObservationResult,
   IntelEvidence,
   IntelFinding,
   InvIntel,
+  IpObservationList,
   RiskIntelResult,
   TxnIntel,
 } from "../lib/api";
-import { IntelSection } from "./intel-panels";
+import {
+  DeviceBlock,
+  GeoBlock,
+  IntelSection,
+  IpBlock,
+} from "./intel-panels";
+
+const { getDeviceMock, getIpObservationsMock, getGeoObservationsMock } =
+  vi.hoisted(() => ({
+    getDeviceMock: vi.fn(),
+    getIpObservationsMock: vi.fn(),
+    getGeoObservationsMock: vi.fn(),
+  }));
+
+vi.mock("next/link", () => ({
+  default: ({
+    href,
+    children,
+  }: {
+    href: string;
+    children: React.ReactNode;
+  }) => <a href={href}>{children}</a>,
+}));
+
+vi.mock("../lib/api", async (importOriginal) => ({
+  ...((await importOriginal()) as object),
+  getDevice: getDeviceMock,
+  getIpObservations: getIpObservationsMock,
+  getGeoObservations: getGeoObservationsMock,
+}));
+
+beforeEach(() => {
+  getDeviceMock.mockReset();
+  getIpObservationsMock.mockReset();
+  getGeoObservationsMock.mockReset();
+});
 
 function txnFixture(): TxnIntel {
   return {
@@ -116,6 +155,81 @@ function evidenceFixture(): IntelEvidence {
   };
 }
 
+function profileFixture(): DeviceProfile {
+  return {
+    device_id: "dev_04",
+    identity_status: "observed_only",
+    disclaimer: "Synthetic fixture.",
+    first_seen: "2026-10-27T10:00:00Z",
+    last_seen: "2026-10-27T12:00:00Z",
+    account_ids: ["acct_A", "acct_B"],
+    txn_ids: ["txn_84721", "txn_90001"],
+    observation_count: 3,
+    shared: true,
+    attributes: null,
+    attributes_source: "none",
+    observations: [],
+    evidence_refs: { graph_edge_ids: ["edge_0002"], event_ids: [] },
+  };
+}
+
+function ipListFixture(): IpObservationList {
+  return {
+    ip_label: "ip_02",
+    address_status: "unknown",
+    observations: [
+      {
+        obs_id: "obs_ip_9",
+        ip_label: "ip_02",
+        address: "10.9.9.9",
+        address_status: "unknown",
+        account_id: "acct_B",
+        txn_id: "txn_90001",
+        observed_at: "2026-10-27T11:00:00Z",
+        source: "seed_event",
+        source_ref: "evt_90001",
+        synthetic: true,
+      },
+    ],
+  };
+}
+
+function geoLookupFixture(): GeoObservationResult {
+  return {
+    identifier: "loc_01",
+    kind: "lookup",
+    lookup: {
+      status: "resolved",
+      country_code: "NG",
+      city: "Lagos",
+      confidence: "high",
+      approximate_only: true,
+      reason: "Seeded fixture lookup.",
+    },
+    observations: [],
+  };
+}
+
+function acctBlockFixture(): AcctIntel {
+  return {
+    account_id: "acct_A",
+    known_devices: ["dev_04"],
+    known_ip_labels: ["ip_02"],
+    known_geo_labels: ["loc_01"],
+    first_seen: "2026-10-27T10:00:00Z",
+    last_seen: "2026-10-27T12:00:00Z",
+    shared_devices: [],
+    shared_ips: [],
+    transaction_count: 1,
+    transaction_ids: ["txn_84721"],
+    investigation_count: 1,
+    investigation_ids: ["inv_84721"],
+    provenance: { event_ids: ["evt_84721"] },
+    synthetic: true,
+    limitations: ["Synthetic fixture."],
+  };
+}
+
 function riskOffFixture(): RiskIntelResult {
   return {
     engine: "risk-intelligence-v2-candidate",
@@ -126,6 +240,73 @@ function riskOffFixture(): RiskIntelResult {
 }
 
 describe("IntelSection", () => {
+  it("expands a device row into its label-level profile (GAP-013)", async () => {
+    getDeviceMock.mockResolvedValue(profileFixture());
+    render(<DeviceBlock intel={txnFixture()} />);
+    expect(screen.queryByText(/acct_A, acct_B/)).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Show provenance" }));
+    await waitFor(() => {
+      expect(getDeviceMock).toHaveBeenCalledWith("dev_04");
+    });
+    expect(screen.getByText(/shared device/)).toBeTruthy();
+    expect(screen.getByText(/observed_only/)).toBeTruthy();
+    expect(screen.getByText(/acct_A, acct_B/)).toBeTruthy();
+  });
+
+  it("shows a retryable error when the device fetch fails", async () => {
+    getDeviceMock.mockRejectedValue(new Error("down"));
+    render(<DeviceBlock intel={txnFixture()} />);
+    fireEvent.click(screen.getByRole("button", { name: "Show provenance" }));
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Retry" })).toBeTruthy();
+    });
+    expect(screen.getByRole("alert")).toBeTruthy();
+  });
+
+  it("expands an IP row with cross-transaction sightings (GAP-013)", async () => {
+    getIpObservationsMock.mockResolvedValue(ipListFixture());
+    render(<IpBlock intel={txnFixture()} />);
+    fireEvent.click(screen.getByRole("button", { name: "Show provenance" }));
+    await waitFor(() => {
+      expect(screen.getByText(/txn_90001/)).toBeTruthy();
+    });
+    expect(getIpObservationsMock).toHaveBeenCalledWith("ip_02");
+    const link = screen.getByRole("link", {
+      name: /Open network explorer txn_90001/,
+    });
+    expect(link.getAttribute("href")).toBe("/network/txn_90001");
+  });
+
+  it("expands a geo row into its lookup result (GAP-013)", async () => {
+    getGeoObservationsMock.mockResolvedValue(geoLookupFixture());
+    render(<GeoBlock intel={txnFixture()} />);
+    fireEvent.click(screen.getByRole("button", { name: "Show provenance" }));
+    await waitFor(() => {
+      expect(screen.getByText(/Lagos/)).toBeTruthy();
+    });
+    expect(screen.getByText(/Seeded fixture lookup/)).toBeTruthy();
+  });
+
+  it("renders per-account blocks with links when provided (GAP-012)", () => {
+    render(
+      <IntelSection
+        intel={intelFixture()}
+        evidence={evidenceFixture()}
+        risk={riskOffFixture()}
+        accounts={{ sender: acctBlockFixture(), receiver: null }}
+      />
+    );
+    expect(screen.getByRole("heading", { name: "acct_A" })).toBeTruthy();
+    expect(screen.getByText("Synthetic fixture.")).toBeTruthy();
+    const invLink = screen.getByRole("link", {
+      name: /Open investigation inv_84721/,
+    });
+    expect(invLink.getAttribute("href")).toBe("/investigations/inv_84721");
+    const netLink = screen.getByRole("link", {
+      name: /Open network explorer txn_84721/,
+    });
+    expect(netLink.getAttribute("href")).toBe("/network/txn_84721");
+  });
   it("renders device, IP, geo, findings, and v2-off state", () => {
     render(
       <IntelSection

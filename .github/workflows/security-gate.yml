@@ -6,7 +6,7 @@ name: security-gate
 
 on:
   push:
-    branches: ["master"]
+    branches: ["master", "production-launch"]
   pull_request:
   schedule:
     - cron: "19 6 * * 1"  # weekly audit, Monday 06:19 UTC
@@ -18,8 +18,31 @@ jobs:
   gate:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    # F-PG-01: disposable scratch PostgreSQL for the migration tests.
+    # Ephemeral service container, destroyed with the job; tests reach it
+    # only via localhost. Never production, never Render (no DATABASE_URL
+    # is set and STORE_BACKEND stays "json").
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: scratch
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    env:
+      SCRATCH_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/scratch
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history: rollback rehearsal needs a previous-commit
+          # target and gitleaks scans the whole PR base..head range.
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -36,6 +59,13 @@ jobs:
 
       - name: Backend security gate (pins, hashes, audit, secrets)
         run: python scripts/security_gate.py
+
+      - name: Python lint gate (ruff)
+        # Pinned audit tool (same pattern as pip-audit below the lockfile);
+        # fails the gate on any new ruff finding per pyproject.toml.
+        run: |
+          python -m pip install "ruff==0.14.13"
+          ruff check .
 
       - name: Backend regression
         env:

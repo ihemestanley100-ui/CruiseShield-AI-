@@ -28,8 +28,8 @@ export const yo = {
     signOutEverywhere: "Jáde níbikibi",
     signOutEverywhereTitle: "Parí ìgbà yìí lórí gbogbo ẹ̀rọ àti aṣàwákiri",
     investigator: "Aláṣẹ ìwádìí",
-    demoRole: "ipa ìfihàn",
-    roleDemo: "{role} · ìfihàn",
+    sessionRole: "ipa ìfihàn",
+    roleContext: "{role} · ìfihàn",
   },
   auth: {
     title: "Wọlé ìfihàn",
@@ -90,7 +90,7 @@ export const yo = {
     ],
     cta: "Ṣàwárí CruiseShield AI™",
     ctaSub: "Wọ inú ìrírí àfihàn ìbáṣepọ̀",
-    enterDemo: "Wọ àfihàn",
+    enterPlatform: "Wọ àfihàn",
     brandName: "CruiseShield AI™",
     tagline: "The Financial Crime Immune System™",
     home: "Ilé CruiseShield AI",
@@ -180,7 +180,7 @@ export const yo = {
     ],
     platformPrinciples: "Àwọn ìlànà pẹpẹ",
     footerLine: "Pẹpẹ kan. Ọjọ́ ọ̀la owó tó ní ààbò síi. Fún gbogbo ènìyàn.",
-    footerDemo:
+    footerNote:
       "Ìrírí àfihàn · dátà àtọwọ́dá · àwọn àwòrán nẹ́tíwọ́kì àpẹẹrẹ · ",
     footerLink: "Wọ àfihàn ìbáṣepọ̀",
     controlsAmbient: "Ohùn àyíká",
@@ -246,7 +246,7 @@ export const yo = {
     light: "Ìmọ́lẹ̀",
     system: "Ètò",
   },
-  demo: {
+  platform: {
     execOverview: "Àkójọ alákóso",
     execOverviewDown: "Àkójọ alákóso kò sí",
     riskIntel: "Òye ewu",
@@ -325,7 +325,7 @@ export const yo = {
     resetTitle: "Àtúntò ojú-ìwòye",
     resetBlurb:
       "Àtúntò ń mú ojú-ìwòye ìbẹ̀rẹ̀ padà gẹ́gẹ́ bí ó ṣe wà ó sì ń nu gbogbo ipò lọ́wọ́lọ́wọ́: ìpinnu ènìyàn, ìdánwò, ìṣiṣẹ́ AI, àti àwọn ìṣẹ̀lẹ̀ àyẹ̀wò ju àtúntò náà lọ.",
-    resetDemo: "Tún ìfihàn ṣe",
+    resetWorkspace: "Tún ìfihàn ṣe",
     confirmReset:
       "Jẹ́rìí: èyí ń nu ìpinnu, ìdánwò, ìṣiṣẹ́ AI, àti ìtàn àyẹ̀wò fún {id}.",
     resetting: "Ń tún ṣe…",
@@ -475,6 +475,25 @@ export const yo = {
     ignoredPre: "Tí a fojú fo: ",
     assumptionLine: "Ìrò: {a}",
   },
+  detection: {
+    title: "Òye ìwádìí",
+    frequencyTitle: "Ìgbà àwọn àmì",
+    detectorsTitle: "Àwọn ìdílé aṣàwárí",
+    channelsTitle: "Ìṣiṣẹ́ ikanni",
+    matrixTitle: "Aṣàwárí ní ikanni",
+    noSignals: "Kò sí àmì tó yẹ tí a gbà sílẹ̀ ní àkókò yìí.",
+    unmappedAlert: "Àwọn kóòdù ikanni tí kò ní àwòrán nílò àtúnyẹ̀wò ìsọ̀rí.",
+    seedFeedNote: "Ìfúnni ìbẹ̀rẹ̀: kò sí ìsopọ̀ ikanni lọ́wọ́lọ́wọ́.",
+    zeroNote: "Òdo mó léwu pé kò sí nǹkan tí a díwọ̀n, kì í ṣe dátà tó sọnù.",
+    notImplemented: "Kò tíì ṣe: kò sí àwòṣe tí a gbé kalẹ̀.",
+    measuredAt: "A díwọ̀n ní",
+    txnSignalsTitle: "Àwọn àmì ìṣòwò",
+    viewInvestigation: "Ṣí ìwádìí",
+    noLinkedInvestigation: "Kò sí ìwádìí tó jẹ mọ́.",
+    investigationsWord: "ìwádìí",
+    fpRate: "Ìwọ̀n àṣìṣe rere",
+    timeSeriesTitle: "Àkójọ àmì àkókò",
+  },
   intel: {
     intelTitle: "Òye ẹ̀rọ, IP àti ipò",
     intelDown: "Òye kò sí fún ìwádìí yìí.",
@@ -532,6 +551,7 @@ export const yo = {
   system: {
     sysTitle: "Ipò Ètò",
     allOk: "Gbogbo ètò ń ṣiṣẹ́",
+    gapsOk: "Ń ṣiṣẹ́ pẹ̀lú àwọn àlàfo: àwọn iṣẹ́ kan kò tíì ṣètò",
     rowApi: "Àwọn Iṣẹ́ API",
     rowSeed: "Ìdúróṣinṣin irúgbìn",
     rowGraph: "Ìpilẹ̀ṣẹ̀ àwòrán",

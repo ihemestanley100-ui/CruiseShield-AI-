@@ -27,7 +27,7 @@ vi.mock("next/link", () => ({
 }));
 
 vi.mock("next/navigation", () => ({
-  usePathname: () => "/demo",
+  usePathname: () => "/platform",
 }));
 
 vi.mock("./landing/GlobalHeroScene", () => ({
@@ -93,10 +93,10 @@ describe("locale switching integration", () => {
     expect(screen.getByRole("heading", { name: "Un monde financier plus sûr" }))
       .toBeTruthy();
     expect(screen.getByText("DÉTECTER")).toBeTruthy();
-    // Brand stays verbatim; demo links still target real routes.
+    // Brand stays verbatim; platform links still target real routes.
     expect(screen.getAllByText("CruiseShield AI™").length).toBeGreaterThan(0);
     const cta = screen.getAllByRole("link", { name: /Explorer CruiseShield AI/ })[0];
-    expect(cta?.getAttribute("href")).toBe("/demo");
+    expect(cta?.getAttribute("href")).toBe("/platform");
   });
 
   it("keeps server-contract decision labels verbatim in every locale", () => {

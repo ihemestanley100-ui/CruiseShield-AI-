@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-11-12T03:44:15Z",
+  "head": "3cbbb48",
+  "files": {
+    "docs/ZERO_GAP_MATRIX.json": {
+      "sha256": "0b9e64cd06c12028e8c1bca40896d047f392db81d6b088e0665f527dbdb45878",
+      "bytes": 153211
+    },
+    "scripts/zero_gap_matrix.py": {
+      "sha256": "80b8828c325055a520e4c04d60a386fb376e2636ef289d96391423af7ce23798",
+      "bytes": 78614
+    },
+    "docs/PRODUCTION_CLOSURE_REGISTER.md": {
+      "sha256": "45ddfbc5c457dd08ab4e63f831f89019de93c8d466dc669b2c0987247a949af4",
+      "bytes": 13074
+    },
+    "docs/RELEASE_CLOSURE_PACKAGE.md": {
+      "sha256": "0e7a4b0c319821c324d7d2f2d2c1609baeea9ff1044921a1609e384f21641f74",
+      "bytes": 8370
+    },
+    "docs/DEMO_PRODUCTION_AUDIT.md": {
+      "sha256": "b9cbc12a69811946034acacccc3a5c4f808bbeb4ef32a5db322fcf5b3150ec9a",
+      "bytes": 8124
+    },
+    "docs/LIVE_EVIDENCE_INDEX.md": {
+      "sha256": "d83496707a31a5b97292181a19db8c5234554d8e4467053e4337fd14281aa206",
+      "bytes": 5796
+    },
+    "docs/LEVEL14_OWNER_APPROVAL_PACKAGES.md": {
+      "sha256": "32a9f6155060017991409f1c036d54a51d1d3062f070996bd6fa3c3e0457e73b",
+      "bytes": 19245
+    },
+    "docs/LEAFLET_TILE_POLICY_REVIEW.md": {
+      "sha256": "26f1dbf182a64e1c1fe7dc38f7a36f0770fa69b2885e79655a70e00c214510b0",
+      "bytes": 2295
+    },
+    "CRUISESHIELD-AI-DECISION-LOG.md": {
+      "sha256": "77157898e31eed4cff9036880d5fabb6713fdbd8ccecb9f5f8d40a67c7aefa33",
+      "bytes": 36130
+    },
+    "docs/PROJECT_EXECUTION_STATE.md": {
+      "sha256": "d7d3789b0e91dc46a0eb92daaf2596923d89435c1c64f00c521baa8132c180ae",
+      "bytes": 52922
+    },
+    "requirements.lock": {
+      "sha256": "37838090f57ccc461af97b8e382f3350fb811fb2cf460794e55286c8e0578c19",
+      "bytes": 45394
+    }
+  }
+}

@@ -1,0 +1,16 @@
+# Gitleaks allowlist: verified false positives only (gate run 42495344343).
+# Each entry was inspected in the committed tree and proven non-secret:
+# synthetic test constants and documentation prose. Never add real
+# credential shapes here; rotate any genuine secret instead.
+title = "CruiseShield AI gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "verified false positives 2026-11-08 (single-map form)"
+regexTarget = "line"
+regexes = [
+  '''test-secret-[a-z]+-032-chars-ok''',
+  '''credential codes, validation/refusal fail-fast''',
+]

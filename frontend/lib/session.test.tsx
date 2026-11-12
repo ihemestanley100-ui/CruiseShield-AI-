@@ -22,7 +22,7 @@ describe("session store and useCan", () => {
     publishSession({ mode: "open" });
   });
 
-  it("enables everything in open-demo mode", () => {
+  it("enables everything in open mode", () => {
     render(<Probe permission="write" />);
     expect(screen.getByTestId("probe").textContent).toBe("yes");
   });

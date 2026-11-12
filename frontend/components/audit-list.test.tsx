@@ -7,7 +7,7 @@ const AUDITS: AuditEntry[] = [
   {
     audit_event_id: "audit_0002",
     actor_type: "system",
-    actor_id: "demo-reset",
+    actor_id: "platform-reset",
     action: "case.opened",
     target_type: "case",
     target_id: "case_84721",

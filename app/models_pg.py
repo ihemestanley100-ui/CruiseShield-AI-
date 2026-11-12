@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS simulations (
 );
 
 -- J4 runtime auth state (environment-local: never migrated by the
--- loader, never in LOAD_ORDER, survives demo reset by design).
+-- loader, never in LOAD_ORDER, survives platform reset by design).
 CREATE TABLE IF NOT EXISTS session_revocations (
     nonce TEXT PRIMARY KEY,
     expires_at BIGINT NOT NULL
@@ -161,6 +161,30 @@ CREATE TABLE IF NOT EXISTS user_epochs (
     epoch INTEGER NOT NULL
 );
 """
+
+# Additive 5.2 tenancy migration (Level 14 §C): every tenant-scoped
+# table gains tenant_id with the legacy default, so existing rows and
+# inserts behave exactly as before. Scratch-execution pending (GAP-015).
+TENANT_TABLES = (
+    "transactions",
+    "alerts",
+    "investigations",
+    "evidence_packages",
+    "evidence_items",
+    "ai_runs",
+    "cases",
+    "decisions",
+    "audit_events",
+    "simulations",
+)
+
+MIGRATION_5_2_TENANCY = "\n".join(
+    "ALTER TABLE %s ADD COLUMN IF NOT EXISTS tenant_id TEXT NOT NULL "
+    "DEFAULT 'org_primary';" % table
+    + "\nCREATE INDEX IF NOT EXISTS idx_%s_tenant ON %s (tenant_id);"
+    % (table, table)
+    for table in TENANT_TABLES
+)
 
 # Tables in FK-safe load order (parents before children).
 LOAD_ORDER = [

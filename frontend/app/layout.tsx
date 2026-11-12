@@ -8,12 +8,12 @@ import { LocaleProvider } from "../lib/i18n/context";
 import { resolveMetadataBase } from "../lib/site-url";
 import "./globals.css";
 import "../styles/landing.css";
-import "../styles/hackathon-panel.css";
+import "../styles/framework-panel.css";
 
 export const metadata: Metadata = {
   // J3 closeout (frontend EV38): absolute openGraph URLs resolve against
   // NEXT_PUBLIC_SITE_URL when the owner sets it at staging; unset keeps
-  // the relative brand-asset URLs below (local/demo behavior unchanged).
+  // the relative brand-asset URLs below (local behavior unchanged).
   metadataBase: resolveMetadataBase(),
   title: "CruiseShield AI™ | The Financial Crime Immune System™",
   description:

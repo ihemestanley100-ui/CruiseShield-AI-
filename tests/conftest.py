@@ -19,6 +19,19 @@ def client(tmp_store):
         yield http
 
 
+@pytest.fixture(scope="session", autouse=True)
+def _snapshot_live_source():
+    """Snapshot the live source once per session (mutation guard).
+
+    Runs after collection-time imports, so in CI (no live file) the
+    snapshot covers the import-seeded file and locally it covers the
+    real file. The untouched checks compare against this snapshot.
+    """
+    from _integrity import record_source_snapshot
+
+    record_source_snapshot()
+
+
 @pytest.fixture(autouse=True)
 def _no_live_provider_calls(monkeypatch):
     """Hermetic tests: a test process must never spend owner AI quota.

@@ -1,9 +1,9 @@
 "use client";
 
-/* Phase 5: protected-demo login gate. Open demo (backend auth disabled)
+/* Phase 5: protected login gate. Open mode (backend auth disabled)
  * renders children exactly as before. When the backend arms login
  * (SESSION_SECRET set), logged-out visitors get a login card instead of
- * the demo routes; the landing page stays public branding and is never
+ * the platform routes; the landing page stays public branding and is never
  * gated here. Fail-open is UI-only: data protection is enforced by the
  * backend session guard, so an unreachable backend just shows the
  * pages' existing backend-error states. */
@@ -28,11 +28,11 @@ export type GateState =
   | { status: "authed"; session: AuthSession }
   | { status: "login" };
 
-export function useDemoSession() {
+export function usePlatformSession() {
   // Checking first: the shell withholds children until the mode check
   // resolves, so logged-out armed visitors never see data sections
   // flash (and fire doomed fetches) before the login card. One tiny
-  // GET delays open-demo first paint by milliseconds.
+  // GET delays open-mode first paint by milliseconds.
   const [gate, setGate] = useState<GateState>({ status: "checking" });
 
   // J3-P6: session-expiry re-gating. Any 401/403 from a data call

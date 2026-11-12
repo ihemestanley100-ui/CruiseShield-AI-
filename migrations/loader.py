@@ -8,6 +8,8 @@ Safety rules:
 - Upserts (ON CONFLICT DO UPDATE) make re-runs idempotent; the loader only
   ever adds/refreshes rows, never deletes.
 - Nothing here touches the active JSON backend or any production resource.
+- ``--audit-keyring`` accepts an operator-supplied keyring file only;
+  key material is never logged and malformed keyrings fail closed.
 """
 from __future__ import annotations
 
@@ -21,6 +23,7 @@ from typing import Any
 import psycopg
 from psycopg.types.json import Jsonb
 
+from app import audit_chain as chain_mod
 from app import config as config_mod
 from app import db as db_mod
 
@@ -29,6 +32,46 @@ class MigrationError(Exception):
     def __init__(self, code: str, detail: str = "") -> None:
         super().__init__(f"{code}: {detail}" if detail else code)
         self.code = code
+
+
+AUDIT_KEY_MIN_BYTES = 16
+
+
+def load_audit_keyring(path: str | Path) -> dict[str, bytes]:
+    """Load an operator-supplied audit keyring: {key_id: hex_key}.
+
+    The keyring file stays outside the repository and evidence bundle.
+    Errors name the path, key id, or decoded length only; key material
+    never appears in exceptions, logs, or reports.
+    """
+    try:
+        raw = Path(path).read_bytes()
+    except OSError:
+        raise MigrationError("KEYRING_NOT_FOUND", str(path)) from None
+    try:
+        doc = json.loads(raw.decode("utf-8"))
+    except ValueError:
+        raise MigrationError("KEYRING_NOT_JSON", str(path)) from None
+    if not isinstance(doc, dict) or not doc:
+        raise MigrationError("KEYRING_BAD_SHAPE", str(path))
+    keyring: dict[str, bytes] = {}
+    for key_id, value in doc.items():
+        if (not isinstance(key_id, str) or not key_id.strip()
+                or len(key_id) > 64):
+            raise MigrationError("KEYRING_BAD_KEY_ID", str(path))
+        if not isinstance(value, str):
+            raise MigrationError("KEYRING_BAD_KEY",
+                                 f"key_id={key_id}")
+        try:
+            key = bytes.fromhex(value.strip())
+        except ValueError:
+            raise MigrationError("KEYRING_BAD_KEY",
+                                 f"key_id={key_id}") from None
+        if len(key) < AUDIT_KEY_MIN_BYTES:
+            raise MigrationError("KEYRING_KEY_TOO_SHORT",
+                                 f"key_id={key_id} bytes={len(key)}")
+        keyring[key_id] = key
+    return keyring
 
 
 def _sha256_bytes(data: bytes) -> str:
@@ -80,12 +123,23 @@ def _doc(value: Any) -> Jsonb:
     return Jsonb(value)
 
 
-def migrate_state(state: dict, conn: psycopg.Connection) -> dict[str, Any]:
+def migrate_state(state: dict, conn: psycopg.Connection,
+                  audit_keyring: dict[str, bytes] | None = None
+                  ) -> dict[str, Any]:
     """Upsert one state dict into PG inside the caller's transaction.
 
     Raises MigrationError (caller rolls back) on any integrity failure.
-    Returns the reconciliation report (counts + checks).
+    Returns the reconciliation report (counts + checks). When
+    ``audit_keyring`` is supplied, sealed audit entries are
+    chain-verified BEFORE any write; tamper fails the migration closed.
     """
+    if audit_keyring is not None:
+        sealed = [a for a in state.get("audits", [])
+                  if "audit_digest" in a]
+        try:
+            chain_mod.verify_chain(sealed, audit_keyring)
+        except ValueError as exc:
+            raise MigrationError("AUDIT_CHAIN_INVALID", str(exc)) from None
     cur = conn.cursor()
     expected: dict[str, int] = {}
     try:
@@ -403,7 +457,9 @@ def reconcile(cur: psycopg.Cursor, state: dict,
 
 def run_migration(source_path: str | Path, database_url: str,
                   expected_hash: str | None = None,
-                  init_schema: bool = True) -> dict[str, Any]:
+                  init_schema: bool = True,
+                  audit_keyring: dict[str, bytes] | None = None
+                  ) -> dict[str, Any]:
     """Load a source COPY into PG atomically. Returns the report.
 
     Any failure rolls the transaction back (database left unchanged) and
@@ -416,7 +472,7 @@ def run_migration(source_path: str | Path, database_url: str,
             # Phase 5.3 L4: DDL joins this transaction, so a failed load
             # rolls the schema back too — the database is truly unchanged.
             db_mod.init_schema(conn, commit=False)
-        report = migrate_state(state, conn)
+        report = migrate_state(state, conn, audit_keyring=audit_keyring)
         conn.commit()
     except MigrationError:
         conn.rollback()
@@ -439,11 +495,21 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--database-url", required=True)
     parser.add_argument("--expected-hash", default=None)
     parser.add_argument("--no-init-schema", action="store_true")
+    parser.add_argument("--audit-keyring", default=None,
+                        help="operator-supplied audit keyring JSON; "
+                             "enables the pre-write chain gate")
     args = parser.parse_args(argv)
+    try:
+        keyring = (load_audit_keyring(args.audit_keyring)
+                   if args.audit_keyring else None)
+    except MigrationError as exc:
+        print(f"MIGRATION_FAILED {exc}", file=sys.stderr)
+        return 1
     try:
         report = run_migration(args.source, args.database_url,
                                args.expected_hash,
-                               init_schema=not args.no_init_schema)
+                               init_schema=not args.no_init_schema,
+                               audit_keyring=keyring)
     except (MigrationError, db_mod.PGError) as exc:
         print(f"MIGRATION_FAILED {exc}", file=sys.stderr)
         return 1

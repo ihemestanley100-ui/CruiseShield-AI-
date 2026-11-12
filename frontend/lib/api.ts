@@ -155,6 +155,7 @@ export interface Transaction {
   sender_account_id: string;
   receiver_account_id: string;
   occurred_at: string;
+  phone_id?: string | null;
 }
 
 export interface RuleResult {
@@ -266,7 +267,7 @@ async function postJson<T>(
     };
     init.body = JSON.stringify(body);
   }
-  // R6: the public frontend ships WITHOUT the demo write token
+  // R6: the public frontend ships WITHOUT the platform write token
   // (header omitted, writes use login sessions). If the variable is
   // ever set, the value bakes PUBLIC into client chunks — never user
   // authentication, never a copy of the backend secret.
@@ -339,6 +340,19 @@ export function postAiFollowup(
   return postJson<AgentRun>(
     `/api/v1/investigations/${encodeURIComponent(invId)}/ai-followup`,
     { question },
+    signal
+  );
+}
+
+/* GAP-012: persisted AI run receipt. Shape mirrors the stored ai_runs
+ * record (GET /api/v1/ai-runs/{id} returns it verbatim). */
+
+export function getAiRun(
+  runId: string,
+  signal?: AbortSignal
+): Promise<AgentRun> {
+  return requestJson<AgentRun>(
+    `/api/v1/ai-runs/${encodeURIComponent(runId)}`,
     signal
   );
 }
@@ -577,6 +591,56 @@ export function getInvestigationIntel(
   );
 }
 
+/* GAP-012: per-account intel summary. Shape mirrors
+ * app/intel_link.py account_intel exactly. */
+
+export interface SharedDeviceEntry {
+  device_id: string;
+  account_ids: string[];
+  txn_ids: string[];
+  graph_edge_ids: string[];
+  event_ids: string[];
+  identity_status: string;
+  synthetic: boolean;
+}
+
+export interface SharedIpEntry {
+  ip_label: string;
+  address_status: string;
+  account_ids: string[];
+  txn_ids: string[];
+  event_ids: string[];
+  synthetic: boolean;
+}
+
+export interface AcctIntel {
+  account_id: string;
+  known_devices: string[];
+  known_ip_labels: string[];
+  known_geo_labels: string[];
+  first_seen: string;
+  last_seen: string;
+  shared_devices: SharedDeviceEntry[];
+  shared_ips: SharedIpEntry[];
+  transaction_count: number;
+  transaction_ids: string[];
+  investigation_count: number;
+  investigation_ids: string[];
+  provenance: { event_ids: string[] };
+  synthetic: boolean;
+  limitations: string[];
+}
+
+export function getAccountIntel(
+  accountId: string,
+  signal?: AbortSignal
+): Promise<AcctIntel> {
+  return requestJson<AcctIntel>(
+    `/api/v1/accounts/${encodeURIComponent(accountId)}/intel`,
+    signal
+  );
+}
+
 export interface IntelFinding {
   finding_id: string;
   category: string;
@@ -658,7 +722,7 @@ export function getRiskIntel(
   );
 }
 
-/* Batch 4: replay, simulation, cases, audit, demo. Shapes mirror
+/* Batch 4: replay, simulation, cases, audit, platform. Shapes mirror
  * app/replay.py, app/simulate.py, app/cases.py, app/store.py. */
 
 export interface ReplayEvent {
@@ -782,17 +846,17 @@ export interface AuditEntry {
   request_id: string;
 }
 
-export interface DemoScenario {
+export interface PlatformScenario {
   scenario_id: string;
   title: string;
 }
 
-export interface DemoScenarioList {
-  scenarios: DemoScenario[];
+export interface PlatformScenarioList {
+  scenarios: PlatformScenario[];
   active_scenario_id: string;
 }
 
-export interface DemoResetResult {
+export interface PlatformResetResult {
   scenario_id: string;
   run_id: string;
   trace_id: string;
@@ -818,6 +882,25 @@ export function getRisk(
 ): Promise<RiskResponse> {
   return requestJson<RiskResponse>(
     `/api/v1/risk/${encodeURIComponent(txnId)}?scope=${encodeURIComponent(scope)}`,
+    signal
+  );
+}
+
+/* GAP-012: base transaction record plus both scored scopes.
+ * Shape mirrors GET /api/v1/transactions/{id} exactly. */
+
+export interface TransactionResponse {
+  transaction: Transaction;
+  risk_transaction: RiskAssessment;
+  risk_network: RiskAssessment;
+}
+
+export function getTransaction(
+  txnId: string,
+  signal?: AbortSignal
+): Promise<TransactionResponse> {
+  return requestJson<TransactionResponse>(
+    `/api/v1/transactions/${encodeURIComponent(txnId)}`,
     signal
   );
 }
@@ -933,22 +1016,22 @@ export function markNotificationsRead(
   );
 }
 
-export function listScenarios(signal?: AbortSignal): Promise<DemoScenarioList> {
-  return requestJson<DemoScenarioList>("/api/v1/demo/scenarios", signal);
+export function listScenarios(signal?: AbortSignal): Promise<PlatformScenarioList> {
+  return requestJson<PlatformScenarioList>("/api/v1/platform/scenarios", signal);
 }
 
-export function resetDemo(
+export function resetWorkspace(
   scenarioId: string,
   signal?: AbortSignal
-): Promise<DemoResetResult> {
-  return postJson<DemoResetResult>(
-    "/api/v1/demo/reset",
+): Promise<PlatformResetResult> {
+  return postJson<PlatformResetResult>(
+    "/api/v1/platform/reset",
     { scenario_id: scenarioId },
     signal
   );
 }
 
-/* Phase 5: protected-demo login. Open demo (auth_enabled false) behaves
+/* Phase 5: protected login. Open mode (auth_enabled false) behaves
  * exactly as before; staging gates every data endpoint behind the
  * HttpOnly session cookie set by postLogin. */
 
@@ -968,6 +1051,272 @@ export function getAuthMode(signal?: AbortSignal): Promise<AuthMode> {
 
 export function getAuthMe(signal?: AbortSignal): Promise<AuthSession> {
   return requestJson<AuthSession>("/api/v1/auth/me", signal);
+}
+
+export interface DetectorInfo {
+  family: string;
+  version: string;
+  status: string;
+  description: string;
+  rules: string[];
+}
+
+export interface DetectorList {
+  detectors: DetectorInfo[];
+}
+
+export interface SignalsSummary {
+  total_signals: number;
+  unique_transactions_flagged: number;
+  unique_entities_flagged: number;
+  unique_investigations_created?: number;
+  false_positive_rate?: number | null;
+  false_positive_basis?: string;
+  by_family: Record<string, number>;
+  by_severity: Record<string, number>;
+  measurement_period: { start: string; end: string };
+  generated_at: string;
+  tenant_scope: string;
+  evaluation: {
+    transactions_evaluated: number;
+    detector_version: string;
+    latency_ms: number;
+    unknown_location_txns: number;
+    family_runs?: Record<string, number>;
+    family_latency_ms?: Record<string, number>;
+    family_errors?: { family: string; error: string }[];
+    execution_id?: string;
+    note: string;
+  };
+  note: string;
+}
+
+export interface ChannelRow {
+  channel: string;
+  transactions: number;
+  unique_transactions: number;
+  signals: number;
+  unique_flagged: number;
+  last_seen: string;
+  integration: string;
+  note: string;
+}
+
+export interface ChannelsSummary {
+  channels: ChannelRow[];
+  unmapped_raw_codes: string[];
+  unmapped_alert: boolean;
+  generated_at: string;
+  tenant_scope: string;
+}
+
+export interface MatrixCell {
+  family: string;
+  channel: string;
+  status: string;
+  signals: number;
+  transactions: number;
+  evidence_signal_id: string;
+}
+
+export interface DetectionMatrix {
+  cells: MatrixCell[];
+  generated_at: string;
+  tenant_scope: string;
+}
+
+export interface DetectionBundle {
+  summary: SignalsSummary;
+  channels: ChannelsSummary;
+  detectors: DetectorList;
+  matrix: DetectionMatrix;
+  timeSeries?: SignalsTimeSeries;
+}
+
+export interface TimeBucket {
+  bucket: string;
+  signals: number;
+  unique_txns: number;
+}
+
+export interface SignalsTimeSeries {
+  granularity: string;
+  buckets: TimeBucket[];
+  total_signals: number;
+  measurement_period: { start: string; end: string };
+  generated_at: string;
+  tenant_scope: string;
+}
+
+export interface SignalSearchRow extends Omit<SignalEvent, "outcome"> {
+  outcome: string | null;
+  linked_investigations: string[];
+}
+
+export interface SignalSearchPage {
+  signals: SignalSearchRow[];
+  total: number;
+  limit: number;
+  offset: number;
+  tenant_scope: string;
+}
+
+export interface SignalDetail extends Omit<SignalEvent, "outcome"> {
+  outcome: {
+    current: string;
+    history: {
+      outcome: string;
+      actor: string;
+      note: string;
+      recorded_at: string;
+    }[];
+  } | null;
+  link: {
+    history: {
+      investigation_id: string;
+      actor: string;
+      linked_at: string;
+    }[];
+  } | null;
+  tenant_scope: string;
+}
+
+export function getDetectors(signal?: AbortSignal): Promise<DetectorList> {
+  return requestJson<DetectorList>("/api/v1/detectors", signal);
+}
+
+export function getSignalsSummary(
+  signal?: AbortSignal
+): Promise<SignalsSummary> {
+  return requestJson<SignalsSummary>("/api/v1/signals/summary", signal);
+}
+
+export function getChannelsSummary(
+  signal?: AbortSignal
+): Promise<ChannelsSummary> {
+  return requestJson<ChannelsSummary>("/api/v1/channels/summary", signal);
+}
+
+export function getDetectionMatrix(
+  signal?: AbortSignal
+): Promise<DetectionMatrix> {
+  return requestJson<DetectionMatrix>("/api/v1/detection/matrix", signal);
+}
+
+export interface SignalEvent {
+  signal_id: string;
+  detector_family: string;
+  detector_version: string;
+  rule_id: string;
+  rule_version: string;
+  transaction_id: string;
+  channel: string;
+  channel_canonical?: string;
+  execution_id?: string;
+  severity: string;
+  occurred_at: string;
+  tenant_id: string;
+  entities: { sender: string; receiver: string };
+  reason: string;
+  evidence: Record<string, unknown>;
+  outcome: string;
+}
+
+export interface TxnSignals {
+  transaction_id: string;
+  signals: SignalEvent[];
+  signal_count: number;
+  investigation: InvestigationSummary | null;
+  case: { case_id: string; status: string } | null;
+  audits: AuditEntry[];
+  tenant_scope: string;
+}
+
+export function getSignalsTimeSeries(
+  granularity: string = "day",
+  signal?: AbortSignal
+): Promise<SignalsTimeSeries> {
+  return requestJson<SignalsTimeSeries>(
+    `/api/v1/signals/time-series?granularity=${encodeURIComponent(
+      granularity
+    )}`,
+    signal
+  );
+}
+
+export function getSignalsSearch(
+  params: {
+    q?: string;
+    family?: string;
+    channel?: string;
+    severity?: string;
+    limit?: number;
+    offset?: number;
+  } = {},
+  signal?: AbortSignal
+): Promise<SignalSearchPage> {
+  const query = new URLSearchParams();
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== undefined && value !== "") query.set(key, String(value));
+  }
+  const suffix = query.size > 0 ? `?${query.toString()}` : "";
+  return requestJson<SignalSearchPage>(
+    `/api/v1/signals/search${suffix}`,
+    signal
+  );
+}
+
+export function getSignalDetail(
+  signalId: string,
+  signal?: AbortSignal
+): Promise<SignalDetail> {
+  return requestJson<SignalDetail>(
+    `/api/v1/signals/${encodeURIComponent(signalId)}`,
+    signal
+  );
+}
+
+export function postSignalOutcome(
+  signalId: string,
+  outcome: string,
+  note: string = "",
+  signal?: AbortSignal
+): Promise<{ signal_id: string; outcome: string; recorded_at: string }> {
+  return postJson<{ signal_id: string; outcome: string; recorded_at: string }>(
+    `/api/v1/signals/${encodeURIComponent(signalId)}/outcome`,
+    { outcome, note },
+    signal
+  );
+}
+
+export function postSignalLink(
+  signalId: string,
+  investigationId: string,
+  signal?: AbortSignal
+): Promise<{
+  signal_id: string;
+  investigation_id: string;
+  linked_at: string;
+}> {
+  return postJson<{
+    signal_id: string;
+    investigation_id: string;
+    linked_at: string;
+  }>(
+    `/api/v1/signals/${encodeURIComponent(signalId)}/link`,
+    { investigation_id: investigationId },
+    signal
+  );
+}
+
+export function getTxnSignals(
+  txnId: string,
+  signal?: AbortSignal
+): Promise<TxnSignals> {
+  return requestJson<TxnSignals>(
+    `/api/v1/signals/by-transaction/${encodeURIComponent(txnId)}`,
+    signal
+  );
 }
 
 export function postLogin(
@@ -992,6 +1341,946 @@ export function postLogoutAll(
   return postJson<{ ok: boolean }>(
     "/api/v1/auth/logout-all",
     undefined,
+    signal
+  );
+}
+
+/* Telecom Identity clients. Shapes mirror app/telecom_registry.py,
+ * app/telecom_verify.py, app/telecom_providers.py. Subjects arrive
+ * masked + hashed only; raw E.164 is never returned. */
+
+export interface TelecomOperator {
+  operator_id: string;
+  country: string;
+  country_name: string;
+  name: string;
+  aliases: string[];
+  mcc_mnc: string[];
+  number_ranges: string[];
+  range_note: string;
+  portability_support: boolean | "unknown";
+  apis: Record<string, { status: string; note: string }>;
+  coverage_status: string;
+  provenance: {
+    source: string;
+    confidence: string;
+    registry_version: string;
+    updated: string;
+  };
+}
+
+export interface TelecomOperatorList {
+  operators: TelecomOperator[];
+  count: number;
+  registry: { version: string; updated: string; operators: string };
+}
+
+export function getTelecomOperators(
+  country?: string,
+  signal?: AbortSignal
+): Promise<TelecomOperatorList> {
+  const query = country ? `?country=${encodeURIComponent(country)}` : "";
+  return requestJson<TelecomOperatorList>(
+    `/api/v1/telecom/operators${query}`,
+    signal
+  );
+}
+
+export interface TelecomNumberParse {
+  e164_masked: string;
+  country: string | null;
+  operator_id: string | null;
+  basis: string;
+  limitation: string;
+}
+
+export function parseTelecomNumber(
+  e164: string,
+  signal?: AbortSignal
+): Promise<TelecomNumberParse> {
+  return requestJson<TelecomNumberParse>(
+    `/api/v1/telecom/numbers/parse?e164=${encodeURIComponent(e164)}`,
+    signal
+  );
+}
+
+export interface TelecomVerification {
+  verification_id: string;
+  subject_masked: string;
+  subject_hash: string;
+  operator_id: string | null;
+  country: string | null;
+  provider: string;
+  provider_ref: string;
+  api: string;
+  api_version: string;
+  verify_type: string;
+  state: string;
+  previous_state: string;
+  confidence: string;
+  source: string;
+  verified_at: string;
+  verified_ts: number;
+  freshness_ttl_hours: number;
+  limitations: string[];
+  consent_id: string;
+  purpose: string;
+  org: string;
+  user: string;
+  tenant_id: string;
+  synthetic: boolean;
+  evidence: Record<string, string>;
+  record_hash: string;
+  integrity?: string;
+}
+
+export function requestTelecomVerification(
+  body: {
+    verify_type: string;
+    e164: string;
+    purpose: string;
+    context?: Record<string, string>;
+  },
+  signal?: AbortSignal
+): Promise<TelecomVerification> {
+  return postJson<TelecomVerification>(
+    "/api/v1/telecom/verifications",
+    body,
+    signal
+  );
+}
+
+export function getTelecomVerification(
+  verificationId: string,
+  signal?: AbortSignal
+): Promise<TelecomVerification> {
+  return requestJson<TelecomVerification>(
+    `/api/v1/telecom/verifications/${encodeURIComponent(verificationId)}`,
+    signal
+  );
+}
+
+export interface TelecomSummary {
+  history: {
+    verification_id: string;
+    verify_type: string;
+    state: string;
+    verified_at: string;
+    stale: boolean;
+  }[];
+  co_signals: {
+    devices: string[];
+    accounts: string[];
+    beneficiaries: string[];
+    geo_labels: string[];
+    transaction_count: number;
+  };
+  history_count: number;
+  subject_masked: string;
+  allocation: {
+    operator_id: string | null;
+    country: string | null;
+    basis: string;
+    limitation: string;
+  };
+  phone_label: string;
+}
+
+export function getTelecomSummary(
+  params: { subject?: string; phone_label?: string },
+  signal?: AbortSignal
+): Promise<TelecomSummary> {
+  const query = new URLSearchParams();
+  if (params.subject) query.set("subject", params.subject);
+  if (params.phone_label) query.set("phone_label", params.phone_label);
+  return requestJson<TelecomSummary>(
+    `/api/v1/telecom/summary?${query.toString()}`,
+    signal
+  );
+}
+
+export interface TelecomConfig {
+  registry: { version: string; updated: string; operators: string };
+  tracked_apis: string[];
+  verify_types: string[];
+  consent_required_all: boolean;
+  always_consent_types: string[];
+  retention_days: number;
+  actor_per_min: number;
+  subject_per_day: number;
+  providers: {
+    adapter: string;
+    name: string;
+    status: string;
+    live: boolean;
+    secret_refs: string[];
+    secret_present: Record<string, boolean>;
+  }[];
+  live_integrations: string[];
+}
+
+export function getTelecomConfig(
+  signal?: AbortSignal
+): Promise<TelecomConfig> {
+  return requestJson<TelecomConfig>("/api/v1/admin/telecom-config", signal);
+}
+
+/* Geointelligence OS clients. Shapes mirror app/identity_verify.py,
+ * app/address_verify.py, app/location_obs.py, app/ip_intel.py,
+ * app/intel_providers.py, app/investigation_map.py,
+ * app/intel_auth.py. Sensitive reads are masked for auditors and
+ * denied for viewers (enforced server-side). */
+
+export interface IdentityVerification {
+  verification_id: string;
+  tenant_id: string;
+  investigation_id: string;
+  subject_hash: string;
+  subject_masked: string;
+  provider_id: string;
+  verify_type: string;
+  verification_status: string;
+  previous_status: string;
+  country: string;
+  factors: {
+    factor: string;
+    result: string;
+    evidence_ref: string;
+    reliability: string;
+  }[];
+  missing: string[];
+  limitations: string[];
+  evidence_reference: string;
+  attributes_checked: string[];
+  verified_at: string;
+  verified_ts: number;
+  expires_at: number;
+  purpose: string;
+  org: string;
+  user: string;
+  synthetic: boolean;
+  record_hash: string;
+  integrity?: string;
+  masked_view?: boolean;
+}
+
+export function requestIdentityVerification(
+  body: {
+    verify_type: string;
+    subject_ref: string;
+    attributes?: Record<string, string>;
+    country: string;
+    purpose: string;
+    investigation_id?: string;
+  },
+  signal?: AbortSignal
+): Promise<IdentityVerification> {
+  return postJson<IdentityVerification>(
+    "/api/v1/identity/verifications",
+    body,
+    signal
+  );
+}
+
+export function getIdentityVerification(
+  verificationId: string,
+  signal?: AbortSignal
+): Promise<IdentityVerification> {
+  return requestJson<IdentityVerification>(
+    `/api/v1/identity/verifications/${encodeURIComponent(verificationId)}`,
+    signal
+  );
+}
+
+export interface AddressVerification {
+  verification_id: string;
+  tenant_id: string;
+  investigation_id: string;
+  subject_hash: string;
+  subject_masked: string;
+  address?: Record<string, string>;
+  address_masked: {
+    country: string;
+    region: string;
+    state_province: string;
+    district: string;
+    city: string;
+    street_masked: string;
+    has_coordinates: boolean;
+  };
+  provider_id: string;
+  verification_method: string;
+  verification_status: string;
+  previous_status: string;
+  match_result: Record<string, unknown>;
+  limitations: string[];
+  evidence_reference: string;
+  verified_at: string;
+  verified_ts: number;
+  expires_at: number;
+  purpose: string;
+  org: string;
+  user: string;
+  synthetic: boolean;
+  record_hash: string;
+  integrity?: string;
+  masked_view?: boolean;
+}
+
+export function requestAddressVerification(
+  body: {
+    address: Record<string, string>;
+    subject_ref: string;
+    method: string;
+    purpose: string;
+    investigation_id?: string;
+    geocoded_only?: boolean;
+  },
+  signal?: AbortSignal
+): Promise<AddressVerification> {
+  return postJson<AddressVerification>(
+    "/api/v1/addresses/verify",
+    body,
+    signal
+  );
+}
+
+export function getAddressVerification(
+  verificationId: string,
+  signal?: AbortSignal
+): Promise<AddressVerification> {
+  return requestJson<AddressVerification>(
+    `/api/v1/addresses/verifications/${encodeURIComponent(verificationId)}`,
+    signal
+  );
+}
+
+export interface IpLookupResult {
+  status: string;
+  location: {
+    country_code: string | null;
+    region: string | null;
+    city: string | null;
+    latitude: number | null;
+    longitude: number | null;
+    accuracy_km: number | null;
+  };
+  network: {
+    asn: string | null;
+    organization: string | null;
+    vpn_indicator: string;
+    proxy_indicator: string;
+    tor_indicator: string;
+  };
+  source: {
+    provider: string | null;
+    observed_at: string | null;
+    retrieved_at: string | null;
+  };
+  investigation_id: string;
+  purpose: string;
+  limitations: string[];
+  observation_id: string;
+}
+
+export function postIpLookup(
+  body: { ip_address: string; investigation_id?: string; purpose: string },
+  signal?: AbortSignal
+): Promise<IpLookupResult> {
+  return postJson<IpLookupResult>(
+    "/api/v1/geolocation/ip/lookup",
+    body,
+    signal
+  );
+}
+
+export interface LocationObservation {
+  observation_id: string;
+  tenant_id: string;
+  investigation_id: string;
+  subject_hash: string;
+  subject_masked: string;
+  device_reference: string;
+  source_type: string;
+  provider_id: string;
+  latitude?: number;
+  longitude?: number;
+  accuracy_meters: number | "unknown";
+  observed_at: string;
+  received_at: string;
+  timezone: string;
+  method: string;
+  verification_status: string;
+  authorization_reference: string;
+  consent_reference: string;
+  evidence_reference: string;
+  expires_at: number;
+  created_at: string;
+  record_hash: string;
+  integrity?: string;
+  masked_view?: boolean;
+}
+
+export interface IntelMap {
+  investigation_id: string;
+  layers: Record<
+    string,
+    {
+      items: Record<string, unknown>[];
+      item_count: number;
+      reason_if_empty: string;
+    }
+  >;
+  masked: boolean;
+  masked_view?: boolean;
+  map_provider_note: string;
+}
+
+export function getInvestigationMap(
+  investigationId: string,
+  signal?: AbortSignal
+): Promise<IntelMap> {
+  return requestJson<IntelMap>(
+    `/api/v1/investigations/${encodeURIComponent(investigationId)}/map`,
+    signal
+  );
+}
+
+export interface IntelRelationship {
+  edge_id: string;
+  source: string;
+  target: string;
+  relationship_type: string;
+  strength: string;
+  evidence_reference: string;
+  provider: string;
+  valid_from: string;
+  valid_to: string;
+}
+
+export function getInvestigationRelationships(
+  investigationId: string,
+  signal?: AbortSignal
+): Promise<{ investigation_id: string; relationships: IntelRelationship[] }> {
+  return requestJson(
+    `/api/v1/investigations/${encodeURIComponent(investigationId)}/relationships`,
+    signal
+  );
+}
+
+export interface IntelProvider {
+  provider_id: string;
+  name: string;
+  category: string;
+  auth: string;
+  capabilities: string[];
+  api_version: string;
+  integration_status: string;
+  live: boolean;
+  countries: string;
+  cost_classification: string;
+  limitations: string[];
+  secret_refs: string[];
+}
+
+export function getIntelProviders(
+  signal?: AbortSignal
+): Promise<{ providers: IntelProvider[]; count: number }> {
+  return requestJson("/api/v1/providers", signal);
+}
+
+export interface CountryCoverage {
+  country: string;
+  country_name: string;
+  identity: string;
+  telecom: string;
+  address: string;
+  ip_geolocation: string;
+  mapping: string;
+  location: string;
+  operators_registered: string[];
+  overall: string;
+  legal_review: string;
+  note: string;
+}
+
+export function getIntelCoverage(
+  signal?: AbortSignal
+): Promise<{
+  countries: CountryCoverage[];
+  count: number;
+  map_provider: string;
+}> {
+  return requestJson("/api/v1/geointel/coverage", signal);
+}
+
+export function getIntelMetrics(
+  signal?: AbortSignal
+): Promise<{
+  tenant_id: string;
+  counts: Record<string, { total: number; by_status: Record<string, number> }>;
+  computed_live: boolean;
+  history: string;
+}> {
+  return requestJson("/api/v1/geointel/metrics", signal);
+}
+
+/* UFI: universal financial crime intelligence. Shapes mirror
+ * app/payment_methods.py, parties.py, typologies.py, alerts.py,
+ * tracing.py, altpayments.py and reports.py exactly. */
+
+export interface TraceMovement {
+  from_transaction: string;
+  to_transaction: string;
+  hop: number;
+  status: string;
+  evidence: string;
+  amount_minor: number | null;
+  currency: string | null;
+}
+
+export interface FundTrace {
+  trace_id: string;
+  origin_transaction: string;
+  movements: TraceMovement[];
+  visited_transactions: string[];
+  limitations: string[];
+  built_at: string;
+}
+
+export function postTrace(
+  transactionId: string,
+  maxHops = 4,
+  signal?: AbortSignal
+): Promise<FundTrace> {
+  return postJson<FundTrace>(
+    "/api/v1/tracing/transactions",
+    { transaction_id: transactionId, max_hops: maxHops },
+    signal
+  );
+}
+
+export function getTrace(
+  traceId: string,
+  signal?: AbortSignal
+): Promise<FundTrace> {
+  return requestJson<FundTrace>(
+    `/api/v1/tracing/${encodeURIComponent(traceId)}`,
+    signal
+  );
+}
+
+export interface Typology {
+  typology_id: string;
+  label: string;
+  detector_families: string[];
+  engine_rules: string[];
+  industries: string[];
+  industry_taxonomy_codes: string[];
+  detection_gap: boolean;
+  mapping_errors: string[];
+  matched_signal_ids?: string[];
+  matched_count?: number;
+}
+
+export function getTypologies(
+  industry?: string,
+  signal?: AbortSignal
+): Promise<{ typologies: Typology[] }> {
+  const query = industry ? `?industry=${encodeURIComponent(industry)}` : "";
+  return requestJson(`/api/v1/fraud/typologies${query}`, signal);
+}
+
+export function getTypology(
+  typologyId: string,
+  signal?: AbortSignal
+): Promise<Typology> {
+  return requestJson<Typology>(
+    `/api/v1/fraud/typologies/${encodeURIComponent(typologyId)}`,
+    signal
+  );
+}
+
+export interface Party {
+  role: string;
+  reference_masked: string | null;
+  label: string | null;
+  source_field: string;
+  verification: string;
+}
+
+export interface TxnParties {
+  transaction_id: string;
+  parties: Party[];
+  classification: {
+    method_id: string;
+    confidence: string;
+    explanation: string;
+  };
+  network: {
+    institution_id: string;
+    confidence: string;
+    explanation: string;
+  };
+  tenant_scope: string;
+}
+
+export function getTxnParties(
+  txnId: string,
+  signal?: AbortSignal
+): Promise<TxnParties> {
+  return requestJson<TxnParties>(
+    `/api/v1/transactions/${encodeURIComponent(txnId)}/parties`,
+    signal
+  );
+}
+
+async function patchJson<T>(
+  path: string,
+  body: unknown,
+  signal?: AbortSignal
+): Promise<T> {
+  /* PATCH twin of postJson for alert transitions. */
+  const init: RequestInit = {
+    method: "PATCH",
+    signal,
+    credentials: "include",
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  };
+  const gate = deadline(signal);
+  init.signal = gate.signal;
+  let res: Response;
+  try {
+    res = await fetch(`${apiBaseUrl()}${path}`, init);
+  } catch (err: unknown) {
+    throw toNetworkError(err);
+  } finally {
+    gate.clear();
+  }
+  const data = (await res.json().catch(() => ({}))) as ApiErrorBody;
+  if (!res.ok) {
+    notifyUnauthorized(path, res.status);
+    throw new ApiError(
+      data.error?.code ?? `HTTP_${res.status}`,
+      data.error?.message ?? `request failed (${res.status})`,
+      res.status,
+      data.error?.trace_id ?? ""
+    );
+  }
+  return data as T;
+}
+
+export interface FraudAlert {
+  id: string;
+  signal_id: string;
+  transaction_id: string | null;
+  detector_family: string | null;
+  severity: string | null;
+  status: string;
+  opened_at: string;
+  history: { status: string; at: string; actor: string }[];
+  notified: boolean;
+}
+
+export function getFraudAlerts(
+  status?: string,
+  signal?: AbortSignal
+): Promise<{ alerts: FraudAlert[]; tenant_scope: string }> {
+  const query = status ? `?status=${encodeURIComponent(status)}` : "";
+  return requestJson(`/api/v1/fraud/alerts${query}`, signal);
+}
+
+export function postFraudAlert(
+  signalId: string,
+  signal?: AbortSignal
+): Promise<{ status: string; alert: FraudAlert }> {
+  return postJson("/api/v1/fraud/alerts", { signal_id: signalId }, signal);
+}
+
+export function patchFraudAlert(
+  alertId: string,
+  status: string,
+  signal?: AbortSignal
+): Promise<FraudAlert> {
+  return patchJson<FraudAlert>(
+    `/api/v1/fraud/alerts/${encodeURIComponent(alertId)}`,
+    { status },
+    signal
+  );
+}
+
+/* UFI slice 2: monitoring + industry adapters. Shapes mirror
+ * app/monitoring.py and app/industry_adapters.py exactly. */
+
+export interface MonitoringStatus {
+  mode: string;
+  mode_note: string;
+  tenant_scope: string;
+  transactions_visible: number;
+  signals_visible: number;
+  alerts_open: number;
+  alerts_by_status: Record<string, number>;
+  signals_without_alerts: number;
+  data_window: { start: string | null; end: string | null };
+  computed_at: string;
+}
+
+export function getMonitoringStatus(
+  signal?: AbortSignal
+): Promise<MonitoringStatus> {
+  return requestJson<MonitoringStatus>("/api/v1/monitoring/status", signal);
+}
+
+export interface MonitoringRun {
+  tenant_scope: string;
+  signals_evaluated: number;
+  alerts_opened: string[];
+  alerts_duplicate: string[];
+  family_runs: Record<string, number>;
+  family_errors: { family: string; error: string }[];
+  evaluated_at: string;
+}
+
+export function postMonitoringEvaluate(
+  signal?: AbortSignal
+): Promise<MonitoringRun> {
+  return postJson<MonitoringRun>("/api/v1/monitoring/evaluate", {}, signal);
+}
+
+export interface IndustryEntry {
+  id: string;
+  name: string;
+  status: string;
+  shared_reuse?: string[];
+  note?: string;
+  status_evidence?: string;
+}
+
+export function getIndustries(
+  signal?: AbortSignal
+): Promise<{ industries: IndustryEntry[]; count: number }> {
+  return requestJson("/api/v1/industries", signal);
+}
+
+export interface IndustryCoverage {
+  industry_id: string;
+  name: string;
+  registry_status: string;
+  risk_taxonomy_codes: (string | undefined)[];
+  threat_scenarios: number;
+  typologies: string[];
+  test_file: string | null;
+  test_present: boolean;
+}
+
+export function getIndustryCoverage(
+  industryId: string,
+  signal?: AbortSignal
+): Promise<IndustryCoverage> {
+  return requestJson<IndustryCoverage>(
+    `/api/v1/industries/${encodeURIComponent(industryId)}/coverage`,
+    signal
+  );
+}
+
+export interface IndustryReadiness {
+  industry_id: string;
+  registry_status: string;
+  checks: {
+    profile_present: boolean;
+    tests_present: boolean;
+    typologies_mapped: boolean;
+    typologies_measured: boolean;
+    status_gate: boolean;
+  };
+  typologies_measured: number;
+  overall: string;
+  note: string;
+}
+
+export function getIndustryReadiness(
+  industryId: string,
+  signal?: AbortSignal
+): Promise<IndustryReadiness> {
+  return requestJson<IndustryReadiness>(
+    `/api/v1/industries/${encodeURIComponent(industryId)}/readiness`,
+    signal
+  );
+}
+
+/* Agent OS: conversations + orchestrated runs. Shapes mirror
+ * app/conversations.py, app/orchestration.py and app/nl_search.py. */
+
+export interface ConversationMessage {
+  role: string;
+  text: string;
+  at: string;
+}
+
+export interface Conversation {
+  conversation_id: string;
+  tenant_id: string;
+  owner: string;
+  context: Record<string, string>;
+  messages: ConversationMessage[];
+  created_at: string;
+  expires_at: string;
+}
+
+export function postConversation(
+  context: Record<string, string>,
+  signal?: AbortSignal
+): Promise<Conversation> {
+  return postJson<Conversation>(
+    "/api/v1/conversations",
+    { context },
+    signal
+  );
+}
+
+export function getConversation(
+  conversationId: string,
+  signal?: AbortSignal
+): Promise<Conversation> {
+  return requestJson<Conversation>(
+    `/api/v1/conversations/${encodeURIComponent(conversationId)}`,
+    signal
+  );
+}
+
+export interface OrchestratedTurn {
+  user_message: ConversationMessage;
+  assistant_message: ConversationMessage;
+  execution: {
+    execution_id: string;
+    state: string;
+    classification?: { intent: string; rationale: string };
+    steps: {
+      tool: string;
+      status: string;
+      plan_id?: string;
+      error?: string;
+    }[];
+    error: string;
+  };
+}
+
+export function postConversationMessage(
+  conversationId: string,
+  text: string,
+  signal?: AbortSignal
+): Promise<OrchestratedTurn> {
+  return postJson<OrchestratedTurn>(
+    `/api/v1/conversations/${encodeURIComponent(conversationId)}/messages`,
+    { text },
+    signal
+  );
+}
+
+export interface NlSearchResult {
+  query: {
+    filters: Record<string, string | number | boolean>;
+    notes: string[];
+    needs_clarification?: boolean;
+    question?: string;
+  };
+  results: {
+    count: number;
+    capped: boolean;
+    transactions: {
+      transaction_id: string;
+      channel: string;
+      amount_minor: number;
+      currency: string;
+      occurred_at: string;
+      flagged: boolean;
+    }[];
+    explanation: string;
+  } | null;
+}
+
+export function postNlSearch(
+  text: string,
+  signal?: AbortSignal
+): Promise<NlSearchResult> {
+  return postJson<NlSearchResult>(
+    "/api/v1/agent-os/search",
+    { text },
+    signal
+  );
+}
+
+/* Recovery OS: eligibility, cases, capability matrix, metrics.
+ * Shapes mirror app/recovery.py, recovery_rules.py and
+ * recovery_caps.py exactly. */
+
+export interface EligibilityResult {
+  status: string;
+  rule_id: string | null;
+  reason: string;
+  missing: string[];
+  alternatives: string[];
+}
+
+export function postRecoveryAssess(
+  transactionId: string,
+  reason: string,
+  signal?: AbortSignal
+): Promise<EligibilityResult> {
+  return postJson<EligibilityResult>(
+    "/api/v1/recovery/assess",
+    { transaction_id: transactionId, reason },
+    signal
+  );
+}
+
+export interface RecoveryCase {
+  recovery_id: string;
+  transaction_id: string;
+  reason: string;
+  state: string;
+  eligibility: EligibilityResult | null;
+  evidence: { kind: string; reference: string }[];
+  channel: string | null;
+  external_reference: string | null;
+  history: { state: string; at: string; actor: string; note: string }[];
+}
+
+export function getRecoveryCases(
+  signal?: AbortSignal
+): Promise<{ cases: RecoveryCase[]; tenant_scope: string }> {
+  return requestJson("/api/v1/recovery/cases", signal);
+}
+
+export function postRecoveryCase(
+  transactionId: string,
+  reason: string,
+  signal?: AbortSignal
+): Promise<{ status: string; case: RecoveryCase }> {
+  return postJson(
+    "/api/v1/recovery/cases",
+    { transaction_id: transactionId, reason },
+    signal
+  );
+}
+
+export interface RecoveryMetrics {
+  total: number;
+  by_state: Record<string, number>;
+  by_reason: Record<string, number>;
+  tenant_scope: string;
+  window: string;
+}
+
+export function getRecoveryMetrics(
+  signal?: AbortSignal
+): Promise<RecoveryMetrics> {
+  return requestJson<RecoveryMetrics>(
+    "/api/v1/recovery/metrics",
     signal
   );
 }

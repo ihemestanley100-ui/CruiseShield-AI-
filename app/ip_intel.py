@@ -260,3 +260,130 @@ def proposed_edges(state: dict[str, Any]) -> list[dict[str, Any]]:
                 "synthetic": True})
     edges.sort(key=lambda e: e["edge_id"])
     return edges
+
+
+IP_LIMITATIONS = (
+    "IP geolocation does not establish a residential address",
+    "IP geolocation does not establish identity or occupancy",
+    "Carrier-grade NAT, VPNs, proxies, and shared networks can "
+    "mislead results",
+)
+
+
+def lookup_geolocation(ip: str, investigation_id: str, purpose: str,
+                       provider: Any = None,
+                       enrichment: Optional[IntelProvider] = None
+                       ) -> dict[str, Any]:
+    """§7.3 lookup: ESTIMATED-only shape with explicit limitations.
+
+    Reuses the DI-05 geo provider contract (app/geo_intel.py):
+    provider.lookup(ip) returns a raw record dict or None. Invalid
+    input yields status INVALID; non-public addresses yield status
+    NOT_APPLICABLE (never geolocated). Enrichment (ASN/org,
+    VPN/proxy/Tor flags) appears only when a real provider
+    supplies it; the null providers report unknown.
+    """
+    from app import geo_intel as geo_mod
+
+    parsed = classify_ip(ip)
+    if not parsed["valid"]:
+        return {"status": "INVALID", "location": {}, "network": {},
+                "source": {"provider": None, "observed_at": None,
+                           "retrieved_at": None},
+                "limitations": ["not a valid IP literal: no lookup "
+                                "performed"]}
+    if parsed["category"] != "public":
+        return {"status": "NOT_APPLICABLE",
+                "location": {}, "network": {},
+                "source": {"provider": None, "observed_at": None,
+                           "retrieved_at": None},
+                "limitations": ["%s addresses are not geolocated"
+                                % parsed["category"]]}
+    backend = provider or geo_mod.NullProvider()
+    record = backend.lookup(parsed["compressed"]) or {}
+    intel = (enrichment or NullProvider()).enrich_ip(
+        parsed["compressed"])
+    return {
+        "status": "ESTIMATED",
+        "location": {
+            "country_code": record.get("country_code"),
+            "region": record.get("region"),
+            "city": record.get("city"),
+            "latitude": record.get("latitude"),
+            "longitude": record.get("longitude"),
+            "accuracy_km": record.get("accuracy_radius_km"),
+        },
+        "network": {
+            "asn": record.get("asn"),
+            "organization": (record.get("organization")
+                             or (intel.org if intel else None)),
+            "vpn_indicator": intel.vpn_indicator if intel else UNKNOWN,
+            "proxy_indicator": (intel.proxy_indicator if intel
+                                else UNKNOWN),
+            "tor_indicator": intel.tor_indicator if intel else UNKNOWN,
+        },
+        "source": {
+            "provider": getattr(backend, "name", None),
+            "observed_at": record.get("observed_at"),
+            "retrieved_at": record.get("retrieved_at"),
+        },
+        "investigation_id": investigation_id,
+        "purpose": purpose,
+        "limitations": list(IP_LIMITATIONS),
+    }
+
+
+def mask_ip(value: str) -> str:
+    """Minimized display: first group + masked remainder."""
+    addr = parse_ip(value)
+    if addr is None:
+        return "invalid"
+    text = addr.compressed
+    sep = "." if addr.version == 4 else ":"
+    head = text.split(sep)[0]
+    return head + sep + "***"
+
+
+def record_network_observation(store, ip: str, result: dict[str, Any],
+                               tenant_id: str, investigation_id: str,
+                               purpose: str, org: str, user: str,
+                               retention_days: int = 90) -> dict[str, Any]:
+    """Persist a network observation (masked IP + hash, never raw)."""
+    import hashlib
+    import hmac
+    import time as _time
+
+    from app import intel_common as common
+
+    purpose = common.check_purpose(purpose)
+    org, user = common.actor_name(org, user)
+    moment = _time.time()
+    seq = int(store.state.get("netgeo_seq", 0)) + 1
+    store.state["netgeo_seq"] = seq
+    key = common.subject_hash("ip:" + ip.strip())
+    record = {
+        "observation_id": "net_%06d" % seq,
+        "tenant_id": tenant_id, "investigation_id": investigation_id[:80],
+        "ip_masked": mask_ip(ip), "ip_hash": hmac.new(
+            key.encode(), b"network-observation",
+            hashlib.sha256).hexdigest()[:32],
+        "status": result.get("status", ""),
+        "location": result.get("location", {}),
+        "network": result.get("network", {}),
+        "provider_id": (result.get("source", {}) or {}).get(
+            "provider", "") or "",
+        "observed_at": (result.get("source", {}) or {}).get(
+            "observed_at", ""),
+        "retrieved_at": (result.get("source", {}) or {}).get(
+            "retrieved_at", ""),
+        "verification_status": result.get("status", ""),
+        "limitations": result.get("limitations", []),
+        "purpose": purpose, "org": org, "user": user,
+        "expires_at": moment + max(1, retention_days) * 86400,
+        "created_at": common.utc(moment),
+    }
+    common.seal(record)
+    store.state.setdefault("network_geo_observations", {})[
+        record["observation_id"]] = record
+    store._save()
+    return record

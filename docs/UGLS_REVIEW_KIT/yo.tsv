@@ -1,5 +1,5 @@
 # locale: yo (MACHINE-DRAFTED — human review pending)
-# version: 1.2.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
+# version: 1.3.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
 # columns: key | en_source | draft | origin(direct=translated,fallback=English shown) | same_as_source | en_vars | draft_vars | vars_ok
 key	en_source	draft	origin	same_as_source	en_vars	draft_vars	vars_ok
 ai.altTitle	Alternative explanations:	Àwọn àlàyé mìíràn:	direct	false			true
@@ -30,14 +30,14 @@ audit.thEvent	Event	Ìṣẹ̀lẹ̀	direct	false			true
 audit.thReason	Reason	Ìdí	direct	false			true
 audit.thState	State change	Ìyípadà ipò	direct	false			true
 audit.thTime	Time	Àkókò	direct	false			true
-auth.blurb	This hosted demo is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	Ìfihàn yìí wà lábẹ́ ààbò. Wọlé pẹ̀lú orúkọ aláṣẹ ìwádìí tí a fún ọ. Dátà tí a ṣe nìkan.	direct	false			true
+auth.blurb	This hosted platform is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	Ìfihàn yìí wà lábẹ́ ààbò. Wọlé pẹ̀lú orúkọ aláṣẹ ìwádìí tí a fún ọ. Dátà tí a ṣe nìkan.	direct	false			true
 auth.invalid	Invalid username or password.	Orúkọ ìlò tàbí ọ̀rọ̀ìpamọ́ kò tọ́.	direct	false			true
 auth.password	Password	Ọ̀rọ̀ìpamọ́	direct	false			true
 auth.rateLimited	Too many login attempts. Wait a minute and try again.	Ìgbìyànjú ìwọlé pọ̀ jù. Dúró fún ìṣẹ́jú kan kí o sì tún gbìyànjú.	direct	false			true
 auth.signIn	Sign in	Wọlé	direct	false			true
 auth.signingIn	Signing in…	Ń wọlé…	direct	false			true
-auth.title	Demo sign in	Wọlé ìfihàn	direct	false			true
-auth.unreachable	Backend unreachable. Check the demo server and retry.	A kò lè dé ọ̀dọ̀ ẹ̀rọ ìránṣẹ́. Ṣàyẹ̀wò ẹ̀rọ ìfihàn kí o sì tún gbìyànjú.	direct	false			true
+auth.title	Secure sign in	Wọlé ìfihàn	direct	false			true
+auth.unreachable	Backend unreachable. Check the platform server and retry.	A kò lè dé ọ̀dọ̀ ẹ̀rọ ìránṣẹ́. Ṣàyẹ̀wò ẹ̀rọ ìfihàn kí o sì tún gbìyànjú.	direct	false			true
 auth.username	Username	Orúkọ ìlò	direct	false			true
 case.advisory	Advisory only: Muse Spark analysis explains evidence and never constitutes a human decision, nor changes risk scores or case status.	Ìmọ̀ràn nìkan: òye Muse Spark ń ṣàlàyé ẹ̀rí, kì í ṣe ìpinnu ènìyàn, kì í sì yí àmì ewu tàbí ipò ọ̀ràn padà.	direct	false			true
 case.aiAssessment	AI assessment	Ìṣàyẹ̀wò AI	direct	false			true
@@ -165,11 +165,13 @@ common.notPermitted	Not available for your role.	Kò sí fún ipa rẹ.	direct	f
 common.present	present	wà báyìí	direct	false			true
 common.requestFailed	request failed	Ìbéèrè kùnà	direct	false			true
 common.retry	Retry	Tún gbìyànjú	direct	false			true
+common.timedOut	Request timed out. Retry.	Ìbéèrè ti kọjá àkókò. Gbìyànjú lẹ́ẹ̀kan síi.	direct	false			true
 common.timelineEmpty	No events.	Kò sí ìṣẹ̀lẹ̀.	direct	false			true
+common.unavailable	Service temporarily unavailable. Retry shortly.	Iṣẹ́ kò sí fún ìgbà díẹ̀. Gbìyànjú lẹ́ẹ̀kan síi lẹ́yìn díẹ̀.	direct	false			true
 common.unknown	unknown	A kò mọ̀	direct	false			true
 common.unknownModel	unknown model	awoṣe àìmọ̀	direct	false			true
 common.unknownTime	unknown time	àkókò àìmọ̀	direct	false			true
-common.unreachable	Backend unreachable. Check the demo server and retry.	A kò le dé ẹrọ abánidáró. Ṣayẹwo ẹrọ ìfihàn kí o sì tún gbìyànjú.	direct	false			true
+common.unreachable	Backend unreachable. Check the platform server and retry.	A kò le dé ẹrọ abánidáró. Ṣayẹwo ẹrọ ìfihàn kí o sì tún gbìyànjú.	direct	false			true
 decision.actorLabel	Analyst ID	ID olùṣàyẹ̀wò	direct	false			true
 decision.decisionLabel	Decision	Ìpinnu	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	Ipa rẹ jẹ́ kíkà nìkan: a ti pa ìpinnu.	direct	false			true
@@ -182,26 +184,23 @@ decision.selectPlaceholder	Select a decision…	Yan ìpinnu…	direct	false			tr
 decision.targetLabel	Move case to	Gbé ọ̀ràn lọ sí	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	Ọ̀ràn yìí wà ní ipò ìparí; a kò gbà ìyípadà mìíràn.	direct	false			true
 decision.title	Human decision	Ìpinnu ènìyàn	direct	false			true
-demo.activityDown	Activity unavailable	Ìṣe kò sí	direct	false			true
-demo.aiBriefDown	AI brief unavailable	Àkójọ AI kò sí	direct	false			true
-demo.backendStatus	Backend status	Ipò ẹ̀rọ ìránṣẹ́	direct	false			true
-demo.checkedAt	Checked {url}…	A ti ṣàyẹ̀wò {url}…	direct	false	url	url	true
-demo.execOverview	Executive overview	Àkójọ alákóso	direct	false			true
-demo.execOverviewDown	Executive overview unavailable	Àkójọ alákóso kò sí	direct	false			true
-demo.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	Ọ̀daràn owó sábà máa ń hàn nínú ìṣòwò kan. CruiseShield AI ń so àwọn ìṣòwò, àkántì, ẹ̀rọ, àwọn aníǹfààní àti òǹtajà ìfura pọ̀ sínú nẹ́tíwọ́kì òye tó ṣeé ṣàlàyé.	direct	false			true
-demo.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	Ẹ́ńjìnnì ewu tó dájú rẹ̀ ń ṣàwárí àwọn àmì, Meta AI ń ràn àwọn olùwádìí lọ́wọ́ láti túmọ̀ ẹ̀rí, àtúntò àti ìdánwò ń ṣàwárí àwọn ojú-ìwòye ohun-tó-lè-ṣẹlẹ̀, ìpinnu ènìyàn sì ń jẹ́ ẹni tí a lè ṣe ìṣirò àti àyẹ̀wò.	direct	false			true
-demo.museBrief	Muse Spark brief	Àkójọ Muse Spark	direct	false			true
-demo.networkPreview	Network preview	Àwòrán nẹ́tíwọ́kì ṣáájú	direct	false			true
-demo.networkPreviewDown	Network preview unavailable	Àwòrán nẹ́tíwọ́kì ṣáájú kò sí	direct	false			true
-demo.recentActivity	Recent activity	Ìṣe aipẹ́	direct	false			true
-demo.replayDown	Replay unavailable.	Àtúntò kò sí.	direct	false			true
-demo.retryTitle	Retry {title}	Tún {title} gbìyànjú	direct	false	title	title	true
-demo.riskIntel	Risk intelligence	Òye ewu	direct	false			true
-demo.riskIntelDown	Risk intelligence unavailable	Òye ewu kò sí	direct	false			true
-demo.startBackendPost	) and press retry.	) kí o sì tẹ tún gbìyànjú.	direct	false			true
-demo.startBackendPre	Start the backend (	Bẹ̀rẹ̀ ẹ̀rọ ìránṣẹ́ (	direct	false			true
-demo.systemStatus	System Status	Ipò Ètò	direct	false			true
-demo.systemStatusDown	System status unavailable	Ipò ètò kò sí	direct	false			true
+detection.channelsTitle	Channel activity	Ìṣiṣẹ́ ikanni	direct	false			true
+detection.detectorsTitle	Detector families	Àwọn ìdílé aṣàwárí	direct	false			true
+detection.fpRate	False-positive rate	Ìwọ̀n àṣìṣe rere	direct	false			true
+detection.frequencyTitle	Signal frequency	Ìgbà àwọn àmì	direct	false			true
+detection.investigationsWord	investigations	ìwádìí	direct	false			true
+detection.matrixTitle	Detector by channel	Aṣàwárí ní ikanni	direct	false			true
+detection.measuredAt	Measured at	A díwọ̀n ní	direct	false			true
+detection.noLinkedInvestigation	No linked investigation.	Kò sí ìwádìí tó jẹ mọ́.	direct	false			true
+detection.noSignals	No qualifying signals recorded in this period.	Kò sí àmì tó yẹ tí a gbà sílẹ̀ ní àkókò yìí.	direct	false			true
+detection.notImplemented	Not implemented: no model deployed.	Kò tíì ṣe: kò sí àwòṣe tí a gbé kalẹ̀.	direct	false			true
+detection.seedFeedNote	Seed feed: no live channel integration.	Ìfúnni ìbẹ̀rẹ̀: kò sí ìsopọ̀ ikanni lọ́wọ́lọ́wọ́.	direct	false			true
+detection.timeSeriesTitle	Signal time series	Àkójọ àmì àkókò	direct	false			true
+detection.title	Detection intelligence	Òye ìwádìí	direct	false			true
+detection.txnSignalsTitle	Transaction signals	Àwọn àmì ìṣòwò	direct	false			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Àwọn kóòdù ikanni tí kò ní àwòrán nílò àtúnyẹ̀wò ìsọ̀rí.	direct	false			true
+detection.viewInvestigation	Open investigation	Ṣí ìwádìí	direct	false			true
+detection.zeroNote	Zero means measured none, not missing data.	Òdo mó léwu pé kò sí nǹkan tí a díwọ̀n, kì í ṣe dátà tó sọnù.	direct	false			true
 evidence.clearSearch	Clear search	Nu ìwá	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	Kò sí ẹ̀rí tó bá àlẹ̀mọ́ yìí mu.	direct	false			true
 evidence.emptySearch	No evidence items match this search.	Kò sí ẹ̀rí tó bá ìwá yìí mu.	direct	false			true
@@ -237,7 +236,7 @@ graph.nodeFocusSuffix	, orbit focus	, ìfojúsùn yípo	direct	false			true
 graph.orbitFocusBadge	· orbit focus	· ìfojúsùn yípo	direct	false			true
 graph.orbitalCounts	Focus: {focus} · Showing {a} of {b} nodes, {c} of {d} edges.	Ìfojúsùn: {focus} · Ń fi ìpade {a} lára {b} hàn, ìsopọ̀ {c} lára {d}.	direct	false	a,b,c,d,focus	a,b,c,d,focus	true
 graph.orbitalLabel	Orbital graph	Àwòrán yípo	direct	false			true
-graph.orbitalNote	Synthetic demo data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	Dátà àfihàn ṣíṣe. Àwọn òrùkà àti ìṣípo jẹ́ ìṣètò nìkan — wọn kò fi ewu, ẹ̀bi, tàbí pàtàkì hàn.	direct	false			true
+graph.orbitalNote	Synthetic data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	Dátà àfihàn ṣíṣe. Àwọn òrùkà àti ìṣípo jẹ́ ìṣètò nìkan — wọn kò fi ewu, ẹ̀bi, tàbí pàtàkì hàn.	direct	false			true
 graph.orbitalSvg	Orbital graph focused on {focus}: {a} nodes, {b} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.	Àwòrán yípo tó dojúkọ {focus}: ìpade {a}, ìsopọ̀ {b}. Tab láti dé ìpade àti ìsopọ̀, Enter láti yàn, àwọn bọ́tìnì ìtọ́sọ́nà láti yí padà.	direct	false	a,b,focus	a,b,focus	true
 graph.orbitalTitle	Orbital explorer	Aṣàwákiri yípo	direct	false			true
 graph.orbitalViewControls	Orbital view controls	Àwọn ìṣàkóso ìwò yípo	direct	false			true
@@ -283,7 +282,7 @@ intel.evidencePre	Evidence: 	Ẹ̀rí: 	direct	false			true
 intel.findingsCount.one	{count} finding	{count} àwárí	direct	false	count	count	true
 intel.findingsCount.other	{count} findings	{count} àwárí	direct	false	count	count	true
 intel.findingsH	Intelligence findings	Àwọn àwárí òye	direct	false			true
-intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic demo values only.	Ìtọ́kasí dídúró, kì í ṣe àmì ìka tí a jẹ́rìí. Àwọn ànímọ́: àwọn iye àfihàn ṣíṣe tí a kéde nìkan.	direct	false			true
+intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic values only.	Ìtọ́kasí dídúró, kì í ṣe àmì ìka tí a jẹ́rìí. Àwọn ànímọ́: àwọn iye àfihàn ṣíṣe tí a kéde nìkan.	direct	false			true
 intel.geoDisclaimer	IP-derived locations are approximate and never proof of physical presence. No GPS collection exists (permission: unavailable).	Àwọn ipò tí a yọ láti IP jẹ́ ìsúnmọ́, wọn kì í sì jẹ́ ẹ̀rí ìwà ní ojú-ọ̀nà. Kò sí ìkójọ GPS (ìyọ̀ọ́nda: kò sí).	direct	false			true
 intel.geoH	Geolocation	Ipò ilẹ̀	direct	false			true
 intel.intelDown	Intelligence unavailable for this investigation.	Òye kò sí fún ìwádìí yìí.	direct	false			true
@@ -306,8 +305,8 @@ intel.repLabel	Reputation	Orúkọ rere	direct	false			true
 intel.reviewLine	Human review: {r}	Àtúnyẹ̀wò ènìyàn: {r}	direct	false	r	r	true
 intel.seeBackend	see backend	wo ẹ̀rọ ìránṣẹ́	direct	false			true
 intel.sharedDevice	— shared device	— ẹ̀rọ píńpín	direct	false			true
-intel.statusLine	{findings} · {iso} · synthetic demo data.	{findings} · {iso} · dátà àfihàn ṣíṣe.	direct	false	findings,iso	findings,iso	true
-intel.syntheticTag	· synthetic demo	· ìfihàn ṣíṣe	direct	false			true
+intel.statusLine	{findings} · {iso} · synthetic data.	{findings} · {iso} · dátà àfihàn ṣíṣe.	direct	false	findings,iso	findings,iso	true
+intel.syntheticTag	· synthetic	· ìfihàn ṣíṣe	direct	false			true
 intel.unknownShort	(unknown)	(àìmọ̀)	direct	false			true
 intel.vpnLabel	VPN/proxy/Tor	VPN/proxy/Tor	direct	true			true
 investigation.aiAnalysis	AI analysis	Òye AI	direct	false			true
@@ -354,16 +353,22 @@ landing.capTitles.6	Investigations	Àwọn ìwádìí	direct	false			true
 landing.capTitles.7	AI Intelligence	Ìmọ̀ AI	direct	false			true
 landing.capTitles.8	Risk Engine	Ẹ́ńjìnnì ewu	direct	false			true
 landing.capTitles.9	Evidence & Audit	Ẹ̀rí àti àyẹ̀wò ìwé	direct	false			true
+landing.closeRegion	Clear region selection	Ko asayan agbegbe kuro	direct	false			true
+landing.collapsePanel	Collapse panel	Pa panel mọ	direct	false			true
 landing.controlsAmbient	Ambient sound	Ohùn àyíká	direct	false			true
 landing.cta	Explore CruiseShield AI™	Ṣàwárí CruiseShield AI™	direct	false			true
-landing.ctaSub	Enter the Interactive Demo Experience	Wọ inú ìrírí àfihàn ìbáṣepọ̀	direct	false			true
-landing.enterDemo	Enter Demo	Wọ àfihàn	direct	false			true
+landing.ctaSub	Explore the interactive investigation platform	Wọ inú ìrírí àfihàn ìbáṣepọ̀	direct	false			true
+landing.enterPlatform	Access Platform	Wọ àfihàn	direct	false			true
+landing.expandPanel	Expand panel	Fẹ panel	direct	false			true
 landing.eyebrow	Global Financial Intelligence	Ìmọ̀ owó káríayé	direct	false			true
-landing.fallbackNote	Interactive 3D is unavailable in this browser. The full demo experience remains open.	3D ìbáṣepọ̀ kò sí nínú aṣàwárí yìí. Ìrírí àfihàn kíkún ṣì ṣí sílẹ̀.	direct	false			true
-landing.footerDemo	Demonstration experience · synthetic data · illustrative network visuals · 	Ìrírí àfihàn · dátà àtọwọ́dá · àwọn àwòrán nẹ́tíwọ́kì àpẹẹrẹ · 	direct	false			true
+landing.fallbackNote	Interactive 3D is unavailable in this browser. The full platform remains open.	3D ìbáṣepọ̀ kò sí nínú aṣàwárí yìí. Ìrírí àfihàn kíkún ṣì ṣí sílẹ̀.	direct	false			true
 landing.footerLine	One Platform. A Safer Financial Future. For Everyone.	Pẹpẹ kan. Ọjọ́ ọ̀la owó tó ní ààbò síi. Fún gbogbo ènìyàn.	direct	false			true
-landing.footerLink	Enter the interactive demo	Wọ àfihàn ìbáṣepọ̀	direct	false			true
+landing.footerLink	Open the interactive platform	Wọ àfihàn ìbáṣepọ̀	direct	false			true
+landing.footerNote	Investigation platform · synthetic data · illustrative network visuals · 	Ìrírí àfihàn · dátà àtọwọ́dá · àwọn àwòrán nẹ́tíwọ́kì àpẹẹrẹ · 	direct	false			true
 landing.fullMotion	Full motion	Ìṣípo kíkún	direct	false			true
+landing.globeContextLost	3D context lost — illustration paused.	A padanu 3D — apejuwe duro.	direct	false			true
+landing.globeControls	World Atlas controls	Awọn iṣakoso atlasi ayé	direct	false			true
+landing.globeHint	Drag to rotate. Arrow keys rotate, plus and minus zoom, 0 resets the view.	Fa lati yi. Awọn ọfa nyi, afikun ati iyokuro sunmọ, 0 tun wo.	direct	false			true
 landing.h1	A Safer Financial World	Ayé owó tó ní ààbò síi	direct	false			true
 landing.home	CruiseShield AI home	Ilé CruiseShield AI	direct	false			true
 landing.illustrative	Illustrative Network View	Ìwò nẹ́tíwọ́kì àpẹẹrẹ	direct	false			true
@@ -376,8 +381,8 @@ landing.intelItems.5	Network Graph	Àwòrán nẹ́tíwọ́kì	direct	false			t
 landing.intelItems.6	AI Investigation	Ìwádìí AI	direct	false			true
 landing.intelItems.7	Risk Analysis	Ìṣàyẹ̀wò ewu	direct	false			true
 landing.intelItems.8	Evidence and Audit	Ẹ̀rí àti àyẹ̀wò ìwé	direct	false			true
-landing.intelNote	Demonstration capabilities · synthetic data	Àwọn agbára àfihàn · dátà àtọwọ́dá	direct	false			true
-landing.intelStatus	Demo	Àfihàn	direct	false			true
+landing.intelNote	Investigation capabilities · synthetic data	Àwọn agbára àfihàn · dátà àtọwọ́dá	direct	false			true
+landing.intelStatus	Pilot	Àfihàn	direct	false			true
 landing.intelTitle	Global Intelligence	Ìmọ̀ káríayé	direct	false			true
 landing.intelligenceModules	Intelligence modules	Àwọn modulu ìmọ̀	direct	false			true
 landing.journey.0	DETECT	ṢÀWÁRÍ	direct	false			true
@@ -414,6 +419,7 @@ landing.moduleTitles.2	Global Network	Nẹ́tíwọ́kì káríayé	direct	false
 landing.moduleTitles.3	Cyber Defense	Ààbò cyber	direct	false			true
 landing.moduleTitles.4	Secure Infrastructure	Amayederun ààbò	direct	false			true
 landing.modulesNote	Illustrative module concepts · capabilities vary by deployment	Àwọn èrò modulu àpẹẹrẹ · agbára yàtọ̀ síra	direct	false			true
+landing.mute	Mute	Pa ohun	direct	false			true
 landing.offWord	Off	Pá	direct	false			true
 landing.onWord	On	Tán	direct	false			true
 landing.pauseScene	Pause scene	Dá ojú-ìwòye dúró	direct	false			true
@@ -421,6 +427,7 @@ landing.platformPrinciples	Platform principles	Àwọn ìlànà pẹpẹ	direct	
 landing.platformQualities	Platform qualities	Àwọn ànímọ́ pẹpẹ	direct	false			true
 landing.problem	Financial crime hides in disconnected transactions. CruiseShield AI connects them — deterministic risk scoring, relationship graphs, and evidence-grounded AI explanations, with a human investigator deciding.	Ọ̀daràn owó ń farasin nínú àwọn ìṣòwò tí kò ní ìsopọ̀. CruiseShield AI ń so wọ́n pọ̀ — àmì ewu tó dájú, àwòrán ìbáṣepọ̀ àti àlàyé AI tó dá lórí ẹ̀rí, pẹ̀lú olùwádìí ènìyàn tó ń ṣe ìpinnu.	direct	false			true
 landing.reduceMotion	Reduce motion	Dín ìṣípo kù	direct	false			true
+landing.regionSignal	Illustrative signal	Ami apejuwe	direct	false			true
 landing.regions.0	North America	North America	direct	true			true
 landing.regions.1	South America	South America	direct	true			true
 landing.regions.2	Europe	Europe	direct	true			true
@@ -432,6 +439,7 @@ landing.regions.7	Cross-Border Corridors	Àwọn ọ̀nà tó rékọjá ààlà
 landing.regionsNote	Simulated regional signals · not live monitoring	Àwọn àmì agbègbè ṣíṣe · kò sí àbojútó lọ́wọ́lọ́wọ́	direct	false			true
 landing.regionsTitle	Global Intelligence Regions	Àwọn agbègbè ìmọ̀ káríayé	direct	false			true
 landing.replayLink	try replay & simulation	ṣe àdánwò ìtúnṣe àti ìṣe àdánwò	direct	false			true
+landing.resetView	Reset view	Tun wo pada	direct	false			true
 landing.resumeScene	Resume scene	Tẹ̀síwájú ojú-ìwòye	direct	false			true
 landing.sceneMotion	Scene motion	Ìṣípo ojú-ìwòye	direct	false			true
 landing.signals.0	Secure	Ààbò	direct	false			true
@@ -439,16 +447,18 @@ landing.signals.1	Intelligent	Ọgbọ́n	direct	false			true
 landing.signals.2	Global	Káríayé	direct	false			true
 landing.signals.3	Auditable	Tó ṣeé ṣe àyẹ̀wò	direct	false			true
 landing.soundLabel	Sound	Ohùn	direct	false			true
-landing.stripNote	Cards open the matching live demo screen · 	Àwọn káàdì ń ṣí ojú-ìwòye àfihàn lọ́wọ́lọ́wọ́ · 	direct	false			true
+landing.stripNote	Cards open the matching screen · 	Àwọn káàdì ń ṣí ojú-ìwòye àfihàn lọ́wọ́lọ́wọ́ · 	direct	false			true
 landing.tagline	The Financial Crime Immune System™	The Financial Crime Immune System™	direct	true			true
+landing.unmute	Unmute	Tan ohun	direct	false			true
 landing.volumeLabel	Volume	Ìwọ̀n ohùn	direct	false			true
+landing.zoomIn	Zoom in	Sunmọ	direct	false			true
+landing.zoomOut	Zoom out	Jinasi	direct	false			true
 nav.aiIntelligence	AI Intelligence	Òye AI	direct	false			true
 nav.auditTrail	Audit Trail	Ìtọ́pasẹ̀ Àyẹ̀wò	direct	false			true
 nav.brand	CruiseShield AI	CruiseShield AI	direct	true			true
 nav.cases	Cases	Ọ̀ràn	direct	false			true
 nav.closeNav	Close navigation	Pa ìtọ́sọ́nà	direct	false			true
 nav.commandCenter	Command Center	Ilé Àṣẹ	direct	false			true
-nav.demoRole	demo role	ipa ìfihàn	direct	false			true
 nav.evidence	Evidence	Ẹ̀rí	direct	false			true
 nav.exploreNetwork	Explore Network	Ṣàwákiri Nẹ́tíwọ́kì	direct	false			true
 nav.home	CruiseShield AI home	Ilé CruiseShield AI	direct	false			true
@@ -458,13 +468,14 @@ nav.networkExplorer	Network Explorer	Aṣàwákiri Nẹ́tíwọ́kì	direct	fal
 nav.primary	Primary	Pàtàkì	direct	false			true
 nav.quickActions	Quick Actions	Àwọn Ìṣe Kánkán	direct	false			true
 nav.replaySimulation	Replay & Simulation	Àtúntò & Ìdánwò	direct	false			true
-nav.roleDemo	{role} · demo	{role} · ìfihàn	direct	false	role	role	true
+nav.roleContext	{role} · active	{role} · ìfihàn	direct	false	role	role	true
 nav.runSimulation	Run Simulation	Ṣiṣe Ìdánwò	direct	false			true
+nav.sessionRole	session role	ipa ìfihàn	direct	false			true
 nav.signOut	Sign out	Jáde	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	Jáde níbikibi	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	Parí ìgbà yìí lórí gbogbo ẹ̀rọ àti aṣàwákiri	direct	false			true
 nav.skipToContent	Skip to main content	Rekọja lọ sí àkóónú pàtàkì	direct	false			true
-nav.synthetic	Synthetic demo data	Dátà àfihàn tí a ṣe	direct	false			true
+nav.synthetic	Synthetic data	Dátà àfihàn tí a ṣe	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	Yí ìtọ́sọ́nà	direct	false			true
 nav.viewAuditTrail	View Audit Trail	Wo Ìtọ́pasẹ̀ Àyẹ̀wò	direct	false			true
@@ -488,11 +499,33 @@ notify.bellLoading	Notifications, loading	Àwọn ìkìlọ̀, ń ṣe	direct	fa
 notify.bellOpen	Notifications, {n} open	Àwọn ìkìlọ̀, {n} ṣí sílẹ̀	direct	false	n	n	true
 notify.closeNotif	Close notifications	Pa àwọn ìkìlọ̀	direct	false			true
 notify.loadingAlerts	Loading alerts…	Ń ṣe àwọn ìkìlọ̀…	direct	false			true
+notify.markAllRead	Mark all read	Samisi gbogbo gẹ́gẹ́ bí ẹni tí a ti kà	direct	false			true
+notify.markRead	Mark read	Samisi gẹ́gẹ́ bí ẹni tí a ti kà	direct	false			true
 notify.networkLink	Network	Nẹ́tíwọ́kì	direct	false			true
 notify.noAlerts	No alerts.	Kò sí ìkìlọ̀.	direct	false			true
 notify.openInv	Open investigation	Ṣí ìwádìí	direct	false			true
 notify.panelLabel	Notifications	Àwọn ìkìlọ̀	direct	false			true
 notify.panelTitle	Notifications	Àwọn ìkìlọ̀	direct	false			true
+platform.activityDown	Activity unavailable	Ìṣe kò sí	direct	false			true
+platform.aiBriefDown	AI brief unavailable	Àkójọ AI kò sí	direct	false			true
+platform.backendStatus	Backend status	Ipò ẹ̀rọ ìránṣẹ́	direct	false			true
+platform.checkedAt	Checked {url}…	A ti ṣàyẹ̀wò {url}…	direct	false	url	url	true
+platform.execOverview	Executive overview	Àkójọ alákóso	direct	false			true
+platform.execOverviewDown	Executive overview unavailable	Àkójọ alákóso kò sí	direct	false			true
+platform.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	Ọ̀daràn owó sábà máa ń hàn nínú ìṣòwò kan. CruiseShield AI ń so àwọn ìṣòwò, àkántì, ẹ̀rọ, àwọn aníǹfààní àti òǹtajà ìfura pọ̀ sínú nẹ́tíwọ́kì òye tó ṣeé ṣàlàyé.	direct	false			true
+platform.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	Ẹ́ńjìnnì ewu tó dájú rẹ̀ ń ṣàwárí àwọn àmì, Meta AI ń ràn àwọn olùwádìí lọ́wọ́ láti túmọ̀ ẹ̀rí, àtúntò àti ìdánwò ń ṣàwárí àwọn ojú-ìwòye ohun-tó-lè-ṣẹlẹ̀, ìpinnu ènìyàn sì ń jẹ́ ẹni tí a lè ṣe ìṣirò àti àyẹ̀wò.	direct	false			true
+platform.museBrief	Muse Spark brief	Àkójọ Muse Spark	direct	false			true
+platform.networkPreview	Network preview	Àwòrán nẹ́tíwọ́kì ṣáájú	direct	false			true
+platform.networkPreviewDown	Network preview unavailable	Àwòrán nẹ́tíwọ́kì ṣáájú kò sí	direct	false			true
+platform.recentActivity	Recent activity	Ìṣe aipẹ́	direct	false			true
+platform.replayDown	Replay unavailable.	Àtúntò kò sí.	direct	false			true
+platform.retryTitle	Retry {title}	Tún {title} gbìyànjú	direct	false	title	title	true
+platform.riskIntel	Risk intelligence	Òye ewu	direct	false			true
+platform.riskIntelDown	Risk intelligence unavailable	Òye ewu kò sí	direct	false			true
+platform.startBackendPost	) and press retry.	) kí o sì tẹ tún gbìyànjú.	direct	false			true
+platform.startBackendPre	Start the backend (	Bẹ̀rẹ̀ ẹ̀rọ ìránṣẹ́ (	direct	false			true
+platform.systemStatus	System Status	Ipò Ètò	direct	false			true
+platform.systemStatusDown	System status unavailable	Ipò ètò kò sí	direct	false			true
 replay.cancel	Cancel	Fagilé	direct	false			true
 replay.confirmReset	Confirm: this clears decisions, simulations, AI runs, and audit history for {id}.	Jẹ́rìí: èyí ń nu ìpinnu, ìdánwò, ìṣiṣẹ́ AI, àti ìtàn àyẹ̀wò fún {id}.	direct	false	id	id	true
 replay.confirmResetBtn	Confirm reset	Jẹ́rìí àtúntò	direct	false			true
@@ -510,12 +543,12 @@ replay.play	Play	Ṣeré	direct	false			true
 replay.positionLine	Step {c} of {t} · {e} events · {x} transactions · {g} edges	Ìgbésẹ̀ {c} lára {t} · ìṣẹ̀lẹ̀ {e} · ìṣòwò {x} · ìsopọ̀ {g}	direct	false	c,e,g,t,x	c,e,g,t,x	true
 replay.reducedMotionPlay	Auto-play disabled: reduced-motion preference detected. Use Step forward.	A ti pa eré-aláìfọwọ́yí: a ṣàwárí ìfẹ́ ìṣípo dínkù. Lo Tẹ̀síwájú.	direct	false			true
 replay.resetBlurb	Reset restores the seeded scenario exactly and clears all live state: human decisions, simulations, AI runs, and audit events beyond the reset itself.	Àtúntò ń mú ojú-ìwòye ìbẹ̀rẹ̀ padà gẹ́gẹ́ bí ó ṣe wà ó sì ń nu gbogbo ipò lọ́wọ́lọ́wọ́: ìpinnu ènìyàn, ìdánwò, ìṣiṣẹ́ AI, àti àwọn ìṣẹ̀lẹ̀ àyẹ̀wò ju àtúntò náà lọ.	direct	false			true
-replay.resetDemo	Reset demo	Tún ìfihàn ṣe	direct	false			true
 replay.resetDoneMid	, seed 	, irúgbìn 	direct	false			true
 replay.resetDonePost	. Reload the page to replay from the restored state.	. Tún ojú-ewé náà ṣe láti túnṣe láti ipò tí a mú padà.	direct	false			true
 replay.resetDonePre	Reset complete: run 	Àtúntò parí: ìṣiṣẹ́ 	direct	false			true
 replay.resetLabel	Scenario reset	Àtúntò ojú-ìwòye	direct	false			true
 replay.resetTitle	Scenario reset	Àtúntò ojú-ìwòye	direct	false			true
+replay.resetWorkspace	Reset workspace	Tún ìfihàn ṣe	direct	false			true
 replay.resetting	Resetting…	Ń tún ṣe…	direct	false			true
 replay.restart	Restart	Tún bẹ̀rẹ̀	direct	false			true
 replay.scenarioPre	Scenario 	Ojú-ìwòye 	direct	false			true
@@ -554,6 +587,7 @@ sim.targetDown	Target unavailable: {err}	Àfojúsùn kò sí: {err}	direct	false
 sim.targetLabel	Target transaction	Ìṣòwò àfojúsùn	direct	false			true
 system.allOk	All systems operational	Gbogbo ètò ń ṣiṣẹ́	direct	false			true
 system.checkedPre	Checked	Tí a ṣàyẹ̀wò	direct	false			true
+system.gapsOk	Operational with gaps: some services unconfigured	Ń ṣiṣẹ́ pẹ̀lú àwọn àlàfo: àwọn iṣẹ́ kan kò tíì ṣètò	direct	false			true
 system.rowAi	AI Engine (Muse Spark)	Ẹ́ńjìnnì AI (Muse Spark)	direct	false			true
 system.rowApi	API Services	Àwọn Iṣẹ́ API	direct	false			true
 system.rowGraph	Graph Provenance	Ìpilẹ̀ṣẹ̀ àwòrán	direct	false			true

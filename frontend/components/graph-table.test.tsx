@@ -26,24 +26,24 @@ const EDGES: GraphEdge[] = [
     source_node_id: "acct_A",
     target_node_id: "acct_B",
     relationship_type: "SENT_TO",
-    source_event_ids: ["evt_demo_84721"],
+    source_event_ids: ["evt_84721"],
     evidence_ids: ["evidence_edge_0001"],
     valid_from: "2026-10-27T10:00:00Z",
     valid_to: null,
     synthetic_flag: true,
-    trace_id: "trace_demo_84721",
+    trace_id: "trace_84721",
   },
   {
     edge_id: "edge_0002",
     source_node_id: "acct_B",
     target_node_id: "acct_A",
     relationship_type: "SENT_TO",
-    source_event_ids: ["evt_demo_84722"],
+    source_event_ids: ["evt_84722"],
     evidence_ids: ["evidence_edge_0002"],
     valid_from: "2026-10-27T10:00:00Z",
     valid_to: null,
     synthetic_flag: true,
-    trace_id: "trace_demo_84722",
+    trace_id: "trace_84722",
   },
 ];
 
@@ -57,7 +57,7 @@ describe("GraphTable", () => {
     );
     expect(container.querySelectorAll("[data-edge-row]")).toHaveLength(2);
     const row = container.querySelector('[data-edge-row="edge_0002"]');
-    expect(row?.textContent).toContain("evt_demo_84722");
+    expect(row?.textContent).toContain("evt_84722");
     expect(row?.textContent).toContain("evidence_edge_0002");
     expect(row?.textContent).toContain("SENT_TO");
   });

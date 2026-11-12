@@ -1,5 +1,5 @@
 # locale: ja (MACHINE-DRAFTED — human review pending)
-# version: 1.2.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
+# version: 1.3.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
 # columns: key | en_source | draft | origin(direct=translated,fallback=English shown) | same_as_source | en_vars | draft_vars | vars_ok
 key	en_source	draft	origin	same_as_source	en_vars	draft_vars	vars_ok
 ai.altTitle	Alternative explanations:	別の説明：	direct	false			true
@@ -30,14 +30,14 @@ audit.thEvent	Event	イベント	direct	false			true
 audit.thReason	Reason	理由	direct	false			true
 audit.thState	State change	状態変更	direct	false			true
 audit.thTime	Time	時刻	direct	false			true
-auth.blurb	This hosted demo is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	このデモは保護されています。評価用に提供された調査員の資格情報でサインインしてください。合成データのみ。	direct	false			true
+auth.blurb	This hosted platform is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	このデモは保護されています。評価用に提供された調査員の資格情報でサインインしてください。合成データのみ。	direct	false			true
 auth.invalid	Invalid username or password.	ユーザー名またはパスワードが無効です。	direct	false			true
 auth.password	Password	パスワード	direct	false			true
 auth.rateLimited	Too many login attempts. Wait a minute and try again.	試行回数が多すぎます。1分待って再試行してください。	direct	false			true
 auth.signIn	Sign in	サインイン	direct	false			true
 auth.signingIn	Signing in…	サインイン中…	direct	false			true
-auth.title	Demo sign in	デモサインイン	direct	false			true
-auth.unreachable	Backend unreachable. Check the demo server and retry.	バックエンドに到達できません。デモサーバーを確認して再試行してください。	direct	false			true
+auth.title	Secure sign in	デモサインイン	direct	false			true
+auth.unreachable	Backend unreachable. Check the platform server and retry.	バックエンドに到達できません。デモサーバーを確認して再試行してください。	direct	false			true
 auth.username	Username	ユーザー名	direct	false			true
 case.advisory	Advisory only: Muse Spark analysis explains evidence and never constitutes a human decision, nor changes risk scores or case status.	助言のみ：Muse Spark の分析は証拠を説明するものであり、人間の判断を構成せず、リスクスコアや案件ステータスも変更しません。	direct	false			true
 case.aiAssessment	AI assessment	AI 評価	direct	false			true
@@ -165,11 +165,13 @@ common.notPermitted	Not available for your role.	お使いのロールでは利�
 common.present	present	現在	direct	false			true
 common.requestFailed	request failed	リクエスト失敗	direct	false			true
 common.retry	Retry	再試行	direct	false			true
+common.timedOut	Request timed out. Retry.	リクエストがタイムアウトしました。再試行してください。	direct	false			true
 common.timelineEmpty	No events.	イベントがありません。	direct	false			true
+common.unavailable	Service temporarily unavailable. Retry shortly.	サービスは一時的に利用できません。しばらくしてから再試行してください。	direct	false			true
 common.unknown	unknown	不明	direct	false			true
 common.unknownModel	unknown model	不明なモデル	direct	false			true
 common.unknownTime	unknown time	不明な時刻	direct	false			true
-common.unreachable	Backend unreachable. Check the demo server and retry.	バックエンドに到達できません。デモサーバーを確認して再試行してください。	direct	false			true
+common.unreachable	Backend unreachable. Check the platform server and retry.	バックエンドに到達できません。デモサーバーを確認して再試行してください。	direct	false			true
 decision.actorLabel	Analyst ID	アナリストID	direct	false			true
 decision.decisionLabel	Decision	判断	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	読み取り専用ロールのため判断は無効です。	direct	false			true
@@ -182,26 +184,23 @@ decision.selectPlaceholder	Select a decision…	判断を選択…	direct	false	
 decision.targetLabel	Move case to	案件の移動先	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	この案件は終了状態です。これ以上の遷移はできません。	direct	false			true
 decision.title	Human decision	人間の判断	direct	false			true
-demo.activityDown	Activity unavailable	アクティビティは利用できません	direct	false			true
-demo.aiBriefDown	AI brief unavailable	AI ブリーフは利用できません	direct	false			true
-demo.backendStatus	Backend status	バックエンドステータス	direct	false			true
-demo.checkedAt	Checked {url}…	{url} を確認…	direct	false	url	url	true
-demo.execOverview	Executive overview	エグゼクティブ概要	direct	false			true
-demo.execOverviewDown	Executive overview unavailable	エグゼクティブ概要は利用できません	direct	false			true
-demo.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	金融犯罪が1件の取引に現れることはめったにありません。CruiseShield AI は不審な取引・口座・デバイス・受益者・加盟店を、説明可能なインテリジェンスネットワークにつなぎます。	direct	false			true
-demo.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	確定的リスクエンジンがシグナルを特定し、Meta AI が調査官の証拠解釈を支援し、リプレイとシミュレーションで仮説シナリオを検討し、人間の判断は説明責任と監査可能性を保ちます。	direct	false			true
-demo.museBrief	Muse Spark brief	Muse Spark ブリーフ	direct	false			true
-demo.networkPreview	Network preview	ネットワークプレビュー	direct	false			true
-demo.networkPreviewDown	Network preview unavailable	ネットワークプレビューは利用できません	direct	false			true
-demo.recentActivity	Recent activity	最近のアクティビティ	direct	false			true
-demo.replayDown	Replay unavailable.	リプレイは利用できません。	direct	false			true
-demo.retryTitle	Retry {title}	{title} を再試行	direct	false	title	title	true
-demo.riskIntel	Risk intelligence	リスクインテリジェンス	direct	false			true
-demo.riskIntelDown	Risk intelligence unavailable	リスクインテリジェンスは利用できません	direct	false			true
-demo.startBackendPost	) and press retry.	）再試行を押してください。	direct	false			true
-demo.startBackendPre	Start the backend (	バックエンドを起動し（	direct	false			true
-demo.systemStatus	System Status	システムステータス	direct	false			true
-demo.systemStatusDown	System status unavailable	システムステータスは利用できません	direct	false			true
+detection.channelsTitle	Channel activity	チャネル活動	direct	false			true
+detection.detectorsTitle	Detector families	検出器ファミリー	direct	false			true
+detection.fpRate	False-positive rate	誤検出率	direct	false			true
+detection.frequencyTitle	Signal frequency	シグナル頻度	direct	false			true
+detection.investigationsWord	investigations	調査	direct	false			true
+detection.matrixTitle	Detector by channel	チャネル別検出器	direct	false			true
+detection.measuredAt	Measured at	測定日時	direct	false			true
+detection.noLinkedInvestigation	No linked investigation.	リンクされた調査はありません。	direct	false			true
+detection.noSignals	No qualifying signals recorded in this period.	この期間に記録された有効なシグナルはありません。	direct	false			true
+detection.notImplemented	Not implemented: no model deployed.	未実装: デプロイされたモデルがありません。	direct	false			true
+detection.seedFeedNote	Seed feed: no live channel integration.	シードフィード: ライブのチャネル統合はありません。	direct	false			true
+detection.timeSeriesTitle	Signal time series	シグナル時系列	direct	false			true
+detection.title	Detection intelligence	検出インテリジェンス	direct	false			true
+detection.txnSignalsTitle	Transaction signals	トランザクションシグナル	direct	false			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	未マッピングのチャネルコードは分類の見直しが必要です。	direct	false			true
+detection.viewInvestigation	Open investigation	調査を開く	direct	false			true
+detection.zeroNote	Zero means measured none, not missing data.	ゼロは測定値なしを意味し、データ欠落ではありません。	direct	false			true
 evidence.clearSearch	Clear search	検索をクリア	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	一致する証拠がありません。	direct	false			true
 evidence.emptySearch	No evidence items match this search.	この検索に一致する証拠がありません。	direct	false			true
@@ -237,7 +236,7 @@ graph.nodeFocusSuffix	, orbit focus	、オービタルフォーカス	direct	fal
 graph.orbitFocusBadge	· orbit focus	· オービタルフォーカス	direct	false			true
 graph.orbitalCounts	Focus: {focus} · Showing {a} of {b} nodes, {c} of {d} edges.	フォーカス：{focus} · {b} 件中 {a} ノード、{d} 件中 {c} エッジを表示。	direct	false	a,b,c,d,focus	a,b,c,d,focus	true
 graph.orbitalLabel	Orbital graph	オービタルグラフ	direct	false			true
-graph.orbitalNote	Synthetic demo data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	合成デモデータ。リングと動きはレイアウトのみであり、リスク・有罪・優先度を示しません。	direct	false			true
+graph.orbitalNote	Synthetic data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	合成デモデータ。リングと動きはレイアウトのみであり、リスク・有罪・優先度を示しません。	direct	false			true
 graph.orbitalSvg	Orbital graph focused on {focus}: {a} nodes, {b} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.	{focus} にフォーカスしたオービタルグラフ：{a} ノード、{b} エッジ。Tab でノードとエッジに移動、Enter で選択、矢印キーで移動。	direct	false	a,b,focus	a,b,focus	true
 graph.orbitalTitle	Orbital explorer	オービタルエクスプローラー	direct	false			true
 graph.orbitalViewControls	Orbital view controls	オービタルビュー操作	direct	false			true
@@ -283,7 +282,7 @@ intel.evidencePre	Evidence: 	証拠：	direct	false			true
 intel.findingsCount.one	{count} finding	{count} 件の所見	direct	false	count	count	true
 intel.findingsCount.other	{count} findings	{count} 件の所見	direct	false	count	count	true
 intel.findingsH	Intelligence findings	インテリジェンス所見	direct	false			true
-intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic demo values only.	フィクスチャ参照であり、検証済みのフィンガープリントではありません。属性：申告された合成デモ値のみ。	direct	false			true
+intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic values only.	フィクスチャ参照であり、検証済みのフィンガープリントではありません。属性：申告された合成デモ値のみ。	direct	false			true
 intel.geoDisclaimer	IP-derived locations are approximate and never proof of physical presence. No GPS collection exists (permission: unavailable).	IP 由来の位置は概算であり、物理的な所在の証明にはなりません。GPS 収集はありません（許可：利用不可）。	direct	false			true
 intel.geoH	Geolocation	位置情報	direct	false			true
 intel.intelDown	Intelligence unavailable for this investigation.	この調査のインテリジェンスは利用できません。	direct	false			true
@@ -306,8 +305,8 @@ intel.repLabel	Reputation	評価	direct	false			true
 intel.reviewLine	Human review: {r}	人間のレビュー：{r}	direct	false	r	r	true
 intel.seeBackend	see backend	バックエンド参照	direct	false			true
 intel.sharedDevice	— shared device	— 共有デバイス	direct	false			true
-intel.statusLine	{findings} · {iso} · synthetic demo data.	{findings} · {iso} · 合成デモデータ。	direct	false	findings,iso	findings,iso	true
-intel.syntheticTag	· synthetic demo	· 合成デモ	direct	false			true
+intel.statusLine	{findings} · {iso} · synthetic data.	{findings} · {iso} · 合成デモデータ。	direct	false	findings,iso	findings,iso	true
+intel.syntheticTag	· synthetic	· 合成デモ	direct	false			true
 intel.unknownShort	(unknown)	（不明）	direct	false			true
 intel.vpnLabel	VPN/proxy/Tor	VPN/プロキシ/Tor	direct	false			true
 investigation.aiAnalysis	AI analysis	AI 分析	direct	false			true
@@ -354,16 +353,22 @@ landing.capTitles.6	Investigations	調査	direct	false			true
 landing.capTitles.7	AI Intelligence	AI インテリジェンス	direct	false			true
 landing.capTitles.8	Risk Engine	リスクエンジン	direct	false			true
 landing.capTitles.9	Evidence & Audit	証拠と監査	direct	false			true
+landing.closeRegion	Clear region selection	地域の選択をクリア	direct	false			true
+landing.collapsePanel	Collapse panel	パネルを折りたたむ	direct	false			true
 landing.controlsAmbient	Ambient sound	環境音	direct	false			true
 landing.cta	Explore CruiseShield AI™	CruiseShield AI™ を探索	direct	false			true
-landing.ctaSub	Enter the Interactive Demo Experience	インタラクティブなデモ体験へ	direct	false			true
-landing.enterDemo	Enter Demo	デモに入る	direct	false			true
+landing.ctaSub	Explore the interactive investigation platform	インタラクティブなデモ体験へ	direct	false			true
+landing.enterPlatform	Access Platform	デモに入る	direct	false			true
+landing.expandPanel	Expand panel	パネルを展開する	direct	false			true
 landing.eyebrow	Global Financial Intelligence	グローバル金融インテリジェンス	direct	false			true
-landing.fallbackNote	Interactive 3D is unavailable in this browser. The full demo experience remains open.	このブラウザではインタラクティブ 3D を利用できません。完全なデモ体験は引き続きご利用いただけます。	direct	false			true
-landing.footerDemo	Demonstration experience · synthetic data · illustrative network visuals · 	デモ体験 · 合成データ · イメージのネットワークビジュアル · 	direct	false			true
+landing.fallbackNote	Interactive 3D is unavailable in this browser. The full platform remains open.	このブラウザではインタラクティブ 3D を利用できません。完全なデモ体験は引き続きご利用いただけます。	direct	false			true
 landing.footerLine	One Platform. A Safer Financial Future. For Everyone.	一つのプラットフォーム。より安全な金融の未来。すべての人のために。	direct	false			true
-landing.footerLink	Enter the interactive demo	インタラクティブなデモに入る	direct	false			true
+landing.footerLink	Open the interactive platform	インタラクティブなデモに入る	direct	false			true
+landing.footerNote	Investigation platform · synthetic data · illustrative network visuals · 	デモ体験 · 合成データ · イメージのネットワークビジュアル · 	direct	false			true
 landing.fullMotion	Full motion	フルモーション	direct	false			true
+landing.globeContextLost	3D context lost — illustration paused.	3Dコンテキストを喪失 — 表示を一時停止中。	direct	false			true
+landing.globeControls	World Atlas controls	ワールドアトラスの操作	direct	false			true
+landing.globeHint	Drag to rotate. Arrow keys rotate, plus and minus zoom, 0 resets the view.	ドラッグで回転。矢印キーで回転、プラス・マイナスでズーム、0でリセット。	direct	false			true
 landing.h1	A Safer Financial World	より安全な金融の世界へ	direct	false			true
 landing.home	CruiseShield AI home	CruiseShield AI ホーム	direct	false			true
 landing.illustrative	Illustrative Network View	イメージのネットワークビュー	direct	false			true
@@ -376,8 +381,8 @@ landing.intelItems.5	Network Graph	ネットワークグラフ	direct	false			tr
 landing.intelItems.6	AI Investigation	AI 調査	direct	false			true
 landing.intelItems.7	Risk Analysis	リスク分析	direct	false			true
 landing.intelItems.8	Evidence and Audit	証拠と監査	direct	false			true
-landing.intelNote	Demonstration capabilities · synthetic data	デモ機能 · 合成データ	direct	false			true
-landing.intelStatus	Demo	デモ	direct	false			true
+landing.intelNote	Investigation capabilities · synthetic data	デモ機能 · 合成データ	direct	false			true
+landing.intelStatus	Pilot	デモ	direct	false			true
 landing.intelTitle	Global Intelligence	グローバルインテリジェンス	direct	false			true
 landing.intelligenceModules	Intelligence modules	インテリジェンスモジュール	direct	false			true
 landing.journey.0	DETECT	検出	direct	false			true
@@ -414,6 +419,7 @@ landing.moduleTitles.2	Global Network	グローバルネットワーク	direct	f
 landing.moduleTitles.3	Cyber Defense	サイバー防御	direct	false			true
 landing.moduleTitles.4	Secure Infrastructure	セキュアなインフラ	direct	false			true
 landing.modulesNote	Illustrative module concepts · capabilities vary by deployment	モジュール概念はイメージです · 機能は導入により異なります	direct	false			true
+landing.mute	Mute	ミュート	direct	false			true
 landing.offWord	Off	オフ	direct	false			true
 landing.onWord	On	オン	direct	false			true
 landing.pauseScene	Pause scene	シーンを一時停止	direct	false			true
@@ -421,6 +427,7 @@ landing.platformPrinciples	Platform principles	プラットフォームの原則
 landing.platformQualities	Platform qualities	プラットフォームの特長	direct	false			true
 landing.problem	Financial crime hides in disconnected transactions. CruiseShield AI connects them — deterministic risk scoring, relationship graphs, and evidence-grounded AI explanations, with a human investigator deciding.	金融犯罪は、つながりのない取引の影に潜んでいます。CruiseShield AI はそれらをつなぎます——確定的リスクスコアリング、関係グラフ、証拠に基づく AI の説明。そして人間の調査官が判断を下します。	direct	false			true
 landing.reduceMotion	Reduce motion	動きを減らす	direct	false			true
+landing.regionSignal	Illustrative signal	例示信号	direct	false			true
 landing.regions.0	North America	北アメリカ	direct	false			true
 landing.regions.1	South America	南アメリカ	direct	false			true
 landing.regions.2	Europe	ヨーロッパ	direct	false			true
@@ -432,6 +439,7 @@ landing.regions.7	Cross-Border Corridors	国境を越えた回廊	direct	false		
 landing.regionsNote	Simulated regional signals · not live monitoring	シミュレーションによる地域シグナル · ライブ監視ではありません	direct	false			true
 landing.regionsTitle	Global Intelligence Regions	グローバルインテリジェンス地域	direct	false			true
 landing.replayLink	try replay & simulation	リプレイとシミュレーションを試す	direct	false			true
+landing.resetView	Reset view	ビューをリセット	direct	false			true
 landing.resumeScene	Resume scene	シーンを再開	direct	false			true
 landing.sceneMotion	Scene motion	シーンの動き	direct	false			true
 landing.signals.0	Secure	安全	direct	false			true
@@ -439,16 +447,18 @@ landing.signals.1	Intelligent	インテリジェント	direct	false			true
 landing.signals.2	Global	グローバル	direct	false			true
 landing.signals.3	Auditable	監査可能	direct	false			true
 landing.soundLabel	Sound	音	direct	false			true
-landing.stripNote	Cards open the matching live demo screen · 	カードから対応するライブデモ画面を開きます · 	direct	false			true
+landing.stripNote	Cards open the matching screen · 	カードから対応するライブデモ画面を開きます · 	direct	false			true
 landing.tagline	The Financial Crime Immune System™	The Financial Crime Immune System™	direct	true			true
+landing.unmute	Unmute	ミュート解除	direct	false			true
 landing.volumeLabel	Volume	音量	direct	false			true
+landing.zoomIn	Zoom in	ズームイン	direct	false			true
+landing.zoomOut	Zoom out	ズームアウト	direct	false			true
 nav.aiIntelligence	AI Intelligence	AIインテリジェンス	direct	false			true
 nav.auditTrail	Audit Trail	監査証跡	direct	false			true
 nav.brand	CruiseShield AI	CruiseShield AI	direct	true			true
 nav.cases	Cases	案件	direct	false			true
 nav.closeNav	Close navigation	ナビゲーションを閉じる	direct	false			true
 nav.commandCenter	Command Center	コマンドセンター	direct	false			true
-nav.demoRole	demo role	デモ役割	direct	false			true
 nav.evidence	Evidence	証拠	direct	false			true
 nav.exploreNetwork	Explore Network	ネットワークを探索	direct	false			true
 nav.home	CruiseShield AI home	CruiseShield AI ホーム	direct	false			true
@@ -458,13 +468,14 @@ nav.networkExplorer	Network Explorer	ネットワークエクスプローラー	
 nav.primary	Primary	プライマリ	direct	false			true
 nav.quickActions	Quick Actions	クイックアクション	direct	false			true
 nav.replaySimulation	Replay & Simulation	リプレイとシミュレーション	direct	false			true
-nav.roleDemo	{role} · demo	{role} · デモ	direct	false	role	role	true
+nav.roleContext	{role} · active	{role} · デモ	direct	false	role	role	true
 nav.runSimulation	Run Simulation	シミュレーションを実行	direct	false			true
+nav.sessionRole	session role	デモ役割	direct	false			true
 nav.signOut	Sign out	サインアウト	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	すべての場所でサインアウト	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	すべてのデバイスとブラウザでこのセッションを終了	direct	false			true
 nav.skipToContent	Skip to main content	メインコンテンツへスキップ	direct	false			true
-nav.synthetic	Synthetic demo data	合成デモデータ	direct	false			true
+nav.synthetic	Synthetic data	合成デモデータ	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	ナビゲーション切替	direct	false			true
 nav.viewAuditTrail	View Audit Trail	監査証跡を表示	direct	false			true
@@ -488,11 +499,33 @@ notify.bellLoading	Notifications, loading	通知、読み込み中	direct	false	
 notify.bellOpen	Notifications, {n} open	通知、{n} 件未読	direct	false	n	n	true
 notify.closeNotif	Close notifications	通知を閉じる	direct	false			true
 notify.loadingAlerts	Loading alerts…	アラートを読み込み中…	direct	false			true
+notify.markAllRead	Mark all read	すべて既読にする	direct	false			true
+notify.markRead	Mark read	既読にする	direct	false			true
 notify.networkLink	Network	ネットワーク	direct	false			true
 notify.noAlerts	No alerts.	アラートはありません。	direct	false			true
 notify.openInv	Open investigation	調査を開く	direct	false			true
 notify.panelLabel	Notifications	通知	direct	false			true
 notify.panelTitle	Notifications	通知	direct	false			true
+platform.activityDown	Activity unavailable	アクティビティは利用できません	direct	false			true
+platform.aiBriefDown	AI brief unavailable	AI ブリーフは利用できません	direct	false			true
+platform.backendStatus	Backend status	バックエンドステータス	direct	false			true
+platform.checkedAt	Checked {url}…	{url} を確認…	direct	false	url	url	true
+platform.execOverview	Executive overview	エグゼクティブ概要	direct	false			true
+platform.execOverviewDown	Executive overview unavailable	エグゼクティブ概要は利用できません	direct	false			true
+platform.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	金融犯罪が1件の取引に現れることはめったにありません。CruiseShield AI は不審な取引・口座・デバイス・受益者・加盟店を、説明可能なインテリジェンスネットワークにつなぎます。	direct	false			true
+platform.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	確定的リスクエンジンがシグナルを特定し、Meta AI が調査官の証拠解釈を支援し、リプレイとシミュレーションで仮説シナリオを検討し、人間の判断は説明責任と監査可能性を保ちます。	direct	false			true
+platform.museBrief	Muse Spark brief	Muse Spark ブリーフ	direct	false			true
+platform.networkPreview	Network preview	ネットワークプレビュー	direct	false			true
+platform.networkPreviewDown	Network preview unavailable	ネットワークプレビューは利用できません	direct	false			true
+platform.recentActivity	Recent activity	最近のアクティビティ	direct	false			true
+platform.replayDown	Replay unavailable.	リプレイは利用できません。	direct	false			true
+platform.retryTitle	Retry {title}	{title} を再試行	direct	false	title	title	true
+platform.riskIntel	Risk intelligence	リスクインテリジェンス	direct	false			true
+platform.riskIntelDown	Risk intelligence unavailable	リスクインテリジェンスは利用できません	direct	false			true
+platform.startBackendPost	) and press retry.	）再試行を押してください。	direct	false			true
+platform.startBackendPre	Start the backend (	バックエンドを起動し（	direct	false			true
+platform.systemStatus	System Status	システムステータス	direct	false			true
+platform.systemStatusDown	System status unavailable	システムステータスは利用できません	direct	false			true
 replay.cancel	Cancel	キャンセル	direct	false			true
 replay.confirmReset	Confirm: this clears decisions, simulations, AI runs, and audit history for {id}.	確認：{id} の判断、シミュレーション、AI 実行、監査履歴をクリアします。	direct	false	id	id	true
 replay.confirmResetBtn	Confirm reset	リセットを確認	direct	false			true
@@ -510,12 +543,12 @@ replay.play	Play	再生	direct	false			true
 replay.positionLine	Step {c} of {t} · {e} events · {x} transactions · {g} edges	ステップ {c}/{t} · {e} イベント · {x} 取引 · {g} エッジ	direct	false	c,e,g,t,x	c,e,g,t,x	true
 replay.reducedMotionPlay	Auto-play disabled: reduced-motion preference detected. Use Step forward.	自動再生は無効です：モーション軽減設定を検出しました。「1つ進む」を使ってください。	direct	false			true
 replay.resetBlurb	Reset restores the seeded scenario exactly and clears all live state: human decisions, simulations, AI runs, and audit events beyond the reset itself.	リセットはシードシナリオを正確に復元し、すべてのライブ状態（人間の判断、シミュレーション、AI 実行、リセット自体を超える監査イベント）をクリアします。	direct	false			true
-replay.resetDemo	Reset demo	デモをリセット	direct	false			true
 replay.resetDoneMid	, seed 	、シード 	direct	false			true
 replay.resetDonePost	. Reload the page to replay from the restored state.	。復元された状態からリプレイするにはページを再読み込みしてください。	direct	false			true
 replay.resetDonePre	Reset complete: run 	リセット完了：実行 	direct	false			true
 replay.resetLabel	Scenario reset	シナリオのリセット	direct	false			true
 replay.resetTitle	Scenario reset	シナリオのリセット	direct	false			true
+replay.resetWorkspace	Reset workspace	デモをリセット	direct	false			true
 replay.resetting	Resetting…	リセット中…	direct	false			true
 replay.restart	Restart	最初から	direct	false			true
 replay.scenarioPre	Scenario 	シナリオ 	direct	false			true
@@ -554,6 +587,7 @@ sim.targetDown	Target unavailable: {err}	対象は利用不可：{err}	direct	fa
 sim.targetLabel	Target transaction	対象取引	direct	false			true
 system.allOk	All systems operational	すべてのシステムは正常です	direct	false			true
 system.checkedPre	Checked	確認	direct	false			true
+system.gapsOk	Operational with gaps: some services unconfigured	ギャップありで稼働中: 一部のサービスが未設定です	direct	false			true
 system.rowAi	AI Engine (Muse Spark)	AI エンジン（Muse Spark）	direct	false			true
 system.rowApi	API Services	API サービス	direct	false			true
 system.rowGraph	Graph Provenance	グラフ出所	direct	false			true

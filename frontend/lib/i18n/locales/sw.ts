@@ -29,8 +29,8 @@ export const sw = {
     signOutEverywhereTitle:
       "Maliza kipindi hiki kwenye kila kifaa na kivinjari",
     investigator: "Mpelelezi",
-    demoRole: "jukumu la onyesho",
-    roleDemo: "{role} · onyesho",
+    sessionRole: "jukumu la onyesho",
+    roleContext: "{role} · onyesho",
   },
   auth: {
     title: "Ingia kwenye onyesho",
@@ -92,7 +92,7 @@ export const sw = {
     ],
     cta: "Chunguza CruiseShield AI™",
     ctaSub: "Ingia kwenye uzoefu wa onyesho shirikishi",
-    enterDemo: "Ingia kwenye onyesho",
+    enterPlatform: "Ingia kwenye onyesho",
     brandName: "CruiseShield AI™",
     tagline: "The Financial Crime Immune System™",
     home: "Nyumbani kwa CruiseShield AI",
@@ -183,7 +183,7 @@ export const sw = {
     ],
     platformPrinciples: "Kanuni za jukwaa",
     footerLine: "Jukwaa moja. Mustakabali wa kifedha ulio salama zaidi. Kwa kila mtu.",
-    footerDemo:
+    footerNote:
       "Uzoefu wa onyesho · data bandia · taswira za mtandao za kielelezo · ",
     footerLink: "Ingia kwenye onyesho shirikishi",
     controlsAmbient: "Sauti ya mazingira",
@@ -249,7 +249,7 @@ export const sw = {
     light: "Nuru",
     system: "Mfumo",
   },
-  demo: {
+  platform: {
     execOverview: "Muhtasari wa utendaji",
     execOverviewDown: "Muhtasari wa utendaji haupatikani",
     riskIntel: "Ujasusi wa hatari",
@@ -329,7 +329,7 @@ export const sw = {
     resetTitle: "Kuweka upya hali",
     resetBlurb:
       "Kuweka upya hurejesha hali ya mbegu sawasawa na kufuta hali yote ya moja kwa moja: maamuzi ya binadamu, uigaji, uendeshaji wa AI, na matukio ya ukaguzi zaidi ya uwekwaji upya wenyewe.",
-    resetDemo: "Weka upya onyesho",
+    resetWorkspace: "Weka upya onyesho",
     confirmReset:
       "Thibitisha: hii hufuta maamuzi, uigaji, uendeshaji wa AI, na historia ya ukaguzi kwa {id}.",
     resetting: "Inaweka upya…",
@@ -481,6 +481,25 @@ export const sw = {
     ignoredPre: "Imepuuzwa: ",
     assumptionLine: "Dhana: {a}",
   },
+  detection: {
+    title: "Upelelezi wa utambuzi",
+    frequencyTitle: "Marudio ya ishara",
+    detectorsTitle: "Familia za vigunduzi",
+    channelsTitle: "Shughuli za chaneli",
+    matrixTitle: "Kigunduzi kwa chaneli",
+    noSignals: "Hakuna ishara zinazostahili zilizorekodiwa katika kipindi hiki.",
+    unmappedAlert: "Misimbo ya chaneli isiyopangwa inahitaji mapitio ya uainishaji.",
+    seedFeedNote: "Mlisho wa mbegu: hakuna muunganiko wa chaneli moja kwa moja.",
+    zeroNote: "Sifuri inamaanisha hakuna kilichopimwa, si data iliyokosekana.",
+    notImplemented: "Haijatekelezwa: hakuna kielelezo kilichowekwa.",
+    measuredAt: "Imepimwa",
+    txnSignalsTitle: "Ishara za muamala",
+    viewInvestigation: "Fungua uchunguzi",
+    noLinkedInvestigation: "Hakuna uchunguzi uliounganishwa.",
+    investigationsWord: "uchunguzi",
+    fpRate: "Kiwango cha chanya za uongo",
+    timeSeriesTitle: "Mfululizo wa ishara kwa wakati",
+  },
   intel: {
     intelTitle: "Ujasusi wa kifaa, IP na eneo",
     intelDown: "Ujasusi haupatikani kwa uchunguzi huu.",
@@ -538,6 +557,7 @@ export const sw = {
   system: {
     sysTitle: "Hali ya Mfumo",
     allOk: "Mifumo yote inafanya kazi",
+    gapsOk: "Inafanya kazi na mapengo: huduma zingine hazijasanidiwa",
     rowApi: "Huduma za API",
     rowSeed: "Uadilifu wa mbegu",
     rowGraph: "Asili ya grafu",

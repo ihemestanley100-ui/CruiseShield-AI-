@@ -49,7 +49,7 @@ export function detectLocale(
   return matchBrowserLocales(languages, FALLBACK_LOCALE);
 }
 
-/* Explicit `?locale=` URL override (testing, shared links, demos).
+/* Explicit `?locale=` URL override (testing, shared links).
  * Returns the tag only when it names a registered language. */
 export function urlLocaleOverride(
   search: string = typeof window === "undefined" ? "" : window.location.search

@@ -22,7 +22,7 @@ performed.
 Problem: `kind=="token"` skips the admin-prefix check.
 Fix (minimal): in `session_guard`, enforce
 `AUTH_ADMIN_PREFIXES` for token creds too — deny token
-on `/api/v1/demo/*` (403) OR treat token as exactly
+on `/api/v1/platform/*` (403; deprecated `/api/v1/demo/*` alias identical) OR treat token as exactly
 {write} on non-admin paths. Demo reset/start then needs
 a logged-in admin (judges log in; public cannot reset).
 Tests: token→demo/* 403; admin session→200; matrix row
@@ -32,10 +32,10 @@ update. Size: S.
 
 Problem: `actor_id` is body-controlled.
 Fix: when `auth_kind=="token"`, force
-`actor_id="demo-token"` (ignore body); sessions keep
+`actor_id="platform-token"` (ignore body); sessions keep
 their login username (prefer cookie identity over body
 for sessions too). Tests: forged "judge" becomes
-"demo-token" in record + audit. Size: S.
+"platform-token" in record + audit. Size: S.
 
 ## R3 — RECOMMENDED: token AI sub-cap (F-QUOTA-1)
 
@@ -67,7 +67,7 @@ Size: XS. Tests: anon 401.
 
 Leave `NEXT_PUBLIC_DEMO_WRITE_TOKEN` EMPTY in Render:
 public visitors read + view; ALL writes require a
-logged-in session (judges get demo logins). Zero
+logged-in session (reviewers get provisioned logins). Zero
 public-write risk, zero code change. Trade-off: drive-
 by visitors cannot click write buttons (they 401 with
 a login prompt). RECOMMENDED if R1–R3 cannot land

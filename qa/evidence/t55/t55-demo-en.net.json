@@ -1,0 +1,20 @@
+[
+  "t=1504ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/investigations/inv_84721",
+  "t=1505ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721",
+  "t=1506ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721/audit",
+  "t=1531ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/investigations/inv_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=1542ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/cases/case_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=1661ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/network/txn_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=1661ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/replay/scn_primary?_rsc=yrUa8X5BJbbbszh9",
+  "t=1661ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/cases/case_84721/audit?_rsc=yrUa8X5BJbbbszh9",
+  "t=4966ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/investigations/inv_84721",
+  "t=4966ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/graph/txn_84721",
+  "t=4967ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721",
+  "t=4967ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721/audit",
+  "t=5092ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721",
+  "t=5092ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:8010/api/v1/cases/case_84721/audit",
+  "t=5106ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/investigations/inv_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=5107ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/cases/case_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=5107ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/network/txn_84721?_rsc=yrUa8X5BJbbbszh9",
+  "t=5108ms Fetch FAILED net::ERR_ABORTED :: http://127.0.0.1:3000/replay/scn_primary?_rsc=yrUa8X5BJbbbszh9"
+]

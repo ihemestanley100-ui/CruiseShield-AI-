@@ -13,13 +13,16 @@ import { Breadcrumbs } from "../../../components/breadcrumbs";
 import { DecisionForm } from "../../../components/decision-form";
 import { RiskBadge } from "../../../components/risk-badge";
 import { SectionNav } from "../../../components/section-nav";
+import { TelecomSection } from "../../../components/telecom-section";
 import {
   ApiError,
+  getAiRun,
   getCase,
   getCaseAudit,
   getInvestigation,
   userErrorMessage,
   type AiAssessment,
+  type AgentRun,
   type AuditEntry,
   type CaseDetail,
   type DecisionResponse,
@@ -30,6 +33,90 @@ type State =
   | { kind: "ready"; detail: CaseDetail; audits: AuditEntry[] }
   | { kind: "not-found" }
   | { kind: "error"; message: string };
+
+/* GAP-012: full persisted-run expander. The assessment above shows
+ * the conclusion, findings, and missing information; expanding fetches
+ * the stored run receipt (summary, alternatives, disclaimer) from
+ * GET /api/v1/ai-runs/{id}. Lazy, best-effort, read-only. */
+function RunDetail({ runId }: { runId: string }) {
+  const { t } = useTranslation("evidence");
+  const { t: tAi } = useTranslation("ai");
+  const { t: tCommon } = useTranslation("common");
+  const [state, setState] = useState<
+    | { kind: "closed" }
+    | { kind: "loading" }
+    | { kind: "ready"; run: AgentRun }
+    | { kind: "error"; message: string }
+  >({ kind: "closed" });
+  const load = () => {
+    setState({ kind: "loading" });
+    getAiRun(runId).then(
+      (run) => setState({ kind: "ready", run }),
+      (err: unknown) =>
+        setState({
+          kind: "error",
+          message: userErrorMessage(err, tCommon),
+        })
+    );
+  };
+  if (state.kind === "closed") {
+    return (
+      <p>
+        <button type="button" onClick={load} aria-expanded={false}>
+          {t("showProv")}
+        </button>
+      </p>
+    );
+  }
+  return (
+    <div>
+      <p>
+        <button
+          type="button"
+          onClick={() => setState({ kind: "closed" })}
+          aria-expanded={true}
+        >
+          {t("hideProv")}
+        </button>
+      </p>
+      {state.kind === "loading" && (
+        <p className="muted">{tCommon("loading")}</p>
+      )}
+      {state.kind === "error" && (
+        <>
+          <div className="alert error" role="alert">
+            {state.message}
+          </div>
+          <p>
+            <button type="button" onClick={load}>
+              {tCommon("retry")}
+            </button>
+          </p>
+        </>
+      )}
+      {state.kind === "ready" && (
+        <>
+          <p>{state.run.result.summary}</p>
+          {(state.run.result.alternative_explanations ?? []).length > 0 && (
+            <>
+              <p className="muted">{tAi("altTitle")}</p>
+              <ul className="stack">
+                {(state.run.result.alternative_explanations ?? []).map(
+                  (item, index) => (
+                    <li key={index} className="muted">
+                      {item}
+                    </li>
+                  )
+                )}
+              </ul>
+            </>
+          )}
+          <p className="muted">{state.run.result.disclaimer}</p>
+        </>
+      )}
+    </div>
+  );
+}
 
 /* Hotfix: tolerate backends predating F2 (no latest_ai_run key at all)
  * and partial payloads. Renders only when a valid assessment object
@@ -85,6 +172,9 @@ function AiAssessmentSection({ detail }: { detail: CaseDetail }) {
               </li>
             ))}
           </ul>
+          {assessment.agent_run_id ? (
+            <RunDetail runId={assessment.agent_run_id} />
+          ) : null}
           {missing.length > 0 && (
             <p className="muted">
               {t("missingInfo", { list: missing.join("; ") })}
@@ -195,7 +285,7 @@ export default function CasePage() {
     <main className="main">
       <Breadcrumbs
         items={[
-          { label: tNav("commandCenter"), href: "/demo" },
+          { label: tNav("commandCenter"), href: "/platform" },
           { label: t("crumb", { id: caseId }) },
         ]}
       />
@@ -312,6 +402,9 @@ export default function CasePage() {
             </Link>
           </p>
           <AuditList audits={state.audits} />
+          <section className="card" aria-live="polite">
+            <TelecomSection />
+          </section>
         </>
       )}
     </main>

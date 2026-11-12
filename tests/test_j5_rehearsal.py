@@ -1,9 +1,9 @@
 """J5 migration rehearsal on disposable scratch PG (live-DB-gated).
 
-Full loop: copy live bytes (read-only) → hash-gated load → idempotent
-re-run → count/ID/risk/audit reconciliation → app reads+writes →
-restart → concurrent reads → corrupt-source rollback → live file
-untouched. Runs where SCRATCH_DATABASE_URL exists (here + CI).
+Full loop: copy canonical fixture bytes (read-only) → hash-gated
+load → idempotent re-run → count/ID/risk/audit reconciliation → app
+reads+writes → restart → concurrent reads → corrupt-source rollback →
+live file untouched. Runs where SCRATCH_DATABASE_URL exists.
 """
 import hashlib
 import json
@@ -12,14 +12,16 @@ import threading
 
 import pytest
 
-import app.config as config_mod
-
 SCRATCH_URL = os.environ.get("SCRATCH_DATABASE_URL", "")
 needs_scratch_pg = pytest.mark.skipif(
     not SCRATCH_URL, reason="SCRATCH_DATABASE_URL not set (no scratch PG)")
 
-LIVE_HASH = ("BA1D4DB4BB4DBC6FC3ACA346664A539610CCC6460CCD530F523C8043"
-             "453790FE")
+# Canonical fixture anchor (F-CI-01); historical live anchor preserved
+# in fixtures/canonical_seed.py with the recorded CI discrepancy.
+from fixtures.canonical_seed import (  # noqa: E402
+    FIXTURE_HASH,
+    fixture_bytes,
+)
 
 # Manifest pins (docs/J5_MIGRATION_MANIFEST.md).
 EXPECT_COUNTS = {"transactions": 11, "graph_nodes": 22, "graph_edges": 30,
@@ -29,11 +31,11 @@ EXPECT_COUNTS = {"transactions": 11, "graph_nodes": 22, "graph_edges": 30,
                  "alerts": 1}
 
 
-def _live_copy(tmp_path):
+def _fixture_copy(tmp_path):
     from app import db as db_mod  # noqa: F401  (import parity)
 
-    raw = config_mod.STATE_PATH.read_bytes()
-    assert hashlib.sha256(raw).hexdigest().upper() == LIVE_HASH
+    raw = fixture_bytes()
+    assert hashlib.sha256(raw).hexdigest().upper() == FIXTURE_HASH
     copy = tmp_path / "state-copy.json"
     copy.write_bytes(raw)
     return copy
@@ -45,16 +47,16 @@ def test_j5_full_rehearsal(tmp_path):
     from app import db as db_mod
     from migrations.loader import MigrationError, run_migration
 
-    copy = _live_copy(tmp_path)
+    copy = _fixture_copy(tmp_path)
     conn = db_mod.connect(SCRATCH_URL)
     try:
         db_mod.init_schema(conn)
         db_mod.clear_database(conn)
     finally:
         conn.close()
-    report = run_migration(copy, SCRATCH_URL, expected_hash=LIVE_HASH)
+    report = run_migration(copy, SCRATCH_URL, expected_hash=FIXTURE_HASH)
     assert report["passed"] is True
-    again = run_migration(copy, SCRATCH_URL, expected_hash=LIVE_HASH,
+    again = run_migration(copy, SCRATCH_URL, expected_hash=FIXTURE_HASH,
                           init_schema=False)
     assert again["passed"] is True
     assert again["tables_actual"] == report["tables_actual"]  # idempotent
@@ -110,8 +112,9 @@ def test_j5_full_rehearsal(tmp_path):
     finally:
         conn.close()
 
-    assert hashlib.sha256(
-        config_mod.STATE_PATH.read_bytes()).hexdigest().upper() == LIVE_HASH
+    from _integrity import assert_source_unmutated
+
+    assert_source_unmutated()
 
 
 @needs_scratch_pg

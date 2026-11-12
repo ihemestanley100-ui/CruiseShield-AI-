@@ -20,11 +20,11 @@ function stateFixture(cursor: number): ReplayState {
       cursor === 0
         ? null
         : {
-            event_id: `evt_demo_8472${cursor}`,
+            event_id: `evt_8472${cursor}`,
             event_type: "financial.transaction.created",
             occurred_at: `2026-10-27T10:0${cursor}:00Z`,
-            source: "synthetic_demo",
-            trace_id: `trace_demo_8472${cursor}`,
+            source: "synthetic",
+            trace_id: `trace_8472${cursor}`,
             transaction: {
               transaction_id: `txn_8472${cursor}`,
               amount_minor: 48000000,
@@ -36,7 +36,7 @@ function stateFixture(cursor: number): ReplayState {
             },
             entities: {},
           },
-    cumulative_event_ids: cursor === 0 ? [] : [`evt_demo_8472${cursor}`],
+    cumulative_event_ids: cursor === 0 ? [] : [`evt_8472${cursor}`],
     cumulative_transaction_ids: cursor === 0 ? [] : [`txn_8472${cursor}`],
     cumulative_edge_ids: [],
     counts: { events: cursor, transactions: cursor === 0 ? 0 : 1, edges: 0 },
@@ -73,7 +73,7 @@ describe("ReplayControls", () => {
       expect.anything()
     );
     expect(screen.getByTestId("replay-current")).toHaveTextContent(
-      "evt_demo_84721"
+      "evt_84721"
     );
   });
 
@@ -110,7 +110,7 @@ describe("ReplayControls", () => {
     render(<ReplayControls scenarioId="scn_primary" />);
     await waitFor(() =>
       expect(
-        screen.getByText("Backend unreachable. Check the demo server and retry.")
+        screen.getByText("Backend unreachable. Check the platform server and retry.")
       ).toBeTruthy()
     );
     getReplayMock.mockImplementation(async () => stateFixture(0));

@@ -4,7 +4,7 @@
  * needs a browser; this file does not claim that. */
 import { render, screen, waitFor, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import CommandPage from "./app/demo/page";
+import CommandPage from "./app/platform/page";
 import { DecisionForm } from "./components/decision-form";
 import { GraphExplorer } from "./components/graph-explorer";
 import type { GraphEdge, GraphNode } from "./lib/api";
@@ -61,12 +61,12 @@ function edge(id: string, src: string, tgt: string): GraphEdge {
     source_node_id: src,
     target_node_id: tgt,
     relationship_type: "SENT_TO",
-    source_event_ids: ["evt_demo_84721"],
+    source_event_ids: ["evt_84721"],
     evidence_ids: [`evidence_${id}`],
     valid_from: "2026-10-27T10:00:00Z",
     valid_to: null,
     synthetic_flag: true,
-    trace_id: "trace_demo_84721",
+    trace_id: "trace_84721",
   };
 }
 
@@ -79,7 +79,7 @@ function risk(score: number, band: string, scope: string) {
     band,
     score_version: "risk-score-v1",
     computed_at: "2026-10-27T10:00:00Z",
-    limitations: "Demo limitations.",
+    limitations: "Risk limitations.",
   };
 }
 
@@ -139,7 +139,7 @@ beforeEach(() => {
       status: "OPEN",
       created_at: "2026-10-27T10:00:00Z",
       updated_at: "2026-10-27T10:00:00Z",
-      trace_id: "trace_demo_84721",
+      trace_id: "trace_84721",
     },
     decisions: [],
     allowed_transitions: [],

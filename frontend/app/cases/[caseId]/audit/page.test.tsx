@@ -31,7 +31,7 @@ function auditFixture(id: string): AuditEntry {
   return {
     audit_event_id: id,
     actor_type: "system",
-    actor_id: "demo-reset",
+    actor_id: "platform-reset",
     action: "case.opened",
     target_type: "case",
     target_id: "case_84721",
@@ -84,7 +84,7 @@ describe("CaseAuditPage", () => {
     );
     render(<CaseAuditPage />);
     expect(
-      await screen.findByText("Backend unreachable. Check the demo server and retry.")
+      await screen.findByText("Backend unreachable. Check the platform server and retry.")
     ).toBeTruthy();
     expect(screen.getByRole("button", { name: "Retry" })).toBeTruthy();
   });
@@ -104,7 +104,7 @@ describe("CaseAuditPage", () => {
     const links = [...nav.querySelectorAll("a")].map((a) =>
       a.getAttribute("href")
     );
-    expect(links).toEqual(["/demo", "/cases/case_84721"]);
+    expect(links).toEqual(["/platform", "/cases/case_84721"]);
     expect(
       within(nav).getByText("Audit trail").getAttribute("aria-current")
     ).toBe("page");

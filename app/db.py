@@ -5,7 +5,7 @@ pooling is Phase 5.3+). DATABASE_URL values are never logged, never raised
 in messages, and never returned by any API.
 
 PgStore mirrors the JSON Store interface: ``.state`` materializes the full
-state dict from SQL on every access (read-your-writes; demo scale only),
+state dict from SQL on every access (read-your-writes; small scale only),
 mutations run in single transactions, and audit appends are serialized with
 an advisory lock. JSON remains the active backend; PG serves parity
 verification with zero production cutover.
@@ -15,7 +15,8 @@ from __future__ import annotations
 import json
 import threading
 from datetime import datetime, timezone
-from typing import Any, Callable
+from typing import Any
+from collections.abc import Callable
 
 import psycopg
 from psycopg.types.json import Jsonb

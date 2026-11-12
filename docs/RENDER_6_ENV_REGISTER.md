@@ -11,6 +11,7 @@ DATE: 2026-11-01 | NAMES ONLY — no values. († = set in render.yaml; ‡ = Re
 - DEMO_WRITE_TOKEN (gap-closure D-002; Render secret prompt) — empty = open demo; set = POSTs require it. Owner-generated (`secrets.token_urlsafe(32)`).
 - SESSION_SECRET ‡ — HMAC session signing; empty = demo login disabled (open demo, honest 503 on /auth/login). R09-F2: minimum 32 characters when set (`secrets.token_urlsafe(32)`); shorter fails closed (503 AUTH_MISCONFIGURED).
 - DEMO_USERS ‡ — `user:role:pbkdf2-hash` CSV for demo login (investigator/admin roles).
+- AUDIT_CHAIN_KEY ‡ — D-1 HMAC audit-sealing key; empty = unarmed legacy (default). Minimum 32 bytes when set (hex/base64/raw); shorter fails closed (store refuses to construct). AUDIT_CHAIN_KEY_ID (default `k1`) labels sealed records; AUDIT_CHAIN_KEY_PREVIOUS + AUDIT_CHAIN_KEY_ID_PREVIOUS verify the prior epoch during rotation only.
 - AI_DAILY_CALL_LIMIT † (default 100) · AI_TIMEOUT_SECONDS † (default 30) — AI cost controls; enforced pre-call with audited rejections.
 - DATABASE_URL (unset until Neon cutover, §E-gated) · PG_CONNECT_TIMEOUT (default 5, fail-safe on garbage per J3-P1) · PORT (Render-provided; local default 8000).
 
@@ -20,7 +21,7 @@ DATE: 2026-11-01 | NAMES ONLY — no values. († = set in render.yaml; ‡ = Re
 ## Frontend
 - NEXT_PUBLIC_API_BASE_URL †§ — deployed backend URL; BAKED AT BUILD; rebuild required after any change.
 - NODE_VERSION † (20.19.6) — build image pin.
-- NEXT_PUBLIC_DEMO_WRITE_TOKEN †§ — same value as backend token; PUBLIC once baked; empty = header omitted. Demo-staging only.
+- NEXT_PUBLIC_DEMO_WRITE_TOKEN †§ — R6 (owner-approved): LEAVE EMPTY for public deploys. No frontend/backend token matching is required or wanted — any value here bakes PUBLIC into browser JS. Protected writes use the login-session flow. Empty = header omitted.
 - NEXT_DIST_DIR — REMOVED 2026-11-01 (J3-P10): the Phase 2B temporary `distDir` override is deleted from `next.config.ts`; builds use default `.next`. This variable no longer exists.
 - PORT (Render-provided) — consumed by `npm start -- --port $PORT`.
 

@@ -46,7 +46,7 @@ def validate_and_normalize(raw: dict) -> tuple[Event, list[str]]:
         **raw,
         "event_type": raw.get("event_type", "financial.transaction.created"),
         "schema_version": raw.get("schema_version", "1.0"),
-        "source": raw.get("source", "synthetic_demo"),
+        "source": raw.get("source", "synthetic"),
         "trace_id": raw.get("trace_id", f"trace_{raw['event_id']}"),
         "privacy_classification": raw.get("privacy_classification", "synthetic"),
         "transaction": {**txn, "channel": channel,

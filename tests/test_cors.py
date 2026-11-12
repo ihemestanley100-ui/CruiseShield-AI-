@@ -55,8 +55,10 @@ def test_config_has_no_wildcard_but_allows_credentials():
     options = cors_options()
     assert "*" not in options["allow_origins"]
     assert options["allow_credentials"] is True
-    assert set(options["allow_methods"]) <= {"GET", "POST", "OPTIONS"}
-    assert set(options["allow_headers"]) <= {"Content-Type", "X-Request-ID"}
+    assert set(options["allow_methods"]) <= {"GET", "POST", "PUT", "PATCH",
+                                             "OPTIONS"}
+    assert set(options["allow_headers"]) <= {"Content-Type", "X-Request-ID",
+                                             "X-Requested-With"}
 
 
 def test_staging_arms_credentialed_cors_without_wildcard(monkeypatch):
@@ -67,16 +69,32 @@ def test_staging_arms_credentialed_cors_without_wildcard(monkeypatch):
     assert options["allow_credentials"] is True
     assert "*" not in options["allow_origins"]
     assert "X-Requested-With" in options["allow_headers"]
-    assert set(options["allow_methods"]) <= {"GET", "POST", "OPTIONS"}
+    assert set(options["allow_methods"]) <= {"GET", "POST", "PUT", "PATCH",
+                                             "OPTIONS"}
 
 
-def test_open_demo_keeps_legacy_policy(monkeypatch):
+def test_open_demo_allows_csrf_header_preflight(monkeypatch):
     monkeypatch.setattr(config_mod, "SESSION_SECRET", "")
     options = cors_options()
-    # UGLS-02: legacy non-credentialed policy rejected every browser
-    # fetch; open demo now allows credentials (safe: explicit origins).
+    # AI-REPAIR: this previously asserted X-Requested-With ABSENT here,
+    # which made open-demo preflights fail and browsers report every
+    # POST as BACKEND_UNREACHABLE. Allowlisting the header for
+    # preflight is not validation (server still requires it).
     assert options["allow_credentials"] is True
-    assert "X-Requested-With" not in options["allow_headers"]
+    assert "X-Requested-With" in options["allow_headers"]
+
+
+def test_open_demo_post_preflight_with_csrf_header_succeeds(monkeypatch):
+    """End-to-end preflight: browser POST headers accepted in open mode."""
+    monkeypatch.setattr(config_mod, "SESSION_SECRET", "")
+    status, headers = _run("OPTIONS", "http://127.0.0.1:3000", [
+        (b"access-control-request-method", b"POST"),
+        (b"access-control-request-headers",
+         b"x-requested-with,content-type"),
+    ])
+    assert status == 200
+    assert headers.get("access-control-allow-origin") == \
+        "http://127.0.0.1:3000"
 
 
 def test_middleware_registered_on_app():
@@ -122,6 +140,19 @@ def test_staging_preflight_allows_xrw_header(monkeypatch):
     assert status == 200
     assert "x-requested-with" in headers[
         "access-control-allow-headers"].lower()
+
+
+@pytest.mark.parametrize("method", ["PUT", "PATCH"])
+def test_preflight_allows_put_and_patch(method):
+    """F-D2: split-origin PUT/PATCH preflights succeed (guard validates)."""
+    status, headers = _run("OPTIONS", "http://localhost:3000", [
+        (b"access-control-request-method", method.encode()),
+        (b"access-control-request-headers",
+         b"x-requested-with,content-type"),
+    ])
+    assert status == 200
+    assert method in headers["access-control-allow-methods"]
+    assert "access-control-allow-origin" in headers
 
 
 def test_preflight_rejects_disallowed_method():

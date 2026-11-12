@@ -23,7 +23,7 @@ def build_items(txn: dict, rule_results: list[RuleResult],
         title=f"Transaction #{num}: {kobo_to_naira(txn['amount_minor'])} "
               f"{txn['sender_account_id']} -> {txn['receiver_account_id']}",
         description=(f"Channel {txn['channel']} at {txn['occurred_at']}. "
-                     f"Synthetic demo record."),
+                     f"Synthetic record."),
         source_record_ids=[txn["transaction_id"]],
         event_ids=[e for e in events_by_id
                    if events_by_id[e]["transaction"]["transaction_id"]
@@ -73,3 +73,24 @@ def find_unknown_ids(package: EvidencePackage, sent_ids: set[str]) -> list[str]:
     """IDs cited by a model response that were not in the submitted package."""
     return sorted({item for item in sent_ids
                    if item not in {i.evidence_id for i in package.items}})
+
+
+EXPORT_VERSION = 1
+
+
+def canonical_export_bytes(package: dict) -> bytes:
+    """EVID-01: deterministic export bytes for an evidence package.
+
+    Canonical JSON envelope (sorted keys, compact separators,
+    ascii-safe) so the same package always serializes to identical
+    bytes regardless of dict insertion order.
+    """
+    return json.dumps({"evidence_package": package,
+                       "version": EXPORT_VERSION},
+                      sort_keys=True, separators=(",", ":"),
+                      ensure_ascii=True).encode("utf-8")
+
+
+def export_fingerprint(blob: bytes) -> str:
+    """sha256 hex over export bytes (mirrors audit-export reporting)."""
+    return hashlib.sha256(blob).hexdigest()

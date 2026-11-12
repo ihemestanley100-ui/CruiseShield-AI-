@@ -3,7 +3,7 @@
  * J3 closeout (frontend EV38): when `NEXT_PUBLIC_SITE_URL` is set to the
  * deployed frontend origin (owner-supplied at staging), Next.js resolves
  * the relative brand-asset URLs in `layout.tsx` against it. When unset,
- * relative URLs are preserved (local/demo behavior unchanged).
+ * relative URLs are preserved (local behavior unchanged).
  */
 export function resolveMetadataBase(
   raw: string | undefined = process.env.NEXT_PUBLIC_SITE_URL,

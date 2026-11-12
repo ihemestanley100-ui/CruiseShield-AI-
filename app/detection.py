@@ -1,0 +1,283 @@
+"""Detector families + derived signal evaluation (detection §1-4).
+
+Signals are DERIVED deterministically from transactions + edges on
+every call — never persisted — so replaying an event yields identical
+signal IDs (idempotent by construction) and rule changes cannot
+overwrite history (each signal pins its detector + rule version).
+No canonical state keys are added.
+"""
+from __future__ import annotations
+
+import hashlib
+import time
+from datetime import datetime, timezone
+from typing import Any
+
+from app import channels as chan_mod
+from app import graph as graph_mod
+from app import rules as rules_mod
+
+VERSION = "1.0"
+
+# Family -> engine rule IDs. Empty tuple = custom logic below.
+RULE_MAPPED: dict[str, tuple[str, ...]] = {
+    "RULE_MATCH": tuple(r.rule_id for r in rules_mod.RULES),
+    "VELOCITY": ("R-002",),
+    "DEVICE_REUSE": ("R-003",),
+    "PHONE_REUSE": ("R-004",),
+    "BENEFICIARY_CLUSTER": ("R-005",),
+    "SHARED_MERCHANT": ("R-008",),
+    "GRAPH_PATTERN": ("R-006", "R-007"),
+}
+
+CUSTOM = ("NETWORK_PROXIMITY", "CROSS_CHANNEL_PATTERN",
+          "GEOGRAPHIC_ANOMALY")
+
+# ML_ANOMALY has no deployed model: listed, never firing, honestly
+# flagged NOT_IMPLEMENTED in the registry and matrix.
+FAMILIES = tuple(RULE_MAPPED) + CUSTOM + ("ML_ANOMALY",)
+
+DESCRIPTIONS = {
+    "RULE_MATCH": "Any versioned engine rule fired.",
+    "VELOCITY": "2+ sender transfers in a 120-minute window.",
+    "DEVICE_REUSE": "One device shared by 2+ accounts.",
+    "PHONE_REUSE": "One phone shared by 2+ accounts.",
+    "BENEFICIARY_CLUSTER": "One beneficiary linked to 2+ accounts.",
+    "SHARED_MERCHANT": "One merchant paid by 2+ accounts.",
+    "GRAPH_PATTERN": "Fan-in (3+ senders) or fan-out (2+ receivers).",
+    "NETWORK_PROXIMITY": "Counterparty shares a device, phone, "
+                          "merchant, or beneficiary link.",
+    "CROSS_CHANNEL_PATTERN": "Sender transacts on 2+ channels.",
+    "GEOGRAPHIC_ANOMALY": "Sender seen in 2+ known locations.",
+    "ML_ANOMALY": "No model deployed; awaiting validated model.",
+}
+
+_SEVERITY = {r.rule_id: r.severity for r in rules_mod.RULES}
+
+
+def _signal_id(*parts: str) -> str:
+    return hashlib.sha256("|".join(parts).encode()).hexdigest()[:16]
+
+
+def _base(txn: dict, family: str, detail: str, severity: str,
+          reason: str, evidence: dict) -> dict[str, Any]:
+    return {
+        "signal_id": _signal_id(txn["transaction_id"], family,
+                                VERSION, detail),
+        "detector_family": family,
+        "detector_version": VERSION,
+        "rule_id": detail if detail.startswith("R-") else "",
+        "rule_version": "1.0" if detail.startswith("R-") else "",
+        "transaction_id": txn["transaction_id"],
+        "channel": txn.get("channel", ""),
+        "channel_canonical": chan_mod.classify(txn.get("channel")),
+        "severity": severity,
+        "occurred_at": txn.get("occurred_at", ""),
+        "tenant_id": txn.get("tenant_id", "org_primary"),
+        "entities": {"sender": txn.get("sender_account_id"),
+                     "receiver": txn.get("receiver_account_id")},
+        "reason": reason,
+        "evidence": evidence,
+        "outcome": "PENDING",
+    }
+
+
+def _rule_signals(txn: dict, transactions: list[dict],
+                  edges: list[dict]) -> list[dict]:
+    results = rules_mod.evaluate(txn["transaction_id"], transactions,
+                                 edges, "detection")
+    fired = {r.rule_id: r for r in results if r.triggered}
+    signals = []
+    for family, rule_ids in RULE_MAPPED.items():
+        for rid in rule_ids:
+            if rid in fired:
+                result = fired[rid]
+                signals.append(_base(
+                    txn, family, rid, _SEVERITY[rid],
+                    f"{rid} fired: {result.threshold}",
+                    {"rule_id": rid, "threshold": result.threshold}))
+    return signals
+
+
+def _proximity_signals(txn: dict, transactions: list[dict],
+                       edges: list[dict]) -> list[dict]:
+    feats = graph_mod.features_for_transaction(txn, transactions, edges)
+    parties = {txn.get("sender_account_id"),
+               txn.get("receiver_account_id")}
+    hits = []
+    for kind in ("device_sharing", "phone_sharing", "merchant_sharing",
+                 "beneficiary_links"):
+        for ident, accounts in feats[kind].items():
+            shared = parties & set(accounts)
+            if shared and len(accounts) >= 2:
+                hits.append(f"{kind}:{ident}x{len(accounts)}")
+    if not hits:
+        return []
+    return [_base(txn, "NETWORK_PROXIMITY", "proximity", "medium",
+                  "Counterparty shares identifiers: " +
+                  ", ".join(sorted(hits)[:4]),
+                  {"shared": sorted(hits)})]
+
+
+def _cross_channel_signals(txn: dict,
+                           by_sender: dict[str, set[str]]
+                           ) -> list[dict]:
+    channels = sorted(by_sender.get(txn.get("sender_account_id", ""), ()))
+    if len(channels) < 2:
+        return []
+    return [_base(txn, "CROSS_CHANNEL_PATTERN", "xchannel", "medium",
+                  f"Sender active on {len(channels)} channels: " +
+                  ", ".join(channels),
+                  {"channels": channels})]
+
+
+def _geo_signals(txn: dict, by_sender: dict[str, set[str]]) -> list[dict]:
+    locs = sorted(by_sender.get(txn.get("sender_account_id", ""), ()))
+    if len(locs) < 2:
+        return []
+    return [_base(txn, "GEOGRAPHIC_ANOMALY", "geo", "low",
+                  f"Sender seen in {len(locs)} locations: " +
+                  ", ".join(locs),
+                  {"locations": locs})]
+
+
+def parse_ts(value: str) -> datetime:
+    """Strict ISO-8601 to aware UTC datetime. Raises ValueError."""
+    text = (value or "").strip()
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(text)
+    except ValueError:
+        raise ValueError(f"FILTER_INVALID: bad timestamp {value!r}")
+    if parsed.tzinfo is None:
+        raise ValueError(f"FILTER_INVALID: naive timestamp {value!r}")
+    return parsed.astimezone(timezone.utc)
+
+
+def _bucket_key(moment: datetime, granularity: str) -> str:
+    if granularity == "hour":
+        return moment.strftime("%Y-%m-%dT%H:00:00Z")
+    if granularity == "day":
+        return moment.strftime("%Y-%m-%d")
+    if granularity == "week":
+        iso_year, iso_week, _ = moment.isocalendar()
+        return f"{iso_year}-W{iso_week:02d}"
+    if granularity == "month":
+        return moment.strftime("%Y-%m")
+    raise ValueError(f"FILTER_INVALID: granularity {granularity!r}")
+
+
+def bucketize(signals: list[dict[str, Any]],
+              granularity: str) -> list[dict[str, Any]]:
+    """Bucket signals by occurred_at (UTC). Empty input -> []."""
+    buckets: dict[str, dict[str, Any]] = {}
+    for sig in signals:
+        key = _bucket_key(parse_ts(sig.get("occurred_at", "")), granularity)
+        row = buckets.setdefault(key, {"bucket": key, "signals": 0,
+                                       "unique_txns": set()})
+        row["signals"] += 1
+        row["unique_txns"].add(sig.get("transaction_id"))
+    ordered = [buckets[k] for k in sorted(buckets)]
+    for row in ordered:
+        row["unique_txns"] = len(row["unique_txns"])
+    return ordered
+
+
+def filter_signals(signals: list[dict[str, Any]], *,
+                   start: str = "", end: str = "",
+                   family: str = "", channel: str = "",
+                   severity: str = "") -> list[dict[str, Any]]:
+    """Filter by UTC range + exact family/channel/severity matches."""
+    start_dt = parse_ts(start) if start else None
+    end_dt = parse_ts(end) if end else None
+    if start_dt and end_dt and start_dt > end_dt:
+        raise ValueError("FILTER_INVALID: start after end")
+    out = []
+    for sig in signals:
+        moment = parse_ts(sig.get("occurred_at", ""))
+        if start_dt and moment < start_dt:
+            continue
+        if end_dt and moment > end_dt:
+            continue
+        if family and sig.get("detector_family") != family:
+            continue
+        if channel and sig.get("channel_canonical") != channel:
+            continue
+        if severity and sig.get("severity") != severity:
+            continue
+        out.append(sig)
+    return out
+
+
+def evaluate_all(transactions: list[dict],
+                 edges: list[dict]) -> dict[str, Any]:
+    """Evaluate every operational family over the transactions."""
+    started = time.perf_counter()
+    by_sender_ch: dict[str, set[str]] = {}
+    by_sender_loc: dict[str, set[str]] = {}
+    unknown_loc = 0
+    # D-035: non-dict rows are skipped and surfaced (fail-closed
+    # per-row). Previously such a row raised AttributeError past
+    # every handler; valid rows were lost with it.
+    valid = [t for t in transactions if isinstance(t, dict)]
+    skipped_non_dict = len(transactions) - len(valid)
+    transactions = valid
+    for txn in transactions:
+        sender = txn.get("sender_account_id", "")
+        if txn.get("channel"):
+            by_sender_ch.setdefault(sender, set()).add(txn["channel"])
+        if txn.get("location_id"):
+            by_sender_loc.setdefault(sender, set()).add(
+                txn["location_id"])
+        else:
+            unknown_loc += 1
+    signals: list[dict] = []
+    family_errors: list[dict[str, str]] = []
+    if skipped_non_dict:
+        family_errors.append({"family": "INPUT",
+                              "error": "NON_DICT_ROWS_SKIPPED: %d"
+                              % skipped_non_dict})
+    family_runs: dict[str, int] = {}
+    family_latency_ms: dict[str, float] = {}
+    groups = [("RULE_FAMILIES", _rule_signals, True),
+              ("NETWORK_PROXIMITY", _proximity_signals, True),
+              ("CROSS_CHANNEL_PATTERN", _cross_channel_signals, False),
+              ("GEOGRAPHIC_ANOMALY", _geo_signals, False)]
+    for name, func, needs_edges in groups:
+        group_started = time.perf_counter()
+        try:
+            for txn in transactions:
+                if needs_edges:
+                    signals.extend(func(txn, transactions, edges))
+                elif name == "CROSS_CHANNEL_PATTERN":
+                    signals.extend(func(txn, by_sender_ch))
+                else:
+                    signals.extend(func(txn, by_sender_loc))
+            family_runs[name] = len(transactions)
+        except Exception as exc:  # noqa: BLE001 - counted, surfaced
+            family_errors.append({"family": name,
+                                  "error": f"{type(exc).__name__}"})
+        finally:
+            family_latency_ms[name] = round(
+                (time.perf_counter() - group_started) * 1000, 2)
+    signals.sort(key=lambda s: (s["occurred_at"], s["signal_id"]))
+    for sig in signals:
+        sig["execution_id"] = _signal_id(
+            ",".join(sorted(t.get("transaction_id", "")
+                            for t in transactions)), VERSION, "run")
+    latency_ms = round((time.perf_counter() - started) * 1000, 2)
+    meta = {
+        "transactions_evaluated": len(transactions),
+        "detector_version": VERSION,
+        "latency_ms": latency_ms,
+        "unknown_location_txns": unknown_loc,
+        "family_runs": family_runs,
+        "family_latency_ms": family_latency_ms,
+        "family_errors": family_errors,
+        "execution_id": signals[0]["execution_id"] if signals else _signal_id(
+            ",".join(sorted(t.get("transaction_id", "")
+                            for t in transactions)), VERSION, "run"),
+        "note": ("Derived on demand from stored transactions; no "
+                 "historical signals are overwritten.")}
+    return {"signals": signals, "meta": meta}

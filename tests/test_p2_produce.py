@@ -82,7 +82,7 @@ def test_same_backup_id_is_never_silently_replaced():
 
 def test_put_idempotent_skips_identical_bytes():
     target = fakes.FakeTarget()
-    first = produce_mod.put_idempotent(target, "k/dump.csbk1", b"fixed")
+    produce_mod.put_idempotent(target, "k/dump.csbk1", b"fixed")
     assert target.puts == ["k/dump.csbk1"]
     second = produce_mod.put_idempotent(target, "k/dump.csbk1", b"fixed")
     assert second.startswith("present:")

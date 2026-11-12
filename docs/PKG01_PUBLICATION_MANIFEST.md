@@ -1,0 +1,600 @@
+# PKG-01 Publication Manifest (read-only preparation)
+
+Branch `feat/phasezero-foundations` @ `d82627d`.
+Refreshed 2026-11-08 (Batch 1 package). NOT staged, committed,
+or pushed. PR target `production-launch` per owner UPDATE-002.
+
+## Counts
+
+- Modified tracked: 151
+- Deleted tracked: 2
+- Untracked in-scope: 376
+- Untracked EXCLUDED (never stage): 7
+
+## Exclusion manifest
+
+- `.edge-d-probe/`
+- `a11y-audit.mjs`
+- `tmp4wcoj3ci`
+- `tmpbll76ret/`
+- `tmpu9qsfyky`
+- `tmpw_ta9ikh/`
+- `webgl-fail-r10.html`
+
+Also excluded by .gitignore (verified): `.env`,
+`.env.arming.local`. Only `.env.example` (empty values) ships.
+
+## Tracked notes
+
+`qa-scratch/data/state.json` REMAINS TRACKED per owner UPDATE-002.
+Q1 DECIDED 2026-11-08: restored to HEAD 5697e03 (verified hash
+match); worktree 86f0978 preserved as off-repo recoverable backup
+(sandbox temp, hash-verified, outside publication scope). File is
+now clean (no worktree delta); ships committed HEAD content.
+
+## Deleted
+
+- `frontend/app/demo/page.test.tsx`
+- `frontend/app/demo/page.tsx`
+
+## Modified (151)
+
+- `.env.example`
+- `.github/workflows/security-gate.yml`
+- `CRUISESHIELD-AI-DECISION-LOG.md`
+- `CRUISESHIELD-AI-PRODUCTION-GAP-REGISTER.md`
+- `README.md`
+- `app/ai_adapter.py`
+- `app/audit_chain.py`
+- `app/auth.py`
+- `app/cases.py`
+- `app/config.py`
+- `app/db.py`
+- `app/detection.py`
+- `app/device_intel.py`
+- `app/events.py`
+- `app/evidence.py`
+- `app/industries.py`
+- `app/ip_intel.py`
+- `app/main.py`
+- `app/models.py`
+- `app/ratelimit.py`
+- `app/risk_intel.py`
+- `app/rules.py`
+- `app/seed.py`
+- `app/store.py`
+- `app/tenancy.py`
+- `backups/local_target.py`
+- `docs/ARCHITECTURE.md`
+- `docs/DEMO_TOKEN_ENDPOINT_AUTHORIZATION_MATRIX.md`
+- `docs/DEMO_TOKEN_SECURITY_REMEDIATION_PLAN.md`
+- `docs/FINAL_DEPLOYMENT_GATE_REGISTER.md`
+- `docs/FINAL_DEPLOYMENT_VERIFICATION.md`
+- `docs/FINAL_GIT_RELEASE_MANIFEST.md`
+- `docs/FINAL_ZERO_GAP_MATRIX.md`
+- `docs/META_AI_INTEGRATION_AUDIT.md`
+- `docs/PROJECT_EXECUTION_STATE.md`
+- `docs/RENDER_6_ENV_REGISTER.md`
+- `docs/UGLS_KEY_INVENTORY_GENERATED.txt`
+- `docs/UGLS_REVIEW_KIT/README.md`
+- `docs/UGLS_REVIEW_KIT/ar.tsv`
+- `docs/UGLS_REVIEW_KIT/es.tsv`
+- `docs/UGLS_REVIEW_KIT/fr.tsv`
+- `docs/UGLS_REVIEW_KIT/ha.tsv`
+- `docs/UGLS_REVIEW_KIT/hi.tsv`
+- `docs/UGLS_REVIEW_KIT/ig.tsv`
+- `docs/UGLS_REVIEW_KIT/ja.tsv`
+- `docs/UGLS_REVIEW_KIT/pt.tsv`
+- `docs/UGLS_REVIEW_KIT/sw.tsv`
+- `docs/UGLS_REVIEW_KIT/yo.tsv`
+- `docs/UGLS_REVIEW_KIT/zh.tsv`
+- `frontend/README.md`
+- `frontend/a11y.test.tsx`
+- `frontend/app/cases/[caseId]/audit/page.test.tsx`
+- `frontend/app/cases/[caseId]/audit/page.tsx`
+- `frontend/app/cases/[caseId]/page.test.tsx`
+- `frontend/app/cases/[caseId]/page.tsx`
+- `frontend/app/error.tsx`
+- `frontend/app/globals.css`
+- `frontend/app/investigations/[id]/page.test.tsx`
+- `frontend/app/investigations/[id]/page.tsx`
+- `frontend/app/layout.tsx`
+- `frontend/app/loading.test.tsx`
+- `frontend/app/loading.tsx`
+- `frontend/app/network/[txnId]/page.tsx`
+- `frontend/app/not-found.test.tsx`
+- `frontend/app/not-found.tsx`
+- `frontend/app/platform/page.tsx`
+- `frontend/app/replay/[scenarioId]/page.test.tsx`
+- `frontend/app/replay/[scenarioId]/page.tsx`
+- `frontend/components/ai-panel.test.tsx`
+- `frontend/components/app-shell.test.tsx`
+- `frontend/components/app-shell.tsx`
+- `frontend/components/audit-list.test.tsx`
+- `frontend/components/command-activity.test.tsx`
+- `frontend/components/command-kpis.test.tsx`
+- `frontend/components/command-network-preview.test.tsx`
+- `frontend/components/command-rule-summary.test.tsx`
+- `frontend/components/decision-form.test.tsx`
+- `frontend/components/detection-panels.test.tsx`
+- `frontend/components/detection-panels.tsx`
+- `frontend/components/graph-explorer.test.tsx`
+- `frontend/components/graph-table.test.tsx`
+- `frontend/components/intel-panels.test.tsx`
+- `frontend/components/intel-panels.tsx`
+- `frontend/components/landing/GlobalHeroScene.test.tsx`
+- `frontend/components/landing/GlobalLandingPage.tsx`
+- `frontend/components/landing/LandingChrome.tsx`
+- `frontend/components/landing/LandingContent.test.tsx`
+- `frontend/components/landing/LandingPanels.tsx`
+- `frontend/components/landing/LandingStrips.tsx`
+- `frontend/components/landing/WebGLFallback.tsx`
+- `frontend/components/locale-switching.test.tsx`
+- `frontend/components/login-gate.test.tsx`
+- `frontend/components/login-gate.tsx`
+- `frontend/components/notifications.test.tsx`
+- `frontend/components/orbital-explorer.test.tsx`
+- `frontend/components/replay-controls.test.tsx`
+- `frontend/components/simulation-panel.test.tsx`
+- `frontend/lib/api.test.ts`
+- `frontend/lib/api.ts`
+- `frontend/lib/graph-layout.test.ts`
+- `frontend/lib/i18n/context.tsx`
+- `frontend/lib/i18n/dictionaries.test.ts`
+- `frontend/lib/i18n/locales/ar.ts`
+- `frontend/lib/i18n/locales/en.ts`
+- `frontend/lib/i18n/locales/es.ts`
+- `frontend/lib/i18n/locales/fr.ts`
+- `frontend/lib/i18n/locales/ha.ts`
+- `frontend/lib/i18n/locales/hi.ts`
+- `frontend/lib/i18n/locales/ig.ts`
+- `frontend/lib/i18n/locales/ja.ts`
+- `frontend/lib/i18n/locales/pt.ts`
+- `frontend/lib/i18n/locales/sw.ts`
+- `frontend/lib/i18n/locales/yo.ts`
+- `frontend/lib/i18n/locales/zh.ts`
+- `frontend/lib/i18n/meta.ts`
+- `frontend/lib/orbital-layout.test.ts`
+- `frontend/lib/orbital-layout.ts`
+- `frontend/lib/session.test.tsx`
+- `frontend/lib/session.ts`
+- `frontend/lib/site-url.test.ts`
+- `frontend/lib/site-url.ts`
+- `migrations/loader.py`
+- `render.yaml`
+- `requirements.lock`
+- `requirements.txt`
+- `static/app.js`
+- `templates/base.html`
+- `tests/conftest.py`
+- `tests/test_ai_validation.py`
+- `tests/test_api_flow.py`
+- `tests/test_auth.py`
+- `tests/test_auth_e2e.py`
+- `tests/test_cases_audit.py`
+- `tests/test_config_safety.py`
+- `tests/test_cors.py`
+- `tests/test_demo_token_remediation.py`
+- `tests/test_detection.py`
+- `tests/test_di03_device.py`
+- `tests/test_flow_direct.py`
+- `tests/test_industry_banking.py`
+- `tests/test_industry_fintech.py`
+- `tests/test_j5_rehearsal.py`
+- `tests/test_j6_drill.py`
+- `tests/test_loader_gate.py`
+- `tests/test_local_target.py`
+- `tests/test_pg_atomic_decision.py`
+- `tests/test_pg_hardening.py`
+- `tests/test_pg_migration.py`
+- `tests/test_pg_parity.py`
+- `tests/test_seed_reset.py`
+- `tests/test_tenant_api.py`
+
+## Untracked in-scope (376)
+
+- `.gitattributes`
+- `CRUISESHIELD-AI-ACCEPTANCE-RECORD.md`
+- `CRUISESHIELD-AI-CURRENT-STATE-MATRIX.md`
+- `CRUISESHIELD-AI-DEMO-REMOVAL-MATRIX.md`
+- `CRUISESHIELD-AI-DEPENDENCY-AND-INTEGRATION-REGISTER.md`
+- `CRUISESHIELD-AI-FRAMEWORK-ALIGNMENT.md`
+- `CRUISESHIELD-AI-IMPLEMENTATION-ROADMAP.md`
+- `CRUISESHIELD-AI-LEVEL14-BASELINE-AUDIT.md`
+- `CRUISESHIELD-AI-RAID-LOG.md`
+- `CRUISESHIELD-AI-RELEASE-ASSESSMENT.md`
+- `CRUISESHIELD-AI-RELEASE-MANIFEST.md`
+- `CRUISESHIELD-AI-REPOSITORY-FORENSIC-AUDIT.md`
+- `HACKATHON_CONTRIBUTIONS.md`
+- `app/abac.py`
+- `app/accounts.py`
+- `app/address_verify.py`
+- `app/agent_retrieval.py`
+- `app/agents.py`
+- `app/ai_gateway.py`
+- `app/alerts.py`
+- `app/altpayments.py`
+- `app/api_credentials.py`
+- `app/billing.py`
+- `app/capabilities.py`
+- `app/connectors.py`
+- `app/conversations.py`
+- `app/governance.py`
+- `app/identity_verify.py`
+- `app/industries_accounting.py`
+- `app/industries_agriculture.py`
+- `app/industries_automotive.py`
+- `app/industries_aviation.py`
+- `app/industries_capital_markets.py`
+- `app/industries_charities.py`
+- `app/industries_construction.py`
+- `app/industries_consulting.py`
+- `app/industries_crypto.py`
+- `app/industries_customs.py`
+- `app/industries_defence.py`
+- `app/industries_ecommerce.py`
+- `app/industries_education.py`
+- `app/industries_energy.py`
+- `app/industries_environment.py`
+- `app/industries_fx.py`
+- `app/industries_gambling.py`
+- `app/industries_gaming.py`
+- `app/industries_government.py`
+- `app/industries_healthcare.py`
+- `app/industries_hospitality.py`
+- `app/industries_insurance.py`
+- `app/industries_law.py`
+- `app/industries_legal.py`
+- `app/industries_luxury.py`
+- `app/industries_manufacturing.py`
+- `app/industries_maritime.py`
+- `app/industries_media.py`
+- `app/industries_mining.py`
+- `app/industries_ngo.py`
+- `app/industries_oilgas.py`
+- `app/industries_pharma.py`
+- `app/industries_procurement.py`
+- `app/industries_property.py`
+- `app/industries_retail.py`
+- `app/industries_social.py`
+- `app/industries_supply.py`
+- `app/industries_tax.py`
+- `app/industries_technology.py`
+- `app/industries_telecom.py`
+- `app/industries_trade.py`
+- `app/industries_transport.py`
+- `app/industries_wholesale.py`
+- `app/industry_adapters.py`
+- `app/institutions.py`
+- `app/intel_auth.py`
+- `app/intel_common.py`
+- `app/intel_providers.py`
+- `app/intel_tools.py`
+- `app/investigation_map.py`
+- `app/location_obs.py`
+- `app/login_risk.py`
+- `app/mfa.py`
+- `app/monitoring.py`
+- `app/nl_search.py`
+- `app/notify.py`
+- `app/orchestration.py`
+- `app/orgs.py`
+- `app/parties.py`
+- `app/passkeys.py`
+- `app/payment_methods.py`
+- `app/payments.py`
+- `app/pilot.py`
+- `app/recovery.py`
+- `app/recovery_caps.py`
+- `app/recovery_rules.py`
+- `app/reports.py`
+- `app/telecom_providers.py`
+- `app/telecom_registry.py`
+- `app/telecom_verify.py`
+- `app/tracing.py`
+- `app/trusted_devices.py`
+- `app/typologies.py`
+- `app/verify.py`
+- `app/web3.py`
+- `browser-evidence/cert-frc/`
+- `browser-evidence/cert-v3/`
+- `browser-evidence/cert-zg/`
+- `browser-evidence/cert-zgep/`
+- `docs/ACCEPTANCE_RECONCILIATION.json`
+- `docs/AGENT_OS.md`
+- `docs/BATCH1_FILE_INVENTORY.json`
+- `docs/BATCH1_FINAL_OWNER_RISK_REVIEW.md`
+- `docs/BATCH1_OWNER_DECISION_SHEET.md`
+- `docs/B10_READING_WORKSHEET.md`
+- `docs/B1_B2_B3_CONSOLIDATED_EXECUTION_REPORT.md`
+- `docs/B1_FRONTEND_TOKEN_WORDING_VERIFICATION.md`
+- `docs/B2_B3_OWNER_ACTION_CHECKLIST.md`
+- `docs/B2_B3_OWNER_EVIDENCE_REGISTER.md`
+- `docs/B2_BACKEND_REDEPLOYMENT_VERIFICATION.md`
+- `docs/B3_RENDER_ACCOUNT_AND_FREE_TIER_VERIFICATION.md`
+- `docs/CANONICAL_FILE_MANIFEST.md`
+- `docs/CRUISESHIELD_COMPLETE_FEATURE_MASTER_INVENTORY.md`
+- `docs/CRUISESHIELD_DEVELOPMENT_CERTIFICATION_REPORT.md`
+- `docs/CRUISESHIELD_FINAL_FEATURE_PRESERVATION_REPORT.md`
+- `docs/CRUISESHIELD_FINAL_RELEASE_CERTIFICATION.md`
+- `docs/CRUISESHIELD_FRONTEND_BACKEND_FEATURE_MAPPING.md`
+- `docs/CRUISESHIELD_MASTER_EVIDENCE_REGISTER.md`
+- `docs/CRUISESHIELD_MISSING_FEATURES_AND_GAP_REGISTER.md`
+- `docs/CRUISESHIELD_ORIGINAL_VS_SECOND_UIUX_RECONCILIATION.md`
+- `docs/CRUISESHIELD_OWNER_ACTIONS.md`
+- `docs/CRUISESHIELD_RELEASE_MANIFEST.md`
+- `docs/CRUISESHIELD_REMEDIATION_REPORT.md`
+- `docs/CRUISESHIELD_UIUX_ACCEPTANCE_TEST_MATRIX.md`
+- `docs/CRUISESHIELD_ZERO_GAP_MASTER_MATRIX.md`
+- `docs/CRUISE_ORBIT_BACKEND_ENDPOINTS.md`
+- `docs/CRUISE_ORBIT_COST_LICENSING.md`
+- `docs/CRUISE_ORBIT_DATA_ARCHITECTURE.md`
+- `docs/CRUISE_ORBIT_FEATURE_INVENTORY.md`
+- `docs/CRUISE_ORBIT_FRONTEND_SPEC.md`
+- `docs/CRUISE_ORBIT_GAP_MATRIX.md`
+- `docs/CRUISE_ORBIT_LIVE_VERIFICATION_PLAN.md`
+- `docs/CRUISE_ORBIT_PROVENANCE_SPEC.md`
+- `docs/CRUISE_ORBIT_PROVIDER_MATRIX.md`
+- `docs/CRUISE_ORBIT_RELEASE_GATES.md`
+- `docs/CRUISE_ORBIT_SECURITY_GOVERNANCE.md`
+- `docs/CRUISE_ORBIT_TEST_ACCEPTANCE.md`
+- `docs/CS_FINAL_BACKEND_SECURITY_REPORT.md`
+- `docs/CS_FINAL_COMPLETION_REPORT.md`
+- `docs/CS_FINAL_END_TO_END_TEST_REPORT.md`
+- `docs/CS_FINAL_EVIDENCE_REGISTER.md`
+- `docs/CS_FINAL_FIVE_AREA_VERIFICATION_REPORT.md`
+- `docs/CS_FINAL_FRONTEND_DEPLOYMENT_REPORT.md`
+- `docs/CS_FINAL_IMPLEMENTATION_REPORT.md`
+- `docs/CS_FINAL_OPERATIONS_AND_ROLLBACK_GUIDE.md`
+- `docs/CS_FINAL_OWNER_ACTIONS.md`
+- `docs/CS_FINAL_RELEASE_DECISION.md`
+- `docs/CS_FINAL_RELEASE_READINESS_MATRIX.md`
+- `docs/CS_FINAL_RENDER_COST_REPORT.md`
+- `docs/CS_FINAL_ZERO_GAP_MATRIX.md`
+- `docs/DEMO_PRODUCTION_AUDIT.md`
+- `docs/DEVELOPMENT_FINAL_CERTIFICATION.md`
+- `docs/DEVELOPMENT_FINAL_REVERIFICATION.md`
+- `docs/EVIDENCE_MANIFEST.json`
+- `docs/EVIDENCE_PROVENANCE_REGISTER.md`
+- `docs/EXTERNAL_INPUT_COMPLETION_PLAN.md`
+- `docs/FINAL_DEPLOYMENT_CERTIFICATION.md`
+- `docs/FINAL_GIT_RELEASE_READINESS_REPORT.md`
+- `docs/FINAL_GPROVISION_PREFLIGHT_REPORT.md`
+- `docs/FINAL_PROJECT_AUDIT.md`
+- `docs/FINAL_RELEASE_CERTIFICATION.md`
+- `docs/FINAL_REMEDIATION_BASELINE.md`
+- `docs/FORENSIC_INVENTORY.json`
+- `docs/FREE_TIER_FINANCIAL_AUDIT.md`
+- `docs/FREE_TIER_FINANCIAL_FINAL_CERTIFICATION.md`
+- `docs/GEOINTELLIGENCE_OS.md`
+- `docs/G_PROVISION_FRONTEND_PREFLIGHT.md`
+- `docs/HACKATHON_SUBMISSION_PACKAGE.md`
+- `docs/I18N02_REVIEWER_HANDOFF.md`
+- `docs/I18N_NATIVE_REVIEW_PACK.md`
+- `docs/L13_PHASE0_BASELINE.md`
+- `docs/LEAFLET_TILE_POLICY_REVIEW.md`
+- `docs/LEVEL14_OWNER_APPROVAL_PACKAGES.md`
+- `docs/LIVE_EVIDENCE_INDEX.md`
+- `docs/META_AI_FINAL_CERTIFICATION.md`
+- `docs/META_AI_LIVE_CERTIFICATION.md`
+- `docs/OPERATIONS_RUNBOOK.md`
+- `docs/OWNER_DECISION_TO_23_REQUIREMENTS_MAP.md`
+- `docs/PHASE_1_APPROVAL_AND_EXECUTION_SEQUENCE.md`
+- `docs/PKG-02_READ_ONLY_VERIFICATION.md`
+- `docs/PKG-05_FREE_TIER_AND_BILLING_VERIFICATION.md`
+- `docs/PKG01_PUBLICATION_MANIFEST.md`
+- `docs/POST_DEPLOYMENT_HEALTH_ROUTE_DIAGNOSTIC.md`
+- `docs/PRODUCTION_CLOSURE_REGISTER.md`
+- `docs/PROPOSED_ZERO_COST_RENDER_CONFIG.md`
+- `docs/PUBLIC_REPOSITORY_AUDIT.md`
+- `docs/PUBLIC_REPOSITORY_FINAL_CERTIFICATION.md`
+- `docs/PUBLIC_REPOSITORY_RELEASE_MANIFEST.md`
+- `docs/RECOVERY_OS.md`
+- `docs/RELEASE_CLOSURE_PACKAGE.md`
+- `docs/REMAINING_40_ACCEPTANCE_AND_EVIDENCE_PLAN.md`
+- `docs/REMAINING_40_CONFIGURATION_AUDIT.md`
+- `docs/REMAINING_40_EXECUTION_ROADMAP.md`
+- `docs/REMAINING_40_EXTERNAL_DEPENDENCY_REGISTER.md`
+- `docs/REMAINING_40_OWNER_APPROVAL_REGISTER.md`
+- `docs/REMAINING_40_REQUIREMENTS_CLOSURE_REGISTER.md`
+- `docs/REMAINING_OWNER_ACTIONS.md`
+- `docs/SECOND_UIUX_IMPLEMENTATION_GAP_MATRIX.md`
+- `docs/SECOND_UIUX_REDESIGN_FORENSIC_AUDIT.md`
+- `docs/SECOND_UIUX_RENDER_DEPLOYMENT_RECOVERY_PLAN.md`
+- `docs/SECURITY_GOVERNANCE_AUDIT.md`
+- `docs/SECURITY_GOVERNANCE_FINAL_CERTIFICATION.md`
+- `docs/SKIP_TEST_REGISTER.json`
+- `docs/TELECOM_IDENTITY.md`
+- `docs/TEN_OWNER_DECISION_BRIEFS.md`
+- `docs/TEST_RESULTS.md`
+- `docs/THREE_JS_FINAL_CERTIFICATION.md`
+- `docs/THREE_JS_VISUAL_INTERACTION_AUDIT.md`
+- `docs/UFI_CLOSEOUT.md`
+- `docs/UNIVERSAL_INTEL_OS.md`
+- `docs/WORLD_ATLAS_ACCEPTANCE_TEST_MATRIX.md`
+- `docs/WORLD_ATLAS_API_SPECIFICATION.md`
+- `docs/WORLD_ATLAS_ARCHITECTURE.md`
+- `docs/WORLD_ATLAS_DATA_MODEL.md`
+- `docs/WORLD_ATLAS_DEPLOYMENT_AND_RELEASE_GATE.md`
+- `docs/WORLD_ATLAS_FEATURE_INVENTORY.md`
+- `docs/WORLD_ATLAS_FEATURE_PRESERVATION_AUDIT.md`
+- `docs/WORLD_ATLAS_IMPLEMENTATION_ROADMAP.md`
+- `docs/WORLD_ATLAS_INTERACTION_DESIGN.md`
+- `docs/WORLD_ATLAS_MASTER_SPECIFICATION.md`
+- `docs/WORLD_ATLAS_SATELLITE_INTEGRATION_SPEC.md`
+- `docs/WORLD_ATLAS_SECURITY_PRIVACY_GOVERNANCE.md`
+- `docs/WORLD_ATLAS_ZERO_GAP_REGISTER.md`
+- `docs/ZERO_GAP_MATRIX.json`
+- `frontend/app/help/`
+- `frontend/app/legal/`
+- `frontend/app/page.test.tsx`
+- `frontend/app/privacy/`
+- `frontend/app/static-pages.test.tsx`
+- `frontend/app/support/`
+- `frontend/components/assistant-shell.test.tsx`
+- `frontend/components/assistant-shell.tsx`
+- `frontend/components/geointel-map.test.tsx`
+- `frontend/components/geointel-map.tsx`
+- `frontend/components/industry-section.test.tsx`
+- `frontend/components/industry-section.tsx`
+- `frontend/components/intel-admin-panels.tsx`
+- `frontend/components/intel-verify-sections.test.tsx`
+- `frontend/components/intel-verify-sections.tsx`
+- `frontend/components/monitoring-section.test.tsx`
+- `frontend/components/monitoring-section.tsx`
+- `frontend/components/recovery-section.test.tsx`
+- `frontend/components/recovery-section.tsx`
+- `frontend/components/static-page.tsx`
+- `frontend/components/telecom-section.test.tsx`
+- `frontend/components/telecom-section.tsx`
+- `frontend/components/tracing-section.test.tsx`
+- `frontend/components/tracing-section.tsx`
+- `qa/`
+- `scripts/audit_export.py`
+- `scripts/evidence_manifest.py`
+- `scripts/forensic_inventory.py`
+- `scripts/gen_closeout.py`
+- `scripts/rollback_rehearsal.py`
+- `scripts/zero_gap_matrix.py`
+- `tests/_integrity.py`
+- `tests/fixtures/`
+- `tests/test_abac.py`
+- `tests/test_access_review.py`
+- `tests/test_account_security.py`
+- `tests/test_accounts.py`
+- `tests/test_agent_os.py`
+- `tests/test_agent_os_routes.py`
+- `tests/test_agents.py`
+- `tests/test_ai_eval.py`
+- `tests/test_ai_gateway.py`
+- `tests/test_audit_export.py`
+- `tests/test_billing.py`
+- `tests/test_canonical_fixture.py`
+- `tests/test_capabilities.py`
+- `tests/test_cases_create.py`
+- `tests/test_connectors.py`
+- `tests/test_deploy_manifests.py`
+- `tests/test_evidence_export.py`
+- `tests/test_evidence_manifest.py`
+- `tests/test_geointel_address.py`
+- `tests/test_geointel_api.py`
+- `tests/test_geointel_identity.py`
+- `tests/test_geointel_ip.py`
+- `tests/test_geointel_location.py`
+- `tests/test_geointel_map.py`
+- `tests/test_geointel_providers.py`
+- `tests/test_governance.py`
+- `tests/test_homepage_routing.py`
+- `tests/test_industries.py`
+- `tests/test_industry_accounting.py`
+- `tests/test_industry_agriculture.py`
+- `tests/test_industry_automotive.py`
+- `tests/test_industry_aviation.py`
+- `tests/test_industry_capital_markets.py`
+- `tests/test_industry_charities.py`
+- `tests/test_industry_conformance.py`
+- `tests/test_industry_construction.py`
+- `tests/test_industry_consulting.py`
+- `tests/test_industry_crypto.py`
+- `tests/test_industry_customs.py`
+- `tests/test_industry_defence.py`
+- `tests/test_industry_ecommerce.py`
+- `tests/test_industry_education.py`
+- `tests/test_industry_energy.py`
+- `tests/test_industry_environment.py`
+- `tests/test_industry_fleet.py`
+- `tests/test_industry_fx.py`
+- `tests/test_industry_gambling.py`
+- `tests/test_industry_gaming.py`
+- `tests/test_industry_government.py`
+- `tests/test_industry_healthcare.py`
+- `tests/test_industry_hospitality.py`
+- `tests/test_industry_insurance.py`
+- `tests/test_industry_law.py`
+- `tests/test_industry_legal.py`
+- `tests/test_industry_luxury.py`
+- `tests/test_industry_manufacturing.py`
+- `tests/test_industry_maritime.py`
+- `tests/test_industry_media.py`
+- `tests/test_industry_mining.py`
+- `tests/test_industry_ngo.py`
+- `tests/test_industry_oilgas.py`
+- `tests/test_industry_pharma.py`
+- `tests/test_industry_procurement.py`
+- `tests/test_industry_property.py`
+- `tests/test_industry_retail.py`
+- `tests/test_industry_social.py`
+- `tests/test_industry_supply.py`
+- `tests/test_industry_tax.py`
+- `tests/test_industry_technology.py`
+- `tests/test_industry_telecom.py`
+- `tests/test_industry_trade.py`
+- `tests/test_industry_transport.py`
+- `tests/test_industry_wholesale.py`
+- `tests/test_ingest_audit.py`
+- `tests/test_login_risk.py`
+- `tests/test_mfa.py`
+- `tests/test_notifications.py`
+- `tests/test_notify.py`
+- `tests/test_orgs.py`
+- `tests/test_passkeys.py`
+- `tests/test_payments.py`
+- `tests/test_pilot.py`
+- `tests/test_product_identity.py`
+- `tests/test_production_guard.py`
+- `tests/test_provider_webhooks.py`
+- `tests/test_quality_gates.py`
+- `tests/test_recovery_core.py`
+- `tests/test_recovery_routes.py`
+- `tests/test_rollback_rehearsal.py`
+- `tests/test_sec_cred.py`
+- `tests/test_sec_dev.py`
+- `tests/test_sec_rot.py`
+- `tests/test_security_notifications.py`
+- `tests/test_telecom_contract.py`
+- `tests/test_telecom_providers.py`
+- `tests/test_telecom_registry.py`
+- `tests/test_telecom_security.py`
+- `tests/test_telecom_verify.py`
+- `tests/test_tenant_map.py`
+- `tests/test_tenant_new_surfaces.py`
+- `tests/test_tracing_scenarios.py`
+- `tests/test_ufi_contract.py`
+- `tests/test_ufi_e2e.py`
+- `tests/test_ufi_perf.py`
+- `tests/test_universal_ai.py`
+- `tests/test_universal_core.py`
+- `tests/test_universal_integration.py`
+- `tests/test_universal_routes.py`
+- `tests/test_universal_security.py`
+- `tests/test_universal_slice2.py`
+- `tests/test_verify.py`
+
+## Pre-push evidence (2026-11-08)
+
+- `secret_scan`: PASS (no real-credential shapes).
+- `lock_covers_requirements`: PASS (17 direct pins).
+- `lockfile_hashes`: PASS (38 pins, 509 sha256).
+- `diff --check`: 0 whitespace errors.
+- Gate FAILs are environmental only (shared-interpreter drift,
+  moviepy/pillow); hosted clean install resolves.
+
+## PR description (proposed)
+
+Title: `feat/phasezero-foundations` — L14 slice incl. detection
+Command Center, txn drill-down, tenant strict-deny, evidence
+manifest, registers, review packs, decision prep.
+Target: `production-launch` (owner UPDATE-002; verified ancestor
+of HEAD, origin in sync at b4732cb; committed diff 51 files
++5846/-553). Observe-only: NO merge, deploy, spend.
+
+## Validation plan (hosted CI must show)
+
+1. `pip install --require-hashes -r requirements.lock` green.
+2. `security_gate.py` full PASS incl. pip-audit + gitleaks.
+3. Backend pytest: 0 failed/errors; skips drop by ~141
+   (socket+loop+PG execute; perf stays skipped).
+4. `npm ci` + typecheck + vitest + `next build` green.
+5. Row evidence: SITE-01/THEME-01/TEL-05/MAP-02/UFI-UI/UFI-UI2/
+   AGOS-UI/REC-UI/DET-12/FE-01 vitest logs; DET-13 gate log;
+   QA-02 PG-service log (73 tests unskip).

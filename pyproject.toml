@@ -1,0 +1,35 @@
+# CruiseShield AI — Ruff lint-quality gate (M3A-01).
+# Minimal zero-debt rule set: every selected code reports ZERO findings on the
+# current tree (verified 2026-11-08, Ruff 0.14.13). CI runs `ruff check .` and
+# fails on any new finding. Broader families (E501 line length, UP031/UP045
+# modernization, I001 import sorting, F401 unused imports, full S) are
+# deliberately NOT selected: they carry large pre-existing counts and are
+# tracked as deferred cleanup, not gates. See the M3A report for counts.
+[tool.ruff]
+exclude = [
+  # Owner-preserved scratch / quarantined paths: never linted, never gated.
+  "tmpbll76ret",
+  "tmpw_ta9ikh",
+  ".edge-d-probe",
+]
+
+[tool.ruff.lint]
+# Bug-catchers (repo-wide clean): E902 (IO errors surface), F821/F822/F823
+# (undefined/undefined-in-loop names), W605 (invalid escapes), B008
+# (function call in default arg), F841 (unused locals), UP034/UP035
+# (safe pyupgrade micro-rules, tree already conforms).
+# Security floor for product code (app+scripts clean): S105/S106/S107
+# (hardcoded credentials), S104 (bind-all), S324 (weak hashes).
+select = [
+  "E902",
+  "F821", "F822", "F823", "F841",
+  "W605",
+  "B008",
+  "UP034", "UP035",
+  "S104", "S105", "S106", "S107", "S324",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Fixture credentials (demo-pass-1 etc.) live only in tests/; the S10x/S324
+# rules still gate all product code in app/** and scripts/**.
+"tests/**" = ["S104", "S105", "S106", "S107", "S324"]

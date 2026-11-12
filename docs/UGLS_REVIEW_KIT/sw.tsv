@@ -1,5 +1,5 @@
 # locale: sw (MACHINE-DRAFTED — human review pending)
-# version: 1.2.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
+# version: 1.3.0 | sourceRev: 2026-11-02-ugls02 | review: machine-drafted
 # columns: key | en_source | draft | origin(direct=translated,fallback=English shown) | same_as_source | en_vars | draft_vars | vars_ok
 key	en_source	draft	origin	same_as_source	en_vars	draft_vars	vars_ok
 ai.altTitle	Alternative explanations:	Maelezo mbadala:	direct	false			true
@@ -30,14 +30,14 @@ audit.thEvent	Event	Tukio	direct	false			true
 audit.thReason	Reason	Sababu	direct	false			true
 audit.thState	State change	Badiliko la hali	direct	false			true
 audit.thTime	Time	Wakati	direct	false			true
-auth.blurb	This hosted demo is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	Onyesho hili limelindwa. Ingia na vitambulisho vya mpelelezi ulivyopewa kwa tathmini hii. Data bandia pekee.	direct	false			true
+auth.blurb	This hosted platform is protected. Sign in with the investigator credentials supplied for this evaluation. Synthetic data only.	Onyesho hili limelindwa. Ingia na vitambulisho vya mpelelezi ulivyopewa kwa tathmini hii. Data bandia pekee.	direct	false			true
 auth.invalid	Invalid username or password.	Jina la mtumiaji au nenosiri si sahihi.	direct	false			true
 auth.password	Password	Nenosiri	direct	false			true
 auth.rateLimited	Too many login attempts. Wait a minute and try again.	Majaribio mengi sana ya kuingia. Subiri dakika moja ujaribu tena.	direct	false			true
 auth.signIn	Sign in	Ingia	direct	false			true
 auth.signingIn	Signing in…	Inaingia…	direct	false			true
-auth.title	Demo sign in	Ingia kwenye onyesho	direct	false			true
-auth.unreachable	Backend unreachable. Check the demo server and retry.	Seva haipatikani. Angalia seva ya onyesho ujaribu tena.	direct	false			true
+auth.title	Secure sign in	Ingia kwenye onyesho	direct	false			true
+auth.unreachable	Backend unreachable. Check the platform server and retry.	Seva haipatikani. Angalia seva ya onyesho ujaribu tena.	direct	false			true
 auth.username	Username	Jina la mtumiaji	direct	false			true
 case.advisory	Advisory only: Muse Spark analysis explains evidence and never constitutes a human decision, nor changes risk scores or case status.	Ushauri pekee: uchambuzi wa Muse Spark hueleza ushahidi wala hauji kama uamuzi wa binadamu, wala haubadilishi alama za hatari au hali ya kesi.	direct	false			true
 case.aiAssessment	AI assessment	Tathmini ya AI	direct	false			true
@@ -165,11 +165,13 @@ common.notPermitted	Not available for your role.	Haipatikani kwa jukumu lako.	di
 common.present	present	sasa	direct	false			true
 common.requestFailed	request failed	Ombi limeshindwa	direct	false			true
 common.retry	Retry	Jaribu tena	direct	false			true
+common.timedOut	Request timed out. Retry.	Ombi limekwisha muda. Jaribu tena.	direct	false			true
 common.timelineEmpty	No events.	Hakuna matukio.	direct	false			true
+common.unavailable	Service temporarily unavailable. Retry shortly.	Huduma haipatikani kwa muda. Jaribu tena hivi punde.	direct	false			true
 common.unknown	unknown	Haijulikani	direct	false			true
 common.unknownModel	unknown model	muundo usiojulikana	direct	false			true
 common.unknownTime	unknown time	wakati usiojulikana	direct	false			true
-common.unreachable	Backend unreachable. Check the demo server and retry.	Seva haipatikani. Angalia seva ya maonyesho na ujaribu tena.	direct	false			true
+common.unreachable	Backend unreachable. Check the platform server and retry.	Seva haipatikani. Angalia seva ya maonyesho na ujaribu tena.	direct	false			true
 decision.actorLabel	Analyst ID	Kitambulisho cha mchambuzi	direct	false			true
 decision.decisionLabel	Decision	Uamuzi	direct	false			true
 decision.readOnly	Your role is read-only: decisions are disabled.	Jukumu lako ni la kusoma pekee: maamuzi yamezimwa.	direct	false			true
@@ -182,26 +184,23 @@ decision.selectPlaceholder	Select a decision…	Chagua uamuzi…	direct	false			
 decision.targetLabel	Move case to	Hamisha kesi hadi	direct	false			true
 decision.terminal	This case is in a terminal state; no further transitions are allowed.	Kesi hii iko katika hali ya mwisho; hakuna mabadiliko zaidi yanayoruhusiwa.	direct	false			true
 decision.title	Human decision	Uamuzi wa binadamu	direct	false			true
-demo.activityDown	Activity unavailable	Shughuli haipatikani	direct	false			true
-demo.aiBriefDown	AI brief unavailable	Muhtasari wa AI haupatikani	direct	false			true
-demo.backendStatus	Backend status	Hali ya seva	direct	false			true
-demo.checkedAt	Checked {url}…	{url} imeangaliwa…	direct	false	url	url	true
-demo.execOverview	Executive overview	Muhtasari wa utendaji	direct	false			true
-demo.execOverviewDown	Executive overview unavailable	Muhtasari wa utendaji haupatikani	direct	false			true
-demo.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	Uhalifu wa kifedha mara chache huonekana katika muamala mmoja. CruiseShield AI huunganisha miamala, akaunti, vifaa, wanufaika na wafanyabiashara wanaotiliwa shaka katika mtandao wa ujasusi unaoelezeka.	direct	false			true
-demo.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	Injini yake ya alama za hatari ya kubainika hutambua ishara, Meta AI huwasaidia wachunguzi kufasiri ushahidi, kurudia na kuiga huchunguza hali za dhana, na maamuzi ya binadamu yanabaki ya kuwajibika na yanayoweza kukaguliwa.	direct	false			true
-demo.museBrief	Muse Spark brief	Muhtasari wa Muse Spark	direct	false			true
-demo.networkPreview	Network preview	Hakikisho la mtandao	direct	false			true
-demo.networkPreviewDown	Network preview unavailable	Hakikisho la mtandao halipatikani	direct	false			true
-demo.recentActivity	Recent activity	Shughuli za hivi karibuni	direct	false			true
-demo.replayDown	Replay unavailable.	Kurudia hakupatikani.	direct	false			true
-demo.retryTitle	Retry {title}	Jaribu {title} tena	direct	false	title	title	true
-demo.riskIntel	Risk intelligence	Ujasusi wa hatari	direct	false			true
-demo.riskIntelDown	Risk intelligence unavailable	Ujasusi wa hatari haupatikani	direct	false			true
-demo.startBackendPost	) and press retry.	) kisha ubonyeze jaribu tena.	direct	false			true
-demo.startBackendPre	Start the backend (	Anzisha seva (	direct	false			true
-demo.systemStatus	System Status	Hali ya Mfumo	direct	false			true
-demo.systemStatusDown	System status unavailable	Hali ya mfumo haipatikani	direct	false			true
+detection.channelsTitle	Channel activity	Shughuli za chaneli	direct	false			true
+detection.detectorsTitle	Detector families	Familia za vigunduzi	direct	false			true
+detection.fpRate	False-positive rate	Kiwango cha chanya za uongo	direct	false			true
+detection.frequencyTitle	Signal frequency	Marudio ya ishara	direct	false			true
+detection.investigationsWord	investigations	uchunguzi	direct	false			true
+detection.matrixTitle	Detector by channel	Kigunduzi kwa chaneli	direct	false			true
+detection.measuredAt	Measured at	Imepimwa	direct	false			true
+detection.noLinkedInvestigation	No linked investigation.	Hakuna uchunguzi uliounganishwa.	direct	false			true
+detection.noSignals	No qualifying signals recorded in this period.	Hakuna ishara zinazostahili zilizorekodiwa katika kipindi hiki.	direct	false			true
+detection.notImplemented	Not implemented: no model deployed.	Haijatekelezwa: hakuna kielelezo kilichowekwa.	direct	false			true
+detection.seedFeedNote	Seed feed: no live channel integration.	Mlisho wa mbegu: hakuna muunganiko wa chaneli moja kwa moja.	direct	false			true
+detection.timeSeriesTitle	Signal time series	Mfululizo wa ishara kwa wakati	direct	false			true
+detection.title	Detection intelligence	Upelelezi wa utambuzi	direct	false			true
+detection.txnSignalsTitle	Transaction signals	Ishara za muamala	direct	false			true
+detection.unmappedAlert	Unmapped channel codes need taxonomy review.	Misimbo ya chaneli isiyopangwa inahitaji mapitio ya uainishaji.	direct	false			true
+detection.viewInvestigation	Open investigation	Fungua uchunguzi	direct	false			true
+detection.zeroNote	Zero means measured none, not missing data.	Sifuri inamaanisha hakuna kilichopimwa, si data iliyokosekana.	direct	false			true
 evidence.clearSearch	Clear search	Futa utafutaji	direct	false			true
 evidence.emptyFilter	No evidence items match this filter.	Hakuna ushahidi unaolingana.	direct	false			true
 evidence.emptySearch	No evidence items match this search.	Hakuna ushahidi unaolingana na utafutaji huu.	direct	false			true
@@ -237,7 +236,7 @@ graph.nodeFocusSuffix	, orbit focus	, lengo la obiti	direct	false			true
 graph.orbitFocusBadge	· orbit focus	· lengo la obiti	direct	false			true
 graph.orbitalCounts	Focus: {focus} · Showing {a} of {b} nodes, {c} of {d} edges.	Lengo: {focus} · Inaonyesha nodi {a} kati ya {b}, kingo {c} kati ya {d}.	direct	false	a,b,c,d,focus	a,b,c,d,focus	true
 graph.orbitalLabel	Orbital graph	Grafu ya obiti	direct	false			true
-graph.orbitalNote	Synthetic demo data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	Data bandia za onyesho. Pete na mwendo ni mpangilio pekee — hazionyeshi hatari, hatia, wala kipaumbele.	direct	false			true
+graph.orbitalNote	Synthetic data. Rings and motion are layout only — they do not indicate risk, guilt, or priority.	Data bandia za onyesho. Pete na mwendo ni mpangilio pekee — hazionyeshi hatari, hatia, wala kipaumbele.	direct	false			true
 graph.orbitalSvg	Orbital graph focused on {focus}: {a} nodes, {b} edges. Tab to reach nodes and edges, Enter to select, arrow keys to pan.	Grafu ya obiti inayolenga {focus}: nodi {a}, kingo {b}. Tab kufikia nodi na kingo, Enter kuchagua, vitufe vya mshale kusogeza.	direct	false	a,b,focus	a,b,focus	true
 graph.orbitalTitle	Orbital explorer	Kivinjari cha obiti	direct	false			true
 graph.orbitalViewControls	Orbital view controls	Vidhibiti vya mwonekano wa obiti	direct	false			true
@@ -283,7 +282,7 @@ intel.evidencePre	Evidence: 	Ushahidi: 	direct	false			true
 intel.findingsCount.one	{count} finding	{count} ugunduzi	direct	false	count	count	true
 intel.findingsCount.other	{count} findings	{count} ugunduzi	direct	false	count	count	true
 intel.findingsH	Intelligence findings	Ugunduzi wa ujasusi	direct	false			true
-intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic demo values only.	Rejea ya kudumu, si alama ya kidole iliyothibitishwa. Sifa: thamani za onyesho bandia zilizotajwa pekee.	direct	false			true
+intel.fixtureNote	Fixture reference, not a verified fingerprint. Attributes: declared synthetic values only.	Rejea ya kudumu, si alama ya kidole iliyothibitishwa. Sifa: thamani za onyesho bandia zilizotajwa pekee.	direct	false			true
 intel.geoDisclaimer	IP-derived locations are approximate and never proof of physical presence. No GPS collection exists (permission: unavailable).	Maeneo yanayotokana na IP ni makadirio wala sio kamwe uthibitisho wa uwepo wa kimwili. Hakuna ukusanyaji wa GPS (ruhusa: haipatikani).	direct	false			true
 intel.geoH	Geolocation	Eneo	direct	false			true
 intel.intelDown	Intelligence unavailable for this investigation.	Ujasusi haupatikani kwa uchunguzi huu.	direct	false			true
@@ -306,8 +305,8 @@ intel.repLabel	Reputation	Sifa	direct	false			true
 intel.reviewLine	Human review: {r}	Mapitio ya binadamu: {r}	direct	false	r	r	true
 intel.seeBackend	see backend	tazama seva	direct	false			true
 intel.sharedDevice	— shared device	— kifaa kinachoshirikiwa	direct	false			true
-intel.statusLine	{findings} · {iso} · synthetic demo data.	{findings} · {iso} · data bandia za onyesho.	direct	false	findings,iso	findings,iso	true
-intel.syntheticTag	· synthetic demo	· onyesho bandia	direct	false			true
+intel.statusLine	{findings} · {iso} · synthetic data.	{findings} · {iso} · data bandia za onyesho.	direct	false	findings,iso	findings,iso	true
+intel.syntheticTag	· synthetic	· onyesho bandia	direct	false			true
 intel.unknownShort	(unknown)	(haijulikani)	direct	false			true
 intel.vpnLabel	VPN/proxy/Tor	VPN/proxy/Tor	direct	true			true
 investigation.aiAnalysis	AI analysis	Uchambuzi wa AI	direct	false			true
@@ -354,16 +353,22 @@ landing.capTitles.6	Investigations	Uchunguzi	direct	false			true
 landing.capTitles.7	AI Intelligence	Ujasusi wa AI	direct	false			true
 landing.capTitles.8	Risk Engine	Injini ya hatari	direct	false			true
 landing.capTitles.9	Evidence & Audit	Ushahidi na ukaguzi	direct	false			true
+landing.closeRegion	Clear region selection	Futa uteuzi wa eneo	direct	false			true
+landing.collapsePanel	Collapse panel	Kunja paneli	direct	false			true
 landing.controlsAmbient	Ambient sound	Sauti ya mazingira	direct	false			true
 landing.cta	Explore CruiseShield AI™	Chunguza CruiseShield AI™	direct	false			true
-landing.ctaSub	Enter the Interactive Demo Experience	Ingia kwenye uzoefu wa onyesho shirikishi	direct	false			true
-landing.enterDemo	Enter Demo	Ingia kwenye onyesho	direct	false			true
+landing.ctaSub	Explore the interactive investigation platform	Ingia kwenye uzoefu wa onyesho shirikishi	direct	false			true
+landing.enterPlatform	Access Platform	Ingia kwenye onyesho	direct	false			true
+landing.expandPanel	Expand panel	Panua paneli	direct	false			true
 landing.eyebrow	Global Financial Intelligence	Ujasusi wa kifedha wa kimataifa	direct	false			true
-landing.fallbackNote	Interactive 3D is unavailable in this browser. The full demo experience remains open.	3D shirikishi haipatikani katika kivinjari hiki. Uzoefu kamili wa onyesho unaendelea kufunguka.	direct	false			true
-landing.footerDemo	Demonstration experience · synthetic data · illustrative network visuals · 	Uzoefu wa onyesho · data bandia · taswira za mtandao za kielelezo · 	direct	false			true
+landing.fallbackNote	Interactive 3D is unavailable in this browser. The full platform remains open.	3D shirikishi haipatikani katika kivinjari hiki. Uzoefu kamili wa onyesho unaendelea kufunguka.	direct	false			true
 landing.footerLine	One Platform. A Safer Financial Future. For Everyone.	Jukwaa moja. Mustakabali wa kifedha ulio salama zaidi. Kwa kila mtu.	direct	false			true
-landing.footerLink	Enter the interactive demo	Ingia kwenye onyesho shirikishi	direct	false			true
+landing.footerLink	Open the interactive platform	Ingia kwenye onyesho shirikishi	direct	false			true
+landing.footerNote	Investigation platform · synthetic data · illustrative network visuals · 	Uzoefu wa onyesho · data bandia · taswira za mtandao za kielelezo · 	direct	false			true
 landing.fullMotion	Full motion	Mwendo kamili	direct	false			true
+landing.globeContextLost	3D context lost — illustration paused.	Muktadha wa 3D umepotea — kielelezo kimesitishwa.	direct	false			true
+landing.globeControls	World Atlas controls	Vidhibiti vya atlasi ya dunia	direct	false			true
+landing.globeHint	Drag to rotate. Arrow keys rotate, plus and minus zoom, 0 resets the view.	Buruta ili kuzungusha. Vitufe vya mshale vinazungusha, kuongeza na kupunguza hubadilisha ukubwa, 0 inaweka upya.	direct	false			true
 landing.h1	A Safer Financial World	Ulimwengu wa kifedha ulio salama zaidi	direct	false			true
 landing.home	CruiseShield AI home	Nyumbani kwa CruiseShield AI	direct	false			true
 landing.illustrative	Illustrative Network View	Mwonekano wa mtandao wa kielelezo	direct	false			true
@@ -376,8 +381,8 @@ landing.intelItems.5	Network Graph	Grafu ya mtandao	direct	false			true
 landing.intelItems.6	AI Investigation	Uchunguzi wa AI	direct	false			true
 landing.intelItems.7	Risk Analysis	Uchanganuzi wa hatari	direct	false			true
 landing.intelItems.8	Evidence and Audit	Ushahidi na ukaguzi	direct	false			true
-landing.intelNote	Demonstration capabilities · synthetic data	Uwezo wa onyesho · data bandia	direct	false			true
-landing.intelStatus	Demo	Onyesho	direct	false			true
+landing.intelNote	Investigation capabilities · synthetic data	Uwezo wa onyesho · data bandia	direct	false			true
+landing.intelStatus	Pilot	Onyesho	direct	false			true
 landing.intelTitle	Global Intelligence	Ujasusi wa kimataifa	direct	false			true
 landing.intelligenceModules	Intelligence modules	Moduli za ujasusi	direct	false			true
 landing.journey.0	DETECT	GUNDUA	direct	false			true
@@ -414,6 +419,7 @@ landing.moduleTitles.2	Global Network	Mtandao wa kimataifa	direct	false			true
 landing.moduleTitles.3	Cyber Defense	Ulinzi wa mtandao	direct	false			true
 landing.moduleTitles.4	Secure Infrastructure	Miundombinu salama	direct	false			true
 landing.modulesNote	Illustrative module concepts · capabilities vary by deployment	Dhana za moduli za kielelezo · uwezo hutofautiana kulingana na utekelezaji	direct	false			true
+landing.mute	Mute	Nyamazisha	direct	false			true
 landing.offWord	Off	Zima	direct	false			true
 landing.onWord	On	Washa	direct	false			true
 landing.pauseScene	Pause scene	Sitisha tukio	direct	false			true
@@ -421,6 +427,7 @@ landing.platformPrinciples	Platform principles	Kanuni za jukwaa	direct	false			t
 landing.platformQualities	Platform qualities	Sifa za jukwaa	direct	false			true
 landing.problem	Financial crime hides in disconnected transactions. CruiseShield AI connects them — deterministic risk scoring, relationship graphs, and evidence-grounded AI explanations, with a human investigator deciding.	Uhalifu wa kifedha hujificha katika miamala isiyounganishwa. CruiseShield AI huziunganisha — uwekaji alama wa hatari wa kubainika, grafu za uhusiano na maelezo ya AI yanayotokana na ushahidi, huku mpelelezi binadamu akifanya uamuzi.	direct	false			true
 landing.reduceMotion	Reduce motion	Punguza mwendo	direct	false			true
+landing.regionSignal	Illustrative signal	Ishara ya kielelezo	direct	false			true
 landing.regions.0	North America	Amerika Kaskazini	direct	false			true
 landing.regions.1	South America	Amerika Kusini	direct	false			true
 landing.regions.2	Europe	Ulaya	direct	false			true
@@ -432,6 +439,7 @@ landing.regions.7	Cross-Border Corridors	Njia za kuvuka mipaka	direct	false			tr
 landing.regionsNote	Simulated regional signals · not live monitoring	Ishara za kikanda zilizochochewa · hakuna ufuatiliaji wa moja kwa moja	direct	false			true
 landing.regionsTitle	Global Intelligence Regions	Mikoa ya ujasusi wa kimataifa	direct	false			true
 landing.replayLink	try replay & simulation	jaribu kurudia na kuiga	direct	false			true
+landing.resetView	Reset view	Weka upya mwonekano	direct	false			true
 landing.resumeScene	Resume scene	Endelea na tukio	direct	false			true
 landing.sceneMotion	Scene motion	Mwendo wa tukio	direct	false			true
 landing.signals.0	Secure	Salama	direct	false			true
@@ -439,16 +447,18 @@ landing.signals.1	Intelligent	Mahiri	direct	false			true
 landing.signals.2	Global	Kimataifa	direct	false			true
 landing.signals.3	Auditable	Inayoweza kukaguliwa	direct	false			true
 landing.soundLabel	Sound	Sauti	direct	false			true
-landing.stripNote	Cards open the matching live demo screen · 	Kadi hufungua skrini husika ya onyesho la moja kwa moja · 	direct	false			true
+landing.stripNote	Cards open the matching screen · 	Kadi hufungua skrini husika ya onyesho la moja kwa moja · 	direct	false			true
 landing.tagline	The Financial Crime Immune System™	The Financial Crime Immune System™	direct	true			true
+landing.unmute	Unmute	Washa sauti	direct	false			true
 landing.volumeLabel	Volume	Sauti kubwa	direct	false			true
+landing.zoomIn	Zoom in	Kuza	direct	false			true
+landing.zoomOut	Zoom out	Punguza	direct	false			true
 nav.aiIntelligence	AI Intelligence	Ujasusi wa AI	direct	false			true
 nav.auditTrail	Audit Trail	Rekodi ya Ukaguzi	direct	false			true
 nav.brand	CruiseShield AI	CruiseShield AI	direct	true			true
 nav.cases	Cases	Kesi	direct	false			true
 nav.closeNav	Close navigation	Funga urambazaji	direct	false			true
 nav.commandCenter	Command Center	Kituo cha Amri	direct	false			true
-nav.demoRole	demo role	jukumu la onyesho	direct	false			true
 nav.evidence	Evidence	Ushahidi	direct	false			true
 nav.exploreNetwork	Explore Network	Chunguza Mtandao	direct	false			true
 nav.home	CruiseShield AI home	Nyumbani kwa CruiseShield AI	direct	false			true
@@ -458,13 +468,14 @@ nav.networkExplorer	Network Explorer	Kivinjari cha Mtandao	direct	false			true
 nav.primary	Primary	Kuu	direct	false			true
 nav.quickActions	Quick Actions	Vitendo vya Haraka	direct	false			true
 nav.replaySimulation	Replay & Simulation	Kurudia na Uigaji	direct	false			true
-nav.roleDemo	{role} · demo	{role} · onyesho	direct	false	role	role	true
+nav.roleContext	{role} · active	{role} · onyesho	direct	false	role	role	true
 nav.runSimulation	Run Simulation	Endesha Uigaji	direct	false			true
+nav.sessionRole	session role	jukumu la onyesho	direct	false			true
 nav.signOut	Sign out	Toka	direct	false			true
 nav.signOutEverywhere	Sign out everywhere	Toka kila mahali	direct	false			true
 nav.signOutEverywhereTitle	End this session on every device and browser	Maliza kipindi hiki kwenye kila kifaa na kivinjari	direct	false			true
 nav.skipToContent	Skip to main content	Ruka hadi maudhui kuu	direct	false			true
-nav.synthetic	Synthetic demo data	Data bandia za onyesho	direct	false			true
+nav.synthetic	Synthetic data	Data bandia za onyesho	direct	false			true
 nav.tagline	Financial Crime Immune System™	Financial Crime Immune System™	direct	true			true
 nav.toggleNav	Toggle navigation	Badilisha urambazaji	direct	false			true
 nav.viewAuditTrail	View Audit Trail	Tazama Rekodi ya Ukaguzi	direct	false			true
@@ -488,11 +499,33 @@ notify.bellLoading	Notifications, loading	Arifa, inapakia	direct	false			true
 notify.bellOpen	Notifications, {n} open	Arifa, {n} wazi	direct	false	n	n	true
 notify.closeNotif	Close notifications	Funga arifa	direct	false			true
 notify.loadingAlerts	Loading alerts…	Inapakia arifa…	direct	false			true
+notify.markAllRead	Mark all read	Weka alama zote zimesomwa	direct	false			true
+notify.markRead	Mark read	Weka alama imesomwa	direct	false			true
 notify.networkLink	Network	Mtandao	direct	false			true
 notify.noAlerts	No alerts.	Hakuna arifa.	direct	false			true
 notify.openInv	Open investigation	Fungua uchunguzi	direct	false			true
 notify.panelLabel	Notifications	Arifa	direct	false			true
 notify.panelTitle	Notifications	Arifa	direct	false			true
+platform.activityDown	Activity unavailable	Shughuli haipatikani	direct	false			true
+platform.aiBriefDown	AI brief unavailable	Muhtasari wa AI haupatikani	direct	false			true
+platform.backendStatus	Backend status	Hali ya seva	direct	false			true
+platform.checkedAt	Checked {url}…	{url} imeangaliwa…	direct	false	url	url	true
+platform.execOverview	Executive overview	Muhtasari wa utendaji	direct	false			true
+platform.execOverviewDown	Executive overview unavailable	Muhtasari wa utendaji haupatikani	direct	false			true
+platform.heroP1	Financial crime rarely appears in one transaction. CruiseShield AI connects suspicious transactions, accounts, devices, beneficiaries and merchants into an explainable intelligence network.	Uhalifu wa kifedha mara chache huonekana katika muamala mmoja. CruiseShield AI huunganisha miamala, akaunti, vifaa, wanufaika na wafanyabiashara wanaotiliwa shaka katika mtandao wa ujasusi unaoelezeka.	direct	false			true
+platform.heroP2	Its deterministic risk engine identifies signals, Meta AI helps investigators interpret evidence, replay and simulation explore hypothetical scenarios, and human decisions remain accountable and auditable.	Injini yake ya alama za hatari ya kubainika hutambua ishara, Meta AI huwasaidia wachunguzi kufasiri ushahidi, kurudia na kuiga huchunguza hali za dhana, na maamuzi ya binadamu yanabaki ya kuwajibika na yanayoweza kukaguliwa.	direct	false			true
+platform.museBrief	Muse Spark brief	Muhtasari wa Muse Spark	direct	false			true
+platform.networkPreview	Network preview	Hakikisho la mtandao	direct	false			true
+platform.networkPreviewDown	Network preview unavailable	Hakikisho la mtandao halipatikani	direct	false			true
+platform.recentActivity	Recent activity	Shughuli za hivi karibuni	direct	false			true
+platform.replayDown	Replay unavailable.	Kurudia hakupatikani.	direct	false			true
+platform.retryTitle	Retry {title}	Jaribu {title} tena	direct	false	title	title	true
+platform.riskIntel	Risk intelligence	Ujasusi wa hatari	direct	false			true
+platform.riskIntelDown	Risk intelligence unavailable	Ujasusi wa hatari haupatikani	direct	false			true
+platform.startBackendPost	) and press retry.	) kisha ubonyeze jaribu tena.	direct	false			true
+platform.startBackendPre	Start the backend (	Anzisha seva (	direct	false			true
+platform.systemStatus	System Status	Hali ya Mfumo	direct	false			true
+platform.systemStatusDown	System status unavailable	Hali ya mfumo haipatikani	direct	false			true
 replay.cancel	Cancel	Ghairi	direct	false			true
 replay.confirmReset	Confirm: this clears decisions, simulations, AI runs, and audit history for {id}.	Thibitisha: hii hufuta maamuzi, uigaji, uendeshaji wa AI, na historia ya ukaguzi kwa {id}.	direct	false	id	id	true
 replay.confirmResetBtn	Confirm reset	Thibitisha kuweka upya	direct	false			true
@@ -510,12 +543,12 @@ replay.play	Play	Cheza	direct	false			true
 replay.positionLine	Step {c} of {t} · {e} events · {x} transactions · {g} edges	Hatua {c} kati ya {t} · matukio {e} · miamala {x} · kingo {g}	direct	false	c,e,g,t,x	c,e,g,t,x	true
 replay.reducedMotionPlay	Auto-play disabled: reduced-motion preference detected. Use Step forward.	Uchezaji otomatiki umezimwa: upendeleo wa mwendo uliopunguzwa umegunduliwa. Tumia Songa mbele.	direct	false			true
 replay.resetBlurb	Reset restores the seeded scenario exactly and clears all live state: human decisions, simulations, AI runs, and audit events beyond the reset itself.	Kuweka upya hurejesha hali ya mbegu sawasawa na kufuta hali yote ya moja kwa moja: maamuzi ya binadamu, uigaji, uendeshaji wa AI, na matukio ya ukaguzi zaidi ya uwekwaji upya wenyewe.	direct	false			true
-replay.resetDemo	Reset demo	Weka upya onyesho	direct	false			true
 replay.resetDoneMid	, seed 	, mbegu 	direct	false			true
 replay.resetDonePost	. Reload the page to replay from the restored state.	. Pakia upya ukurasa ili kurudia kutoka hali iliyorejeshwa.	direct	false			true
 replay.resetDonePre	Reset complete: run 	Kuweka upya kumekamilika: uendeshaji 	direct	false			true
 replay.resetLabel	Scenario reset	Kuweka upya hali	direct	false			true
 replay.resetTitle	Scenario reset	Kuweka upya hali	direct	false			true
+replay.resetWorkspace	Reset workspace	Weka upya onyesho	direct	false			true
 replay.resetting	Resetting…	Inaweka upya…	direct	false			true
 replay.restart	Restart	Anza upya	direct	false			true
 replay.scenarioPre	Scenario 	Hali 	direct	false			true
@@ -554,6 +587,7 @@ sim.targetDown	Target unavailable: {err}	Lengwa halipatikani: {err}	direct	false
 sim.targetLabel	Target transaction	Muamala lengwa	direct	false			true
 system.allOk	All systems operational	Mifumo yote inafanya kazi	direct	false			true
 system.checkedPre	Checked	Imeangaliwa	direct	false			true
+system.gapsOk	Operational with gaps: some services unconfigured	Inafanya kazi na mapengo: huduma zingine hazijasanidiwa	direct	false			true
 system.rowAi	AI Engine (Muse Spark)	Injini ya AI (Muse Spark)	direct	false			true
 system.rowApi	API Services	Huduma za API	direct	false			true
 system.rowGraph	Graph Provenance	Asili ya grafu	direct	false			true

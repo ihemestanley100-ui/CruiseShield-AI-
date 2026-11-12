@@ -33,24 +33,24 @@ const EDGES: GraphEdge[] = [
     source_node_id: "acct_A",
     target_node_id: "acct_B",
     relationship_type: "SENT_TO",
-    source_event_ids: ["evt_demo_84721"],
+    source_event_ids: ["evt_84721"],
     evidence_ids: ["evidence_edge_0001"],
     valid_from: "2026-10-27T10:00:00Z",
     valid_to: null,
     synthetic_flag: true,
-    trace_id: "trace_demo_84721",
+    trace_id: "trace_84721",
   },
   {
     edge_id: "edge_0002",
     source_node_id: "acct_B",
     target_node_id: "dev_04",
     relationship_type: "USES_DEVICE",
-    source_event_ids: ["evt_demo_84721"],
+    source_event_ids: ["evt_84721"],
     evidence_ids: ["evidence_edge_0002"],
     valid_from: "2026-10-27T10:00:00Z",
     valid_to: null,
     synthetic_flag: true,
-    trace_id: "trace_demo_84721",
+    trace_id: "trace_84721",
   },
 ];
 
@@ -101,7 +101,7 @@ describe("OrbitalExplorer", () => {
     fireEvent.click(container.querySelector('[data-edge="edge_0002"]') as Element);
     const detail = screen.getByTestId("orbital-detail");
     expect(detail).toHaveTextContent("USES_DEVICE");
-    expect(detail).toHaveTextContent("evt_demo_84721");
+    expect(detail).toHaveTextContent("evt_84721");
     expect(detail).toHaveTextContent("evidence_edge_0002");
   });
 

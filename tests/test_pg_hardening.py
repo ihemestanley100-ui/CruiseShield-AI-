@@ -294,11 +294,6 @@ def test_recovery_after_connection_failure(hard, monkeypatch):
 
 
 def test_live_source_untouched():
-    import hashlib
+    from _integrity import assert_source_unmutated
 
-    from app import config as config_mod
-
-    raw = config_mod.STATE_PATH.read_bytes()
-    assert len(raw) == 101417
-    assert hashlib.sha256(raw).hexdigest().upper() == (
-        "BA1D4DB4BB4DBC6FC3ACA346664A539610CCC6460CCD530F523C8043453790FE")
+    assert_source_unmutated()

@@ -1,0 +1,1644 @@
+{
+ "generated": "2026-11-08",
+ "head": "d82627d",
+ "source_run": "pytest tests/ -v --tb=no -rs (142 skipped)",
+ "total": 142,
+ "counted_as_passed": 0,
+ "entries": [
+  {
+   "id": "tests/test_ai_validation.py::test_success_path_with_mock_transport",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_provider_429_retries_then_rate_limited",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_provider_500_maps_without_retry",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_provider_auth_failure_maps_without_retry",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_provider_timeout_fails_fast",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_provider_connection_error_maps",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_provider_non_json_body_maps",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_hostile_model_output_fails_closed",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_hostile_followup_changes_nothing_authoritative",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_followup_request_carries_max_output_tokens",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_analyze_sends_structured_output",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_analyze_falls_back_when_structured_rejected",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_analyze_no_retry_on_other_400",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_analyze_retries_transient_then_succeeds",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_analyze_rate_limited_after_exhaustion",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_analyze_no_retry_on_auth_failure",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_ai_validation.py::test_successful_run_persists_provider_usage",
+   "file": "tests/test_ai_validation.py",
+   "reason_class": "event-loop",
+   "reason": "no event loop in this sandbox; runs in CI/user envs",
+   "hosted_equivalent": "runs natively on hosted CI (Windows-sandbox loop quirk)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_api_flow.py::test_full_judge_flow",
+   "file": "tests/test_api_flow.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_api_flow.py::test_pages_and_health_render",
+   "file": "tests/test_api_flow.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_api_flow.py::test_stable_error_format",
+   "file": "tests/test_api_flow.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_api_flow.py::test_health_and_ready_envelopes",
+   "file": "tests/test_api_flow.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_api_flow.py::test_core_reads_over_transport",
+   "file": "tests/test_api_flow.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_api_flow.py::test_unknown_ids_404_over_transport",
+   "file": "tests/test_api_flow.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_api_flow.py::test_risk_bogus_scope_400_over_transport",
+   "file": "tests/test_api_flow.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_api_flow.py::test_ai_endpoints_validate_pre_provider",
+   "file": "tests/test_api_flow.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_api_flow.py::test_simulation_domain_errors_over_transport",
+   "file": "tests/test_api_flow.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_api_flow.py::test_decision_unknown_case_over_transport",
+   "file": "tests/test_api_flow.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_api_flow.py::test_legacy_pages_render_over_transport",
+   "file": "tests/test_api_flow.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_api_flow.py::test_events_schema_rejection_over_transport",
+   "file": "tests/test_api_flow.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_api_flow.py::test_auth_mode_open_by_default",
+   "file": "tests/test_api_flow.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_auth.py::test_full_stack_login_cookie_csrf_roles",
+   "file": "tests/test_auth.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_auth_e2e.py::test_j4_full_login_journey",
+   "file": "tests/test_auth_e2e.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_cases_audit.py::test_session_role_threaded_into_decision",
+   "file": "tests/test_cases_audit.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_cases_audit.py::test_token_decision_keeps_demo_token_actor",
+   "file": "tests/test_cases_audit.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_cors.py::test_health_sends_allow_origin_header",
+   "file": "tests/test_cors.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r1_token_denied_platform_reset",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r1_token_denied_judge_start",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r1_token_denied_platform_scenarios_get",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r1_admin_session_allowed_platform_reset",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r1_nonadmin_session_still_denied",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r1_anonymous_denied_platform_reset",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r2_token_actor_forced",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r2_session_actor_preserved",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r3_token_denied_ai_analysis",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r3_token_denied_ai_followup",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r3_session_allowed_ai_analysis",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r3_unarmed_local_dev_unaffected",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r4_token_reads_evidence_post",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_demo_token_remediation.py::test_r4_anonymous_denied_evidence_post",
+   "file": "tests/test_demo_token_remediation.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_detection.py::test_outcome_post_persists_history_and_audits",
+   "file": "tests/test_detection.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_detection.py::test_outcome_post_rejects_bad_value_and_unknown",
+   "file": "tests/test_detection.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_detection.py::test_link_post_idempotent_and_audits",
+   "file": "tests/test_detection.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_detection.py::test_outcome_post_armed_requires_credential",
+   "file": "tests/test_detection.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_homepage_routing.py::test_backend_root_serves_legacy_command_center",
+   "file": "tests/test_homepage_routing.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_homepage_routing.py::test_frontend_dependency_endpoints_healthy",
+   "file": "tests/test_homepage_routing.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_homepage_routing.py::test_local_frontend_origin_preflight_accepted",
+   "file": "tests/test_homepage_routing.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_homepage_routing.py::test_unknown_origin_rejected",
+   "file": "tests/test_homepage_routing.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_j5_rehearsal.py::test_j5_full_rehearsal",
+   "file": "tests/test_j5_rehearsal.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_j5_rehearsal.py::test_j5_pooler_style_url_fails_closed",
+   "file": "tests/test_j5_rehearsal.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_j6_drill.py::test_j6_disposable_roundtrip_drill",
+   "file": "tests/test_j6_drill.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_notifications.py::test_list_open_mode",
+   "file": "tests/test_notifications.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_notifications.py::test_mark_one_persists",
+   "file": "tests/test_notifications.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_notifications.py::test_mark_all_and_unknown_ignored",
+   "file": "tests/test_notifications.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_notifications.py::test_validation",
+   "file": "tests/test_notifications.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_notifications.py::test_armed_anonymous_denied",
+   "file": "tests/test_notifications.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_notifications.py::test_armed_sessions_isolated",
+   "file": "tests/test_notifications.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_notifications.py::test_armed_token_identity_and_write_gate",
+   "file": "tests/test_notifications.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_pg_atomic_decision.py::test_success_commits_all_four",
+   "file": "tests/test_pg_atomic_decision.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_atomic_decision.py::test_failure_at_each_statement_rolls_back_all[1]",
+   "file": "tests/test_pg_atomic_decision.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_atomic_decision.py::test_failure_at_each_statement_rolls_back_all[2]",
+   "file": "tests/test_pg_atomic_decision.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_atomic_decision.py::test_failure_at_each_statement_rolls_back_all[3]",
+   "file": "tests/test_pg_atomic_decision.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_atomic_decision.py::test_failure_at_each_statement_rolls_back_all[4]",
+   "file": "tests/test_pg_atomic_decision.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_atomic_decision.py::test_failure_at_each_statement_rolls_back_all[5]",
+   "file": "tests/test_pg_atomic_decision.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_atomic_decision.py::test_failure_at_each_statement_rolls_back_all[6]",
+   "file": "tests/test_pg_atomic_decision.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_atomic_decision.py::test_crash_leaves_no_partial_decision",
+   "file": "tests/test_pg_atomic_decision.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_atomic_decision.py::test_concurrent_decisions_exactly_one_wins",
+   "file": "tests/test_pg_atomic_decision.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_atomic_decision.py::test_standalone_audit_unchanged",
+   "file": "tests/test_pg_atomic_decision.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_atomic_decision.py::test_second_decision_reuses_closed_batch",
+   "file": "tests/test_pg_atomic_decision.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_hardening.py::test_concurrent_duplicate_ingest_exactly_one_accepted",
+   "file": "tests/test_pg_hardening.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_hardening.py::test_l2_pg_matches_json_dedupe",
+   "file": "tests/test_pg_hardening.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_hardening.py::test_l3_no_hash_chain_overclaim",
+   "file": "tests/test_pg_hardening.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_hardening.py::test_l4_failed_init_leaves_no_schema",
+   "file": "tests/test_pg_hardening.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_hardening.py::test_l4_unstamped_schema_never_reports_success",
+   "file": "tests/test_pg_hardening.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_hardening.py::test_l5_failed_write_leaves_snapshot_clean",
+   "file": "tests/test_pg_hardening.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_hardening.py::test_l5_abort_batch_safety_valve",
+   "file": "tests/test_pg_hardening.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_hardening.py::test_l6_empty_audit_history_fails_migration",
+   "file": "tests/test_pg_hardening.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_hardening.py::test_l6_counter_mismatch_fails_migration",
+   "file": "tests/test_pg_hardening.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_hardening.py::test_recovery_after_connection_failure",
+   "file": "tests/test_pg_hardening.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_migration.py::test_health_json_default_reports_backend",
+   "file": "tests/test_pg_migration.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_pg_migration.py::test_ready_json_default",
+   "file": "tests/test_pg_migration.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_pg_migration.py::test_ready_pg_unreachable_fails_closed",
+   "file": "tests/test_pg_migration.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_pg_migration.py::test_migrate_reconciles_exactly",
+   "file": "tests/test_pg_migration.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_migration.py::test_migrate_is_idempotent",
+   "file": "tests/test_pg_migration.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_migration.py::test_migrate_rolls_back_on_corruption",
+   "file": "tests/test_pg_migration.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_migration.py::test_pgstore_reads_and_rollback_to_json",
+   "file": "tests/test_pg_migration.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_migration.py::test_health_pg_selected_reports_schema",
+   "file": "tests/test_pg_migration.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_state_materialization_matches",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[GET-/api/v1/transactions/txn_84721]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[GET-/api/v1/graph/txn_84721]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[GET-/api/v1/risk/txn_84721?scope=transaction]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[GET-/api/v1/risk/txn_84721?scope=network]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[GET-/api/v1/alerts]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[GET-/api/v1/investigations/inv_84721]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[GET-/api/v1/investigations/inv_84721/evidence-package]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[POST-/api/v1/investigations/inv_84721/evidence-package]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[GET-/api/v1/replay/scn_primary?cursor=0]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[GET-/api/v1/replay/scn_primary?cursor=3]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[GET-/api/v1/replay/scn_primary?cursor=999]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[GET-/api/v1/cases]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[GET-/api/v1/cases/case_84721]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_read_parity[GET-/api/v1/cases/case_84721/audit]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[GET-/api/v1/transactions/txn_nope-None]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[GET-/api/v1/graph/txn_nope-None]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[GET-/api/v1/risk/txn_nope-None]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[GET-/api/v1/risk/txn_84721?scope=bogus-None]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[GET-/api/v1/investigations/inv_nope-None]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[GET-/api/v1/investigations/inv_nope/evidence-package-None]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[GET-/api/v1/replay/scn_nope-None]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[GET-/api/v1/cases/case_nope-None]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[GET-/api/v1/cases/case_nope/audit-None]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[GET-/api/v1/ai-runs/agentrun_nope-None]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[POST-/api/v1/investigations/inv_nope/ai-followup-body10]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[POST-/api/v1/investigations/inv_nope/ai-followup-not-a-dict]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[POST-/api/v1/cases/case_nope/decisions-body12]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[POST-/api/v1/simulations-body13]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[POST-/api/v1/simulations-not-a-dict]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_error_parity[POST-/api/v1/events-body15]",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_empty_states_parity",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_event_ingest_parity",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_simulation_parity",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_decision_parity",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_record_decision_direct_parity",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_ai_run_persistence_parity",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_reset_parity",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_deterministic_scores_and_hashes",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_concurrent_audit_appends_serialized",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_failed_mutation_rolls_back",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_audit_append_only",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_pg_selected_unreachable_never_reports_healthy",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "socket",
+   "reason": "socket creation forbidden",
+   "hosted_equivalent": "runs natively on hosted Linux CI (no sandbox socket ban)",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_j7_sqli_probe_returns_none_without_error",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_pg_parity.py::test_j4_revocation_epoch_parity",
+   "file": "tests/test_pg_parity.py",
+   "reason_class": "scratch-pg",
+   "reason": "SCRATCH_DATABASE_URL not set",
+   "hosted_equivalent": "runs in CI via SCRATCH_DATABASE_URL postgres service",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "PKG-01",
+    "D-057"
+   ]
+  },
+  {
+   "id": "tests/test_ufi_perf.py::test_hosted_load_profile",
+   "file": "tests/test_ufi_perf.py",
+   "reason_class": "hosted-volume",
+   "reason": "needs hosted data volume",
+   "hosted_equivalent": "needs staging/prod-like data volume",
+   "status": "BLOCKED",
+   "unblocked_by": [
+    "deploy-approval"
+   ]
+  }
+ ]
+}

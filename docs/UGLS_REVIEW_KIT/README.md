@@ -23,11 +23,14 @@ below); nothing here is human-verified.
 
 Cell escaping: tabs → space, newlines → literal `\n`.
 
-## Current integrity snapshot (2026-11-02)
+## Current integrity snapshot (2026-11-05)
 
-- Rows per locale: 575 (fr, ar, all nine drafts). Fallback rows: 0.
-- `same_as_source`: fr 25, ar 6, ig/yo/ha/es 15, pt 14, zh 7,
-  hi/sw 8–9, ja 8 — brand/data terms, reviewer to confirm each.
+- Rows per locale: 608 (591 prior + 17 `detection.*` fallback:
+  14 original + `fpRate`, `investigationsWord`, `timeSeriesTitle`).
+  Fallback rows: 17 (detection namespace, machine drafts pending).
+- `same_as_source`: prior counts + 11 detection fallback rows per
+  locale — brand/data terms plus untranslated English, reviewer to
+  confirm each.
 - `vars_ok=false`: 0 everywhere except ar (8 rows, all `.one`
   plural forms dropping `{count}`; `{ids}` correctly kept —
   grammatically expected, awaiting sign-off).

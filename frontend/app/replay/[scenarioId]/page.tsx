@@ -1,7 +1,7 @@
 "use client";
 
 /* Batch 4: replay & simulation route. Scenario metadata from
- * GET /api/v1/demo/scenarios, deterministic playback from
+ * GET /api/v1/platform/scenarios, deterministic playback from
  * GET /api/v1/replay, what-if runs from POST /api/v1/simulations.
  * Reset is a deliberate two-step action with stated consequences. */
 
@@ -14,9 +14,9 @@ import {
   ApiError,
   getReplay,
   listScenarios,
-  resetDemo,
+  resetWorkspace,
   userErrorMessage,
-  type DemoResetResult,
+  type PlatformResetResult,
 } from "../../../lib/api";
 import { useTranslation } from "../../../lib/i18n/context";
 
@@ -35,7 +35,7 @@ export default function ReplayPage() {
   const [state, setState] = useState<State>({ kind: "loading" });
   const [confirming, setConfirming] = useState(false);
   const [resetting, setResetting] = useState(false);
-  const [resetResult, setResetResult] = useState<DemoResetResult | null>(null);
+  const [resetResult, setResetResult] = useState<PlatformResetResult | null>(null);
   const [resetError, setResetError] = useState("");
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function ReplayPage() {
     setResetError("");
     setResetResult(null);
     try {
-      const result = await resetDemo(scenarioId);
+      const result = await resetWorkspace(scenarioId);
       setResetResult(result);
       setConfirming(false);
     } catch (err: unknown) {
@@ -89,7 +89,7 @@ export default function ReplayPage() {
     <main className="main">
       <Breadcrumbs
         items={[
-          { label: tNav("commandCenter"), href: "/demo" },
+          { label: tNav("commandCenter"), href: "/platform" },
           { label: t("crumb", { id: scenarioId }) },
         ]}
       />
@@ -136,7 +136,7 @@ export default function ReplayPage() {
             <p className="muted">{t("resetBlurb")}</p>
             {!confirming && resetResult === null && (
               <button type="button" onClick={() => setConfirming(true)}>
-                {t("resetDemo")}
+                {t("resetWorkspace")}
               </button>
             )}
             {confirming && (

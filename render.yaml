@@ -37,14 +37,19 @@ services:
         value: /srv/data
       - key: FRONTEND_ORIGINS
         value: https://cruiseshield-ai-frontend.onrender.com
-      # Gap-closure D-002: shared demo write token. Render prompts at
-      # deploy. Empty = open demo; set = POSTs require the credential.
+      # R5 (owner-approved): backend DEMO_WRITE_TOKEN is MANDATORY and
+      # PRIVATE. Render prompts at deploy; use a fresh 32+ random value.
+      # Empty = write gates open (FORBIDDEN for public). Never copy this
+      # value into any frontend variable, file, log, or documentation.
       - key: DEMO_WRITE_TOKEN
         sync: false
       # J3 closeout: protected-demo login secrets (see RENDER_6). Render
       # prompts at deploy. Empty SESSION_SECRET = login disabled
       # (open demo, honest 503 on /auth/login) — set both for staging.
       - key: SESSION_SECRET
+        sync: false
+      # SEC-ROT: previous secret during rotation overlap; empty otherwise.
+      - key: SESSION_SECRET_PREVIOUS
         sync: false
       - key: DEMO_USERS
         sync: false
@@ -53,6 +58,57 @@ services:
         value: 100
       - key: AI_TIMEOUT_SECONDS
         value: 30
+      # D-047: per-provider daily ceiling (0 = off; global cap governs).
+      - key: AI_PROVIDER_DAILY_LIMIT
+        value: 0
+      # FRC-001: per-call model output ceiling (sent as max_tokens on
+      # analysis + follow-up). 4096 = code default; behavior-neutral.
+      # Garbage/zero/negative values fall back to 4096 in code.
+      - key: AI_MAX_OUTPUT_TOKENS
+        value: 4096
+      # ZG-001: storage backend selection (json = default; pg = scratch
+      # migration verification only, needs DATABASE_URL which stays unset).
+      - key: STORE_BACKEND
+        value: json
+      # ZG-001: postgres connect timeout, seconds (default 5; garbage/<=0
+      # fall back to 5 in code). Inert while STORE_BACKEND=json.
+      - key: PG_CONNECT_TIMEOUT
+        value: 5
+      # Telecom Identity (TEL-06): thresholds + provider secret refs.
+      # Secrets stay unset (sync:false) until TEL-08 authorization.
+      - key: TELECOM_CONSENT_REQUIRED
+        value: 0
+      - key: TELECOM_RETENTION_DAYS
+        value: 90
+      - key: TELECOM_ACTOR_PER_MIN
+        value: 30
+      - key: TELECOM_SUBJECT_PER_DAY
+        value: 20
+      - key: CS_CONN_CAMARA_SECRET
+        sync: false
+      - key: CS_CONN_MTN_KEY
+        sync: false
+      - key: CS_CONN_HLR_KEY
+        sync: false
+      # Geointelligence OS (SEC-GEO): quotas + map renderer + intel secrets.
+      - key: GEO_ACTOR_PER_MIN
+        value: 30
+      - key: GEO_SUBJECT_PER_DAY
+        value: 20
+      - key: GEO_RETENTION_DAYS
+        value: 90
+      - key: MAP_PROVIDER
+        value: none
+      - key: CS_CONN_IDENTITY_KEY
+        sync: false
+      - key: CS_CONN_ADDRESS_KEY
+        sync: false
+      - key: CS_CONN_IPGEO_KEY
+        sync: false
+      - key: CS_CONN_GEOCODE_KEY
+        sync: false
+      - key: CS_CONN_LOCATION_SECRET
+        sync: false
 
   - type: web
     name: cruiseshield-ai-frontend
@@ -77,9 +133,10 @@ services:
       # MUST equal the deployed backend URL from DEPLOY_ORDER step 1.
       - key: NEXT_PUBLIC_API_BASE_URL
         value: https://cruiseshield-ai.onrender.com
-      # Gap-closure D-002: MUST equal backend DEMO_WRITE_TOKEN (same
-      # owner-generated value in both prompts). PUBLIC once baked into
-      # client chunks — demo-staging use only. Empty = header omitted.
+      # R6 (owner-approved): LEAVE EMPTY for public deploys. No
+      # frontend/backend token matching is required or wanted — any
+      # value here bakes PUBLIC into browser JS. Protected writes use
+      # the login-session flow instead. Empty = header omitted.
       - key: NEXT_PUBLIC_DEMO_WRITE_TOKEN
         sync: false
       # J3 closeout: deployed frontend origin for absolute metadata URLs.

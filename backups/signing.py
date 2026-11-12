@@ -104,7 +104,7 @@ def verify_message(message: bytes, signature_doc: str,
     try:
         packet = base64.b64decode(lines[1], validate=True)
         global_sig = base64.b64decode(lines[3], validate=True)
-    except Exception as exc:
+    except Exception:
         raise SignatureError("BAD_SIGNATURE_DOC", "bad base64") from None
     trusted_comment = lines[2][len("trusted comment: "):]
     trusted = trusted_comment.encode("utf-8")

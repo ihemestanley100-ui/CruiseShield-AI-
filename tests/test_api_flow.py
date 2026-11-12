@@ -13,9 +13,9 @@ pytestmark = pytest.mark.skipif(
 
 
 def test_full_judge_flow(client):
-    reset = client.post("/api/v1/demo/reset", json={"scenario_id": "scn_primary"})
+    reset = client.post("/api/v1/platform/reset", json={"scenario_id": "scn_primary"})
     assert reset.status_code == 200, reset.text
-    assert reset.json()["manifest"]["synthetic_notice"] == "Synthetic demo data."
+    assert reset.json()["manifest"]["synthetic_notice"] == "Synthetic data."
 
     txn = client.get("/api/v1/transactions/txn_84721").json()
     assert txn["transaction"]["amount_minor"] == 48000000
@@ -76,9 +76,11 @@ def test_pages_and_health_render(client):
     for path in ("/", "/investigations/inv_84721", "/system-health"):
         response = client.get(path)
         assert response.status_code == 200, path
-        assert "Synthetic demo data" in response.text
+        assert "Synthetic data" in response.text
     health = client.get("/api/v1/health").json()
-    assert health["status"] == "healthy"
+    # A-1: default store (unconfigured AI + legacy audit) reports
+    # operational_with_gaps, never an unconditional "healthy".
+    assert health["status"] == "operational_with_gaps"
     assert health["checks"]["graph_provenance"] == "PASS"
 
 
@@ -97,7 +99,9 @@ def test_health_and_ready_envelopes(client):
     health = client.get("/api/v1/health")
     assert health.status_code == 200
     body = health.json()
-    assert body["status"] in ("healthy", "degraded")
+    # A-1: qualified states (healthy only when fully configured).
+    assert body["status"] in ("healthy", "operational_with_gaps",
+                              "degraded", "unavailable")
     assert body["scenario_id"] == "scn_primary"
     ready = client.get("/api/v1/ready")
     assert ready.status_code == 200

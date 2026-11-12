@@ -49,7 +49,7 @@ def test_profile_distinguishes_observation_from_identity(tmp_store):
 
 def test_profile_attributes_are_synthetic_and_declared(tmp_store):
     profile = di.get_profile(tmp_store.state, "dev_04")
-    assert profile.attributes_source == "synthetic_demo_fixture"
+    assert profile.attributes_source == "synthetic_fixture"
     assert profile.attributes["device_type"] == "mobile"
 
 
@@ -71,7 +71,7 @@ def test_device_endpoint_returns_profile(tmp_store):
     body = main.get_device("dev_04")
     assert body["device_id"] == "dev_04"
     assert body["shared"] is True
-    assert body["attributes_source"] == "synthetic_demo_fixture"
+    assert body["attributes_source"] == "synthetic_fixture"
 
 
 def test_device_endpoint_404_unknown_400_malformed(tmp_store):
