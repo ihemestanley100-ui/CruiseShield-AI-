@@ -66,7 +66,7 @@ _SEVERITY = {r.rule_id: r.severity for r in rules_mod.RULES}
 # MS-DETECT-001 aggregate-detector rule versions. These rules fire at
 # the detector layer (multi-transaction windows), not in the
 # per-transaction engine, so the engine score contracts stay stable.
-RULE_VERSIONS = {"R-009": "1.0", "R-010": "1.0", "R-011": "1.0"}
+RULE_VERSIONS = {"R-009": "1.0", "R-010": "1.0", "R-011": "1.1"}
 
 # Family -> config kill-switch variable. Unmapped families (including
 # the RULE_FAMILIES group) have no switch and always run.
@@ -78,11 +78,16 @@ _KILL_SWITCHES = {
 
 
 def family_enabled(family: str) -> bool:
-    """True unless the family's kill switch is explicitly "0"."""
+    """True unless the family's kill switch is explicitly "0".
+
+    Grammar is owned by config.detector_flag_enabled
+    (availability-biased fail-open; RV-04).
+    """
     var = _KILL_SWITCHES.get(family)
     if var is None:
         return True
-    return (getattr(config_mod, var, "1") or "1").strip() != "0"
+    return config_mod.detector_flag_enabled(
+        getattr(config_mod, var, None))
 
 
 def _signal_id(*parts: str) -> str:
@@ -97,7 +102,8 @@ def _base(txn: dict, family: str, detail: str, severity: str,
         "detector_family": family,
         "detector_version": VERSION,
         "rule_id": detail if detail.startswith("R-") else "",
-        "rule_version": "1.0" if detail.startswith("R-") else "",
+        "rule_version": (RULE_VERSIONS.get(detail, "1.0")
+                         if detail.startswith("R-") else ""),
         "transaction_id": txn["transaction_id"],
         "channel": txn.get("channel", ""),
         "channel_canonical": chan_mod.classify(txn.get("channel")),
@@ -246,6 +252,24 @@ _MULE_WARNING = ("Activity consistent with pass-through "
                  "no automated adverse consequences.")
 
 
+def _mule_valid_amount(value: object) -> bool:
+    """Detector-boundary amount check: genuine non-negative int kobo.
+
+    RV-03: bools, floats, strings, None, and negatives are malformed
+    and excluded; a valid zero amount counts as a leg.
+    """
+    return (isinstance(value, int) and not isinstance(value, bool)
+            and value >= 0)
+
+
+def _mule_moment(txn: dict) -> datetime | None:
+    """Aware-UTC instant of a leg; None when naive/unparseable (RV-01)."""
+    try:
+        return parse_ts(txn.get("occurred_at", ""))
+    except ValueError:
+        return None
+
+
 def _mule_leg_status(txn: dict) -> str:
     """R-011 leg eligibility: SETTLED, LEGACY, or '' (excluded).
 
@@ -267,10 +291,13 @@ def _mule_signals(txn: dict, transactions: list[dict],
     """R-011: 3+ senders in, 80%+ value out within 24h (HIGH).
 
     Both ends of the target (sender, receiver) are evaluated as
-    candidate mule accounts. Chronological guard: OUT legs count
-    only at/after the earliest eligible IN leg (string comparison,
-    same ordering as the window sort). Ratio is uncapped; values
-    above 1.0 are flagged OVER_FORWARD / BALANCE_CONFOUNDED.
+    candidate mule accounts. Timestamps normalize to aware UTC
+    before window evaluation, sorting, and comparison; naive or
+    unparseable timestamps are excluded (no timezone assumed).
+    Chronological guard: OUT legs count only at/after the earliest
+    eligible IN leg (UTC comparison, same ordering as the window
+    sort). Ratio is uncapped; values above 1.0 are flagged
+    OVER_FORWARD / BALANCE_CONFOUNDED.
     """
     tenant = txn.get("tenant_id", "org_primary")
     center = txn.get("occurred_at", "")
@@ -285,14 +312,20 @@ def _mule_signals(txn: dict, transactions: list[dict],
             graph_mod.MULE_WINDOW_MINUTES)
         elig_in = [t for t in ins
                    if _mule_leg_status(t)
-                   and isinstance(t.get("amount_minor"), int)]
+                   and _mule_valid_amount(t.get("amount_minor"))
+                   and _mule_moment(t) is not None]
         if not elig_in:
             continue
         earliest = elig_in[0]["occurred_at"]
-        chrono_out = [t for t in outs
-                      if _mule_leg_status(t)
-                      and isinstance(t.get("amount_minor"), int)
-                      and t.get("occurred_at", "") >= earliest]
+        earliest_dt = _mule_moment(elig_in[0])
+        elig_out = [t for t in outs
+                    if _mule_leg_status(t)
+                    and _mule_valid_amount(t.get("amount_minor"))
+                    and _mule_moment(t) is not None]
+        out_moments = {t["transaction_id"]: _mule_moment(t)
+                       for t in elig_out}
+        chrono_out = [t for t in elig_out
+                      if out_moments[t["transaction_id"]] >= earliest_dt]
         senders = sorted({t.get("sender_account_id")
                           for t in elig_in
                           if t.get("sender_account_id")})
@@ -311,8 +344,10 @@ def _mule_signals(txn: dict, transactions: list[dict],
         over = ratio > 1.0
         unattested = sum(1 for t in elig_in + chrono_out
                          if _mule_leg_status(t) == "LEGACY")
-        ineligible = (len(ins) + len(outs) - len(elig_in)
-                      - len(chrono_out))
+        lifecycle_excluded = (len(ins) - len(elig_in)
+                                + len(outs) - len(elig_out))
+        chronology_excluded = len(elig_out) - len(chrono_out)
+        ineligible = lifecycle_excluded + chronology_excluded
         try:
             midpoint = parse_ts(center)
             delta = timedelta(minutes=graph_mod.MULE_WINDOW_MINUTES)
@@ -339,6 +374,8 @@ def _mule_signals(txn: dict, transactions: list[dict],
              "earliest_incoming_at": earliest,
              "unattested_count": unattested,
              "ineligible_excluded": ineligible,
+             "lifecycle_excluded": lifecycle_excluded,
+             "chronology_excluded": chronology_excluded,
              "over_forward": over,
              "thresholds": {
                  "min_senders": graph_mod.MULE_MIN_SENDERS,

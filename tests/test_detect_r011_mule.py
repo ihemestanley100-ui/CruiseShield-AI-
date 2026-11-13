@@ -53,7 +53,7 @@ def test_mule_positive_fires_with_full_evidence():
         "txn_mi0", "txn_mi1", "txn_mi2", "txn_mo0"}
     first = hits[0]
     assert first["rule_id"] == "R-011"
-    assert first["rule_version"] == "1.0"
+    assert first["rule_version"] == "1.1"
     assert first["severity"] == "high"
     ev = first["evidence"]
     assert ev["account"] == "M"
@@ -315,7 +315,7 @@ def test_mule_unrelated_outlets_inflate_transparently():
 
 
 def test_mule_rule_version_registered():
-    assert det_mod.RULE_VERSIONS["R-011"] == "1.0"
+    assert det_mod.RULE_VERSIONS["R-011"] == "1.1"
 
 
 def test_mule_threshold_constants():
@@ -370,3 +370,190 @@ def test_mule_leaves_r009_r010_untouched():
     assert det_mod.RULE_VERSIONS["R-010"] == "1.0"
     assert det_mod.family_enabled("STRUCTURING_PATTERN") is True
     assert det_mod.family_enabled("DECLINE_REPETITION") is True
+
+
+# --- J. RV-01..RV-05 remediation --------------------------------------------
+
+
+def _txn_at(tid, sender, receiver, amount, occurred_at, tenant="org_primary",
+            provider=None, status=None):
+    txn = {"transaction_id": tid, "sender_account_id": sender,
+           "receiver_account_id": receiver, "amount_minor": amount,
+           "occurred_at": occurred_at, "channel": "NIP",
+           "tenant_id": tenant}
+    if provider is not None:
+        txn["provider"] = provider
+    if status is not None:
+        txn["provider_status"] = status
+    return txn
+
+
+def test_mule_mixed_offsets_same_instant_guard_includes():
+    txns = [_txn("txn_mi0", "S1", "M", 5000000, 0),
+            _txn("txn_mi1", "S2", "M", 5000000, 60),
+            _txn("txn_mi2", "S3", "M", 5000000, 120),
+            _txn_at("txn_mo0", "M", "Z", 12000000,
+                    "2026-01-01T02:00:00+02:00")]  # == t=0 UTC
+    hits = _fams(_run(txns))
+    assert {s["transaction_id"] for s in hits} == {
+        "txn_mi0", "txn_mi1", "txn_mi2", "txn_mo0"}
+    mine = [s for s in hits if s["transaction_id"] == "txn_mo0"][0]
+    assert "txn_mo0" in mine["evidence"]["out_ids"]
+
+
+def test_mule_chronology_beats_lexical_order():
+    # Lexically earliest IN string is t=30Z, but the +02:00 leg is an
+    # earlier instant (t=-60). Old string ordering picked the wrong
+    # earliest and wrongly excluded the t=0 OUT leg.
+    txns = [_txn("txn_mi0", "S1", "M", 5000000, 30),
+            _txn_at("txn_mi1", "S2", "M", 5000000,
+                    "2026-01-01T01:00:00+02:00"),
+            _txn("txn_mi2", "S3", "M", 5000000, 60),
+            _txn("txn_mo0", "M", "Z", 12000000, 0)]
+    assert "2026-01-01T00:30:00Z" < "2026-01-01T01:00:00+02:00"  # trap holds
+    hits = _fams(_run(txns))
+    assert {s["transaction_id"] for s in hits} == {
+        "txn_mi0", "txn_mi1", "txn_mi2", "txn_mo0"}
+    assert hits[0]["evidence"]["earliest_incoming_at"] == \
+        "2026-01-01T01:00:00+02:00"
+
+
+def test_mule_naive_timestamps_excluded_without_crash():
+    txns = (_mule_txns()
+            + [_txn_at("txn_n0", "S4", "M", 5000000,
+                       "2026-01-01T02:30:00"),
+               _txn_at("txn_n1", "M", "Z2", 5000000,
+                       "2026-01-01T03:00:00")])
+    result = det_mod.evaluate_all(txns, [])
+    hits = _fams(result["signals"])
+    assert {s["transaction_id"] for s in hits} == {
+        "txn_mi0", "txn_mi1", "txn_mi2", "txn_mo0"}
+    for hit in hits:
+        assert hit["evidence"]["distinct_senders"] == 3
+        assert "txn_n0" not in hit["evidence"]["in_ids"]
+        assert "txn_n1" not in hit["evidence"]["out_ids"]
+    assert [e for e in result["meta"]["family_errors"]
+            if e["family"] == "MULE_PASSTHROUGH"] == []
+
+
+def test_mule_naive_center_yields_no_legs():
+    bad = _txn_at("txn_bad", "S1", "M", 5000000, "2026-01-01T00:00:00")
+    ins, outs = graph_mod.account_window_legs(
+        "M", "org_primary", bad["occurred_at"], _mule_txns(),
+        graph_mod.MULE_WINDOW_MINUTES)
+    assert (ins, outs) == ([], [])
+
+
+def test_mule_window_boundary_mixed_offsets():
+    base = [_txn("txn_mi0", "S1", "M", 5000000, 0),
+            _txn("txn_mi1", "S2", "M", 5000000, 60),
+            _txn("txn_mo0", "M", "Z", 12000000, 100)]
+    edge = base + [_txn_at("txn_mi2", "S3", "M", 5000000,
+                            "2026-01-01T19:00:00-05:00")]  # == t=1440
+    hits = _fams(_run(edge))
+    assert hits
+    assert hits[0]["evidence"]["distinct_senders"] == 3
+    # t=2000: outside every target's own centered window (targets sit
+    # at t=0/60/100/2000, so no evaluation sees 3 senders at once).
+    outside = base + [_txn_at("txn_mi2", "S3", "M", 5000000,
+                              "2026-01-02T04:20:00-05:00")]  # t=2000
+    assert _fams(_run(outside)) == []
+
+
+def test_mule_garbage_timestamp_leg_excluded():
+    txns = (_mule_txns()
+            + [_txn_at("txn_g0", "M", "Z2", 50000000, "not-a-timestamp")])
+    hits = _fams(_run(txns))
+    assert {s["transaction_id"] for s in hits} == {
+        "txn_mi0", "txn_mi1", "txn_mi2", "txn_mo0"}
+    assert hits[0]["evidence"]["total_out"] == 12000000
+
+
+def test_mule_negative_in_leg_excluded():
+    txns = [_txn("txn_mi0", "S1", "M", 5000000, 0),
+            _txn("txn_mi1", "S2", "M", 5000000, 60),
+            _txn("txn_mi2", "S3", "M", -5000000, 120),
+            _txn("txn_mo0", "M", "Z", 12000000, 180)]
+    assert _fams(_run(txns)) == []
+
+
+def test_mule_negative_out_excluded_from_ratio():
+    txns = (_mule_txns()
+            + [_txn("txn_mo1", "M", "Z2", -5000000, 200)])
+    hits = _fams(_run(txns))
+    assert hits
+    assert hits[0]["evidence"]["total_out"] == 12000000
+    assert hits[0]["evidence"]["forwarded_ratio"] == 0.8
+    assert "txn_mo1" not in hits[0]["evidence"]["out_ids"]
+
+
+def test_mule_malformed_amounts_excluded():
+    txns = (_mule_txns()
+            + [_txn_at("txn_x0", "S4", "M", None, _ts(30)),
+               _txn_at("txn_x1", "S5", "M", "5000000", _ts(40)),
+               _txn_at("txn_x2", "S6", "M", 5000000.0, _ts(50)),
+               _txn_at("txn_x3", "S7", "M", True, _ts(55)),
+               _txn_at("txn_x4", "M", "Z2", "12000000", _ts(200))])
+    hits = _fams(_run(txns))
+    assert {s["transaction_id"] for s in hits} == {
+        "txn_mi0", "txn_mi1", "txn_mi2", "txn_mo0"}
+    for hit in hits:
+        assert hit["evidence"]["distinct_senders"] == 3
+        for bad in ("txn_x0", "txn_x1", "txn_x2", "txn_x3"):
+            assert bad not in hit["evidence"]["in_ids"]
+        assert "txn_x4" not in hit["evidence"]["out_ids"]
+
+
+def test_mule_zero_amount_leg_valid():
+    txns = [_txn("txn_mi0", "S1", "M", 5000000, 0),
+            _txn("txn_mi1", "S2", "M", 5000000, 60),
+            _txn("txn_mi2", "S3", "M", 0, 120),
+            _txn("txn_mo0", "M", "Z", 12000000, 180)]
+    hits = _fams(_run(txns))
+    assert len(hits) == 4
+    assert hits[0]["evidence"]["distinct_senders"] == 3
+    assert hits[0]["evidence"]["total_in"] == 10000000
+    assert hits[0]["evidence"]["over_forward"] is True
+
+
+def test_mule_kill_switch_value_matrix(monkeypatch):
+    matrix = {"0": False, " 0 ": False, "\t0\n": False,
+              "1": True, "true": True, "false": True,
+              "off": True, "no": True, "": True, "2": True,
+              None: True, 5: True}
+    for value, expected in matrix.items():
+        monkeypatch.setattr(config_mod, "DETECTOR_MULE_ENABLED", value)
+        assert det_mod.family_enabled("MULE_PASSTHROUGH") is expected, value
+    monkeypatch.delattr(config_mod, "DETECTOR_MULE_ENABLED", raising=False)
+    assert det_mod.family_enabled("MULE_PASSTHROUGH") is True
+
+
+def test_mule_exclusion_counts_split_lifecycle_vs_chronology():
+    txns = (_mule_txns()
+            + [_txn("txn_e0", "S4", "M", 5000000, 30, "org_primary",
+                    "nip", "pending"),
+               _txn("txn_e1", "M", "Z2", 5000000, 200, "org_primary",
+                    "card", "declined"),
+               _txn("txn_e2", "M", "Z3", 5000000, -60)])
+    hits = _fams(_run(txns))
+    assert hits
+    for hit in hits:
+        ev = hit["evidence"]
+        assert ev["lifecycle_excluded"] == 2
+        assert ev["chronology_excluded"] == 1
+        assert ev["ineligible_excluded"] == 3
+        assert ev["lifecycle_excluded"] + ev["chronology_excluded"] == \
+            ev["ineligible_excluded"]
+        assert "txn_e0" not in ev["in_ids"]
+        assert "txn_e1" not in ev["out_ids"]
+        assert "txn_e2" not in ev["out_ids"]
+
+
+def test_mule_zero_exclusions_clean_pattern():
+    hits = _fams(_run(_mule_txns()))
+    assert hits
+    for hit in hits:
+        ev = hit["evidence"]
+        assert ev["lifecycle_excluded"] == 0
+        assert ev["chronology_excluded"] == 0
+        assert ev["ineligible_excluded"] == 0

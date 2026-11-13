@@ -1,7 +1,7 @@
 """Deterministic graph queries, provenance checks, and network features."""
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 
 def _parse_ts(value: str) -> datetime:
@@ -34,6 +34,29 @@ def _safe_ts(value: object) -> datetime | None:
         return _parse_ts(value)
     except ValueError:
         return None
+
+
+def _aware_ts(value: object) -> datetime | None:
+    """Parse ISO-8601 to an aware UTC datetime; else None.
+
+    Canonical timestamp contract (RV-01/RV-02): only
+    timezone-aware values are evaluable. Naive timestamps (no
+    offset designator) return None exactly like unparseable
+    values — no timezone is ever assumed. Callers treat None as
+    "leg not evaluable" and exclude the row.
+    """
+    if not isinstance(value, str) or not value:
+        return None
+    text = value.strip()
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(text)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        return None
+    return parsed.astimezone(timezone.utc)
 
 
 def sender_window_peers(txn: dict, transactions: list[dict],
@@ -82,21 +105,22 @@ def account_window_legs(account: str, tenant: str, center: str,
     """Eligible IN/OUT legs for account within ±window of center.
 
     IN = receiver is account; OUT = sender is account. Same tenant
-    only, deduplicated by transaction_id, self-transfers excluded,
-    unparseable timestamps excluded. Deterministic order:
-    (occurred_at, transaction_id). Lifecycle eligibility is applied
-    by the caller. An unparseable center yields ([], []).
+    only, deduplicated by transaction_id, self-transfers excluded.
+    Timestamps normalize to aware UTC before window evaluation;
+    naive or unparseable timestamps are excluded (no timezone is
+    assumed). Deterministic order: (UTC instant, transaction_id).
+    Lifecycle eligibility is applied by the caller. A naive or
+    unparseable center yields ([], []).
     """
     if not account or not isinstance(center, str):
         return [], []
-    try:
-        midpoint = _parse_ts(center)
-    except ValueError:
+    midpoint = _aware_ts(center)
+    if midpoint is None:
         return [], []
     window = timedelta(minutes=window_minutes)
     seen: set[str] = set()
-    ins: list[dict] = []
-    outs: list[dict] = []
+    ins: list[tuple[datetime, dict]] = []
+    outs: list[tuple[datetime, dict]] = []
     for other in transactions:
         if not isinstance(other, dict):
             continue
@@ -111,19 +135,17 @@ def account_window_legs(account: str, tenant: str, center: str,
             continue
         if sender != account and receiver != account:
             continue
-        moment = _safe_ts(other.get("occurred_at"))
+        moment = _aware_ts(other.get("occurred_at"))
         if moment is None or abs(moment - midpoint) > window:
             continue
         seen.add(oid)
         if receiver == account:
-            ins.append(other)
+            ins.append((moment, other))
         else:
-            outs.append(other)
-    ins.sort(key=lambda t: (t.get("occurred_at", ""),
-                                t.get("transaction_id", "")))
-    outs.sort(key=lambda t: (t.get("occurred_at", ""),
-                                 t.get("transaction_id", "")))
-    return ins, outs
+            outs.append((moment, other))
+    ins.sort(key=lambda pair: (pair[0], pair[1].get("transaction_id", "")))
+    outs.sort(key=lambda pair: (pair[0], pair[1].get("transaction_id", "")))
+    return [t for _, t in ins], [t for _, t in outs]
 
 
 def validate_provenance(edges: list[dict]) -> list[str]:

@@ -4,16 +4,17 @@ Mule pass-through detection (MULE_PASSTHROUGH). Synthetic data only.
 No ML claims. Follows the MS-DETECT-001 detector-layer pattern;
 engine RULES and R-009/R-010 behavior are unchanged.
 
-## R-011 — MULE_PASSTHROUGH (v1.0, owner-authorized)
+## R-011 — MULE_PASSTHROUGH (v1.1, remediation pending independent review; v1.0 owner-authorized)
 
 Detects accounts receiving value from 3+ distinct senders and
 forwarding 80%+ of it within a 24h window.
 
 | Parameter | Value | Source |
 |---|---|---|
-| Rule version | 1.0 | `app/detection.py` RULE_VERSIONS |
+| Rule version | 1.1 | `app/detection.py` RULE_VERSIONS |
 | Window | ±1440 minutes, centered on target | `app/graph.py` MULE_WINDOW_MINUTES |
-| Chronological guard | OUT legs count only at/after earliest eligible IN leg | `_mule_signals` (string ordering, same as window sort) |
+| Timestamp contract | aware UTC normalization before window/sort/compare; naive or unparseable excluded, no TZ assumed | `app/graph.py` _aware_ts + `_mule_signals` (RV-01/RV-02) |
+| Chronological guard | OUT legs count only at/after earliest eligible IN leg | `_mule_signals` (UTC ordering, same as window sort) |
 | Min distinct senders | ≥ 3 | MULE_MIN_SENDERS |
 | Min incoming | ≥ 10,000,000 kobo eligible | MULE_MIN_INCOMING |
 | Min forwarded ratio | ≥ 0.80, uncapped | MULE_MIN_RATIO |
@@ -22,7 +23,7 @@ forwarding 80%+ of it within a 24h window.
 | Target membership | required (target must be an eligible IN or chronological OUT leg) | `_mule_signals` |
 | Severity | high | signal field |
 | Kill switch | DETECTOR_MULE_ENABLED (default ON; "0" disables) | `app/config.py` |
-| Operator note | Disabled ONLY by the literal value `0` (surrounding whitespace tolerated). `false`, `off`, `no`, empty, or unset values keep the detector ON. Always verify the resulting DISABLED state. Availability-biased fail-open by design. | `app/detection.py` family_enabled |
+| Operator note | Grammar (exact, tested): OFF = literal `0` with surrounding whitespace tolerated; ON = `1` (default), empty, unset, or any other value. Always verify the resulting DISABLED state. Availability-biased fail-open by design. | `app/config.py` detector_flag_enabled (RV-04) |
 
 ## Lifecycle eligibility (verified against `map_lifecycle`)
 
@@ -47,12 +48,26 @@ forwarding 80%+ of it within a 24h window.
 - Unrelated OUT legs inflate the ratio (false-positive
   direction); all OUT leg IDs are disclosed in evidence.
 - No REFUND/REVERSAL canonical states exist in the mapper;
-  v1.0 is reversal/refund-blind by documented limitation.
+  v1.1 remains reversal/refund-blind by documented limitation.
 - Windows are centered, not trailing; the chronological guard
   (OUT at/after earliest IN) enforces receive-before-forward.
-- Amounts must be integer kobo; non-integers excluded.
-- Thresholds are code constants in v1.0; changes need a
+- Amounts must be non-negative integer kobo at the detector
+  boundary; negatives, bools, floats, strings, and missing
+  values are excluded; zero is a valid leg (RV-03).
+- Exclusion accounting splits `lifecycle_excluded` from
+  `chronology_excluded`; `ineligible_excluded` is their sum
+  and is kept for compatibility (RV-05).
+- Thresholds are code constants in v1.1; changes need a
   version bump and re-test.
+
+## Version history
+
+- v1.0 (owner-authorized): initial MULE_PASSTHROUGH release.
+- v1.1 (remediation, PENDING independent review): RV-01/RV-02
+  UTC timestamp normalization with naive-exclusion contract;
+  RV-03 non-negative integer amount boundary; RV-04 explicit
+  kill-switch grammar (behavior preserved); RV-05 split
+  exclusion counts. Thresholds unchanged. R-009/R-010 untouched.
 
 ## False positives (designed behavior)
 
@@ -92,5 +107,5 @@ by design.
 - Implementation: app/graph.py, app/config.py,
   app/detection.py (no app/main.py change; registry and
   matrix consume the existing family_enabled hooks).
-- Tests: tests/test_detect_r011_mule.py (30 tests) +
+- Tests: tests/test_detect_r011_mule.py (43 tests) +
   updated pins (14 families, 126 cells).

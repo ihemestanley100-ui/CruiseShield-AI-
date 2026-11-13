@@ -57,7 +57,8 @@ def test_signals_pin_versions_and_provenance(txns, edges):
         assert sig["transaction_id"] and sig["occurred_at"]
         assert sig["outcome"] == "PENDING"
         if sig["rule_id"]:
-            assert sig["rule_version"] == "1.0"
+            assert sig["rule_version"] == det_mod.RULE_VERSIONS.get(
+                sig["rule_id"], "1.0")
 
 
 def test_evaluation_is_idempotent(txns, edges):
