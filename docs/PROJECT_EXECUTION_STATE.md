@@ -847,3 +847,13 @@ PKG-01 fixup (2026-11-08, owner-authorized): 3 backend failures fixed (manifest 
 - 25 new tests; full suite 1485P/145S/same sandbox-only
   1F+2E; ruff + matrix + manifest validators exit 0.
 - NO commit/push/merge/deploy. Awaiting owner review.
+
+## MS-DETECT-003 R-011 local implementation (owner GO, local only)
+
+- Branch feat/detect-r011-mule from frozen bd8e629.
+- R-011 MULE_PASSTHROUGH as detector-layer family (14
+  families, 126 matrix cells); engine + R-009/R-010
+  untouched; no app/main.py change (existing hooks).
+- Kill switch DETECTOR_MULE_ENABLED (default ON).
+- 30 new tests; full suite + validators per final
+  acceptance audit. NO commit/push/merge/deploy.

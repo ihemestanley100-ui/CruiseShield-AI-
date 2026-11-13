@@ -325,6 +325,26 @@ DETECTOR_STRUCTURING_ENABLED = os.environ.get(
     "DETECTOR_STRUCTURING_ENABLED", "1")
 DETECTOR_DECLINE_REPETITION_ENABLED = os.environ.get(
     "DETECTOR_DECLINE_REPETITION_ENABLED", "1")
+# MS-DETECT-003 R-011 mule pass-through kill switch, default ON.
+DETECTOR_MULE_ENABLED = os.environ.get("DETECTOR_MULE_ENABLED", "1")
+
+def detector_flag_enabled(value: object) -> bool:
+    """Parse a detector-family kill-switch value (RV-04).
+
+    Exact grammar (tested):
+      OFF: the literal "0"; surrounding whitespace tolerated.
+      ON:  "1" (the default), "", None/missing, and every other value.
+    Availability-biased fail-open by design: a missing or
+    malformed flag must never silently disable detection.
+    Operators disable a family with "0" and must verify the
+    resulting DISABLED registry status. Non-string values
+    (programming error; real env values are always str) fail open.
+    """
+    if not isinstance(value, str):
+        return True
+    return (value or "1").strip() != "0"
+
+
 PASSKEYS_ENABLED = os.environ.get("PASSKEYS_ENABLED", "0")
 RP_ID = os.environ.get("RP_ID", "")
 RP_ORIGIN = os.environ.get("RP_ORIGIN", "")

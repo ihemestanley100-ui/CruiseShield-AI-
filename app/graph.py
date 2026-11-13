@@ -1,7 +1,7 @@
 """Deterministic graph queries, provenance checks, and network features."""
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 
 def _parse_ts(value: str) -> datetime:
@@ -19,6 +19,12 @@ STRUCTURING_MIN_TOTAL = 40000000
 DECLINE_WINDOW_MINUTES = 1440
 DECLINE_MIN_COUNT = 3
 
+# MS-DETECT-003 R-011 mule pass-through (rule v1.0, owner-authorized).
+MULE_WINDOW_MINUTES = 1440
+MULE_MIN_SENDERS = 3
+MULE_MIN_INCOMING = 10000000
+MULE_MIN_RATIO = 0.80
+
 
 def _safe_ts(value: object) -> datetime | None:
     """Parse an ISO timestamp; unparseable values read as None."""
@@ -28,6 +34,29 @@ def _safe_ts(value: object) -> datetime | None:
         return _parse_ts(value)
     except ValueError:
         return None
+
+
+def _aware_ts(value: object) -> datetime | None:
+    """Parse ISO-8601 to an aware UTC datetime; else None.
+
+    Canonical timestamp contract (RV-01/RV-02): only
+    timezone-aware values are evaluable. Naive timestamps (no
+    offset designator) return None exactly like unparseable
+    values — no timezone is ever assumed. Callers treat None as
+    "leg not evaluable" and exclude the row.
+    """
+    if not isinstance(value, str) or not value:
+        return None
+    text = value.strip()
+    if text.endswith("Z"):
+        text = text[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(text)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        return None
+    return parsed.astimezone(timezone.utc)
 
 
 def sender_window_peers(txn: dict, transactions: list[dict],
@@ -67,6 +96,56 @@ def sender_window_peers(txn: dict, transactions: list[dict],
     peers.sort(key=lambda t: (t.get("occurred_at", ""),
                               t.get("transaction_id", "")))
     return peers
+
+
+def account_window_legs(account: str, tenant: str, center: str,
+                        transactions: list[dict],
+                        window_minutes: int = 1440
+                        ) -> tuple[list[dict], list[dict]]:
+    """Eligible IN/OUT legs for account within ±window of center.
+
+    IN = receiver is account; OUT = sender is account. Same tenant
+    only, deduplicated by transaction_id, self-transfers excluded.
+    Timestamps normalize to aware UTC before window evaluation;
+    naive or unparseable timestamps are excluded (no timezone is
+    assumed). Deterministic order: (UTC instant, transaction_id).
+    Lifecycle eligibility is applied by the caller. A naive or
+    unparseable center yields ([], []).
+    """
+    if not account or not isinstance(center, str):
+        return [], []
+    midpoint = _aware_ts(center)
+    if midpoint is None:
+        return [], []
+    window = timedelta(minutes=window_minutes)
+    seen: set[str] = set()
+    ins: list[tuple[datetime, dict]] = []
+    outs: list[tuple[datetime, dict]] = []
+    for other in transactions:
+        if not isinstance(other, dict):
+            continue
+        oid = other.get("transaction_id")
+        if not oid or oid in seen:
+            continue
+        if other.get("tenant_id", "org_primary") != tenant:
+            continue
+        sender = other.get("sender_account_id")
+        receiver = other.get("receiver_account_id")
+        if sender == receiver:
+            continue
+        if sender != account and receiver != account:
+            continue
+        moment = _aware_ts(other.get("occurred_at"))
+        if moment is None or abs(moment - midpoint) > window:
+            continue
+        seen.add(oid)
+        if receiver == account:
+            ins.append((moment, other))
+        else:
+            outs.append((moment, other))
+    ins.sort(key=lambda pair: (pair[0], pair[1].get("transaction_id", "")))
+    outs.sort(key=lambda pair: (pair[0], pair[1].get("transaction_id", "")))
+    return [t for _, t in ins], [t for _, t in outs]
 
 
 def validate_provenance(edges: list[dict]) -> list[str]:
